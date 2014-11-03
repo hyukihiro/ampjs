@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!--#include virtual="/inc/head.inc" -->
+
+<style type="text/css">
+.images img{
+	opacity: 0;
+}
+
+
+</style>
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/inc/header.inc" -->
+
+
+<div id="Content" class="cf">
+
+<section class="sec"><div class="sec-inner">
+<p><span id="count">0</span>%</p>
+
+<ul class="images">
+<li><img src="http://cdn.morguefile.com/imageData/public/files/m/mconnors/07/l/1406581462njl4o.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/m/MPatterson/07/l/14064268020f7q4.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/f/FidlerJan/07/l/1405881413oh7cq.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/t/ttronslien/07/l/1405042656lfcsg.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/m/Maryhere/06/l/1401682920m3yf7.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/m/MGDboston/04/l/13974506652soy8.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/h/hotblack/03/l/1394886800b4bzy.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/p/psarahtonen/03/l/1394337546owc54.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/j/jemolesky/03/l/13942303150imlv.jpg" alt="" /></li>
+<li><img src="http://cdn.morguefile.com/imageData/public/files/g/greyerbaby/10/l/1350711392bvykm.jpg" alt="" /></li>
+</ul>
+
+
+
+</div><!-- .sec // --></section>
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/inc/js.inc" -->
+
+<script type="text/javascript">
+jQuery(function($){
+
+	var loader = new amp.jQuery.Loader($('.images'));
+
+	loader.init()
+	.progress(function(num){
+		$('#count').text(num);
+	})
+	.done(function(){
+		loader.elm.find('img').animate({opacity: 1}, 800);
+	});
+
+});
+
+</script>
+</body>
+</html>
