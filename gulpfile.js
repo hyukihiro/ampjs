@@ -334,29 +334,19 @@ gulp.task('js', function(){
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.html + 'src/snippet/'));
 
-	// jquery-plugins
-	gulp.src(path.develop + 'src/jquery-plugins/*.js')
-		.pipe(plugins.concat('jquery.plugins.js'))
-		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.html + 'src/jquery-plugins/'))
-		.pipe(plugins.rename({suffix: '.min'}))
-		.pipe(plugins.uglify())
-		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.html + 'src/jquery-plugins/'));
-
-	// amp
+	// amp コピー
 	gulp.src(path.develop + 'src/amp/**/*.js')
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.html + 'src/amp/'));
 
-	// amp
+	// amp.js min
 	gulp.src(path.develop + 'src/amp/*.js')
 		.pipe(plugins.concat('amp.min.js'))
 		.pipe(plugins.uglify())
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.html + 'src/amp/'));
 
-	// amp.utilitys
+	// amp.utilitys.js 連結 & 圧縮
 	gulp.src(path.develop + 'src/amp/utilitys/*.js')
 		.pipe(plugins.concat('amp.utilitys.js'))
 		.pipe(plugins.header(banner))
@@ -366,7 +356,7 @@ gulp.task('js', function(){
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.html + 'src/amp/utilitys/'));
 
-	// amp.jquery
+	// amp.jQuery.js 連結 & 圧縮
 	gulp.src(path.develop + 'src/amp/jquery/*.js')
 		.pipe(plugins.concat('amp.jQuery.js'))
 		.pipe(plugins.header(banner))
@@ -376,7 +366,17 @@ gulp.task('js', function(){
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.html + 'src/amp/jquery/'));
 
-	// amp.createjs
+	// jquery-plugins  連結 & 圧縮
+	gulp.src(path.develop + 'src/amp/jquery-plugins/*.js')
+		.pipe(plugins.concat('amp.jquery.plugins.js'))
+		.pipe(plugins.header(banner))
+		.pipe(gulp.dest(path.html + 'src/amp/jquery-plugins/'))
+		.pipe(plugins.rename({basename: 'amp.jquery.plugins.min.js'}))
+		.pipe(plugins.uglify())
+		.pipe(plugins.header(banner))
+		.pipe(gulp.dest(path.html + 'src/amp/jquery-plugins/'));
+
+	// amp.createjs.js 連結 & 圧縮
 	gulp.src(path.develop + 'src/amp/createjs/*.js')
 		.pipe(plugins.concat('amp.createjs.js'))
 		.pipe(plugins.header(banner))
