@@ -49,7 +49,7 @@ var project = 'amp';
 var path = {
 	develop: 'develop/', // 開発用
 	html   : 'html/', // 公開用
-	docs   : 'docs/' // ドキュメント用
+	docs   : 'html/docs/' // ドキュメント用
 };
 
 

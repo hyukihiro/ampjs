@@ -9,7 +9,6 @@ var common = common || {};
 
 (function($){
 
-
 	/**
 	 * <h4>CONFIG</h4>
 	 *
