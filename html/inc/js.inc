@@ -14,7 +14,7 @@
 <script src="/src/lib/creatjs-plugins/particleEmitterJs-0.5.0.min.js"></script>
 
 <!-- amp -->
-<script src="/src/jquery-plugins/jquery.plugins.js"></script>
+<script src="/src/amp/jquery-plugins/jquery.plugins.js"></script>
 <script src="/src/amp/amp.js"></script>
 <script src="/src/amp/utilitys/amp.utilitys.js"></script>
 <!-- <script src="/src/amp/jquery/amp.jQuery.js"></script> -->

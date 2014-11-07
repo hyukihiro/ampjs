@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <!--#include virtual="/inc/head.inc" -->
 </head>
 
 
 <body>
 <div id="Page">
-<!--#include virtual="/inc/header.inc" -->
+<!--#include virtual="/inc/header.jquery.inc" -->
 
 
 <div id="Content" class="cf">
@@ -38,12 +36,13 @@
 <!-- #Page // --></div>
 
 
-<!--#include virtual="/inc/js.inc" -->
+<!--#include virtual="/inc/js.jquery.inc" -->
+
 
 <script type="text/javascript">
 jQuery(function($){
 
-	var render = new amp.jQuery.Render($('#tmpl'), {url: 'json/amp.render.json'});
+	var render = new amp.jQuery.Render($('#tmpl'), {url: 'json/amp.jquery.render.json'});
 
 	var Sort = amp.jQuery.Sort.extend({
 		findItem: function(current){

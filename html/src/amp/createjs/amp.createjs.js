@@ -29,6 +29,8 @@
 
   // 'use strict';
 
+  // see: http://qiita.com/nakajmg/items/65575d54cbed013ff2a5
+  // see: http://kudox.jp/java-script/createjs-preloadjs-loadqueue
 
   /*--------------------------------------------------------------------------
     @constructor
@@ -40,15 +42,15 @@
    *
    * @class Loader
    * @constructor
-   * @param  {Array} manifest 読み込むファイル
-   * @param  {Objecr} options
+   * @param  {Array} manifest 読み込みファイルリスト
+   * @param  {Objecr} options 後日記述
    * @return {Instance}
    */
   var Loader = function(manifest, options){
     this.manifest  = amp.isArray(manifest) ? manifest : [manifest];
     this.param     = amp.extend(true, {}, Loader.defaults, options);
     this.loadQueue = new createjs.LoadQueue(this.param.useXHR);
-    this.mediator  = new amp.Mediator();
+    this.loadQueue.setMaxConnections(this.param.loadMax);
   };
 
 
@@ -64,7 +66,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '1.0';
+  Loader.VERSION = '1.1';
 
 
   /**
@@ -108,15 +110,6 @@
 
 
   /**
-   * <h4>Loaderイベントを管理します</h4>
-   *
-   * @mathod mediator
-   * @type {amp.Mediator}
-   */
-  Loader.p.mediator = null;
-
-
-  /**
    * <h4>Loader.defaultsとコンストラクタ呼び出し時に第二引数に指定した値をmixin</h4>
    *
    * @property param
@@ -143,15 +136,6 @@
   Loader.p.updateCount = null;
 
 
-  /**
-   * <h4>$imagesとimagesをあわせた画像点数</h4>
-   *
-   * @property allComplete
-   * @type {Boolean}
-   */
-  Loader.p.allComplete = false;
-
-
 
   /*--------------------------------------------------------------------------
     @method
@@ -165,7 +149,7 @@
    * @method extend
    * @param {Object} protoProp プロトタイプオブジェクト
    * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
+   * @return {Loader}
    */
    Loader.extend = root.amp._extend;
 
@@ -191,22 +175,17 @@
     self.loadQueue.addEventListener('progress', function(e){
       if(e.loaded !== 0){
         self.loadCount += 1;
-        self.mediator.trigger('progress', arguments);
+        self.loadQueue.dispatchEvent('progressCallback');
       }
     });
 
     // complete
     self.loadQueue.addEventListener('complete', function(){
-      self.loadQueue.removeAllEventListeners();
-      self.mediator.trigger('complete', arguments);
-
-      // if(!self.mediator.hasEvent('update')){
-      //   self.mediator.trigger('allcomplete');
-      // }
+      self.loadQueue.dispatchEvent('completeCallbak');
     });
 
-    // アップデートカウント
-    self._updateCount();
+    // Loaderの状態を管理
+    self._controller();
 
     // ロード開始
     self.loadQueue.loadManifest(self.manifest);
@@ -261,7 +240,7 @@
   Loader.p.progress = function(callback){
     var self = this;
 
-    self.mediator.on('progress', function(){
+    self.loadQueue.addEventListener('progressCallback', function(){
       callback.apply(self, arguments);
     });
 
@@ -279,7 +258,7 @@
   Loader.p.update = function(callback){
     var self = this;
 
-    self.mediator.on('update', function(){
+    self.loadQueue.addEventListener('update', function(){
       callback.apply(self, arguments);
     });
 
@@ -288,28 +267,33 @@
 
 
   /**
-   * <h4>カウントの更新・updateイベントの発行</h4>
+   * <h4>Loaderイベントを管理します</h4>
+   * カウントの更新・updateイベントの発行
    *
    * @private
-   * @method _updateCount
+   * @method _controller
    * @return {Void}
    */
-  Loader.p._updateCount = function(){
+  Loader.p._controller = function(){
     var self = this;
 
     amp.requestAnimationFrame(function(){
       var current = self.loadCount / self.manifest.length * 100;
 
-      if(self.updateCount < current){
-        self.updateCount += 1;
-        self.mediator.trigger('update', self.updateCount);
-      }
-
       // 100までカウントの更新
       if(self.updateCount < 100){
-        self._updateCount();
+        self._controller();
+
+      // 全ての処理が完了したら、updateCompleteイベントを発行して全てのイベントを削除
       } else {
-        self.mediator.trigger('allcomplete');
+        self.loadQueue.dispatchEvent('updateComplete');
+        self.loadQueue.removeAllEventListeners();
+      }
+
+      // updateカウントが更新されるたびに、updateイベントを発行します
+      if(self.updateCount < current){
+        self.updateCount += 1;
+        self.loadQueue.dispatchEvent({type: 'update', count: self.updateCount});
       }
     });
   };
@@ -325,7 +309,7 @@
   Loader.p.complete = function(callback){
     var self = this;
 
-    self.mediator.on('complete', function(){
+    self.loadQueue.addEventListener('completeCallbak', function(){
       callback.apply(self, arguments);
     });
 
@@ -333,19 +317,34 @@
   };
 
 
-
   /**
-   * <h4>全ての処理が完了したら実行</h4>
+   * <h4>updateの処理が完了したら実行</h4>
    *
-   * @method allComplete
+   * @method updateComplete
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.allComplete = function(callback){
-    this.mediator.on('allcomplete', callback);
+  Loader.p.updateComplete = function(callback){
+    this.loadQueue.addEventListener('updateComplete', callback);
     return this;
   };
 
+
+  /**
+   * <h4>ローダー</h4>
+   * Loaderのショートハンド<br>
+   * 処理Loader生成し、initを実行してインスタンスを返す
+   *
+   * @static
+   * @method create
+   * @param  {DOM} elm 対象のimgを囲う要素 省略可
+   * @return {Loader} Loader生成してインスタンスを返す
+   */
+  Loader.create = function(manifest, options){
+    var loader = new Loader(manifest, options);
+    loader.init();
+    return loader;
+  };
 
 
   /*--------------------------------------------------------------------------

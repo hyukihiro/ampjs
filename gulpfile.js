@@ -335,14 +335,14 @@ gulp.task('js', function(){
 		.pipe(gulp.dest(path.html + 'src/snippet/'));
 
 	// jquery-plugins
-	gulp.src(path.develop + 'src/jquery-plugins/*.js')
+	gulp.src(path.develop + 'src/amp/jquery-plugins/*.js')
 		.pipe(plugins.concat('jquery.plugins.js'))
 		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.html + 'src/jquery-plugins/'))
+		.pipe(gulp.dest(path.html + 'src/amp/jquery-plugins/'))
 		.pipe(plugins.rename({suffix: '.min'}))
 		.pipe(plugins.uglify())
 		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.html + 'src/jquery-plugins/'));
+		.pipe(gulp.dest(path.html + 'src/amp/jquery-plugins/'));
 
 	// amp
 	gulp.src(path.develop + 'src/amp/**/*.js')
