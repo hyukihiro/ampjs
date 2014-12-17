@@ -3,6 +3,9 @@
   // 'use strict';
 
 
+  var Mediator, p;
+
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -14,7 +17,7 @@
    * @constructor
    * @return {Mediator}
    */
-  var Mediator = function(){};
+  Mediator = function(){};
 
 
 
@@ -29,7 +32,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediator.VERSION = '1.4';
+  Mediator.VERSION = '1.5';
 
 
   /**
@@ -38,7 +41,7 @@
    * @property p
    * @type {Object}
    */
-  Mediator.p = Mediator.prototype;
+  p = Mediator.prototype;
 
 
   /**
@@ -48,7 +51,7 @@
    * @property _callbacks
    * @type {Object}
    */
-  Mediator.p._callbacks = {};
+  p._callbacks = {};
 
 
 
@@ -78,7 +81,7 @@
    * @param  {Object} context コンテキスト固定
    * @return {Mediator}
    */
-  Mediator.p.on = function(event, callback, context){
+  p.on = function(event, callback, context){
     var self = this;
 
     self._callbacks[event] = {
@@ -99,14 +102,21 @@
    * @param  {Object} context コンテキスト固定
    * @return {Mediator}
    */
-  Mediator.p.one = function(event, callback, context){
+  p.one = function(event, callback, context){
     var self = this,
     once;
 
+    /* underscore ver
     once = _.once(function(){
       self.off(event, once);
       callback.apply(self, arguments);
     });
+    */
+
+    once = function(){
+      self.off(event, once);
+      callback.apply(self, arguments);
+    };
 
     self.on(event, once, context);
 
@@ -121,7 +131,7 @@
    * @param  {String} event イベント名
    * @return {Mediator}
    */
-  Mediator.p.off = function(event){
+  p.off = function(event){
     if(this._callbacks[event]){
       this._callbacks[event] = null;
 
@@ -140,7 +150,7 @@
    * @param  {String} event イベント名
    * @return {Boolean}
    */
-  Mediator.p.hasEvent = function(event){
+  p.hasEvent = function(event){
     var key,
     flag = false;
 
@@ -163,7 +173,7 @@
    * @param  {String} event イベント名
    * @return {Mediator}
    */
-  Mediator.p.trigger = function(event){
+  p.trigger = function(event){
     if(this._callbacks[event]){
       this._callbacks[event].callback.apply(event.context, [].slice.apply(arguments).slice(1));
     }
@@ -177,7 +187,7 @@
    * @method toString
    * @return {String} クラス名を返す
    */
-  Mediator.p.toString = function(){
+  p.toString = function(){
     return '[object Mediator]';
   };
 

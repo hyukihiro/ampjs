@@ -5,6 +5,10 @@
   // see: http://qiita.com/nakajmg/items/65575d54cbed013ff2a5
   // see: http://kudox.jp/java-script/createjs-preloadjs-loadqueue
 
+
+  var Loader, p, loader;
+
+
   /*--------------------------------------------------------------------------
     @constructor
   --------------------------------------------------------------------------*/
@@ -19,7 +23,7 @@
    * @param  {Objecr} options 後日記述
    * @return {Instance}
    */
-  var Loader = function(manifest, options){
+  Loader = function(manifest, options){
     this.manifest  = amp.isArray(manifest) ? manifest : [manifest];
     this.param     = amp.extend(true, {}, Loader.defaults, options);
     this.loadQueue = new createjs.LoadQueue(this.param.useXHR);
@@ -39,7 +43,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '1.1';
+  Loader.VERSION = '1.2';
 
 
   /**
@@ -48,7 +52,7 @@
    * @property p
    * @type {Object}
    */
-  Loader.p = Loader.prototype;
+  p = Loader.prototype;
 
 
   /**
@@ -70,7 +74,7 @@
    * @property manifest
    * @type {Array}
    */
-  Loader.p.manifest = null;
+  p.manifest = null;
 
 
   /**
@@ -79,7 +83,7 @@
    * @property loadQueue
    * @type {createjs.LoadQueue}
    */
-  Loader.p.loadQueue = null;
+  p.loadQueue = null;
 
 
   /**
@@ -88,7 +92,7 @@
    * @property param
    * @type {Object}
    */
-  Loader.p.param = null;
+  p.param = null;
 
 
   /**
@@ -97,7 +101,7 @@
    * @property loadCount
    * @type {Number}
    */
-  Loader.p.loadCount = 0;
+  p.loadCount = 0;
 
 
   /**
@@ -106,7 +110,7 @@
    * @property updateCount
    * @type {Number}
    */
-  Loader.p.updateCount = null;
+  p.updateCount = null;
 
 
 
@@ -134,7 +138,7 @@
    * @method init
    * @return {Loader}
    */
-  Loader.p.init = function(){
+  p.init = function(){
     var self = this;
 
     // updateCountをフラグにシングルトン
@@ -174,7 +178,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.done = function(callback){
+  p.done = function(callback){
     var self = this;
 
     self.loadQueue.addEventListener('fileload', function(){
@@ -192,7 +196,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.fail = function(callback){
+  p.fail = function(callback){
     var self = this;
 
     self.loadQueue.addEventListener('error', function(){
@@ -210,7 +214,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.progress = function(callback){
+  p.progress = function(callback){
     var self = this;
 
     self.loadQueue.addEventListener('progressCallback', function(){
@@ -228,7 +232,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.update = function(callback){
+  p.update = function(callback){
     var self = this;
 
     self.loadQueue.addEventListener('update', function(){
@@ -247,7 +251,7 @@
    * @method _controller
    * @return {Void}
    */
-  Loader.p._controller = function(){
+  p._controller = function(){
     var self = this;
 
     amp.requestAnimationFrame(function(){
@@ -279,7 +283,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.complete = function(callback){
+  p.complete = function(callback){
     var self = this;
 
     self.loadQueue.addEventListener('completeCallbak', function(){
@@ -297,7 +301,7 @@
    * @param  {Function} callback コールバック
    * @return {Loader}
    */
-  Loader.p.updateComplete = function(callback){
+  p.updateComplete = function(callback){
     this.loadQueue.addEventListener('updateComplete', callback);
     return this;
   };
@@ -308,12 +312,13 @@
    * Loaderのショートハンド<br>
    * 処理Loader生成し、initを実行してインスタンスを返す
    *
+   * @class loader
    * @static
-   * @method create
+   * @method loader
    * @param  {DOM} elm 対象のimgを囲う要素 省略可
    * @return {Loader} Loader生成してインスタンスを返す
    */
-  Loader.create = function(manifest, options){
+  loader = function(manifest, options){
     var loader = new Loader(manifest, options);
     loader.init();
     return loader;
@@ -327,6 +332,7 @@
   root.amp = root.amp || {};
   root.amp.createjs = root.amp.createjs || {};
   root.amp.createjs.Loader = Loader;
+  root.amp.createjs.loader = loader;
 
 
 }(window, createjs));

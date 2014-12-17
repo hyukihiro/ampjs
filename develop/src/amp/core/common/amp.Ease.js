@@ -3,6 +3,9 @@
   // 'use strict';
 
 
+  var Ease, p;
+
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -14,7 +17,7 @@
    * @constructor
    * @return {Ease}
    */
-  var Ease = function(){};
+  Ease = function(){};
 
 
 
@@ -29,7 +32,7 @@
    * @property VERSION
    * @type {String}
    */
-  Ease.VERSION = '1.2';
+  Ease.VERSION = '1.3';
 
 
   /**
@@ -38,7 +41,8 @@
    * @property p
    * @type {Object}
    */
-  Ease.p = Ease.prototype;
+  p = Ease.prototype;
+
 
 
   /*--------------------------------------------------------------------------
@@ -851,7 +855,7 @@
    * @method toString
    * @return {String} クラス名を返す
    */
-  Ease.p.toString = function(){
+  p.toString = function(){
     return '[object Ease]';
   };
 

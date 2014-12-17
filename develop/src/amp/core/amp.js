@@ -1,4 +1,4 @@
-;(function(root){
+(function(root){
 
   // 'use strict';
 
@@ -46,7 +46,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '1.5';
+  amp.VERSION = '1.6';
 
 
   /**
@@ -206,6 +206,7 @@
 
   /**
    * <h4>Mac判定</h4>
+   * isoは、含みません。
    *
    * @static
    * @method isMac
@@ -259,7 +260,7 @@
    *
    * @static
    * @method isDevice
-   * @param {String} デバイス名 ['sd', 'smartdevice', 'sp', 'smartphone', 'tb', 'tablet', 'iphone', 'ipad', 'ipod', 'android', 'androidtablet', 'touchscreen', 'mspointer']
+   * @param {String} デバイス名 ['pc', 'sd', 'smartdevice', 'sp', 'smartphone', 'tb', 'tablet', 'iphone', 'ipad', 'ipod', 'androidphone', 'androidtablet', 'touchscreen', 'mspointer']
    * @return {Boolean}
    */
   amp.isDevice = function(key){
@@ -821,7 +822,7 @@
    * @param {String} str id名 初期値: 'cid' 省略可
    * @return {String} str+数値を返す
    */
-  amp.createId = (function(){
+  amp.createID = (function(){
     var count = 0;
 
     return function(str){
@@ -951,7 +952,7 @@
    * @return {Number}
    */
   amp.getRatio = function(){
-    return root.devicePixelRatio;
+    return root.devicePixelRatio || 1;
   };
 
 
@@ -1033,6 +1034,7 @@
   /**
    * <h4>クラス名を返す</h4>
    *
+   * @static
    * @method toString
    * @return {String}
    */
@@ -1081,7 +1083,7 @@
 
   /**
    * <h4>requestAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、setTimeoutで代替処理を行います
+   * 対応していないブラウザは、setTimeoutでフォールバックします
    *
    * @method requestAnimationFrame
    * @param {Function} callback コールバック関数
@@ -1108,7 +1110,7 @@
 
   /**
    * <h4>cancelAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、clearTimeoutで代替処理を行います
+   * 対応していないブラウザは、clearTimeoutでフォールバックします
    *
    * @method requestAnimationFrame
    * @param {Number} id タイマーNumber
@@ -1150,6 +1152,24 @@
     };
   }());
 
+
+  /**
+   * <h4>forEach</h4>
+   * 配列の各要素に対して、指定された処理を実行します
+   *
+   * @static
+   * @method forEach
+   * @type {Void}
+   */
+  Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
+    if(this === null){
+      throw new TypeError('this is null or not defined');
+    }
+    var i = 0, l = this.length;
+    for(; i < l; i += 1){
+      callback.call(context || null, this[i], i, this);
+    }
+  };
 
 
 

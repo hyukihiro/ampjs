@@ -137,7 +137,7 @@
       this._isInit = true;
 
       if(!this.param.key){
-        this.param.key = amp.createId('FlatHeight');
+        this.param.key = amp.createID('FlatHeight');
       }
       this.setHeight();
       this.setEvent();
