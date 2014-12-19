@@ -19,32 +19,39 @@
 
 | 機能 | タスク | 状態 | コメント | ショートハンド | サンプル |
 |:---:|:----:|:---:|:--------:|:---:|:---:|
-| Core         | - | ○ | ○ | - | × |
+| core         | - | ○ | ○ | - | × |
+| ease         | - | ○ | ○ | - | - |
 | fontResize   | - | ○ | ○ | - | ○ |
-| Iterator     | - | ○ | ○ | - | ○ |
 | Mediator     | - | ○ | ○ | - | ○ |
-| Ease         | - | ○ | ○ | - | - |
+| Iterator     | 一時中断 | ○ | ○ | - | ○ |
 
 ** jQuery **
 
 | 機能 | タスク | 状態 | コメント | ショートハンド | サンプル |
 |:---:|:----:|:---:|:--------:|:---:|:---:|
 | Render       | - | ○ | ○ | ○ | ○ |
-| Loader       | - | ○ | ○ | ○ | ○ |
 | Sort         | - | ○ | ○ | ○ | ○ |
+| SmothScroll  | - | ○ | ○ | ○ | ○ |
 | FlatHeight   | - | ○ | ○ | ○ | ○ |
 | Scroll       | - | ○ | ○ | ○ | ○ |
-| SmothScroll  | - | ○ | ○ | ○ | ○ |
+	| Boxhover     | - | ○ | ○ | ○ | ○ |
+
+| Loader       | - | ○ | ○ | ○ | ○ |
 | PagetopToggle| - | ○ | ○ | ○ | ○ |
-| Boxhover     | - | ○ | ○ | ○ | ○ |
+
+| Rollover | 実装中 | × | × | × | × |
+| SlipRollover | 実装中 | × | × | × | × |
+| Active | 実装中 | × | × | × | × |
+| mediaQuery | 実装中 | × | × | × | × |
+
+
 | Slider     | 実装中 | × | × | × | × |
 | Crossfader | 実装中 | × | × | × | × |
-| mediaQuery | 実装中 | × | × | × | × |
-| HoverTween | 実装中 | × | × | × | × |
-| SwitchImage| 実装中 | × | × | × | × |
-| Modal      | 未実装 | × | × | × | × |
-| Accordion  | 未実装 | × | × | × | × |
 | Tab        | 未実装 | × | × | × | × |
+| Accordion  | 未実装 | × | × | × | × |
+| Modal      | 未実装 | × | × | × | × |
+<!-- | HoverTween | 実装中 | × | × | × | × | -->
+| SwitchImage| 実装中 | × | × | × | × |
 
 
 ** createjs **

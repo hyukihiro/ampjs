@@ -7,12 +7,13 @@
     config
   ----------------------------------------------------------------------*/
 
-  // console.logがないブラウザは、空の関数を返す
-  if(!('console' in root)){
-    root.console = {
-      log: function(){}
-    };
-  }
+  /**
+   * <h4>amp</h4>
+   * namespace
+   *
+   * @class amp
+   **/
+  var amp = {};
 
 
   var
@@ -25,13 +26,13 @@
   toString   = Object.prototype.toString;
 
 
-  // @namespace
-  /**
-   * <h4>amp</h4>
-   *
-   * @class amp
-   **/
-  var amp = {};
+
+  // console.logがないブラウザは、空の関数を返す
+  if(!('console' in root)){
+    root.console = {
+      log: function(){}
+    };
+  }
 
 
 
@@ -46,7 +47,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '1.6';
+  amp.VERSION = '1.7';
 
 
   /**
@@ -1077,8 +1078,9 @@
   };
 
 
+
   /*----------------------------------------------------------------------
-    @method Fallback
+    @method Add Fallbacks
   ----------------------------------------------------------------------*/
 
   /**
@@ -1170,6 +1172,7 @@
       callback.call(context || null, this[i], i, this);
     }
   };
+
 
 
 

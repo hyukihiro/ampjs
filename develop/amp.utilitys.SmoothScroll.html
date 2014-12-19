@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--#include virtual="/inc/head.inc" -->
+<style type="text/css">
+.sec{
+	height: 1000px;
+}
+
+</style>
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/inc/header.utilitys.inc" -->
+
+
+<div id="Content" class="cf">
+
+<p>Windows PCのみ有効</p>
+
+<section id="sec01" class="sec"><div class="sec-inner">
+<p>sec01</p>
+</div><!-- .sec // --></section>
+
+<section id="sec02" class="sec"><div class="sec-inner">
+<p>sec02</p>
+</div><!-- .sec // --></section>
+
+<section id="sec03" class="sec"><div class="sec-inner">
+<p>sec03</p>
+</div><!-- .sec // --></section>
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/inc/js.jquery.inc" -->
+
+
+<script type="text/javascript">
+jQuery(function($){
+
+	var smoothScroll = new amp.SmoothScroll();
+	smoothScroll.on();
+
+});
+
+</script>
+</body>
+</html>

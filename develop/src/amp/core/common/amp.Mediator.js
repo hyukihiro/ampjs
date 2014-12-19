@@ -2,6 +2,9 @@
 
   // 'use strict';
 
+  // #note
+  // NextVer: イベント属性機能追加
+
 
   var Mediator, p;
 
