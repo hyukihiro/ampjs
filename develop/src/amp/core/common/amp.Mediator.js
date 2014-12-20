@@ -1,12 +1,10 @@
-;(function(root){
+(function(root){
 
   // 'use strict';
 
-  // #note
-  // NextVer: イベント属性機能追加
-
 
   var Mediator, p;
+
 
 
   /*----------------------------------------------------------------------
@@ -35,7 +33,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediator.VERSION = '1.5';
+  Mediator.VERSION = '2.0';
 
 
   /**
@@ -48,13 +46,13 @@
 
 
   /**
-   * <h4>コールバックイベントを連想配列で格納します</h4>
+   * <h4>イベントハンドラーを連想配列で格納します</h4>
    *
    * @private
-   * @property _callbacks
+   * @property _handlers
    * @type {Object}
    */
-  p._callbacks = {};
+  p._handlers = {};
 
 
 
@@ -85,14 +83,8 @@
    * @return {Mediator}
    */
   p.on = function(event, callback, context){
-    var self = this;
-
-    self._callbacks[event] = {
-      callback: callback,
-      context : context
-    };
-
-    return self;
+    this._setHandler(event, callback, context);
+    return this;
   };
 
 
@@ -106,24 +98,22 @@
    * @return {Mediator}
    */
   p.one = function(event, callback, context){
-    var self = this,
-    once;
+    var self = this;
 
     /* underscore ver
-    once = _.once(function(){
-      self.off(event, once);
+    var once = _.once(function(){
+      self.off(event);
       callback.apply(self, arguments);
     });
+    self.on(event, once, context);
     */
 
-    once = function(){
-      self.off(event, once);
+    self.on(event, function(){
+      self.off(event);
       callback.apply(self, arguments);
-    };
+    }, context);
 
-    self.on(event, once, context);
-
-    return self;
+    return this;
   };
 
 
@@ -135,14 +125,81 @@
    * @return {Mediator}
    */
   p.off = function(event){
-    if(this._callbacks[event]){
-      this._callbacks[event] = null;
+    this._setHandler(event);
+    return this;
+  };
 
-    } else if(!event){
-      this._callbacks = {};
+
+ /**
+  * <h4>ハンドラーの追加・削除</h4>
+  *
+  * @private
+  * @method _setHandler
+  * @param {String} event イベント名
+  * @param {Function} callback コールバック関数
+  * @param {Object} context コンテキスト
+  */
+  p._setHandler = function(event, callback, context){
+    var handlers,
+    events = this._getEventNameMap(event);
+
+    handlers = this._handlers[events.name] = this._handlers[events.name] || [];
+
+    // addEvent
+    if(callback){
+      handlers.push({
+        attr    : events.attr,
+        callback: callback,
+        context : context
+      });
+
+    // removeEvent
+    } else {
+      if(events.attr){
+        var ary = [],
+        i = 0,
+        l = handlers.length;
+
+        for(; i < l; i += 1){
+          if(handlers[i].attr === events.attr){
+            handlers[i].attr = null;
+            continue;
+          } else {
+            ary.push(handlers[i]);
+          }
+        }
+        handlers = ary;
+
+      } else {
+        handlers = null;
+      }
     }
 
     return this;
+  };
+
+
+  /**
+   * <h4>イベント名、イベント属性を連想配列にして返す</h4>
+   *
+   * @private
+   * @method _getEventNameMap
+   * @param  {String} event イベント名
+   * @return {Object}
+   */
+  p._getEventNameMap = function(event){
+    var num = event.indexOf('.'),
+    val;
+
+    if(num !== -1){
+      val = event.substr(num);
+      event = event.substr(0, num);
+    }
+
+    return {
+      name: event,
+      attr : val
+    };
   };
 
 
@@ -154,13 +211,26 @@
    * @return {Boolean}
    */
   p.hasEvent = function(event){
-    var key,
+    var handlers,
+    events = this._getEventNameMap(event),
     flag = false;
 
-    for(key in this._callbacks){
-      if(key === event){
+    handlers = this._handlers[events.name];
+
+    if(handlers){
+      if(events.attr){
+        var i = 0,
+        l = handlers.length;
+
+        for(; i < l; i += 1){
+          if(handlers[i].attr === events.attr){
+            flag = true;
+            break;
+          }
+        }
+
+      } else {
         flag = true;
-        break;
       }
     }
 
@@ -177,9 +247,20 @@
    * @return {Mediator}
    */
   p.trigger = function(event){
-    if(this._callbacks[event]){
-      this._callbacks[event].callback.apply(event.context, [].slice.apply(arguments).slice(1));
+    var events = this._getEventNameMap(event),
+    handlers = this._handlers[events.name];
+
+    if(handlers){
+      var i = 0,
+      l = handlers.length;
+
+      for(; i < l; i += 1){
+        if(!events.attr || handlers[i].attr === events.attr){
+          handlers[i].callback.apply(handlers[i].context, [].slice.apply(arguments).slice(1));
+        }
+      }
     }
+
     return this;
   };
 
@@ -193,7 +274,6 @@
   p.toString = function(){
     return '[object Mediator]';
   };
-
 
 
 

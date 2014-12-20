@@ -27,35 +27,37 @@
 <script type="text/javascript">
 jQuery(function($){
 
+
 	var mediator = new amp.Mediator(),
 	count = 0;
 
 	// console.log(mediator);
 
-	// mediator.on('add', function(){
-	// 	alert(++count);
-	// });
-
-	// mediator.on('del', function(){
-	// 	alert(--count);
-	// });
-
-	// mediator.on('call', function(){
-	// 	alert(count);
-	// });
+	mediator.on('add.hoge', function(){
+		alert(++count);
+	}).trigger('add');
 
 
-	// $('#add').click(function(){
-	// 	mediator.trigger('add');
-	// });
+	mediator.on('del', function(){
+		alert(--count);
+	});
 
-	// $('#del').click(function(){
-	// 	mediator.trigger('del');
-	// });
+	mediator.on('call', function(){
+		alert(count);
+	});
 
-	// $('#call').click(function(){
-	// 	mediator.trigger('call');
-	// });
+
+	$('#add').click(function(){
+		mediator.trigger('add');
+	});
+
+	$('#del').click(function(){
+		mediator.trigger('del');
+	});
+
+	$('#call').click(function(){
+		mediator.trigger('call');
+	});
 
 
 });

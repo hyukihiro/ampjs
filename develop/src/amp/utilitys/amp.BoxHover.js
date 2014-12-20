@@ -74,7 +74,7 @@
    * @property p
    * @type {Object}
    */
-  BoxHover.p = BoxHover.prototype;
+  p = BoxHover.prototype;
 
 
   /**

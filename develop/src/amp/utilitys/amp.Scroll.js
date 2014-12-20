@@ -73,7 +73,7 @@
    * @property p
    * @type {Object}
    */
-  Scroll.p = Scroll.prototype;
+  p = Scroll.prototype;
 
 
   /**

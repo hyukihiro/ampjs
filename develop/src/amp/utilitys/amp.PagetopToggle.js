@@ -2,6 +2,8 @@
 
   // 'use strict';
 
+  var PagetopToggle, pagetopToggle, p;
+
 
 
   /*--------------------------------------------------------------------------
@@ -17,14 +19,39 @@
    * @param  {Object} options オプション値
    * @return {PagetopToggle}
    */
-  var PagetopToggle = function($target, options){
-    this.$target = $target;
-    if($target.css('display') === 'none'){
-      $target.css({display: 'block', visibility: 'hidden'});
+  PagetopToggle = function($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !$target instanceof jQuery){
+      options = $target;
+      $target = $('.pagetop');
     }
-    this.isShow = $target.css('visibility') === 'visible';
+
+    this.$target = $target;
+    this.isShow  = $target.css('display') === 'block';
     this.isFixed = $target.css('position') === 'fixed';
     this.param = $.extend(true, {}, PagetopToggle.defaults, options);
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ページトップボタンのToggle処理</h4>
+   * PagetopToggleのショートハンド
+   *
+   * @static
+   * @method create
+   * @param  {jQuery} $target pagetop要素 省略可 初期値 $('#Pagetop')
+   * @param  {Object} options オプション値 省略可
+   * @return {Pagetop} Pagetopインスタンスを返す
+   */
+  pagetopToggle = function($target, options){
+    var inst = new PagetopToggle($target, options);
+    inst.init();
+    return inst;
   };
 
 
@@ -40,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  PagetopToggle.VERSION = '1.4';
+  PagetopToggle.VERSION = '2.0';
 
 
   /**
@@ -49,17 +76,7 @@
    * @property p
    * @type {Object}
    */
-  PagetopToggle.p = PagetopToggle.prototype;
-
-
-  /**
-   * <h4>initで初期化したか</h4>
-   *
-   * @private
-   * @property _isInit
-   * @type {Boolean}
-   */
-  PagetopToggle.p._isInit = false;
+  p = PagetopToggle.prototype;
 
 
   /**
@@ -68,7 +85,7 @@
    * @property $window
    * @type {jQuery}
    */
-  PagetopToggle.p.$window = $(root);
+  p.$window = $(root);
 
 
   /**
@@ -77,7 +94,7 @@
    * @property $target
    * @type {jQuery}
    */
-  PagetopToggle.p.$target = null;
+  p.$target = null;
 
 
   /**
@@ -86,7 +103,7 @@
    * @property isShow
    * @type {Boolean}
    */
-  PagetopToggle.p.isShow = null;
+  p.isShow = null;
 
 
   /**
@@ -95,7 +112,7 @@
    * @property isFixed
    * @type {Boolean}
    */
-  PagetopToggle.p.isFixed = null;
+  p.isFixed = null;
 
 
   /**
@@ -106,11 +123,10 @@
    *   show     : { opacity : 1}, // {Object} 表示アニメーション時のcssプロパティ </li><li>
    *   hide     : { opacity : 0}, // {Object} 非表示アニメーション時のcssプロパティ </li><li>
    *   absolute : { position : 'absolute'}, // {Object} ポジションabsoluteのcssプロパティ </li><li>
-   *   animate  : { // {Object} 表示・非表示のアニメートプロパティ <ul><li>
-   *     duration : 400, </li><li>
-   *     easing   : 'easeOutCubic', </li><li>
-   *     complete : $.noop </li></ul>
-   *    } </li></ul>
+   *   duration : 400, // デュレーション </li><li>
+   *   easing   : 'easeOutCubic', // イージング </li><li>
+   *   showCall : $.noop // 表示されたときに呼び出す関数 </li><li>
+   *   hideCall : $.noop // 非表示されたときに呼び出す関数 </li></ul>
    * }
    *
    * @static
@@ -123,11 +139,10 @@
     show     : { opacity : 1},
     hide     : { opacity : 0},
     absolute : { position: 'absolute'},
-    animate  : {
-      duration: 400,
-      easing  : 'easeOutCubic',
-      complete: $.noop
-    }
+    duration : 400,
+    easing   : 'easeOutCubic',
+    showCall : $.noop,
+    hideCall : $.noop
   };
 
 
@@ -138,7 +153,7 @@
    * @property param
    * @type {Object}
    */
-  PagetopToggle.p.param = null;
+  p.param = null;
 
 
 
@@ -166,12 +181,9 @@
    * @method init
    * @return {PagetopToggle}
    */
-  PagetopToggle.p.init = function(){
-    if(!this._isInit){
-      this._isInit = true;
-      this.toggle();
-      this.setEvent();
-    }
+  p.init = function(){
+    this.toggle();
+    this.setEvent();
     return this;
   };
 
@@ -182,7 +194,7 @@
    * @method setEvent
    * @return {PagetopToggle}
    */
-  PagetopToggle.p.setEvent = function(){
+  p.setEvent = function(){
     var self = this;
     self.$window.on('scroll.PagetopToggle', function(){
       self.toggle();
@@ -197,7 +209,7 @@
    * @method toggle
    * @return {PagetopToggle}
    */
-  PagetopToggle.p.toggle = function(){
+  p.toggle = function(){
     var self = this,
     param = self.param,
     offsetY = self.$window.scrollTop();
@@ -205,13 +217,14 @@
     // 表示・非表示
     if(!self.isShow && param.showY < offsetY){
       self.isShow = true;
-      self.$target.css({visibility: 'visible'}).css(param.hide)
-      .stop(true, false).animate(param.show, param.animate);
+      self.$target.css({display: 'block'}).css(param.hide)
+      .stop(true, false).animate(param.show, param.duration, param.ease, param.showCall);
 
     } else if(self.isShow && param.showY > offsetY){
       self.isShow = false;
-      self.$target.stop(true, false).animate(param.hide, param.animate, function(){
-        self.$target.css({visibility: 'hidden'});
+      self.$target.stop(true, false).animate(param.hide, param.duration, param.ease, function(){
+        self.$target.css({display: 'none'});
+        param.hideCall();
       });
     }
 
@@ -237,31 +250,8 @@
    * @method toString
    * @return {String}
    */
-  PagetopToggle.p.toString = function(){
+  p.toString = function(){
     return '[object PagetopToggle]';
-  };
-
-
-  /**
-   * <h4>ページトップボタンのToggle処理</h4>
-   * PagetopToggleのショートハンド
-   *
-   * @static
-   * @method create
-   * @param  {jQuery} $target pagetop要素 省略可 初期値 $('#Pagetop')
-   * @param  {Object} options オプション値 省略可
-   * @return {Pagetop} Pagetopインスタンスを返す
-   */
-  PagetopToggle.create = function($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !$target instanceof jQuery){
-      options = $target;
-      $target = $('#Pagetop');
-    }
-
-    var pagetop = new PagetopToggle($target, options);
-    pagetop.init();
-    return pagetop;
   };
 
 
@@ -271,8 +261,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.jQuery = root.amp.jQuery || {};
-  root.amp.jQuery.PagetopToggle = PagetopToggle;
+  root.amp.PagetopToggle = PagetopToggle;
+  root.amp.pagetopToggle = pagetopToggle;
 
 
 }(window, jQuery));
