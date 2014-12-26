@@ -13,10 +13,10 @@
 <script src="/src/creatjs-plugins/particleEmitterJs-0.5.0.min.js"></script>
 
 <!-- amp -->
-<script src="/src/amp/original/amp.core.js"></script>
-<script src="/src/amp/original/amp.jquery-plugins.js"></script>
-<script src="/src/amp/original/amp.utilitys.js"></script>
-<script src="/src/amp/original/amp.createjs.js"></script>
+<script src="/src/amp/uncompressed/amp.core.js"></script>
+<script src="/src/amp/uncompressed/amp.jquery-plugins.js"></script>
+<script src="/src/amp/uncompressed/amp.utilitys.js"></script>
+<script src="/src/amp/uncompressed/amp.createjs.js"></script>
 
 <!-- common -->
 <script src="/js/common.js"></script>

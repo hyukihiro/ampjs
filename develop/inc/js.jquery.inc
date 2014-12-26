@@ -9,9 +9,9 @@
 <script src="/src/jquery-plugins/jquery.mousewheel.min.js"></script>
 
 <!-- amp -->
-<script src="/src/amp/original/amp.core.js"></script>
-<script src="/src/amp/original/amp.jquery-plugins.js"></script>
-<script src="/src/amp/original/amp.utilitys.js"></script>
+<script src="/src/amp/uncompressed/amp.core.js"></script>
+<script src="/src/amp/uncompressed/amp.jquery-plugins.js"></script>
+<script src="/src/amp/uncompressed/amp.utilitys.js"></script>
 
 <!-- common -->
 <script src="/js/common.js"></script>
