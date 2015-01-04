@@ -2,6 +2,7 @@
 
   // 'use strict';
 
+  var Loader, loader, p;
 
 
   /*--------------------------------------------------------------------------
@@ -16,14 +17,40 @@
    * @class Loader
    * @constructor
    * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期値： 'body'
+   * @param {Boolean} isStart ローダー開始するか
    * @return {Loader}
    */
-  var Loader = function(elm){
+  Loader = function(elm, isStart){
     this.elm = elm ? elm : this.elm;
     this.imagesloaded = imagesLoaded(this.elm);
     this.length = this.imagesloaded.images.length;
     this.$defer = new $.Deferred();
+
+    if(amp.isBoolean(isStart) && isStart){
+      this.start();
+    }
+
     return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ローダー</h4>
+   * Loaderのショートハンド<br>
+   * 処理が完了したら、jQuery Deferred Objectを返します
+   *
+   * @static
+   * @method loader
+   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期: body
+   * @return {Loader} Loader生成してインスタンスを返す
+   */
+  loader = function(elm){
+    return new Loader(elm, true);
   };
 
 
@@ -39,7 +66,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '1.6';
+  Loader.VERSION = '2.0';
 
 
   /**
@@ -48,7 +75,7 @@
    * @property p
    * @type {Object}
    */
-  Loader.p = Loader.prototype;
+  p = Loader.prototype;
 
 
   /**
@@ -57,7 +84,7 @@
    * @property elm
    * @type {DOM}
    */
-  Loader.p.elm = 'body';
+  p.elm = 'body';
 
 
   /**
@@ -66,7 +93,7 @@
    * @property imagesloaded
    * @type {imagesloaded}
    */
-  Loader.p.imagesloaded = null;
+  p.imagesloaded = null;
 
 
   /**
@@ -76,7 +103,7 @@
    * @property $defer
    * @type {jQuery.Deferred}
    */
-  Loader.p.$defer = null;
+  p.$defer = null;
 
 
   /**
@@ -85,7 +112,7 @@
    * @property length
    * @type {Number}
    */
-  Loader.p.length = 0;
+  p.length = 0;
 
 
   /**
@@ -94,7 +121,7 @@
    * @property count
    * @type {Number}
    */
-  Loader.p.count = 0;
+  p.count = 0;
 
 
   /**
@@ -103,44 +130,7 @@
    * @property loadCount
    * @type {Number}
    */
-  Loader.p.loadCount = 0;
-
-
-  /**
-   * <h4>タイマーID</h4>
-   *
-   * @property timerID
-   * @type {String}
-   */
-  Loader.p.timerID = null;
-
-
-  /**
-   * <h4>エラー処理を監視するタイマーID</h4>
-   *
-   * @property checkID
-   * @type {String}
-   */
-  Loader.p.checkID = null;
-
-
-  /**
-   * <h4>タイムスタンプ</h4>
-   *
-   * @private
-   * @property _timeStamp
-   * @type {Number} ミリ秒
-   */
-  Loader.p._timeStamp = null;
-
-
-  /**
-   * <h4>処理が止まっていないかチェックする間隔</h4>
-   *
-   * @property checkTime
-   * @type {Number} ミリ秒
-   */
-  Loader.p.checkTime = 5000;
+  p.loadCount = 0;
 
 
 
@@ -162,30 +152,21 @@
 
 
   /**
-   * <h4>初期化</h4>
-   * シングルトンパターン
+   * <h4>ローター開始</h4>
    *
-   * @method init
+   * @method start
    * @return {jQuery.Deferred} jQuery.Deferred.promiseを返す
    */
-  Loader.p.init = function(){
+  p.start = function(){
     var self = this;
 
-    if(!self._timeStamp){
-      // タイムスタンプ
-      self._timeStamp = amp.now();
+    // 画像処理完了毎（成功・失敗）にインクリメントする
+    self.imagesloaded.jqDeferred.progress(function(){
+      self.count += 1;
+    });
 
-      // 画像の読み込まれたらインクリメントする
-      self.imagesloaded.jqDeferred.progress(function(){
-        self.count += 1;
-      });
-
-      // カウントを更新する
-      self.update();
-
-      // 5秒間処理が止まれば自動的にカウントを更新
-      self.check();
-    }
+    // カウントを更新する
+    self._update();
 
     return self.$defer.promise();
   };
@@ -194,58 +175,25 @@
   /**
    * <h4>カウントのアップデート</h4>
    *
-   * @method update
+   * @private
+   * @method _update
    * @return {Void}
    */
-  Loader.p.update = function(){
-    var self = this;
+  p._update = function(){
+    var self = this,
     current = self.count / self.length * 100;
-    self.loadCount += (current - self.loadCount) * 0.1;
 
-    // progress
+    self.loadCount += self.loadCount < current ? 1 : 0;
+
     self.$defer.notify(Math.ceil(self.loadCount));
 
-    // done
     if(self.loadCount >= 100){
-      // 監視解除
-      clearTimeout(self.checkID);
       self.$defer.resolve(self.imagesloaded);
-
     } else {
-      self.timerID = amp.requestAnimationFrame(function(){
-        self.update();
+      amp.requestAnimationFrame(function(){
+        self._update();
       });
     }
-
-    if(self.loadCount > 99){
-      self.loadCount = 100;
-    }
-  };
-
-
-  /**
-   * <h4>処理が止まっていないか監視します</h4>
-   *
-   * @method check
-   * @return {Void}
-   */
-  Loader.p.check = function(){
-    var self = this,
-    count = self.count;
-
-    self.checkID = setTimeout(function(){
-
-      if(self.count === count){
-        self.checkID = setInterval(function(){
-          if(self.count !== self.length){
-            self.count += 1;
-          }
-        }, 1000 / 60);
-
-      } else {
-        self.check();
-      }
-    }, self.checkTime);
   };
 
 
@@ -255,25 +203,8 @@
    * @method toString
    * @return {String} クラス名を返す
    */
-  Loader.p.toString = function(){
+  p.toString = function(){
     return '[object Loader]';
-  };
-
-
-  /**
-   * <h4>ローダー</h4>
-   * Loaderのショートハンド<br>
-   * 処理が完了したら、jQuery Deferred Objectを返します
-   *
-   * @static
-   * @method create
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可
-   * @return {Loader} Loader生成してインスタンスを返す
-   */
-  Loader.create = function(elm){
-    var loader = new Loader(elm);
-    loader.init();
-    return loader;
   };
 
 
@@ -283,8 +214,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.jQuery = root.amp.jQuery || {};
-  root.amp.jQuery.Loader = Loader;
+  root.amp.Loader = Loader;
+  root.amp.loader = loader;
 
 
 }(window, jQuery));

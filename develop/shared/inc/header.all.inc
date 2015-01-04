@@ -9,8 +9,8 @@
 <li><a href="/amp.core.fontResize.html">amp.fontResize</a></li>
 <li><a href="/amp.core.Mediator.html">amp.Mediator</a></li>
 <!-- <li><a href="/amp.core.Iterator.html">amp.Iterator</a></li> -->
-<li><a href="/amp.utilitys.html">utilitys</a></li>
-<li><a href="/amp.createjs.html">amp.createjs</a></li>
+<li><a href="/amp.jquery.html">jquery</a></li>
+<li><a href="/amp.createjs.html">createjs</a></li>
 </ul>
 </nav>
 

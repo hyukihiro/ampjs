@@ -317,12 +317,12 @@ gulp.task('js', function(){
 		.pipe(gulp.dest(path.httpdocs + 'src/'));
 
 	// common.js
-	gulp.src(path.develop + 'js/*.js')
+	gulp.src(path.develop + 'shared/js/*.js')
 		.pipe(plugins.plumber())
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('jshint-stylish'))
 		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.httpdocs + 'js/'));
+		.pipe(gulp.dest(path.httpdocs + 'shared/js/'));
 
 	// snippet
 	gulp.src(path.develop + 'src/snippet/*.js')
@@ -330,7 +330,7 @@ gulp.task('js', function(){
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('jshint-stylish'))
 		.pipe(plugins.header(banner))
-		.pipe(gulp.dest(path.httpdocs));
+		.pipe(gulp.dest(path.httpdocs + 'src/snippet/'));
 
 	// amp core
 	gulp.src(path.develop + 'src/amp/core/**/*.js')
@@ -358,15 +358,15 @@ gulp.task('js', function(){
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.httpdocs + 'src/amp/min/'));
 
-	// amp utilitys
-	gulp.src(path.develop + 'src/amp/utilitys/*.js')
+	// amp jquery
+	gulp.src(path.develop + 'src/amp/jquery/*.js')
 		.pipe(plugins.plumber())
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('jshint-stylish'))
-		.pipe(plugins.concat('amp.utilitys.js'))
+		.pipe(plugins.concat('amp.jquery.js'))
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.httpdocs + 'src/amp/uncompressed/'))
-		.pipe(plugins.rename({basename: 'amp.utilitys.min'}))
+		.pipe(plugins.rename({basename: 'amp.jquery.min'}))
 		.pipe(plugins.uglify())
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.httpdocs + 'src/amp/min/'));

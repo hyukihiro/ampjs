@@ -48,7 +48,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '1.7';
+  amp.VERSION = '1.8';
 
 
   /**
@@ -832,6 +832,28 @@
       return str + (count += 1);
     };
   }());
+
+
+  /**
+   * <h4>渡した配列に、折り返した値を追加して返します</h4>
+   *
+   * @static
+   * @property cuff
+   * @param  {Array} ary   ベースとなる配列
+   * @param  {Number} radix 折り返すポイント
+   * @return {Array}
+   */
+  amp.cuff = function(ary, radix){
+    var copyAry = ary.concat(),
+    i = radix ? radix : 0,
+    l = ary.length;
+
+    for(; i < l; i += 1){
+      ary.push(copyAry[l - (i+1)]);
+    }
+
+    return ary;
+  };
 
 
   /**

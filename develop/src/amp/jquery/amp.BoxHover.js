@@ -193,7 +193,7 @@
     if($a.attr('target') === '_blank'){
       return window.open($a.attr('href'), '_blank');
     } else {
-      return location.href = $a.attr('href');
+      location.href = $a.attr('href');
     }
   };
 
@@ -216,7 +216,7 @@
 
   root.amp = root.amp || {};
   root.amp.BoxHover = BoxHover;
-  root.amp.boxHover = BoxHover;
+  root.amp.boxHover = boxHover;
 
 
 }(window, jQuery));

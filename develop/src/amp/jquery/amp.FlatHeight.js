@@ -20,7 +20,7 @@
    * @param  {Object} options オプション値 省略可
    * @return {FlatHeight}
    */
-  var FlatHeight = function($target, split, options){
+  FlatHeight = function($target, split, options){
     this.$target   = $target;
     this.split     = $.isNumeric(split) ? split : $target.length;
     options        = $.isPlainObject(split) ? split : options;

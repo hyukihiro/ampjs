@@ -11,4 +11,4 @@
 <script src="/src/amp/uncompressed/amp.createjs.js"></script>
 
 <!-- common -->
-<script src="/js/common.js"></script>
+<script src="/shared/js/common.js"></script>

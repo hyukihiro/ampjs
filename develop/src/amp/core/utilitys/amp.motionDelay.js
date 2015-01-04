@@ -72,8 +72,6 @@
 
   // random
   motionDelay.random = function(){
-
-
   };
 
 
@@ -86,12 +84,6 @@
   motionDelay.orderSideOut = function(){};
   motionDelay.orderAltIn = function(){};
   motionDelay.orderAltOut = function(){};
-
-
-
-
-
-
 
 
 

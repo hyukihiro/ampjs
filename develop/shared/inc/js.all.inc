@@ -15,8 +15,8 @@
 <!-- amp -->
 <script src="/src/amp/uncompressed/amp.core.js"></script>
 <script src="/src/amp/uncompressed/amp.jquery-plugins.js"></script>
-<script src="/src/amp/uncompressed/amp.utilitys.js"></script>
+<script src="/src/amp/uncompressed/amp.jquery.js"></script>
 <script src="/src/amp/uncompressed/amp.createjs.js"></script>
 
 <!-- common -->
-<script src="/js/common.js"></script>
+<script src="/shared/js/common.js"></script>

@@ -24,6 +24,7 @@
 | fontResize   | - | ○ | ○ | - | ○ |
 | Mediator     | - | ○ | ○ | - | ○ |
 | Storage      | - | ○ | ○ | - | ○ |
+| motionDelay  | 実装中 | × | × | × | × |
 | Iterator     | 一時中断 | ○ | ○ | - | ○ |
 
 ** jQuery **
@@ -35,24 +36,21 @@
 | SmothScroll  | - | ○ | ○ | ○ | ○ |
 | FlatHeight   | - | ○ | ○ | ○ | ○ |
 | Scroll       | - | ○ | ○ | ○ | ○ |
-	| Boxhover     | - | ○ | ○ | ○ | ○ |
-
+| Boxhover     | - | ○ | ○ | ○ | ○ |
+| Mediaquery   | - | ○ | ○ | ○ | ○ |
 | Loader       | - | ○ | ○ | ○ | ○ |
-| PagetopToggle| - | ○ | ○ | ○ | ○ |
 
+| PagetopToggle| 実装中 | ○ | ○ | ○ | ○ |
 | Rollover | 実装中 | × | × | × | × |
 | SlipRollover | 実装中 | × | × | × | × |
 | Active | 実装中 | × | × | × | × |
-| mediaQuery | 実装中 | × | × | × | × |
-
 
 | Slider     | 実装中 | × | × | × | × |
 | Crossfader | 実装中 | × | × | × | × |
 | Tab        | 未実装 | × | × | × | × |
 | Accordion  | 未実装 | × | × | × | × |
 | Modal      | 未実装 | × | × | × | × |
-<!-- | HoverTween | 実装中 | × | × | × | × | -->
-| SwitchImage| 実装中 | × | × | × | × |
+| SwitchImage| 一時中断 | × | × | × | × |
 
 
 ** createjs **
@@ -67,8 +65,7 @@
 ## TASKS
 
 * plugins整理・実装・テスト
-* Hummer.js IE8エラー
-* createjs 追加
+* Hummer.js 削除
 
 ---
 
