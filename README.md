@@ -39,11 +39,12 @@
 | Boxhover     | - | ○ | ○ | ○ | ○ |
 | Mediaquery   | - | ○ | ○ | ○ | ○ |
 | Loader       | - | ○ | ○ | ○ | ○ |
-| ScrollToggle| - | ○ | ○ | ○ | ○ |
+| ScrollToggle | - | ○ | ○ | ○ | ○ |
+| Rollover     | - | ○ | ○ | ○ | ○ |
+| Active       | - | ○ | ○ | ○ | ○ |
 
-| Rollover | 実装中 | × | × | × | × |
-| SlipRollover | 実装中 | × | × | × | × |
-| Active | 実装中 | × | × | × | × |
+| Slipover | 実装中 | × | × | × | × |
+| Alphaover | 実装中 | × | × | × | × |
 
 | Slider     | 実装中 | × | × | × | × |
 | Crossfader | 実装中 | × | × | × | × |

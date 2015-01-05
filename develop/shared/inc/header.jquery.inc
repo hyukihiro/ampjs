@@ -5,6 +5,7 @@
 <nav>
 <ul>
 <li><a href="/amp.jquery.html">amp/jquery/</a></li>
+<li><a href="/amp.jquery.Active.html">amp.Active</a></li>
 <li><a href="/amp.jquery.Boxhover.html">amp.Boxhover</a></li>
 <li><a href="/amp.jquery.FlatHeight.html">amp.FlatHeight</a></li>
 <li><a href="/amp.jquery.Loader.html">amp.Loader</a></li>

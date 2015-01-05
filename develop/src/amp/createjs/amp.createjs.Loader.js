@@ -1,4 +1,4 @@
-;(function(root, createjs){
+(function(root, createjs){
 
   // 'use strict';
 

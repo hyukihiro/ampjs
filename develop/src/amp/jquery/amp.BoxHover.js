@@ -1,4 +1,4 @@
-;(function(root, $){
+(function(root, $){
 
   // 'use strict';
 
@@ -21,7 +21,7 @@
    */
   BoxHover = function($target, options){
     // $target指定がない場合、初期値を設定
-    if(!$target || !$target instanceof jQuery){
+    if(!$target || !($target instanceof jQuery)){
       options = $target;
       $target = $('.box-hover');
     }

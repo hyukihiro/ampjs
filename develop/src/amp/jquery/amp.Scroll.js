@@ -21,7 +21,7 @@
    */
   Scroll = function($trigger, options){
     // $trigger指定がない場合、初期値を設定
-    if(!$trigger || !$trigger instanceof jQuery){
+    if(!$trigger || !($trigger instanceof jQuery)){
       options = $trigger;
       $trigger = $('a[href^=#]');
     }

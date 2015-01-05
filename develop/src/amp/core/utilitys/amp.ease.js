@@ -32,271 +32,261 @@
    * @property VERSION
    * @type {String}
    */
-  ease.VERSION = '1.5';
+  ease.VERSION = '1.6';
 
 
   /*--------------------------------------------------------------------------
     jQuery
   --------------------------------------------------------------------------*/
-  /**
-   * <h4>jQuery Easeing Pluginをエクスポートしています</h4>
-   * jQuery Easeing Pluginをインストールして使用してください
-   *
-   * @static
-   * @property createjs
-   * @type {Object}
-   */
-   ease.jQuery = {};
-
 
   /* 1 Sine
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._1_SINE_IN
+   * @property _1_SINE_IN
    * @type {String}
    */
-  ease.jQuery._1_SINE_IN = 'easeInSine';
+  ease._1_SINE_IN = 'easeInSine';
 
   /**
    * @static
-   * @property jQuery._1_SINE_OUT
+   * @property _1_SINE_OUT
    * @type {String}
    */
-  ease.jQuery._1_SINE_OUT = 'easeOutSine';
+  ease._1_SINE_OUT = 'easeOutSine';
 
   /**
    * @static
-   * @property jQuery._1_SINE_IN_OUT
+   * @property _1_SINE_IN_OUT
    * @type {String}
    */
-  ease.jQuery._1_SINE_IN_OUT = 'easeInOutSine';
+  ease._1_SINE_IN_OUT = 'easeInOutSine';
 
 
   /* 2 Quad
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._2_QUAD_IN
+   * @property _2_QUAD_IN
    * @type {String}
    */
-  ease.jQuery._2_QUAD_IN = 'easeInQuad';
+  ease._2_QUAD_IN = 'easeInQuad';
 
   /**
    * @static
-   * @property jQuery._2_QUAD_OUT
+   * @property _2_QUAD_OUT
    * @type {String}
    */
-  ease.jQuery._2_QUAD_OUT = 'easeOutQuad';
+  ease._2_QUAD_OUT = 'easeOutQuad';
 
   /**
    * @static
-   * @property jQuery._2_QUAD_IN_OUT
+   * @property _2_QUAD_IN_OUT
    * @type {String}
    */
-  ease.jQuery._2_QUAD_IN_OUT = 'easeInOutQuad';
+  ease._2_QUAD_IN_OUT = 'easeInOutQuad';
 
 
   /* 3 Cubic
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._3_CUBIC_IN
+   * @property _3_CUBIC_IN
    * @type {String}
    */
-  ease.jQuery._3_CUBIC_IN = 'easeInCubic';
+  ease._3_CUBIC_IN = 'easeInCubic';
 
   /**
    * @static
-   * @property jQuery._3_CUBIC_OUT
+   * @property _3_CUBIC_OUT
    * @type {String}
    */
-  ease.jQuery._3_CUBIC_OUT = 'easeOutCubic';
+  ease._3_CUBIC_OUT = 'easeOutCubic';
 
   /**
    * @static
-   * @property jQuery._3_CUBIC_IN_OUT
+   * @property _3_CUBIC_IN_OUT
    * @type {String}
    */
-  ease.jQuery._3_CUBIC_IN_OUT = 'easeInOutCubic';
+  ease._3_CUBIC_IN_OUT = 'easeInOutCubic';
 
 
   /* 4 Quart
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._4_QUART_IN
+   * @property _4_QUART_IN
    * @type {String}
    */
-  ease.jQuery._4_QUART_IN = 'easeInQuart';
+  ease._4_QUART_IN = 'easeInQuart';
 
   /**
    * @static
-   * @property jQuery._4_QUART_OUT
+   * @property _4_QUART_OUT
    * @type {String}
    */
-  ease.jQuery._4_QUART_OUT = 'easeOutQuart';
+  ease._4_QUART_OUT = 'easeOutQuart';
 
   /**
    * @static
-   * @property jQuery._4_QUART_IN_OUT
+   * @property _4_QUART_IN_OUT
    * @type {String}
    */
-  ease.jQuery._4_QUART_IN_OUT = 'easeInOutQuart';
+  ease._4_QUART_IN_OUT = 'easeInOutQuart';
 
 
   /* 5 Quint
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._5_QUINT_IN
+   * @property _5_QUINT_IN
    * @type {String}
    */
-  ease.jQuery._5_QUINT_IN = 'easeInQuint';
+  ease._5_QUINT_IN = 'easeInQuint';
 
   /**
    * @static
-   * @property jQuery._5_QUINT_OUT
+   * @property _5_QUINT_OUT
    * @type {String}
    */
-  ease.jQuery._5_QUINT_OUT = 'easeOutQuint';
+  ease._5_QUINT_OUT = 'easeOutQuint';
 
   /**
    * @static
-   * @property jQuery._5_QUINT_IN_OUT
+   * @property _5_QUINT_IN_OUT
    * @type {String}
    */
-  ease.jQuery._5_QUINT_IN_OUT = 'easeInOutQuint';
+  ease._5_QUINT_IN_OUT = 'easeInOutQuint';
 
 
   /* 6 Expo
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._6_EXPO_IN
+   * @property _6_EXPO_IN
    * @type {String}
    */
-  ease.jQuery._6_EXPO_IN = 'easeInExpo';
+  ease._6_EXPO_IN = 'easeInExpo';
 
   /**
    * @static
-   * @property jQuery._6_EXPO_OUT
+   * @property _6_EXPO_OUT
    * @type {String}
    */
-  ease.jQuery._6_EXPO_OUT = 'easeOutExpo';
+  ease._6_EXPO_OUT = 'easeOutExpo';
 
   /**
    * @static
-   * @property jQuery._6_EXPO_IN_OUT
+   * @property _6_EXPO_IN_OUT
    * @type {String}
    */
-  ease.jQuery._6_EXPO_IN_OUT = 'easeInOutExpo';
+  ease._6_EXPO_IN_OUT = 'easeInOutExpo';
 
 
   /* 7 Circ
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._7_CIRC_IN
+   * @property _7_CIRC_IN
    * @type {String}
    */
-  ease.jQuery._7_CIRC_IN = 'easeInCirc';
+  ease._7_CIRC_IN = 'easeInCirc';
 
   /**
    * @static
-   * @property jQuery._7_CIRC_OUT
+   * @property _7_CIRC_OUT
    * @type {String}
    */
-  ease.jQuery._7_CIRC_OUT = 'easeOutCirc';
+  ease._7_CIRC_OUT = 'easeOutCirc';
 
   /**
    * @static
-   * @property jQuery._7_CIRC_IN_OUT
+   * @property _7_CIRC_IN_OUT
    * @type {String}
    */
-  ease.jQuery._7_CIRC_IN_OUT = 'easeInOutCirc';
+  ease._7_CIRC_IN_OUT = 'easeInOutCirc';
 
 
   /* Linear
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._LINEAR
+   * @property _LINEAR
    * @type {String}
    */
-  ease.jQuery._LINEAR = 'linear';
+  ease._LINEAR = 'linear';
 
 
   /* Back
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._BACK_IN
+   * @property _BACK_IN
    * @type {String}
    */
-  ease.jQuery._BACK_IN = 'easeInBack';
+  ease._BACK_IN = 'easeInBack';
 
   /**
    * @static
-   * @property jQuery._BACK_OUT
+   * @property _BACK_OUT
    * @type {String}
    */
-  ease.jQuery._BACK_OUT = 'easeOutBack';
+  ease._BACK_OUT = 'easeOutBack';
 
   /**
    * @static
-   * @property jQuery._BACK_IN_OUT
+   * @property _BACK_IN_OUT
    * @type {String}
    */
-  ease.jQuery._BACK_IN_OUT = 'easeInOutBack';
+  ease._BACK_IN_OUT = 'easeInOutBack';
 
 
   /* Elastic
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._ELASTIC_IN
+   * @property _ELASTIC_IN
    * @type {String}
    */
-  ease.jQuery._ELASTIC_IN = 'easeInElastic';
+  ease._ELASTIC_IN = 'easeInElastic';
 
   /**
    * @static
-   * @property jQuery._ELASTIC_OUT
+   * @property _ELASTIC_OUT
    * @type {String}
    */
-  ease.jQuery._ELASTIC_OUT = 'easeOutElastic';
+  ease._ELASTIC_OUT = 'easeOutElastic';
 
   /**
    * @static
-   * @property jQuery._ELASTIC_IN_OUT
+   * @property _ELASTIC_IN_OUT
    * @type {String}
    */
-  ease.jQuery._ELASTIC_IN_OUT = 'easeInOutElastic';
+  ease._ELASTIC_IN_OUT = 'easeInOutElastic';
 
 
   /* Bounce
   -----------------------------------------------------------------*/
   /**
    * @static
-   * @property jQuery._BOUNCE_IN
+   * @property _BOUNCE_IN
    * @type {String}
    */
-  ease.jQuery._BOUNCE_IN = 'easeInBounce';
+  ease._BOUNCE_IN = 'easeInBounce';
 
   /**
    * @static
-   * @property jQuery._BOUNCE_OUT
+   * @property _BOUNCE_OUT
    * @type {String}
    */
-  ease.jQuery._BOUNCE_OUT = 'easeOutBounce';
+  ease._BOUNCE_OUT = 'easeOutBounce';
 
   /**
    * @static
-   * @property jQuery._BOUNCE_IN_OUT
+   * @property _BOUNCE_IN_OUT
    * @type {String}
    */
-  ease.jQuery._BOUNCE_IN_OUT = 'easeInOutBounce';
+  ease._BOUNCE_IN_OUT = 'easeInOutBounce';
 
 
   /*--------------------------------------------------------------------------

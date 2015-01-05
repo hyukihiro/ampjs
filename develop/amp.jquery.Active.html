@@ -32,7 +32,10 @@
 <script type="text/javascript">
 jQuery(function($){
 
-	new amp.Rollover($('img.rover, input.rover, .all-rover img')).createRollover().on();
+	new amp.Rollover($('img.rover, input.rover, .all-rover img'));
+	amp.active($('img.rover, input.rover, .all-rover img').eq(0));
+	amp.active($('img.rover, input.rover, .all-rover img').eq(2));
+
 	// console.log(amp.jQuery.Rollover);
 
 	// $('img.rover, input.rover, .all-rover img')
