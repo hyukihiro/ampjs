@@ -2,8 +2,8 @@
 
   // 'use strict';
 
+  var Ease, p;
 
-  var ease;
 
 
   /*----------------------------------------------------------------------
@@ -13,11 +13,11 @@
   /**
    * <h4>Easeingを管理します</h4>
    *
-   * @class ease
+   * @class Ease
    * @constructor
-   * @return {ease}
+   * @return {Ease}
    */
-  ease = {};
+  Ease = function(){};
 
 
 
@@ -32,7 +32,17 @@
    * @property VERSION
    * @type {String}
    */
-  ease.VERSION = '1.6';
+  Ease.VERSION = '1.7';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = Ease.prototype;
+
 
 
   /*--------------------------------------------------------------------------
@@ -46,21 +56,21 @@
    * @property _1_SINE_IN
    * @type {String}
    */
-  ease._1_SINE_IN = 'easeInSine';
+  p._1_SINE_IN = 'easeInSine';
 
   /**
    * @static
    * @property _1_SINE_OUT
    * @type {String}
    */
-  ease._1_SINE_OUT = 'easeOutSine';
+  p._1_SINE_OUT = 'easeOutSine';
 
   /**
    * @static
    * @property _1_SINE_IN_OUT
    * @type {String}
    */
-  ease._1_SINE_IN_OUT = 'easeInOutSine';
+  p._1_SINE_IN_OUT = 'easeInOutSine';
 
 
   /* 2 Quad
@@ -70,21 +80,21 @@
    * @property _2_QUAD_IN
    * @type {String}
    */
-  ease._2_QUAD_IN = 'easeInQuad';
+  p._2_QUAD_IN = 'easeInQuad';
 
   /**
    * @static
    * @property _2_QUAD_OUT
    * @type {String}
    */
-  ease._2_QUAD_OUT = 'easeOutQuad';
+  p._2_QUAD_OUT = 'easeOutQuad';
 
   /**
    * @static
    * @property _2_QUAD_IN_OUT
    * @type {String}
    */
-  ease._2_QUAD_IN_OUT = 'easeInOutQuad';
+  p._2_QUAD_IN_OUT = 'easeInOutQuad';
 
 
   /* 3 Cubic
@@ -94,21 +104,21 @@
    * @property _3_CUBIC_IN
    * @type {String}
    */
-  ease._3_CUBIC_IN = 'easeInCubic';
+  p._3_CUBIC_IN = 'easeInCubic';
 
   /**
    * @static
    * @property _3_CUBIC_OUT
    * @type {String}
    */
-  ease._3_CUBIC_OUT = 'easeOutCubic';
+  p._3_CUBIC_OUT = 'easeOutCubic';
 
   /**
    * @static
    * @property _3_CUBIC_IN_OUT
    * @type {String}
    */
-  ease._3_CUBIC_IN_OUT = 'easeInOutCubic';
+  p._3_CUBIC_IN_OUT = 'easeInOutCubic';
 
 
   /* 4 Quart
@@ -118,21 +128,21 @@
    * @property _4_QUART_IN
    * @type {String}
    */
-  ease._4_QUART_IN = 'easeInQuart';
+  p._4_QUART_IN = 'easeInQuart';
 
   /**
    * @static
    * @property _4_QUART_OUT
    * @type {String}
    */
-  ease._4_QUART_OUT = 'easeOutQuart';
+  p._4_QUART_OUT = 'easeOutQuart';
 
   /**
    * @static
    * @property _4_QUART_IN_OUT
    * @type {String}
    */
-  ease._4_QUART_IN_OUT = 'easeInOutQuart';
+  p._4_QUART_IN_OUT = 'easeInOutQuart';
 
 
   /* 5 Quint
@@ -142,21 +152,21 @@
    * @property _5_QUINT_IN
    * @type {String}
    */
-  ease._5_QUINT_IN = 'easeInQuint';
+  p._5_QUINT_IN = 'easeInQuint';
 
   /**
    * @static
    * @property _5_QUINT_OUT
    * @type {String}
    */
-  ease._5_QUINT_OUT = 'easeOutQuint';
+  p._5_QUINT_OUT = 'easeOutQuint';
 
   /**
    * @static
    * @property _5_QUINT_IN_OUT
    * @type {String}
    */
-  ease._5_QUINT_IN_OUT = 'easeInOutQuint';
+  p._5_QUINT_IN_OUT = 'easeInOutQuint';
 
 
   /* 6 Expo
@@ -166,21 +176,21 @@
    * @property _6_EXPO_IN
    * @type {String}
    */
-  ease._6_EXPO_IN = 'easeInExpo';
+  p._6_EXPO_IN = 'easeInExpo';
 
   /**
    * @static
    * @property _6_EXPO_OUT
    * @type {String}
    */
-  ease._6_EXPO_OUT = 'easeOutExpo';
+  p._6_EXPO_OUT = 'easeOutExpo';
 
   /**
    * @static
    * @property _6_EXPO_IN_OUT
    * @type {String}
    */
-  ease._6_EXPO_IN_OUT = 'easeInOutExpo';
+  p._6_EXPO_IN_OUT = 'easeInOutExpo';
 
 
   /* 7 Circ
@@ -190,21 +200,21 @@
    * @property _7_CIRC_IN
    * @type {String}
    */
-  ease._7_CIRC_IN = 'easeInCirc';
+  p._7_CIRC_IN = 'easeInCirc';
 
   /**
    * @static
    * @property _7_CIRC_OUT
    * @type {String}
    */
-  ease._7_CIRC_OUT = 'easeOutCirc';
+  p._7_CIRC_OUT = 'easeOutCirc';
 
   /**
    * @static
    * @property _7_CIRC_IN_OUT
    * @type {String}
    */
-  ease._7_CIRC_IN_OUT = 'easeInOutCirc';
+  p._7_CIRC_IN_OUT = 'easeInOutCirc';
 
 
   /* Linear
@@ -214,7 +224,7 @@
    * @property _LINEAR
    * @type {String}
    */
-  ease._LINEAR = 'linear';
+  p._LINEAR = 'linear';
 
 
   /* Back
@@ -224,21 +234,21 @@
    * @property _BACK_IN
    * @type {String}
    */
-  ease._BACK_IN = 'easeInBack';
+  p._BACK_IN = 'easeInBack';
 
   /**
    * @static
    * @property _BACK_OUT
    * @type {String}
    */
-  ease._BACK_OUT = 'easeOutBack';
+  p._BACK_OUT = 'easeOutBack';
 
   /**
    * @static
    * @property _BACK_IN_OUT
    * @type {String}
    */
-  ease._BACK_IN_OUT = 'easeInOutBack';
+  p._BACK_IN_OUT = 'easeInOutBack';
 
 
   /* Elastic
@@ -248,21 +258,21 @@
    * @property _ELASTIC_IN
    * @type {String}
    */
-  ease._ELASTIC_IN = 'easeInElastic';
+  p._ELASTIC_IN = 'easeInElastic';
 
   /**
    * @static
    * @property _ELASTIC_OUT
    * @type {String}
    */
-  ease._ELASTIC_OUT = 'easeOutElastic';
+  p._ELASTIC_OUT = 'easeOutElastic';
 
   /**
    * @static
    * @property _ELASTIC_IN_OUT
    * @type {String}
    */
-  ease._ELASTIC_IN_OUT = 'easeInOutElastic';
+  p._ELASTIC_IN_OUT = 'easeInOutElastic';
 
 
   /* Bounce
@@ -272,21 +282,21 @@
    * @property _BOUNCE_IN
    * @type {String}
    */
-  ease._BOUNCE_IN = 'easeInBounce';
+  p._BOUNCE_IN = 'easeInBounce';
 
   /**
    * @static
    * @property _BOUNCE_OUT
    * @type {String}
    */
-  ease._BOUNCE_OUT = 'easeOutBounce';
+  p._BOUNCE_OUT = 'easeOutBounce';
 
   /**
    * @static
    * @property _BOUNCE_IN_OUT
    * @type {String}
    */
-  ease._BOUNCE_IN_OUT = 'easeInOutBounce';
+  p._BOUNCE_IN_OUT = 'easeInOutBounce';
 
 
   /*--------------------------------------------------------------------------
@@ -301,7 +311,7 @@
    * @property createjs
    * @type {Object}
    */
-  ease.createjs = (function(){
+  p.createjs = (function(){
     var e = {},
     c = root.createjs || {};
 
@@ -312,7 +322,7 @@
       c = createjs.Ease;
     }
 
-    // see: http://www.createjs.com/Docs/TweenJS/files/tweenjs_ease.js.html
+    // see: http://www.createjs.com/Docs/TweenJS/files/tweenjs_p.js.html
 
     /* 1 Sine
     -----------------------------------------------------------------*/
@@ -581,7 +591,7 @@
    * @property css
    * @type {Object}
    */
-  ease.css = {};
+  p.css = {};
 
 
   /* 1 Sine
@@ -591,21 +601,21 @@
    * @property css._1_SINE_IN
    * @type {String}
    */
-  ease.css._1_SINE_IN = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
+  p.css._1_SINE_IN = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
 
   /**
    * @static
    * @property css._1_SINE_IN
    * @type {String}
    */
-  ease.css._1_SINE_OUT = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
+  p.css._1_SINE_OUT = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
 
   /**
    * @static
    * @property css._1_SINE_IN_OUT
    * @type {String}
    */
-  ease.css._1_SINE_IN_OUT = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
+  p.css._1_SINE_IN_OUT = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
 
 
   /* 2 Quad
@@ -615,21 +625,21 @@
    * @property css._2_QUAD_IN
    * @type {String}
    */
-  ease.css._2_QUAD_IN = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
+  p.css._2_QUAD_IN = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
 
   /**
    * @static
    * @property css._2_QUAD_OUT
    * @type {String}
    */
-  ease.css._2_QUAD_OUT = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  p.css._2_QUAD_OUT = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
 
   /**
    * @static
    * @property css._2_QUAD_IN_OUT
    * @type {String}
    */
-  ease.css._2_QUAD_IN_OUT = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
+  p.css._2_QUAD_IN_OUT = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
 
 
   /* 3 Cubic
@@ -639,21 +649,21 @@
    * @property css._3_CUBIC_IN
    * @type {String}
    */
-  ease.css._3_CUBIC_IN = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
+  p.css._3_CUBIC_IN = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
 
   /**
    * @static
    * @property css._3_CUBIC_OUT
    * @type {String}
    */
-  ease.css._3_CUBIC_OUT = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+  p.css._3_CUBIC_OUT = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
 
   /**
    * @static
    * @property css._3_CUBIC_IN_OUT
    * @type {String}
    */
-  ease.css._3_CUBIC_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
+  p.css._3_CUBIC_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
 
 
   /* 4 Quart
@@ -663,21 +673,21 @@
    * @property css._4_QUART_IN
    * @type {String}
    */
-  ease.css._4_QUART_IN = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
+  p.css._4_QUART_IN = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
 
   /**
    * @static
    * @property css._4_QUART_OUT
    * @type {String}
    */
-  ease.css._4_QUART_OUT = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
+  p.css._4_QUART_OUT = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
 
   /**
    * @static
    * @property css._4_QUART_IN_OUT
    * @type {String}
    */
-  ease.css._4_QUART_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+  p.css._4_QUART_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
 
 
   /* 5 Quint
@@ -687,21 +697,21 @@
    * @property css._5_QUINT_IN
    * @type {String}
    */
-  ease.css._5_QUINT_IN = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
+  p.css._5_QUINT_IN = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
 
   /**
    * @static
    * @property css._5_QUINT_OUT
    * @type {String}
    */
-  ease.css._5_QUINT_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+  p.css._5_QUINT_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
 
   /**
    * @static
    * @property css._5_QUINT_IN_OUT
    * @type {String}
    */
-  ease.css._5_QUINT_IN_OUT = 'cubic-bezier(0.86, 0, 0.07, 1)';
+  p.css._5_QUINT_IN_OUT = 'cubic-bezier(0.86, 0, 0.07, 1)';
 
 
   /* 6 Expo
@@ -711,21 +721,21 @@
    * @property css._6_EXPO_IN
    * @type {String}
    */
-  ease.css._6_EXPO_IN = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
+  p.css._6_EXPO_IN = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
 
   /**
    * @static
    * @property css._6_EXPO_OUT
    * @type {String}
    */
-  ease.css._6_EXPO_OUT = 'cubic-bezier(0.19, 1, 0.22, 1)';
+  p.css._6_EXPO_OUT = 'cubic-bezier(0.19, 1, 0.22, 1)';
 
   /**
    * @static
    * @property css._6_EXPO_IN_OUT
    * @type {String}
    */
-  ease.css._6_EXPO_IN_OUT = 'cubic-bezier(1, 0, 0, 1)';
+  p.css._6_EXPO_IN_OUT = 'cubic-bezier(1, 0, 0, 1)';
 
 
   /* 7 Cric
@@ -735,21 +745,21 @@
    * @property css._7_CIRC_IN
    * @type {String}
    */
-  ease.css._7_CIRC_IN = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
+  p.css._7_CIRC_IN = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
 
   /**
    * @static
    * @property css._7_CIRC_OUT
    * @type {String}
    */
-  ease.css._7_CIRC_OUT = 'cubic-bezier(0.075, 0.82, 0.165, 1);';
+  p.css._7_CIRC_OUT = 'cubic-bezier(0.075, 0.82, 0.165, 1);';
 
   /**
    * @static
    * @property css._7_CIRC_IN_OUT
    * @type {String}
    */
-  ease.css._7_CIRC_IN_OUT = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
+  p.css._7_CIRC_IN_OUT = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
 
 
   /* 7 Back
@@ -759,21 +769,21 @@
    * @property css._BACK_IN
    * @type {String}
    */
-  ease.css._BACK_IN = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
+  p.css._BACK_IN = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
 
   /**
    * @static
    * @property css._BACK_OUT
    * @type {String}
    */
-  ease.css._BACK_OUT = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+  p.css._BACK_OUT = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
 
   /**
    * @static
    * @property css._BACK_IN_OUT
    * @type {String}
    */
-  ease.css._BACK_IN_OUT = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+  p.css._BACK_IN_OUT = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
 
 
   /* Elastic
@@ -783,21 +793,21 @@
    * @property css._ELASTIC_IN
    * @type {String}
    */
-  ease.css._ELASTIC_IN = null;
+  p.css._ELASTIC_IN = null;
 
   /**
    * @static
    * @property css._ELASTIC_OUT
    * @type {String}
    */
-  ease.css._ELASTIC_OUT = null;
+  p.css._ELASTIC_OUT = null;
 
   /**
    * @static
    * @property css._ELASTIC_IN_OUT
    * @type {String}
    */
-  ease.css._ELASTIC_IN_OUT = null;
+  p.css._ELASTIC_IN_OUT = null;
 
 
   /* Bounce
@@ -807,21 +817,50 @@
    * @property css._BOUNCE_IN
    * @type {String}
    */
-  ease.css._BOUNCE_IN = null;
+  p.css._BOUNCE_IN = null;
 
   /**
    * @static
    * @property css._BOUNCE_OUT
    * @type {String}
    */
-  ease.css._BOUNCE_OUT = null;
+  p.css._BOUNCE_OUT = null;
 
   /**
    * @static
    * @property css._BOUNCE_IN_OUT
    * @type {String}
    */
-  ease.css._BOUNCE_IN_OUT = null;
+  p.css._BOUNCE_IN_OUT = null;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Extend Class}
+   */
+  Ease.extend = root.amp._extend;
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object Ease]';
+  };
 
 
 
@@ -830,7 +869,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.ease = ease;
+  root.amp.Ease = Ease;
+  root.amp.ease = new Ease();
 
 
 }(window));

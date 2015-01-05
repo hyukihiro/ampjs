@@ -1208,7 +1208,7 @@
       var size = 0,
       prop;
       for(prop in obj){
-        if(obj.hasOwnProperty(prop)){
+        if(obj.hasOwnProperty(prop) && prop !== 'length'){
           size += 1;
         }
       }

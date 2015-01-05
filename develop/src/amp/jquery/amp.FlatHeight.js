@@ -203,23 +203,21 @@
 
     self.$target.height('auto');
 
-    if(self.split < 2){
-      return false;
-    }
+    if(1 < self.split){
+      for(; i < total; i += 1){
+        // 一番高い高さを求める
+        targetHeight = self.$target.eq(i).height();
+        maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
 
-    for(; i < total; i += 1){
-      // 一番高い高さを求める
-      targetHeight = self.$target.eq(i).height();
-      maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
+        // 行の高さを揃える
+        if((i + 1) % self.split === 0){
+          self.$target.slice(rowCount * self.split, (rowCount += 1) * self.split).height(maxHeight);
+          maxHeight = 0;
 
-      // 行の高さを揃える
-      if((i + 1) % self.split === 0){
-        self.$target.slice(rowCount * self.split, (rowCount += 1) * self.split).height(maxHeight);
-        maxHeight = 0;
-
-      // 最終行の高さを揃える
-      } else if(1 < rest && finalRow <= i && i === total - 1){
-        self.$target.slice(rowCount * self.split, total).height(maxHeight);
+        // 最終行の高さを揃える
+        } else if(1 < rest && finalRow <= i && i === total - 1){
+          self.$target.slice(rowCount * self.split, total).height(maxHeight);
+        }
       }
     }
 

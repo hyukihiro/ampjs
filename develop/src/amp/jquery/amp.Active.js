@@ -53,7 +53,7 @@
   Active.types = [
     'textover',
     'rollover',
-    'slipover',
+    // 'slipover',
     'alphaover'
   ];
 
@@ -93,10 +93,15 @@
   /**
    * 要素のアクティブ化
    *
+   * @static
+   * @public
    * @method active
+   * @param {jQuery} $target 対象の要素
+   * @param {String} type アクティブタイプ
+   * @param {Object} options アクティブオプション
    * @return {RolloverInstance}
    */
-  p.active = function($target, type, options){
+  Active.active = p.active = function($target, type, options){
     if(!($target instanceof jQuery)){
       throw new TypeError('Please select the jQuery element');
     }
@@ -157,7 +162,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.active = new Active().active;
+  root.amp.Active = Active;
+  root.amp.active = Active.active;
 
 
 

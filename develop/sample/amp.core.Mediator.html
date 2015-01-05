@@ -33,9 +33,9 @@ jQuery(function($){
 
 	// console.log(mediator);
 
-	mediator.on('add.hoge', function(){
-		alert(++count);
-	}).trigger('add');
+	// mediator.on('add.hoge', function(){
+	// 	alert(++count);
+	// });
 
 
 	mediator.on('del', function(){
@@ -58,6 +58,8 @@ jQuery(function($){
 	$('#call').click(function(){
 		mediator.trigger('call');
 	});
+
+	mediator.off('add');
 
 
 });

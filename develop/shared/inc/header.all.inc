@@ -5,7 +5,7 @@
 <nav>
 <ul>
 <li><a href="/sample/">amp</a></li>
-<li><a href="/sample/amp.core.ease.html">amp.ease</a></li>
+<li><a href="/sample/amp.core.Ease.html">amp.Ease</a></li>
 <li><a href="/sample/amp.core.fontResize.html">amp.fontResize</a></li>
 <li><a href="/sample/amp.core.Mediator.html">amp.Mediator</a></li>
 <!-- <li><a href="/sample/amp.core.Iterator.html">amp.Iterator</a></li> -->

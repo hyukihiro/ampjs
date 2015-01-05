@@ -2,8 +2,7 @@
 
   // 'use strict';
 
-
-  var Mediator, p;
+  var Mediator, mediator, p;
 
 
 
@@ -23,6 +22,24 @@
 
 
   /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>イベントを仲介します</h4>
+   * Mediatorショートハンド
+   *
+   * @class Mediator
+   * @constructor
+   * @return {Mediator}
+   */
+  mediator = function(){
+    return new Mediator();
+  };
+
+
+
+  /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
 
@@ -33,7 +50,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediator.VERSION = '2.0';
+  Mediator.VERSION = '2.1';
 
 
   /**
@@ -140,14 +157,12 @@
   * @param {Object} context コンテキスト
   */
   p._setHandler = function(event, callback, context){
-    var handlers,
-    events = this._getEventNameMap(event);
-
-    handlers = this._handlers[events.name] = this._handlers[events.name] || [];
+    var events = (event && this._getEventNameMap(event));
 
     // addEvent
     if(callback){
-      handlers.push({
+      this._handlers[events.name] = this._handlers[events.name] || [];
+      this._handlers[events.name].push({
         attr    : events.attr,
         callback: callback,
         context : context
@@ -155,8 +170,9 @@
 
     // removeEvent
     } else {
-      if(events.attr){
-        var ary = [],
+      if(events && events.attr && this._handlers[events.name]){
+        var handlers = this._handlers[events.name],
+        ary = [],
         i = 0,
         l = handlers.length;
 
@@ -168,10 +184,13 @@
             ary.push(handlers[i]);
           }
         }
-        handlers = ary;
 
+        this._handlers[events.name] = ary;
+
+      } else if(events){
+        this._handlers[events.name] = null;
       } else {
-        handlers = null;
+        this._handlers = {};
       }
     }
 
@@ -283,6 +302,7 @@
 
   root.amp = root.amp || {};
   root.amp.Mediator = Mediator;
+  root.amp.mediator = mediator;
 
 
 }(window));

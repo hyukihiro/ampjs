@@ -136,8 +136,8 @@
     var self = this;
 
     if(amp.isWindows()){
-      self.off();
-      self.$target.on('mousewheel.SmoothScroll', function(event, move){
+      self.$target.off('mousewheel.SmoothScroll')
+      .on('mousewheel.SmoothScroll', function(event, move){
         self.tween(event, move);
         return false;
       });

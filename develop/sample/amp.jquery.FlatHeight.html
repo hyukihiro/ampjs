@@ -64,6 +64,7 @@ jQuery(function($){
 	// var flatHeight = amp.FlatHeight.create($('.sec-inner').find('p'), 4);
 
 	$(window).resizestop({timer: 20}, function(){
+		// flatHeight.setSplit(1);
 		if(common.isState('pc')){
 			flatHeight.setSplit(4);
 		} else if(common.isState('tb')){
