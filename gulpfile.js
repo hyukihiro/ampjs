@@ -222,9 +222,9 @@ gulp.task('watch', function(){
  */
 gulp.task('browserSync', function(){
 	plugins.browserSync({
-		proxy: project,
-		host :project,
-		root: path.httpdocs,
+		proxy: project + '/sample',
+		host : project,
+		root : path.httpdocs,
 		port: 80
 	});
 });
