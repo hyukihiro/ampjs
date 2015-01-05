@@ -39,8 +39,8 @@
 | Boxhover     | - | ○ | ○ | ○ | ○ |
 | Mediaquery   | - | ○ | ○ | ○ | ○ |
 | Loader       | - | ○ | ○ | ○ | ○ |
+| ScrollToggle| - | ○ | ○ | ○ | ○ |
 
-| PagetopToggle| 実装中 | ○ | ○ | ○ | ○ |
 | Rollover | 実装中 | × | × | × | × |
 | SlipRollover | 実装中 | × | × | × | × |
 | Active | 実装中 | × | × | × | × |

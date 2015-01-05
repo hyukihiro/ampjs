@@ -2,7 +2,7 @@
 
   // 'use strict';
 
-  var PagetopToggle, pagetopToggle, p;
+  var ScrollToggle, scrollToggle, p;
 
 
 
@@ -11,25 +11,18 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>ページトップのtoggle処理</h4>
+   * <h4>スクロール時、座標を判定してのToggle処理</h4>
    *
-   * @class PagetopToggle
+   * @class ScrollToggle
    * @constructor
-   * @param  {jQuery} $target pagetop要素
+   * @param  {jQuery} $target 表示・非表示する要素
    * @param  {Object} options オプション値
-   * @return {PagetopToggle}
+   * @return {ScrollToggle}
    */
-  PagetopToggle = function($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !$target instanceof jQuery){
-      options = $target;
-      $target = $('.pagetop');
-    }
-
+  ScrollToggle = function($target, options){
     this.$target = $target;
     this.isShow  = $target.css('display') === 'block';
-    this.isFixed = $target.css('position') === 'fixed';
-    this.param = $.extend(true, {}, PagetopToggle.defaults, options);
+    this.param   = $.extend(true, {}, ScrollToggle.defaults, options);
   };
 
 
@@ -39,18 +32,18 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>ページトップボタンのToggle処理</h4>
-   * PagetopToggleのショートハンド
+   * <h4>スクロール時、座標を判定してのToggle処理</h4>
+   * ScrollToggleのショートハンド
    *
    * @static
-   * @method create
-   * @param  {jQuery} $target pagetop要素 省略可 初期値 $('#Pagetop')
+   * @method scrollToggle
+   * @param  {jQuery} $target 表示・非表示する要素
    * @param  {Object} options オプション値 省略可
    * @return {Pagetop} Pagetopインスタンスを返す
    */
-  pagetopToggle = function($target, options){
-    var inst = new PagetopToggle($target, options);
-    inst.init();
+  scrollToggle = function($target, options){
+    var inst = new ScrollToggle($target, options);
+    inst.on();
     return inst;
   };
 
@@ -67,7 +60,7 @@
    * @property VERSION
    * @type {String}
    */
-  PagetopToggle.VERSION = '2.0';
+  ScrollToggle.VERSION = '2.0';
 
 
   /**
@@ -76,7 +69,7 @@
    * @property p
    * @type {Object}
    */
-  p = PagetopToggle.prototype;
+  p = ScrollToggle.prototype;
 
 
   /**
@@ -89,7 +82,7 @@
 
 
   /**
-   * <h4>pagetop要素</h4>
+   * <h4>表示・非表示する要素</h4>
    *
    * @property $target
    * @type {jQuery}
@@ -107,22 +100,11 @@
 
 
   /**
-   * <h4>Fixedポジションか?</h4>
-   *
-   * @property isFixed
-   * @type {Boolean}
-   */
-  p.isFixed = null;
-
-
-  /**
    * <h4>オプション値</h4>
    * defaults: { <ul><li>
    *   showY    : 300, // {Number} 表示されるoffsetY値 </li><li>
-   *   absoluteY: null, // {Number} ポジションabsoluteに切り替えるoffsetY値 </li><li>
    *   show     : { opacity : 1}, // {Object} 表示アニメーション時のcssプロパティ </li><li>
    *   hide     : { opacity : 0}, // {Object} 非表示アニメーション時のcssプロパティ </li><li>
-   *   absolute : { position : 'absolute'}, // {Object} ポジションabsoluteのcssプロパティ </li><li>
    *   duration : 400, // デュレーション </li><li>
    *   easing   : 'easeOutCubic', // イージング </li><li>
    *   showCall : $.noop // 表示されたときに呼び出す関数 </li><li>
@@ -133,12 +115,10 @@
    * @property defaults
    * @type {Object}
    */
-  PagetopToggle.defaults = {
+  ScrollToggle.defaults = {
     showY    : 300,
-    absoluteY: null,
     show     : { opacity : 1},
     hide     : { opacity : 0},
-    absolute : { position: 'absolute'},
     duration : 400,
     easing   : 'easeOutCubic',
     showCall : $.noop,
@@ -169,76 +149,79 @@
    * @method extend
    * @param {Object} protoProp プロトタイプオブジェクト
    * @param {Object} staticProp staticオブジェクト
-   * @return {PagetopToggle}
+   * @return {ScrollToggle}
    */
-   PagetopToggle.extend = root.amp._extend;
+   ScrollToggle.extend = root.amp._extend;
 
 
   /**
-   * <h4>初期化</h4>
-   * シングルトンパターン
+   * <h4>イベントオン</h4>
    *
-   * @method init
-   * @return {PagetopToggle}
+   * @method on
+   * @return {ScrollToggle}
    */
-  p.init = function(){
-    this.toggle();
-    this.setEvent();
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント設定</h4>
-   *
-   * @method setEvent
-   * @return {PagetopToggle}
-   */
-  p.setEvent = function(){
-    var self = this;
-    self.$window.on('scroll.PagetopToggle', function(){
-      self.toggle();
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>要素の表示・非表示、ポジションモードの切り替え</h4>
-   *
-   * @method toggle
-   * @return {PagetopToggle}
-   */
-  p.toggle = function(){
+  p.on = function(){
     var self = this,
     param = self.param,
-    offsetY = self.$window.scrollTop();
+    offsetY;
 
-    // 表示・非表示
-    if(!self.isShow && param.showY < offsetY){
-      self.isShow = true;
-      self.$target.css({display: 'block'}).css(param.hide)
-      .stop(true, false).animate(param.show, param.duration, param.ease, param.showCall);
+    self.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.$window.scrollTop();
 
-    } else if(self.isShow && param.showY > offsetY){
-      self.isShow = false;
-      self.$target.stop(true, false).animate(param.hide, param.duration, param.ease, function(){
-        self.$target.css({display: 'none'});
-        param.hideCall();
-      });
-    }
-
-    // fixed・absolute
-    if(param.absoluteY){
-      if(!self.isFixed && offsetY < param.absoluteY){
-        self.isFixed = true;
-        self.$target.css({position: 'fixed'});
-
-      } else if(self.isFixed && offsetY > param.absoluteY){
-        self.isFixed = false;
-        self.$target.css(param.absolute);
+      // 表示・非表示
+      if(!self.isShow && param.showY < offsetY){
+        self.show();
+      } else if(self.isShow && param.showY > offsetY){
+        self.hide();
       }
-    }
+    }).trigger('scroll.ScrollToggle');
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベントオフ</h4>
+   *
+   * @method off
+   * @return {ScrollToggle}
+   */
+  p.off = function(){
+    self.$window.off('scroll.ScrollToggle');
+    return this;
+  };
+
+
+
+  /**
+   * <h4>表示</h4>
+   *
+   * @method show
+   * @return {ScrollToggle}
+   */
+  p.show = function(){
+    var self = this;
+    self.isShow = true;
+    self.$target.css({display: 'block'}).css(self.param.hide)
+    .stop(true, false).animate(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
+
+    return this;
+  };
+
+
+  /**
+   * <h4>非表示</h4>
+   *
+   * @method hide
+   * @return {ScrollToggle}
+   */
+  p.hide = function(){
+    var self = this;
+    self.isShow = false;
+    self.$target.stop(true, false).animate(self.param.hide, self.param.duration, self.param.ease, function(){
+      self.$target.css({display: 'none'});
+      self.param.hideCall();
+    });
 
     return this;
   };
@@ -251,7 +234,7 @@
    * @return {String}
    */
   p.toString = function(){
-    return '[object PagetopToggle]';
+    return '[object ScrollToggle]';
   };
 
 
@@ -261,8 +244,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.PagetopToggle = PagetopToggle;
-  root.amp.pagetopToggle = pagetopToggle;
+  root.amp.ScrollToggle = ScrollToggle;
+  root.amp.scrollToggle = scrollToggle;
 
 
 }(window, jQuery));
