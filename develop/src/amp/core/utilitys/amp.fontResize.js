@@ -40,7 +40,8 @@
    * @property p
    * @type {Object}
    */
-  p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
+  p = FontResize.prototype;
+  // p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
 
 
   /**

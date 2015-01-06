@@ -2,20 +2,20 @@
 
   // 'use strict';
 
-  var motionDelay, p;
+  var MotionDelay, p;
 
 
   /*--------------------------------------------------------------------------
 
   --------------------------------------------------------------------------*/
-  motionDelay = function(motion, duration, len, split){
+  MotionDelay = function(motion, duration, len, split){
   };
 
 
   //
   // Slied
   // Alternate
-  motionDelay.types = [
+  MotionDelay.types = [
     // random
     'random',
     // order
@@ -71,19 +71,19 @@
 
 
   // random
-  motionDelay.random = function(){
+  MotionDelay.random = function(){
   };
 
 
 
 
   // order
-  motionDelay.orderIn = function(){};
-  motionDelay.orderOut = function(){};
-  motionDelay.orderSideIn = function(){};
-  motionDelay.orderSideOut = function(){};
-  motionDelay.orderAltIn = function(){};
-  motionDelay.orderAltOut = function(){};
+  MotionDelay.orderIn = function(){};
+  MotionDelay.orderOut = function(){};
+  MotionDelay.orderSideIn = function(){};
+  MotionDelay.orderSideOut = function(){};
+  MotionDelay.orderAltIn = function(){};
+  MotionDelay.orderAltOut = function(){};
 
 
 
@@ -95,7 +95,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.motionDelay = motionDelay;
+  root.amp.motionDelay = MotionDelay;
+  root.amp.motionDelay = new MotionDelay();
 
 
 }(window));
