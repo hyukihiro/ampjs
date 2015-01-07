@@ -22,6 +22,8 @@
   Mediaquery = function($el, isObserver){
     if($el instanceof jQuery){
       this.$el = $el;
+    } else {
+      isObserver = $el;
     }
 
     this._event = amp.isPC() ? 'resize.Mediaquery' : 'orientationchange.Mediaquery';
@@ -67,7 +69,8 @@
 
   /**
    * <h4>プロトタイプオブジェクト</h4>
-   * Mediatorをエクスポートします。Mediatorクラスを参照してください
+   * Mediatorをエクスポートします
+   * Mediatorクラスを参照してください
    *
    * @property p
    * @type {Object}
@@ -92,7 +95,7 @@
    * @default false
    * @type {Boolean}
    */
-  p.isObserver = false;
+  p.isObserver = true;
 
 
   /**

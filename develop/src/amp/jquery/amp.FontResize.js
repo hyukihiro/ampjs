@@ -1,21 +1,23 @@
-(function(root){
+(function(root, $){
 
   // 'use strict';
 
-  var FontResize, fontResize, p;
+  var FontResize, p;
+
 
 
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>フォントサイズ変更イベント</h4>
+   *
+   * @class FontResize
+   * @constructor
+   * @return {FontResize}
+   */
   FontResize = function(){};
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-  fontResize = function(){
-  };
 
 
 
@@ -35,34 +37,53 @@
 
   /**
    * <h4>プロトタイプオブジェクト</h4>
-   * Mediatorをエクスポートします。Mediatorクラスを参照してください
+   * Mediatorをエクスポートします
+   * Mediatorクラスを参照してください
    *
    * @property p
    * @type {Object}
    */
-  p = FontResize.prototype;
-  // p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
+  p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
 
 
   /**
-   * <h4>設定値</h4>
-   * config { <ul><li>
-   *   elm    : null, 監視対象のDOM</li><li>
-   *   size   : 0, {Number} 現在のフォントサイズ</li><li>
-   *   count  : 0, {Number} コールバックインデックス</li><li>
-   *   timerId: null {Number} タイマーID</li></ul>
-   * }
+   * <h4>フォントサイズ変更時の発行するイベント名</h4>
    *
+   * @private
    * @static
-   * @property defaults
-   * @type {Object}
+   * @property _event 'change'
+   * [_event description]
+   * @type {String}
    */
-  FontResize.defaults = {
-    elm    : null,
-    size   : 0,
-    count  : 0,
-    timerId: null
-  };
+  FontResize._event = 'change';
+
+
+  /**
+   * <h4>要素を監視しているか</h4>
+   *
+   * @property isObserver
+   * @default false
+   * @type {Boolean}
+   */
+  p.isObserver = true;
+
+
+  /**
+   * <h4>監視する要素</h4>
+   *
+   * @property $el
+   * @type {jQuery}
+   */
+  p.$el = null;
+
+
+  /**
+   * <h4>監視要素の高さ</h4>
+   *
+   * @property height
+   * @type {Number}
+   */
+  p.height = null;
 
 
 
@@ -83,224 +104,93 @@
   FontResize.extend = amp._extend;
 
 
-
-  p.init = function(){
-  };
-
-
-
-  p.toString = function(){
-    return '[object FontResize]';
-  };
-
-
-/*--------------------------------------------------------------------------
-  ↑ここまで
---------------------------------------------------------------------------*/
-
-
   /**
-   * <h4>文字サイズ監視、文字サイズ変更イベント</h4>
-   * シングルトンパターン
-   *
-   * @static
-   * @class fontResize
-   * @event fontResize
-   * @param {Function} fn コールバック関数
-   * @param  {String} key コールバックキー
-   * @return {fontResize}
-   * @example
-   *  amp.fontResize.on('change', callback);
-   */
-  var fontResize = function(fn, key){
-    // singleton
-    if(!fontResize._callbacks){
-      fontResize._callbacks = {};
-      fontResize._init();
-    }
-
-    if(key){
-      fontResize.add(fn, key);
-    } else {
-      fontResize.add(fn);
-    }
-
-    return fontResize;
-  };
-
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  fontResize.VERSION = '1.5';
-
-
-  /**
-   * <h4>設定値</h4>
-   * config { <ul><li>
-   *   elm    : null, 監視対象のDOM</li><li>
-   *   size   : 0, {Number} 現在のフォントサイズ</li><li>
-   *   count  : 0, {Number} コールバックインデックス</li><li>
-   *   timerId: null {Number} タイマーID</li></ul>
-   * }
-   *
-   * @static
-   * @property config
-   * @type {Object}
-   */
-  fontResize.config = {
-    elm    : null,
-    size   : 0,
-    count  : 0,
-    timerId: null
-  };
-
-
-  /**
-   * <h4>コールバックオブジェクト</h4>
+   * <h4>監視するフォントの設置</h4>
    *
    * @private
-   * @static
-   * @property _callbacks
-   * @type {Object}
-   */
-  fontResize._callbacks = null;
-
-
-  /**
-   * <h4>初期化</h4>
-   *
-   * @private
-   * @static
    * @method _init
-   * @return {Void}
+   * @return {FontResize}
    */
-  fontResize._init = function(){
-    // 監視対象要素の追加
-    fontResize.config.elm = document.createElement('ins');
-    fontResize.config.elm.innerHTML = 'amp';
-    fontResize.config.elm.setAttribute('id', 'amp_observer');
-    fontResize.config.elm.setAttribute('style', 'display:block; visibility: hidden; position: absolute; top: 0; z-index: -1;');
-    document.getElementsByTagName('body')[0].appendChild(fontResize.config.elm);
+  p._init = function(){
+    this.$el = $('<ins id="FontResize">F</ins>').css({
+      display   : 'block',
+      visibility: 'hidden',
+      position  : 'absolute',
+      top       : 0,
+      left      : 0,
+      zIndex    : -1
+    });
 
-    fontResize.config.size = fontResize.config.elm.clientHeight;
-    fontResize.on();
+    $('body').append(this.$el);
+    this.height = this.$el.height();
+    this._controller();
+
+    return this;
   };
 
 
   /**
-   * <h4>フォント監視開始</h4>
+   * <h4>イベント登録</h4>
    *
-   * @static
    * @method on
-   * @return {fontResize}
+   * @param  {String} event イベント名
+   * @param  {Function} callback コールバック
+   * @param  {Object} context コンテキスト固定
+   * @return {Mediator}
    */
-  fontResize.on = function(){
-    fontResize.off();
-    fontResize.loop();
-    return fontResize;
+  p.on = function(event, callback, context){
+    if(!this.$el){
+      this._init();
+    }
+
+    this._setHandler(event, callback, context);
+    return this;
   };
 
 
   /**
-   * <h4>フォント監視停止</h4>
+   * <h4>フォントの監視、有無の設定</h4>
    *
-   * @static
-   * @method off
-   * @return {fontResize}
+   * @method setObserver
+   * @param {Boolean} isObserver 監視有効か無効かセットする 有効:true
+   * @return {FontResize}
    */
-  fontResize.off = function(){
-    amp.cancelAnimationFrame(fontResize.config.timerId);
-    return fontResize;
+  p.setObserver = function(isObserver){
+    var flag = amp.isBoolean(isObserver) ? isObserver : this.isObserver;
+
+    if(flag !== this.isObserver && flag){
+      this._controller();
+    }
+
+    this.isObserver = flag;
+
+    return this;
   };
 
 
   /**
-   * <h4>再起処理</h4>
+   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
    *
-   * @static
-   * @method loop
+   * @private
+   * @method _controller
    * @return {Void}
    */
-  fontResize.loop = function(){
-    var h = fontResize.config.elm.clientHeight;
-    if(fontResize.config.size != h){
-      fontResize.config.size = h;
-      fontResize.trigger();
+  p._controller = function(){
+    var self = this,
+    h = self.$el.height();
+
+    if(self.height !== h){
+      self.height = h;
+      this.trigger(FontResize._event);
     }
-    fontResize.config.timerId = amp.requestAnimationFrame(fontResize.loop);
-  };
 
-
-  /**
-   * <h4>コールバック削除</h4>
-   *
-   * @static
-   * @method clear
-   * @param {String} key コールバックキー
-   * @return {fontResize}
-   */
-  fontResize.clear = function(key){
-    if(key && fontResize._callbacks.key){
-      fontResize._callbacks[key] = null;
-
-    } else if(!key){
-      fontResize._callbacks = {};
-      fontResize.off();
+    if(self.isObserver){
+      amp.requestAnimationFrame(function(){
+        self._controller();
+      });
     }
-    return fontResize;
-  };
 
-
-  /**
-   * <h4>コールバック追加</h4>
-   *
-   * @static
-   * @method add
-   * @param {Function} fn コールバック関数
-   * @param {String} key コールバックキー
-   * @return {fontResize}
-   */
-  fontResize.add = function(fn, key){
-    if(key){
-      // 注意： コールバックオブジェクトが重複したとき上書きします。
-      fontResize._callbacks[key] = fn;
-
-    } else {
-      fontResize._callbacks[fontResize.config.count] = fn;
-      fontResize.config.count += 1;
-    }
-    return fontResize;
-  };
-
-
-  /**
-   * <h4>イベント発行</h4>
-   *
-   * @static
-   * @method trigger
-   * @param {String} key コールバックキー 省略可
-   * @return {fontResize}
-   */
-  fontResize.trigger = function(key){
-    if(key){
-      if($.isFunction(fontResize._callbacks[key])){
-        fontResize._callbacks[key]();
-      }
-
-    } else {
-      var k;
-      for(k in fontResize._callbacks){
-        if($.isFunction(fontResize._callbacks[k])){
-          fontResize._callbacks[k]();
-        }
-      }
-    }
-    return fontResize;
+    return this;
   };
 
 
@@ -311,8 +201,8 @@
    * @method toString
    * @return {String}
    */
-  fontResize.toString = function(){
-    return '[object fontResize]';
+  p.toString = function(){
+    return '[object FontResize]';
   };
 
 
@@ -322,7 +212,8 @@
   --------------------------------------------------------------------------*/
 
   root.amp = root.amp || {};
-  root.amp.fontResize = fontResize;
+  root.amp.FontResize = FontResize;
+  root.amp.fontResize = new FontResize();
 
 
-}(window));
+}(window, jQuery));

@@ -29,15 +29,21 @@
 
 <script type="text/javascript">
 jQuery(function($){
-	amp.fontResize(function(){
+
+	var fr = amp.fontResize.on('change',function(){
 		alert(0);
-	})
+	});
 
-	$('#amp_observer').css({fontSize: 10});
+	// console.log(fr);
+	// amp.fontResize(function(){
+	// 	alert(0);
+	// })
 
-	setTimeout(function(){
-		$('#amp_observer').css({fontSize: 11});
-	}, 1000);
+	// $('#amp_observer').css({fontSize: 10});
+
+	// setTimeout(function(){
+	// 	$('#amp_observer').css({fontSize: 11});
+	// }, 1000);
 	// console.log(amp.fontResize);
 
 
@@ -50,6 +56,20 @@ jQuery(function($){
 		})
 	}
 	*/
+
+/*
+amp.fontResize.on('change', function(){
+	// callback
+});
+amp.fontResize.one('change', function(){
+	// callback
+});
+
+amp.fontResize.trigger('change');
+
+amp.fontResize.off('change');
+*/
+
 });
 
 </script>
