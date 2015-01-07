@@ -129,7 +129,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {BoxHover}
    */
-  BoxHover.extend = root.amp._extend;
+  BoxHover.extend = amp._extend;
 
 
   /**

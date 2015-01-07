@@ -151,7 +151,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {ScrollToggle}
    */
-   ScrollToggle.extend = root.amp._extend;
+   ScrollToggle.extend = amp._extend;
 
 
   /**

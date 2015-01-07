@@ -87,7 +87,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Rollover}
    */
-  Active.extend = root.amp._extend;
+  Active.extend = amp._extend;
 
 
   /**
@@ -107,7 +107,7 @@
     }
 
     // optionsチェック
-    if(amp.isObject(type)){
+    if($.isPlainObject(type)){
       options = type;
       type = null;
     }
@@ -140,7 +140,7 @@
     } else {
     // 画像
       options = $.extend(true, Active.defaults, options);
-      return root.amp[type]($target.addClass(options.activeClass), options);
+      return amp[type]($target.addClass(options.activeClass), options);
     }
   };
 

@@ -80,7 +80,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  FontResize.extend = root.amp._extend;
+  FontResize.extend = amp._extend;
 
 
 
@@ -288,14 +288,14 @@
    */
   fontResize.trigger = function(key){
     if(key){
-      if(amp.isFunction(fontResize._callbacks[key])){
+      if($.isFunction(fontResize._callbacks[key])){
         fontResize._callbacks[key]();
       }
 
     } else {
       var k;
       for(k in fontResize._callbacks){
-        if(amp.isFunction(fontResize._callbacks[k])){
+        if($.isFunction(fontResize._callbacks[k])){
           fontResize._callbacks[k]();
         }
       }

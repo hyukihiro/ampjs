@@ -40,8 +40,8 @@
    * <h4>画像のロールオーバー</h4>
    * Rolloverのショートハンド
    *
-   * @class Rollover
-   * @constructor
+   * @static
+   * @method rollover
    * @param  {jQuery} $image 画像要素
    * @param  {Object} options ロールオーバーのオプション値
    * @return {Rollover}
@@ -124,7 +124,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Rollover}
    */
-  Rollover.extend = root.amp._extend;
+  Rollover.extend = amp._extend;
 
 
   /**
@@ -159,13 +159,15 @@
         // アクティブでないときoff画像に変更
         if(!$image.hasClass(param.activeClass)){
           image.src = image.rollover.offSrc;
+        } else {
+          amp.preload(image.rollover.offSrc);
         }
 
       } else {
       // 現在off画像の場合
         image.rollover.offSrc = src;
         image.rollover.onSrc = src.replace(ext, param.postfix + ext);
-        root.amp.preload(image.rollover.onSrc);
+        amp.preload(image.rollover.onSrc);
 
         // アクティブの場合on画像に変更
         if($image.hasClass(param.activeClass)){
@@ -187,7 +189,7 @@
    */
   p.on = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       var $img = $(this),
@@ -217,13 +219,13 @@
   /**
    * <h4>イベントオフ</h4>
    *
-   * @method on
+   * @method off
    * @param  {Number} num 要素のインデックス
    * @return {Rollover}
    */
   p.off = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       $(this)[0].rollover.$trigger.off('mouseenter.Rollover mouseleave.Rollover');
@@ -242,7 +244,7 @@
    */
   p.active = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       var img = $(this).addClass(self.param.activeClass)[0];
@@ -262,7 +264,7 @@
    */
   p.passive = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       var img = $(this).removeClass(self.param.activeClass)[0];
@@ -280,7 +282,7 @@
    */
   p.invalid = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       $(this).addClass(self.param.noOverClass);
@@ -297,7 +299,7 @@
    */
   p.inforce = function(num){
     var self = this,
-    $image = amp.isNumber(num) ? self.$image.eq(num) : self.$image;
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
 
     $image.each(function(){
       var img = $(this).removeClass(self.param.noOverClass).removeClass(self.param.activeClass)[0];

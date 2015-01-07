@@ -137,7 +137,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Scroll}
    */
-   Scroll.extend = root.amp._extend;
+   Scroll.extend = amp._extend;
 
 
   /**

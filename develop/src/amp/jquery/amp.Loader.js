@@ -148,7 +148,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Loader}
    */
-   Loader.extend = root.amp._extend;
+   Loader.extend = amp._extend;
 
 
   /**

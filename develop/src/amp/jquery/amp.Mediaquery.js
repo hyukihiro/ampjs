@@ -40,10 +40,10 @@
    * Mediaqueryのショートハンド
    *
    * @static
-   * @method scroll
+   * @method mediaquery
    * @param  {jQuery} $el スタイルの監視対象要素
    * @param  {Boolean} isObserver 要素を監視しするか
-   * @return {Mediaquery} Mediaqueryインスタンスを返す
+   * @return {Mediaquery}
    */
   mediaquery = function($el, isObserver){
     return new Mediaquery($el, isObserver);
@@ -72,7 +72,7 @@
    * @property p
    * @type {Object}
    */
-  p = Mediaquery.prototype = amp.extend({}, amp.Mediator.prototype, Mediaquery.prototype);
+  p = Mediaquery.prototype = $.extend({}, amp.Mediator.prototype, Mediaquery.prototype);
 
 
   /**
@@ -133,7 +133,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Mediaquery}
    */
-  Mediaquery.extend = root.amp._extend;
+  Mediaquery.extend = amp._extend;
 
 
   /**

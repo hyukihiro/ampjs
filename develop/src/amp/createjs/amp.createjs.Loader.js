@@ -33,6 +33,28 @@
 
 
   /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ローダー</h4>
+   * Loaderのショートハンド<br>
+   * 処理Loader生成し、initを実行してインスタンスを返す
+   *
+   * @static
+   * @method loader
+   * @param  {DOM} elm 対象のimgを囲う要素 省略可
+   * @return {Loader} Loader生成してインスタンスを返す
+   */
+  loader = function(manifest, options){
+    var loader = new Loader(manifest, options);
+    loader.init();
+    return loader;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
 
@@ -128,7 +150,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Loader}
    */
-   Loader.extend = root.amp._extend;
+   Loader.extend = amp._extend;
 
 
   /**
@@ -306,23 +328,6 @@
     return this;
   };
 
-
-  /**
-   * <h4>ローダー</h4>
-   * Loaderのショートハンド<br>
-   * 処理Loader生成し、initを実行してインスタンスを返す
-   *
-   * @class loader
-   * @static
-   * @method loader
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可
-   * @return {Loader} Loader生成してインスタンスを返す
-   */
-  loader = function(manifest, options){
-    var loader = new Loader(manifest, options);
-    loader.init();
-    return loader;
-  };
 
 
   /*--------------------------------------------------------------------------

@@ -141,7 +141,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {FlatHeight}
    */
-  FlatHeight.extend = root.amp._extend;
+  FlatHeight.extend = amp._extend;
 
 
   /**

@@ -29,8 +29,7 @@
    * <h4>イベントを仲介します</h4>
    * Mediatorショートハンド
    *
-   * @class Mediator
-   * @constructor
+   * @static mediator
    * @return {Mediator}
    */
   mediator = function(){
@@ -50,7 +49,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediator.VERSION = '2.1';
+  Mediator.VERSION = '2.2';
 
 
   /**
@@ -87,7 +86,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  Mediator.extend = root.amp._extend;
+  Mediator.extend = amp._extend;
 
 
   /**
@@ -108,7 +107,7 @@
   /**
    * <h4>1度だけ実行するイベント登録</h4>
    *
-   * @method on
+   * @method one
    * @param  {String} event イベント名
    * @param  {Function} callback コールバック
    * @param  {Object} context コンテキスト固定

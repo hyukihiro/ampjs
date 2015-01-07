@@ -123,7 +123,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {SmoothScroll}
    */
-  SmoothScroll.extend = root.amp._extend;
+  SmoothScroll.extend = amp._extend;
 
 
   /**

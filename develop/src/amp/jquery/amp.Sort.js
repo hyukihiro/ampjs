@@ -83,10 +83,10 @@
 
 
   /**
-   * <h4>amp Render Sortを格納します</h4>
+   * <h4>Render Sortを格納します</h4>
    *
    * @property $render
-   * @type {amp Render Sort}
+   * @type {Render}
    */
   p.render = null;
 
@@ -138,7 +138,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Sort}
    */
-  Sort.extend = root.amp._extend;
+  Sort.extend = amp._extend;
 
 
   /**

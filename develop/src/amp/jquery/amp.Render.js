@@ -167,7 +167,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Render}
    */
-   Render.extend = root.amp._extend;
+   Render.extend = amp._extend;
 
 
   /**
@@ -256,7 +256,6 @@
 
   /**
    * <h4>DOM生成して、HTMLに挿入します</h4>
-   * 文字列を返した場合、<p class="not-found" />を生成します。
    *
    * @method render
    * @return {Render}
