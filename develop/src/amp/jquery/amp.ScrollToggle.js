@@ -13,7 +13,7 @@
   /**
    * <h4>スクロール時、座標を判定してのToggle処理</h4>
    *
-   * @class ScrollToggle
+   * @class amp.ScrollToggle
    * @constructor
    * @param  {jQuery} $target 表示・非表示する要素
    * @param  {Object} options オプション値

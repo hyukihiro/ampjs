@@ -17,7 +17,7 @@
    * <h4>ローダー</h4>
    * createrjs.Preloadクラスに依存します
    *
-   * @class Loader
+   * @class amp.createrjs.Loader
    * @constructor
    * @param  {Array} manifest 読み込みファイルリスト
    * @param  {Objecr} options 後日記述

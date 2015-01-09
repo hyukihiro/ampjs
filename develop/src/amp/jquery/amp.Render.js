@@ -15,7 +15,7 @@
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
    * <b>Hogan.jsに依存します</b>
    *
-   * @class Render
+   * @class amp.Render
    * @constructor
    * @param  {jQuery} $tepl jsTemplate要素
    * @param  {Object} ajaxOptions $.ajax options

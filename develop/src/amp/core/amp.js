@@ -48,7 +48,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '1.8';
+  amp.VERSION = '1.9';
 
 
   /**
@@ -1056,6 +1056,18 @@
 
 
   /**
+   * <h4>空白文字を削除して返す</h4>
+   *
+   * @method removeSpaceChara
+   * @param  {String} str 対象の文字列
+   * @return {String}
+   */
+  amp.removeSpaceChara = function(str){
+    return str.replace(/\s+/g, '');
+  };
+
+
+  /**
    * <h4>クラス名を返す</h4>
    *
    * @static
@@ -1103,7 +1115,7 @@
 
 
   /*----------------------------------------------------------------------
-    @method Add Fallbacks
+    @method Fallbacks
   ----------------------------------------------------------------------*/
 
   /**
@@ -1200,6 +1212,7 @@
   /**
    * <h4>連想配列の要素数取得</h4>
    *
+   * @method Object.keys
    * @param  {Object} obj
    * @return {Void}
    */

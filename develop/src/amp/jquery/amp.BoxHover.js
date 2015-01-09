@@ -13,7 +13,7 @@
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class BoxHover
+   * @class amp.BoxHover
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
    * @param  {Object} options オプション値

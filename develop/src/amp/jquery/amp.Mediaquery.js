@@ -2,7 +2,7 @@
 
   // 'use strict';
 
-  var Mediaquery, mediaquery, p;
+  var Mediaquery, p;
 
 
 
@@ -13,43 +13,11 @@
   /**
    * <h4>mediaqueryのブレイクポイントイベント</h4>
    *
-   * @class Mediaquery
+   * @class amp.Mediaquery
    * @constructor
-   * @param  {jQuery} スタイルの監視対象要素
-   * @param  {Boolean} isObserver 要素を監視しするか
    * @return {Mediaquery}
    */
-  Mediaquery = function($el, isObserver){
-    if($el instanceof jQuery){
-      this.$el = $el;
-    } else {
-      isObserver = $el;
-    }
-
-    this._event = amp.isPC() ? 'resize.Mediaquery' : 'orientationchange.Mediaquery';
-    this.setObserver(isObserver);
-    this._controller();
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>mediaqueryのブレイクポイントイベント</h4>
-   * Mediaqueryのショートハンド
-   *
-   * @static
-   * @method mediaquery
-   * @param  {jQuery} $el スタイルの監視対象要素
-   * @param  {Boolean} isObserver 要素を監視しするか
-   * @return {Mediaquery}
-   */
-  mediaquery = function($el, isObserver){
-    return new Mediaquery($el, isObserver);
-  };
+  Mediaquery = function(){};
 
 
 
@@ -64,7 +32,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '1.0';
+  Mediaquery.VERSION = '1.1';
 
 
   /**
@@ -85,7 +53,7 @@
    * @default $('head')
    * @type {jQuery}
    */
-  p.$el = $('head');
+  p.$el = null;
 
 
   /**
@@ -111,16 +79,6 @@
   };
 
 
-  /**
-   * <h4>監視イベント</h4>
-   *
-   * @private
-   * @property _event
-   * @type {String}
-   */
-  p._event = null;
-
-
 
   /*--------------------------------------------------------------------------
     @method
@@ -140,6 +98,47 @@
 
 
   /**
+   * <h4>初期化</h4>
+   *
+   * @method init
+   * @param  {jQuery}  $el 監視要素
+   * @param  {Boolean} isObserver 監視フラグ
+   * @return {Mediaquery}
+   */
+  p.init = function($el, isObserver){
+    if(amp.isBoolean($el)){
+      isObserver = $el;
+    }
+
+    this.setElement($el);
+    this.setObserver(isObserver);
+    this._controller();
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @param  {String} event イベント名
+   * @param  {Function} callback コールバック
+   * @param  {Object} context コンテキスト固定
+   * @return {Mediator}
+   */
+  p.on = function(event, callback, context){
+    this._addEvent(event, callback, context);
+
+    // 初期化されていない場合
+    if(!this.$el){
+      this.init();
+    }
+    return this;
+  };
+
+
+  /**
    * <h4>状態を監視し、イベントを発行します</h4>
    *
    * @private
@@ -148,21 +147,32 @@
    */
   p._controller = function(){
     var self = this,
-    mediaType;
+    mediaTypes;
 
-    $(root).on(self._event, function(){
+    $(root).on('resize.Mediaquery', function(){
+
       if(self.isObserver){
-        mediaType = self.getCurrent();
+        var mediaTypes = self.getCurrents(),
+        events = [];
 
-        if(mediaType !== self.mediaTypes.current){
-          self.mediaTypes.prev = self.mediaTypes.current;
-          self.mediaTypes.current = mediaType;
+        // 変更されたイベントタイプの検索
+        if(self.mediaTypes.current){
+          events = _.difference(mediaTypes, self.mediaTypes.current);
+        }
 
-          self.trigger(mediaType);
+        // mediaTypes値の設定
+        self.mediaTypes.prev = self.mediaTypes.current;
+        self.mediaTypes.current = mediaTypes;
+
+        // イベント発行
+        if(events[0]){
+          _.each(events, function(event){
+            self.trigger(event, self.mediaTypes);
+          });
           self.trigger('change', self.mediaTypes);
         }
       }
-    }).trigger(this._event);
+    });
   };
 
 
@@ -176,7 +186,7 @@
   p.setObserver = function(isObserver){
     this.isObserver = amp.isBoolean(isObserver) ? isObserver : this.isObserver;
     if(this.isObserver){
-      $(root).trigger(this._event);
+      $(root).trigger('resize.Mediaquery');
     }
 
     return this;
@@ -184,14 +194,32 @@
 
 
   /**
-   * <h4>現在のタイプの取得</h4>
-   * $elのfont-familyを取得します
+   * <h4>監視する要素を選択</h4>
    *
-   * @method getCurrent
-   * @return {String}
+   * @method setElement
+   * @param {jQuery} $el 監視する要素
+   * @return {Mediaquery}
    */
-  p.getCurrent = function(){
-    return this.$el.css('fontFamily');
+  p.setElement = function($el){
+    // 監視する要素が選択されていない場合はhead要素を選択
+    if(!this.$el && !($el instanceof jQuery)){
+      this.$el = $('head');
+    } else {
+      this.$el = $el;
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>現在のタイプの取得</h4>
+   * $elのfont-familyを配列にソートして返します
+   *
+   * @method getCurrents
+   * @return {Array}
+   */
+  p.getCurrents = function(){
+    return _.sortBy(amp.removeSpaceChara(this.$el.css('fontFamily')).split(','));
   };
 
 
@@ -213,7 +241,7 @@
 
   root.amp = root.amp || {};
   root.amp.Mediaquery = Mediaquery;
-  root.amp.mediaquery = mediaquery;
+  root.amp.mediaquery = new Mediaquery();
 
 
 }(window, jQuery));

@@ -14,7 +14,7 @@
    * <h4>ストレージ管理</h4>
    * Storageショートハンド
    *
-   * @class Storage
+   * @class amp.Storage
    * @constructor
    * @method storage
    * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'

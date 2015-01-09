@@ -13,7 +13,7 @@
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class Scroll
+   * @class amp.Scroll
    * @constructor
    * @param  {jQuery} $trigger トリガーとなるa要素 省略可 初期： $('a[href^=#]')
    * @param  {Object} options オプション値 省略可 初期： Scroll.defaults

@@ -14,7 +14,7 @@
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class SmoothScroll
+   * @class amp.SmoothScroll
    * @constructor
    * @param  {Object} options オプション値
    * @return {SmoothScroll}

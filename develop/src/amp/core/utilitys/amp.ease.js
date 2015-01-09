@@ -13,7 +13,7 @@
   /**
    * <h4>Easeingを管理します</h4>
    *
-   * @class Ease
+   * @class amp.Ease
    * @constructor
    * @return {Ease}
    */

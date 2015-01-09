@@ -13,7 +13,7 @@
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class FlatHeight
+   * @class amp.FlatHeight
    * @constructor
    * @param  {jQuery} $target 対象のエリア要素
    * @param  {Number} split 区切る数 省略可

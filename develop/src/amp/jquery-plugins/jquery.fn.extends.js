@@ -8,7 +8,6 @@
 	 * version: 0.2
 	 *
 	 * @class jQuery.fn
-	 * @module jQuery.fn
 	 */
 
 

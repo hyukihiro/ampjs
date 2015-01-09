@@ -14,7 +14,7 @@
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
    * <b>imagesloaded.jsに依存します</b>
    *
-   * @class Loader
+   * @class amp.Loader
    * @constructor
    * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期値： 'body'
    * @param {Boolean} isStart ローダー開始するか

@@ -16,7 +16,7 @@
    * createjs.Easeをインストールして使用してください
    * see: http://www.createjs.com/Docs/TweenJS/files/tweenjs_p.js.html
    *
-   * @class Ease
+   * @class amp.Ease
    * @constructor
    * @return {Ease}
    */

@@ -14,7 +14,7 @@
    * <h4>ソート</h4>
    * Renderクラスと組み合わせて使います
    *
-   * @class Sort
+   * @class amp.Sort
    * @constructor
    * @param  {jQuery} トリガーa要素 hrefにフィルター値(先頭に#付けた)をセットする
    * @param  {Render} render レンダーインスタンス

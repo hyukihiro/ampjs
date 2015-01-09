@@ -13,7 +13,7 @@
   /**
    * <h4>フォントサイズ変更イベント</h4>
    *
-   * @class FontResize
+   * @class amp.FontResize
    * @constructor
    * @return {FontResize}
    */
@@ -32,7 +32,7 @@
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = '2.0';
+  FontResize.VERSION = '2.1';
 
 
   /**
@@ -143,7 +143,7 @@
       this._init();
     }
 
-    this._setHandler(event, callback, context);
+    this._addEvent(event, callback, context);
     return this;
   };
 

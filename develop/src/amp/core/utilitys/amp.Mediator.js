@@ -13,7 +13,7 @@
   /**
    * <h4>イベントを仲介します</h4>
    *
-   * @class Mediator
+   * @class amp.Mediator
    * @constructor
    * @return {Mediator}
    */
@@ -29,7 +29,8 @@
    * <h4>イベントを仲介します</h4>
    * Mediatorショートハンド
    *
-   * @static mediator
+   * @static
+   * @method mediator
    * @return {Mediator}
    */
   mediator = function(){
@@ -49,7 +50,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediator.VERSION = '2.2';
+  Mediator.VERSION = '2.3';
 
 
   /**
@@ -99,7 +100,7 @@
    * @return {Mediator}
    */
   p.on = function(event, callback, context){
-    this._setHandler(event, callback, context);
+    this._addEvent(event, callback, context);
     return this;
   };
 
@@ -141,59 +142,76 @@
    * @return {Mediator}
    */
   p.off = function(event){
-    this._setHandler(event);
+    this._removeEvent(event);
     return this;
   };
 
 
- /**
-  * <h4>ハンドラーの追加・削除</h4>
-  *
-  * @private
-  * @method _setHandler
-  * @param {String} event イベント名
-  * @param {Function} callback コールバック関数
-  * @param {Object} context コンテキスト
-  */
-  p._setHandler = function(event, callback, context){
-    var events = (event && this._getEventNameMap(event));
+  /**
+   * <h4>イベント追加</h4>
+   *
+   * @method _addEvent
+   * @param {String} event イベント名
+   * @param {Function} callback コールバック関数
+   * @param {Object} context コンテキスト
+   * @return {Void}
+   */
+  p._addEvent = function(event, callback, context){
+    var events = event.split(' '),
+    i = 0,
+    l = events.length;
 
-    // addEvent
-    if(callback){
-      this._handlers[events.name] = this._handlers[events.name] || [];
-      this._handlers[events.name].push({
-        attr    : events.attr,
+    for(; i < l; i += 1){
+      var eventObj = this._getEventNameMap(events[i]);
+
+      this._handlers[eventObj.name] = this._handlers[eventObj.name] || [];
+      this._handlers[eventObj.name].push({
+        attr    : eventObj.attr,
         callback: callback,
         context : context
       });
+    }
+  };
 
-    // removeEvent
-    } else {
-      if(events && events.attr && this._handlers[events.name]){
-        var handlers = this._handlers[events.name],
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method _addEvent
+   * @param {String} event イベント名 省略時、全てのイベント削除
+   * @return {Void}
+   */
+  p._removeEvent = function(event){
+    var events = event ? event.split(' ') : [],
+    i = 0,
+    l = events.length;
+
+    for(; i < l; i += 1){
+      var eventObj = this._getEventNameMap(events[i]);
+
+      if(eventObj && eventObj.attr && this._handlers[eventObj.name]){
+        var handlers = this._handlers[eventObj.name],
         ary = [],
-        i = 0,
-        l = handlers.length;
+        j = 0,
+        k = handlers.length;
 
-        for(; i < l; i += 1){
-          if(handlers[i].attr === events.attr){
-            handlers[i].attr = null;
+        for(; j < k; j += 1){
+          if(handlers[j].attr === eventObj.attr){
+            handlers[j].attr = null;
             continue;
           } else {
-            ary.push(handlers[i]);
+            ary.push(handlers[j]);
           }
         }
 
-        this._handlers[events.name] = ary;
+        this._handlers[eventObj.name] = ary;
 
-      } else if(events){
-        this._handlers[events.name] = null;
+      } else if(eventObj){
+        this._handlers[eventObj.name] = null;
       } else {
         this._handlers = {};
       }
     }
-
-    return this;
   };
 
 

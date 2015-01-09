@@ -13,7 +13,7 @@
   /**
    * <h4>画像のロールオーバー</h4>
    *
-   * @class Rollover
+   * @class amp.Rollover
    * @constructor
    * @param  {jQuery} $image 画像要素
    * @param  {Object} options ロールオーバーのオプション値

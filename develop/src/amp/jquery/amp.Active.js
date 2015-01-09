@@ -13,7 +13,7 @@
   /**
    * <h4>アクティブ化</h4>
    *
-   * @class Active
+   * @class amp.Active
    * @constructor
    * @return {Active}
    */
@@ -47,6 +47,7 @@
   /**
    * <h4>アクティブタイプリスト</h4>
    *
+   * @ static
    * @property types
    * @type {Array}
    */
