@@ -359,7 +359,10 @@ gulp.task('js', function(){
 		.pipe(gulp.dest(path.httpdocs + 'src/amp/min/'));
 
 	// amp jquery
-	gulp.src(path.develop + 'src/amp/jquery/*.js')
+	gulp.src([
+		path.develop + 'src/amp/jquery/core/*.js',
+		path.develop + 'src/amp/jquery/utilitys/*.js'
+	])
 		.pipe(plugins.plumber())
 		.pipe(plugins.jshint())
 		.pipe(plugins.jshint.reporter('jshint-stylish'))
@@ -370,6 +373,19 @@ gulp.task('js', function(){
 		.pipe(plugins.uglify())
 		.pipe(plugins.header(banner))
 		.pipe(gulp.dest(path.httpdocs + 'src/amp/min/'));
+
+	// amp plugins
+	gulp.src(path.develop + 'src/amp/jquery/plugins/*.js')
+		.pipe(plugins.plumber())
+		.pipe(plugins.jshint())
+		.pipe(plugins.jshint.reporter('jshint-stylish'))
+		.pipe(plugins.header(banner))
+		.pipe(gulp.dest(path.httpdocs + 'src/amp/uncompressed/plugins/'))
+		.pipe(plugins.rename({extname : '.min.js'}))
+		.pipe(plugins.uglify())
+		.pipe(plugins.header(banner))
+		.pipe(gulp.dest(path.httpdocs + 'src/amp/min/plugins/'));
+
 
 	// amp createjs
 	gulp.src(path.develop + 'src/amp/createjs/*.js')

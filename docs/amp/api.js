@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "amp",
         "amp.Active",
+        "amp.Alphaover",
         "amp.BoxHover",
         "amp.Ease",
         "amp.FlatHeight",

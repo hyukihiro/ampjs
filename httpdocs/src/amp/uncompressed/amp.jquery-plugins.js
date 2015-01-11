@@ -36,7 +36,6 @@
 	 * version: 0.1
 	 *
 	 * @class jQuery.Event
-	 * @module jQuery.Event
 	 */
 
 
@@ -153,7 +152,6 @@
 	 * version: 0.1
 	 *
 	 * @class jQuery.Event
-	 * @module jQuery.Event
 	 */
 
 
@@ -234,7 +232,6 @@
 	 * version: 0.1
 	 *
 	 * @class jQuery
-	 * @module jQuery
 	 */
 
 
@@ -336,7 +333,6 @@
 	 * version: 0.2
 	 *
 	 * @class jQuery.fn
-	 * @module jQuery.fn
 	 */
 
 

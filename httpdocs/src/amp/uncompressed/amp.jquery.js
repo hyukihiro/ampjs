@@ -30,401 +30,6 @@
 
   // 'use strict';
 
-  var Active, p;
-
-
-
-  /*--------------------------------------------------------------------------
-    @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>アクティブ化</h4>
-   *
-   * @class amp.Active
-   * @constructor
-   * @return {Active}
-   */
-  Active = function(){};
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Active.VERSION = '1.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Active.prototype;
-
-
-  /**
-   * <h4>アクティブタイプリスト</h4>
-   *
-   * @ static
-   * @property types
-   * @type {Array}
-   */
-  Active.types = [
-    'textover',
-    'rollover',
-    // 'slipover',
-    'alphaover'
-  ];
-
-
-  /**
-   * <h4>オプションのデフォルト値</h4>
-   *
-   * @property defaults
-   * @type {Object}
-   */
-  Active.defaults = {
-    groupClass : 'group-over',
-    activeClass: 'active',
-    noOverClass: 'no-over',
-    postfix    : '_on'
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Rollover}
-   */
-  Active.extend = amp._extend;
-
-
-  /**
-   * 要素のアクティブ化
-   *
-   * @static
-   * @public
-   * @method active
-   * @param {jQuery} $target 対象の要素
-   * @param {String} type アクティブタイプ
-   * @param {Object} options アクティブオプション
-   * @return {RolloverInstance}
-   */
-  Active.active = p.active = function($target, type, options){
-    if(!($target instanceof jQuery)){
-      throw new TypeError('Please select the jQuery element');
-    }
-
-    // optionsチェック
-    if($.isPlainObject(type)){
-      options = type;
-      type = null;
-    }
-
-    // typeの大文字表記チェック
-    if(amp.isString(type)){
-      type = type.toLowerCase();
-    }
-
-    // type判定
-    var flag = false,
-    i = 0,
-    l = Active.types.length;
-    for(; i < l; i += 1){
-      if(type === Active.types[i]){
-        flag = true;
-        break;
-      }
-    }
-
-    // type判定エラー時
-    if(!flag){
-      type = $target[0].nodeName === 'IMG' ? Active.types[1] : Active.types[0];
-    }
-
-    // テキスト
-    if(Active.types[0] === type){
-      return $target.addClass(options.activeClass);
-
-    } else {
-    // 画像
-      options = $.extend(true, Active.defaults, options);
-      return amp[type]($target.addClass(options.activeClass), options);
-    }
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Active]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.Active = Active;
-  root.amp.active = Active.active;
-
-
-
-}(window, jQuery));
-
-(function(root, $){
-
-  // 'use strict';
-
-  var BoxHover, boxHover, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ボックスホバー</h4>
-   *
-   * @class amp.BoxHover
-   * @constructor
-   * @param  {jQuery} $target 対象のbox要素
-   * @param  {Object} options オプション値
-   * @return {BoxHover}
-   */
-  BoxHover = function($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $('.box-hover');
-    }
-
-    this.$target = $target;
-    this.param = $.extend(true, {}, BoxHover.defaults, options);
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ボックスホバー</h4>
-   * BoxHoverショートハンド
-   *
-   * @static
-   * @method boxHover
-   * @param  {jQuery} $target 対象のbox要素 省略可 初期値 $('.box-hover')
-   * @param  {Object} options オプション値 省略可
-   * @return {BoxHover} BoxHoverインスタンスを返す
-   */
-  boxHover = function($target, options){
-    var inst = new BoxHover($target, options);
-    inst.on();
-    return inst;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  BoxHover.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = BoxHover.prototype;
-
-
-  /**
-   * <h4>対象の要素</h4>
-   *
-   * @property $target
-   * @type {jQuery}
-   */
-  p.$target = null;
-
-
-  /**
-   * <h4>デフォルト値</h4>
-   * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
-   * defaults { <ul><li>
-   *   hoverClass: 'hover', {String} ホバー時に付けるクラス名</li><li>
-   *   linkClass : 'link' {String} 複数リンクがある場合、優先するリンククラス</li></ul>
-   * }
-   *
-   * @static
-   * @property defaults
-   * @type {Object}
-   */
-  BoxHover.defaults = {
-    hoverClass: 'hover',
-    linkClass : 'link'
-  };
-
-
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタ呼び出し時の引数とBoxHover.optionsを、mixinして格納します<br>
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.param = null;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {BoxHover}
-   */
-  BoxHover.extend = amp._extend;
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @param {jQuery} $target ターゲット要素 省略可
-   * @return {BoxHover}
-   */
-  p.on = function($target){
-    var self = this;
-
-    $target = $target ? $target : this.$target;
-    this.off($target);
-
-    $target.css({cursor: 'pointer'})
-      .on('mouseenter.BoxHover', function(){
-        $(this).addClass(self.param.hoverClass);
-      })
-      .on('mouseleave.BoxHover', function(){
-        $(this).removeClass(self.param.hoverClass);
-      })
-      .on('click.BoxHover', function(){
-        self.setLink($(this));
-      });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @param {jQuery} $target ターゲット要素 省略可
-   * @return {BoxHover}
-   */
-  p.off = function($target){
-    $target = $target ? $target : this.$target;
-    $target.css({cursor: 'auto'}).off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
-    return this;
-  };
-
-
-  /**
-   * <h4>リンクの設定</h4>
-   *
-   * @method setLink
-   * @param {Object} event イベントオブジェクト
-   * @param {Object} param paramオブジェクト
-   * @return {Boolean} false デフォルトのリンクの挙動のキャンセル
-   */
-  p.setLink = function($target){
-    var self = this,
-    $link = $target.find('.' + self.param.linkClass),
-    $a = $target.find('a').eq(0);
-
-    $a = $link[0] ? $link : $a;
-
-    // リンク展開
-    if($a.attr('target') === '_blank'){
-      return window.open($a.attr('href'), '_blank');
-    } else {
-      location.href = $a.attr('href');
-    }
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object BoxHover]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.BoxHover = BoxHover;
-  root.amp.boxHover = boxHover;
-
-
-}(window, jQuery));
-
-(function(root, $){
-
-  // 'use strict';
-
   var Ease, p;
 
 
@@ -449,12 +54,7 @@
     @property
   --------------------------------------------------------------------------*/
 
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
+  // prototype
   p = Ease.prototype;
 
 
@@ -708,257 +308,6 @@
 
   // 'use strict';
 
-  var FlatHeight, flatHeight, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>要素の高さを揃える</h4>
-   *
-   * @class amp.FlatHeight
-   * @constructor
-   * @param  {jQuery} $target 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {FlatHeight}
-   */
-  FlatHeight = function($target, split, options){
-    this.$target   = $target;
-    this.split     = $.isNumeric(split) ? split : $target.length;
-    options        = $.isPlainObject(split) ? split : options;
-    this.param     = $.extend(true, {}, FlatHeight.defaults, options);
-    this.param.key = this.param.key ? this.param.key : amp.createID('FlatHeight');
-    this.param.isResize = amp.isDevice('sd') ? true : this.param.isResize;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>要素の高さ揃え</h4>
-   * FlatHeightのショートハンド
-   *
-   * @static
-   * @method flatHeight
-   * @param  {jQuery} $target 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {FlatHeight} FlatHeight生成してインスタンスを返す
-   */
-  flatHeight = function($target, split, options){
-    var inst = new FlatHeight($target, split, options);
-    inst.setEvent();
-    inst.setHeight();
-    return inst;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  FlatHeight.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = FlatHeight.prototype;
-
-
-  /**
-   * <h4>対象の要素</h4>
-   *
-   * @property $target
-   * @type {jQuery}
-   */
-  p.$target = null;
-
-
-  /**
-   * <h4>高さを揃える要素の分割単位</h4>
-   *
-   * @property split
-   * @type {Number}
-   */
-  p.split = null;
-
-
-  /**
-   * <h4>デフォルト値</h4>
-   * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
-   * defaults: { <ul><li>
-   *   isResize: false, // {Boolean} リサイズ時、高さを揃えなおすか </li><li>
-   *   key     : null, // {String} amp.fontResizeイベントに渡すコールバックキー </li><li>
-   *   timer   : 100 // {Number} リサイズイベントタイミング </li></ul>
-   * }
-   *
-   * @static
-   * @property defaults
-   * @type {Object}
-   */
-  FlatHeight.defaults = {
-    isResize: false,
-    key     : null,
-    timer   : 50
-  };
-
-
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.param = null;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {FlatHeight}
-   */
-  FlatHeight.extend = amp._extend;
-
-
-  /**
-   * <h4>イベント設定</h4>
-   * リサイズイベント、フォントリサイズイベント
-   *
-   * @method setEvent
-   * @return {FlatHeight}
-   */
-  p.setEvent = function(){
-    var self = this;
-
-    // font resize
-    if(amp.isDevice('pc')){
-      amp.fontResize(function(){
-        self.setHeight();
-      }, {key: self.param.key, timer: self.param.timer});
-    }
-
-    // window resize
-    $(window).on('resizestop.FlatHeight', {timer: self.param.timer}, function(){
-      if(self.param.isResize){
-        self.setHeight();
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>区切りをセットして高さを揃える</h4>
-   *
-   * @method setSplit
-   * @return {FlatHeight}
-   */
-  p.setSplit = function(num){
-    this.split = num;
-    this.setHeight();
-    return this;
-  };
-
-
-  /**
-   * <h4>高さを揃える</h4>
-   *
-   * @method setHeight
-   * @return {FlatHeight}
-   */
-  p.setHeight = function(){
-    var self = this,
-    total = self.$target.length,
-    rest = total % self.split,
-    finalRow = total - rest,
-    maxHeight = 0,
-    targetHeight = 0,
-    rowCount = 0,
-    i = 0;
-
-    self.$target.height('auto');
-
-    if(1 < self.split){
-      for(; i < total; i += 1){
-        // 一番高い高さを求める
-        targetHeight = self.$target.eq(i).height();
-        maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
-
-        // 行の高さを揃える
-        if((i + 1) % self.split === 0){
-          self.$target.slice(rowCount * self.split, (rowCount += 1) * self.split).height(maxHeight);
-          maxHeight = 0;
-
-        // 最終行の高さを揃える
-        } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.$target.slice(rowCount * self.split, total).height(maxHeight);
-        }
-      }
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object FlatHeight]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.FlatHeight = FlatHeight;
-  root.amp.flatHeight = flatHeight;
-
-
-
-}(window, jQuery));
-
-(function(root, $){
-
-  // 'use strict';
-
   var FontResize, p;
 
 
@@ -1009,7 +358,6 @@
    * @private
    * @static
    * @property _event 'change'
-   * [_event description]
    * @type {String}
    */
   FontResize._event = 'change';
@@ -1171,228 +519,6 @@
   root.amp = root.amp || {};
   root.amp.FontResize = FontResize;
   root.amp.fontResize = new FontResize();
-
-
-}(window, jQuery));
-
-(function(root, $){
-
-  // 'use strict';
-
-  var Loader, loader, p;
-
-
-  /*--------------------------------------------------------------------------
-    @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ローダー</h4>
-   * 処理が完了したら、jQuery Deferred Objectを返します<br>
-   * <b>imagesloaded.jsに依存します</b>
-   *
-   * @class amp.Loader
-   * @constructor
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期値： 'body'
-   * @param {Boolean} isStart ローダー開始するか
-   * @return {Loader}
-   */
-  Loader = function(elm, isStart){
-    this.elm = elm ? elm : this.elm;
-    this.imagesloaded = imagesLoaded(this.elm);
-    this.length = this.imagesloaded.images.length;
-    this.$defer = new $.Deferred();
-
-    if(amp.isBoolean(isStart) && isStart){
-      this.start();
-    }
-
-    return this;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ローダー</h4>
-   * Loaderのショートハンド<br>
-   * 処理が完了したら、jQuery Deferred Objectを返します
-   *
-   * @static
-   * @method loader
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期: body
-   * @return {Loader} Loader生成してインスタンスを返す
-   */
-  loader = function(elm){
-    return new Loader(elm, true);
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Loader.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Loader.prototype;
-
-
-  /**
-   * <h4>対象のimgを囲う要素</h4>
-   *
-   * @property elm
-   * @type {DOM}
-   */
-  p.elm = 'body';
-
-
-  /**
-   * <h4>imagesloadedオブジェクト</h4>
-   *
-   * @property imagesloaded
-   * @type {imagesloaded}
-   */
-  p.imagesloaded = null;
-
-
-  /**
-   * <h4>jQuery Deferred Objectを格納</h4>
-   * ローディングの状態をdone, fail, proglessに反映しています
-   *
-   * @property $defer
-   * @type {jQuery.Deferred}
-   */
-  p.$defer = null;
-
-
-  /**
-   * <h4>$imagesとimagesをあわせた画像点数</h4>
-   *
-   * @property length
-   * @type {Number}
-   */
-  p.length = 0;
-
-
-  /**
-   * <h4>画像が読み込まれた数をカウントします</h4>
-   *
-   * @property count
-   * @type {Number}
-   */
-  p.count = 0;
-
-
-  /**
-   * <h4>読み込み度数をインクリメントします</h4>
-   *
-   * @property loadCount
-   * @type {Number}
-   */
-  p.loadCount = 0;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Loader}
-   */
-   Loader.extend = amp._extend;
-
-
-  /**
-   * <h4>ローター開始</h4>
-   *
-   * @method start
-   * @return {jQuery.Deferred} jQuery.Deferred.promiseを返す
-   */
-  p.start = function(){
-    var self = this;
-
-    // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.imagesloaded.jqDeferred.progress(function(){
-      self.count += 1;
-    });
-
-    // カウントを更新する
-    self._update();
-
-    return self.$defer.promise();
-  };
-
-
-  /**
-   * <h4>カウントのアップデート</h4>
-   *
-   * @private
-   * @method _update
-   * @return {Void}
-   */
-  p._update = function(){
-    var self = this,
-    current = self.count / self.length * 100;
-
-    self.loadCount += self.loadCount < current ? 1 : 0;
-
-    self.$defer.notify(Math.ceil(self.loadCount));
-
-    if(self.loadCount >= 100){
-      self.$defer.resolve(self.imagesloaded);
-    } else {
-      amp.requestAnimationFrame(function(){
-        self._update();
-      });
-    }
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Loader]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.Loader = Loader;
-  root.amp.loader = loader;
 
 
 }(window, jQuery));
@@ -1641,6 +767,1174 @@
   root.amp = root.amp || {};
   root.amp.Mediaquery = Mediaquery;
   root.amp.mediaquery = new Mediaquery();
+
+
+}(window, jQuery));
+
+(function(root, $){
+
+  // 'use strict';
+
+  var Active, p;
+
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>アクティブ化</h4>
+   *
+   * @class amp.Active
+   * @constructor
+   * @return {Active}
+   */
+  Active = function(){};
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Active.VERSION = '1.0';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = Active.prototype;
+
+
+  /**
+   * <h4>アクティブタイプリスト</h4>
+   *
+   * @ static
+   * @property types
+   * @type {Array}
+   */
+  Active.types = ['text', 'rollover', 'alphaover'];
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Rollover}
+   */
+  Active.extend = amp._extend;
+
+
+  /**
+   * 要素のアクティブ化
+   *
+   * @static
+   * @public
+   * @method active
+   * @param {jQuery} $target 対象の要素
+   * @param {String} type アクティブタイプ
+   * @param {Object} options アクティブオプション
+   * @return {RolloverInstance}
+   */
+  Active.active = p.active = function($target, type, options){
+    if(!($target instanceof jQuery)){
+      throw new TypeError('Please select the jQuery element');
+    }
+
+    // optionsチェック
+    if($.isPlainObject(type)){
+      options = type;
+      type = null;
+    }
+
+    // typeの大文字表記チェック
+    if(amp.isString(type)){
+      type = type.toLowerCase();
+    }
+
+    // type判定
+    var flag = false,
+    i = 0,
+    l = Active.types.length;
+    for(; i < l; i += 1){
+      if(type === Active.types[i]){
+        flag = true;
+        break;
+      }
+    }
+
+    // type判定エラー時
+    if(!flag){
+      type = $target[0].nodeName === 'IMG' ? Active.types[1] : Active.types[0];
+    }
+
+    // text
+    if(type === Active.types[0]){
+      return $target.addClass(options || 'active');
+
+    // rollover
+    } else if(type === Active.types[1]){
+      options = $.extend(true, {}, amp.Rollover.defaults, options);
+      return amp.rollover($target.addClass(options.activeClass), options);
+
+    // alphaover
+    } else if(type === Active.types[2]){
+      options = $.extend(true, {}, amp.Alphaover.defaults, options);
+      return amp.alphaover($target.addClass(options.activeClass), options);
+    }
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object Active]';
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  root.amp = root.amp || {};
+  root.amp.Active = Active;
+  root.amp.active = Active.active;
+
+
+
+}(window, jQuery));
+
+(function(root, $){
+
+  // 'use strict';
+
+  var Alphaover, alphaover, p;
+
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>アルファ―オーバー</h4>
+   *
+   * @class amp.Alphaover
+   * @constructor
+   * @param  {jQuery} $target ターゲット要素
+   * @param  {Object} options アルファ―オーバーのオプション値
+   * @return {Alphaover}
+   */
+  Alphaover = function($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('img.alpha, input.alpha, .all-alpha img');
+    }
+
+    this.$target = $target;
+    this.param = $.extend(true, Alphaover.defaults, options);
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ターゲットのロールオーバー</h4>
+   * Alphaoverのショートハンド
+   *
+   * @static
+   * @method alphaover
+   * @param  {jQuery} $target ターゲット要素
+   * @param  {Object} options アルファ―オーバーのオプション値
+   * @return {Alphaover}
+   */
+  alphaover = function($target, options){
+    var inst = new Alphaover($target, options);
+    inst.setAlphaover().on();
+    return inst;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Alphaover.VERSION = '1.0';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = Alphaover.prototype;
+
+
+  /**
+   * <h4>オプションのデフォルト値</h4>
+   *
+   * @property defaults
+   * @type {Object}
+   */
+  Alphaover.defaults = {
+    groupClass : 'group-over',
+    activeClass: 'active',
+    noOverClass: 'no-over',
+    opacity    : 0.7,
+    dulation   : 0, // 200
+    ease       : amp.ease.$._2_QUAD_IN_OUT
+    // ease       : 'easeInOutQuad'
+  };
+
+
+  /**
+   * <h4>Alphaover.defaultsとオプション値をmixin</h4>
+   *
+   * @property param
+   * @type {Object}
+   */
+  p.param = null;
+
+
+  /**
+   * <h4>ターゲットターゲット</h4>
+   *
+   * @property $target
+   * @type {jQuery}
+   */
+  p.$target = null;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Alphaover}
+   */
+  Alphaover.extend = amp._extend;
+
+
+  /**
+   * <h4>ロールオーバーの生成</h4>
+   *
+   * @method createAlphaover
+   * @return {Alphaover}
+   */
+  p.setAlphaover = function(){
+    var self = this,
+    param = self.param,
+    $target, $group;
+
+    self.$target.each(function(i){
+      $target = self.$target.eq(i);
+      $group = $target.closest('.' + self.param.groupClass);
+
+      // トリガー追加
+      $target[0].$trigger = $group[0] ? $group : $target;
+
+      if($target.hasClass(self.param.activeClass)){
+        $target.css({opacity: self.param.opacity});
+      } else {
+        $target.css({opacity: 1});
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベントオン</h4>
+   *
+   * @method on
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.on = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      var $el = $(this),
+      el = $el[0];
+
+      el.$trigger.off('mouseenter.Alphaover mouseleave.Alphaover')
+      .on({
+        // mouseover
+        'mouseenter.Alphaover': function(){
+          if(!$el.hasClass(self.param.activeClass) && !$el.hasClass(self.param.noOverClass)){
+            if(0 < self.param.dulation){
+              $el.stop(true, false).animate({opacity: self.param.opacity}, self.param.dulation, self.param.ease);
+            } else {
+              $el.css({opacity: self.param.opacity});
+            }
+          }
+        },
+        // mouseout
+        'mouseleave.Alphaover': function(){
+          if(!$el.hasClass(self.param.activeClass) && !$el.hasClass(self.param.noOverClass)){
+            if(0 < self.param.dulation){
+              $el.stop(true, false).animate({opacity: 1}, self.param.dulation, self.param.ease);
+            } else {
+              $el.css({opacity: 1});
+            }
+          }
+        }
+      });
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベントオフ</h4>
+   *
+   * @method off
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.off = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      $(this)[0].$trigger.off('mouseenter.Alphaover mouseleave.Alphaover');
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ロールオーバーアクティブ化</h4>
+   *
+   * @method active
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.active = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      $(this).addClass(self.param.activeClass).css({opacity: self.param.opacity});
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ロールオーバー待機化</h4>
+   *
+   * @method passive
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.passive = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      $(this).removeClass(self.param.activeClass).css({opacity: 1});
+    });
+  };
+
+
+  /**
+   * <h4>ロールオーバー無効化</h4>
+   *
+   * @method invalid
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.invalid = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      $(this).addClass(self.param.noOverClass);
+    });
+  };
+
+
+  /**
+   * <h4>ロールオーバー有効化</h4>
+   *
+   * @method inforce
+   * @param  {Number} num 要素のインデックス
+   * @return {Alphaover}
+   */
+  p.inforce = function(num){
+    var self = this,
+    $target = $.isNumeric(num) ? self.$target.eq(num) : self.$target;
+
+    $target.each(function(){
+      $(this).removeClass(self.param.noOverClass).removeClass(self.param.activeClass).css({opacity: 1});
+    });
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object Alphaover]';
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  root.amp = root.amp || {};
+  root.amp.Alphaover = Alphaover;
+  root.amp.alphaover = alphaover;
+
+
+}(window, jQuery));
+
+(function(root, $){
+
+  // 'use strict';
+
+  var BoxHover, boxHover, p;
+
+
+
+  /*--------------------------------------------------------------------------
+     @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ボックスホバー</h4>
+   *
+   * @class amp.BoxHover
+   * @constructor
+   * @param  {jQuery} $target 対象のbox要素
+   * @param  {Object} options オプション値
+   * @return {BoxHover}
+   */
+  BoxHover = function($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.box-hover');
+    }
+
+    this.$target = $target;
+    this.param = $.extend(true, {}, BoxHover.defaults, options);
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ボックスホバー</h4>
+   * BoxHoverショートハンド
+   *
+   * @static
+   * @method boxHover
+   * @param  {jQuery} $target 対象のbox要素 省略可 初期値 $('.box-hover')
+   * @param  {Object} options オプション値 省略可
+   * @return {BoxHover} BoxHoverインスタンスを返す
+   */
+  boxHover = function($target, options){
+    var inst = new BoxHover($target, options);
+    inst.on();
+    return inst;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  BoxHover.VERSION = '2.0';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = BoxHover.prototype;
+
+
+  /**
+   * <h4>対象の要素</h4>
+   *
+   * @property $target
+   * @type {jQuery}
+   */
+  p.$target = null;
+
+
+  /**
+   * <h4>デフォルト値</h4>
+   * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
+   * defaults { <ul><li>
+   *   hoverClass: 'hover', {String} ホバー時に付けるクラス名</li><li>
+   *   linkClass : 'link' {String} 複数リンクがある場合、優先するリンククラス</li></ul>
+   * }
+   *
+   * @static
+   * @property defaults
+   * @type {Object}
+   */
+  BoxHover.defaults = {
+    hoverClass: 'hover',
+    linkClass : 'link'
+  };
+
+
+  /**
+   * <h4>パラメーター格納オブジェクト</h4>
+   * コンストラクタ呼び出し時の引数とBoxHover.optionsを、mixinして格納します<br>
+   *
+   * @property param
+   * @type {Object}
+   */
+  p.param = null;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {BoxHover}
+   */
+  BoxHover.extend = amp._extend;
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @param {jQuery} $target ターゲット要素 省略可
+   * @return {BoxHover}
+   */
+  p.on = function($target){
+    var self = this;
+
+    $target = $target ? $target : this.$target;
+    this.off($target);
+
+    $target.css({cursor: 'pointer'})
+      .on('mouseenter.BoxHover', function(){
+        $(this).addClass(self.param.hoverClass);
+      })
+      .on('mouseleave.BoxHover', function(){
+        $(this).removeClass(self.param.hoverClass);
+      })
+      .on('click.BoxHover', function(){
+        self.setLink($(this));
+      });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @param {jQuery} $target ターゲット要素 省略可
+   * @return {BoxHover}
+   */
+  p.off = function($target){
+    $target = $target ? $target : this.$target;
+    $target.css({cursor: 'auto'}).off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
+    return this;
+  };
+
+
+  /**
+   * <h4>リンクの設定</h4>
+   *
+   * @method setLink
+   * @param {Object} event イベントオブジェクト
+   * @param {Object} param paramオブジェクト
+   * @return {Boolean} false デフォルトのリンクの挙動のキャンセル
+   */
+  p.setLink = function($target){
+    var self = this,
+    $link = $target.find('.' + self.param.linkClass),
+    $a = $target.find('a').eq(0);
+
+    $a = $link[0] ? $link : $a;
+
+    // リンク展開
+    if($a.attr('target') === '_blank'){
+      return window.open($a.attr('href'), '_blank');
+    } else {
+      location.href = $a.attr('href');
+    }
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object BoxHover]';
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  root.amp = root.amp || {};
+  root.amp.BoxHover = BoxHover;
+  root.amp.boxHover = boxHover;
+
+
+}(window, jQuery));
+
+(function(root, $){
+
+  // 'use strict';
+
+  var FlatHeight, flatHeight, p;
+
+
+
+  /*--------------------------------------------------------------------------
+     @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>要素の高さを揃える</h4>
+   *
+   * @class amp.FlatHeight
+   * @constructor
+   * @param  {jQuery} $target 対象のエリア要素
+   * @param  {Number} split 区切る数 省略可
+   * @param  {Object} options オプション値 省略可
+   * @return {FlatHeight}
+   */
+  FlatHeight = function($target, split, options){
+    this.$target   = $target;
+    this.split     = $.isNumeric(split) ? split : $target.length;
+    options        = $.isPlainObject(split) ? split : options;
+    this.param     = $.extend(true, {}, FlatHeight.defaults, options);
+    this.param.isResize = amp.isDevice('sd') ? true : this.param.isResize;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>要素の高さ揃え</h4>
+   * FlatHeightのショートハンド
+   *
+   * @static
+   * @method flatHeight
+   * @param  {jQuery} $target 対象のエリア要素
+   * @param  {Number} split 区切る数 省略可
+   * @param  {Object} options オプション値 省略可
+   * @return {FlatHeight} FlatHeight生成してインスタンスを返す
+   */
+  flatHeight = function($target, split, options){
+    var inst = new FlatHeight($target, split, options);
+    inst.setEvent();
+    inst.setHeight();
+    return inst;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  FlatHeight.VERSION = '2.1';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = FlatHeight.prototype;
+
+
+  /**
+   * <h4>対象の要素</h4>
+   *
+   * @property $target
+   * @type {jQuery}
+   */
+  p.$target = null;
+
+
+  /**
+   * <h4>高さを揃える要素の分割単位</h4>
+   *
+   * @property split
+   * @type {Number}
+   */
+  p.split = null;
+
+
+  /**
+   * <h4>デフォルト値</h4>
+   * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
+   * defaults: { <ul><li>
+   *   isResize: false, // {Boolean} リサイズ時、高さを揃えなおすか (スマートデバイスはtrueに設定されます)</li><li>
+   *   timer   : 100 // {Number} リサイズイベントタイミング </li></ul>
+   * }
+   *
+   * @static
+   * @property defaults
+   * @type {Object}
+   */
+  FlatHeight.defaults = {
+    isResize: false,
+    timer   : 50
+  };
+
+
+  /**
+   * <h4>パラメーター格納オブジェクト</h4>
+   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
+   *
+   * @property param
+   * @type {Object}
+   */
+  p.param = null;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {FlatHeight}
+   */
+  FlatHeight.extend = amp._extend;
+
+
+  /**
+   * <h4>イベント設定</h4>
+   * リサイズイベント、フォントリサイズイベント
+   *
+   * @method setEvent
+   * @return {FlatHeight}
+   */
+  p.setEvent = function(){
+    var self = this;
+
+    // font resize
+    if(amp.isDevice('pc')){
+      amp.fontResize.on('change.FlatHeight', function(){
+        self.setHeight();
+      });
+    }
+
+    // window resize
+    $(window).on('resizestop.FlatHeight', {timer: self.param.timer}, function(){
+      if(self.param.isResize){
+        self.setHeight();
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>区切りをセットして高さを揃える</h4>
+   *
+   * @method setSplit
+   * @return {FlatHeight}
+   */
+  p.setSplit = function(num){
+    this.split = num;
+    this.setHeight();
+    return this;
+  };
+
+
+  /**
+   * <h4>高さを揃える</h4>
+   *
+   * @method setHeight
+   * @return {FlatHeight}
+   */
+  p.setHeight = function(){
+    var self = this,
+    total = self.$target.length,
+    rest = total % self.split,
+    finalRow = total - rest,
+    maxHeight = 0,
+    targetHeight = 0,
+    rowCount = 0,
+    i = 0;
+
+    self.$target.height('auto');
+
+    if(1 < self.split){
+      for(; i < total; i += 1){
+        // 一番高い高さを求める
+        targetHeight = self.$target.eq(i).height();
+        maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
+
+        // 行の高さを揃える
+        if((i + 1) % self.split === 0){
+          self.$target.slice(rowCount * self.split, (rowCount += 1) * self.split).height(maxHeight);
+          maxHeight = 0;
+
+        // 最終行の高さを揃える
+        } else if(1 < rest && finalRow <= i && i === total - 1){
+          self.$target.slice(rowCount * self.split, total).height(maxHeight);
+        }
+      }
+    }
+
+    return this;
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object FlatHeight]';
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  root.amp = root.amp || {};
+  root.amp.FlatHeight = FlatHeight;
+  root.amp.flatHeight = flatHeight;
+
+
+
+}(window, jQuery));
+
+(function(root, $){
+
+  // 'use strict';
+
+  var Loader, loader, p;
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ローダー</h4>
+   * 処理が完了したら、jQuery Deferred Objectを返します<br>
+   * <b>imagesloaded.jsに依存します</b>
+   *
+   * @class amp.Loader
+   * @constructor
+   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期値： 'body'
+   * @param {Boolean} isStart ローダー開始するか
+   * @return {Loader}
+   */
+  Loader = function(elm, isStart){
+    this.elm = elm ? elm : this.elm;
+    this.imagesloaded = imagesLoaded(this.elm);
+    this.length = this.imagesloaded.images.length;
+    this.$defer = new $.Deferred();
+
+    if(amp.isBoolean(isStart) && isStart){
+      this.start();
+    }
+
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ローダー</h4>
+   * Loaderのショートハンド<br>
+   * 処理が完了したら、jQuery Deferred Objectを返します
+   *
+   * @static
+   * @method loader
+   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期: body
+   * @return {Loader} Loader生成してインスタンスを返す
+   */
+  loader = function(elm){
+    return new Loader(elm, true);
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Loader.VERSION = '2.0';
+
+
+  /**
+   * <h4>プロトタイプオブジェクト</h4>
+   *
+   * @property p
+   * @type {Object}
+   */
+  p = Loader.prototype;
+
+
+  /**
+   * <h4>対象のimgを囲う要素</h4>
+   *
+   * @property elm
+   * @type {DOM}
+   */
+  p.elm = 'body';
+
+
+  /**
+   * <h4>imagesloadedオブジェクト</h4>
+   *
+   * @property imagesloaded
+   * @type {imagesloaded}
+   */
+  p.imagesloaded = null;
+
+
+  /**
+   * <h4>jQuery Deferred Objectを格納</h4>
+   * ローディングの状態をdone, fail, proglessに反映しています
+   *
+   * @property $defer
+   * @type {jQuery.Deferred}
+   */
+  p.$defer = null;
+
+
+  /**
+   * <h4>$imagesとimagesをあわせた画像点数</h4>
+   *
+   * @property length
+   * @type {Number}
+   */
+  p.length = 0;
+
+
+  /**
+   * <h4>画像が読み込まれた数をカウントします</h4>
+   *
+   * @property count
+   * @type {Number}
+   */
+  p.count = 0;
+
+
+  /**
+   * <h4>読み込み度数をインクリメントします</h4>
+   *
+   * @property loadCount
+   * @type {Number}
+   */
+  p.loadCount = 0;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラスを拡張します</h4>
+   * amp._extendをエクスポートしています
+   *
+   * @static
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Loader}
+   */
+   Loader.extend = amp._extend;
+
+
+  /**
+   * <h4>ローター開始</h4>
+   *
+   * @method start
+   * @return {jQuery.Deferred} jQuery.Deferred.promiseを返す
+   */
+  p.start = function(){
+    var self = this;
+
+    // 画像処理完了毎（成功・失敗）にインクリメントする
+    self.imagesloaded.jqDeferred.progress(function(){
+      self.count += 1;
+    });
+
+    // カウントを更新する
+    self._update();
+
+    return self.$defer.promise();
+  };
+
+
+  /**
+   * <h4>カウントのアップデート</h4>
+   *
+   * @private
+   * @method _update
+   * @return {Void}
+   */
+  p._update = function(){
+    var self = this,
+    current = self.count / self.length * 100;
+
+    self.loadCount += self.loadCount < current ? 1 : 0;
+
+    self.$defer.notify(Math.ceil(self.loadCount));
+
+    if(self.loadCount >= 100){
+      self.$defer.resolve(self.imagesloaded);
+    } else {
+      amp.requestAnimationFrame(function(){
+        self._update();
+      });
+    }
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object Loader]';
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  root.amp = root.amp || {};
+  root.amp.Loader = Loader;
+  root.amp.loader = loader;
 
 
 }(window, jQuery));
@@ -2944,332 +3238,6 @@
   root.amp = root.amp || {};
   root.amp.SmoothScroll = SmoothScroll;
   root.amp.smoothScroll = smoothScroll;
-
-
-}(window, jQuery));
-
-(function(root, $){
-
-  // 'use strict';
-
-  var Sort, sort, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ソート</h4>
-   * Renderクラスと組み合わせて使います
-   *
-   * @class amp.Sort
-   * @constructor
-   * @param  {jQuery} トリガーa要素 hrefにフィルター値(先頭に#付けた)をセットする
-   * @param  {Render} render レンダーインスタンス
-   * @return {Sort}
-   */
-  Sort = function($trigger, render){
-    this.$trigger = $trigger;
-    this.render = render;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ソート</h4>
-   * ソートショートハンド
-   *
-   * @method sort
-   * @param  {jQuery} トリガーa要素 hrefにフィルター値(先頭に#付けた)をセットする
-   * @param  {Render Instance} render レンダーインスタンス
-   * @return {Sort} Sortインスタンスを返す
-   */
-  sort = function($trigger, render){
-    var inst = new Sort($trigger, render);
-    inst.active();
-    inst.setTrigger(this.$trigger);
-    return inst;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Sort.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Sort.prototype;
-
-
-  /**
-   * <h4>トリガーa要素</h4>
-   * href値に先頭に#付けた検索キーを与えてください
-   *
-   * @property $trigger
-   * @type {jQuery}
-   */
-  p.$trigger = null;
-
-
-  /**
-   * <h4>Render Sortを格納します</h4>
-   *
-   * @property $render
-   * @type {Render}
-   */
-  p.render = null;
-
-
-  /**
-   * <h4>現在のフィルター値</h4>
-   * トリガーのhref値（ハッシュを省いた値）が格納されます<br>
-   * all値はフィルタリング処理を行いません
-   *
-   * @property current
-   * @default 'all'
-   * @type {String}
-   */
-  p.current = 'all';
-
-
-  /**
-   * <h4>トリガーのアクティブ時のクラス名</h4>
-   *
-   * @property activeClass
-   * @default 'active'
-   * @type {String}
-   */
-  p.activeClass = 'active';
-
-
-  /**
-   * <h4>アニメーションの状態を管理するフラグ</h4>
-   *
-   * @property isAnimate
-   * @default false
-   * @type {Boolean}
-   */
-  p.isAnimate = false;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Sort}
-   */
-  Sort.extend = amp._extend;
-
-
-  /**
-   * <h4>トリガー要素のイベント登録</h4>
-   *
-   * @method setTrigger
-   * @return {Sort}
-   */
-  p.setTrigger = function($trigger){
-    var self = this;
-
-    $trigger.on('click.Sort', function(){
-      self.controller($(this).attr('href'));
-      return false;
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>処理のコントロール</h4>
-   * ここでパラメータの変更を行います
-   *
-   * @method controller
-   * @param  {String} current フィルター値
-   * @return {jQuery.Deferred} 処理が完了したことを通知します
-   */
-  p.controller = function(current){
-    var self = this;
-    current = current.replace(/#/, '');
-
-    if(this.current === current || this.isAnimate){
-      return $.stream();
-    }
-
-    // 縦列処理します
-    return $.stream(
-      function(){
-        // 検索結果を設定
-        self.isAnimate = true;
-        self.current = current;
-        self.active();
-        self.render.createTemplate(self.findItem(self.current));
-      },
-      function(){
-        // 現在表示している要素を消す
-        return self.hide();
-      },
-      function(){
-        // DOMを入れ替え
-        return self.resetHTML();
-      },
-      function(){
-        // 追加した要素を表示
-        return self.show();
-      },
-      function(){
-        // 待機状態に戻す
-        self.isAnimate = false;
-      }
-    );
-  };
-
-
-  /**
-   * <h4>ナビゲーションのアクティブ</h4>
-   *
-   * @method active
-   * @return {Sort}
-   */
-  p.active = function(){
-    var self = this;
-    self.$trigger.removeClass(self.activeClass).each(function(){
-      if($(this).attr('href') === '#' + self.current){
-        $(this).addClass(self.activeClass);
-        return false;
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>検索処理</h4>
-   *
-   * @method findItem
-   * @param  {String} current フィルター値
-   * @return {Array | String} 検索結果（配列）を返す。見つからない場合は、notFoundを返す。
-   */
-  p.findItem = function(current){
-    var self = this,
-    sort = {};
-
-    if(current === 'all'){
-      sort = self.render.data;
-    } else {
-      sort = _.filter(self.render.data, function(list){
-        return list === current;
-      });
-    }
-
-    return sort;
-  };
-
-
-  /**
-   * <h4>検索結果が無い場合、文字列を返す</h4>
-   *
-   * @method notFound
-   * @return {DOM} '<p class="not-found">検索結果は0件です。</p>'
-   */
-  p.notFound = function(){
-    return '<p class="not-found">検索結果は0件です。</p>';
-  };
-
-
-  /**
-   * <h4>HTMLの入れ替え</h4>
-   *
-   * @method resetHTML
-   * @return {jQuery} 新しくセットしたDOM
-   */
-  p.resetHTML = function(){
-    var self = this,
-    $el;
-
-    if(typeof self.render.tmplData === 'string'){
-      $el = $(self.notFound());
-    } else {
-      $el = $(self.render.tmpl.render(self.render.tmplData));
-    }
-
-    self.render.$el.replaceWith($el.css({opacity: 0}));
-    self.render.$el = $el;
-    return self.render.$el;
-  };
-
-
-  /**
-   * <h4>現在表示の要素を消す</h4>
-   *
-   * @method hide
-   * @return {jQuery} 要素が非表示になったことを通知します
-   */
-  p.hide = function(){
-    return this.render.$el.stop(true, false).animate({opacity: 0});
-  };
-
-
-  /**
-   * <h4>新しくセットされた要素の表示</h4>
-   *
-   * @method show
-   * @return {jQuery} 要素が表示されたことを通知します
-   */
-  p.show = function(){
-    return this.render.$el.stop(true, false).animate({opacity: 1});
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Sort]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.Sort = Sort;
-  root.amp.sort = sort;
 
 
 }(window, jQuery));

@@ -150,6 +150,7 @@
   /**
    * <h4>イベント追加</h4>
    *
+   * @private
    * @method _addEvent
    * @param {String} event イベント名
    * @param {Function} callback コールバック関数
@@ -177,6 +178,7 @@
   /**
    * <h4>イベント削除</h4>
    *
+   * @private
    * @method _addEvent
    * @param {String} event イベント名 省略時、全てのイベント削除
    * @return {Void}

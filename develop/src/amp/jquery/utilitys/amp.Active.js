@@ -51,26 +51,7 @@
    * @property types
    * @type {Array}
    */
-  Active.types = [
-    'textover',
-    'rollover',
-    // 'slipover',
-    'alphaover'
-  ];
-
-
-  /**
-   * <h4>オプションのデフォルト値</h4>
-   *
-   * @property defaults
-   * @type {Object}
-   */
-  Active.defaults = {
-    groupClass : 'group-over',
-    activeClass: 'active',
-    noOverClass: 'no-over',
-    postfix    : '_on'
-  };
+  Active.types = ['text', 'rollover', 'alphaover'];
 
 
 
@@ -134,14 +115,19 @@
       type = $target[0].nodeName === 'IMG' ? Active.types[1] : Active.types[0];
     }
 
-    // テキスト
-    if(Active.types[0] === type){
-      return $target.addClass(options.activeClass);
+    // text
+    if(type === Active.types[0]){
+      return $target.addClass(options || 'active');
 
-    } else {
-    // 画像
-      options = $.extend(true, Active.defaults, options);
-      return amp[type]($target.addClass(options.activeClass), options);
+    // rollover
+    } else if(type === Active.types[1]){
+      options = $.extend(true, {}, amp.Rollover.defaults, options);
+      return amp.rollover($target.addClass(options.activeClass), options);
+
+    // alphaover
+    } else if(type === Active.types[2]){
+      options = $.extend(true, {}, amp.Alphaover.defaults, options);
+      return amp.alphaover($target.addClass(options.activeClass), options);
     }
   };
 

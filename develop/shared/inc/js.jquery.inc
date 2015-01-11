@@ -12,6 +12,9 @@
 <script src="/src/amp/uncompressed/amp.core.js"></script>
 <script src="/src/amp/uncompressed/amp.jquery-plugins.js"></script>
 <script src="/src/amp/uncompressed/amp.jquery.js"></script>
+<script src="/src/amp/uncompressed/plugins/amp.Sort.js"></script>
+
+
 
 <!-- common -->
 <script src="/shared/js/common.js"></script>

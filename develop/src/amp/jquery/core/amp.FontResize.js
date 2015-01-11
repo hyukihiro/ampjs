@@ -52,7 +52,6 @@
    * @private
    * @static
    * @property _event 'change'
-   * [_event description]
    * @type {String}
    */
   FontResize._event = 'change';

@@ -50,7 +50,6 @@
   ua         = navigator.userAgent.toLowerCase(),
   doc        = document,
   html       = doc.documentElement,
-  css3Prefix = ['', '-ms-', '-moz-', '-webkit-'],
   ieSupports = {min: 8, max: 12},
   toString   = Object.prototype.toString;
 
@@ -76,7 +75,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '1.9';
+  amp.VERSION = '2.0';
 
 
   /**
@@ -538,24 +537,28 @@
    * @return {Boolean}
    */
   amp.isIEScope = function(ver, pun){
-    // pun値の誤入力チェック
-    if(pun.search(/^prev$|^later$/) > -1){
+    var current, index;
+    ver = Number(ver);
 
-      var flag = pun === 'prev',
-      end = flag ? ver - ieSupports.min: ieSupports.max - ver,
-      inc = flag ? -1 : 1,
-      isScope,
-      j = 0;
+    // Legacy IE
+    if(ua.indexOf('msie') > -1){
+      index = ua.indexOf('msie ') + 5;
 
-      for(; j <= end; j += 1){
-        isScope = amp.isIE(ver);
-        ver += inc;
-        if(isScope){
-          break;
-        }
+    // Modern IE
+    } else if(ua.indexOf('trident') > -1){
+      index = ua.indexOf('rv:') + 3;
+    }
+
+    if(0 < index){
+      current = Number(ua.substring(index, index + 2));
+
+      if(pun === 'later'){
+        return current >= ver;
+      } else {
+        return current <= ver;
       }
-
-      return isScope;
+    } else {
+      return false;
     }
   };
 
@@ -604,7 +607,7 @@
    * @return {Boolean}
    */
   amp.isOpera = function(){
-    return ua.indexOf('opera/') > -1 && ua.indexOf('mobile') < 0;
+    return ua.indexOf(' opr/') > -1 || (ua.indexOf('opera/') > -1 && ua.indexOf('mobile') < 0);
   };
 
 
@@ -701,7 +704,7 @@
    * @return {Boolean}
    */
   amp.hasReqAnime = function(){
-    return (root.requestAnimationFrame ||
+    return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||
       root.msRequestAnimationFrame);
@@ -822,13 +825,13 @@
    * @return {Boolean}
    */
   amp.hasTransition = function(){
-    var prop = 'transition',
+    var props = ['transition', '-webkit-transition', '-moz-transition', '-ms-transition', '-o-transition'],
     i = 0,
-    l = css3Prefix.length,
+    l = props.length,
     flag = false;
 
     for(; i < l; i += 1){
-      if(css3Prefix[i] + prop in html.style){
+      if(props[i] in html.style){
         flag = true;
         break;
       }
@@ -872,15 +875,15 @@
    * @return {Array}
    */
   amp.cuff = function(ary, radix){
-    var copyAry = ary.concat(),
+    var copy = ary.concat(),
     i = radix ? radix : 0,
-    l = ary.length;
+    l = copy.length;
 
     for(; i < l; i += 1){
-      ary.push(copyAry[l - (i+1)]);
+      copy.push(ary[l - (i+1)]);
     }
 
-    return ary;
+    return copy;
   };
 
 
@@ -1727,6 +1730,7 @@
   /**
    * <h4>イベント追加</h4>
    *
+   * @private
    * @method _addEvent
    * @param {String} event イベント名
    * @param {Function} callback コールバック関数
@@ -1754,6 +1758,7 @@
   /**
    * <h4>イベント削除</h4>
    *
+   * @private
    * @method _addEvent
    * @param {String} event イベント名 省略時、全てのイベント削除
    * @return {Void}

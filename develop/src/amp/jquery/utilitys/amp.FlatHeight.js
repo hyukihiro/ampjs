@@ -25,7 +25,6 @@
     this.split     = $.isNumeric(split) ? split : $target.length;
     options        = $.isPlainObject(split) ? split : options;
     this.param     = $.extend(true, {}, FlatHeight.defaults, options);
-    this.param.key = this.param.key ? this.param.key : amp.createID('FlatHeight');
     this.param.isResize = amp.isDevice('sd') ? true : this.param.isResize;
   };
 
@@ -66,7 +65,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '2.0';
+  FlatHeight.VERSION = '2.1';
 
 
   /**
@@ -100,8 +99,7 @@
    * <h4>デフォルト値</h4>
    * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
    * defaults: { <ul><li>
-   *   isResize: false, // {Boolean} リサイズ時、高さを揃えなおすか </li><li>
-   *   key     : null, // {String} amp.fontResizeイベントに渡すコールバックキー </li><li>
+   *   isResize: false, // {Boolean} リサイズ時、高さを揃えなおすか (スマートデバイスはtrueに設定されます)</li><li>
    *   timer   : 100 // {Number} リサイズイベントタイミング </li></ul>
    * }
    *
@@ -111,7 +109,6 @@
    */
   FlatHeight.defaults = {
     isResize: false,
-    key     : null,
     timer   : 50
   };
 
@@ -156,9 +153,9 @@
 
     // font resize
     if(amp.isDevice('pc')){
-      amp.fontResize(function(){
+      amp.fontResize.on('change.FlatHeight', function(){
         self.setHeight();
-      }, {key: self.param.key, timer: self.param.timer});
+      });
     }
 
     // window resize
