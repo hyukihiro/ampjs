@@ -54,7 +54,6 @@
   toString   = Object.prototype.toString;
 
 
-
   // console.logがないブラウザは、空の関数を返す
   if(!('console' in root)){
     root.console = {
@@ -869,7 +868,7 @@
    * <h4>渡した配列に、折り返した値を追加して返します</h4>
    *
    * @static
-   * @property cuff
+   * @method cuff
    * @param  {Array} ary   ベースとなる配列
    * @param  {Number} radix 折り返すポイント
    * @return {Array}
@@ -959,7 +958,7 @@
    * <h4>ClassをExtendします</h4>
    * ClassにextendメソッドをExportして使います
    *
-   * @private
+   * @protected
    * @static
    * @method _extend
    * @param {Object} protoProp プロトタイプオブジェクト
@@ -990,7 +989,7 @@
    *
    * @static
    * @method getHash
-   * @return {Array} #を省いた文字列を配列に格納して返す
+   * @return {Array}
    */
   amp.getHash = function(){
     if(url.hash.length){
@@ -1224,9 +1223,10 @@
   /**
    * <h4>forEach</h4>
    * 配列の各要素に対して、指定された処理を実行します
+   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
    *
    * @static
-   * @method forEach
+   * @method Array.forEach
    * @type {Void}
    */
   Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
@@ -1242,6 +1242,7 @@
 
   /**
    * <h4>連想配列の要素数取得</h4>
+   * Object.keys未実装のブラウザに、フォールバックして処理を追加しています
    *
    * @method Object.keys
    * @param  {Object} obj

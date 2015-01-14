@@ -31,25 +31,25 @@ jQuery(function($){
 	var mediaquery = new amp.Mediaquery();
 
 
-	amp.mediaquery.on('pc tb-aside', function(){
-		console.log('PC tb-A');
-	});
+	// amp.mediaquery.on('pc tb-aside', function(){
+	// 	console.log('PC tb-A');
+	// });
 
-	mediaquery.on('tb-aside', function(){
-		console.log('tb-A');
-	});
+	// mediaquery.on('tb-aside', function(){
+	// 	console.log('tb-A');
+	// });
 
-	mediaquery.on('tb-bside', function(){
-		console.log('tb-B');
-	});
+	// mediaquery.on('tb-bside', function(){
+	// 	console.log('tb-B');
+	// });
 
-	mediaquery.on('sp', function(){
-		console.log('sp');
-	});
+	// mediaquery.on('sp', function(){
+	// 	console.log('sp');
+	// });
 
 	mediaquery.on('change', function(e){
 		console.log(e);
-	});
+	}).trigger('change');
 
 
 	// mediaquery.trigger('change');

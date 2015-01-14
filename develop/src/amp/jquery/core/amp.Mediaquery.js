@@ -120,6 +120,7 @@
 
   /**
    * <h4>イベント登録</h4>
+   * Override
    *
    * @method on
    * @param  {String} event イベント名
@@ -137,6 +138,36 @@
     return this;
   };
 
+  /**
+   * <h4>イベント発行</h4>
+   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
+   *
+   * @method trigger
+   * @param  {String} event イベント名
+   * @return {Mediator}
+   */
+  p.trigger = function(event){
+    var events = this._getEventNameMap(event),
+    handlers = this._handlers[events.name];
+
+    if(handlers){
+      this._getMediaEvents();
+
+      var i = 0,
+      l = handlers.length;
+
+      for(; i < l; i += 1){
+        if(!events.attr || handlers[i].attr === events.attr){
+          handlers[i].callback.call(handlers[i].context, this.mediaTypes);
+        }
+      }
+    }
+
+    return this;
+  };
+
+
+
 
   /**
    * <h4>状態を監視し、イベントを発行します</h4>
@@ -146,23 +177,12 @@
    * @return {Void}
    */
   p._controller = function(){
-    var self = this,
-    mediaTypes;
+    var self = this;
 
     $(root).on('resize.Mediaquery', function(){
 
       if(self.isObserver){
-        var mediaTypes = self.getCurrents(),
-        events = [];
-
-        // 変更されたイベントタイプの検索
-        if(self.mediaTypes.current){
-          events = _.difference(mediaTypes, self.mediaTypes.current);
-        }
-
-        // mediaTypes値の設定
-        self.mediaTypes.prev = self.mediaTypes.current;
-        self.mediaTypes.current = mediaTypes;
+        var events = self._getMediaEvents();
 
         // イベント発行
         if(events[0]){
@@ -174,6 +194,34 @@
       }
     });
   };
+
+
+  /**
+   * <h4>イベントの取得</h4>
+   * イベント名を配列で返す
+   *
+   * @private
+   * @method _getMediaEvents
+   * @return {Array}
+   */
+  p._getMediaEvents = function(){
+    var self = this,
+    mediaTypes = self.getCurrents(),
+    events = [];
+
+    // 変更されたイベントタイプの検索
+    if(self.mediaTypes.current){
+      events = _.difference(mediaTypes, self.mediaTypes.current);
+    }
+
+    // mediaTypes値の設定
+    self.mediaTypes.prev = self.mediaTypes.current;
+    self.mediaTypes.current = mediaTypes;
+
+    return events;
+  };
+
+
 
 
   /**
