@@ -6,17 +6,16 @@
 <script src="/src/underscore-min.js"></script>
 
 <!-- jquery.plugins -->
-<script src="/src/jquery-plugins/jquery.easing.1.3.min.js"></script>
-<script src="/src/jquery-plugins/jquery.mousewheel.min.js"></script>
+<script src="/src/jquery.plugins.js"></script>
 
 <!-- createjs.plugins -->
-<script src="/src/creatjs-plugins/particleEmitterJs-0.5.0.min.js"></script>
+<script src="/src/createjs.plugins/particleEmitterJs-0.5.0.min.js"></script>
 
 <!-- amp -->
-<script src="/src/amp/uncompressed/amp.core.js"></script>
-<script src="/src/amp/uncompressed/amp.jquery-plugins.js"></script>
-<script src="/src/amp/uncompressed/amp.jquery.js"></script>
-<script src="/src/amp/uncompressed/amp.createjs.js"></script>
+<script src="/src/amp/amp.core.js"></script>
+<script src="/src/amp/amp.jquery.plugins.js"></script>
+<script src="/src/amp/amp.jquery.js"></script>
+<script src="/src/amp/amp.createjs.js"></script>
 
 <!-- common -->
 <script src="/shared/js/common.js"></script>
