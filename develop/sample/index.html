@@ -27,7 +27,11 @@
 
 <script>
 window.onload = function(){
-	amp.cuff([0,1,2], 0);
+	$('img').eq(0).on('flick', function(e){
+		console.log(e);
+	});
+
+	// amp.cuff([0,1,2], 0);
 
 
 	// console.log(TypeError);
