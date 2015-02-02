@@ -130,7 +130,7 @@
    * <h4>アイテム、ストレージデータの削除</h4>
    *
    * @method removeItem
-   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します
+   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します ※可変長引数可
    * @return {Storage}
    */
   p.removeItem = function(key){
@@ -138,7 +138,10 @@
       if(key === undefined){
         this._storage.clear();
       } else {
-        this._storage.removeItem(key);
+        var i = 0, l = arguments.length;
+        for(; i < l; i += 1){
+          this._storage.removeItem(arguments[i]);
+        }
       }
     }
 

@@ -924,28 +924,30 @@
       obj = arguments[count];
 
       for(key in obj){
-        data = extendObject[key];
-        copy = obj[key];
+        if(obj.hasOwnProperty(key)){
+          data = extendObject[key];
+          copy = obj[key];
 
-        // マージデータが同じなら次のループへ
-        if(extendObject === copy){
-          continue;
-        }
-
-        isArray = amp.isArray(copy);
-
-        if(isDeep && copy && amp.isObject(copy) || isArray){
-          if(isArray){
-            clone = data && amp.isArray(data) ? data : [];
-          } else {
-            clone = data && amp.isObject(data) ? data : {};
+          // マージデータが同じなら次のループへ
+          if(extendObject === copy){
+            continue;
           }
 
-          // ネスト構造を再帰処理
-          extendObject[key] = amp.extend(isDeep, clone, copy);
+          isArray = amp.isArray(copy);
 
-        } else if (copy !== undefined){
-          extendObject[key] = copy;
+          if(isDeep && copy && amp.isObject(copy) || isArray){
+            if(isArray){
+              clone = data && amp.isArray(data) ? data : [];
+            } else {
+              clone = data && amp.isObject(data) ? data : {};
+            }
+
+            // ネスト構造を再帰処理
+            extendObject[key] = amp.extend(isDeep, clone, copy);
+
+          } else if (copy !== undefined){
+            extendObject[key] = copy;
+          }
         }
       }
     }
@@ -965,20 +967,32 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  amp._extend = function(protoProp, staticProp){
+  amp._extend = function(protoProps, staticProps){
     var parent = this,
     child;
 
-    if(amp.isFunction(protoProp) && protoProp.construtor){
-      child = protoProp.construtor;
-    } else {
-      child = function(){
-        return parent.apply(this, arguments);
-      };
+    if(amp.isFunction(protoProps)){
+      staticProps = protoProps;
+      protoProps = protoProps.prototype;
     }
 
-    amp.extend(true, child, parent, staticProp);
-    amp.extend(true, child.prototype, parent.prototype, protoProp);
+    if(protoProps && protoProps.constructor) {
+      child = protoProps.constructor;
+    } else {
+      child = function(){ return parent.apply(this, arguments); };
+    }
+
+    amp.extend(true, child, parent, staticProps);
+
+    var Substitute = function(){ this.constructor = child; };
+    Substitute.prototype = parent.prototype;
+    child.prototype = new Substitute();
+
+    if(protoProps){
+      amp.extend(true, child.prototype, protoProps);
+    }
+
+    child.__super__ = parent.prototype;
 
     return child;
   };
@@ -1179,7 +1193,7 @@
    * <h4>cancelAnimationFrameをエクスポートしています</h4>
    * 対応していないブラウザは、clearTimeoutでフォールバックします
    *
-   * @method requestAnimationFrame
+   * @method cancelAnimationFrame
    * @param {Number} id タイマーNumber
    * @return {Number} タイマーNumber
    */
@@ -2039,7 +2053,7 @@
    * <h4>アイテム、ストレージデータの削除</h4>
    *
    * @method removeItem
-   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します
+   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します ※可変長引数可
    * @return {Storage}
    */
   p.removeItem = function(key){
@@ -2047,7 +2061,10 @@
       if(key === undefined){
         this._storage.clear();
       } else {
-        this._storage.removeItem(key);
+        var i = 0, l = arguments.length;
+        for(; i < l; i += 1){
+          this._storage.removeItem(arguments[i]);
+        }
       }
     }
 
