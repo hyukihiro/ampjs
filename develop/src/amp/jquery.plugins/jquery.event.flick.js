@@ -57,12 +57,9 @@
 	 * @type {Object}
 	 */
 	Flick.events = {
-    flick     : 'flick',
-    // flickleft : 'flickleft',
-    // flickright: 'flickright',
-    // flickup    : 'flickup',
-    // flickdown  : 'flickdown',
-    // flickcancel: 'flickcancel',
+    flick      : 'flick',
+    flickside  : 'flickside',
+    flickupdown: 'flickupdown',
     flickmove  : 'flickmove',
     flickmoveX : 'flickmoveX',
     flickmoveY : 'flickmoveY'
@@ -106,14 +103,16 @@
 
 
 	/**
-	 * [getFlickHandler description]
-	 * @param  {[type]} type [description]
-	 * @return {[type]}      [description]
+	 * <h4>フリックイベントハンドラ</h4>
+	 *
+	 * @method getFlickHandler
+	 * @param  {String} type イベント名
+	 * @return {Void}
 	 */
 	Flick.getFlickHandler = function(type){
 		var attr = '._' + type.toUpperCase(),
-		isSide = (type === 'flick' || type === 'flickleft' || type === 'flickright'),
-		isUpdown = (type === 'flick' || type === 'flickup' || type === 'flickdown');
+		isSide = (type === 'flick' || type === 'flickside'),
+		isUpdown = (type === 'flick' || type === 'flickupdown');
 
 		return function($target, startEvent, param){
 			var data = Flick.createEventData(startEvent);
@@ -156,10 +155,16 @@
 			.one('mouseup' + attr + ' touchend' + attr, function(){
 				$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 
-				// ここのしょりで慣性
-				if(data.isMoveX && param.area < Math.abs(data.moveX)){
+				if(isSide && data.isMoveX && param.area < Math.abs(data.moveX)){
 					data.flickEvent.type = type;
 					data.flickEvent.moveX = data.moveX;
+					data.flickEvent.moveY = data.moveY;
+					$target.trigger(data.flickEvent);
+
+				} else if(isUpdown && data.isMoveY && param.area < Math.abs(data.moveY)){
+					data.flickEvent.type = type;
+					data.flickEvent.moveX = data.moveX;
+					data.flickEvent.moveY = data.moveY;
 					$target.trigger(data.flickEvent);
 				}
 			});
@@ -230,7 +235,6 @@
 	};
 
 
-
 	/**
 	 * <h4>イベントステートデータ生成</h4>
 	 *
@@ -264,10 +268,10 @@
 		data.flickEvent = event;
 
 		if(Flick.isTouch){
-			data.moveX = data.startX - event.originalEvent.changedTouches[0].pageX;
+			data.moveX = event.originalEvent.changedTouches[0].pageX - data.startX;
 			data.moveY = data.startY - event.originalEvent.changedTouches[0].pageY;
 		} else {
-			data.moveX = data.startX - event.pageX;
+			data.moveX = event.pageX - data.startX;
 			data.moveY = data.startY - event.pageY;
 		}
 
@@ -318,6 +322,47 @@
 	 * @return {Void}
 	 */
 	Flick.flick.handler = Flick.getFlickHandler('flick');
+
+
+
+	/*--------------------------------------------------------------------------
+		@flick
+	--------------------------------------------------------------------------*/
+
+	/**
+	 * <h4>フリックイベントオブジェクト</h4>
+	 *
+	 * @event flickside
+	 * @type {Object}
+	 */
+	Flick.flickside = {};
+
+
+	/**
+	 * <h4>イベント追加</h4>
+	 *
+	 * @method setup
+	 * @return {Void}
+	 */
+	Flick.flickside.setup = Flick.getSetup('flickside');
+
+
+	/**
+	 * <h4>イベント削除</h4>
+	 *
+	 * @event teardown
+	 * @return {Void}
+	 */
+	Flick.flickside.teardown = Flick.getTeardown('flickside');
+
+
+	/**
+	 * <h4>イベントハンドラ</h4>
+	 *
+	 * @method handler
+	 * @return {Void}
+	 */
+	Flick.flickside.handler = Flick.getFlickHandler('flickside');
 
 
 
@@ -457,7 +502,6 @@
 			return arguments.length > 0 ? this.on(key, null, data, fn) : this.trigger(key);
 		};
 	};
-
 
 
 }(jQuery));
