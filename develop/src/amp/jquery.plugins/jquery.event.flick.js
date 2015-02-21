@@ -133,7 +133,7 @@
 				}
 			})
 			.on('click' + attr, function(clickEvent){
-				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide;
+				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide,
 				isY = data.isMoveY && param.area < Math.abs(data.moveY) && isUpdown;
 				if(isX || isY){
 					clickEvent.preventDefault();
@@ -143,7 +143,7 @@
 			// find > a
 			$target.find('a').off('click' + attr)
 			.on('click' + attr, function(clickEvent){
-				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide;
+				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide,
 				isY = data.isMoveY && param.area < Math.abs(data.moveY) && isUpdown;
 				if(isX || isY){
 					clickEvent.preventDefault();

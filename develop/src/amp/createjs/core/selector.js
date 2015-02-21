@@ -40,6 +40,19 @@
   --------------------------------------------------------------------------*/
 
 
+  // var $, p;
+
+  // $ = function(){
+  //   this.DisplayObject_constructor();
+  // };
+  // p = createjs.extend($, createjs.DisplayObject);
+
+
+
+
+  // export
+  // amp.createjs.$ = createjs.promote($, "DisplayObject");
+
 
 
 
@@ -48,6 +61,8 @@
     @method
   --------------------------------------------------------------------------*/
 
+  p._$ = {};
+
   // select
   p.eq = function(){};
   p.find = function(){};
@@ -55,6 +70,7 @@
   p.last = function(){};
   p.parent = function(){};
   p.children = function(){};
+
 
   // prop
   p.prop = function(){};

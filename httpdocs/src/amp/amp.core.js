@@ -963,7 +963,7 @@
    * @protected
    * @static
    * @method _extend
-   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
