@@ -939,29 +939,29 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  amp._extend = function(protoProps, staticProps){
+  amp._extend = function(protoProp, staticProp){
     var parent = this,
     child;
 
-    if(amp.isFunction(protoProps)){
-      staticProps = protoProps;
-      protoProps = protoProps.prototype;
+    if(amp.isFunction(protoProp)){
+      staticProp = protoProp;
+      protoProp = protoProp.prototype;
     }
 
-    if(protoProps && protoProps.constructor) {
-      child = protoProps.constructor;
+    if(protoProp && protoProp.constructor) {
+      child = protoProp.constructor;
     } else {
       child = function(){ return parent.apply(this, arguments); };
     }
 
-    amp.extend(true, child, parent, staticProps);
+    amp.extend(true, child, parent, staticProp);
 
     var Substitute = function(){ this.constructor = child; };
     Substitute.prototype = parent.prototype;
     child.prototype = new Substitute();
 
-    if(protoProps){
-      amp.extend(true, child.prototype, protoProps);
+    if(protoProp){
+      amp.extend(true, child.prototype, protoProp);
     }
 
     child.__super__ = parent.prototype;
