@@ -371,7 +371,11 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'));
 
 	// amp.core.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/core/**/*.js')
+	MODULE.gulp.src([
+		PATH.develop + 'src/amp/core/*.js',
+		PATH.develop + 'src/amp/core/base/*.js',
+		PATH.develop + 'src/amp/core/utilitys/*.js',
+	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))

@@ -1,4 +1,4 @@
-(function(root){
+(function(root, amp){
 
   // 'use strict';
 
@@ -297,9 +297,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Ease = Ease;
-  root.amp.ease = new Ease();
+  amp = amp || {};
+  amp.Ease = Ease;
+  amp.ease = new Ease();
 
 
-}(window));
+}(window, amp));

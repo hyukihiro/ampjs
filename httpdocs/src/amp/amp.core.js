@@ -31,34 +31,49 @@
   // 'use strict';
 
 
-  /**
-   * <h4>amp</h4>
-   * namespace
-   *
-   * @class amp
-   **/
-  var amp = {};
+  /*======================================================================
+    AMP基本設定
+  ======================================================================*/
 
 
-
-  /*----------------------------------------------------------------------
+  /*--------------------------------------------------------------------------
     config
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
-  var
-  url        = root.location,
-  ua         = navigator.userAgent.toLowerCase(),
-  doc        = document,
-  html       = doc.documentElement,
-  ieSupports = {min: 8, max: 12},
-  toString   = Object.prototype.toString;
+  // クラス基本設定
+  var NAME = 'AMP',
+  VERSION  = '3.0';
 
 
-  // console.logがないブラウザは、空の関数を返す
+  // consoleがなければ空の関数を返す
   if(!('console' in root)){
     root.console = {
       log: function(){}
     };
+  }
+
+  /**
+   * <h4>amp</h4>
+   *
+   * @module amp
+   **/
+  root.amp = root.amp || {};
+  root.amp = new AMP(NAME, VERSION);
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>AMP</h4>
+   *
+   * @class AMP
+   * @constructor
+   **/
+  function AMP(className, version){
+    this.constructor = className;
+    this.VERSION = version || '1.0';
   }
 
 
@@ -74,8 +89,613 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '2.0';
+  AMP.VERSION = VERSION;
 
+
+  /**
+   * <h4>コンストラクタ名</h4>
+   *
+   * @static
+   * @property constructor
+   * @type {String}
+   */
+  AMP.constructor = AMP.prototype.constructor = NAME;
+
+
+  /**
+   * AMP
+   * @type {Class}
+   */
+  // AMP.prototype.AMP = AMP;
+
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  AMP.toString = AMP.prototype.toString = function(){
+    return '[object ' + this.constructor + ']';
+  };
+
+
+
+}(window));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    基本ユーティリティ
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>オブジェクトの拡張</h4>
+   *
+   * @method extend
+   * @param {Boolean} isDeep ディープコピーするか 初期値: false 省略可
+   * @param {Object} arguments 拡張するオブジェクト
+   * @return {Object} 拡張したオブジェクトを返します
+   */
+  amp.extend = function(){
+    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
+
+    length = arguments.length;
+    isDeep = amp.isBoolean(arguments[0]) && arguments[0];
+
+    if(isDeep){
+      count = 2;
+      extendObject = arguments[1];
+    } else {
+      count = 1;
+      extendObject = arguments[0];
+    }
+
+    for(; count < length; count += 1){
+      obj = arguments[count];
+
+      for(key in obj){
+        if(obj.hasOwnProperty(key)){
+          data = extendObject[key];
+          copy = obj[key];
+
+          // マージデータが同じなら次のループへ
+          if(extendObject === copy){
+            continue;
+          }
+
+          isArray = amp.isArray(copy);
+
+          if(isDeep && copy && amp.isObject(copy) || isArray){
+            if(isArray){
+              clone = data && amp.isArray(data) ? data : [];
+            } else {
+              clone = data && amp.isObject(data) ? data : {};
+            }
+
+            // ネスト構造を再帰処理
+            extendObject[key] = amp.extend(isDeep, clone, copy);
+
+          } else if (copy !== undefined){
+            extendObject[key] = copy;
+          }
+        }
+      }
+    }
+
+    return extendObject;
+  };
+
+
+  /**
+   * <h4>ClassをExtendします</h4>
+   * ClassにextendメソッドをExportして使います
+   *
+   * @protected
+   * @static
+   * @method _extend
+   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Extend Class}
+   */
+  amp._extend = function(protoProp, staticProp){
+    var parent = this,
+    child;
+
+    if(amp.isFunction(protoProp)){
+      staticProp = protoProp;
+      protoProp = protoProp.prototype;
+    }
+
+    if(protoProp && protoProp.constructor) {
+      child = protoProp.constructor;
+    } else {
+      child = function(){ return parent.apply(this, arguments); };
+    }
+
+    amp.extend(true, child, parent, staticProp);
+
+    var Substitute = function(){ this.constructor = child; };
+    Substitute.prototype = parent.prototype;
+    child.prototype = new Substitute();
+
+    if(protoProp){
+      amp.extend(true, child.prototype, protoProp);
+    }
+
+    child.__super__ = parent.prototype;
+
+    return child;
+  };
+
+
+  /**
+   * <h4>画面のピクセル比を返す</h4>
+   *
+   * @static
+   * @method pixelRatio
+   * @return {Number}
+   */
+  amp.pixelRatio = function(){
+    return root.devicePixelRatio || 1;
+  };
+
+
+  /**
+   * <h4>画像のプリロード</h4>
+   *
+   * @static
+   * @method preload
+   * @param {String} src 画像パス
+   * @return {Image} 生成した、イメージオブジェクト
+   */
+  amp.preload = function(src){
+    var img = new Image();
+    img.src = src;
+    return img;
+  };
+
+
+  /**
+   * <h4>requestAnimationFrameをエクスポートしています</h4>
+   * 対応していないブラウザは、setTimeoutでフォールバックします
+   *
+   * @method requestAnimationFrame
+   * @param {Function} callback コールバック関数
+   * @return {Number}
+   */
+  amp.requestAnimationFrame = (function(){
+    var requestAnimation = (
+      root.requestAnimationFrame ||
+      root.webkitRequestAnimationFrame ||
+      root.mozRequestAnimationFrame ||
+      root.oRequestAnimationFrame ||
+      function(callback){
+        return root.setTimeout(callback, 1000 / 60);
+      }
+    );
+
+    // contextの処理追加予定
+    return function(callback){
+      return requestAnimation(callback);
+    };
+  }());
+
+
+  /**
+   * <h4>cancelAnimationFrameをエクスポートしています</h4>
+   * 対応していないブラウザは、clearTimeoutでフォールバックします
+   *
+   * @method cancelAnimationFrame
+   * @param {Number} id タイマーNumber
+   * @return {Number}
+   */
+  amp.cancelAnimationFrame = (function(){
+    var cancelAnimation = (
+      root.cancelAnimationFrame ||
+      root.webkitCancelAnimationFrame ||
+      root.mozCancelAnimationFrame ||
+      root.oCancelAnimationFrame ||
+      function(id){
+        root.clearTimeout(id);
+      }
+    );
+
+    return function(id){
+      return cancelAnimation(id);
+    };
+  }());
+
+
+  /**
+   * <h4>現在の時間を返します</h4>
+   * performance.nowメソッドをExportしています
+   * performanceに対応していないブラウザはgetTimeを返します
+   *
+   * @static
+   * @method now
+   * @return {Number}
+   */
+  amp.now = (function(){
+    var p = root.performance,
+    pNow = p && (p.now || p.mozNow || p.msNow || p.oNow || p.webkitNow);
+
+    return function(){
+      return (pNow && pNow.call(p)) || (new Date().getTime());
+    };
+  }());
+
+
+}(window, amp || {}));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    ブラウザ対応していない機能をフォールバックします
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>forEach</h4>
+   * 配列の各要素に対して、指定された処理を実行します
+   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
+   *
+   * @static
+   * @method Array.forEach
+   * @type {Void}
+   */
+  Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
+    if(this === null){
+      throw new TypeError('this is null or not defined');
+    }
+    var i = 0, l = this.length;
+    for(; i < l; i += 1){
+      callback.call(context || null, this[i], i, this);
+    }
+  };
+
+
+  /**
+   * <h4>連想配列の要素数取得</h4>
+   * Object.keys未実装のブラウザに、フォールバックして処理を追加しています
+   *
+   * @method Object.keys
+   * @param  {Object} obj
+   * @return {Void}
+   */
+  Object.keys =  Object.keys || function(obj){
+    if(amp.isObject(obj)){
+      var size = 0,
+      prop;
+      for(prop in obj){
+        if(obj.hasOwnProperty(prop) && prop !== 'length'){
+          size += 1;
+        }
+      }
+      obj.length = size;
+    }
+  };
+
+
+
+}(window));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    ブラウザ機能を判定
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    config
+  ----------------------------------------------------------------------*/
+
+  var
+  url  = root.location,
+  doc  = document,
+  html = doc.documentElement;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>applicationCache機能の有無</h4>
+   *
+   * @static
+   * @method hasAppCache
+   * @return {Boolean}
+   */
+  amp.hasAppCache = function(){
+    return 'applicationCache' in root;
+  };
+
+
+  /**
+   * <h4>Geolocation機能の有無</h4>
+   *
+   * @static
+   * @method hasGeolocation
+   * @return {Boolean}
+   */
+  amp.hasGeolocation = function(){
+    return 'geolocation' in navigator;
+  };
+
+
+  /**
+   * <h4>pushState機能の有無</h4>
+   *
+   * @static
+   * @method hasPushState
+   * @return {Boolean}
+   */
+  amp.hasPushState = function(){
+    return 'pushState' in root.history;
+  };
+
+
+  /**
+   * <h4>RequestAnimationFrame機能の有無</h4>
+   *
+   * @static
+   * @method hasReqAnime
+   * @return {Boolean}
+   */
+  amp.hasReqAnime = function(){
+    return !!(root.requestAnimationFrame ||
+      root.webkitRequestAnimationFrame ||
+      root.mozRequestAnimationFrame ||
+      root.msRequestAnimationFrame);
+  };
+
+
+  /**
+   * <h4>ストレージ機能の有無</h4>
+   *
+   * @static
+   * @method hasStorage
+   * @return {Boolean}
+   */
+  amp.hasStorage = function(){
+    return 'sessionStorage' in root && 'localStorage' in root;
+  };
+
+
+  /**
+   * <h4>WebSocket機能の有無</h4>
+   *
+   * @static
+   * @method hasWebSocket
+   * @return {Boolean}
+   */
+  amp.hasWebSocket = function(){
+    return 'WebSocket' in root;
+  };
+
+
+  /**
+   * <h4>WebWorker機能の有無</h4>
+   *
+   * @static
+   * @method hasWebWorker
+   * @return {Boolean}
+   */
+  amp.hasWebWorker = function(){
+    return 'Worker' in root;
+  };
+
+
+  /**
+   * <h4>audio機能の有無</h4>
+   *
+   * @static
+   * @method hasAudio
+   * @return {Boolean}
+   */
+  amp.hasAudio = function(){
+    // hack for ietester
+    if(amp.isBrowser('ie', 9)){
+      return true;
+    } else {
+      return !!doc.createElement('audio').canPlayType;
+    }
+  };
+
+
+  /**
+   * <h4>canvas機能の有無</h4>
+   *
+   * @static
+   * @method hasCanvas
+   * @return {Boolean}
+   */
+  amp.hasCanvas = function(){
+    return !!doc.createElement('canvas').getContext;
+  };
+
+  /**
+   * <h4>hashの有無</h4>
+   *
+   * @static
+   * @method hasHash
+   * @param {String} key ハッシュ名 省略可
+   * @return {Boolean}
+   */
+  amp.hasHash = function(key){
+    var flag = false;
+
+    if(url.href.indexOf('#') > -1){
+      if(key){
+        var k = key.replace(/^#/, ''),
+        vals = url.hash.split('#'),
+        i = 1,
+        l = vals.length;
+
+        for(; i < l; i += 1){
+          if(k === vals[i]){
+            flag = true;
+            break;
+          }
+        }
+
+      } else {
+        flag = true;
+      }
+    }
+
+    return flag;
+  };
+
+
+  /**
+   * <h4>MsPointer判定 βver</h4>
+   *
+   * @static
+   * @method isMsPointer
+   * @return {Boolean}
+   */
+  amp.hasMsPointer = function(){
+    return root.navigator.msPointerEnabled > -1;
+  };
+
+
+  /**
+   * <h4>SVG機能の有無</h4>
+   *
+   * @static
+   * @method hasSVG
+   * @return {Boolean}
+   */
+  amp.hasSVG = function(){
+    return 'SVGAngle' in root;
+  };
+
+
+  /**
+   * <h4>TouchScreen判定</h4>
+   *
+   * @static
+   * @method hasTouchScreen
+   * @return {Boolean}
+   */
+  amp.hasTouchScreen = (function(){
+    var hasTouchScreen,
+    div = doc.createElement('div');
+
+    div.setAttribute('ontouchstart', 'return');
+    hasTouchScreen = (typeof div.ontouchstart === 'function');
+    return function(){
+      return hasTouchScreen;
+    };
+  }());
+
+
+  /**
+   * <h4>video機能の有無</h4>
+   *
+   * @static
+   * @method hasVideo
+   * @return {Boolean}
+   */
+  amp.hasVideo = function(){
+    // hack for ietester
+    if(amp.isBrowser('ie', 9)){
+      return true;
+    } else {
+      return !!doc.createElement('video').canPlayType;
+    }
+  };
+
+
+  /**
+   * <h4>XMLSerializerの有無</h4>
+   *
+   * @static
+   * @method hasXMLSerializer
+   * @return {Boolean}
+   */
+  amp.hasXMLSerializer = function(){
+    return 'XMLSerializer' in root;
+  };
+
+
+  /**
+   * <h4>css3 transition機能の有無</h4>
+   *
+   * @static
+   * @method hasTransition
+   * @return {Boolean}
+   */
+  amp.hasTransition = function(){
+    var props = ['transition', '-webkit-transition', '-moz-transition', '-ms-transition', '-o-transition'],
+    i = 0,
+    l = props.length,
+    flag = false;
+
+    for(; i < l; i += 1){
+      if(props[i] in html.style){
+        flag = true;
+        break;
+      }
+    }
+
+    return flag;
+  };
+
+
+
+}(window, amp || {}));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    オブジェクト,ブラウザを判定します
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    config
+  ----------------------------------------------------------------------*/
+
+  var
+  ua       = navigator.userAgent.toLowerCase(),
+  toString = Object.prototype.toString;
+
+
+
+  /*----------------------------------------------------------------------
+    @property
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>developモード</h4>
@@ -90,7 +710,7 @@
 
 
   /*----------------------------------------------------------------------
-    @method Judgment
+    @method
   ----------------------------------------------------------------------*/
 
   /* isType
@@ -183,7 +803,7 @@
    *
    * @static
    * @method isOS
-   * @param  {String} key OS名 ['windows', 'windowsPhone', 'mac', 'ios', android]
+   * @param  {String} key OS名 (windows, windowsPhone, mac, ios, android)
    * @param  {String | Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
@@ -288,7 +908,8 @@
    *
    * @static
    * @method isDevice
-   * @param {String} デバイス名 ['pc', 'sd', 'smartdevice', 'sp', 'smartphone', 'tb', 'tablet', 'iphone', 'ipad', 'ipod', 'androidphone', 'androidtablet', 'touchscreen', 'mspointer']
+   * @param {String} デバイス名
+   * (pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet)
    * @return {Boolean}
    */
   amp.isDevice = function(key){
@@ -320,12 +941,6 @@
 
     } else if(k === 'androidtablet'){
       return amp.isAndroidTablet();
-
-    } else if (k === 'touchscreen'){
-      return amp.isTouchScreen();
-
-    } else if (k === 'mspointer'){
-      return amp.isMsPointer();
     }
   };
 
@@ -438,29 +1053,6 @@
   };
 
 
-  /**
-   * <h4>TouchScreen判定</h4>
-   *
-   * @static
-   * @method isTouchScreen
-   * @return {Boolean}
-   */
-  amp.isTouchScreen = function(){
-    return 'ontouchend' in doc;
-  };
-
-
-  /**
-   * <h4>MsPointer判定 βver</h4>
-   *
-   * @static
-   * @method isMsPointer
-   * @return {Boolean}
-   */
-  amp.isMsPointer = function(){
-    return root.navigator.msPointerEnabled > -1;
-  };
-
 
   /* Browser
   -----------------------------------------------------------------*/
@@ -470,9 +1062,10 @@
    *
    * @static
    * @method isBrowser
-   * @param  {String} key ブラウザ名 ['ie', 'chrome', 'safari', 'firefox', 'opera', 'mobileSafari', 'android', 'webkit']
-   * @param  {String | Number} ver バージョン [ie, mobileSafari, android] 省略可
-   * @param  {String} pun ie指定バージョン範囲 ['prev', 'later']  省略可
+   * @param  {String} key ブラウザ名
+   * (ie, chrome, safari, firefox, opera, mobileSafari, android, webkit)
+   * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
+   * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}
    */
   amp.isBrowser = function(key, ver, pun){
@@ -532,7 +1125,7 @@
    * @static
    * @method isIEScope
    * @param  {Number}  ver バージョンナンバー
-   * @param  {String}  pun 以前・移行 ['prev', 'later']
+   * @param  {String}  pun 以前・以降 (prev, later)
    * @return {Boolean}
    */
   amp.isIEScope = function(ver, pun){
@@ -656,193 +1249,89 @@
   };
 
 
-  /* Function
-  -----------------------------------------------------------------*/
 
-  /**
-   * <h4>applicationCache機能の有無</h4>
-   *
-   * @static
-   * @method hasAppCache
-   * @return {Boolean}
-   */
-  amp.hasAppCache = function(){
-    return 'applicationCache' in root;
-  };
+}(window, amp || {}));
+
+(function(root, amp){
+
+  // 'use strict';
 
 
-  /**
-   * <h4>Geolocation機能の有無</h4>
-   *
-   * @static
-   * @method hasGeolocation
-   * @return {Boolean}
-   */
-  amp.hasGeolocation = function(){
-    return 'geolocation' in navigator;
-  };
+  /*======================================================================
+    locationオブジェクトを扱います
+  ======================================================================*/
 
 
-  /**
-   * <h4>pushState機能の有無</h4>
-   *
-   * @static
-   * @method hasPushState
-   * @return {Boolean}
-   */
-  amp.hasPushState = function(){
-    return 'pushState' in root.history;
-  };
+  /*----------------------------------------------------------------------
+    config
+  ----------------------------------------------------------------------*/
 
-
-  /**
-   * <h4>RequestAnimationFrame機能の有無</h4>
-   *
-   * @static
-   * @method hasReqAnime
-   * @return {Boolean}
-   */
-  amp.hasReqAnime = function(){
-    return !!(root.requestAnimationFrame ||
-      root.webkitRequestAnimationFrame ||
-      root.mozRequestAnimationFrame ||
-      root.msRequestAnimationFrame);
-  };
-
-
-  /**
-   * <h4>ストレージ機能の有無</h4>
-   *
-   * @static
-   * @method hasStorage
-   * @return {Boolean}
-   */
-  amp.hasStorage = function(){
-    return 'sessionStorage' in root && 'localStorage' in root;
-  };
-
-
-  /**
-   * <h4>WebSocket機能の有無</h4>
-   *
-   * @static
-   * @method hasWebSocket
-   * @return {Boolean}
-   */
-  amp.hasWebSocket = function(){
-    return 'WebSocket' in root;
-  };
-
-
-  /**
-   * <h4>WebWorker機能の有無</h4>
-   *
-   * @static
-   * @method hasWebWorker
-   * @return {Boolean}
-   */
-  amp.hasWebWorker = function(){
-    return 'Worker' in root;
-  };
-
-
-  /**
-   * <h4>audio機能の有無</h4>
-   *
-   * @static
-   * @method hasAudio
-   * @return {Boolean}
-   */
-  amp.hasAudio = function(){
-    // hack for ietester
-    if(amp.isBrowser('ie', 9)){
-      return true;
-    } else {
-      return !!doc.createElement('audio').canPlayType;
-    }
-  };
-
-
-  /**
-   * <h4>canvas機能の有無</h4>
-   *
-   * @static
-   * @method hasCanvas
-   * @return {Boolean}
-   */
-  amp.hasCanvas = function(){
-    return !!doc.createElement('canvas').getContext;
-  };
-
-
-  /**
-   * <h4>SVG機能の有無</h4>
-   *
-   * @static
-   * @method hasSVG
-   * @return {Boolean}
-   */
-  amp.hasSVG = function(){
-    return 'SVGAngle' in root;
-  };
-
-
-  /**
-   * <h4>video機能の有無</h4>
-   *
-   * @static
-   * @method hasVideo
-   * @return {Boolean}
-   */
-  amp.hasVideo = function(){
-    // hack for ietester
-    if(amp.isBrowser('ie', 9)){
-      return true;
-    } else {
-      return !!doc.createElement('video').canPlayType;
-    }
-  };
-
-
-  /**
-   * <h4>XMLSerializerの有無</h4>
-   *
-   * @static
-   * @method hasXMLSerializer
-   * @return {Boolean}
-   */
-  amp.hasXMLSerializer = function(){
-    return 'XMLSerializer' in root;
-  };
-
-
-  /**
-   * <h4>css3 transition機能の有無</h4>
-   *
-   * @static
-   * @method hasTransition
-   * @return {Boolean}
-   */
-  amp.hasTransition = function(){
-    var props = ['transition', '-webkit-transition', '-moz-transition', '-ms-transition', '-o-transition'],
-    i = 0,
-    l = props.length,
-    flag = false;
-
-    for(; i < l; i += 1){
-      if(props[i] in html.style){
-        flag = true;
-        break;
-      }
-    }
-
-    return flag;
-  };
+  var url = root.location;
 
 
 
   /*----------------------------------------------------------------------
-    @method Utility
+    @method
+  ----------------------------------------------------------------------*/
+
+
+  /**
+   * <h4>hashの取得し、#を省いた文字列を配列に格納して返す</h4>
+   *
+   * @static
+   * @method getHash
+   * @return {Array}
+   */
+  amp.getHash = function(){
+    if(url.hash.length){
+      return url.hash.split('#').slice(1);
+    }
+  };
+
+
+  /**
+   * <h4>リクエストパラメータの値を連想配列として取得</h4>
+   *
+   * @static
+   * @method queryHashMap
+   * @return {Object}
+   */
+  amp.queryHashMap = function(){
+    var map,
+    array = [],
+    param = url.search.slice(1).split('&');
+
+    if(param[0] !== ''){
+      var i = 0,
+      l = param.length;
+
+      map = {};
+
+      for(; i < l; i += 1){
+        array = param[i].split('=');
+        map[array[0]] = array[1] ? decodeURI(array[1]) : decodeURI(array[0]);
+      }
+    }
+
+    return map;
+  };
+
+
+
+}(window, amp || {}));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    文字列を扱います
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    @method
   ----------------------------------------------------------------------*/
 
   /**
@@ -852,9 +1341,9 @@
    * @static
    * @method createId
    * @param {String} str id名 初期値: 'cid' 省略可
-   * @return {String} str+数値を返す
+   * @return {String}
    */
-  amp.createID = (function(){
+  amp.createId = (function(){
     var count = 0;
 
     return function(str){
@@ -865,38 +1354,79 @@
 
 
   /**
-   * <h4>渡した配列に、折り返した値を追加して返します</h4>
-   *
-   * @static
-   * @method cuff
-   * @param  {Array} ary   ベースとなる配列
-   * @param  {Number} radix 折り返すポイント
-   * @return {Array}
-   */
-  amp.cuff = function(ary, radix){
-    var copy = ary.concat(),
-    i = radix ? radix : 0,
-    l = copy.length;
-
-    for(; i < l; i += 1){
-      copy.push(ary[l - (i+1)]);
-    }
-
-    return copy;
-  };
-
-
-  /**
    * <h4>ランダムな4桁のコードを返す</h4>
    *
    * @static
    * @method digit
-   * @return {String} ランダムな4桁のコードを返す
+   * @return {String}
    */
   amp.digit = function() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
+
+  /**
+   * <h4>空白文字を削除して返す</h4>
+   *
+   * @method replaceSpace
+   * @param  {String} str 対象の文字列
+   * @return {String}
+   */
+  amp.replaceSpace = function(str){
+    return str.replace(/\s+/g, '');
+  };
+
+
+  /**
+   * <h4>UUIDの生成して返す</h4>
+   *
+   * @static
+   * @method uuid
+   * @return {String}
+   */
+  amp.uuid = function(){
+    var d = amp.digit;
+    return (d() + d() + '-' + d() + '-' + d() + '-' + d() + '-' + d() + d() + d());
+  };
+
+
+  /**
+   * <h4>xmlを文字列に変換して返す</h4>
+   *
+   * @static
+   * @method xmlToString
+   * @param  {XML Node} xmlNodeデータ
+   * @return {String}
+   */
+  amp.xmlToString = function(xml){
+    if(amp.hasXMLSerializer()){
+      return (new XMLSerializer()).serializeToString(xml);
+    } else {
+      try {
+        return xmlNode.xml;
+      } catch(e){
+        console.log(e);
+      }
+    }
+  };
+
+
+
+}(window, amp || {}));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    基本ユーティリティ
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>オブジェクトの拡張</h4>
@@ -999,62 +1529,44 @@
 
 
   /**
-   * <h4>hashの取得し、#を省いた文字列を配列に格納して返す</h4>
+   * ここベース
    *
-   * @static
-   * @method getHash
-   * @return {Array}
+   * <h4>クラスのベースを生成します</h4>
+   * AMPクラスの継承 + amp._extend機能を実装しています
+   *
+   * @method createClass
+   * @param  {String} className クラス名
+   * @param  {String} version バージョン
+   * @return {Class}
    */
-  amp.getHash = function(){
-    if(url.hash.length){
-      return url.hash.split('#').slice(1);
-    }
-  };
+  amp.createClass = (function(){
+      // amp.AMP.extend = amp._extend;
+      // var baseClass = new amp.AMP('className', 'version');
+
+    console.log(new amp.AMP());
+
+  }());
+
+  // function(className, version){
+  //   if(amp.isString(className)){
+  //     var baseClass = new amp.AMP(className, version);
+  //     return baseClass;
+  //   } else {
+  //     throw new TypeError(className + ' is not a String');
+  //   }
+  // };
+
 
 
   /**
    * <h4>画面のピクセル比を返す</h4>
    *
    * @static
-   * @method getRatio
+   * @method pixelRatio
    * @return {Number}
    */
-  amp.getRatio = function(){
+  amp.pixelRatio = function(){
     return root.devicePixelRatio || 1;
-  };
-
-
-  /**
-   * <h4>hashの有無</h4>
-   *
-   * @static
-   * @method hasHash
-   * @param {String} key ハッシュ名 省略可
-   * @return {Boolean}
-   */
-  amp.hasHash = function(key){
-    var flag = false;
-
-    if(url.href.indexOf('#') > -1){
-      if(key){
-        var k = key.replace(/^#/, ''),
-        vals = url.hash.split('#'),
-        i = 1,
-        l = vals.length;
-
-        for(; i < l; i += 1){
-          if(k === vals[i]){
-            flag = true;
-            break;
-          }
-        }
-
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
   };
 
 
@@ -1074,104 +1586,14 @@
 
 
   /**
-   * <h4>リクエストパラメータの値を連想配列として取得</h4>
-   *
-   * @static
-   * @method queryHashMap
-   * @return {Object} クエリを格納した連想配列を返す
-   */
-  amp.queryHashMap = function(){
-    var map = {},
-    array = [],
-    param = url.search.slice(1).split('&');
-
-    if(param[0] !== ''){
-      var i = 0,
-      l = param.length;
-
-      for(; i < l; i += 1){
-        array = param[i].split('=');
-        map[array[0]] = array[1] ? decodeURI(array[1]) : decodeURI(array[0]);
-      }
-    }
-
-    return map;
-  };
-
-
-  /**
-   * <h4>空白文字を削除して返す</h4>
-   *
-   * @method removeSpaceChara
-   * @param  {String} str 対象の文字列
-   * @return {String}
-   */
-  amp.removeSpaceChara = function(str){
-    return str.replace(/\s+/g, '');
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @static
-   * @method toString
-   * @return {String}
-   */
-  amp.toString = function(){
-    return '[object amp]';
-  };
-
-
-  /**
-   * <h4>UUIDの生成して返す</h4>
-   *
-   * @static
-   * @method uuid
-   * @return {String} UUIDを生成して返す
-   */
-  amp.uuid = function(){
-    var d = amp.digit;
-    return (d() + d() + '-' + d() + '-' + d() + '-' + d() + '-' + d() + d() + d());
-  };
-
-
-  /**
-   * <h4>xmlを文字列に変換</h4>
-   *
-   * @static
-   * @method xmlToString
-   * @param  {XML Node} xmlNodeデータ
-   * @return {String} 文字列に変換して返す
-   */
-  amp.xmlToString = function(xml){
-    if(amp.hasXMLSerializer()){
-      return (new XMLSerializer()).serializeToString(xml);
-    } else {
-      try {
-        return xmlNode.xml;
-      } catch(e){
-        console.log(e);
-      }
-    }
-  };
-
-
-
-  /*----------------------------------------------------------------------
-    @method Fallbacks
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>requestAnimationFrameをエクスポートしています</h4>
    * 対応していないブラウザは、setTimeoutでフォールバックします
    *
    * @method requestAnimationFrame
    * @param {Function} callback コールバック関数
-   * @return {Number} タイマーNumber
+   * @return {Number}
    */
   amp.requestAnimationFrame = (function(){
-
     var requestAnimation = (
       root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
@@ -1195,10 +1617,9 @@
    *
    * @method cancelAnimationFrame
    * @param {Number} id タイマーNumber
-   * @return {Number} タイマーNumber
+   * @return {Number}
    */
   amp.cancelAnimationFrame = (function(){
-
     var cancelAnimation = (
       root.cancelAnimationFrame ||
       root.webkitCancelAnimationFrame ||
@@ -1222,7 +1643,7 @@
    *
    * @static
    * @method now
-   * @type {Number} 現在の時間(ミリ秒)を返します
+   * @return {Number}
    */
   amp.now = (function(){
     var p = root.performance,
@@ -1234,60 +1655,10 @@
   }());
 
 
-  /**
-   * <h4>forEach</h4>
-   * 配列の各要素に対して、指定された処理を実行します
-   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
-   *
-   * @static
-   * @method Array.forEach
-   * @type {Void}
-   */
-  Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
-    if(this === null){
-      throw new TypeError('this is null or not defined');
-    }
-    var i = 0, l = this.length;
-    for(; i < l; i += 1){
-      callback.call(context || null, this[i], i, this);
-    }
-  };
 
+}(window, amp || {}));
 
-  /**
-   * <h4>連想配列の要素数取得</h4>
-   * Object.keys未実装のブラウザに、フォールバックして処理を追加しています
-   *
-   * @method Object.keys
-   * @param  {Object} obj
-   * @return {Void}
-   */
-  Object.keys =  Object.keys || function(obj){
-    if(amp.isObject(obj)){
-      var size = 0,
-      prop;
-      for(prop in obj){
-        if(obj.hasOwnProperty(prop) && prop !== 'length'){
-          size += 1;
-        }
-      }
-      obj.length = size;
-    }
-  };
-
-
-
-  /*----------------------------------------------------------------------
-    export
-  ----------------------------------------------------------------------*/
-
-  root.amp = amp;
-
-
-
-}(window));
-
-(function(root){
+(function(root, amp){
 
   // 'use strict';
 
@@ -1586,12 +1957,12 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Ease = Ease;
-  root.amp.ease = new Ease();
+  amp = amp || {};
+  amp.Ease = Ease;
+  amp.ease = new Ease();
 
 
-}(window));
+}(window, amp));
 
 (function(root){
 
@@ -2134,101 +2505,6 @@
   root.amp = root.amp || {};
   root.amp.Storage = Storage;
   root.amp.storage = storage;
-
-
-}(window));
-
-(function(root){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ベースクラス</h4>
-   *
-   * @class CLASS
-   * @constructor
-   */
-  function CLASS(className, version){
-    this.constructor = className;
-    this.VERSION = version;
-  }
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  CLASS.VERSION = '1.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  var p = CLASS.prototype;
-
-
-  /**
-   * <h4>コンストラクタ名</h4>
-   *
-   * @property constructor
-   * @type {String}
-   */
-  p.constructor = 'CLASS';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  p.extend = amp._extend;
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object ' + this.constructor + ']';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.CLASS = CLASS;
-
 
 
 }(window));
