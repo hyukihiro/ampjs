@@ -35,15 +35,16 @@
     AMP基本設定
   ======================================================================*/
 
+  // クラス基本設定
+  var
+  CLASS_NAME = 'AMP',
+  VERSION    = '3.0';
+
+
 
   /*--------------------------------------------------------------------------
     config
   --------------------------------------------------------------------------*/
-
-  // クラス基本設定
-  var NAME = 'AMP',
-  VERSION  = '3.0';
-
 
   // consoleがなければ空の関数を返す
   if(!('console' in root)){
@@ -52,13 +53,6 @@
     };
   }
 
-  /**
-   * <h4>amp</h4>
-   *
-   * @module amp
-   **/
-  root.amp = root.amp || {};
-  root.amp = new AMP(NAME, VERSION);
 
 
   /*--------------------------------------------------------------------------
@@ -71,9 +65,10 @@
    * @class AMP
    * @constructor
    **/
-  function AMP(className, version){
-    this.constructor = className;
-    this.VERSION = version || '1.0';
+  function AMP(className){
+    if(typeof className === 'string'){
+      this._name = className;
+    }
   }
 
 
@@ -95,18 +90,11 @@
   /**
    * <h4>コンストラクタ名</h4>
    *
-   * @static
-   * @property constructor
+   * @private
+   * @property name
    * @type {String}
    */
-  AMP.constructor = AMP.prototype.constructor = NAME;
-
-
-  /**
-   * AMP
-   * @type {Class}
-   */
-  // AMP.prototype.AMP = AMP;
+  AMP.prototype._name = CLASS_NAME;
 
 
 
@@ -115,18 +103,107 @@
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>ClassをExtendします</h4>
+   *
+   * @static
+   * @method extend
+   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Extend Class}
+   */
+  // AMP.extend = amp._extend;
+
+
+  /**
    * <h4>クラス名を返す</h4>
    *
    * @method toString
    * @return {String} クラス名を返す
    */
-  AMP.toString = AMP.prototype.toString = function(){
-    return '[object ' + this.constructor + ']';
+  AMP.prototype.toString = function(){
+    return '[object ' + this._name + ']';
   };
 
 
 
+  /*----------------------------------------------------------------------
+    export
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>amp</h4>
+   *
+   * @module amp
+   **/
+  root.amp = new AMP();
+  root.amp.AMP = AMP;
+
+
+
 }(window));
+
+(function(root, amp){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    配列処理
+  ======================================================================*/
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>each処理を行います</h4>
+   *
+   * @method each
+   * @param  {Object}   obj      イテレーションを行うオブジェクト
+   * @param  {Function} callback イテレーション毎のコールバック関数
+   * @return {Object} 第一引数に渡されたオブジェクト
+   */
+	amp.each = function(obj, callback){
+		var isContinue,
+		i;
+
+		if(amp.isArray(obj)){
+			var l = obj.length;
+			i = 0;
+			for(; i < l; i += 1){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+
+		} else {
+			for(i in obj){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+		}
+
+		return obj;
+	};
+
+
+	/*
+	matchArray(array, args or list){
+	};
+	*/
+
+
+	/*
+	diffArray(array, args or list){
+	}
+	*/
+
+
+}(window, amp || {}));
 
 (function(root, amp){
 
@@ -207,136 +284,85 @@
    * @protected
    * @static
    * @method _extend
-   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
-   * @param {Object} staticProp staticオブジェクト
+   * @param {Class} childClass 子クラス
    * @return {Extend Class}
    */
-  amp._extend = function(protoProp, staticProp){
+  // amp.AMPにextendメソッドをExportします
+  amp._extend = amp.AMP.extend = function(childClass){
     var parent = this,
-    child;
+    parentProto = parent.prototype,
+    publicProp = childClass.prototype,
+    childConstructor = publicProp.constructor,
+    extendClass,
+    Substitute;
 
-    if(amp.isFunction(protoProp)){
-      staticProp = protoProp;
-      protoProp = protoProp.prototype;
-    }
+    // mixin
+    Substitute = function(){
+      this.constructor = childConstructor;
+      // amp.extend(this.constructor, parentProto.constructor, childConstructor);
+    };
+    Substitute.prototype = parentProto;
 
-    if(protoProp && protoProp.constructor) {
-      child = protoProp.constructor;
-    } else {
-      child = function(){ return parent.apply(this, arguments); };
-    }
+    // extendClass
+    extendClass           = childConstructor;
+    extendClass.prototype = amp.extend(true, new Substitute(), publicProp);
+    extendClass.__super__ = parentProto;
 
-    amp.extend(true, child, parent, staticProp);
-
-    var Substitute = function(){ this.constructor = child; };
-    Substitute.prototype = parent.prototype;
-    child.prototype = new Substitute();
-
-    if(protoProp){
-      amp.extend(true, child.prototype, protoProp);
-    }
-
-    child.__super__ = parent.prototype;
-
-    return child;
+    return extendClass;
   };
 
 
   /**
-   * <h4>画面のピクセル比を返す</h4>
-   *
-   * @static
-   * @method pixelRatio
-   * @return {Number}
+   * 後日追加予定
+   * [extendClass description]
+   * @return {[type]} [description]
    */
-  amp.pixelRatio = function(){
-    return root.devicePixelRatio || 1;
+  /*
+  amp.extendClass = function(){
+    var extendClass = function(){};
+    extendClass.extend =
+    var i = 0,
+    l = arguments.length -1;
+
+    for(; i < l; i += 1){
+      arguments[i].extend = amp._extend;
+      extendClass = arguments[i].extend(arguments[i+1]);
+    }
+    return extendClass;
+  };
+  */
+
+
+  /**
+   * <h4>AMPクラスの継承したクラスを生成します</h4>
+   * AMPクラスの継承 + amp._extend機能を実装しています
+   *
+   * @method createClass
+   * @param  {Class} childClass 子クラス
+   * @param  {String} version バージョン
+   * @return {Extend Class}
+   */
+  amp.createClass = function(childClass, version){
+    childClass.prototype._name = amp.getFunctionName(childClass);
+    childClass.VERSION = version || '1.0';
+    childClass.extend = amp._extend;
+    return amp.AMP.extend(childClass);
   };
 
 
   /**
-   * <h4>画像のプリロード</h4>
+   * <h4>ampネームスペースにクラスを追加</h4>
    *
-   * @static
-   * @method preload
-   * @param {String} src 画像パス
-   * @return {Image} 生成した、イメージオブジェクト
+   * @method exportClass
+   * @param  {Class} childClass 子クラス
+   * @param  {String} version バージョン
+   * @return {Export Class}
    */
-  amp.preload = function(src){
-    var img = new Image();
-    img.src = src;
-    return img;
+  amp.exportClass = function(childClass, version){
+    var exportClass = amp.createClass(childClass, version);
+    amp[amp.getFunctionName(exportClass)] = exportClass;
+    return exportClass;
   };
-
-
-  /**
-   * <h4>requestAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、setTimeoutでフォールバックします
-   *
-   * @method requestAnimationFrame
-   * @param {Function} callback コールバック関数
-   * @return {Number}
-   */
-  amp.requestAnimationFrame = (function(){
-    var requestAnimation = (
-      root.requestAnimationFrame ||
-      root.webkitRequestAnimationFrame ||
-      root.mozRequestAnimationFrame ||
-      root.oRequestAnimationFrame ||
-      function(callback){
-        return root.setTimeout(callback, 1000 / 60);
-      }
-    );
-
-    // contextの処理追加予定
-    return function(callback){
-      return requestAnimation(callback);
-    };
-  }());
-
-
-  /**
-   * <h4>cancelAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、clearTimeoutでフォールバックします
-   *
-   * @method cancelAnimationFrame
-   * @param {Number} id タイマーNumber
-   * @return {Number}
-   */
-  amp.cancelAnimationFrame = (function(){
-    var cancelAnimation = (
-      root.cancelAnimationFrame ||
-      root.webkitCancelAnimationFrame ||
-      root.mozCancelAnimationFrame ||
-      root.oCancelAnimationFrame ||
-      function(id){
-        root.clearTimeout(id);
-      }
-    );
-
-    return function(id){
-      return cancelAnimation(id);
-    };
-  }());
-
-
-  /**
-   * <h4>現在の時間を返します</h4>
-   * performance.nowメソッドをExportしています
-   * performanceに対応していないブラウザはgetTimeを返します
-   *
-   * @static
-   * @method now
-   * @return {Number}
-   */
-  amp.now = (function(){
-    var p = root.performance,
-    pNow = p && (p.now || p.mozNow || p.msNow || p.oNow || p.webkitNow);
-
-    return function(){
-      return (pNow && pNow.call(p)) || (new Date().getTime());
-    };
-  }());
 
 
 }(window, amp || {}));
@@ -1274,7 +1300,6 @@
     @method
   ----------------------------------------------------------------------*/
 
-
   /**
    * <h4>hashの取得し、#を省いた文字列を配列に格納して返す</h4>
    *
@@ -1404,8 +1429,10 @@
     } else {
       try {
         return xmlNode.xml;
-      } catch(e){
-        console.log(e);
+      } catch(error){
+        if(amp.isDeveplop){
+          console.log(error);
+        }
       }
     }
   };
@@ -1429,133 +1456,19 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>オブジェクトの拡張</h4>
+   * <h4>関数名を返す</h4>
    *
-   * @method extend
-   * @param {Boolean} isDeep ディープコピーするか 初期値: false 省略可
-   * @param {Object} arguments 拡張するオブジェクト
-   * @return {Object} 拡張したオブジェクトを返します
+   * @method getFunctionName
+   * @param  {Function} fn 名前を取得したい関数
+   * @return {String}
    */
-  amp.extend = function(){
-    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
-
-    length = arguments.length;
-    isDeep = amp.isBoolean(arguments[0]) && arguments[0];
-
-    if(isDeep){
-      count = 2;
-      extendObject = arguments[1];
+  amp.getFunctionName = function(fn){
+    if('name' in fn){
+      return fn.name;
     } else {
-      count = 1;
-      extendObject = arguments[0];
+      return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
     }
-
-    for(; count < length; count += 1){
-      obj = arguments[count];
-
-      for(key in obj){
-        if(obj.hasOwnProperty(key)){
-          data = extendObject[key];
-          copy = obj[key];
-
-          // マージデータが同じなら次のループへ
-          if(extendObject === copy){
-            continue;
-          }
-
-          isArray = amp.isArray(copy);
-
-          if(isDeep && copy && amp.isObject(copy) || isArray){
-            if(isArray){
-              clone = data && amp.isArray(data) ? data : [];
-            } else {
-              clone = data && amp.isObject(data) ? data : {};
-            }
-
-            // ネスト構造を再帰処理
-            extendObject[key] = amp.extend(isDeep, clone, copy);
-
-          } else if (copy !== undefined){
-            extendObject[key] = copy;
-          }
-        }
-      }
-    }
-
-    return extendObject;
   };
-
-
-  /**
-   * <h4>ClassをExtendします</h4>
-   * ClassにextendメソッドをExportして使います
-   *
-   * @protected
-   * @static
-   * @method _extend
-   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  amp._extend = function(protoProp, staticProp){
-    var parent = this,
-    child;
-
-    if(amp.isFunction(protoProp)){
-      staticProp = protoProp;
-      protoProp = protoProp.prototype;
-    }
-
-    if(protoProp && protoProp.constructor) {
-      child = protoProp.constructor;
-    } else {
-      child = function(){ return parent.apply(this, arguments); };
-    }
-
-    amp.extend(true, child, parent, staticProp);
-
-    var Substitute = function(){ this.constructor = child; };
-    Substitute.prototype = parent.prototype;
-    child.prototype = new Substitute();
-
-    if(protoProp){
-      amp.extend(true, child.prototype, protoProp);
-    }
-
-    child.__super__ = parent.prototype;
-
-    return child;
-  };
-
-
-  /**
-   * ここベース
-   *
-   * <h4>クラスのベースを生成します</h4>
-   * AMPクラスの継承 + amp._extend機能を実装しています
-   *
-   * @method createClass
-   * @param  {String} className クラス名
-   * @param  {String} version バージョン
-   * @return {Class}
-   */
-  amp.createClass = (function(){
-      // amp.AMP.extend = amp._extend;
-      // var baseClass = new amp.AMP('className', 'version');
-
-    console.log(new amp.AMP());
-
-  }());
-
-  // function(className, version){
-  //   if(amp.isString(className)){
-  //     var baseClass = new amp.AMP(className, version);
-  //     return baseClass;
-  //   } else {
-  //     throw new TypeError(className + ' is not a String');
-  //   }
-  // };
-
 
 
   /**
@@ -1657,854 +1570,3 @@
 
 
 }(window, amp || {}));
-
-(function(root, amp){
-
-  // 'use strict';
-
-  var Ease, p;
-
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>Easeingを管理します</h4>
-   *
-   * @class amp.Ease
-   * @constructor
-   * @return {Ease}
-   */
-  Ease = function(){};
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Ease.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Ease.prototype;
-
-
-  /**
-   * <h4>CSS3 easeing用ネームスペース</h4>
-   *
-   * @property css
-   * @type {Object}
-   */
-  p.css = {};
-
-
-  /* 1 Sine
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._1_SINE_IN
-   * @type {String}
-   */
-  p.css._1_SINE_IN = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
-
-  /**
-   * @property css._1_SINE_IN
-   * @type {String}
-   */
-  p.css._1_SINE_OUT = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
-
-  /**
-   * @property css._1_SINE_IN_OUT
-   * @type {String}
-   */
-  p.css._1_SINE_IN_OUT = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
-
-
-  /* 2 Quad
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._2_QUAD_IN
-   * @type {String}
-   */
-  p.css._2_QUAD_IN = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
-
-  /**
-   * @property css._2_QUAD_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_OUT = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-
-  /**
-   * @property css._2_QUAD_IN_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_IN_OUT = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
-
-
-  /* 3 Cubic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._3_CUBIC_IN
-   * @type {String}
-   */
-  p.css._3_CUBIC_IN = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
-
-  /**
-   * @property css._3_CUBIC_OUT
-   * @type {String}
-   */
-  p.css._3_CUBIC_OUT = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
-
-  /**
-   * @property css._3_CUBIC_IN_OUT
-   * @type {String}
-   */
-  p.css._3_CUBIC_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
-
-
-  /* 4 Quart
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._4_QUART_IN
-   * @type {String}
-   */
-  p.css._4_QUART_IN = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
-
-  /**
-   * @property css._4_QUART_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_OUT = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
-
-  /**
-   * @property css._4_QUART_IN_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
-
-
-  /* 5 Quint
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._5_QUINT_IN
-   * @type {String}
-   */
-  p.css._5_QUINT_IN = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
-
-  /**
-   * @property css._5_QUINT_OUT
-   * @type {String}
-   */
-  p.css._5_QUINT_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
-
-  /**
-   * @property css._5_QUINT_IN_OUT
-   * @type {String}
-   */
-  p.css._5_QUINT_IN_OUT = 'cubic-bezier(0.86, 0, 0.07, 1)';
-
-
-  /* 6 Expo
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._6_EXPO_IN
-   * @type {String}
-   */
-  p.css._6_EXPO_IN = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
-
-  /**
-   * @property css._6_EXPO_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_OUT = 'cubic-bezier(0.19, 1, 0.22, 1)';
-
-  /**
-   * @property css._6_EXPO_IN_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_IN_OUT = 'cubic-bezier(1, 0, 0, 1)';
-
-
-  /* 7 Cric
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._7_CIRC_IN
-   * @type {String}
-   */
-  p.css._7_CIRC_IN = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
-
-  /**
-   * @property css._7_CIRC_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_OUT = 'cubic-bezier(0.075, 0.82, 0.165, 1);';
-
-  /**
-   * @property css._7_CIRC_IN_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_IN_OUT = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
-
-
-  /* 7 Back
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BACK_IN
-   * @type {String}
-   */
-  p.css._BACK_IN = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
-
-  /**
-   * @property css._BACK_OUT
-   * @type {String}
-   */
-  p.css._BACK_OUT = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-
-  /**
-   * @property css._BACK_IN_OUT
-   * @type {String}
-   */
-  p.css._BACK_IN_OUT = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-
-  /* Elastic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._ELASTIC_IN
-   * @type {String}
-   */
-  p.css._ELASTIC_IN = null;
-
-  /**
-   * @property css._ELASTIC_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_OUT = null;
-
-  /**
-   * @property css._ELASTIC_IN_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_IN_OUT = null;
-
-
-  /* Bounce
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BOUNCE_IN
-   * @type {String}
-   */
-  p.css._BOUNCE_IN = null;
-
-  /**
-   * @property css._BOUNCE_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_OUT = null;
-
-  /**
-   * @property css._BOUNCE_IN_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_IN_OUT = null;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  Ease.extend = amp._extend;
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Ease]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  amp = amp || {};
-  amp.Ease = Ease;
-  amp.ease = new Ease();
-
-
-}(window, amp));
-
-(function(root){
-
-  // 'use strict';
-
-  var Mediator, mediator, p;
-
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>イベントを仲介します</h4>
-   *
-   * @class amp.Mediator
-   * @constructor
-   * @return {Mediator}
-   */
-  Mediator = function(){};
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>イベントを仲介します</h4>
-   * Mediatorショートハンド
-   *
-   * @static
-   * @method mediator
-   * @return {Mediator}
-   */
-  mediator = function(){
-    return new Mediator();
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Mediator.VERSION = '2.3';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Mediator.prototype;
-
-
-  /**
-   * <h4>イベントハンドラーを連想配列で格納します</h4>
-   *
-   * @private
-   * @property _handlers
-   * @type {Object}
-   */
-  p._handlers = {};
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  Mediator.extend = amp._extend;
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @param  {String} event イベント名
-   * @param  {Function} callback コールバック
-   * @param  {Object} context コンテキスト固定
-   * @return {Mediator}
-   */
-  p.on = function(event, callback, context){
-    this._addEvent(event, callback, context);
-    return this;
-  };
-
-
-  /**
-   * <h4>1度だけ実行するイベント登録</h4>
-   *
-   * @method one
-   * @param  {String} event イベント名
-   * @param  {Function} callback コールバック
-   * @param  {Object} context コンテキスト固定
-   * @return {Mediator}
-   */
-  p.one = function(event, callback, context){
-    var self = this;
-
-    /* underscore ver
-    var once = _.once(function(){
-      self.off(event);
-      callback.apply(self, arguments);
-    });
-    self.on(event, once, context);
-    */
-
-    self.on(event, function(){
-      self.off(event);
-      callback.apply(self, arguments);
-    }, context);
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @param  {String} event イベント名
-   * @return {Mediator}
-   */
-  p.off = function(event){
-    this._removeEvent(event);
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント追加</h4>
-   *
-   * @private
-   * @method _addEvent
-   * @param {String} event イベント名
-   * @param {Function} callback コールバック関数
-   * @param {Object} context コンテキスト
-   * @return {Void}
-   */
-  p._addEvent = function(event, callback, context){
-    var events = event.split(' '),
-    i = 0,
-    l = events.length;
-
-    for(; i < l; i += 1){
-      var eventObj = this._getEventNameMap(events[i]);
-
-      this._handlers[eventObj.name] = this._handlers[eventObj.name] || [];
-      this._handlers[eventObj.name].push({
-        attr    : eventObj.attr,
-        callback: callback,
-        context : context
-      });
-    }
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @private
-   * @method _addEvent
-   * @param {String} event イベント名 省略時、全てのイベント削除
-   * @return {Void}
-   */
-  p._removeEvent = function(event){
-    var events = event ? event.split(' ') : [],
-    i = 0,
-    l = events.length;
-
-    for(; i < l; i += 1){
-      var eventObj = this._getEventNameMap(events[i]);
-
-      if(eventObj && eventObj.attr && this._handlers[eventObj.name]){
-        var handlers = this._handlers[eventObj.name],
-        ary = [],
-        j = 0,
-        k = handlers.length;
-
-        for(; j < k; j += 1){
-          if(handlers[j].attr === eventObj.attr){
-            handlers[j].attr = null;
-            continue;
-          } else {
-            ary.push(handlers[j]);
-          }
-        }
-
-        this._handlers[eventObj.name] = ary;
-
-      } else if(eventObj){
-        this._handlers[eventObj.name] = null;
-      } else {
-        this._handlers = {};
-      }
-    }
-  };
-
-
-  /**
-   * <h4>イベント名、イベント属性を連想配列にして返す</h4>
-   *
-   * @private
-   * @method _getEventNameMap
-   * @param  {String} event イベント名
-   * @return {Object}
-   */
-  p._getEventNameMap = function(event){
-    var num = event.indexOf('.'),
-    val;
-
-    if(num !== -1){
-      val = event.substr(num);
-      event = event.substr(0, num);
-    }
-
-    return {
-      name: event,
-      attr : val
-    };
-  };
-
-
-  /**
-   * <h4>イベントが登録されているか</h4>
-   *
-   * @method hasEvent
-   * @param  {String} event イベント名
-   * @return {Boolean}
-   */
-  p.hasEvent = function(event){
-    var handlers,
-    events = this._getEventNameMap(event),
-    flag = false;
-
-    handlers = this._handlers[events.name];
-
-    if(handlers){
-      if(events.attr){
-        var i = 0,
-        l = handlers.length;
-
-        for(; i < l; i += 1){
-          if(handlers[i].attr === events.attr){
-            flag = true;
-            break;
-          }
-        }
-
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  };
-
-
-  /**
-   * <h4>イベント発行</h4>
-   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
-   *
-   * @method trigger
-   * @param  {String} event イベント名
-   * @return {Mediator}
-   */
-  p.trigger = function(event){
-    var events = this._getEventNameMap(event),
-    handlers = this._handlers[events.name];
-
-    if(handlers){
-      var i = 0,
-      l = handlers.length;
-
-      for(; i < l; i += 1){
-        if(!events.attr || handlers[i].attr === events.attr){
-          handlers[i].callback.apply(handlers[i].context, [].slice.apply(arguments).slice(1));
-        }
-      }
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Mediator]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.Mediator = Mediator;
-  root.amp.mediator = mediator;
-
-
-}(window));
-
-(function(root){
-
-  // 'use strict';
-
-  var Storage, storage, p;
-
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ストレージ管理</h4>
-   * Storageショートハンド
-   *
-   * @class amp.Storage
-   * @constructor
-   * @method storage
-   * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'
-   * @return {Storage}
-   */
-  Storage = function(storageType){
-    if(amp.hasStorage()){
-      if(storageType === 'localStorage'){
-        this.type     = 'localStorage';
-        this._storage = localStorage;
-
-      } else {
-        this.type     = 'sessionStorage';
-        this._storage = sessionStorage;
-      }
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ストレージ管理</h4>
-   * Storageショートハンド
-   *
-   * @static
-   * @method storage
-   * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'
-   * @return {Storage}
-   */
-  storage = function(storageType){
-    return new Storage(storageType);
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Storage.VERSION = '1.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Storage.prototype;
-
-
-  /**
-   * <h4>ストレージタイプ</h4>
-   *
-   * @property type
-   * @type {String}
-   */
-  p.type = 'sessionStorage';
-
-
-  /**
-   * <h4>ストレージを保管</h4>
-   *
-   * @private
-   * @property _storage
-   * @type {Object}
-   */
-  p._storage = null;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>値のセット</h4>
-   *
-   * @method setItem
-   * @param {String | Object} key セットするキー オブジェクトを渡すと、一括で値をセットします
-   * @param {Any} val セットする値
-   * @return {Storage}
-   */
-  p.setItem = function(key, val){
-    if(this._storage){
-
-      if(amp.isObject(key)){
-        var k;
-        for(k in key){
-          this._storage.setItem(k, key[k]);
-        }
-      } else {
-        this._storage.setItem(key, val);
-      }
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>アイテム、ストレージデータの削除</h4>
-   *
-   * @method removeItem
-   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します ※可変長引数可
-   * @return {Storage}
-   */
-  p.removeItem = function(key){
-    if(this._storage){
-      if(key === undefined){
-        this._storage.clear();
-      } else {
-        var i = 0, l = arguments.length;
-        for(; i < l; i += 1){
-          this._storage.removeItem(arguments[i]);
-        }
-      }
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>レングスを返す</h4>
-   *
-   * @method getLength
-   * @return {Number}
-   */
-  p.getLength = function(){
-    return this._storage && this._storage.length;
-  };
-
-
-  /**
-   * <h4>アイテムの取得</h4>
-   *
-   * @method getItem
-   * @param  {String} key 取得するキー 省略時は、ストレージオブジェクトを返す
-   * @return {Any}
-   */
-  p.getItem = function(key){
-    if(this._storage){
-      if(key === undefined){
-        return this._storage.length ? this._storage : undefined;
-      } else {
-        return this._storage.getItem(key);
-      }
-    }
-  };
-
-
-  /**
-   * <h4>アイテムがあるか判定</h4>
-   *
-   * @method hasItem
-   * @param  {String}  key 判定するキー
-   * @return {Boolean}
-   */
-  p.hasItem = function(key){
-    if(this._storage){
-      return this._storage.getItem(key) !== null;
-    }
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Storage]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  root.amp = root.amp || {};
-  root.amp.Storage = Storage;
-  root.amp.storage = storage;
-
-
-}(window));

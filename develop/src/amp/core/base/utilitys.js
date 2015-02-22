@@ -13,133 +13,19 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>オブジェクトの拡張</h4>
+   * <h4>関数名を返す</h4>
    *
-   * @method extend
-   * @param {Boolean} isDeep ディープコピーするか 初期値: false 省略可
-   * @param {Object} arguments 拡張するオブジェクト
-   * @return {Object} 拡張したオブジェクトを返します
+   * @method getFunctionName
+   * @param  {Function} fn 名前を取得したい関数
+   * @return {String}
    */
-  amp.extend = function(){
-    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
-
-    length = arguments.length;
-    isDeep = amp.isBoolean(arguments[0]) && arguments[0];
-
-    if(isDeep){
-      count = 2;
-      extendObject = arguments[1];
+  amp.getFunctionName = function(fn){
+    if('name' in fn){
+      return fn.name;
     } else {
-      count = 1;
-      extendObject = arguments[0];
+      return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
     }
-
-    for(; count < length; count += 1){
-      obj = arguments[count];
-
-      for(key in obj){
-        if(obj.hasOwnProperty(key)){
-          data = extendObject[key];
-          copy = obj[key];
-
-          // マージデータが同じなら次のループへ
-          if(extendObject === copy){
-            continue;
-          }
-
-          isArray = amp.isArray(copy);
-
-          if(isDeep && copy && amp.isObject(copy) || isArray){
-            if(isArray){
-              clone = data && amp.isArray(data) ? data : [];
-            } else {
-              clone = data && amp.isObject(data) ? data : {};
-            }
-
-            // ネスト構造を再帰処理
-            extendObject[key] = amp.extend(isDeep, clone, copy);
-
-          } else if (copy !== undefined){
-            extendObject[key] = copy;
-          }
-        }
-      }
-    }
-
-    return extendObject;
   };
-
-
-  /**
-   * <h4>ClassをExtendします</h4>
-   * ClassにextendメソッドをExportして使います
-   *
-   * @protected
-   * @static
-   * @method _extend
-   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  amp._extend = function(protoProp, staticProp){
-    var parent = this,
-    child;
-
-    if(amp.isFunction(protoProp)){
-      staticProp = protoProp;
-      protoProp = protoProp.prototype;
-    }
-
-    if(protoProp && protoProp.constructor) {
-      child = protoProp.constructor;
-    } else {
-      child = function(){ return parent.apply(this, arguments); };
-    }
-
-    amp.extend(true, child, parent, staticProp);
-
-    var Substitute = function(){ this.constructor = child; };
-    Substitute.prototype = parent.prototype;
-    child.prototype = new Substitute();
-
-    if(protoProp){
-      amp.extend(true, child.prototype, protoProp);
-    }
-
-    child.__super__ = parent.prototype;
-
-    return child;
-  };
-
-
-  /**
-   * ここベース
-   *
-   * <h4>クラスのベースを生成します</h4>
-   * AMPクラスの継承 + amp._extend機能を実装しています
-   *
-   * @method createClass
-   * @param  {String} className クラス名
-   * @param  {String} version バージョン
-   * @return {Class}
-   */
-  amp.createClass = (function(){
-      // amp.AMP.extend = amp._extend;
-      // var baseClass = new amp.AMP('className', 'version');
-
-    console.log(new amp.AMP());
-
-  }());
-
-  // function(className, version){
-  //   if(amp.isString(className)){
-  //     var baseClass = new amp.AMP(className, version);
-  //     return baseClass;
-  //   } else {
-  //     throw new TypeError(className + ' is not a String');
-  //   }
-  // };
-
 
 
   /**

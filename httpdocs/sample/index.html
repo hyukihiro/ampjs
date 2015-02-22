@@ -27,13 +27,24 @@
 
 <script>
 window.onload = function(){
-	// var Test = amp.createClass('Test');
 
+	var hoge = {
+		hoge: 0,
+		hogehoge: 1
+	};
 
-
-	$('img').eq(0).on('flickside', function(e){
-		console.log(e);
+	amp.each(hoge, function(item, hoge){
+		if(hoge === 'hogehoge'){
+			return false;
+		}
+		console.log(item);
 	});
+
+
+	// $('img').eq(0).on('flickside', function(e){
+	// 	console.log(e);
+	// });
+
 
 
 	// console.log(TypeError);

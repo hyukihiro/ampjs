@@ -82,8 +82,10 @@
     } else {
       try {
         return xmlNode.xml;
-      } catch(e){
-        console.log(e);
+      } catch(error){
+        if(amp.isDeveplop){
+          console.log(error);
+        }
       }
     }
   };

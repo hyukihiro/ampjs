@@ -7,15 +7,16 @@
     AMP基本設定
   ======================================================================*/
 
+  // クラス基本設定
+  var
+  CLASS_NAME = 'AMP',
+  VERSION    = '3.0';
+
+
 
   /*--------------------------------------------------------------------------
     config
   --------------------------------------------------------------------------*/
-
-  // クラス基本設定
-  var NAME = 'AMP',
-  VERSION  = '3.0';
-
 
   // consoleがなければ空の関数を返す
   if(!('console' in root)){
@@ -24,13 +25,6 @@
     };
   }
 
-  /**
-   * <h4>amp</h4>
-   *
-   * @module amp
-   **/
-  root.amp = root.amp || {};
-  root.amp = new AMP(NAME, VERSION);
 
 
   /*--------------------------------------------------------------------------
@@ -43,9 +37,10 @@
    * @class AMP
    * @constructor
    **/
-  function AMP(className, version){
-    this.constructor = className;
-    this.VERSION = version || '1.0';
+  function AMP(className){
+    if(typeof className === 'string'){
+      this._name = className;
+    }
   }
 
 
@@ -67,18 +62,11 @@
   /**
    * <h4>コンストラクタ名</h4>
    *
-   * @static
-   * @property constructor
+   * @private
+   * @property name
    * @type {String}
    */
-  AMP.constructor = AMP.prototype.constructor = NAME;
-
-
-  /**
-   * AMP
-   * @type {Class}
-   */
-  // AMP.prototype.AMP = AMP;
+  AMP.prototype._name = CLASS_NAME;
 
 
 
@@ -87,14 +75,40 @@
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>ClassをExtendします</h4>
+   *
+   * @static
+   * @method extend
+   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
+   * @param {Object} staticProp staticオブジェクト
+   * @return {Extend Class}
+   */
+  // AMP.extend = amp._extend;
+
+
+  /**
    * <h4>クラス名を返す</h4>
    *
    * @method toString
    * @return {String} クラス名を返す
    */
-  AMP.toString = AMP.prototype.toString = function(){
-    return '[object ' + this.constructor + ']';
+  AMP.prototype.toString = function(){
+    return '[object ' + this._name + ']';
   };
+
+
+
+  /*----------------------------------------------------------------------
+    export
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>amp</h4>
+   *
+   * @module amp
+   **/
+  root.amp = new AMP();
+  root.amp.AMP = AMP;
 
 
 
