@@ -70,19 +70,19 @@
    * @return {Storage}
    */
   p.setItem = function(key, val){
-    if(this._storage){
+    var self = this;
 
+    if(self._storage){
       if(amp.isObject(key)){
-        var k;
-        for(k in key){
-          this._storage.setItem(k, key[k]);
-        }
+        amp.each(key, function(item, index){
+          self._storage.setItem(index, item);
+        });
       } else {
-        this._storage.setItem(key, val);
+        self._storage.setItem(key, val);
       }
     }
 
-    return this;
+    return self;
   };
 
 
@@ -94,14 +94,16 @@
    * @return {Storage}
    */
   p.removeItem = function(key){
+    var self = this;
+
     if(this._storage){
-      if(key === undefined){
+      if(amp.isUndefined(key)){
         this._storage.clear();
+
       } else {
-        var i = 0, l = arguments.length;
-        for(; i < l; i += 1){
-          this._storage.removeItem(arguments[i]);
-        }
+        amp.each(arguments, function(item){
+          self._storage.removeItem(item);
+        });
       }
     }
 
@@ -129,8 +131,10 @@
    */
   p.getItem = function(key){
     if(this._storage){
-      if(key === undefined){
-        return this._storage.length ? this._storage : undefined;
+      if(amp.isUndefined(key)){
+        if(this._storage.length){
+          return this._storage;
+        }
       } else {
         return this._storage.getItem(key);
       }

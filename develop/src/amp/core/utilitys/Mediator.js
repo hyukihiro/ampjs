@@ -66,14 +66,6 @@
   p.one = function(event, callback, context){
     var self = this;
 
-    /* underscore ver
-    var once = _.once(function(){
-      self.off(event);
-      callback.apply(self, arguments);
-    });
-    self.on(event, once, context);
-    */
-
     self.on(event, function(){
       self.off(event);
       callback.apply(self, arguments);
@@ -107,20 +99,18 @@
    * @return {Void}
    */
   p._addEvent = function(event, callback, context){
-    var events = event.split(' '),
-    i = 0,
-    l = events.length;
+    var self = this,
+    events = event.split(' ');
 
-    for(; i < l; i += 1){
-      var eventObj = this._getEventNameMap(events[i]);
-
-      this._handlers[eventObj.name] = this._handlers[eventObj.name] || [];
-      this._handlers[eventObj.name].push({
+    amp.each(events, function(item){
+      var eventObj = self._getEventNameMap(item);
+      self._handlers[eventObj.name] = self._handlers[eventObj.name] || [];
+      self._handlers[eventObj.name].push({
         attr    : eventObj.attr,
         callback: callback,
         context : context
       });
-    }
+    });
   };
 
 
@@ -133,36 +123,34 @@
    * @return {Void}
    */
   p._removeEvent = function(event){
-    var events = event ? event.split(' ') : [],
-    i = 0,
-    l = events.length;
+    var self = this,
+    events = event ? event.split(' ') : [];
 
-    for(; i < l; i += 1){
-      var eventObj = this._getEventNameMap(events[i]);
+    amp.each(events, function(event){
+      var eventObj = self._getEventNameMap(event);
 
-      if(eventObj && eventObj.attr && this._handlers[eventObj.name]){
-        var handlers = this._handlers[eventObj.name],
-        ary = [],
-        j = 0,
-        k = handlers.length;
+      if(eventObj && eventObj.attr && self._handlers[eventObj.name]){
+        var handlers = self._handlers[eventObj.name],
+        ary = [];
 
-        for(; j < k; j += 1){
-          if(handlers[j].attr === eventObj.attr){
-            handlers[j].attr = null;
-            continue;
+        amp.each(handlers, function(handler){
+          if(handler.attr === eventObj.attr){
+            handler.attr = null;
+            return true;
           } else {
-            ary.push(handlers[j]);
+            ary.push(handler);
           }
-        }
+        });
 
-        this._handlers[eventObj.name] = ary;
+        self._handlers[eventObj.name] = ary;
 
       } else if(eventObj){
-        this._handlers[eventObj.name] = null;
+        self._handlers[eventObj.name] = null;
       } else {
-        this._handlers = {};
+        self._handlers = {};
       }
-    }
+    });
+
   };
 
 
@@ -185,7 +173,7 @@
 
     return {
       name: event,
-      attr : val
+      attr: val
     };
   };
 
@@ -206,16 +194,12 @@
 
     if(handlers){
       if(events.attr){
-        var i = 0,
-        l = handlers.length;
-
-        for(; i < l; i += 1){
-          if(handlers[i].attr === events.attr){
+        amp.each(handlers, function(handler){
+          if(handler.attr === events.attr){
             flag = true;
-            break;
+            return false;
           }
-        }
-
+        });
       } else {
         flag = true;
       }
@@ -234,21 +218,19 @@
    * @return {Mediator}
    */
   p.trigger = function(event){
-    var events = this._getEventNameMap(event),
+    var self = this,
+    events = this._getEventNameMap(event),
     handlers = this._handlers[events.name];
 
     if(handlers){
-      var i = 0,
-      l = handlers.length;
-
-      for(; i < l; i += 1){
-        if(!events.attr || handlers[i].attr === events.attr){
-          handlers[i].callback.apply(handlers[i].context, [].slice.apply(arguments).slice(1));
+      amp.each(handlers, function(handler){
+        if(!events.attr || handler.attr === events.attr){
+          handler.callback.apply(handler.context, [].slice.apply(arguments).slice(1));
         }
-      }
+      });
     }
 
-    return this;
+    return self;
   };
 
 

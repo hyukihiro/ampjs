@@ -188,7 +188,7 @@
    *
    * @method isBreakNumber
    * @param  {Number} num 判定したい数値
-   * @param  {Number} num 割る数値
+   * @param  {Number} breakNun 判定したい数値を割る数値
    * @return {Boolean}
    */
   amp.isBreakNumber = function(num, breakNun) {
