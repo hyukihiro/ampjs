@@ -120,6 +120,82 @@
   };
 
 
+  /**
+   * <h4>正規表現判定</h4>
+   *
+   * @method isRegexp
+   * @param  {Object} obj 判定したいオブジェクト
+   * @return {Boolean}
+   */
+  amp.isRegexp = function(obj) {
+    return toString.call(obj) === '[object RegExp]';
+  };
+
+
+  /**
+   * <h4>undefined判定</h4>
+   *
+   * @method isUndefined
+   * @param  {Object} obj 判定したいオブジェクト
+   * @return {Boolean}
+   */
+  amp.isUndefined = function(obj){
+    return obj === void 0;
+  };
+
+
+  /**
+   * <h4>null判定</h4>
+   *
+   * @method isNull
+   * @param  {Object} obj 判定したいオブジェクト
+   * @return {Boolean}
+   */
+  amp.isNull = function(obj) {
+    return obj === null || toString.call(obj) === '[object Null]';
+  };
+
+
+  /* Number
+  -----------------------------------------------------------------*/
+
+  /**
+   * <h4>ポジティブ値判定</h4>
+   *
+   * @method isPositive
+   * @param  {Number} num 判定したい数値
+   * @return {Boolean}
+   */
+  amp.isPositive = function(num){
+    return amp.isNumber(num) && num > 0;
+  };
+
+
+  /**
+   * <h4>ネガティブ値判定</h4>
+   *
+   * @method isPositive
+   * @param  {Number} num 判定したい数値
+   * @return {Boolean}
+   */
+  amp.isNegative = function(num){
+    return amp.isNumber(num) && num < 0;
+  };
+
+
+  /**
+   * <h4>割りきれるか判定</h4>
+   *
+   * @method isBreakNumber
+   * @param  {Number} num 判定したい数値
+   * @param  {Number} num 割る数値
+   * @return {Boolean}
+   */
+  amp.isBreakNumber = function(num, breakNun) {
+    return amp.isNumber(num) && num % breakNun === 0;
+  };
+
+
   /* OS
   -----------------------------------------------------------------*/
 
