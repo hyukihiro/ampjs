@@ -1,9 +1,6 @@
-(function(root){
+(function(root, amp){
 
   // 'use strict';
-
-  var Storage, storage, p;
-
 
 
   /*----------------------------------------------------------------------
@@ -12,17 +9,14 @@
 
   /**
    * <h4>ストレージ管理</h4>
-   * Storageショートハンド
    *
-   * @class amp.Storage
+   * @class Storage
    * @constructor
-   * @method storage
-   * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'
-   * @return {Storage}
+   * @param {Boolean} isLocalStorage ローカルストレージを使用するか？
    */
-  Storage = function(storageType){
+  function Storage(isLocalStorage){
     if(amp.hasStorage()){
-      if(storageType === 'localStorage'){
+      if(isLocalStorage){
         this.type     = 'localStorage';
         this._storage = localStorage;
 
@@ -31,26 +25,10 @@
         this._storage = sessionStorage;
       }
     }
-  };
+  }
 
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ストレージ管理</h4>
-   * Storageショートハンド
-   *
-   * @static
-   * @method storage
-   * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'
-   * @return {Storage}
-   */
-  storage = function(storageType){
-    return new Storage(storageType);
-  };
+  // prototype
+  var p = Storage.prototype;
 
 
 
@@ -59,27 +37,9 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Storage.VERSION = '1.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Storage.prototype;
-
-
-  /**
    * <h4>ストレージタイプ</h4>
    *
+   * @default 'sessionStorage'
    * @property type
    * @type {String}
    */
@@ -192,25 +152,12 @@
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Storage]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Storage = Storage;
-  root.amp.storage = storage;
+  amp.exportClass(Storage, '2.0');
 
 
-}(window));
+}(window, amp || {}));

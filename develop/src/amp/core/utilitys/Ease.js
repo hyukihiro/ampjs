@@ -2,9 +2,6 @@
 
   // 'use strict';
 
-  var Ease, p;
-
-
 
   /*----------------------------------------------------------------------
     @constructor
@@ -13,36 +10,19 @@
   /**
    * <h4>Easeingを管理します</h4>
    *
-   * @class amp.Ease
+   * @class Ease
    * @constructor
-   * @return {Ease}
    */
-  Ease = function(){};
+  function Ease(){}
+
+  // prototype
+  var p = Ease.prototype;
 
 
 
   /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Ease.VERSION = '2.0';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Ease.prototype;
-
 
   /**
    * <h4>CSS3 easeing用ネームスペース</h4>
@@ -265,41 +245,11 @@
 
 
   /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  Ease.extend = amp._extend;
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Ease]';
-  };
-
-
-
-  /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
-  amp = amp || {};
-  amp.Ease = Ease;
+  amp.exportClass(Ease, '3.0');
   amp.ease = new Ease();
 
 
-}(window, amp));
+}(window, amp || {}));

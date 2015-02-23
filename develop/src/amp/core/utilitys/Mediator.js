@@ -1,9 +1,6 @@
-(function(root){
+(function(root, amp){
 
   // 'use strict';
-
-  var Mediator, mediator, p;
-
 
 
   /*----------------------------------------------------------------------
@@ -13,54 +10,19 @@
   /**
    * <h4>イベントを仲介します</h4>
    *
-   * @class amp.Mediator
+   * @class Mediator
    * @constructor
-   * @return {Mediator}
    */
-  Mediator = function(){};
+  function Mediator(){}
 
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>イベントを仲介します</h4>
-   * Mediatorショートハンド
-   *
-   * @static
-   * @method mediator
-   * @return {Mediator}
-   */
-  mediator = function(){
-    return new Mediator();
-  };
+  // prototype
+  var p = Mediator.prototype;
 
 
 
   /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Mediator.VERSION = '2.3';
-
-
-  /**
-   * <h4>プロトタイプオブジェクト</h4>
-   *
-   * @property p
-   * @type {Object}
-   */
-  p = Mediator.prototype;
-
 
   /**
    * <h4>イベントハンドラーを連想配列で格納します</h4>
@@ -76,19 +38,6 @@
   /*--------------------------------------------------------------------------
     @method
   --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Extend Class}
-   */
-  Mediator.extend = amp._extend;
-
 
   /**
    * <h4>イベント登録</h4>
@@ -303,25 +252,12 @@
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Mediator]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Mediator = Mediator;
-  root.amp.mediator = mediator;
+  amp.exportClass(Mediator, '3.0');
 
 
-}(window));
+}(window, amp || {}));
