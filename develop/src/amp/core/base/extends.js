@@ -82,6 +82,10 @@
    */
   // amp.AMPにextendメソッドをExportします
   amp._extend = amp.AMP.extend = function(childClass){
+    if(amp.isUndefined(childClass)){
+      childClass = function(){};
+    }
+
     var parent = this,
     parentProto = parent.prototype,
     publicProp = childClass.prototype,

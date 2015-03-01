@@ -13,9 +13,9 @@
 <div id="Content" class="cf">
 
 <section class="sec"><div class="sec-inner">
-<img src="/shared/images/btn01.png" width="200" height="70" alt="" />
-<img src="/shared/images/btn02.png" width="200" height="70" alt="" />
-<img src="/shared/images/btn03.png" width="200" height="70" alt="" />
+<a href="amp.jquery.html"><img src="/shared/images/btn01.png" width="400" height="700" alt="" /></a>
+<img src="/shared/images/btn02.png" width="200" height="7000" alt="" />
+<img src="/shared/images/btn03.png" width="200" height="700" alt="" />
 </div><!-- .sec // --></section>
 
 <!-- #Content // --></div>
@@ -27,24 +27,18 @@
 
 <script>
 window.onload = function(){
-	console.log(amp);
 
-	var hoge = {
-		hoge: 0,
-		hogehoge: 1
-	};
+	console.log(amp.Ease.prototype);
 
-	amp.each(hoge, function(item, hoge){
-		if(hoge === 'hogehoge'){
-			return false;
+
+	$('.sec-inner').on('flickcancel', function(e){
+		if(amp.isPC()){
+			console.log(e);
+		} else {
+			alert(0);
 		}
-		console.log(item);
+
 	});
-
-
-	// $('img').eq(0).on('flickside', function(e){
-	// 	console.log(e);
-	// });
 
 
 

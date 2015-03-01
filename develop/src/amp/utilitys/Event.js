@@ -8,15 +8,15 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>イベントを仲介します</h4>
+   * <h4>イベント管理</h4>
    *
-   * @class Mediator
+   * @class Event
    * @constructor
    */
-  function Mediator(){}
+  function Event(){}
 
   // prototype
-  var p = Mediator.prototype;
+  var p = Event.prototype;
 
 
 
@@ -46,7 +46,7 @@
    * @param  {String} event イベント名
    * @param  {Function} callback コールバック
    * @param  {Object} context コンテキスト固定
-   * @return {Mediator}
+   * @return {Event}
    */
   p.on = function(event, callback, context){
     this._addEvent(event, callback, context);
@@ -57,13 +57,13 @@
   /**
    * <h4>1度だけ実行するイベント登録</h4>
    *
-   * @method one
+   * @method onece
    * @param  {String} event イベント名
    * @param  {Function} callback コールバック
    * @param  {Object} context コンテキスト固定
-   * @return {Mediator}
+   * @return {Event}
    */
-  p.one = function(event, callback, context){
+  p.onece = function(event, callback, context){
     var self = this;
 
     self.on(event, function(){
@@ -76,11 +76,12 @@
 
 
   /**
+   * !important 時期バージョンでcallback追加予定
    * <h4>イベント削除</h4>
    *
    * @method off
    * @param  {String} event イベント名
-   * @return {Mediator}
+   * @return {Event}
    */
   p.off = function(event){
     this._removeEvent(event);
@@ -215,7 +216,7 @@
    *
    * @method trigger
    * @param  {String} event イベント名
-   * @return {Mediator}
+   * @return {Event}
    */
   p.trigger = function(event){
     var self = this,
@@ -239,7 +240,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  amp.exportClass(Mediator, '3.0');
+  amp.exportClass(Event, '3.0');
 
 
 }(window, amp || {}));

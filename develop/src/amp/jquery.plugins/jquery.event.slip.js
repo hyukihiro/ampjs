@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 0.1
+	 * version: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
@@ -66,7 +66,7 @@
 				obj.x = x;
 				obj.y = y;
 				obj.type = fix;
-				obj.direction = direction;
+				// obj.direction = direction;
 
 				switch(direction){
 				case 0:

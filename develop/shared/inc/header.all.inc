@@ -6,7 +6,7 @@
 <ul>
 <li><a href="/sample/">amp</a></li>
 <li><a href="/sample/amp.core.Ease.html">amp.Ease</a></li>
-<li><a href="/sample/amp.core.Mediator.html">amp.Mediator</a></li>
+<li><a href="/sample/amp.core.Event.html">amp.Event</a></li>
 <li><a href="/sample/amp.core.Storage.html">amp.Storage</a></li>
 <!-- <li><a href="/sample/amp.core.Iterator.html">amp.Iterator</a></li> -->
 <!-- <li><a href="/sample/amp.core.MotionDelay.html">amp.MotionDelay</a></li> -->

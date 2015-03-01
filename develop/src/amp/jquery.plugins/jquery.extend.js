@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryオブジェクト拡張</h3>
-	 * version: 0.1
+	 * version: 1.0
 	 *
 	 * @class jQuery
 	 */

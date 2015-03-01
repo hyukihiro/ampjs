@@ -4,7 +4,7 @@
 
 
   /*======================================================================
-    ブラウザ機能を判定
+    所持判定
   ======================================================================*/
 
 
@@ -181,6 +181,19 @@
    */
   amp.hasMsPointer = function(){
     return root.navigator.msPointerEnabled > -1;
+  };
+
+
+  /**
+   * <h4>文字列があるか判定</h4>
+   *
+   * @method hasString
+   * @param  {String}  str   対象の文字列
+   * @param  {String}  haStr 検索文字
+   * @return {Boolean}
+   */
+  amp.hasString = function(str, hasStr){
+    return amp.isString(str) && str.indexOf(hasStr) > -1;
   };
 
 

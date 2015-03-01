@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryプロタイプオブジェクト拡張</h3>
-	 * version: 0.2
+	 * version: 2.0
 	 *
 	 * @class jQuery.fn
 	 */
@@ -17,7 +17,6 @@
 	 * @method qCss
 	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
 	 * @param  {String or Function} val プロパティ値かコールバック関数
-	 * @param  {Function} callback コールバック関数
 	 * @return {jQuery}
 	 */
 	/**
@@ -26,7 +25,6 @@
 	 * @method qAttr
 	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
 	 * @param  {String or Function} val プロパティ値かコールバック関数
-	 * @param  {Function} callback コールバック関数
 	 * @return {jQuery}
 	 */
   $.each({
@@ -34,19 +32,10 @@
 		attr: 'qAttr'
 	}, function(orig, fix){
 
-		$.fn[fix] = function(prop, val, callback){
+		$.fn[fix] = function(prop, val){
 			var self = this;
-
-			if($.isFunction(val)){
-				callback = val;
-				val = undefined;
-			}
-
 			return self.queue(function(){
-				self[orig](prop, val).dequeue();
-				if($.isFunction(callback)){
-					callback(self);
-				}
+				return self[orig](prop, val).dequeue();
 			});
 		};
 	});
@@ -58,7 +47,6 @@
 	 * @method qAddClass
 	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
 	 * @param  {String or Function} val プロパティ値かコールバック関数
-	 * @param  {Function} callback コールバック関数
 	 * @return {jQuery}
 	 */
 	/**
@@ -74,13 +62,10 @@
 		removeClass: 'qRemoveClass'
 	}, function(orig, fix){
 
-		$.fn[fix] = function(val, callback){
+		$.fn[fix] = function(val){
 			var self = this;
 			return self.queue(function(){
-				self[orig](val).dequeue();
-				if($.isFunction(callback)){
-					callback(self);
-				}
+				return self[orig](val).dequeue();
 			});
 		};
 	});
@@ -97,7 +82,7 @@
 		var self = this;
 		return self.queue(function(){
 			fn();
-			self.dequeue();
+			return self.dequeue();
 		});
 	};
 

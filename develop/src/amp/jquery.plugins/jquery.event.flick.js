@@ -5,11 +5,10 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 0.1
+	 * version: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
-
 	/**
 	 * <h4>Flickイベントオブジェクト</h4>
 	 *
@@ -25,7 +24,7 @@
 	 * @property VERSION
 	 * @type {String}
 	 */
-	Flick.VERSION = '1.0';
+	Flick.VERSION = '1.1';
 
 
 	/**
@@ -35,19 +34,23 @@
 	 * @type {Object}
 	 */
 	Flick.data = {
+    // isCancel: true
     hit : 50,
-    area: 10,
-    isCancel: true
+    area: 10
 	};
 
 
 	/**
-	 * <h4>タッチイベントが有効か</h4>
+	 * <h4>タッチイベントが有効か判定</h4>
 	 *
 	 * @property isTouch
 	 * @type {Boolean}
 	 */
-	Flick.isTouch = ('ontouchstart' in window);
+	Flick.isTouch = (function(){
+    var div = document.createElement('div');
+    div.setAttribute('ontouchstart', 'return');
+    return typeof div.ontouchstart === 'function';
+  }());
 
 
 	/**
@@ -56,14 +59,17 @@
 	 * @property events
 	 * @type {Object}
 	 */
-	Flick.events = {
-    flick      : 'flick',
-    flickside  : 'flickside',
-    flickupdown: 'flickupdown',
-    flickmove  : 'flickmove',
-    flickmoveX : 'flickmoveX',
-    flickmoveY : 'flickmoveY'
-	};
+	Flick.events = [
+		'flick',
+		'flickX',
+		'flickY',
+		'flickcancel',
+		// 'flickcancelX',
+		// 'flickcancelY',
+		'flickmove',
+		'flickmoveX',
+		'flickmoveY'
+	];
 
 
 	/**
@@ -95,10 +101,9 @@
 	 */
 	Flick.getTeardown = function(type){
 		var attr = '._' + type.toUpperCase();
-
 		return function(){
 			$(this).off('mousedown' + attr + ' touchstart' + attr, Flick[type].handler);
-		}
+		};
 	};
 
 
@@ -111,13 +116,16 @@
 	 */
 	Flick.getFlickHandler = function(type){
 		var attr = '._' + type.toUpperCase(),
-		isSide = (type === 'flick' || type === 'flickside'),
-		isUpdown = (type === 'flick' || type === 'flickupdown');
+		isSide = (type === 'flick' || type === 'flickcancel' || type === 'flickX'),
+		isUpdown = (type === 'flick' || type === 'flickcancel' || type === 'flickY');
+
+		// isType = Flick.getFlickHasMap(type)
 
 		return function($target, startEvent, param){
 			var data = Flick.createEventData(startEvent);
 
-			if(param.isCancel){
+			// if(param.isCancel){
+			if(!Flick.isTouch){
 				startEvent.preventDefault();
 			}
 
@@ -125,16 +133,14 @@
 			$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr)
 			.on('mousemove' + attr + ' touchmove' + attr, function(moveEvent){
 				Flick.setMoveData(moveEvent, data, param);
-
-				if(data.isMoveX && isSide){
-					moveEvent.preventDefault();
-				} else if(data.isMoveY && isUpdown){
+				if((data.isMoveX && isSide) || (data.isMoveY && isUpdown)){
 					moveEvent.preventDefault();
 				}
 			})
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide,
 				isY = data.isMoveY && param.area < Math.abs(data.moveY) && isUpdown;
+
 				if(isX || isY){
 					clickEvent.preventDefault();
 				}
@@ -145,8 +151,11 @@
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide,
 				isY = data.isMoveY && param.area < Math.abs(data.moveY) && isUpdown;
-				if(isX || isY){
-					clickEvent.preventDefault();
+
+				if((isX || isY) && type !== 'flickcancel'){
+					return false;
+				} else if(type === 'flickcancel' && (data.isMoveX || data.isMoveY)){
+					return false;
 				}
 			});
 
@@ -155,20 +164,31 @@
 			.one('mouseup' + attr + ' touchend' + attr, function(){
 				$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 
-				if(isSide && data.isMoveX && param.area < Math.abs(data.moveX)){
-					data.flickEvent.type = type;
-					data.flickEvent.moveX = data.moveX;
-					data.flickEvent.moveY = data.moveY;
-					$target.trigger(data.flickEvent);
+				data.flickEvent.type  = type;
+				data.flickEvent.moveX = data.moveX;
+				data.flickEvent.moveY = data.moveY;
 
+				if(isSide && data.isMoveX && param.area < Math.abs(data.moveX)){
+					if(type !== 'flickcancel'){
+						$target.trigger(data.flickEvent);
+					}
 				} else if(isUpdown && data.isMoveY && param.area < Math.abs(data.moveY)){
-					data.flickEvent.type = type;
-					data.flickEvent.moveX = data.moveX;
-					data.flickEvent.moveY = data.moveY;
+					if(type !== 'flickcancel'){
+						$target.trigger(data.flickEvent);
+					}
+				} else if(type === 'flickcancel' && (data.isMoveX || data.isMoveY)){
 					$target.trigger(data.flickEvent);
 				}
 			});
 		};
+	};
+
+
+	/**
+	 * キャンセル処理追加予定
+	 * [getCancelHandler description]
+	 */
+	Flick.getCancelHandler = function(){
 	};
 
 
@@ -179,12 +199,15 @@
 	 * @return {Void}
 	 */
 	Flick.getMoveHandler = function(type){
-		var attr = '._' + type.toUpperCase();
+		var attr = '._' + type.toUpperCase(),
+		isSide = (type === 'flickmove' || type === 'flickmoveX'),
+		isUpdown = (type === 'flickmove' || type === 'flickmoveY');
 
 		return function($target, startEvent, param){
 			var data = Flick.createEventData(startEvent);
 
-			if(param.isCancel){
+			// if(param.isCancel){
+			if(!Flick.isTouch){
 				startEvent.preventDefault();
 			}
 
@@ -221,8 +244,11 @@
 			// find > a
 			$target.find('a').off('click' + attr)
 			.on('click' + attr, function(clickEvent){
-				if(data.isMoveX && param.area < Math.abs(data.moveX)){
-					clickEvent.preventDefault();
+				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && isSide,
+				isY = data.isMoveY && param.area < Math.abs(data.moveY) && isUpdown;
+
+				if(isX || isY){
+					return false;
 				}
 			});
 
@@ -251,6 +277,33 @@
 			moveY     : 0,
 			startX    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageX : event.pageX,
 			startY    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageY : event.pageY
+		};
+	};
+
+
+	/**
+	 * <h4>イベントフラグの生成</h4>
+	 *
+	 * @method hasEventType
+	 * @param  {String}  type イベントタイプ
+	 * @return {Object}
+	 */
+	Flick.getFlickHasMap = function(type){
+		return {
+			isSide  : (
+				type === 'flick' ||
+				type === 'flickX' ||
+				type === 'flickmove' ||
+				type === 'flickmoveX' ||
+				type === 'flickcancel' ||
+				type === 'flickcancelX'),
+			isUpdown: (
+				type === 'flick' ||
+				type === 'flickY' ||
+				type === 'flickmove' ||
+				type === 'flickmoveX' ||
+				type === 'flickcancel' ||
+				type === 'flickcancelY')
 		};
 	};
 
@@ -287,82 +340,54 @@
 	/*--------------------------------------------------------------------------
 		@flick
 	--------------------------------------------------------------------------*/
-
-	/**
-	 * <h4>フリックイベントオブジェクト</h4>
-	 *
-	 * @event flick
-	 * @type {Object}
-	 */
-	Flick.flick = {};
-
-
-	/**
-	 * <h4>イベント追加</h4>
-	 *
-	 * @method setup
-	 * @return {Void}
-	 */
-	Flick.flick.setup = Flick.getSetup('flick');
+	// addEventType
+	// $.each(Flick.events, function(key){
+	// 	Flick[key] = {
+	// 		setup   : Flick.getSetup(key),
+	// 		teardown: Flick.getTeardown(key),
+	// 		handler : Flick.getFlickHandler(key)
+	// 	}
+	// });
 
 
-	/**
-	 * <h4>イベント削除</h4>
-	 *
-	 * @event teardown
-	 * @return {Void}
-	 */
-	Flick.flick.teardown = Flick.getTeardown('flick');
+	// flick フリックイベントオブジェクトY軸
+	Flick.flick = {
+		setup   : Flick.getSetup('flick'),
+		teardown: Flick.getTeardown('flick'),
+		handler : Flick.getFlickHandler('flick')
+	};
 
+	// flickX フリックイベントオブジェクトX軸
+	Flick.flickX = {
+		setup   : Flick.getSetup('flickX'),
+		teardown: Flick.getTeardown('flickX'),
+		handler : Flick.getFlickHandler('flickX')
+	};
 
-	/**
-	 * <h4>イベントハンドラ</h4>
-	 *
-	 * @method handler
-	 * @return {Void}
-	 */
-	Flick.flick.handler = Flick.getFlickHandler('flick');
+	// 追加予定
+	// flickY フリックイベントオブジェクトY軸
+	// Flick.flickY = {
+	// 	setup   : Flick.getSetup('flickY'),
+	// 	teardown: Flick.getTeardown('flickY'),
+	// 	handler : Flick.getFlickHandler('flickY')
+	// };
 
 
 
 	/*--------------------------------------------------------------------------
-		@flick
+		@flickcancel
 	--------------------------------------------------------------------------*/
 
-	/**
-	 * <h4>フリックイベントオブジェクト</h4>
-	 *
-	 * @event flickside
-	 * @type {Object}
-	 */
-	Flick.flickside = {};
+	// flickcancel フリックキャンセルイベントオブジェクト
+	Flick.flickcancel = {
+    setup   : Flick.getSetup('flickcancel'),
+    teardown: Flick.getTeardown('flickcancel'),
+    handler : Flick.getFlickHandler('flickcancel')
+	};
 
-
-	/**
-	 * <h4>イベント追加</h4>
-	 *
-	 * @method setup
-	 * @return {Void}
-	 */
-	Flick.flickside.setup = Flick.getSetup('flickside');
-
-
-	/**
-	 * <h4>イベント削除</h4>
-	 *
-	 * @event teardown
-	 * @return {Void}
-	 */
-	Flick.flickside.teardown = Flick.getTeardown('flickside');
-
-
-	/**
-	 * <h4>イベントハンドラ</h4>
-	 *
-	 * @method handler
-	 * @return {Void}
-	 */
-	Flick.flickside.handler = Flick.getFlickHandler('flickside');
+	// 追加予定
+	// Flick.flickcancelX = {}
+	// Flick.flickcancelY = {}
 
 
 
@@ -370,120 +395,26 @@
 		@flickmove
 	--------------------------------------------------------------------------*/
 
-	/**
-	 * <h4>フリックムーブイベントオブジェクト</h4>
-	 *
-	 * @event flickmove
-	 * @type {Object}
-	 */
-	Flick.flickmove = {};
+	// flickmove フリックムーブイベントオブジェクト
+	Flick.flickmove = {
+		setup   : Flick.getSetup('flickmove'),
+		teardown: Flick.getTeardown('flickmove'),
+		handler : Flick.getMoveHandler('flickmove')
+	};
 
+	// flickmoveX フリックムーブイベントオブジェクトX軸
+	Flick.flickmoveX = {
+		setup   : Flick.getSetup('flickmoveX'),
+		teardown: Flick.getTeardown('flickmoveX'),
+		handler : Flick.getMoveHandler('flickmoveX')
+	};
 
-	/**
-	 * <h4>イベント追加</h4>
-	 *
-	 * @method setup
-	 * @return {Void}
-	 */
-	Flick.flickmove.setup = Flick.getSetup('flickmove');
-
-
-	/**
-	 * <h4>イベント削除</h4>
-	 *
-	 * @event teardown
-	 * @return {Void}
-	 */
-	Flick.flickmove.teardown = Flick.getTeardown('flickmove');
-
-
-	/**
-	 * <h4>イベントハンドラ</h4>
-	 *
-	 * @method handler
-	 * @return {Void}
-	 */
-	Flick.flickmove.handler = Flick.getMoveHandler('flickmove');
-
-
-
-	/*--------------------------------------------------------------------------
-		@flickmoveX
-	--------------------------------------------------------------------------*/
-	/**
-	 * <h4>フリックムーブイベントオブジェクト</h4>
-	 *
-	 * @event flickmoveX
-	 * @type {Object}
-	 */
-	Flick.flickmoveX = {};
-
-
-	/**
-	 * <h4>イベント追加</h4>
-	 *
-	 * @method setup
-	 * @return {Void}
-	 */
-	Flick.flickmoveX.setup = Flick.getSetup('flickmoveX');
-
-
-	/**
-	 * <h4>イベント削除</h4>
-	 *
-	 * @event teardown
-	 * @return {Void}
-	 */
-	Flick.flickmoveX.teardown = Flick.getTeardown('flickmoveX');
-
-
-	/**
-	 * <h4>イベントハンドラ</h4>
-	 *
-	 * @method handler
-	 * @return {Void}
-	 */
-	Flick.flickmoveX.handler = Flick.getMoveHandler('flickmoveX');
-
-
-
-	/*--------------------------------------------------------------------------
-		@flickmoveY
-	--------------------------------------------------------------------------*/
-	/**
-	 * <h4>フリックムーブイベントオブジェクト</h4>
-	 *
-	 * @event flickmoveY
-	 * @type {Object}
-	 */
-	Flick.flickmoveY = {};
-
-
-	/**
-	 * <h4>イベント追加</h4>
-	 *
-	 * @method setup
-	 * @return {Void}
-	 */
-	Flick.flickmoveY.setup = Flick.getSetup('flickmoveY');
-
-
-	/**
-	 * <h4>イベント削除</h4>
-	 *
-	 * @event teardown
-	 * @return {Void}
-	 */
-	Flick.flickmoveY.teardown = Flick.getTeardown('flickmoveY');
-
-
-	/**
-	 * <h4>イベントハンドラ</h4>
-	 *
-	 * @method handler
-	 * @return {Void}
-	 */
-	Flick.flickmoveY.handler = Flick.getMoveHandler('flickmoveY');
+	// flickmoveY フリックムーブイベントオブジェクトY軸
+	Flick.flickmoveY = {
+    setup   : Flick.getSetup('flickmoveY'),
+    teardown: Flick.getTeardown('flickmoveY'),
+    handler : Flick.getMoveHandler('flickmoveY')
+	};
 
 
 
@@ -493,7 +424,7 @@
 
 	$._Flick = Flick;
 
-	for(var key in Flick.events){
+	$.each(Flick.events, function(index, key){
 		// addEvent
 		$.event.special[key] = Flick[key];
 
@@ -501,7 +432,7 @@
 		$.fn[key] = function(data, fn){
 			return arguments.length > 0 ? this.on(key, null, data, fn) : this.trigger(key);
 		};
-	};
+	});
 
 
 }(jQuery));
