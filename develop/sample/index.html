@@ -1,62 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<!--#include virtual="/shared/inc/head.inc" -->
+<!--#include virtual="/sample/shared/inc/head.inc" -->
 </head>
 
 
 <body>
 <div id="Page">
-<!--#include virtual="/shared/inc/header.all.inc" -->
+<!--#include virtual="/sample/shared/inc/header.all.inc" -->
 
 
 <div id="Content" class="cf">
 
 <section class="sec"><div class="sec-inner">
-<a href="amp.jquery.html"><img src="/shared/images/btn01.png" width="400" height="700" alt="" /></a>
-<img src="/shared/images/btn02.png" width="200" height="7000" alt="" />
-<img src="/shared/images/btn03.png" width="200" height="700" alt="" />
+<a href="amp.jquery.html"><img src="/sample/shared/images/btn01.png" width="400" height="700" alt="" /></a>
+<img src="/sample/shared/images/btn02.png" width="200" height="7000" alt="" />
+<img src="/sample/shared/images/btn03.png" width="200" height="700" alt="" />
 </div><!-- .sec // --></section>
 
 <!-- #Content // --></div>
 <!-- #Page // --></div>
 
 
-<!--#include virtual="/shared/inc/js.all.inc" -->
+<!--#include virtual="/sample/shared/inc/js.all.inc" -->
 
 
 <script>
 window.onload = function(){
 
 
-	function A(){
+	var a = {
+		a: 'a1',
+		b: 'b1',
+		c: {
+			b: 'b1'
+		}
+	}
+	var b = {
+		a: 'a2',
+		c: {
+			c: 'b2'
+		}
+	}
 
-	};
+// console.log(void 0 === true);
+	console.log(AMP.mixin(true, {}, a, b, b));
 
-	A.extend = AMP._extend;
-
-A.prototype.a = 'a';
-
-
-	var C = function(){}
-C.prototype.a = {
-c: 'c'
-};
-
-	var B = A.extend({
-		c: 'c'
-	});
-
-
-	var b = new B;
-
-//	console.log(b);
-//	console.log(B);
-
-
-
-//console.log(B.extend);
-console.log(B.prototype.a);
 
 
 

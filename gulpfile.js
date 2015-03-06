@@ -15,8 +15,10 @@ var PROJECT = 'ampjs';
 var PATH = {
 	proxy   : '/sample/',   // URL
 	develop : 'develop/',  // 開発用
+	amp     : 'develop/src/amp/',  // ライブラリ開発用
+	amp_original: 'src/amp_original/',  // ライブラリオリジナル保管用
 	httpdocs: 'httpdocs/', // 公開用
-	src     : 'src/',      // ライブラリソース用
+	src     : 'src/',      // リリースソース用
 	docs    : 'docs/'      // ドキュメント用
 };
 
@@ -162,6 +164,7 @@ MODULE.gulp.task('default', tasks);
  * cmd : gulp docs
  */
 MODULE.gulp.task('docs', function(){
+	// 後で回収
 	// amp
   MODULE.gulp.src(PATH.develop + 'src/amp/**/*.js')
     .pipe(MODULE.jsDoc())
@@ -315,24 +318,45 @@ MODULE.gulp.task('css', function(){
  * ts: typescriptコンパイル
  */
 MODULE.gulp.task('typescript', function(){
-	MODULE.gulp.src(PATH.develop + '**/*.ts')
+	// amp_original
+	MODULE.gulp.src(PATH.amp + '**/*.ts')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.typescript())
 	.pipe(MODULE.header(LICENSE))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs));
-});
+	.pipe(MODULE.gulp.dest(PATH.amp_original));
 
 
-/**
- * hbs: handlebarsコンパイル
- */
-MODULE.gulp.task('hbs', function(){
-	MODULE.gulp.src(PATH.develop + '**/*.hbs')
+	// amp.core.js
+	MODULE.gulp.src(PATH.amp + 'core/**/*.ts')
 	.pipe(MODULE.plumber())
-	.pipe(MODULE.handlebars())
-  .pipe(MODULE.declare({namespace: 'JST'}))
+	.pipe(MODULE.typescript())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.concat('amp.core.js'))
 	.pipe(MODULE.header(LICENSE))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs));
+	.pipe(MODULE.gulp.dest(PATH.src + '/amp/'))
+	.pipe(MODULE.rename({basename: 'amp.core.min'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENSE))
+	.pipe(MODULE.gulp.dest(PATH.src + '/amp/'))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+
+	// amp.utilitys.js
+	MODULE.gulp.src(PATH.amp + 'utilitys/**/*.ts')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.typescript())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.concat('amp.utilitys.js'))
+	.pipe(MODULE.header(LICENSE))
+	.pipe(MODULE.gulp.dest(PATH.src + '/amp/'))
+	.pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENSE))
+	.pipe(MODULE.gulp.dest(PATH.src + '/amp/'))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+
+
 });
 
 
@@ -340,35 +364,60 @@ MODULE.gulp.task('hbs', function(){
  * js: jsHint & コピー
  */
 MODULE.gulp.task('js', function(){
-	// src
-	MODULE.gulp.src(PATH.src + '*.js')
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/'));
-
-	// src jquery.plugins.js
-	MODULE.gulp.src(PATH.src + 'jquery.plugins/*.js')
-	.pipe(MODULE.concat('jquery.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/'));
-
-	// src createjs
-	MODULE.gulp.src(PATH.src + 'createjs.plugins/*.js')
-	// .pipe(MODULE.concat('createjs.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/createjs.plugins'));
 
 	// common.js
-	MODULE.gulp.src(PATH.develop + 'shared/js/*.js')
+	MODULE.gulp.src(PATH.develop + 'sample/shared/js/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.header(LICENSE))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'shared/js/'));
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'sample/shared/js/'));
 
-	// snippet/*.js
-	// MODULE.gulp.src(PATH.develop + 'src/snippet/*.js')
-	// .pipe(MODULE.plumber())
-	// .pipe(MODULE.jshint())
-	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
-	// .pipe(MODULE.header(LICENSE))
-	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'));
+
+	// libs/utilitys
+	MODULE.gulp.src(PATH.develop + 'src/libs/utilitys/*.js')
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/utilitys/'));
+
+
+	// libs/jquery
+	MODULE.gulp.src(PATH.develop + 'src/libs/jquery/*.js')
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/jquery/'));
+
+	MODULE.gulp.src(PATH.develop + 'src/libs/jquery/plugins/**/*.js')
+	.pipe(MODULE.concat('jquery.plugins.js'))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/jquery/'));
+
+
+	// libs/createjs
+	MODULE.gulp.src(PATH.develop + 'src/libs/createjs/*.js')
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/createjs/'));
+
+	MODULE.gulp.src(PATH.develop + 'src/libs/createjs/plugins/**/*.js')
+	.pipe(MODULE.concat('createjs.plugins.js'))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/createjs/'));
+
+
+	// snippet/.js
+	MODULE.gulp.src(PATH.develop + 'src/snippet/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.header(LICENSE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'))
+	.pipe(MODULE.gulp.dest(PATH.src + 'snippet/'));
+
+
+	// templates/.js
+	MODULE.gulp.src(PATH.develop + 'src/templates/**/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.header(LICENSE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/templates/'))
+	.pipe(MODULE.gulp.dest(PATH.src + 'templates/'));
+
+
+
 
 	// amp.core.js
 	// MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
@@ -383,18 +432,8 @@ MODULE.gulp.task('js', function(){
 	// .pipe(MODULE.header(LICENSE))
 	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
-	// amp.core.js
-	// MODULE.gulp.src(PATH.develop + 'src/amp/core/**/*.js')
-	// .pipe(MODULE.plumber())
-	// .pipe(MODULE.jshint())
-	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
-	// .pipe(MODULE.concat('amp.core.js'))
-	// .pipe(MODULE.header(LICENSE))
-	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	// .pipe(MODULE.rename({basename: 'amp.core.min'}))
-	// .pipe(MODULE.uglify())
-	// .pipe(MODULE.header(LICENSE))
-	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+
+
 
 	// amp.core.js
 	// MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')

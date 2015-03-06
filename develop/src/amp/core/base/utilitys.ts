@@ -22,6 +22,66 @@ module AMP {
 
 
   /**
+   * ミックスイン
+   *
+   * @method mixin
+   * @param {Boolean} isDeep ディープコピーするか 初期値: false 省略可
+   * @param {Object} arguments 拡張するオブジェクト
+   * @return {Object} 拡張したオブジェクトを返します
+   */
+  export var mixin = function (isDeep?: boolean, ...args: Object[]): Object {
+    var
+    baseObj: Object,
+    obj    : Object,
+    copy   : Object,
+    clone  : any,
+    data   : any,
+    key    : string,
+    isArray: boolean;
+
+    isDeep  = (<any>AMP).isBoolean(isDeep) && isDeep;
+    baseObj = args[0];
+
+    var i = 1,
+    l = args.length;
+
+    for(; i < l; i += 1){
+      obj = args[i];
+
+      for (key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          data = baseObj[key];
+          copy = obj[key];
+
+          // マージデータが同じなら次のループへ
+          if (baseObj === copy) {
+            continue;
+          }
+
+          isArray = (<any>AMP).isArray(copy);
+
+          if (isDeep && copy && (<any>AMP).isObject(copy) || isArray) {
+            if (isArray) {
+              clone = data && (<any>AMP).isArray(data) ? data : [];
+            } else {
+              clone = data && (<any>AMP).isObject(data) ? data : {};
+            }
+
+            // ネスト構造を再帰処理
+            baseObj[key] = (<any>AMP).mixin(isDeep, clone, copy);
+
+          } else if (!(<any>AMP).isUndefined(copy)) {
+            baseObj[key] = copy;
+          }
+        }
+      }
+    }
+
+    return baseObj;
+  };
+
+
+  /**
    * 画面のピクセル比を返す
    *
    * @static
