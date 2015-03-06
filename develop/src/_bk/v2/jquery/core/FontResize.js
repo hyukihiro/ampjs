@@ -17,7 +17,8 @@
    * @constructor
    * @return {FontResize}
    */
-  FontResize = function(){};
+  function FontResize(){};
+
 
 
 
@@ -43,8 +44,8 @@
    * @property p
    * @type {Object}
    */
-  p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
-
+  // p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
+  p = FontResize.prototype
 
   /**
    * <h4>フォントサイズ変更時の発行するイベント名</h4>

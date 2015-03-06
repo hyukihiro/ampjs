@@ -1,9 +1,6 @@
-(function(root, $){
+(function(root, $, amp){
 
   // 'use strict';
-
-  var Ease, p;
-
 
 
   /*----------------------------------------------------------------------
@@ -18,17 +15,16 @@
    * @constructor
    * @return {Ease}
    */
-  Ease = amp.Ease.extend();
+  function Ease(){};
+
+  // prototype
+  var p = Ease.prototype;
 
 
 
   /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
-
-  // prototype
-  p = Ease.prototype;
-
 
   /**
    * <h4>jQuery easeing用ネームスペース</h4>
@@ -268,10 +264,10 @@
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
+  // console.log(amp.Ease.extend(Ease));
+  amp.exportClass(amp.Ease.extend(Ease), amp.Ease.VERSION);
 
-  root.amp = root.amp || {};
-  root.amp.Ease = Ease;
-  root.amp.ease = new Ease();
+  amp.ease = new Ease();
 
 
-}(window, jQuery));
+}(window, jQuery, amp || {}));

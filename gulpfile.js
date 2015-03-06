@@ -35,6 +35,7 @@ var MODULE = {
 	jshint       : require('gulp-jshint'),
 	jshintStylish: require('jshint-stylish'),
 	// sass         : require('gulp-ruby-sass'),
+	typescript   : require('gulp-typescript'),
 	uglify       : require('gulp-uglify'),
 	pleeease     : require('gulp-pleeease'),
 	plumber      : require('gulp-plumber'),
@@ -45,7 +46,6 @@ var MODULE = {
 	// path         : require('path'), // for sass-includes
 	// declare      : require('gulp-declare'),  // for handlebars
 	// handlebars   : require('gulp-handlebars'),
-	// ts           : require('gulp-tsc'),
 	// ejs          : require('gulp-ejs'),
 	// minCss       : require('gulp-minify-css'),
 	// rimraf       : require('rimraf') // ファイル削除
@@ -59,7 +59,7 @@ var MODULE = {
 var tasks = (function(){
 	var
 	tasks   = ['watch', 'browserSync', 'imagemin', 'css', 'js', 'copy'],
-	options = ['sass', 'ejs',	'ts', 'handlebars'];
+	options = ['sass', 'ejs',	'typescript', 'handlebars'];
 
 	for(var i = 0; i < options.length; i += 1){
 		if(MODULE[options[i]]){
@@ -117,9 +117,9 @@ var syncFiles = [
 
 
 /**
- * BANNER: jsコピーライトコメント
+ * LICENSE: jsコピーライトコメント
  */
-var BANNER = MODULE.fs.readFileSync('gulp.js.banner.txt', 'utf8');
+var LICENSE = MODULE.fs.readFileSync('LICENSE.txt', 'utf8');
 
 
 /* options
@@ -211,7 +211,7 @@ MODULE.gulp.task('watch', function(){
 	if(MODULE.handlebars) MODULE.gulp.watch(PATH.develop + '**/*.hbs', ['handlebars']);
 
 	// typescript
-	if(MODULE.ts) MODULE.gulp.watch(PATH.develop + '**/*.ts', ['ts']);
+	if(MODULE.typescript) MODULE.gulp.watch(PATH.develop + '**/*.ts', ['typescript']);
 
 	// ejs
 	if(MODULE.ejs){
@@ -314,11 +314,11 @@ MODULE.gulp.task('css', function(){
 /**
  * ts: typescriptコンパイル
  */
-MODULE.gulp.task('ts', function(){
+MODULE.gulp.task('typescript', function(){
 	MODULE.gulp.src(PATH.develop + '**/*.ts')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.typescript())
-	.pipe(MODULE.header(BANNER))
+	.pipe(MODULE.header(LICENSE))
 	.pipe(MODULE.gulp.dest(PATH.httpdocs));
 });
 
@@ -331,7 +331,7 @@ MODULE.gulp.task('hbs', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.handlebars())
   .pipe(MODULE.declare({namespace: 'JST'}))
-	.pipe(MODULE.header(BANNER))
+	.pipe(MODULE.header(LICENSE))
 	.pipe(MODULE.gulp.dest(PATH.httpdocs));
 });
 
@@ -359,122 +359,122 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.header(BANNER))
+	.pipe(MODULE.header(LICENSE))
 	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'shared/js/'));
 
 	// snippet/*.js
-	MODULE.gulp.src(PATH.develop + 'src/snippet/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'));
+	// MODULE.gulp.src(PATH.develop + 'src/snippet/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'));
 
 	// amp.core.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.utilitys.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.utilitys.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp.core.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/core/**/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.core.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.core.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/core/**/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.core.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.core.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp.core.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.utilitys.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.utilitys.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp.jquery.plugins.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/jquery.plugins/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.jquery.plugins.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.jquery.plugins.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/jquery.plugins/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.jquery.plugins.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.jquery.plugins.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp.jquery.js
-	MODULE.gulp.src([
-		PATH.develop + 'src/amp/jquery/core/*.js',
-		PATH.develop + 'src/amp/jquery/utilitys/*.js'
-	])
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.jquery.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.jquery.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src([
+	// 	PATH.develop + 'src/amp/jquery/core/*.js',
+	// 	PATH.develop + 'src/amp/jquery/utilitys/*.js'
+	// ])
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.jquery.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.jquery.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp/jquery.plugins/*.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/jquery/plugins/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/jquery.plugins/'))
-	.pipe(MODULE.rename({extname : '.min.js'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/jquery.plugins/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/jquery/plugins/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/jquery.plugins/'))
+	// .pipe(MODULE.rename({extname : '.min.js'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/jquery.plugins/'));
 
 	// amp.createjs.js
-	MODULE.gulp.src([
-		PATH.develop + 'src/amp/createjs/core/*.js',
-		PATH.develop + 'src/amp/createjs/utilitys/*.js'
-	])
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.createjs.js'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
-	.pipe(MODULE.rename({basename: 'amp.createjs.min'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+	// MODULE.gulp.src([
+	// 	PATH.develop + 'src/amp/createjs/core/*.js',
+	// 	PATH.develop + 'src/amp/createjs/utilitys/*.js'
+	// ])
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.concat('amp.createjs.js'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	// .pipe(MODULE.rename({basename: 'amp.createjs.min'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
 
 	// amp/createjs.plugins/*.js
-	MODULE.gulp.src(PATH.develop + 'src/amp/createjs/plugins/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/createjs.plugins/'))
-	.pipe(MODULE.rename({extname : '.min.js'}))
-	.pipe(MODULE.uglify())
-	.pipe(MODULE.header(BANNER))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/createjs.plugins/'));
+	// MODULE.gulp.src(PATH.develop + 'src/amp/createjs/plugins/*.js')
+	// .pipe(MODULE.plumber())
+	// .pipe(MODULE.jshint())
+	// .pipe(MODULE.jshint.reporter('jshint-stylish'))
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/createjs.plugins/'))
+	// .pipe(MODULE.rename({extname : '.min.js'}))
+	// .pipe(MODULE.uglify())
+	// .pipe(MODULE.header(LICENSE))
+	// .pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/createjs.plugins/'));
 });
