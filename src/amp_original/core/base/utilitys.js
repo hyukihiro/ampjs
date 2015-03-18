@@ -1,5 +1,5 @@
 /**
- * AMP JavaScript Library
+ * AMP.JS JavaScript Library
  *
  * Author: Yoshihito Fujiwara
  * Source: https://bitbucket.org/cutupworks/ampjs

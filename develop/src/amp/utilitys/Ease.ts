@@ -1,3 +1,6 @@
+// <reference path="../amp.ts" />
+
+
 module AMP {
 
   export class Ease extends AMP.Amp {

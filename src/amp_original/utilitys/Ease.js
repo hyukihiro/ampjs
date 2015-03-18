@@ -1,5 +1,5 @@
 /**
- * AMP JavaScript Library
+ * AMP.JS JavaScript Library
  *
  * Author: Yoshihito Fujiwara
  * Source: https://bitbucket.org/cutupworks/ampjs
@@ -27,6 +27,7 @@
  */
 
 
+// <reference path="../amp.ts" />
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
