@@ -2,7 +2,6 @@ YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
         "CLASS",
-        "LiquidSlider",
         "amp",
         "amp.Active",
         "amp.Alphaover",
@@ -10,7 +9,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "amp.Ease",
         "amp.FlatHeight",
         "amp.FontResize",
-        "amp.Layer",
         "amp.Loader",
         "amp.Mediaquery",
         "amp.Mediator",
