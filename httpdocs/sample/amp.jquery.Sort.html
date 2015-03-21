@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--#include virtual="/sample/shared/inc/head.inc" -->
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/sample/shared/inc/header.jquery.inc" -->
+
+
+<div id="Content" class="cf">
+
+<section class="sec"><div class="sec-inner">
+<ul id="sort">
+<li><a href="#all">ALL</a></li>
+<li><a href="#a">A</a></li>
+<li><a href="#b">B</a></li>
+<li><a href="#c">C</a></li>
+</ul>
+
+
+<script id="tmpl" type="text/template">
+<dl>
+{{#article}}
+<dt><span class="date">{{date}}</span><span class="ttl">{{title}}</span></dt>
+<dd>{{text}}</dd>
+{{/article}}
+</dl>
+</script>
+
+</div><!-- .sec // --></section>
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/sample/shared/inc/js.all.inc" -->
+
+
+<script type="text/javascript">
+jQuery(function($){
+
+	var render = new amp.Render($('#tmpl'), {url: 'shared/json/amp.render.json'});
+
+	var Sort = amp.Sort.extend({
+		findItem: function(current){
+	    var self = this,
+	    sort = {};
+
+	    if(current === 'all'){
+	      sort = self.render.data;
+	    } else {
+	      sort['article'] = _.filter(self.render.data['article'], function(list){
+	        return list['type'] === current;
+	      });
+	    }
+
+	    if(!sort['article'].length){
+	    	sort = self.notFound();
+	    }
+
+	    return sort;
+		}
+	});
+
+	var sort = new Sort($('#sort').find('a'), render);
+
+	render.init();
+	sort.init();
+
+});
+
+</script>
+</body>
+</html>
