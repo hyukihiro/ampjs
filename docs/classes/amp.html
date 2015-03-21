@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/amp.FontResize.html">amp.FontResize</a></li>
             
+                <li><a href="../classes/amp.Layer.html">amp.Layer</a></li>
+            
                 <li><a href="../classes/amp.Loader.html">amp.Loader</a></li>
             
                 <li><a href="../classes/amp.Mediaquery.html">amp.Mediaquery</a></li>
@@ -77,15 +79,21 @@
             
                 <li><a href="../classes/amp.Storage.html">amp.Storage</a></li>
             
+                <li><a href="../classes/CLASS.html">CLASS</a></li>
+            
                 <li><a href="../classes/jQuery.html">jQuery</a></li>
             
                 <li><a href="../classes/jQuery.Event.html">jQuery.Event</a></li>
             
                 <li><a href="../classes/jQuery.fn.html">jQuery.fn</a></li>
             
+                <li><a href="../classes/LiquidSlider.html">LiquidSlider</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Flick.html">Flick</a></li>
             
             </ul>
         </div>
@@ -130,10 +138,14 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l6"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:6</code></a>
+            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l6"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:6</code></a>
         </div>
     
 
+    
+        
+            Module: <a href="../modules/Flick.html">Flick</a>
+        
     
 
     
@@ -187,6 +199,13 @@ namespace</p>
 
                                 
                                     <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_cancelAnimationFrame">cancelAnimationFrame</a>
+
                                 
                                 
                             </li>
@@ -724,13 +743,6 @@ namespace</p>
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_requestAnimationFrame">requestAnimationFrame</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_toString">toString</a>
 
                                 
@@ -855,7 +867,7 @@ namespace</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l929"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:929</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l931"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:931</code></a>
         
         </p>
 
@@ -880,13 +892,13 @@ ClassにextendメソッドをExportして使います</p>
                 <li class="param">
                     
                         <code class="param-name">protoProp</code>
-                        <span class="type">Object</span>
+                        <span class="type">Object | Function</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>プロトタイプオブジェクト</p>
+                        <p>プロトタイプオブジェクト、もしくはsubClass</p>
 
                     </div>
 
@@ -965,7 +977,7 @@ ClassにextendメソッドをExportして使います</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1195"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1195</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1209"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1209</code></a>
         
         </p>
 
@@ -984,6 +996,114 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
 
     
 
+    
+
+    
+</div>
+
+                
+                    <div id="method_cancelAnimationFrame" class="method item">
+    <h3 class="name"><code>cancelAnimationFrame</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1164"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1164</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p><h4>cancelAnimationFrameをエクスポートしています</h4>
+対応していないブラウザは、clearTimeoutでフォールバックします</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">id</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>タイマーNumber</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <p>タイマーNumber</p>
+
+                
+            </div>
+        </div>
     
 
     
@@ -1038,7 +1158,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l820"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:820</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l820"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:820</code></a>
         
         </p>
 
@@ -1154,7 +1274,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l839"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:839</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l839"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:839</code></a>
         
         </p>
 
@@ -1266,7 +1386,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l861"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:861</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l861"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:861</code></a>
         
         </p>
 
@@ -1354,7 +1474,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l873"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:873</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l873"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:873</code></a>
         
         </p>
 
@@ -1468,7 +1588,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l959"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:959</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l973"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:973</code></a>
         
         </p>
 
@@ -1540,7 +1660,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l973"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:973</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l987"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:987</code></a>
         
         </p>
 
@@ -1612,7 +1732,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l634"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:634</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l634"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:634</code></a>
         
         </p>
 
@@ -1684,7 +1804,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l721"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:721</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l721"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:721</code></a>
         
         </p>
 
@@ -1756,7 +1876,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l738"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:738</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l738"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:738</code></a>
         
         </p>
 
@@ -1828,7 +1948,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l646"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:646</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l646"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:646</code></a>
         
         </p>
 
@@ -1910,7 +2030,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l985"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:985</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l999"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:999</code></a>
         
         </p>
 
@@ -2006,7 +2126,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l658"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:658</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l658"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:658</code></a>
         
         </p>
 
@@ -2078,7 +2198,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l670"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:670</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l670"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:670</code></a>
         
         </p>
 
@@ -2150,7 +2270,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l685"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:685</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l685"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:685</code></a>
         
         </p>
 
@@ -2222,7 +2342,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l750"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:750</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l750"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:750</code></a>
         
         </p>
 
@@ -2294,7 +2414,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l791"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:791</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l791"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:791</code></a>
         
         </p>
 
@@ -2366,7 +2486,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l762"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:762</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l762"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:762</code></a>
         
         </p>
 
@@ -2438,7 +2558,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l697"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:697</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l697"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:697</code></a>
         
         </p>
 
@@ -2510,7 +2630,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l709"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:709</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l709"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:709</code></a>
         
         </p>
 
@@ -2582,7 +2702,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l779"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:779</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l779"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:779</code></a>
         
         </p>
 
@@ -2664,7 +2784,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l238"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:238</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l238"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:238</code></a>
         
         </p>
 
@@ -2770,7 +2890,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l602"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:602</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l602"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:602</code></a>
         
         </p>
 
@@ -2866,7 +2986,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l389"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:389</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l389"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:389</code></a>
         
         </p>
 
@@ -2938,7 +3058,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l401"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:401</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l401"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:401</code></a>
         
         </p>
 
@@ -3020,7 +3140,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l71"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:71</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l71"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:71</code></a>
         
         </p>
 
@@ -3126,7 +3246,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l84"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:84</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l84"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:84</code></a>
         
         </p>
 
@@ -3244,7 +3364,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l440"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:440</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l440"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:440</code></a>
         
         </p>
 
@@ -3372,7 +3492,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l537"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:537</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l537"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:537</code></a>
         
         </p>
 
@@ -3454,7 +3574,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l258"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:258</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l258"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:258</code></a>
         
         </p>
 
@@ -3550,7 +3670,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l549"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:549</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l549"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:549</code></a>
         
         </p>
 
@@ -3632,7 +3752,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l97"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:97</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l97"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:97</code></a>
         
         </p>
 
@@ -3738,7 +3858,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l484"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:484</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l484"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:484</code></a>
         
         </p>
 
@@ -3850,7 +3970,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l501"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:501</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l501"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:501</code></a>
         
         </p>
 
@@ -3972,7 +4092,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l220"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:220</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l220"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:220</code></a>
         
         </p>
 
@@ -4068,7 +4188,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l365"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:365</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l365"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:365</code></a>
         
         </p>
 
@@ -4140,7 +4260,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l353"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:353</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l353"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:353</code></a>
         
         </p>
 
@@ -4212,7 +4332,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l377"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:377</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l377"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:377</code></a>
         
         </p>
 
@@ -4284,7 +4404,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l207"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:207</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l207"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:207</code></a>
         
         </p>
 
@@ -4368,7 +4488,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l585"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:585</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l585"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:585</code></a>
         
         </p>
 
@@ -4464,7 +4584,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l425"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:425</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l425"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:425</code></a>
         
         </p>
 
@@ -4546,7 +4666,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l110"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:110</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l110"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:110</code></a>
         
         </p>
 
@@ -4652,7 +4772,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l123"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:123</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l123"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:123</code></a>
         
         </p>
 
@@ -4750,7 +4870,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l573"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:573</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l573"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:573</code></a>
         
         </p>
 
@@ -4838,7 +4958,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l153"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:153</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l153"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:153</code></a>
         
         </p>
 
@@ -4951,7 +5071,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l305"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:305</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l305"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:305</code></a>
         
         </p>
 
@@ -5023,7 +5143,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l561"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:561</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l561"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:561</code></a>
         
         </p>
 
@@ -5095,7 +5215,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l317"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:317</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l317"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:317</code></a>
         
         </p>
 
@@ -5167,7 +5287,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l329"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:329</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l329"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:329</code></a>
         
         </p>
 
@@ -5249,7 +5369,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l137"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:137</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l137"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:137</code></a>
         
         </p>
 
@@ -5345,7 +5465,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l341"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:341</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l341"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:341</code></a>
         
         </p>
 
@@ -5417,7 +5537,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l413"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:413</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l413"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:413</code></a>
         
         </p>
 
@@ -5489,7 +5609,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l619"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:619</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l619"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:619</code></a>
         
         </p>
 
@@ -5561,7 +5681,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l183"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:183</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l183"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:183</code></a>
         
         </p>
 
@@ -5633,7 +5753,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l195"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:195</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l195"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:195</code></a>
         
         </p>
 
@@ -5701,7 +5821,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1176"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1176</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1190"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1190</code></a>
         
         </p>
 
@@ -5772,7 +5892,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1215"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1215</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1229"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1229</code></a>
         
         </p>
 
@@ -5879,7 +5999,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1019"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1019</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1033"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1033</code></a>
         
         </p>
 
@@ -5977,7 +6097,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1034"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1034</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1048"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1048</code></a>
         
         </p>
 
@@ -6059,7 +6179,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1060"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1060</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1074"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1074</code></a>
         
         </p>
 
@@ -6163,7 +6283,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1123"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1123</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1137"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1137</code></a>
         
         </p>
 
@@ -6195,114 +6315,6 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
 
                     <div class="param-description">
                         <p>コールバック関数</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                
-                    
-                        <span class="type">Number</span>:
-                    
-                    <p>タイマーNumber</p>
-
-                
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="method_requestAnimationFrame" class="method item">
-    <h3 class="name"><code>requestAnimationFrame</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>id</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1150"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1150</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p><h4>cancelAnimationFrameをエクスポートしています</h4>
-対応していないブラウザは、clearTimeoutでフォールバックします</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">id</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>タイマーNumber</p>
 
                     </div>
 
@@ -6371,7 +6383,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1072"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1072</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1086"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1086</code></a>
         
         </p>
 
@@ -6443,7 +6455,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1084"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1084</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1098"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1098</code></a>
         
         </p>
 
@@ -6527,7 +6539,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l1097"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:1097</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l1111"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:1111</code></a>
         
         </p>
 
@@ -6619,7 +6631,7 @@ Object.keys未実装のブラウザに、フォールバックして処理を追
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l52"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:52</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l52"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:52</code></a>
         
         </p>
 
@@ -6667,7 +6679,7 @@ developモードは、エラー時コンソールログを出力します</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_core_amp.js.html#l42"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\core\amp.js:42</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_core_amp.js.html#l42"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\core\amp.js:42</code></a>
         
         </p>
 

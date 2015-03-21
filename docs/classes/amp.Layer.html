@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>amp.Active</title>
+    <title>amp.Layer</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -130,7 +130,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>amp.Active Class</h1>
+                        <h1>amp.Layer Class</h1>
 <div class="box meta">
     
 
@@ -138,7 +138,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l13"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:13</code></a>
+            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_selector.js.html#l13"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\selector.js:13</code></a>
         </div>
     
 
@@ -154,14 +154,14 @@
 
 
 <div class="box intro">
-    <h4>アクティブ化</h4>
+    <h4>Layeringを管理します</h4>
 </div>
 
 
     <div class="constructor">
         <h2>Constructor</h2>
-        <div id="method_amp.Active" class="method item">
-    <h3 class="name"><code>amp.Active</code></h3>
+        <div id="method_amp.Layer" class="method item">
+    <h3 class="name"><code>amp.Layer</code></h3>
 
     
         <span class="paren">()</span>
@@ -169,7 +169,7 @@
 
     
         <span class="returns-inline">
-            <span class="type">Active</span>
+            <span class="type">Layer</span>
         </span>
     
 
@@ -196,7 +196,7 @@
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l13"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:13</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_selector.js.html#l13"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\selector.js:13</code></a>
         
         </p>
 
@@ -219,7 +219,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">Active</span>:
+                        <span class="type">Layer</span>:
                     
                 
             </div>
@@ -256,8 +256,24 @@
 
                     <ul class="index-list methods">
                         
+                            <li class="index-item method">
+                                <a href="#method_each">each</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item method public">
-                                <a href="#method_active">active</a>
+                                <a href="#method_findId">findId</a>
+
+                                
+                                    <span class="flag static">static</span>
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method public">
+                                <a href="#method_findName">findName</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -266,7 +282,7 @@
                             </li>
                         
                             <li class="index-item method">
-                                <a href="#method_extend">extend</a>
+                                <a href="#method_isDisplayInherit">isDisplayInherit</a>
 
                                 
                                     <span class="flag static">static</span>
@@ -274,9 +290,11 @@
                                 
                             </li>
                         
-                            <li class="index-item method">
-                                <a href="#method_toString">toString</a>
+                            <li class="index-item method public">
+                                <a href="#method_isType">isType</a>
 
+                                
+                                    <span class="flag static">static</span>
                                 
                                 
                             </li>
@@ -293,13 +311,6 @@
                         
                             <li class="index-item property">
                                 <a href="#property_p">p</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_types">types</a>
 
                                 
                                 
@@ -328,8 +339,8 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_active" class="method item public">
-    <h3 class="name"><code>active</code></h3>
+                    <div id="method_each" class="method item">
+    <h3 class="name"><code>each</code></h3>
 
     
         <div class="args">
@@ -337,19 +348,7 @@
             
                 <li class="arg">
                     
-                        <code>$target</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>type</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>options</code>
+                        <code>callback</code>
                     
                 </li>
             
@@ -359,7 +358,117 @@
 
     
         <span class="returns-inline">
-            <span class="type">RolloverInstance</span>
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l226"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:226</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>each処理</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">callback</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>繰り返し毎に関数が呼び出されます</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_findId" class="method item public">
+    <h3 class="name"><code>findId</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>id</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>children</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
         </span>
     
 
@@ -390,7 +499,7 @@
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l75"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:75</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l99"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:99</code></a>
         
         </p>
 
@@ -401,8 +510,7 @@
     </div>
 
     <div class="description">
-        <p>要素のアクティブ化</p>
-
+        <h4>指定id名のオブジェクトを返す</h4>
     </div>
 
     
@@ -413,30 +521,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">$target</code>
-                        <span class="type">JQuery</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>対象の要素</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">type</code>
+                        <code class="param-name">id</code>
                         <span class="type">String</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>アクティブタイプ</p>
+                        <p>検索id名</p>
 
                     </div>
 
@@ -445,14 +537,14 @@
             
                 <li class="param">
                     
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
+                        <code class="param-name">children</code>
+                        <span class="type">Stage | Container</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>アクティブオプション</p>
+                        <p>Stage,Container子要素</p>
 
                     </div>
 
@@ -470,7 +562,7 @@
             <div class="returns-description">
                 
                     
-                        <span class="type">RolloverInstance</span>:
+                        <span class="type">Object</span>:
                     
                 
             </div>
@@ -481,8 +573,8 @@
 </div>
 
                 
-                    <div id="method_extend" class="method item">
-    <h3 class="name"><code>extend</code></h3>
+                    <div id="method_findName" class="method item public">
+    <h3 class="name"><code>findName</code></h3>
 
     
         <div class="args">
@@ -490,13 +582,13 @@
             
                 <li class="arg">
                     
-                        <code>protoProp</code>
+                        <code>name</code>
                     
                 </li>
             
                 <li class="arg">
                     
-                        <code>staticProp</code>
+                        <code>children</code>
                     
                 </li>
             
@@ -506,7 +598,131 @@
 
     
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+        <span class="flag public">public</span>
+    
+
+    
+
+    
+        <span class="flag static">static</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l64"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>指定したnemeプロパティを持つオブジェクトを検索して配列で返します</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">name</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>検索nemeプロパティ値</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">children</code>
+                        <span class="type">Stage | Container</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Stage,Container子要素</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_isDisplayInherit" class="method item">
+    <h3 class="name"><code>isDisplayInherit</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>instance</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
         </span>
     
 
@@ -535,7 +751,7 @@
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l62"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:62</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l180"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:180</code></a>
         
         </p>
 
@@ -546,9 +762,7 @@
     </div>
 
     <div class="description">
-        <p><h4>クラスを拡張します</h4>
-amp._extendをエクスポートしています</p>
-
+        <h4>DisplayObjectを継承しているかチェックします</h4>
     </div>
 
     
@@ -559,30 +773,14 @@ amp._extendをエクスポートしています</p>
             
                 <li class="param">
                     
-                        <code class="param-name">protoProp</code>
+                        <code class="param-name">instance</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>プロトタイプオブジェクト</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">staticProp</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>staticオブジェクト</p>
+                        <p>評価するインスタンスオブジェクト</p>
 
                     </div>
 
@@ -600,7 +798,7 @@ amp._extendをエクスポートしています</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">Rollover</span>:
+                        <span class="type">Boolean</span>:
                     
                 
             </div>
@@ -611,25 +809,45 @@ amp._extendをエクスポートしています</p>
 </div>
 
                 
-                    <div id="method_toString" class="method item">
-    <h3 class="name"><code>toString</code></h3>
+                    <div id="method_isType" class="method item public">
+    <h3 class="name"><code>isType</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>object</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
         <span class="returns-inline">
-            <span class="type">String</span>
+            <span class="type">Boolean</span>
         </span>
     
 
     
 
     
+        <span class="flag public">public</span>
+    
 
     
 
+    
+        <span class="flag static">static</span>
     
 
     
@@ -647,7 +865,7 @@ amp._extendをエクスポートしています</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l135"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:135</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l165"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:165</code></a>
         
         </p>
 
@@ -658,9 +876,49 @@ amp._extendをエクスポートしています</p>
     </div>
 
     <div class="description">
-        <h4>クラス名を返す</h4>
+        <h4>オブジェクトが指定した型かチェックします</h4>
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>タイプ名</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">object</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>判定する対象オブジェクト</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -670,10 +928,8 @@ amp._extendをエクスポートしています</p>
             <div class="returns-description">
                 
                     
-                        <span class="type">String</span>:
+                        <span class="type">Boolean</span>:
                     
-                    <p>クラス名を返す</p>
-
                 
             </div>
         </div>
@@ -714,7 +970,7 @@ amp._extendをエクスポートしています</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l38"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:38</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l46"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:46</code></a>
         
         </p>
 
@@ -724,51 +980,10 @@ amp._extendをエクスポートしています</p>
     </div>
 
     <div class="description">
-        <h4>プロトタイプオブジェクト</h4>
-    </div>
+        <p><h4>プロトタイプオブジェクト</h4>
+Mediatorをエクスポートします
+Mediatorクラスを参照してください</p>
 
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_types" class="property item">
-    <h3 class="name"><code>types</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l47"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:47</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <h4>アクティブタイプリスト</h4>
     </div>
 
     
@@ -804,7 +1019,7 @@ amp._extendをエクスポートしています</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery_utilitys_Active.js.html#l28"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery\utilitys\Active.js:28</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_createjs_core_Asset.js.html#l36"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\createjs\core\Asset.js:36</code></a>
         
         </p>
 

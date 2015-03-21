@@ -57,6 +57,8 @@
             
                 <li><a href="../classes/amp.FontResize.html">amp.FontResize</a></li>
             
+                <li><a href="../classes/amp.Layer.html">amp.Layer</a></li>
+            
                 <li><a href="../classes/amp.Loader.html">amp.Loader</a></li>
             
                 <li><a href="../classes/amp.Mediaquery.html">amp.Mediaquery</a></li>
@@ -77,15 +79,21 @@
             
                 <li><a href="../classes/amp.Storage.html">amp.Storage</a></li>
             
+                <li><a href="../classes/CLASS.html">CLASS</a></li>
+            
                 <li><a href="../classes/jQuery.html">jQuery</a></li>
             
                 <li><a href="../classes/jQuery.Event.html">jQuery.Event</a></li>
             
                 <li><a href="../classes/jQuery.fn.html">jQuery.fn</a></li>
             
+                <li><a href="../classes/LiquidSlider.html">LiquidSlider</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/Flick.html">Flick</a></li>
             
             </ul>
         </div>
@@ -130,10 +138,14 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.stop.js.html#l6"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.stop.js:6</code></a>
+            Defined in: <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.stop.js.html#l6"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.stop.js:6</code></a>
         </div>
     
 
+    
+        
+            Module: <a href="../modules/Flick.html">Flick</a>
+        
     
 
     
@@ -154,6 +166,10 @@ version: 0.1</p>
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -166,7 +182,100 @@ version: 0.1</p>
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
 
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_createData">createData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getFlickHandler">getFlickHandler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getMoveHandler">getMoveHandler</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getSetup">getSetup</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getTeardown">getTeardown</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_hasEventType">hasEventType</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setMoveData">setMoveData</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_data">data</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_events">events</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_isTouch">isTouch</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_VERSION">VERSION</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -218,7 +327,933 @@ version: 0.1</p>
         </div>
 
         
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
+                
+                    <div id="method_createData" class="method item">
+    <h3 class="name"><code>createData</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l324"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:324</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベントステートデータ生成</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベント開始データ（タッチスタート・マウスダウン）</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getFlickHandler" class="method item">
+    <h3 class="name"><code>getFlickHandler</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l110"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:110</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>フリックイベントハンドラ</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベント名</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Void</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getMoveHandler" class="method item">
+    <h3 class="name"><code>getMoveHandler</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l251"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:251</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>move系イベントハンドラ</h4>
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Void</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getSetup" class="method item">
+    <h3 class="name"><code>getSetup</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l75"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:75</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベント登録関数の生成</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベント名</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getTeardown" class="method item">
+    <h3 class="name"><code>getTeardown</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l95"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:95</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベント削除関数の生成</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベント名</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_hasEventType" class="method item">
+    <h3 class="name"><code>hasEventType</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>type</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l344"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:344</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベントフラグの生成</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベントタイプ</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_setMoveData" class="method item">
+    <h3 class="name"><code>setMoveData</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>event</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>data</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>param</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l371"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:371</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>move中の値のセット</h4>
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベントデータオブジェクト</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>ステートデータ</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">param</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>イベント設定値</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Void</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_data" class="property item">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l30"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:30</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベント設定値</h4>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_events" class="property item">
+    <h3 class="name"><code>events</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l56"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:56</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>イベントの種類</h4>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isTouch" class="property item">
+    <h3 class="name"><code>isTouch</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l43"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>タッチイベントが有効か判定</h4>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_VERSION" class="property item">
+    <h3 class="name"><code>VERSION</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.flick.js.html#l21"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.flick.js:21</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <h4>バージョン情報</h4>
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
@@ -251,7 +1286,7 @@ version: 0.1</p>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.stop.js.html#l18"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.stop.js:18</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.stop.js.html#l18"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.stop.js:18</code></a>
         
         </p>
 
@@ -328,7 +1363,7 @@ $(window).on(&#39;resizestop&#39;, {timer: 1000}, callback);</code></pre>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.stop.js.html#l27"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.stop.js:27</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.stop.js.html#l27"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.stop.js:27</code></a>
         
         </p>
 
@@ -406,7 +1441,7 @@ $(window).scrollstop(callback);</code></pre>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.slip.js.html#l101"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.slip.js:101</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.slip.js.html#l101"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.slip.js:101</code></a>
         
         </p>
 
@@ -498,7 +1533,7 @@ $(window).scrollstop(callback);</code></pre>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.slip.js.html#l17"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.slip.js:17</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.slip.js.html#l17"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.slip.js:17</code></a>
         
         </p>
 
@@ -554,7 +1589,7 @@ $(elm).slipin(callback);</code></pre>
             
         
         
-        <a href="../files/C:_xampp_htdocs_PROJECT_1_amp_ampjs_develop_src_amp_jquery-plugins_jquery.event.slip.js.html#l27"><code>C:\xampp\htdocs\PROJECT\1_amp\ampjs\develop\src\amp\jquery-plugins\jquery.event.slip.js:27</code></a>
+        <a href="../files/C:_xampp_htdocs_PROJECT_ampjs_develop_src_amp_jquery.plugins_jquery.event.slip.js.html#l27"><code>C:\xampp\htdocs\PROJECT\ampjs\develop\src\amp\jquery.plugins\jquery.event.slip.js:27</code></a>
         
         </p>
 
