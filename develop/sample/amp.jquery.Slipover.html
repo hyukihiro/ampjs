@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--#include virtual="/sample/shared/inc/head.inc" -->
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/sample/shared/inc/header.jquery.inc" -->
+
+
+<div id="Content" class="cf">
+
+<section class="sec"><div class="sec-inner cf">
+
+<img class="rover" src="/sample/shared/images/btn01.png" width="200" height="70" alt="" />
+<img class="rover no-over" src="/sample/shared/images/btn02.png" width="200" height="70" alt="" />
+<img class="rover active" src="/sample/shared/images/btn03.png" width="200" height="70" alt="" />
+
+
+
+</div><!-- .sec // --></section>
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/sample/shared/inc/js.all.inc" -->
+
+
+<script type="text/javascript">
+jQuery(function($){
+
+	new amp.jQuery.Slipover($('img.rover, input.rover, .all-rover img'));
+	// console.log(amp.jQuery.Rollover);
+
+	// $('img.rover, input.rover, .all-rover img')
+});
+</script>
+</body>
+</html>

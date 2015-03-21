@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--#include virtual="/sample/shared/inc/head.inc" -->
+
+<style type="text/css">
+canvas{
+	outline: 1px solid #f09;
+	background: #fff;
+}
+
+</style>
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/sample/shared/inc/header.createjs.inc" -->
+
+
+<div id="Content" class="cf">
+<canvas width="500" height="500"></canvas>
+
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/sample/shared/inc/js.all.inc" -->
+
+
+<script type="text/javascript">
+jQuery(function($){
+	var $canvas = $('canvas');
+	var stage = new createjs.Stage($canvas[0]);
+
+	// var count = 0;
+ var shape01 = new createjs.Shape();
+ shape01.name = 'shape';
+ shape01.id = 'shape01';
+
+ shape01.graphics.beginFill("#ff0000").drawRect(0, 0, 100, 100);
+ // shape01.setBounds(0, 0, 100, 100);
+
+ var shape02 = new createjs.Shape();
+ shape02.graphics.beginFill("#559900").drawRect(100, 100, 100, 100);
+ shape02.name = 'shape';
+ shape02.id = 'shape02';
+
+ var container = new createjs.Container();
+ container.name = 'container';
+ container.addChild(shape02);
+
+ stage.addChild(shape01);
+ stage.addChild(container);
+
+ // console.log(stage.getChildByName('shape'));
+
+ var asset = new amp.createjs.Asset(stage);
+ // console.log(asset);
+ // console.log(asset.find);
+ // asset.findObject('shape')
+
+ // console.log(shape01.getBounds);
+ console.log(asset.size());
+
+ asset.each(function(index, item){
+ 	if(index === 0){
+ 		return false;
+ 	}
+ })
+
+
+ // console.log(stage.getChildByName('shape02'));
+
+ // var $stage = amp.createjs.$(stage);
+
+ // var $shape02 = amp.createjs.$(stage, 'shape');
+
+
+ // console.log();
+ // $stage.each(function(i, item){
+ // 	console.log(i, item);
+ // });
+
+
+ // console.log($stage);
+
+
+	// createjs.Ticker.RAF
+	createjs.Ticker.addEventListener("tick", handleTick);
+	function handleTick(event){
+		// console.log(count++);
+  	stage.update();
+	}
+
+
+
+
+});
+
+
+
+</script>
+</body>
+</html>

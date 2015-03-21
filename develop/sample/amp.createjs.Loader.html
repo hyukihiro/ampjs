@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!--#include virtual="/sample/shared/inc/head.inc" -->
+</head>
+
+
+<body>
+<div id="Page">
+<!--#include virtual="/sample/shared/inc/header.createjs.inc" -->
+
+
+<div id="Content" class="cf">
+
+<section class="sec"><div class="sec-inner">
+<p><span id="count">0</span>%</p>
+</div><!-- .sec // --></section>
+
+<!-- #Content // --></div>
+<!-- #Page // --></div>
+
+
+<!--#include virtual="/sample/shared/inc/js.all.inc" -->
+
+<script>
+
+window.onload = function(){
+
+	var preloader = new amp.createjs.Loader([
+		{id: 'image01', src: '/images/btn01.png?1'},
+		{id: 'image02', src: '/images/btn01_on.png?2'},
+		{id: 'image03', src: '/images/btn02.png?3'},
+		{id: 'image04', src: '/images/btn02_on.png?4'},
+		{id: 'image05', src: '/images/btn031.png?5'}
+	])
+	.init()
+	.progress(function(e){
+		// console.log(e);
+	})
+	.update(function(e){
+		$('#count').text(e.count);
+	})
+	.fail(function(e){
+		// console.log(e);
+	})
+	.done(function(){
+    var image = this.loadQueue.getResult('image01');
+    $('#Content').append(image);
+	})
+	.complete(function(){
+		console.log('おわったよ');
+	})
+	.updateComplete(function(){
+		alert('完了したよ');
+		// console.log('完了したよ');
+	});
+};
+
+</script>
+</body>
+</html>
