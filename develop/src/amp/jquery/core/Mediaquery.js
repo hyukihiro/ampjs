@@ -1,3 +1,6 @@
+var AMP = AMP || {};
+
+
 (function(root, $){
 
   // 'use strict';
@@ -287,9 +290,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Mediaquery = Mediaquery;
-  root.AMP.mediaquery = new Mediaquery();
+  AMP.Mediaquery = Mediaquery;
+  AMP.mediaquery = new Mediaquery();
 
 
 }(window, jQuery));

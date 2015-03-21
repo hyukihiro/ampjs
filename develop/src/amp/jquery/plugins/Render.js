@@ -1,3 +1,6 @@
+var AMP = AMP || {};
+
+
 (function(root, $){
 
   // 'use strict';
@@ -283,9 +286,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Render = Render;
-  root.AMP.render = render;
+  AMP.Render = Render;
+  AMP.render = render;
 
 
 }(window, jQuery));

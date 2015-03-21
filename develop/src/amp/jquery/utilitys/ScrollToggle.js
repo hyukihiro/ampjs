@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -243,9 +245,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.ScrollToggle = ScrollToggle;
-  root.AMP.scrollToggle = scrollToggle;
+  AMP.ScrollToggle = ScrollToggle;
+  AMP.scrollToggle = scrollToggle;
 
 
 }(window, jQuery));

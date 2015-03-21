@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -213,9 +215,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Loader = Loader;
-  root.AMP.loader = loader;
+  AMP.Loader = Loader;
+  AMP.loader = loader;
 
 
 }(window, jQuery));

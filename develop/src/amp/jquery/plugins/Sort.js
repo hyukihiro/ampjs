@@ -1,3 +1,6 @@
+var AMP = AMP || {};
+
+
 (function(root, $){
 
   // 'use strict';
@@ -317,9 +320,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Sort = Sort;
-  root.AMP.sort = sort;
+  AMP.Sort = Sort;
+  AMP.sort = sort;
 
 
 }(window, jQuery));

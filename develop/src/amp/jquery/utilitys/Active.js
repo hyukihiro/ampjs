@@ -1,3 +1,6 @@
+var AMP = AMP || {};
+
+
 (function(root, $){
 
   // 'use strict';
@@ -148,9 +151,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Active = Active;
-  root.AMP.active = Active.active;
+  AMP.Active = Active;
+  AMP.active = Active.active;
 
 
 

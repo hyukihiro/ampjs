@@ -1,9 +1,9 @@
 <!-- core -->
 <script src="/src/jquery-1.8.3.min.js"></script>
 <script src="/src/velocity.min.js"></script>
+<script src="/src/underscore-min.js"></script>
 <script src="/src/hogan-3.0.2.min.js"></script>
 <script src="/src/imagesloaded.pkgd.min.js"></script>
-<script src="/src/underscore-min.js"></script>
 
 <!-- jquery.plugins -->
 <script src="/src/jquery.plugins.js"></script>
@@ -15,8 +15,9 @@
 <!-- amp -->
 <script src="/src/amp/jquery.plugins.js"></script>
 <script src="/src/amp/amp.core.js"></script>
+<script src="/src/amp/amp.utilitys.js"></script>
 <script src="/src/amp/amp.jquery.js"></script>
-<script src="/src/amp/amp.createjs.js"></script>
+<!-- <script src="/src/amp/amp.createjs.js"></script> -->
 
 <!-- common -->
 <script src="/shared/js/common.js"></script>

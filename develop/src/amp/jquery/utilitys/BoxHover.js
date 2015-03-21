@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -214,9 +216,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.BoxHover = BoxHover;
-  root.AMP.boxHover = boxHover;
+  AMP.BoxHover = BoxHover;
+  AMP.boxHover = boxHover;
 
 
 }(window, jQuery));

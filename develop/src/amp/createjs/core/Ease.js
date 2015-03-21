@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, createjs){
 
   // 'use strict';
@@ -12,15 +14,15 @@
 
   /**
    * <h4>Easeingを管理します</h4>
-   * AMP.Easeをextendします
+   * amp.Easeをextendします
    * createjs.Easeをインストールして使用してください
    * see: http://www.createjs.com/Docs/TweenJS/files/tweenjs_p.js.html
    *
-   * @class AMP.Ease
+   * @class amp.Ease
    * @constructor
    * @return {Ease}
    */
-  Ease = AMP.Ease.extend();
+  Ease = amp.Ease.extend();
 
 
 
@@ -266,9 +268,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Ease = Ease;
-  root.AMP.ease = new Ease();
+  AMP.Ease = Ease;
+  AMP.ease = new Ease();
 
 
 }(window, createjs));

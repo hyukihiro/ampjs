@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -190,9 +192,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.SmoothScroll = SmoothScroll;
-  root.AMP.smoothScroll = smoothScroll;
+  AMP.SmoothScroll = SmoothScroll;
+  AMP.smoothScroll = smoothScroll;
 
 
 }(window, jQuery));

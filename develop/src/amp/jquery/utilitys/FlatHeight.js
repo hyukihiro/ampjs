@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -238,9 +240,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.FlatHeight = FlatHeight;
-  root.AMP.flatHeight = flatHeight;
+  AMP.FlatHeight = FlatHeight;
+  AMP.flatHeight = flatHeight;
 
 
 

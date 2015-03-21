@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -324,9 +326,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Rollover = Rollover;
-  root.AMP.rollover = rollover;
+  AMP.Rollover = Rollover;
+  AMP.rollover = rollover;
 
 
 }(window, jQuery));

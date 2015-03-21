@@ -1,3 +1,5 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
@@ -17,7 +19,8 @@
    * @constructor
    * @return {FontResize}
    */
-  FontResize = function(){};
+  function FontResize(){};
+
 
 
 
@@ -43,8 +46,8 @@
    * @property p
    * @type {Object}
    */
-  p = FontResize.prototype = AMP.extend({}, AMP.Mediator.prototype, FontResize.prototype);
-
+  // p = FontResize.prototype = AMP.extend({}, AMP.Mediator.prototype, FontResize.prototype);
+  p = FontResize.prototype
 
   /**
    * <h4>フォントサイズ変更時の発行するイベント名</h4>
@@ -210,9 +213,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.FontResize = FontResize;
-  root.AMP.fontResize = new FontResize();
+  AMP.FontResize = FontResize;
+  AMP.fontResize = new FontResize();
 
 
 }(window, jQuery));

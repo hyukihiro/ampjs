@@ -371,6 +371,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/snippet/'));
 
 	// amp.core.js
+	MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.concat('amp.utilitys.js'))
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	.pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+
+	// amp.core.js
 	MODULE.gulp.src(PATH.develop + 'src/amp/core/**/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -379,6 +392,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
 	.pipe(MODULE.rename({basename: 'amp.core.min'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));
+
+	// amp.core.js
+	MODULE.gulp.src(PATH.develop + 'src/amp/utilitys/**/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.concat('amp.utilitys.js'))
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'))
+	.pipe(MODULE.rename({basename: 'amp.utilitys.min'}))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/amp/'));

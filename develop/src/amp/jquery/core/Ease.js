@@ -1,9 +1,8 @@
+var AMP = AMP || {};
+
 (function(root, $){
 
   // 'use strict';
-
-  var Ease, p;
-
 
 
   /*----------------------------------------------------------------------
@@ -18,17 +17,16 @@
    * @constructor
    * @return {Ease}
    */
-  Ease = AMP.Ease.extend();
+  function Ease(){};
+
+  // prototype
+  var p = Ease.prototype;
 
 
 
   /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
-
-  // prototype
-  p = Ease.prototype;
-
 
   /**
    * <h4>jQuery easeing用ネームスペース</h4>
@@ -269,9 +267,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.AMP = root.AMP || {};
-  root.AMP.Ease = Ease;
-  root.AMP.ease = new Ease();
+  AMP.exportClass(AMP.Ease.extend(Ease), AMP.Ease.VERSION);
+  AMP.ease = new Ease();
 
 
 }(window, jQuery));
