@@ -13,7 +13,7 @@
   /**
    * <h4>アクティブ化</h4>
    *
-   * @class amp.Active
+   * @class AMP.Active
    * @constructor
    * @return {Active}
    */
@@ -61,7 +61,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -69,7 +69,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Rollover}
    */
-  Active.extend = amp._extend;
+  Active.extend = AMP._extend;
 
 
   /**
@@ -95,7 +95,7 @@
     }
 
     // typeの大文字表記チェック
-    if(amp.isString(type)){
+    if(AMP.isString(type)){
       type = type.toLowerCase();
     }
 
@@ -121,13 +121,13 @@
 
     // rollover
     } else if(type === Active.types[1]){
-      options = $.extend(true, {}, amp.Rollover.defaults, options);
-      return amp.rollover($target.addClass(options.activeClass), options);
+      options = $.extend(true, {}, AMP.Rollover.defaults, options);
+      return AMP.rollover($target.addClass(options.activeClass), options);
 
     // alphaover
     } else if(type === Active.types[2]){
-      options = $.extend(true, {}, amp.Alphaover.defaults, options);
-      return amp.alphaover($target.addClass(options.activeClass), options);
+      options = $.extend(true, {}, AMP.Alphaover.defaults, options);
+      return AMP.alphaover($target.addClass(options.activeClass), options);
     }
   };
 
@@ -148,9 +148,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Active = Active;
-  root.amp.active = Active.active;
+  root.AMP = root.AMP || {};
+  root.AMP.Active = Active;
+  root.AMP.active = Active.active;
 
 
 

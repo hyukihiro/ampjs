@@ -13,7 +13,7 @@
   /**
    * <h4>画像のロールオーバー</h4>
    *
-   * @class amp.Rollover
+   * @class AMP.Rollover
    * @constructor
    * @param  {jQuery} $image 画像要素
    * @param  {Object} options ロールオーバーのオプション値
@@ -116,7 +116,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -124,7 +124,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Rollover}
    */
-  Rollover.extend = amp._extend;
+  Rollover.extend = AMP._extend;
 
 
   /**
@@ -160,14 +160,14 @@
         if(!$image.hasClass(param.activeClass)){
           image.src = image.rollover.offSrc;
         } else {
-          amp.preload(image.rollover.offSrc);
+          AMP.preload(image.rollover.offSrc);
         }
 
       } else {
       // 現在off画像の場合
         image.rollover.offSrc = src;
         image.rollover.onSrc = src.replace(ext, param.postfix + ext);
-        amp.preload(image.rollover.onSrc);
+        AMP.preload(image.rollover.onSrc);
 
         // アクティブの場合on画像に変更
         if($image.hasClass(param.activeClass)){
@@ -324,9 +324,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Rollover = Rollover;
-  root.amp.rollover = rollover;
+  root.AMP = root.AMP || {};
+  root.AMP.Rollover = Rollover;
+  root.AMP.rollover = rollover;
 
 
 }(window, jQuery));

@@ -13,7 +13,7 @@
   /**
    * <h4>Easeingを管理します</h4>
    *
-   * @class amp.Ease
+   * @class AMP.Ease
    * @constructor
    * @return {Ease}
    */
@@ -270,7 +270,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -278,7 +278,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  Ease.extend = amp._extend;
+  Ease.extend = AMP._extend;
 
 
   /**
@@ -297,9 +297,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Ease = Ease;
-  root.amp.ease = new Ease();
+  root.AMP = root.AMP || {};
+  root.AMP.Ease = Ease;
+  root.AMP.ease = new Ease();
 
 
 }(window));

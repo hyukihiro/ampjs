@@ -14,7 +14,7 @@
    * <h4>ソート</h4>
    * Renderクラスと組み合わせて使います
    *
-   * @class amp.Sort
+   * @class AMP.Sort
    * @constructor
    * @param  {jQuery} トリガーa要素 hrefにフィルター値(先頭に#付けた)をセットする
    * @param  {Render} render レンダーインスタンス
@@ -130,7 +130,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -138,7 +138,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Sort}
    */
-  Sort.extend = amp._extend;
+  Sort.extend = AMP._extend;
 
 
   /**
@@ -317,9 +317,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Sort = Sort;
-  root.amp.sort = sort;
+  root.AMP = root.AMP || {};
+  root.AMP.Sort = Sort;
+  root.AMP.sort = sort;
 
 
 }(window, jQuery));

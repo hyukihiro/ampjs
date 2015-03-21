@@ -13,7 +13,7 @@
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class amp.FlatHeight
+   * @class AMP.FlatHeight
    * @constructor
    * @param  {jQuery} $target 対象のエリア要素
    * @param  {Number} split 区切る数 省略可
@@ -25,7 +25,7 @@
     this.split     = $.isNumeric(split) ? split : $target.length;
     options        = $.isPlainObject(split) ? split : options;
     this.param     = $.extend(true, {}, FlatHeight.defaults, options);
-    this.param.isResize = amp.isDevice('sd') ? true : this.param.isResize;
+    this.param.isResize = AMP.isDevice('sd') ? true : this.param.isResize;
   };
 
 
@@ -130,7 +130,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -138,7 +138,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {FlatHeight}
    */
-  FlatHeight.extend = amp._extend;
+  FlatHeight.extend = AMP._extend;
 
 
   /**
@@ -152,8 +152,8 @@
     var self = this;
 
     // font resize
-    if(amp.isDevice('pc')){
-      amp.fontResize.on('change.FlatHeight', function(){
+    if(AMP.isDevice('pc')){
+      AMP.fontResize.on('change.FlatHeight', function(){
         self.setHeight();
       });
     }
@@ -238,9 +238,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.FlatHeight = FlatHeight;
-  root.amp.flatHeight = flatHeight;
+  root.AMP = root.AMP || {};
+  root.AMP.FlatHeight = FlatHeight;
+  root.AMP.flatHeight = flatHeight;
 
 
 

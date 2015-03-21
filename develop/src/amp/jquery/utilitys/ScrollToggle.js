@@ -13,7 +13,7 @@
   /**
    * <h4>スクロール時、座標を判定してのToggle処理</h4>
    *
-   * @class amp.ScrollToggle
+   * @class AMP.ScrollToggle
    * @constructor
    * @param  {jQuery} $target 表示・非表示する要素
    * @param  {Object} options オプション値
@@ -143,7 +143,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -151,7 +151,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {ScrollToggle}
    */
-   ScrollToggle.extend = amp._extend;
+   ScrollToggle.extend = AMP._extend;
 
 
   /**
@@ -243,9 +243,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.ScrollToggle = ScrollToggle;
-  root.amp.scrollToggle = scrollToggle;
+  root.AMP = root.AMP || {};
+  root.AMP.ScrollToggle = ScrollToggle;
+  root.AMP.scrollToggle = scrollToggle;
 
 
 }(window, jQuery));

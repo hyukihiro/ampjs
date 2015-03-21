@@ -59,7 +59,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -67,7 +67,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  p.extend = amp._extend;
+  p.extend = AMP._extend;
 
 
   /**
@@ -86,8 +86,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.CLASS = CLASS;
+  root.AMP = root.AMP || {};
+  root.AMP.CLASS = CLASS;
 
 
 

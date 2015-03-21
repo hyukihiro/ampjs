@@ -13,7 +13,7 @@
   /**
    * <h4>mediaqueryのブレイクポイントイベント</h4>
    *
-   * @class amp.Mediaquery
+   * @class AMP.Mediaquery
    * @constructor
    * @return {Mediaquery}
    */
@@ -43,7 +43,7 @@
    * @property p
    * @type {Object}
    */
-  p = Mediaquery.prototype = $.extend({}, amp.Mediator.prototype, Mediaquery.prototype);
+  p = Mediaquery.prototype = $.extend({}, AMP.Mediator.prototype, Mediaquery.prototype);
 
 
   /**
@@ -86,7 +86,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -94,7 +94,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Mediaquery}
    */
-  Mediaquery.extend = amp._extend;
+  Mediaquery.extend = AMP._extend;
 
 
   /**
@@ -106,7 +106,7 @@
    * @return {Mediaquery}
    */
   p.init = function($el, isObserver){
-    if(amp.isBoolean($el)){
+    if(AMP.isBoolean($el)){
       isObserver = $el;
     }
 
@@ -232,7 +232,7 @@
    * @return {Mediaquery}
    */
   p.setObserver = function(isObserver){
-    this.isObserver = amp.isBoolean(isObserver) ? isObserver : this.isObserver;
+    this.isObserver = AMP.isBoolean(isObserver) ? isObserver : this.isObserver;
     if(this.isObserver){
       $(root).trigger('resize.Mediaquery');
     }
@@ -267,7 +267,7 @@
    * @return {Array}
    */
   p.getCurrents = function(){
-    return _.sortBy(amp.removeSpaceChara(this.$el.css('fontFamily')).split(','));
+    return _.sortBy(AMP.removeSpaceChara(this.$el.css('fontFamily')).split(','));
   };
 
 
@@ -287,9 +287,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Mediaquery = Mediaquery;
-  root.amp.mediaquery = new Mediaquery();
+  root.AMP = root.AMP || {};
+  root.AMP.Mediaquery = Mediaquery;
+  root.AMP.mediaquery = new Mediaquery();
 
 
 }(window, jQuery));

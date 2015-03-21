@@ -13,7 +13,7 @@
   /**
    * <h4>Layeringを管理します</h4>
    *
-   * @class amp.Layer
+   * @class AMP.Layer
    * @constructor
    * @return {Layer}
    */
@@ -189,7 +189,7 @@
     var isInherit = false,
     type;
 
-    if(instance && amp.isFunction(instance.toString)){
+    if(instance && AMP.isFunction(instance.toString)){
       type = instance.toString();
       if(type.indexOf('[Bitmap ') === 0 ||
         type.indexOf('[Container ') === 0 ||
@@ -280,9 +280,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.createjs = root.amp.createjs || {};
-  root.amp.createjs.Asset = Asset;
+  root.AMP = root.AMP || {};
+  root.AMP.createjs = root.AMP.createjs || {};
+  root.AMP.createjs.Asset = Asset;
 
 
 }(window, createjs));

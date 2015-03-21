@@ -15,7 +15,7 @@
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
    * <b>Hogan.jsに依存します</b>
    *
-   * @class amp.Render
+   * @class AMP.Render
    * @constructor
    * @param  {jQuery} $tepl jsTemplate要素
    * @param  {Object} ajaxOptions $.ajax options
@@ -159,7 +159,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -167,7 +167,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Render}
    */
-   Render.extend = amp._extend;
+   Render.extend = AMP._extend;
 
 
   /**
@@ -230,7 +230,7 @@
    * @return {Render}
    */
   p.ajaxFail = function(xhr, status, error){
-    if(amp.isDevelop){
+    if(AMP.isDevelop){
       console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
     }
     if(root.confirm('データの取得に失敗しました。\n再度、ページを読み込み直しますか？')){
@@ -283,9 +283,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Render = Render;
-  root.amp.render = render;
+  root.AMP = root.AMP || {};
+  root.AMP.Render = Render;
+  root.AMP.render = render;
 
 
 }(window, jQuery));

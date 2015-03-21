@@ -13,7 +13,7 @@
   /**
    * <h4>イベントを仲介します</h4>
    *
-   * @class amp.Mediator
+   * @class AMP.Mediator
    * @constructor
    * @return {Mediator}
    */
@@ -79,7 +79,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -87,7 +87,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  Mediator.extend = amp._extend;
+  Mediator.extend = AMP._extend;
 
 
   /**
@@ -319,9 +319,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Mediator = Mediator;
-  root.amp.mediator = mediator;
+  root.AMP = root.AMP || {};
+  root.AMP.Mediator = Mediator;
+  root.AMP.mediator = mediator;
 
 
 }(window));

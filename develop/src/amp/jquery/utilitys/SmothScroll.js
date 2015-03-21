@@ -14,7 +14,7 @@
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class amp.SmoothScroll
+   * @class AMP.SmoothScroll
    * @constructor
    * @param  {Object} options オプション値
    * @return {SmoothScroll}
@@ -115,7 +115,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -123,7 +123,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {SmoothScroll}
    */
-  SmoothScroll.extend = amp._extend;
+  SmoothScroll.extend = AMP._extend;
 
 
   /**
@@ -135,7 +135,7 @@
   p.on = function(){
     var self = this;
 
-    if(amp.isWindows()){
+    if(AMP.isWindows()){
       self.$target.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(event, move){
         self.tween(event, move);
@@ -167,7 +167,7 @@
   p.tween = function(event, move){
     var self = this,
     param = self.param,
-    y = amp.isWebkit() ? self.$target.eq(1).scrollTop() : self.$target.eq(0).scrollTop(),
+    y = AMP.isWebkit() ? self.$target.eq(1).scrollTop() : self.$target.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
     self.$target.stop(true, false).animate({scrollTop: scrollY}, param.dulation, param.ease);
@@ -190,9 +190,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.SmoothScroll = SmoothScroll;
-  root.amp.smoothScroll = smoothScroll;
+  root.AMP = root.AMP || {};
+  root.AMP.SmoothScroll = SmoothScroll;
+  root.AMP.smoothScroll = smoothScroll;
 
 
 }(window, jQuery));

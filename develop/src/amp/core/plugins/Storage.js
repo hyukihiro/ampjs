@@ -14,14 +14,14 @@
    * <h4>ストレージ管理</h4>
    * Storageショートハンド
    *
-   * @class amp.Storage
+   * @class AMP.Storage
    * @constructor
    * @method storage
    * @param  {String} storageType ストレージタイプ 'sessionStorage', 'localStorage' 初期:'sessionStorage'
    * @return {Storage}
    */
   Storage = function(storageType){
-    if(amp.hasStorage()){
+    if(AMP.hasStorage()){
       if(storageType === 'localStorage'){
         this.type     = 'localStorage';
         this._storage = localStorage;
@@ -112,7 +112,7 @@
   p.setItem = function(key, val){
     if(this._storage){
 
-      if(amp.isObject(key)){
+      if(AMP.isObject(key)){
         var k;
         for(k in key){
           this._storage.setItem(k, key[k]);
@@ -208,9 +208,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Storage = Storage;
-  root.amp.storage = storage;
+  root.AMP = root.AMP || {};
+  root.AMP.Storage = Storage;
+  root.AMP.storage = storage;
 
 
 }(window));

@@ -13,7 +13,7 @@
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class amp.BoxHover
+   * @class AMP.BoxHover
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
    * @param  {Object} options オプション値
@@ -121,7 +121,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -129,7 +129,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {BoxHover}
    */
-  BoxHover.extend = amp._extend;
+  BoxHover.extend = AMP._extend;
 
 
   /**
@@ -214,9 +214,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.BoxHover = BoxHover;
-  root.amp.boxHover = boxHover;
+  root.AMP = root.AMP || {};
+  root.AMP.BoxHover = BoxHover;
+  root.AMP.boxHover = boxHover;
 
 
 }(window, jQuery));

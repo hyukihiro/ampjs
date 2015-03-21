@@ -4,12 +4,12 @@
 
 
   /**
-   * <h4>amp</h4>
+   * <h4>AMP</h4>
    * namespace
    *
-   * @class amp
+   * @class AMP
    **/
-  var amp = {};
+  var AMP = {};
 
 
 
@@ -46,7 +46,7 @@
    * @property VERSION
    * @type {String}
    */
-  amp.VERSION = '2.1';
+  AMP.VERSION = '3.0';
 
 
   /**
@@ -57,7 +57,7 @@
    * @property isDevelop
    * @type {Boolean}
    */
-  amp.isDevelop = false;
+  AMP.isDevelop = false;
 
 
 
@@ -76,7 +76,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isArray = Array.isArray || function(obj){
+  AMP.isArray = Array.isArray || function(obj){
     return toString.call(obj) === '[object Array]';
   };
 
@@ -89,7 +89,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isBoolean = function(obj){
+  AMP.isBoolean = function(obj){
     return toString.call(obj) === '[object Boolean]';
   };
 
@@ -102,7 +102,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isFunction = function(obj){
+  AMP.isFunction = function(obj){
     return toString.call(obj) === '[object Function]';
   };
 
@@ -115,7 +115,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isNumber = function(obj){
+  AMP.isNumber = function(obj){
     return toString.call(obj) === '[object Number]';
   };
 
@@ -129,7 +129,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isObject = function(obj){
+  AMP.isObject = function(obj){
     return !!obj && toString.call(obj) === '[object Object]';
   };
 
@@ -142,7 +142,7 @@
    * @param  {Object} obj 判定したいオブジェクト
    * @return {Boolean}
    */
-  amp.isString = function(obj){
+  AMP.isString = function(obj){
     return toString.call(obj) === '[object String]';
   };
 
@@ -159,23 +159,23 @@
    * @param  {String | Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
-  amp.isOS = function(key, ver){
+  AMP.isOS = function(key, ver){
     var k = key.toLowerCase();
 
     if(k.indexOf('windows') > -1){
-      return amp.isWindows();
+      return AMP.isWindows();
 
     } else if(k.indexOf('windowsphone') > -1){
-      return amp.isWindowsPhone();
+      return AMP.isWindowsPhone();
 
     }  else if(k.indexOf('mac') > -1){
-      return amp.isMac();
+      return AMP.isMac();
 
     } else if(k.indexOf('ios') > -1){
-      return amp.isIos(ver);
+      return AMP.isIos(ver);
 
     } else if(k.indexOf('android') > -1){
-      return amp.isAndroid(ver);
+      return AMP.isAndroid(ver);
     }
   };
 
@@ -187,7 +187,7 @@
    * @method isWindows
    * @return {Boolean}
    */
-  amp.isWindows = function(){
+  AMP.isWindows = function(){
     return ua.indexOf('windows') > -1;
   };
 
@@ -199,7 +199,7 @@
    * @method isWindowsPhone
    * @return {Boolean}
    */
-  amp.isWindowsPhone = function(){
+  AMP.isWindowsPhone = function(){
     return ua.indexOf('windows phone') > -1;
   };
 
@@ -212,7 +212,7 @@
    * @method isMac
    * @return {Boolean}
    */
-  amp.isMac = function(){
+  AMP.isMac = function(){
     return ua.indexOf('mac os') > -1 && ua.indexOf('mobile') < 0;
   };
 
@@ -225,7 +225,7 @@
    * @param {Number | String} バージョンナンバー 省略可
    * @return {Boolean}
    */
-  amp.isIos = function(ver){
+  AMP.isIos = function(ver){
     if(ver){
       var serial = ('' + ver).replace(/\./g, '_');
       return ua.indexOf('os '+ serial) > -1;
@@ -243,7 +243,7 @@
    * @param {Number | String} バージョンナンバー 省略可
    * @return {Boolean}
    */
-  amp.isAndroid = function(ver){
+  AMP.isAndroid = function(ver){
     if(ver){
       return ua.indexOf('android ' + ver) > -1;
     } else {
@@ -263,41 +263,41 @@
    * @param {String} デバイス名 ['pc', 'sd', 'smartdevice', 'sp', 'smartphone', 'tb', 'tablet', 'iphone', 'ipad', 'ipod', 'androidphone', 'androidtablet', 'touchscreen', 'mspointer']
    * @return {Boolean}
    */
-  amp.isDevice = function(key){
+  AMP.isDevice = function(key){
     var k = key.toLowerCase();
 
     if(k === 'pc'){
-      return amp.isPC();
+      return AMP.isPC();
 
     } else if (k === 'sd' || k === 'smartdevice'){
-      return amp.isSmartDevice();
+      return AMP.isSmartDevice();
 
     } else if (k === 'sp' || k === 'smartphone'){
-      return amp.isSmartPhone();
+      return AMP.isSmartPhone();
 
     } else if (k === 'tb' || k === 'tablet'){
-      return amp.isTablet();
+      return AMP.isTablet();
 
     } else if(k === 'iphone'){
-      return amp.isIPhone();
+      return AMP.isIPhone();
 
     } else if(k === 'ipad'){
-      return amp.isIPad();
+      return AMP.isIPad();
 
     } else if(k === 'ipod'){
-      return amp.isIPod();
+      return AMP.isIPod();
 
     } else if(k === 'android'){
-      return amp.isAndroidPhone();
+      return AMP.isAndroidPhone();
 
     } else if(k === 'androidtablet'){
-      return amp.isAndroidTablet();
+      return AMP.isAndroidTablet();
 
     } else if (k === 'touchscreen'){
-      return amp.isTouchScreen();
+      return AMP.isTouchScreen();
 
     } else if (k === 'mspointer'){
-      return amp.isMsPointer();
+      return AMP.isMsPointer();
     }
   };
 
@@ -309,8 +309,8 @@
    * @method isPC
    * @return {Boolean}
    */
-  amp.isPC = function(){
-    return amp.isOS('windows') || amp.isOS('mac');
+  AMP.isPC = function(){
+    return AMP.isOS('windows') || AMP.isOS('mac');
   };
 
 
@@ -321,8 +321,8 @@
    * @method isSmartDevice
    * @return {Boolean}
    */
-  amp.isSmartDevice = function(){
-    return amp.isOS('ios') || amp.isOS('android');
+  AMP.isSmartDevice = function(){
+    return AMP.isOS('ios') || AMP.isOS('android');
   };
 
 
@@ -333,8 +333,8 @@
    * @method isSmartPhone
    * @return {Boolean}
    */
-  amp.isSmartPhone = function(){
-    return ua.indexOf('iphone') > -1 || amp.isOS('android') && ua.indexOf('mobile') > -1;
+  AMP.isSmartPhone = function(){
+    return ua.indexOf('iphone') > -1 || AMP.isOS('android') && ua.indexOf('mobile') > -1;
   };
 
 
@@ -345,8 +345,8 @@
    * @method isTablet
    * @return {Boolean}
    */
-  amp.isTablet = function(){
-    return ua.indexOf('ipad') > -1 || amp.isOS('android') && ua.indexOf('mobile') < 0;
+  AMP.isTablet = function(){
+    return ua.indexOf('ipad') > -1 || AMP.isOS('android') && ua.indexOf('mobile') < 0;
   };
 
 
@@ -357,7 +357,7 @@
    * @method isIPhone
    * @return {Boolean}
    */
-  amp.isIPhone = function(){
+  AMP.isIPhone = function(){
     return ua.indexOf('iphone') > -1;
   };
 
@@ -369,7 +369,7 @@
    * @method isIPad
    * @return {Boolean}
    */
-  amp.isIPad = function(){
+  AMP.isIPad = function(){
     return ua.indexOf('ipad') > -1;
   };
 
@@ -381,7 +381,7 @@
    * @method isIPod
    * @return {Boolean}
    */
-  amp.isIPod = function(){
+  AMP.isIPod = function(){
     return ua.indexOf('ipod') > -1;
   };
 
@@ -393,8 +393,8 @@
    * @method isAndroidPhone
    * @return {Boolean}
    */
-  amp.isAndroidPhone = function(){
-    return amp.isOS('android') && ua.indexOf('mobile') > -1;
+  AMP.isAndroidPhone = function(){
+    return AMP.isOS('android') && ua.indexOf('mobile') > -1;
   };
 
 
@@ -405,8 +405,8 @@
    * @method isAndroidTablet
    * @return {Boolean}
    */
-  amp.isAndroidTablet = function(){
-    return amp.isOS('android') && ua.indexOf('mobile') < 0;
+  AMP.isAndroidTablet = function(){
+    return AMP.isOS('android') && ua.indexOf('mobile') < 0;
   };
 
 
@@ -417,7 +417,7 @@
    * @method isTouchScreen
    * @return {Boolean}
    */
-  amp.isTouchScreen = function(){
+  AMP.isTouchScreen = function(){
     return 'ontouchend' in doc;
   };
 
@@ -429,7 +429,7 @@
    * @method isMsPointer
    * @return {Boolean}
    */
-  amp.isMsPointer = function(){
+  AMP.isMsPointer = function(){
     return root.navigator.msPointerEnabled > -1;
   };
 
@@ -447,36 +447,36 @@
    * @param  {String} pun ie指定バージョン範囲 ['prev', 'later']  省略可
    * @return {Boolean}
    */
-  amp.isBrowser = function(key, ver, pun){
+  AMP.isBrowser = function(key, ver, pun){
     var k = key.toLowerCase();
 
     if(k === 'ie'){
       if(pun){
-        return amp.isIEScope(ver, pun);
+        return AMP.isIEScope(ver, pun);
       } else {
-        return amp.isIE(ver);
+        return AMP.isIE(ver);
       }
 
     } else if(k === 'chrome'){
-      return amp.isChrome();
+      return AMP.isChrome();
 
     } else if(k === 'firefox'){
-      return amp.isFirefox();
+      return AMP.isFirefox();
 
     } else if(k === 'safari'){
-      return amp.isSafari();
+      return AMP.isSafari();
 
     } else if(k === 'opera'){
-      return amp.isOpera();
+      return AMP.isOpera();
 
     } else if(k === 'mobilesafari'){
-      return amp.isMobileSafari(ver);
+      return AMP.isMobileSafari(ver);
 
     } else if(k === 'android'){
-      return amp.isAndroidBrowser(ver);
+      return AMP.isAndroidBrowser(ver);
 
     } else if(k === 'webkit'){
-      return amp.isWebkit();
+      return AMP.isWebkit();
     }
   };
 
@@ -489,7 +489,7 @@
    * @param  {Number}  ver バージョンナンバー 省略可
    * @return {Boolean}
    */
-  amp.isIE = function(ver){
+  AMP.isIE = function(ver){
     if(!ver){
       return ua.indexOf('msie') > -1 || ua.indexOf('trident') > -1;
     } else {
@@ -507,7 +507,7 @@
    * @param  {String}  pun 以前・移行 ['prev', 'later']
    * @return {Boolean}
    */
-  amp.isIEScope = function(ver, pun){
+  AMP.isIEScope = function(ver, pun){
     var current, index;
     ver = Number(ver);
 
@@ -541,7 +541,7 @@
    * @method isChrome
    * @return {Boolean}
    */
-  amp.isChrome = function(){
+  AMP.isChrome = function(){
     return ua.indexOf('chrome') > -1 && ua.indexOf('mobile') < 0;
   };
 
@@ -553,7 +553,7 @@
    * @method isFirefox
    * @return {Boolean}
    */
-  amp.isFirefox = function(){
+  AMP.isFirefox = function(){
     return ua.indexOf('firefox') > -1 && ua.indexOf('mobile') < 0;
   };
 
@@ -565,8 +565,8 @@
    * @method isSafari
    * @return {Boolean}
    */
-  amp.isSafari = function(){
-    return ua.indexOf('safari') > -1 && ua.indexOf('mobile') < 0 && !amp.isChrome();
+  AMP.isSafari = function(){
+    return ua.indexOf('safari') > -1 && ua.indexOf('mobile') < 0 && !AMP.isChrome();
   };
 
 
@@ -577,7 +577,7 @@
    * @method isOpera
    * @return {Boolean}
    */
-  amp.isOpera = function(){
+  AMP.isOpera = function(){
     return ua.indexOf(' opr/') > -1 || (ua.indexOf('opera/') > -1 && ua.indexOf('mobile') < 0);
   };
 
@@ -590,11 +590,11 @@
    * @param {Number | String} ver バージョンナンバー  省略可
    * @return {Boolean}
    */
-  amp.isMobileSafari = function(ver){
+  AMP.isMobileSafari = function(ver){
     if(ver){
-      return amp.isIos(ver) && ua.indexOf('safari') > -1;
+      return AMP.isIos(ver) && ua.indexOf('safari') > -1;
     } else {
-      return amp.isIos() && ua.indexOf('safari') > -1;
+      return AMP.isIos() && ua.indexOf('safari') > -1;
     }
   };
 
@@ -607,11 +607,11 @@
    * @param {Number | String} ver バージョンナンバー 省略可
    * @return {Boolean}
    */
-  amp.isAndroidBrowser = function(ver){
+  AMP.isAndroidBrowser = function(ver){
     if(ver){
-      return amp.isAndroid(ver) && ua.indexOf('safari') > -1;
+      return AMP.isAndroid(ver) && ua.indexOf('safari') > -1;
     } else {
-      return amp.isAndroid() && ua.indexOf('safari') > -1;
+      return AMP.isAndroid() && ua.indexOf('safari') > -1;
     }
   };
 
@@ -623,7 +623,7 @@
    * @method isWebkit
    * @return {Boolean}
    */
-  amp.isWebkit = function(){
+  AMP.isWebkit = function(){
     return ua.indexOf('webkit') > -1;
   };
 
@@ -638,7 +638,7 @@
    * @method hasAppCache
    * @return {Boolean}
    */
-  amp.hasAppCache = function(){
+  AMP.hasAppCache = function(){
     return 'applicationCache' in root;
   };
 
@@ -650,7 +650,7 @@
    * @method hasGeolocation
    * @return {Boolean}
    */
-  amp.hasGeolocation = function(){
+  AMP.hasGeolocation = function(){
     return 'geolocation' in navigator;
   };
 
@@ -662,7 +662,7 @@
    * @method hasPushState
    * @return {Boolean}
    */
-  amp.hasPushState = function(){
+  AMP.hasPushState = function(){
     return 'pushState' in root.history;
   };
 
@@ -674,7 +674,7 @@
    * @method hasReqAnime
    * @return {Boolean}
    */
-  amp.hasReqAnime = function(){
+  AMP.hasReqAnime = function(){
     return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||
@@ -689,7 +689,7 @@
    * @method hasStorage
    * @return {Boolean}
    */
-  amp.hasStorage = function(){
+  AMP.hasStorage = function(){
     return 'sessionStorage' in root && 'localStorage' in root;
   };
 
@@ -701,7 +701,7 @@
    * @method hasWebSocket
    * @return {Boolean}
    */
-  amp.hasWebSocket = function(){
+  AMP.hasWebSocket = function(){
     return 'WebSocket' in root;
   };
 
@@ -713,7 +713,7 @@
    * @method hasWebWorker
    * @return {Boolean}
    */
-  amp.hasWebWorker = function(){
+  AMP.hasWebWorker = function(){
     return 'Worker' in root;
   };
 
@@ -725,9 +725,9 @@
    * @method hasAudio
    * @return {Boolean}
    */
-  amp.hasAudio = function(){
+  AMP.hasAudio = function(){
     // hack for ietester
-    if(amp.isBrowser('ie', 9)){
+    if(AMP.isBrowser('ie', 9)){
       return true;
     } else {
       return !!doc.createElement('audio').canPlayType;
@@ -742,7 +742,7 @@
    * @method hasCanvas
    * @return {Boolean}
    */
-  amp.hasCanvas = function(){
+  AMP.hasCanvas = function(){
     return !!doc.createElement('canvas').getContext;
   };
 
@@ -754,7 +754,7 @@
    * @method hasSVG
    * @return {Boolean}
    */
-  amp.hasSVG = function(){
+  AMP.hasSVG = function(){
     return 'SVGAngle' in root;
   };
 
@@ -766,9 +766,9 @@
    * @method hasVideo
    * @return {Boolean}
    */
-  amp.hasVideo = function(){
+  AMP.hasVideo = function(){
     // hack for ietester
-    if(amp.isBrowser('ie', 9)){
+    if(AMP.isBrowser('ie', 9)){
       return true;
     } else {
       return !!doc.createElement('video').canPlayType;
@@ -783,7 +783,7 @@
    * @method hasXMLSerializer
    * @return {Boolean}
    */
-  amp.hasXMLSerializer = function(){
+  AMP.hasXMLSerializer = function(){
     return 'XMLSerializer' in root;
   };
 
@@ -795,7 +795,7 @@
    * @method hasTransition
    * @return {Boolean}
    */
-  amp.hasTransition = function(){
+  AMP.hasTransition = function(){
     var props = ['transition', '-webkit-transition', '-moz-transition', '-ms-transition', '-o-transition'],
     i = 0,
     l = props.length,
@@ -826,7 +826,7 @@
    * @param {String} str id名 初期値: 'cid' 省略可
    * @return {String} str+数値を返す
    */
-  amp.createID = (function(){
+  AMP.createID = (function(){
     var count = 0;
 
     return function(str){
@@ -845,7 +845,7 @@
    * @param  {Number} radix 折り返すポイント
    * @return {Array}
    */
-  amp.cuff = function(ary, radix){
+  AMP.cuff = function(ary, radix){
     var copy = ary.concat(),
     i = radix ? radix : 0,
     l = copy.length;
@@ -865,7 +865,7 @@
    * @method digit
    * @return {String} ランダムな4桁のコードを返す
    */
-  amp.digit = function() {
+  AMP.digit = function() {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
@@ -878,11 +878,11 @@
    * @param {Object} arguments 拡張するオブジェクト
    * @return {Object} 拡張したオブジェクトを返します
    */
-  amp.extend = function(){
+  AMP.extend = function(){
     var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
 
     length = arguments.length;
-    isDeep = amp.isBoolean(arguments[0]) && arguments[0];
+    isDeep = AMP.isBoolean(arguments[0]) && arguments[0];
 
     if(isDeep){
       count = 2;
@@ -905,17 +905,17 @@
             continue;
           }
 
-          isArray = amp.isArray(copy);
+          isArray = AMP.isArray(copy);
 
-          if(isDeep && copy && amp.isObject(copy) || isArray){
+          if(isDeep && copy && AMP.isObject(copy) || isArray){
             if(isArray){
-              clone = data && amp.isArray(data) ? data : [];
+              clone = data && AMP.isArray(data) ? data : [];
             } else {
-              clone = data && amp.isObject(data) ? data : {};
+              clone = data && AMP.isObject(data) ? data : {};
             }
 
             // ネスト構造を再帰処理
-            extendObject[key] = amp.extend(isDeep, clone, copy);
+            extendObject[key] = AMP.extend(isDeep, clone, copy);
 
           } else if (copy !== undefined){
             extendObject[key] = copy;
@@ -939,11 +939,11 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  amp._extend = function(protoProp, staticProp){
+  AMP._extend = function(protoProp, staticProp){
     var parent = this,
     child;
 
-    if(amp.isFunction(protoProp)){
+    if(AMP.isFunction(protoProp)){
       staticProp = protoProp;
       protoProp = protoProp.prototype;
     }
@@ -954,14 +954,14 @@
       child = function(){ return parent.apply(this, arguments); };
     }
 
-    amp.extend(true, child, parent, staticProp);
+    AMP.extend(true, child, parent, staticProp);
 
     var Substitute = function(){ this.constructor = child; };
     Substitute.prototype = parent.prototype;
     child.prototype = new Substitute();
 
     if(protoProp){
-      amp.extend(true, child.prototype, protoProp);
+      AMP.extend(true, child.prototype, protoProp);
     }
 
     child.__super__ = parent.prototype;
@@ -977,7 +977,7 @@
    * @method getHash
    * @return {Array}
    */
-  amp.getHash = function(){
+  AMP.getHash = function(){
     if(url.hash.length){
       return url.hash.split('#').slice(1);
     }
@@ -991,7 +991,7 @@
    * @method getRatio
    * @return {Number}
    */
-  amp.getRatio = function(){
+  AMP.getRatio = function(){
     return root.devicePixelRatio || 1;
   };
 
@@ -1004,7 +1004,7 @@
    * @param {String} key ハッシュ名 省略可
    * @return {Boolean}
    */
-  amp.hasHash = function(key){
+  AMP.hasHash = function(key){
     var flag = false;
 
     if(url.href.indexOf('#') > -1){
@@ -1038,7 +1038,7 @@
    * @param {String} src 画像パス
    * @return {Image} 生成した、イメージオブジェクト
    */
-  amp.preload = function(src){
+  AMP.preload = function(src){
     var img = new Image();
     img.src = src;
     return img;
@@ -1052,7 +1052,7 @@
    * @method queryHashMap
    * @return {Object} クエリを格納した連想配列を返す
    */
-  amp.queryHashMap = function(){
+  AMP.queryHashMap = function(){
     var map = {},
     array = [],
     param = url.search.slice(1).split('&');
@@ -1078,7 +1078,7 @@
    * @param  {String} str 対象の文字列
    * @return {String}
    */
-  amp.removeSpaceChara = function(str){
+  AMP.removeSpaceChara = function(str){
     return str.replace(/\s+/g, '');
   };
 
@@ -1090,8 +1090,8 @@
    * @method toString
    * @return {String}
    */
-  amp.toString = function(){
-    return '[object amp]';
+  AMP.toString = function(){
+    return '[object AMP]';
   };
 
 
@@ -1102,8 +1102,8 @@
    * @method uuid
    * @return {String} UUIDを生成して返す
    */
-  amp.uuid = function(){
-    var d = amp.digit;
+  AMP.uuid = function(){
+    var d = AMP.digit;
     return (d() + d() + '-' + d() + '-' + d() + '-' + d() + '-' + d() + d() + d());
   };
 
@@ -1116,8 +1116,8 @@
    * @param  {XML Node} xmlNodeデータ
    * @return {String} 文字列に変換して返す
    */
-  amp.xmlToString = function(xml){
-    if(amp.hasXMLSerializer()){
+  AMP.xmlToString = function(xml){
+    if(AMP.hasXMLSerializer()){
       return (new XMLSerializer()).serializeToString(xml);
     } else {
       try {
@@ -1142,7 +1142,7 @@
    * @param {Function} callback コールバック関数
    * @return {Number} タイマーNumber
    */
-  amp.requestAnimationFrame = (function(){
+  AMP.requestAnimationFrame = (function(){
 
     var requestAnimation = (
       root.requestAnimationFrame ||
@@ -1169,7 +1169,7 @@
    * @param {Number} id タイマーNumber
    * @return {Number} タイマーNumber
    */
-  amp.cancelAnimationFrame = (function(){
+  AMP.cancelAnimationFrame = (function(){
 
     var cancelAnimation = (
       root.cancelAnimationFrame ||
@@ -1196,7 +1196,7 @@
    * @method now
    * @type {Number} 現在の時間(ミリ秒)を返します
    */
-  amp.now = (function(){
+  AMP.now = (function(){
     var p = root.performance,
     pNow = p && (p.now || p.mozNow || p.msNow || p.oNow || p.webkitNow);
 
@@ -1235,7 +1235,7 @@
    * @return {Void}
    */
   Object.keys =  Object.keys || function(obj){
-    if(amp.isObject(obj)){
+    if(AMP.isObject(obj)){
       var size = 0,
       prop;
       for(prop in obj){
@@ -1253,7 +1253,7 @@
     export
   ----------------------------------------------------------------------*/
 
-  root.amp = amp;
+  root.AMP = AMP;
 
 
 

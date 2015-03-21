@@ -13,7 +13,7 @@
   /**
    * <h4>Layeringを管理します</h4>
    *
-   * @class amp.Layer
+   * @class AMP.Layer
    * @constructor
    * @return {Layer}
    */
@@ -21,7 +21,7 @@
     var isType = Selector = false,
     type;
 
-    if(selector && amp.isFunction(selector.toString)){
+    if(selector && AMP.isFunction(selector.toString)){
       type = selector.toString();
       isType = type.indexOf('[Container ') > -1 || type.indexOf('[Stage ') > -1;
     }
@@ -51,7 +51,7 @@
 
 
   // export
-  // amp.createjs.$ = createjs.promote($, "DisplayObject");
+  // AMP.createjs.$ = createjs.promote($, "DisplayObject");
 
 
 
@@ -99,8 +99,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.$ = $;
+  root.AMP = root.AMP || {};
+  root.AMP.$ = $;
 
 
 }(window, createjs));

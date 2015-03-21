@@ -13,7 +13,7 @@
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class amp.Scroll
+   * @class AMP.Scroll
    * @constructor
    * @param  {jQuery} $trigger トリガーとなるa要素 省略可 初期： $('a[href^=#]')
    * @param  {Object} options オプション値 省略可 初期： Scroll.defaults
@@ -129,7 +129,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -137,7 +137,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Scroll}
    */
-   Scroll.extend = amp._extend;
+   Scroll.extend = AMP._extend;
 
 
   /**
@@ -218,9 +218,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Scroll = Scroll;
-  root.amp.scroll = scroll;
+  root.AMP = root.AMP || {};
+  root.AMP.Scroll = Scroll;
+  root.AMP.scroll = scroll;
 
 
 }(window, jQuery));

@@ -17,15 +17,15 @@
    * <h4>ローダー</h4>
    * createrjs.Preloadクラスに依存します
    *
-   * @class amp.createrjs.Loader
+   * @class AMP.createrjs.Loader
    * @constructor
    * @param  {Array} manifest 読み込みファイルリスト
    * @param  {Objecr} options 後日記述
    * @return {Instance}
    */
   Loader = function(manifest, options){
-    this.manifest  = amp.isArray(manifest) ? manifest : [manifest];
-    this.param     = amp.extend(true, {}, Loader.defaults, options);
+    this.manifest  = AMP.isArray(manifest) ? manifest : [manifest];
+    this.param     = AMP.extend(true, {}, Loader.defaults, options);
     this.loadQueue = new createjs.LoadQueue(this.param.useXHR);
     this.loadQueue.setMaxConnections(this.param.loadMax);
   };
@@ -142,7 +142,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -150,7 +150,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Loader}
    */
-   Loader.extend = amp._extend;
+   Loader.extend = AMP._extend;
 
 
   /**
@@ -164,7 +164,7 @@
     var self = this;
 
     // updateCountをフラグにシングルトン
-    if(amp.isNumber(self.updateCount)){
+    if(AMP.isNumber(self.updateCount)){
       return self;
     } else {
       self.updateCount = 0;
@@ -276,7 +276,7 @@
   p._controller = function(){
     var self = this;
 
-    amp.requestAnimationFrame(function(){
+    AMP.requestAnimationFrame(function(){
       var current = self.loadCount / self.manifest.length * 100;
 
       // 100までカウントの更新
@@ -334,10 +334,10 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.createjs = root.amp.createjs || {};
-  root.amp.createjs.Loader = Loader;
-  root.amp.createjs.loader = loader;
+  root.AMP = root.AMP || {};
+  root.AMP.createjs = root.AMP.createjs || {};
+  root.AMP.createjs.Loader = Loader;
+  root.AMP.createjs.loader = loader;
 
 
 }(window, createjs));

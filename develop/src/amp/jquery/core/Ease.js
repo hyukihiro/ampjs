@@ -12,13 +12,13 @@
 
   /**
    * <h4>Easeingを管理します</h4>
-   * amp.Easeをextendします
+   * AMP.Easeをextendします
    *
-   * @class amp.Ease
+   * @class AMP.Ease
    * @constructor
    * @return {Ease}
    */
-  Ease = amp.Ease.extend();
+  Ease = AMP.Ease.extend();
 
 
 
@@ -269,9 +269,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Ease = Ease;
-  root.amp.ease = new Ease();
+  root.AMP = root.AMP || {};
+  root.AMP.Ease = Ease;
+  root.AMP.ease = new Ease();
 
 
 }(window, jQuery));

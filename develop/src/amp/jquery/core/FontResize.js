@@ -13,7 +13,7 @@
   /**
    * <h4>フォントサイズ変更イベント</h4>
    *
-   * @class amp.FontResize
+   * @class AMP.FontResize
    * @constructor
    * @return {FontResize}
    */
@@ -43,7 +43,7 @@
    * @property p
    * @type {Object}
    */
-  p = FontResize.prototype = amp.extend({}, amp.Mediator.prototype, FontResize.prototype);
+  p = FontResize.prototype = AMP.extend({}, AMP.Mediator.prototype, FontResize.prototype);
 
 
   /**
@@ -92,7 +92,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -100,7 +100,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  FontResize.extend = amp._extend;
+  FontResize.extend = AMP._extend;
 
 
   /**
@@ -155,7 +155,7 @@
    * @return {FontResize}
    */
   p.setObserver = function(isObserver){
-    var flag = amp.isBoolean(isObserver) ? isObserver : this.isObserver;
+    var flag = AMP.isBoolean(isObserver) ? isObserver : this.isObserver;
 
     if(flag !== this.isObserver && flag){
       this._controller();
@@ -184,7 +184,7 @@
     }
 
     if(self.isObserver){
-      amp.requestAnimationFrame(function(){
+      AMP.requestAnimationFrame(function(){
         self._controller();
       });
     }
@@ -210,9 +210,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.FontResize = FontResize;
-  root.amp.fontResize = new FontResize();
+  root.AMP = root.AMP || {};
+  root.AMP.FontResize = FontResize;
+  root.AMP.fontResize = new FontResize();
 
 
 }(window, jQuery));

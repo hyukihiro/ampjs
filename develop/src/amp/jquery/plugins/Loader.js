@@ -14,7 +14,7 @@
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
    * <b>imagesloaded.jsに依存します</b>
    *
-   * @class amp.Loader
+   * @class AMP.Loader
    * @constructor
    * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期値： 'body'
    * @param {Boolean} isStart ローダー開始するか
@@ -26,7 +26,7 @@
     this.length = this.imagesloaded.images.length;
     this.$defer = new $.Deferred();
 
-    if(amp.isBoolean(isStart) && isStart){
+    if(AMP.isBoolean(isStart) && isStart){
       this.start();
     }
 
@@ -140,7 +140,7 @@
 
   /**
    * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * AMP._extendをエクスポートしています
    *
    * @static
    * @method extend
@@ -148,7 +148,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Loader}
    */
-   Loader.extend = amp._extend;
+   Loader.extend = AMP._extend;
 
 
   /**
@@ -190,7 +190,7 @@
     if(self.loadCount >= 100){
       self.$defer.resolve(self.imagesloaded);
     } else {
-      amp.requestAnimationFrame(function(){
+      AMP.requestAnimationFrame(function(){
         self._update();
       });
     }
@@ -213,9 +213,9 @@
     export
   --------------------------------------------------------------------------*/
 
-  root.amp = root.amp || {};
-  root.amp.Loader = Loader;
-  root.amp.loader = loader;
+  root.AMP = root.AMP || {};
+  root.AMP.Loader = Loader;
+  root.AMP.loader = loader;
 
 
 }(window, jQuery));
