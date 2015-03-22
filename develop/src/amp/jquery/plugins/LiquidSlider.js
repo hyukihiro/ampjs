@@ -1,4 +1,8 @@
-(function($, amp, exports){
+var AMP = AMP || {};
+
+(function(root){
+
+  // 'use strict';
 
 
   /*----------------------------------------------------------------------
@@ -6,7 +10,7 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * リキッドスライダー
+   * <h4>リキッドスライダー</h4>
    *
    * @constructor
    * @class LiquidSlider
@@ -265,7 +269,7 @@
 	p.timerStart = function(num){
 		var self = this;
 
-		if(amp.isNumber(num)){
+		if(AMP.isNumber(num)){
 			self.param.timer = num;
 		}
 
@@ -324,7 +328,7 @@
 	 * @return {LiquidSlider}
 	 */
 	p.moveTo = function(num){
-		if(amp.isNumber(num) && num < this.param.originalLength){
+		if(AMP.isNumber(num) && num < this.param.originalLength){
 			this._controller(num - this.param.current);
 		}
 		return this;
@@ -366,10 +370,8 @@
 					self.timerStart();
 					self.param.isAnimate = false;
 				}
-			)
-
-
-		};
+			);
+		}
 
 		return self;
 	};
@@ -428,7 +430,7 @@
 	 * @return {LiquidSlider}
 	 */
 	p._active = function(step){
-		step = amp.isNumber(step) ? step : 0;
+		step = AMP.isNumber(step) ? step : 0;
 
 		// pointer
 		if(this.param.$pointer[0]){
@@ -534,8 +536,8 @@
 		exports
 	--------------------------------------------------------------------------*/
 
-	exports.LiquidSlider = LiquidSlider;
+	AMP.LiquidSlider = LiquidSlider;
 
 
 
-}(jQuery, amp, common));
+}(jQuery));
