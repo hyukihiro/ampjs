@@ -9,7 +9,6 @@ var AMP = AMP || {};
     拡張
   ======================================================================*/
 
-  // アップデート予定
 
   /*----------------------------------------------------------------------
     @method
@@ -41,35 +40,72 @@ var AMP = AMP || {};
       obj = arguments[count];
 
       for(key in obj){
-        if(obj.hasOwnProperty(key)){
-          data = extendObject[key];
-          copy = obj[key];
+        data = extendObject[key];
+        copy = obj[key];
 
-          // マージデータが同じなら次のループへ
-          if(extendObject === copy){
-            continue;
+        // マージデータが同じなら次のループへ
+        if(extendObject === copy){
+          continue;
+        }
+
+        isArray = AMP.isArray(copy);
+
+        if(isDeep && copy && AMP.isObject(copy) || isArray){
+          if(isArray){
+            clone = data && AMP.isArray(data) ? data : [];
+          } else {
+            clone = data && AMP.isObject(data) ? data : {};
           }
 
-          isArray = AMP.isArray(copy);
+          // ネスト構造を再帰処理
+          extendObject[key] = AMP.mixin(isDeep, clone, copy);
 
-          if(isDeep && copy && AMP.isObject(copy) || isArray){
-            if(isArray){
-              clone = data && AMP.isArray(data) ? data : [];
-            } else {
-              clone = data && AMP.isObject(data) ? data : {};
-            }
-
-            // ネスト構造を再帰処理
-            extendObject[key] = AMP.mixin(isDeep, clone, copy);
-
-          } else if (copy !== undefined){
-            extendObject[key] = copy;
-          }
+        } else if (copy !== undefined){
+          extendObject[key] = copy;
         }
       }
     }
 
     return extendObject;
+  };
+
+
+  /**
+   * <h4>クラスの継承</h4>
+   * 拡張した、サブクラスを返します
+   * superClassは、可変長引数で、多重継承することが可能
+   *
+   * @method inherits
+   * @param  {Function} subClass   サブクラス
+   * @param  {Function} superClass スパークラス
+   * @return {Function}
+   */
+  AMP.inherits = function(subClass, superClass){
+    superClass = AMP.argsToArray(arguments, 1);
+
+    var p = subClass.prototype,
+    i = superClass.length - 1;
+
+    for(; i > -1; i -= 1){
+      function F(){
+        this.constructor = subClass;
+      };
+      F.prototype = superClass[i].prototype;
+
+      // exports
+      // constructor
+      subClass[AMP.getFunctionName(superClass[i]) + '_constructor'] = superClass[i];
+
+      // static
+      AMP.each(superClass[i], function(item, key){
+        subClass[key] = item;
+      });
+
+      // public
+      AMP.mixin(p, new F());
+    }
+
+    return subClass;
   };
 
 
@@ -80,52 +116,13 @@ var AMP = AMP || {};
    * @protected
    * @static
    * @method _extend
-   * @param {Class} childClass 子クラス
-   * @return {Extend Class}
+   * @param {arguments} subClass サブクラス
+   * @return {Function}
    */
   // AMP.AMPにextendメソッドをExportします
-  AMP._extend = AMP.AMP.extend = function(childClass){
-    if(AMP.isUndefined(childClass)){
-      childClass = function(){};
-    }
-
-    var parent = this,
-    parentProto = parent.prototype,
-    publicProp = childClass.prototype,
-    childConstructor = publicProp.constructor,
-    extendClass,
-    Substitute;
-
-    // mixin
-    Substitute = function(){
-      this.constructor = childConstructor;
-      // AMP.mixin(this.constructor, parentProto.constructor, childConstructor);
-    };
-    Substitute.prototype = parentProto;
-
-    // extendClass
-    extendClass           = childConstructor;
-    extendClass.prototype = AMP.mixin(true, new Substitute(), publicProp);
-    extendClass.__super__ = parentProto;
-
-    return extendClass;
-  };
-
-
-
-
-  /**
-   * <h4>AMPネームスペースにクラスを追加</h4>
-   *
-   * @method exportClass
-   * @param  {Class} childClass 子クラス
-   * @param  {String} version バージョン
-   * @return {Export Class}
-   */
-  AMP.exportClass = function(childClass, version){
-    var exportClass = AMP.createClass(childClass, version);
-    AMP[AMP.getFunctionName(exportClass)] = exportClass;
-    return exportClass;
+  AMP._extend = AMP._AMP.extend = function(){
+    var args = arguments.length ? arguments : function(){};
+    return AMP.inherits(args, this);
   };
 
 

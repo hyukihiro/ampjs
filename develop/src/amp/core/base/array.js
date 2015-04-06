@@ -49,4 +49,23 @@ var AMP = AMP || {};
 	};
 
 
+  /**
+   *　<h4>atgumentsを配列に変換して返す</h4>
+   *
+   * @method argsToArray
+   * @param {arguments} args arguments
+   * @param {Number} index スライスする切り取り開始位置
+   * @param {Number} lastIndex スライスする切り取り終了位置
+   * @type {Array}
+   */
+  AMP.argsToArray = (function(){
+  	var slice = Array.prototype.slice
+  	return function(args, index, lastIndex){
+  		index = index || 0;
+  		lastIndex = lastIndex || args.length;
+  		return slice.call(args, index, lastIndex);
+  	}
+  }());
+
+
 }(window));

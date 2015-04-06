@@ -17,17 +17,18 @@ var AMP = AMP || {};
    * @param {Boolean} isLocalStorage ローカルストレージを使用するか？
    */
   function Storage(isLocalStorage){
-    if(AMP.hasStorage()){
-      if(isLocalStorage){
-        this.type     = 'localStorage';
-        this._storage = localStorage;
+    if(isLocalStorage){
+      this.type     = 'localStorage';
+      this._storage = localStorage;
 
-      } else {
-        this.type     = 'sessionStorage';
-        this._storage = sessionStorage;
-      }
+    } else {
+      this.type     = 'sessionStorage';
+      this._storage = sessionStorage;
     }
   }
+
+  // 基底クラスを継承
+  AMP.inherits(Storage, AMP._AMP);
 
   // prototype
   var p = Storage.prototype;
@@ -37,6 +38,26 @@ var AMP = AMP || {};
   /*--------------------------------------------------------------------------
     @property
   --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Storage.VERSION = '2.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @private
+   * @property name
+   * @type {String}
+   */
+  p.className = 'Storage';
+
 
   /**
    * <h4>ストレージタイプ</h4>
@@ -103,7 +124,7 @@ var AMP = AMP || {};
         this._storage.clear();
 
       } else {
-        AMP.each(arguments, function(item){
+        AMP.each(AMP.argToAarguments, function(item){
           self._storage.removeItem(item);
         });
       }
@@ -158,12 +179,20 @@ var AMP = AMP || {};
   };
 
 
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+
+
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
-  AMP.exportClass(Storage, '2.0');
+  AMP.Storage = Storage;
 
 
 }(window));

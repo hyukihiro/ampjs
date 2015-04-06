@@ -57,5 +57,20 @@
   };
 
 
+  /**
+   * <h4>新しいprototypeオブジェクトの生成</h4>
+   * see: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+   *
+   * @method Object.create
+   * @param  {Object} proto プロトタイプオブジェクト
+   * @return {Object}
+   */
+  Object.create = Object.create || function(proto){
+    function F(){}
+    F.prototype = proto;
+    return new F();
+  };
+
+
 
 }(window));

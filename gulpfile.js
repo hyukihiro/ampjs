@@ -129,7 +129,7 @@ var LICENCE = MODULE.fs.readFileSync('LICENCE.txt', 'utf8');
  * pleeeaseOptions： css prefix調整
  */
 var pleeeaseOptions = {
-	browsers  : ['last 2 version', 'ie 8', 'ie 9', 'Android 2.3'],
+	browsers  : ['last 2 version', 'ie 8', 'ie 9', 'Android 4'],
 	sourcemaps: false,
 	mqpacker  : false,
 	minifier  : false
@@ -341,18 +341,18 @@ MODULE.gulp.task('hbs', function(){
  */
 MODULE.gulp.task('js', function(){
 	// src
-	MODULE.gulp.src(PATH.src + '*.js')
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/'));
+	MODULE.gulp.src(PATH.src + 'libs/*.js')
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs'));
 
 	// src jquery.plugins.js
-	MODULE.gulp.src(PATH.src + 'jquery.plugins/*.js')
+	MODULE.gulp.src(PATH.src + 'libs/jquery.plugins/*.js')
 	.pipe(MODULE.concat('jquery.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/'));
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs'));
 
 	// src createjs
-	MODULE.gulp.src(PATH.src + 'createjs.plugins/*.js')
+	MODULE.gulp.src(PATH.src + 'libs/createjs.plugins/*.js')
 	// .pipe(MODULE.concat('createjs.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/createjs.plugins'));
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'src/libs/createjs.plugins'));
 
 	// common.js
 	MODULE.gulp.src(PATH.develop + 'shared/js/*.js')

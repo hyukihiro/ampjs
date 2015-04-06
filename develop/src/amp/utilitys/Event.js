@@ -242,7 +242,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.exportClass(Event, '3.0');
+  // AMP.exportClass(Event, '3.0');
 
 
 }(window));

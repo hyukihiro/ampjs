@@ -28,18 +28,34 @@
 <script>
 window.onload = function(){
 
-	console.log(amp.Ease.prototype);
+	// console.log(amp.Ease.prototype);
 
 
-	$('.sec-inner').on('flickcancel', function(e){
-		if(amp.isPC()){
-			console.log(e);
-		} else {
-			alert(0);
-		}
+	// $('.sec-inner').on('flickcancel', function(e){
+	// 	if(amp.isPC()){
+	// 		console.log(e);
+	// 	} else {
+	// 		alert(0);
+	// 	}
 
-	});
+	// });
+	function A(){};
+	A._a = function(){}
+	A.prototype.hoge = 'hoge';
+	A.prototype.a = 'a';
 
+	A.extend = AMP._extend;
+
+	function C(){
+
+	};
+
+	console.log(AMP);
+	// var B = A.extend();
+	// console.log(AMP);
+
+
+	// AMP.inherits(C, B, A);
 
 
 	// console.log(TypeError);

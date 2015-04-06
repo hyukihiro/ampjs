@@ -22,8 +22,8 @@ var AMP = AMP || {};
    * @return {String}
    */
   AMP.getFunctionName = function(fn){
-    if('name' in fn){
-      return fn.name;
+    if('className' in fn){
+      return fn.className;
     } else {
       return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
     }

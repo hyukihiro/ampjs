@@ -32,15 +32,12 @@
 
   /**
    * <h4>AMP</h4>
+   * 基底クラスを定義しています
    *
    * @class AMP
    * @constructor
    **/
-  function AMP(className){
-    if(typeof className === 'string'){
-      this._name = className;
-    }
-  }
+  function AMP(){}
 
 
 
@@ -59,13 +56,13 @@
 
 
   /**
-   * <h4>コンストラクタ名</h4>
+   * <h4>クラス名</h4>
    *
    * @private
    * @property name
    * @type {String}
    */
-  AMP.prototype._name = CLASS_NAME;
+  AMP.prototype.className = CLASS_NAME;
 
 
 
@@ -82,7 +79,7 @@
    * @param {Object} staticProp staticオブジェクト
    * @return {Extend Class}
    */
-  // AMP.mixin = amp._extend;
+  // AMP.extend = AMP._extend;
 
 
   /**
@@ -92,7 +89,7 @@
    * @return {String} クラス名を返す
    */
   AMP.prototype.toString = function(){
-    return '[object ' + this._name + ']';
+    return '[object ' + this.className + ']';
   };
 
 
@@ -106,8 +103,8 @@
    *
    * @module amp
    **/
-  root.amp = new AMP(CLASS_NAME);
-  root.amp.AMP = AMP;
+  root.AMP = new AMP(CLASS_NAME);
+  root.AMP._AMP = AMP;
 
 
 
