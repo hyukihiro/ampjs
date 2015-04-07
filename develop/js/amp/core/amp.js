@@ -22,7 +22,7 @@
   // クラス基本設定
   var
   CLASS_NAME = 'AMP',
-  VERSION    = '3.0';
+  VERSION    = '3.0.0';
 
 
 
@@ -75,8 +75,7 @@
    *
    * @static
    * @method extend
-   * @param {Object|Function} protoProp プロトタイプオブジェクト、もしくはsubClass
-   * @param {Object} staticProp staticオブジェクト
+   * @param {Function} subClass サブクラス
    * @return {Extend Class}
    */
   // AMP.extend = AMP._extend;

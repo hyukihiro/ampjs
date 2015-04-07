@@ -46,7 +46,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Storage.VERSION = '2.0';
+  Storage.VERSION = '2.0.0';
 
 
   /**

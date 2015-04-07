@@ -22,10 +22,12 @@ var AMP = AMP || {};
    * @return {String}
    */
   AMP.getFunctionName = function(fn){
-    if('className' in fn){
-      return fn.className;
-    } else {
-      return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
+    if(fn){
+      if(fn.className){
+        return fn.className;
+      } else {
+        return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
+      }
     }
   };
 

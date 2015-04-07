@@ -36,7 +36,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Ease.VERSION = '2.0';
+  Ease.VERSION = '2.0.0';
 
 
   /**
