@@ -17,7 +17,7 @@
    * @class Tween
    * @return {Tween}
    */
-  function Tween(){};
+  function Tween(){}
 
 
 

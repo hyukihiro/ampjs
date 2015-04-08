@@ -34,7 +34,7 @@
     this.hogan = Hogan.compile($template.html());
     this.$template = $template;
     this.$wrap = this.$template.wrapAll('<div class="_jst_wrap" />');
-  };
+  }
 
 
 

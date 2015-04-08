@@ -50,13 +50,20 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>イベントハンドラーを連想配列で格納します</h4>
+   * <h4>イベントリスナーを連想配列で格納します</h4>
+   *
+   * @example
+   * _listeners = {
+   *    attr    : eventObj.attr,
+   *    func    : listener,
+   *    context : context
+   * }
    *
    * @private
-   * @property _handlers
+   * @property _listeners
    * @type {Object}
    */
-  p._handlers = {};
+  p._listeners = {};
 
 
   /*--------------------------------------------------------------------------
@@ -127,20 +134,24 @@ var AMP = AMP || {};
     var self = this,
     events = type.split(' ');
 
-    AMP.each(events, function(item){
-      var eventObj = self._getEventNameMap(item);
-      self._handlers[eventObj.type] = self._handlers[eventObj.type] || [];
-      self._handlers[eventObj.type].push({
-        attr    : eventObj.attr,
-        listener: listener,
-        context : context
+    // listenerが関数かチェック
+    if(AMP.isFunction(listener)){
+      AMP.each(events, function(item){
+        var eventObj = self._getEventNameMap(item);
+        self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
+        self._listeners[eventObj.type].push({
+          attr   : eventObj.attr,
+          func     : listener,
+          context: context
+        });
       });
-    });
+    }
   };
 
 
   /**
    * <h4>イベント削除</h4>
+   * TODO: 内部処理最適化予定
    *
    * @private
    * @method _addEvent
@@ -150,7 +161,9 @@ var AMP = AMP || {};
    */
   p._removeEvent = function(type, listener){
     var self = this,
-    events = type ? type.split(' ') : [];
+    events = type ? type.split(' ') : [],
+    ary = null,
+    listeners;
 
     listener = AMP.getFunctionName(listener);
 
@@ -158,45 +171,43 @@ var AMP = AMP || {};
       var eventObj = self._getEventNameMap(event);
 
       // イベント属性指定がある場合
-      if(eventObj && eventObj.attr && self._handlers[eventObj.type]){
-        var handlers = self._handlers[eventObj.type],
-        ary = null;
+      if(eventObj && eventObj.attr && self._listeners[eventObj.type]){
+        listeners = self._listeners[eventObj.type];
 
-        AMP.each(handlers, function(handler){
-          if(handler.attr !== eventObj.attr){
+        AMP.each(listeners, function(item){
+          if(item.attr !== eventObj.attr){
             if(listener){
-              if(listener !== AMP.getFunctionName(handler.listener)){
+              if(listener !== AMP.getFunctionName(item.func)){
                 ary = ary || [];
-                ary.push(handler);
+                ary.push(item);
               }
             } else {
               ary = ary || [];
-              ary.push(handler);
+              ary.push(item);
             }
           }
         });
 
-        self._handlers[eventObj.type] = ary;
+        self._listeners[eventObj.type] = ary;
 
       // イベントタイプ指定ある場合
       } else if(eventObj){
-        var ary = null;
-
         if(listener){
-          var handlers = self._handlers[eventObj.type],
-          AMP.each(handlers, function(handler){
-            if(listener !== AMP.getFunctionName(handler.listener)){
+          listeners = self._listeners[eventObj.type];
+
+          AMP.each(listeners, function(item){
+            if(listener !== AMP.getFunctionName(item.func)){
               ary = ary || [];
-              ary.push(handler);
+              ary.push(item);
             }
           });
         }
-        self._handlers[eventObj.type] = ary;
+        self._listeners[eventObj.type] = ary;
 
       // イベント全て削除
       } else {
-        self._handlers = null;
-        self._handlers = {};
+        self._listeners = null;
+        self._listeners = {};
       }
     });
   };
@@ -234,20 +245,21 @@ var AMP = AMP || {};
    * @return {Boolean}
    */
   p.hasEvent = function(type){
-    var handlers,
+    var flag = false,
     events = this._getEventNameMap(type),
-    flag = false;
+    listeners　= this._listeners[events.type];
 
-    handlers = this._handlers[events.type];
-
-    if(handlers){
+    // イベントリスナーの有無
+    if(listeners){
+      // 属性指定がある場合
       if(events.attr){
-        AMP.each(handlers, function(handler){
-          if(handler.attr === events.attr){
+        AMP.each(listeners, function(item){
+          if(item.attr === events.attr){
             flag = true;
             return false;
           }
         });
+
       } else {
         flag = true;
       }
@@ -268,12 +280,12 @@ var AMP = AMP || {};
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    handlers = this._handlers[events.type];
+    listeners = this._listeners[events.type];
 
-    if(handlers){
-      AMP.each(handlers, function(handler){
-        if(!events.attr || handler.attr === events.attr){
-          handler.listener.apply(handler.context, AMP.argsToArray(arguments, 1));
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
         }
       });
     }

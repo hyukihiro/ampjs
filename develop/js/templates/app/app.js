@@ -3,7 +3,7 @@
 // 後日作成
 // アプリケーションを管理します
 
-	function App(){};
+	function App(){}
 
 	p = App.prototype;
 
@@ -36,20 +36,16 @@
 			app.state = 'start';
 
 			app.manage = new app.View();
-        app.Mediator.on('sort', function(event) {
-            self.sortRenderTween(event);
-        });
+      app.Mediator.on('sort', function(event) {
+          self.sortRenderTween(event);
+      });
 
-        // URLの監視開始
-        Backbone.history.start({
-            root: '/matcollection/',
-            pushState: false
-        });
-
-
-
-
-		};
+      // URLの監視開始
+      Backbone.history.start({
+          root: '/matcollection/',
+          pushState: false
+      });
+		}
 
 		return this;
 	};

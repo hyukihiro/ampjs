@@ -87,9 +87,12 @@ var AMP = AMP || {};
     i = superClass.length - 1;
 
     for(; i > -1; i -= 1){
+      // jshintのチェックを緩和します
+      /* jshint loopfunc: true */
+      /* jshint -W082 */
       function F(){
         this.constructor = subClass;
-      };
+      }
       F.prototype = superClass[i].prototype;
 
       // exports

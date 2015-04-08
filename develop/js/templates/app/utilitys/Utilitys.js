@@ -19,7 +19,7 @@
    * @class Utilitys
    * @return {Utilitys}
    */
-  function Utilitys(){};
+  function Utilitys(){}
 
 
 

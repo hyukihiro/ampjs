@@ -59,12 +59,12 @@ var AMP = AMP || {};
    * @type {Array}
    */
   AMP.argsToArray = (function(){
-  	var slice = Array.prototype.slice
+  	var slice = Array.prototype.slice;
   	return function(args, index, lastIndex){
   		index = index || 0;
   		lastIndex = lastIndex || args.length;
   		return slice.call(args, index, lastIndex);
-  	}
+  	};
   }());
 
 
