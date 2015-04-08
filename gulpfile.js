@@ -340,14 +340,14 @@ MODULE.gulp.task('hbs', function(){
  */
 MODULE.gulp.task('js', function(){
 
-	/* common.js
+	/* sample
 	-----------------------------------------------------------------*/
-	MODULE.gulp.src(PATH.develop + 'shared/js/*.js')
+	MODULE.gulp.src(PATH.develop + 'sample/shared/js/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.header(LICENCE))
-	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'shared/js/'));
+	.pipe(MODULE.gulp.dest(PATH.httpdocs + 'sample/shared/js/'));
 
 	/* libs
 	-----------------------------------------------------------------*/

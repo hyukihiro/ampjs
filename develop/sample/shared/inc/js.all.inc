@@ -10,4 +10,4 @@
 <!-- <script src="/js/amp/amp.createjs.js"></script> -->
 
 <!-- common -->
-<script src="/shared/js/common.js"></script>
+<script src="/sample/shared/js/common.js"></script>
