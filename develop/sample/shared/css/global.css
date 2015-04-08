@@ -211,7 +211,7 @@ header .link {
 
 header .link a {
   padding-right: 28px;
-  background: url(/shared/images/external.png) no-repeat 100% 50%;
+  background: url(/sample/shared/images/external.png) no-repeat 100% 50%;
   font-size: 86%;
 }
 header .link a:hover {
