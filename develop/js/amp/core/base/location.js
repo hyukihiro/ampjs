@@ -44,15 +44,13 @@ var AMP = AMP || {};
    * @return {Object}
    */
   AMP.queryHashMap = function(){
-    var map,
+    var map = {};
     array = [],
     param = url.search.slice(1).split('&');
 
     if(param[0] !== ''){
       var i = 0,
       l = param.length;
-
-      map = {};
 
       for(; i < l; i += 1){
         array = param[i].split('=');
