@@ -17,7 +17,10 @@ var AMP = AMP || {};
    * @constructor
    * @return {Ease}
    */
-  function Ease(){};
+  function Ease(){}
+
+  // 基底クラスを継承
+  AMP.inherits(Ease, AMP.Ease);
 
   // prototype
   var p = Ease.prototype;
@@ -267,7 +270,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.exportClass(AMP.Ease.extend(Ease), AMP.Ease.VERSION);
+  AMP.Ease　= Ease;
   AMP.ease = new Ease();
 
 

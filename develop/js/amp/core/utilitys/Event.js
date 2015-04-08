@@ -18,7 +18,7 @@ var AMP = AMP || {};
   function Event(){}
 
   // 基底クラスを継承
-  AMP.inherits(Event, AMP._AMP);
+  AMP.inherits(Event, AMP.BASE_CLASS);
 
   // prototype
   var p = Event.prototype;
@@ -42,8 +42,7 @@ var AMP = AMP || {};
   /**
    * <h4>クラス名</h4>
    *
-   * @private
-   * @property name
+   * @property className
    * @type {String}
    */
   p.className = 'Event';

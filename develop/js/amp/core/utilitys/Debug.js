@@ -1,4 +1,6 @@
-(function(root, $){
+var AMP = AMP || {};
+
+(function(root){
 
   // 'use strict';
 
@@ -15,7 +17,7 @@
   function Debug(){}
 
   // 基底クラスを継承
-  AMP.inherits(Debug, AMP._AMP);
+  AMP.inherits(Debug, AMP.BASE_CLASS);
 
   // prototype
   var p = Debug.prototype;
@@ -39,20 +41,40 @@
   /**
    * <h4>クラス名</h4>
    *
-   * @private
-   * @property name
+   * @property className
    * @type {String}
    */
   p.className = 'Debug';
 
 
   /**
-   * <h4>デバッグview</h4>
+   * <h4>デバッグview要素</h4>
    *
-   * @property css
+   * @static
+   * @property debugViews
    * @type {Object}
    */
-  p._debugViews = null;
+  Debug.views = null;
+
+
+  /**
+   * <h4>デバッグviewの表示状態</h4>
+   *
+   * @static
+   * @property isShow
+   * @type {Boolean}
+   */
+  Debug.isShow = true;
+
+
+  /**
+   * <h4>デバッグログの有効・無効</h4>
+   *
+   * @static
+   * @property isChangeLog
+   * @type {Boolean}
+   */
+  Debug.isChangeLog = true;
 
 
 
@@ -61,38 +83,44 @@
   --------------------------------------------------------------------------*/
 
 
-  // Log.hsaLog = !(root.console._defaultLog);
+  /**
+   * <h4>view要素を生成</h4>
+   *
+   * @static
+   * @method createView
+   * @return {Void}
+   */
   Debug.createView = function(){
-    // view?p?[?c?v‘f?d?¶?￢
-    var childNode = '';
-    childNode += '<div style="z-index:19791218;min-width:250px;font-size:12px;background:#41454e;">';
-    childNode += '<div class="ttl" style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>';
-    childNode += '<textarea id="AMP_DEBUG_TEXT" style="-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>';
-    childNode += '</div>';
+    // view要素生成
+    var childNode = '<div style="z-index:19791218;min-width:250px;font-size:12px;background:#41454e;">\n<div class="ttl" style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>\n<textarea id="AMP_DEBUG_TEXT" style="-webkit-box-sizing:border-box;box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>\n</div>';
 
-    // view?v‘f?d?¶?￢
-    var doc = document,
-    el = doc.createElement('div');
+    // view要素の追加
+    var el = document.createElement('div');
 
     el.id = 'AMP_DEBUG';
+    el.setAttribute('style', 'position:fixed;left:10px;bottom:10px;');
     el.innerHTML = childNode;
-    doc.body.appendChild(el);
+    document.body.appendChild(el);
 
-    //?@controll elms
+    //　controll elements
     Debug.views = {
-      wrap : doc.getElementById('AMP_DEBUG'),
-      text : doc.getElementById('AMP_DEBUG_TEXT')
+      wrap : document.getElementById('AMP_DEBUG'),
+      text : document.getElementById('AMP_DEBUG_TEXT')
     };
 
-    Debug.views.wrap.setAttribute('style', 'position:fixed;left:10px;bottom:10px;');
-
-    //
+    //　viewイベント追加
     Debug.addEvent();
   };
 
 
+  /**
+   * <h4>viewイベント設定</h4>
+   *
+   * @static
+   * @method addEvent
+   * @return {Void}
+   */
   Debug.addEvent = function(){
-   // move
     var isDrag = false,
     x = null,
     y = null;
@@ -102,13 +130,8 @@
       isDrag = true;
     };
 
-    // cancel
-    Debug.views.text.onmousemove = function(){
-      isDrag = false;
-    };
-
     // move
-    Debug.views.wrap.onmousemove = function(){
+    document.onmousemove = function(){
       if(isDrag){
         var _x = event.clientX;
         _y = event.clientY;
@@ -119,17 +142,17 @@
           x = _x;
           y = _y;
 
-          var offset = 'position:fixed;';
-          offset += 'top:' + (Debug.views.wrap.offsetTop + diffY) + 'px;';
-          offset += 'left:' + (Debug.views.wrap.offsetLeft + diffX) + 'px;';
-          Debug.views.wrap.setAttribute('style', offset);
+          var position = 'position:fixed;';
+          position += 'top:' + (Debug.views.wrap.offsetTop + diffY) + 'px;';
+          position += 'left:' + (Debug.views.wrap.offsetLeft + diffX) + 'px;';
+          Debug.views.wrap.setAttribute('style', position);
+
+          return false;
 
         } else {
           x = _x;
           y = _y;
         }
-
-        return false;
       }
     };
 
@@ -139,10 +162,18 @@
       x = null;
       y = null;
     };
+
+    // keyup
+    // Debug.views.text.onkeyup = function(){}
+
+    // cancel
+    Debug.views.text.onmousemove = function(){
+      isDrag = false;
+    };
+    Debug.views.wrap.onscroll = function(){
+      return false;
+    };
   };
-
-
-
 
 
   /**
@@ -152,24 +183,95 @@
    * @return {Debug}
    */
   p.log = function(){
-    if(!this.views){
+    if(!Debug.views){
       Debug.createView();
     }
 
-    // データタイプに合わせてログを出力
-    AMP.each(AMP.argsToArray(arguments), function(data){
-      if(AMP.isArray(data)){
-        this.views.text.value += JSON.stringify(data) + '\n';
-      } else if(AMP.isObject(data)){
-        this.views.text.value += JSON.stringify(data, null, '\t') + '\n';
-      } else {
-        this.views.text.value += data + '\n';
-      }
-    });
+    if(Debug.isChangeLog){
+      AMP.each(AMP.argsToArray(arguments), function(data){
+        // データタイプに合わせてログを出力
+        if(AMP.isArray(data)){
+          Debug.views.text.value += JSON.stringify(data) + '\n';
+        } else if(AMP.isObject(data)){
+          Debug.views.text.value += JSON.stringify(data, null, '\t') + '\n';
+        } else {
+          Debug.views.text.value += data + '\n';
+        }
+      });
+    }
 
     return this;
   };
 
+
+  /**
+   * <h4>ログのクリア</h4>
+   *
+   * @method clear
+   * @return {Debug}
+   */
+  p.clear = function(){
+    if(Debug.views){
+      Debug.views.text.value = '';
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>ログの出力モードを有効にします</h4>
+   *
+   * @method　start
+   * @return {Debug}
+   */
+  p.start = function(){
+    Debug.isChangeLog　= true;
+    return this;
+  };
+
+
+  /**
+   * <h4>ログの出力モードを無効にします</h4>
+   *
+   * @method　stop
+   * @return {Debug}
+   */
+  p.stop = function(){
+    Debug.isChangeLog　= false;
+    return this;
+  };
+
+
+  /**
+   * <h4>ログを非表示にします</h4>
+   *
+   * @method hide
+   * @return {Debug}
+   */
+  p.hide = function(){
+    if(Debug.views && Debug.isShow){
+      var style = Debug.views.wrap.getAttribute('style') + 'display:none;';
+      Debug.views.wrap.setAttribute('style', style);
+      Debug.isShow = false;
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>ログを表示します</h4>
+   *
+   * @method show
+   * @return {Debug}
+   */
+  p.show = function(){
+    if(Debug.views && !Debug.isShow){
+      var style = Debug.views.wrap.getAttribute('style') + 'display:block;';
+      Debug.views.wrap.setAttribute('style', style);
+      Debug.isShow = true;
+    }
+    return this;
+  };
 
 
   /*--------------------------------------------------------------------------
@@ -180,4 +282,4 @@
   AMP.debug = new Debug();
 
 
-}(window, jQuery));
+}(window));

@@ -28,7 +28,7 @@ var AMP = AMP || {};
   }
 
   // 基底クラスを継承
-  AMP.inherits(Storage, AMP._AMP);
+  AMP.inherits(Storage, AMP.BASE_CLASS);
 
   // prototype
   var p = Storage.prototype;
@@ -52,8 +52,7 @@ var AMP = AMP || {};
   /**
    * <h4>クラス名</h4>
    *
-   * @private
-   * @property name
+   * @property className
    * @type {String}
    */
   p.className = 'Storage';

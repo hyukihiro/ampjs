@@ -87,7 +87,7 @@ var AMP = AMP || {};
     i = superClass.length - 1;
 
     for(; i > -1; i -= 1){
-      // jshintのチェックを緩和します
+      // !!!: jshintのチェックを緩和します
       /* jshint loopfunc: true */
       /* jshint -W082 */
       function F(){
@@ -123,9 +123,9 @@ var AMP = AMP || {};
    * @return {Function}
    */
   // AMP.AMPにextendメソッドをExportします
-  AMP._extend = AMP._AMP.extend = function(){
-    var args = arguments.length ? arguments : function(){};
-    return AMP.inherits(args, this);
+  AMP._extend = AMP.BASE_CLASS.extend = function(){
+    var subClass = arguments.length ? arguments : function(){};
+    return AMP.inherits(subClass, this);
   };
 
 

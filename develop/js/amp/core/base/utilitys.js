@@ -16,18 +16,21 @@ var AMP = AMP || {};
 
   /**
    * <h4>関数名を返す</h4>
+   * 無名関数はundefinedを返します
    *
    * @method getFunctionName
    * @param  {Function} fn 名前を取得したい関数
    * @return {String}
    */
   AMP.getFunctionName = function(fn){
-    if(fn){
+    if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
       } else {
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
+    } else {
+      throw new TypeError(fn + ' is not a function');
     }
   };
 

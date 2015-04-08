@@ -15,8 +15,7 @@
   // consoleがなければ空の関数を返す
   if(!('console' in root)){
     root.console = {
-      log: function(){},
-      _defaultLog: false // ブラウザのデフォルト機能判定用フラグ
+      log: function(){}
     };
   }
 
@@ -75,9 +74,9 @@
    * @return {Object}
    */
   Object.create = Object.create || function(proto){
-    function F(){}
-    F.prototype = proto;
-    return new F();
+    function Obj(){}
+    Obj.prototype = proto;
+    return new Obj();
   };
 
 

@@ -18,7 +18,7 @@ var AMP = AMP || {};
   function Ease(){}
 
   // 基底クラスを継承
-  AMP.inherits(Ease, AMP._AMP);
+  AMP.inherits(Ease, AMP.BASE_CLASS);
 
   // prototype
   var p = Ease.prototype;
@@ -42,8 +42,7 @@ var AMP = AMP || {};
   /**
    * <h4>クラス名</h4>
    *
-   * @private
-   * @property name
+   * @property className
    * @type {String}
    */
   p.className = 'Ease';
@@ -285,7 +284,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP._Ease　= Ease;
+  AMP.Ease　= Ease;
   AMP.ease = new Ease();
 
 

@@ -21,7 +21,8 @@
 
   /**
    * <h4>AMP</h4>
-   * 基底クラスを定義しています
+   * !!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)
+   * !!!: AMP.BaseClassにエクスポートしてます
    *
    * @class AMP
    * @constructor
@@ -47,8 +48,7 @@
   /**
    * <h4>クラス名</h4>
    *
-   * @private
-   * @property name
+   * @property className
    * @type {String}
    */
   AMP.prototype.className = CLASS_NAME;
@@ -68,6 +68,7 @@
    * @return {Extend Class}
    */
   // AMP.extend = AMP._extend;
+  AMP.extend = null;
 
 
   /**
@@ -92,7 +93,7 @@
    * @module amp
    **/
   root.AMP = new AMP(CLASS_NAME);
-  root.AMP._AMP = AMP;
+  root.AMP.BASE_CLASS = AMP;
 
 
 
