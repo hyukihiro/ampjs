@@ -4,47 +4,27 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var SmoothScroll, smoothScroll, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class AMP.SmoothScroll
+   * @class SmoothScroll
    * @constructor
-   * @param  {Object} options オプション値
-   * @return {SmoothScroll}
    */
-  SmoothScroll = function(options){
-    this.$target = $('html, body');
+  function SmoothScroll(options){
+    this.$html = $('html, body');
     this.param = $.extend(true, {}, SmoothScroll.defaults, options);
-  };
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(SmoothScroll, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>マウスホイールのスムーススクロール</h4>
-   *
-   * @static
-   * @method smoothScroll
-   * @param  {Object} options? オプション値 省略可
-   * @return {SmoothScroll} SmoothScrollインスタンスを返す
-   */
-  smoothScroll = function(options){
-    var smoothScroll = new SmoothScroll(options);
-    smoothScroll.on();
-    return smoothScroll;
-  };
+  // prototype
+  var p = SmoothScroll.prototype;
 
 
 
@@ -59,30 +39,32 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  SmoothScroll.VERSION = '2.0';
+  SmoothScroll.VERSION = '3.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = SmoothScroll.prototype;
+  p.className = 'SmoothScroll';
 
 
   /**
    * <h4>スムーススクロールエリア</h4>
    * コンストラクタが呼び出し時に、$('html, body')が渡されます
    *
-   * @property $target
+   * @property $html
    * @type {jQuery}
    */
-  p.$target = null;
+  p.$html = null;
 
 
   /**
-   * <h4>オプション値</h4>
+   * <h4>オプション初期値</h4>
+   *
+   * @default
    * defaults: { <ul><li>
    *   amount  : 0, // {Number} スクロール量 </li><li>
    *   duration: 600, // {Number} スクロールスピード </li><li>
@@ -94,8 +76,8 @@ var AMP = AMP || {};
    * @type {Object}
    */
   SmoothScroll.defaults = {
-    amount  : 200,
-    dulation: 400,
+    amount  : 500,
+    duration: 500,
     ease    : 'easeOutCubic'
   };
 
@@ -116,16 +98,19 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>SmoothScrollインスタンスの生成</h4>
+   * shorthand
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
+   * @method get
+   * @param  {Object} options? オプション値 省略可
    * @return {SmoothScroll}
    */
-  SmoothScroll.extend = AMP._extend;
+  SmoothScroll.get = function(options){
+    var smoothScroll = new SmoothScroll(options);
+    smoothScroll.on();
+    return smoothScroll;
+  };
 
 
   /**
@@ -138,9 +123,9 @@ var AMP = AMP || {};
     var self = this;
 
     if(AMP.isWindows()){
-      self.$target.off('mousewheel.SmoothScroll')
-      .on('mousewheel.SmoothScroll', function(event, move){
-        self.tween(event, move);
+      self.$html.off('mousewheel.SmoothScroll')
+      .on('mousewheel.SmoothScroll', function(){
+        self.tween(arguments[1]);
         return false;
       });
     }
@@ -155,7 +140,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.$target.off('mousewheel.SmoothScroll');
+    this.$html.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -166,24 +151,14 @@ var AMP = AMP || {};
    * @method tween
    * @return {Void}
    */
-  p.tween = function(event, move){
+  p.tween = function(move){
     var self = this,
     param = self.param,
-    y = AMP.isWebkit() ? self.$target.eq(1).scrollTop() : self.$target.eq(0).scrollTop(),
+    y = AMP.isWebkit() ? self.$html.eq(1).scrollTop() : self.$html.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
-    self.$target.stop(true, false).animate({scrollTop: scrollY}, param.dulation, param.ease);
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String}
-   */
-  p.toString = function(){
-    return '[object SmoothScroll]';
+    self.$html.velocity('stop')
+    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
   };
 
 
@@ -193,7 +168,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.SmoothScroll = SmoothScroll;
-  AMP.smoothScroll = smoothScroll;
+  AMP.smoothScroll = SmoothScroll.get;
 
 
 }(window, jQuery));

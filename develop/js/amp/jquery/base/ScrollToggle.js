@@ -4,50 +4,30 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var ScrollToggle, scrollToggle, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>スクロール時、座標を判定してのToggle処理</h4>
    *
-   * @class AMP.ScrollToggle
+   * @class ScrollToggle
    * @constructor
    * @param  {jQuery} $target 表示・非表示する要素
    * @param  {Object} options オプション値
-   * @return {ScrollToggle}
    */
-  ScrollToggle = function($target, options){
+  function ScrollToggle($target, options){
+    this.$window = $(window);
     this.$target = $target;
-    this.isShow  = $target.css('display') === 'block';
     this.param   = $.extend(true, {}, ScrollToggle.defaults, options);
-  };
+    this.isShow  = $target.css('display') === 'block';
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(ScrollToggle, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>スクロール時、座標を判定してのToggle処理</h4>
-   * ScrollToggleのショートハンド
-   *
-   * @static
-   * @method scrollToggle
-   * @param  {jQuery} $target 表示・非表示する要素
-   * @param  {Object} options オプション値 省略可
-   * @return {Pagetop} Pagetopインスタンスを返す
-   */
-  scrollToggle = function($target, options){
-    var inst = new ScrollToggle($target, options);
-    inst.on();
-    return inst;
-  };
+  // prototype
+  var p = ScrollToggle.prototype;
 
 
 
@@ -62,16 +42,16 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = '2.0';
+  ScrollToggle.VERSION = '3.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = ScrollToggle.prototype;
+  p.className = 'ScrollToggle';
 
 
   /**
@@ -80,7 +60,7 @@ var AMP = AMP || {};
    * @property $window
    * @type {jQuery}
    */
-  p.$window = $(root);
+  p.$window = null;
 
 
   /**
@@ -102,7 +82,9 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>オプション値</h4>
+   * <h4>オプション初期値</h4>
+   *
+   * @default
    * defaults: { <ul><li>
    *   showY    : 300, // {Number} 表示されるoffsetY値 </li><li>
    *   show     : { opacity : 1}, // {Object} 表示アニメーション時のcssプロパティ </li><li>
@@ -121,8 +103,8 @@ var AMP = AMP || {};
     showY    : 300,
     show     : { opacity : 1},
     hide     : { opacity : 0},
-    duration : 400,
-    easing   : 'easeOutCubic',
+    duration : 500,
+    easing   : 'easeInSine',
     showCall : $.noop,
     hideCall : $.noop
   };
@@ -144,16 +126,20 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>ScrollToggleインスタンスの生成</h4>
+   * shorthand
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {ScrollToggle}
+   * @method get
+   * @param  {jQuery} $target 表示・非表示する要素
+   * @param  {Object} options オプション値 省略可
+   * @return {Pagetop} Pagetopインスタンスを返す
    */
-   ScrollToggle.extend = AMP._extend;
+  ScrollToggle.get = function($target, options){
+    var inst = new ScrollToggle($target, options);
+    inst.on();
+    return inst;
+  };
 
 
   /**
@@ -194,7 +180,6 @@ var AMP = AMP || {};
   };
 
 
-
   /**
    * <h4>表示</h4>
    *
@@ -205,7 +190,8 @@ var AMP = AMP || {};
     var self = this;
     self.isShow = true;
     self.$target.css({display: 'block'}).css(self.param.hide)
-    .stop(true, false).animate(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
+    .velocity('stop')
+    .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
 
     return this;
   };
@@ -220,23 +206,15 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
     self.isShow = false;
-    self.$target.stop(true, false).animate(self.param.hide, self.param.duration, self.param.ease, function(){
+
+    self.$target
+    .velocity('stop')
+    .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
       self.$target.css({display: 'none'});
       self.param.hideCall();
     });
 
     return this;
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String}
-   */
-  p.toString = function(){
-    return '[object ScrollToggle]';
   };
 
 
@@ -246,7 +224,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.ScrollToggle = ScrollToggle;
-  AMP.scrollToggle = scrollToggle;
+  AMP.scrollToggle = ScrollToggle.get;
 
 
 }(window, jQuery));

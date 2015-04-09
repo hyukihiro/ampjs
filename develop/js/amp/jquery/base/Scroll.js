@@ -4,13 +4,9 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var Scroll, scroll, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>ページ内リンクのスクロール</h4>
@@ -19,39 +15,22 @@ var AMP = AMP || {};
    * @constructor
    * @param  {jQuery} $trigger トリガーとなるa要素 省略可 初期： $('a[href^=#]')
    * @param  {Object} options オプション値 省略可 初期： Scroll.defaults
-   * @return {Scroll}
    */
-  Scroll = function($trigger, options){
+  function Scroll($trigger, options){
     // $trigger指定がない場合、初期値を設定
     if(!$trigger || !($trigger instanceof jQuery)){
       options = $trigger;
       $trigger = $('a[href^=#]');
     }
     this.$trigger = $trigger;
-    this.param = $.extend(true, {}, Scroll.defaults, {$page: $('html, body')}, options);
-  };
+    this.param = $.extend(true, {}, Scroll.defaults, {$html: $('html, body')}, options);
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(Scroll, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ページ内リンクのスクロール</h4>
-   * Scrollのショートハンド
-   *
-   * @static
-   * @method scroll
-   * @param  {jQuery} $trigger トリガーとなるa要素 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {Scroll} Scrollインスタンスを返す
-   */
-  scroll = function($trigger, options){
-    var inst = new Scroll($trigger, options);
-    inst.on();
-    return inst;
-  };
+  // prototype
+  var p = Scroll.prototype;
 
 
 
@@ -66,16 +45,16 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '2.0';
+  Scroll.VERSION = '3.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = Scroll.prototype;
+  p.className = 'Scroll';
 
 
   /**
@@ -89,12 +68,14 @@ var AMP = AMP || {};
 
   /**
    * <h4>オプション値</h4>
+   *
+   * @default
    * defaults: { <ul><li>
-   *   $page        : null, // {jQuery} ラッパー要素 初期値: $('html, body') </li><li>
+   *   $html        : null, // {jQuery} ラッパー要素 初期値: $('html, body') </li><li>
    *   adjust       : 0, // {Number} スクロール停止位置の調整値 </li><li>
    *   noScrollClass: 'no-scroll', // {String} スクロールキャンセルするクラス </li><li>
    *   duration     : 600, // {Number} スクロールスピード </li><li>
-   *   easing       : 'easeOutExpo', // {String} イージング </li><li>
+   *   ease         : 'easeOutExpo', // {String} イージング </li><li>
    *   begin        : $.noop, // {Function} スクロール開始前のコールバック </li><li>
    *   complete     : $.noop, // {Function} スクロール完了時のコールバック </li><ul>
    * }
@@ -104,11 +85,11 @@ var AMP = AMP || {};
    * @type {Object}
    */
   Scroll.defaults = {
-    $page        : null, // $('html, body'),
+    $html        : null, // $('html, body'),
     adjust       : 0,
     noScrollClass: 'no-scroll',
-    duration     : 600,
-    easing       : 'easeOutExpo',
+    duration     : 800,
+    ease         : 'easeOutQuint',
     begin        : $.noop,
     complete     : $.noop
   };
@@ -130,16 +111,20 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>Scrollインスタンスの生成</h4>
+   * shorthand
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
+   * @method get
+   * @param  {jQuery} $trigger トリガーとなるa要素 省略可
+   * @param  {Object} options オプション値 省略可
    * @return {Scroll}
    */
-   Scroll.extend = AMP._extend;
+  Scroll.get = function($trigger, options){
+    var inst = new Scroll($trigger, options);
+    inst.on();
+    return inst;
+  };
 
 
   /**
@@ -189,12 +174,13 @@ var AMP = AMP || {};
 
     if($target[0] && !$trigger.hasClass(param.noScrollClass)){
       moveTo = $target.offset().top - param.adjust;
-      if($(window).scrollTop() !== moveTo){
+      if($(root).scrollTop() !== moveTo){
         // 縦列処理します
         $.stream(
           param.begin,
           function(){
-            return param.$page.stop(true, false).animate({scrollTop: moveTo}, param.duration, param.easing);
+            return param.$html.velocity('stop')
+            .velocity('scroll', {offset: moveTo, duration: param.duration, easing: param.ease});
           },
           param.complete
         );
@@ -204,24 +190,13 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String}
-   */
-  p.toString = function(){
-    return '[object Scroll]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
   AMP.Scroll = Scroll;
-  AMP.scroll = scroll;
+  AMP.scroll = Scroll.get;
 
 
 }(window, jQuery));

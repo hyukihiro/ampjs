@@ -4,55 +4,30 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var FlatHeight, flatHeight, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class AMP.FlatHeight
+   * @class FlatHeight
    * @constructor
    * @param  {jQuery} $target 対象のエリア要素
    * @param  {Number} split 区切る数 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {FlatHeight}
+   * @param  {Boolean} isResize リサイズ後に実行するか
    */
-  FlatHeight = function($target, split, options){
-    this.$target   = $target;
-    this.split     = $.isNumeric(split) ? split : $target.length;
-    options        = $.isPlainObject(split) ? split : options;
-    this.param     = $.extend(true, {}, FlatHeight.defaults, options);
-    this.param.isResize = AMP.isDevice('sd') ? true : this.param.isResize;
-  };
+  function FlatHeight($target, split, isResize){
+    this.$target  = $target;
+    this.split    = AMP.isNumber(split) ? split : $target.length;
+    this.isResize = AMP.isBoolean(isResize) ? isResize : true;
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>要素の高さ揃え</h4>
-   * FlatHeightのショートハンド
-   *
-   * @static
-   * @method flatHeight
-   * @param  {jQuery} $target 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {FlatHeight} FlatHeight生成してインスタンスを返す
-   */
-  flatHeight = function($target, split, options){
-    var inst = new FlatHeight($target, split, options);
-    inst.setEvent();
-    inst.setHeight();
-    return inst;
-  };
+  // prototype
+  var p = FlatHeight.prototype;
 
 
 
@@ -67,7 +42,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '2.1';
+  FlatHeight.VERSION = '3.0.0';
 
 
   /**
@@ -98,31 +73,12 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値</h4>
-   * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
-   * defaults: { <ul><li>
-   *   isResize: false, // {Boolean} リサイズ時、高さを揃えなおすか (スマートデバイスはtrueに設定されます)</li><li>
-   *   timer   : 100 // {Number} リサイズイベントタイミング </li></ul>
-   * }
+   * <h4>サイズ後、リセットしなおすか</h4>
    *
-   * @static
-   * @property defaults
-   * @type {Object}
+   * @property isResize
+   * @type {Boolean}
    */
-  FlatHeight.defaults = {
-    isResize: false,
-    timer   : 50
-  };
-
-
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.param = null;
+  p.isResize = true;
 
 
 
@@ -131,29 +87,35 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>要素の高さ揃え</h4>
+   * FlatHeightのショートハンド
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
+   * @method get
+   * @param  {jQuery} $target 対象のエリア要素
+   * @param  {Number} split 区切る数 省略可
+   * @param  {Boolean} isResize リサイズ後に実行するか
    * @return {FlatHeight}
    */
-  FlatHeight.extend = AMP._extend;
+  FlatHeight.get = function($target, split, isResize){
+    var inst = new FlatHeight($target, split, isResize);
+    inst.addEvent();
+    inst.setHeight();
+    return inst;
+  };
 
 
   /**
    * <h4>イベント設定</h4>
    * リサイズイベント、フォントリサイズイベント
    *
-   * @method setEvent
+   * @method addEvent
    * @return {FlatHeight}
    */
-  p.setEvent = function(){
+  p.addEvent = function(){
     var self = this;
 
-    // font resize
+    // fontresize
     if(AMP.isDevice('pc')){
       AMP.fontResize.on('change.FlatHeight', function(){
         self.setHeight();
@@ -161,8 +123,8 @@ var AMP = AMP || {};
     }
 
     // window resize
-    $(window).on('resizestop.FlatHeight', {timer: self.param.timer}, function(){
-      if(self.param.isResize){
+    $(root).on('resizestop.FlatHeight', {timer: 50}, function(){
+      if(self.isResize){
         self.setHeight();
       }
     });
@@ -224,24 +186,13 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object FlatHeight]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
   AMP.FlatHeight = FlatHeight;
-  AMP.flatHeight = flatHeight;
+  AMP.flatHeight = FlatHeight.get;
 
 
 

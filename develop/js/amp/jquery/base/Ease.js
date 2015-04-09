@@ -13,9 +13,8 @@ var AMP = AMP || {};
    * <h4>Easeingを管理します</h4>
    * AMP.Easeをextendします
    *
-   * @class AMP.Ease
+   * @class Ease
    * @constructor
-   * @return {Ease}
    */
   function Ease(){}
 
@@ -34,16 +33,10 @@ var AMP = AMP || {};
   /**
    * <h4>jQuery easeing用ネームスペース</h4>
    *
-   * @property jQuery
-   * @type {Object}
-   */
-  /**
-   * <h4>jQuery easeing用ネームスペース</h4>
-   *
    * @property $
    * @type {Object}
    */
-  p.$ = p.jQuery = {};
+  p.$ = {};
 
 
   /* 1 Sine
