@@ -4,7 +4,21 @@
 <!--#include virtual="/sample/shared/inc/head.inc" -->
 
 
-
+<style>
+	head{
+		font-family: pc;
+	}
+	@media all and (max-width: 1024px){
+		head{
+			font-family: tb;
+		}
+	}
+	@media all and (max-width: 767px){
+		head{
+			font-family: sp;
+		}
+	}
+</style>
 </head>
 
 
@@ -42,25 +56,23 @@
 
 
 
-
+<div id="sample">
+sssssssssss
+</div>
 
 
 
 <script>
 window.onload = function(){
-	var ary = ['sss','oooo'];
+	// console.log(AMP.fontResize._createElement());
 
-	AMP.debug.log({
-		a: 0,
-		b: 1
-	});
 
-	console.log(AMP);
-	// 0
-	// false
-	// 'aa'
-//
 
+	// AMP.debug.log({
+	// 	a: 0,
+	// 	b: 1
+	// });
+// console.log($('script').css('fontFamily'));
 
 
 };

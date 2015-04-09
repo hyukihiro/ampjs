@@ -44,7 +44,7 @@ var AMP = AMP || {};
    * @return {Object}
    */
   AMP.queryHashMap = function(){
-    var map = {};
+    var map = {},
     array = [],
     param = url.search.slice(1).split('&');
 

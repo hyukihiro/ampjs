@@ -15,6 +15,44 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>DOMイベント削除</h4>
+   *
+   * @method removeEvent
+   * @param  {DOM} element  ターゲット要素
+   * @param  {String} type     イベント名
+   * @param  {Function} listener 実行する関数
+   * @return {DOM}
+   */
+  AMP.addEvent = function(element, type, listener){
+    if(element.addEventListener){
+      element.addEventListener(type, listener, false);
+    } else {
+      element.attachEvent('on' + type, listener);
+    }
+    return element;
+  };
+
+
+  /**
+   * <h4>DOMイベント削除</h4>
+   *
+   * @method removeEvent
+   * @param  {DOM} element  ターゲット要素
+   * @param  {String} type     イベント名
+   * @param  {Function} listener 実行する関数
+   * @return {DOM}
+   */
+  AMP.removeEvent = function(element, type, listener){
+    if(element.addEventListener){
+      element.removeEventListener(type, listener, false);
+    } else {
+      element.detachEvent('on' + type, listener);
+    }
+    return element;
+  };
+
+
+  /**
    * <h4>関数名を返す</h4>
    * 無名関数はundefinedを返します
    *

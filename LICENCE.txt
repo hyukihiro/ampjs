@@ -1,10 +1,10 @@
 /**
- * amp JavaScript Library
+ * AMP JavaScript Library
  *
  * @licence MIT Licence
  *
  * author Yoshihito Fujiwara
- * source https://bitbucket.org/cutupworks/ampjs
+ * source https://bitbucket.org/yoshihitofujiwara/ampjs
  * Copyright (c) 2014 Yoshihito Fujiwara
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of

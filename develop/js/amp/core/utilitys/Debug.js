@@ -11,7 +11,7 @@ var AMP = AMP || {};
   /**
    * <h4>デバッグ機能</h4>
    *
-   * @class Log
+   * @class Debug
    * @constructor
    */
   function Debug(){}
@@ -162,9 +162,6 @@ var AMP = AMP || {};
       x = null;
       y = null;
     };
-
-    // keyup
-    // Debug.views.text.onkeyup = function(){}
 
     // cancel
     Debug.views.text.onmousemove = function(){

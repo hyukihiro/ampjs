@@ -67,7 +67,7 @@
    * @param {Function} subClass サブクラス
    * @return {Extend Class}
    */
-  // AMP.extend = AMP._extend;
+  // !!!: export AMP._extend;
   AMP.extend = null;
 
 
@@ -88,11 +88,11 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>amp</h4>
+   * <h4>AMP</h4>
    *
-   * @module amp
+   * @module AMP
    **/
-  root.AMP = new AMP(CLASS_NAME);
+  root.AMP = new AMP();
   root.AMP.BASE_CLASS = AMP;
 
 
