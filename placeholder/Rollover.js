@@ -4,32 +4,55 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  /*----------------------------------------------------------------------
+  var Rollover, rollover, p;
+
+
+
+  /*--------------------------------------------------------------------------
     @constructor
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
   /**
-   * <h4>ロールオーバー</h4>
+   * <h4>画像のロールオーバー</h4>
    *
-   * @class Rollover
+   * @class AMP.Rollover
    * @constructor
+   * @param  {jQuery} $image 画像要素
+   * @param  {Object} options ロールオーバーのオプション値
+   * @return {Rollover}
    */
-  function Rollover($image, options){
+  Rollover = function($image, options){
     // $image指定がない場合、初期値を設定
     if(!$image || !($image instanceof jQuery)){
       options = $image;
-      $image = $('img.rover, input.rover, .all_rover img');
+      $image = $('img.rover, input.rover, .all-rover img');
     }
 
     this.$image = $image;
     this.param = $.extend(true, Rollover.defaults, options);
   };
 
-  // 基底クラスを継承
-  AMP.inherits(Rollover, AMP.BASE_CLASS);
 
-  // prototype
-  var p = Rollover.prototype;
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>画像のロールオーバー</h4>
+   * Rolloverのショートハンド
+   *
+   * @static
+   * @method rollover
+   * @param  {jQuery} $image 画像要素
+   * @param  {Object} options ロールオーバーのオプション値
+   * @return {Rollover}
+   */
+  rollover = function($image, options){
+    var inst = new Rollover($image, options);
+    inst.createRollover().on();
+    return inst;
+  };
 
 
 
@@ -44,26 +67,16 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Rollover.VERSION = '2.0.0';
+  Rollover.VERSION = '1.0';
 
 
   /**
-   * <h4>クラス名</h4>
+   * <h4>プロトタイプオブジェクト</h4>
    *
-   * @property className
-   * @type {String}
+   * @property p
+   * @type {Object}
    */
-  p.className = 'Rollover';
-
-
-  /**
-   * <h4>ターゲット画像要素</h4>
-   *
-   * @default $('img.rover, input.rover, .all_rover img')
-   * @property $image
-   * @type {jQuery}
-   */
-  p.$image = null;
+  p = Rollover.prototype;
 
 
   /**
@@ -73,9 +86,9 @@ var AMP = AMP || {};
    * @type {Object}
    */
   Rollover.defaults = {
-    groupClass : 'group_over',
+    groupClass : 'group-over',
     activeClass: 'active',
-    noOverClass: 'no_over',
+    noOverClass: 'no-over',
     postfix    : '_on'
   };
 
@@ -89,26 +102,31 @@ var AMP = AMP || {};
   p.param = null;
 
 
+  /**
+   * <h4>ターゲット画像</h4>
+   *
+   * @property $image
+   * @type {jQuery}
+   */
+  p.$image = null;
+
+
 
   /*--------------------------------------------------------------------------
     @method
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>画像のロールオーバー</h4>
-   * Rolloverのショートハンド
+   * <h4>クラスを拡張します</h4>
+   * AMP._extendをエクスポートしています
    *
    * @static
-   * @method rollover
-   * @param  {jQuery} $image 画像要素
-   * @param  {Object} options ロールオーバーのオプション値
+   * @method extend
+   * @param {Object} protoProp プロトタイプオブジェクト
+   * @param {Object} staticProp staticオブジェクト
    * @return {Rollover}
    */
-  Rollover.get = function($image, options){
-    var inst = new Rollover($image, options);
-    inst._createRollover().on();
-    return inst;
-  };
+  Rollover.extend = AMP._extend;
 
 
   /**
@@ -117,7 +135,7 @@ var AMP = AMP || {};
    * @method createRollover
    * @return {Rollover}
    */
-  p._createRollover = function(){
+  p.createRollover = function(){
     var self = this,
     param = self.param,
     $image, image, src, ext, $group;
@@ -257,13 +275,59 @@ var AMP = AMP || {};
   };
 
 
+  /**
+   * <h4>ロールオーバー無効化</h4>
+   *
+   * @method invalid
+   * @param  {Number} num 要素のインデックス
+   * @return {Rollover}
+   */
+  p.invalid = function(num){
+    var self = this,
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+
+    $image.each(function(){
+      $(this).addClass(self.param.noOverClass);
+    });
+  };
+
+
+  /**
+   * <h4>ロールオーバー有効化</h4>
+   *
+   * @method inforce
+   * @param  {Number} num 要素のインデックス
+   * @return {Rollover}
+   */
+  p.inforce = function(num){
+    var self = this,
+    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+
+    $image.each(function(){
+      var img = $(this).removeClass(self.param.noOverClass).removeClass(self.param.activeClass)[0];
+      img.src = img.rollover.offSrc;
+    });
+  };
+
+
+  /**
+   * <h4>クラス名を返す</h4>
+   *
+   * @method toString
+   * @return {String} クラス名を返す
+   */
+  p.toString = function(){
+    return '[object Rollover]';
+  };
+
+
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
   AMP.Rollover = Rollover;
-  AMP.rollover = Rollover.get;
+  AMP.rollover = rollover;
 
 
 }(window, jQuery));

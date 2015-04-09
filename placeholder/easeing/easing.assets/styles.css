@@ -1,0 +1,560 @@
+/* -ms-transform */
+.easing-description .back:active { -ms-transform:translateY(2px) }
+.easing-page .easing.linear { -ms-transform:translateY(-105px) }
+.easing-page .page-slider { -ms-transform:translateX(-105%) }
+.easing.is-clickable:active .button { -ms-transform:scale(.9) }
+.graph .example .bottom { -ms-transform:rotate(45deg) }
+.graph .example .top { -ms-transform:rotate(45deg) }
+.open-source .background { -ms-transform:rotate(45deg) }
+.open-source .corner { -ms-transform:rotate(45deg) }
+.open-source .octocat { -ms-transform:rotate(45deg) }
+.open-source .source-crop { -ms-transform:rotate(45deg) }
+.open-source .title { -ms-transform:rotate(45deg) }
+.transform-2d .open-source.show .rotator { -ms-transform:rotate(180deg) }
+
+/* -webkit-tap-highlight-color */
+.easing .link { -webkit-tap-highlight-color:rgba(255,255,255,0) }
+.open-source .crop { -webkit-tap-highlight-color:rgba(255,255,255,0) }
+
+/* -webkit-transform */
+.easing-description .back:active { -webkit-transform:translateY(2px) }
+.easing-page .easing.linear { -webkit-transform:translateY(-105px) }
+.easing-page .page-slider { -webkit-transform:translateX(-105%) }
+.easing.is-clickable:active .button { -webkit-transform:scale(.9) }
+.graph .example .bottom { -webkit-transform:rotate(45deg) }
+.graph .example .top { -webkit-transform:rotate(45deg) }
+.open-source .background { -webkit-transform:rotate(45deg) }
+.open-source .corner { -webkit-transform:rotate(45deg) }
+.open-source .octocat { -webkit-transform:rotate(45deg) }
+.open-source .source-crop { -webkit-transform:rotate(45deg) }
+.open-source .title { -webkit-transform:rotate(45deg) }
+.transform-2d .open-source.show .rotator { -webkit-transform:rotate(180deg) }
+.transform-3d .open-source.show .rotator { -webkit-transform:rotate3d(1,1,0,180deg) }
+
+/* -webkit-transition */
+.easing .graph .dot { -webkit-transition:opacity 200ms }
+.easing .graph .example { -webkit-transition:opacity 200ms }
+.easing-description .graph .dot { -webkit-transition:opacity 200ms }
+.easing-description .graph .example { -webkit-transition:opacity 200ms }
+.easing-description p a { -webkit-transition:border-bottom-color 150ms }
+.easing.is-clickable:active .button { -webkit-transition:-webkit-transform 200ms,box-shadow 200ms }
+.easing.is-clickable:active .button { -webkit-transition:none }
+.easing.is-clickable:hover .button { -webkit-transition:-webkit-transform 200ms,box-shadow 200ms }
+.easings .part ul { -webkit-transition:opacity 400ms }
+.howtos p a { -webkit-transition:border-bottom-color 150ms }
+.open-source .translate { -webkit-transition:opacity 400ms }
+.page-animation .easing.linear { -webkit-transition:all 600ms cubic-bezier(.77,0,.175,1) }
+.page-animation .page-slider { -webkit-transition:all 600ms cubic-bezier(.77,0,.175,1) }
+.transform-3d .open-source .rotator { -webkit-transition:all 600ms cubic-bezier(.455,.03,.515,.955) }
+footer .author { -webkit-transition:color 400ms }
+footer .hover { -webkit-transition:top 400ms cubic-bezier(.77,0,.175,1) }
+footer .star.is-show { -webkit-transition:opacity 400ms }
+
+/* -webkit-transition-delay */
+.transform-3d .open-source .border { -webkit-transition-delay:250ms }
+.transform-3d .open-source .text { -webkit-transition-delay:250ms }
+.transform-3d .open-source .translate { -webkit-transition-delay:0 }
+.transform-3d .open-source.show .border { -webkit-transition-delay:200ms }
+.transform-3d .open-source.show .text { -webkit-transition-delay:200ms }
+.transform-3d .open-source.show .translate { -webkit-transition-delay:400ms }
+
+/* -webkit-transition-property */
+.transform-3d .open-source .border { -webkit-transition-property:opacity }
+.transform-3d .open-source .text { -webkit-transition-property:opacity }
+
+/* background */
+.easing.is-clickable:active { background:#f0f0f0 }
+.easing.is-clickable:active .button { background:#fff }
+.easing.is-clickable:hover { background:#f0f0f0 }
+.easing.is-clickable:hover .button { background:#fff }
+.graph .dot { background:#ddd }
+.graph .example { background:#e40000 }
+.graph .example { background:-webkit-linear-gradient(#fe0000,#d00000) }
+.graph .example { background:linear-gradient(#fe0000,#d00000) }
+.graph .example .bottom { background:#fff }
+.graph .example .top { background:#fff }
+.open-source .background { background:#e8e8e8 }
+.open-source .source-crop { background:#fff }
+.open-source .title { background:#fff }
+.open-source .translate { background:#fff }
+.open-source:active .background { background:#ddd }
+.transform-3d .open-source .shadow { background:rgba(0,0,0,.1) }
+body { background:#fff }
+footer .hover { background:#000 }
+
+/* background-color */
+footer .mask { background-color:#888 }
+
+/* background-size */
+.open-source .octocat { background-size:100% 100% }
+footer .image { background-size:100% 100% }
+
+/* border-bottom */
+.easing-description .back .text { border-bottom:1px dotted }
+.easing-description p a { border-bottom:1px solid #bbb }
+.howtos p a { border-bottom:1px solid #bbb }
+
+/* border-bottom-color */
+.easing-description p a:hover { border-bottom-color:#000 }
+.howtos p a:hover { border-bottom-color:#000 }
+
+/* border-bottom-style */
+.easing-description .back:hover .text { border-bottom-style:solid }
+
+/* border-radius */
+.easing-description .graph .dot { border-radius:2px }
+.graph .dot { border-radius:2px }
+
+/* border-top */
+.open-source .border { border-top:1px dashed #999 }
+
+/* bottom */
+.open-source .border { bottom:0 }
+.open-source .text { bottom:4px }
+.transform-3d .open-source .shadow { bottom:0 }
+footer { bottom:0 }
+
+/* box-shadow */
+.easing.easeOutElastic .easing-title { box-shadow:#fff 0 26px 8px -8px inset }
+.easing.is-clickable:active { box-shadow:inset 0 0 5px rgba(0,0,0,.5) }
+.easing.is-clickable:active .button { box-shadow:0 0 2px rgba(0,0,0,.3) }
+.easing.is-clickable:hover { box-shadow:inset 0 0 5px rgba(0,0,0,.5) }
+.open-source .background { box-shadow:inset 0 -7px 7px -7px rgba(0,0,0,.5) }
+.open-source .octocat { box-shadow:inset 0 -5px 5px -5px rgba(0,0,0,.4) }
+.open-source .title { box-shadow:0 0 3px rgba(0,0,0,.5) }
+.open-source .translate { box-shadow:0 0 6px #fff }
+
+/* box-sizing */
+.easing-description { box-sizing:border-box }
+
+/* color */
+.easing-description .back { color:red }
+.easing-description p a { color:#000 }
+.easing-description pre strong { color:red }
+.easings .part-title { color:#999 }
+.howtos p a { color:#000 }
+.howtos pre strong { color:red }
+.open-source .source { color:#000 }
+.open-source .text { color:#666 }
+.open-source .translate a { color:#000 }
+body { color:#000 }
+footer .author:hover { color:#000 }
+footer a { color:#888 }
+
+/* display */
+.easing { display:inline-block }
+.easing .graph .dot { display:none }
+.easing .graph .example { display:none }
+.easing-description { display:none }
+.easing-description .back .text { display:inline-block }
+.easing-description p a { display:inline-block }
+.easing.linear { display:none }
+.easings ul { display:inline-block }
+.graph { display:inline-block }
+.howtos p a { display:inline-block }
+.open-source { display:none }
+.open-source .crop { display:block }
+.transform-2d .open-source.show .border { display:none }
+.transform-2d .open-source.show .text { display:none }
+footer .star { display:none }
+footer .star.is-enable { display:block }
+footer li { display:inline-block }
+
+/* fill */
+.graph svg path { fill:rgba(255,255,255,0) }
+.graph svg path { fill:transparent }
+.graph svg text { fill:#bbb }
+
+/* float */
+.easing-description .back { float:right }
+footer .author { float:left }
+footer .star.is-enable { float:left }
+
+/* font-family */
+body { font-family:"PT Sans",sans-serif }
+code { font-family:"PT Mono",monospace }
+footer li { font-family:"Trebuchet MS",sans-serif }
+pre strong { font-family:"PT Sans",sans-serif }
+
+/* font-size */
+.easing .easing-title { font-size:13px }
+.easing .easing-title { font-size:15px }
+.easing-description .back { font-size:14px }
+.easing-description h2 { font-size:23px }
+.easing-description h2 { font-size:25px }
+.easing-description h3 { font-size:20px }
+.easing-description h3 { font-size:22px }
+.easing-description pre { font-size:13px }
+.easing-description pre strong { font-size:14px }
+.easings .part-title { font-size:12px }
+.easings .part-title { font-size:14px }
+.graph svg text { font-size:12px }
+.howtos h2 { font-size:23px }
+.howtos h2 { font-size:25px }
+.howtos h3 { font-size:23px }
+.howtos h3 { font-size:25px }
+.howtos pre { font-size:13px }
+.howtos pre strong { font-size:14px }
+.open-source .source code { font-size:10px }
+.open-source .text { font-size:12px }
+.open-source .translate { font-size:13px }
+body { font-size:16px }
+code { font-size:14px }
+footer .author { font-size:12px }
+footer .author { font-size:13px }
+footer li { font-size:12px }
+
+/* font-weight */
+.easing .easing-title { font-weight:400 }
+.easing-description h2 { font-weight:400 }
+.easing-description h3 { font-weight:400 }
+.easing-description pre strong { font-weight:400 }
+.easings .part-title { font-weight:400 }
+.howtos h2 { font-weight:400 }
+.howtos h3 { font-weight:400 }
+.howtos pre strong { font-weight:400 }
+
+/* height */
+.easing-description .graph .dot { height:4px }
+.easing-description .graph svg { height:182px }
+.graph .dot { height:2px }
+.graph .example { height:12px }
+.graph .example .bottom { height:15px }
+.graph .example .top { height:15px }
+.graph svg { height:119px }
+.graph svg { height:140px }
+.open-source { height:80px }
+.open-source .background { height:120px }
+.open-source .corner { height:120px }
+.open-source .crop { height:90px }
+.open-source .octocat { height:19px }
+.open-source .rotator { height:80px }
+.open-source .source-crop { height:120px }
+.open-source .title { height:80px }
+footer { height:40px }
+footer .hover { height:100% }
+footer .image { height:22px }
+
+/* left */
+.easing .graph .dot { left:1px }
+.easing .graph .example { left:122px }
+.easing-description { left:105% }
+.easing-description .graph .dot { left:2px }
+.easing-description .graph .example { left:161.2px }
+.easings .easing { left:-2px }
+.easings .part-title { left:auto }
+.graph .example .bottom { left:-11px }
+.graph .example .top { left:-11px }
+.open-source .background { left:32px }
+.open-source .corner { left:21px }
+.open-source .crop { left:-10px }
+.open-source .octocat { left:43px }
+.open-source .rotator { left:10px }
+.open-source .source { left:40px }
+.open-source .source-crop { left:-50px }
+.open-source .title { left:23px }
+.open-source.show .rotator { left:12px }
+.transform-3d .open-source .shadow { left:0 }
+footer { left:0 }
+footer .mask { left:0 }
+
+/* line-height */
+.about { line-height:1.3 }
+.easing-description p a { line-height:1 }
+.howtos p a { line-height:1 }
+.open-source .source { line-height:1.1 }
+footer a { line-height:40px }
+
+/* list-style */
+.easing { list-style:none }
+footer li { list-style:none }
+
+/* margin */
+* { margin:0 }
+.centered { margin:0 auto }
+.easing { margin:3px 0 }
+.easing { margin:3px 5px }
+.easing .button { margin:-5px }
+.easing-description .graph { margin:-20px 0 -10px }
+.easings { margin:0 -30px 0 -10px }
+.easings { margin:0 }
+.easings .part-title { margin:-3px 0 -1px }
+.page-crop { margin:-10px 0 0 -10px }
+.page-crop { margin:0 -10px }
+footer .star.is-enable { margin:9px 0 0 30px }
+
+/* margin-bottom */
+.about p { margin-bottom:5px }
+.easing .easing-title { margin-bottom:-25px }
+.easing.linear .easing-title { margin-bottom:-35px }
+.graph svg { margin-bottom:-30px }
+body { margin-bottom:50px }
+
+/* margin-left */
+.easing-description .back .text { margin-left:5px }
+
+/* margin-right */
+.easings ul { margin-right:0 }
+.easings ul { margin-right:20px }
+
+/* margin-top */
+.easing-description { margin-top:-10px }
+.easing-description .back { margin-top:19px }
+.easing-description h2 { margin-top:15px }
+
+/* max-width */
+.centered { max-width:96% }
+
+/* min-height */
+html { min-height:100% }
+
+/* opacity */
+.easing .graph .dot { opacity:0 }
+.easing .graph .example { opacity:0 }
+.easing-description .graph .dot { opacity:0 }
+.easing-description .graph .example { opacity:0 }
+.easing-description.exampled .graph .dot { opacity:1 }
+.easing-description.exampled .graph .example { opacity:1 }
+.easing:hover .graph .dot { opacity:1 }
+.easing:hover .graph .example { opacity:1 }
+.easing:hover.is-tapped .dot { opacity:0 }
+.easing:hover.is-tapped .example { opacity:0 }
+.easings.hightlight-part .part ul { opacity:.15 }
+.easings.hightlight-part .part:hover ul { opacity:1 }
+.open-source .border { opacity:1 }
+.open-source .text { opacity:1 }
+.open-source .translate { opacity:0 }
+.open-source.show .border { opacity:0 }
+.open-source.show .text { opacity:0 }
+.open-source.show .translate { opacity:1 }
+.open-source.user-can-translate.show .translate { opacity:1 }
+.transform-3d .open-source .shadow { opacity:0 }
+footer .star { opacity:0 }
+footer .star.is-show { opacity:1 }
+
+/* outline */
+a { outline:none }
+
+/* overflow */
+.graph .example { overflow:hidden }
+.open-source .corner { overflow:hidden }
+.open-source .crop { overflow:hidden }
+.page-crop { overflow:hidden }
+footer .mask { overflow:hidden }
+
+/* padding */
+* { padding:0 }
+.about { padding:20px 164px 5px 0 }
+.easing { padding:5px }
+.easing .button { padding:5px }
+.easing-description { padding:0 10px }
+.easing-description h3 { padding:7px 0 5px }
+.easing-description pre { padding:5px 0 10px }
+.howtos { padding:0 10px }
+.howtos h2 { padding:17px 0 5px }
+.howtos h3 { padding:7px 0 5px }
+.howtos pre { padding:5px 0 10px }
+.open-source .translate { padding:0 3px }
+.page-crop { padding:0 }
+.page-crop { padding:10px 0 0 10px }
+
+/* padding-bottom */
+.easing-description p { padding-bottom:5px }
+.howtos p { padding-bottom:5px }
+
+/* padding-left */
+.open-source .text { padding-left:5px }
+footer .author { padding-left:27px }
+footer li { padding-left:10px }
+
+/* padding-top */
+.about { padding-top:10px }
+footer { padding-top:10px }
+
+/* position */
+.centered { position:relative }
+.easing { position:relative }
+.easing .easing-title { position:relative }
+.easing .graph { position:relative }
+.easing-description { position:absolute }
+.easing.linear { position:absolute }
+.easings { position:relative }
+.easings .part { position:relative }
+.easings .part-title { position:absolute }
+.easings .part-title { position:static }
+.graph { position:relative }
+.graph .dot { position:absolute }
+.graph .example { position:absolute }
+.graph .example .bottom { position:absolute }
+.graph .example .top { position:absolute }
+.open-source { position:absolute }
+.open-source .background { position:absolute }
+.open-source .border { position:absolute }
+.open-source .corner { position:absolute }
+.open-source .crop { position:absolute }
+.open-source .octocat { position:absolute }
+.open-source .rotator { position:absolute }
+.open-source .source { position:absolute }
+.open-source .source-crop { position:absolute }
+.open-source .text { position:absolute }
+.open-source .title { position:absolute }
+.open-source .translate { position:absolute }
+.page-slider { position:relative }
+.transform-3d .open-source .shadow { position:absolute }
+footer { position:absolute }
+footer .author { position:relative }
+footer .hover { position:absolute }
+footer .image { position:relative }
+footer .mask { position:absolute }
+footer select { position:relative }
+html { position:relative }
+
+/* right */
+.easing.linear { right:25px }
+.easings .part-title { right:35px }
+.open-source { right:0 }
+.open-source .translate { right:0 }
+.transform-3d .open-source .shadow { right:0 }
+
+/* stroke */
+.graph svg line { stroke:#bbb }
+.graph svg path { stroke:#000 }
+
+/* stroke-width */
+.graph svg line { stroke-width:1px }
+.graph svg path { stroke-width:2px }
+
+/* text-align */
+.easing .easing-title { text-align:center }
+.easings .part-title { text-align:center }
+.easings .part-title { text-align:right }
+.open-source .text { text-align:center }
+.open-source .translate { text-align:center }
+footer { text-align:right }
+
+/* text-decoration */
+.easing .graph { text-decoration:none }
+.easing-description .back { text-decoration:none }
+.easing-description p a { text-decoration:none }
+.howtos p a { text-decoration:none }
+.open-source { text-decoration:none }
+.open-source .translate a { text-decoration:none }
+.open-source.tappable .translate a { text-decoration:underline }
+footer .author:hover { text-decoration:none }
+footer a:hover { text-decoration:none }
+
+/* text-shadow */
+.open-source .source { text-shadow:#fff 0 1px 0 }
+
+/* top */
+.easing .graph .dot { top:99px }
+.easing .graph .example { top:94px }
+.easing-description { top:0 }
+.easing-description .graph .dot { top:128px }
+.easing-description .graph .example { top:124px }
+.easing.linear { top:11px }
+.easing.linear { top:6px }
+.easings .part-title { top:-12px }
+.easings .part-title { top:auto }
+.graph .example .bottom { top:5px }
+.graph .example .top { top:-8px }
+.open-source { top:0 }
+.open-source .background { top:-65px }
+.open-source .corner { top:-66px }
+.open-source .crop { top:0 }
+.open-source .octocat { top:24px }
+.open-source .rotator { top:0 }
+.open-source .source-crop { top:22px }
+.open-source .title { top:82px }
+.open-source .translate { top:90px }
+.open-source.show .rotator { top:-2px }
+.transform-3d .open-source .shadow { top:0 }
+footer .author:hover .hover { top:0 }
+footer .hover { top:-100% }
+footer .mask { top:9px }
+footer select { top:9px }
+
+/* transform */
+.easing-description .back:active { transform:translateY(2px) }
+.easing-page .easing.linear { transform:translateY(-105px) }
+.easing-page .page-slider { transform:translateX(-105%) }
+.easing.is-clickable:active .button { transform:scale(.9) }
+.graph .example .bottom { transform:rotate(45deg) }
+.graph .example .top { transform:rotate(45deg) }
+.open-source .background { transform:rotate(45deg) }
+.open-source .corner { transform:rotate(45deg) }
+.open-source .octocat { transform:rotate(45deg) }
+.open-source .source-crop { transform:rotate(45deg) }
+.open-source .title { transform:rotate(45deg) }
+.transform-2d .open-source.show .rotator { transform:rotate(180deg) }
+.transform-3d .open-source.show .rotator { transform:rotate3d(1,1,0,180deg) }
+
+/* transition */
+.easing .graph .dot { transition:opacity 200ms }
+.easing .graph .example { transition:opacity 200ms }
+.easing-description .graph .dot { transition:opacity 200ms }
+.easing-description .graph .example { transition:opacity 200ms }
+.easing-description p a { transition:border-bottom-color 150ms }
+.easing.is-clickable:active .button { transition:none }
+.easing.is-clickable:hover .button { transition:transform 200ms,box-shadow 200ms }
+.easings .part ul { transition:opacity 400ms }
+.howtos p a { transition:border-bottom-color 150ms }
+.open-source .translate { transition:opacity 400ms }
+.page-animation .easing.linear { transition:all 600ms cubic-bezier(.77,0,.175,1) }
+.page-animation .page-slider { transition:all 600ms cubic-bezier(.77,0,.175,1) }
+.transform-3d .open-source .rotator { transition:all 600ms cubic-bezier(.455,.03,.515,.955) }
+footer .author { transition:color 400ms }
+footer .hover { transition:top 400ms cubic-bezier(.77,0,.175,1) }
+footer .star.is-show { transition:opacity 400ms }
+
+/* transition-delay */
+.transform-3d .open-source .border { transition-delay:250ms }
+.transform-3d .open-source .text { transition-delay:250ms }
+.transform-3d .open-source .translate { transition-delay:0 }
+.transform-3d .open-source.show .border { transition-delay:200ms }
+.transform-3d .open-source.show .text { transition-delay:200ms }
+.transform-3d .open-source.show .translate { transition-delay:400ms }
+
+/* transition-property */
+.transform-3d .open-source .border { transition-property:opacity }
+.transform-3d .open-source .text { transition-property:opacity }
+
+/* white-space */
+.easing-description pre strong { white-space:nowrap }
+.howtos pre strong { white-space:nowrap }
+pre { white-space:pre-wrap }
+
+/* width */
+.centered { width:984px }
+.easing-description { width:100% }
+.easing-description .graph .dot { width:4px }
+.easing-description .graph svg { width:161.2px }
+.easings .part-title { width:40px }
+.easings .part-title { width:auto }
+.graph .dot { width:2px }
+.graph .example { width:21px }
+.graph .example .bottom { width:15px }
+.graph .example .top { width:15px }
+.graph svg { width:105.4px }
+.graph svg { width:124px }
+.open-source { width:80px }
+.open-source .background { width:120px }
+.open-source .border { width:100% }
+.open-source .corner { width:120px }
+.open-source .crop { width:90px }
+.open-source .octocat { width:33px }
+.open-source .rotator { width:80px }
+.open-source .source-crop { width:120px }
+.open-source .text { width:100% }
+.open-source .title { width:82px }
+footer { width:100% }
+footer .hover { width:100% }
+footer .image { width:20px }
+
+/* z-index */
+.easing .easing-title { z-index:2 }
+.easing.linear { z-index:2 }
+.graph .example { z-index:10 }
+.open-source .rotator { z-index:3 }
+.open-source .translate { z-index:3 }
+footer .image { z-index:2 }

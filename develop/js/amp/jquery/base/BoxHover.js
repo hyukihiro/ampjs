@@ -4,55 +4,34 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var BoxHover, boxHover, p;
-
-
-
-  /*--------------------------------------------------------------------------
-     @constructor
-  --------------------------------------------------------------------------*/
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class AMP.BoxHover
+   * @class BoxHover
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
    * @param  {Object} options オプション値
-   * @return {BoxHover}
    */
-  BoxHover = function($target, options){
+  function BoxHover($target, options){
     // $target指定がない場合、初期値を設定
     if(!$target || !($target instanceof jQuery)){
       options = $target;
-      $target = $('.box-hover');
+      $target = $('.box_hover');
     }
 
     this.$target = $target;
     this.param = $.extend(true, {}, BoxHover.defaults, options);
-  };
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(BoxHover, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ボックスホバー</h4>
-   * BoxHoverショートハンド
-   *
-   * @static
-   * @method boxHover
-   * @param  {jQuery} $target 対象のbox要素 省略可 初期値 $('.box-hover')
-   * @param  {Object} options オプション値 省略可
-   * @return {BoxHover} BoxHoverインスタンスを返す
-   */
-  boxHover = function($target, options){
-    var inst = new BoxHover($target, options);
-    inst.on();
-    return inst;
-  };
+  // prototype
+  var p = BoxHover.prototype;
 
 
 
@@ -67,21 +46,22 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = '2.0';
+  BoxHover.VERSION = '3.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = BoxHover.prototype;
+  p.className = 'BoxHover';
 
 
   /**
    * <h4>対象の要素</h4>
    *
+   * @default $('.box_hover')
    * @property $target
    * @type {jQuery}
    */
@@ -91,6 +71,8 @@ var AMP = AMP || {};
   /**
    * <h4>デフォルト値</h4>
    * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
+   *
+   * @default
    * defaults { <ul><li>
    *   hoverClass: 'hover', {String} ホバー時に付けるクラス名</li><li>
    *   linkClass : 'link' {String} 複数リンクがある場合、優先するリンククラス</li></ul>
@@ -122,16 +104,20 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>BoxHoverインスタンスの生成</h4>
+   * shorthand
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
+   * @method get
+   * @param  {jQuery} $target 対象のbox要素 省略可 初期値 $('.box-hover')
+   * @param  {Object} options オプション値 省略可
    * @return {BoxHover}
    */
-  BoxHover.extend = AMP._extend;
+  BoxHover.get = function($target, options){
+    var inst = new BoxHover($target, options);
+    inst.on();
+    return inst;
+  };
 
 
   /**
@@ -141,22 +127,26 @@ var AMP = AMP || {};
    * @param {jQuery} $target ターゲット要素 省略可
    * @return {BoxHover}
    */
-  p.on = function($target){
+  p.on = function(){
     var self = this;
 
-    $target = $target ? $target : this.$target;
-    this.off($target);
+    this.off();
 
-    $target.css({cursor: 'pointer'})
-      .on('mouseenter.BoxHover', function(){
-        $(this).addClass(self.param.hoverClass);
-      })
-      .on('mouseleave.BoxHover', function(){
-        $(this).removeClass(self.param.hoverClass);
-      })
-      .on('click.BoxHover', function(){
-        self.setLink($(this));
-      });
+    this.$target.css({cursor: 'pointer'})
+    .on('mouseenter.BoxHover', function(){
+      $(this).addClass(self.param.hoverClass);
+    })
+    .on('mouseleave.BoxHover', function(){
+      $(this).removeClass(self.param.hoverClass);
+    })
+    .on('click.BoxHover', function(){
+      self._setLink($(this));
+    });
+
+    // フォーム要素はイベント伝播をキャンセル
+    this.$target.find('label input　select textarea').click(function(event){
+      event.stopPropagation();
+    });
 
     return this;
   };
@@ -169,9 +159,9 @@ var AMP = AMP || {};
    * @param {jQuery} $target ターゲット要素 省略可
    * @return {BoxHover}
    */
-  p.off = function($target){
-    $target = $target ? $target : this.$target;
-    $target.css({cursor: 'auto'}).off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
+  p.off = function(){
+    this.$target.css({cursor: 'auto'})
+    .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };
 
@@ -179,45 +169,34 @@ var AMP = AMP || {};
   /**
    * <h4>リンクの設定</h4>
    *
-   * @method setLink
+   * @private
+   * @method _setLink
    * @param {Object} event イベントオブジェクト
    * @param {Object} param paramオブジェクト
-   * @return {Boolean} false デフォルトのリンクの挙動のキャンセル
+   * @return {Void}
    */
-  p.setLink = function($target){
-    var self = this,
-    $link = $target.find('.' + self.param.linkClass),
+  p._setLink = function($target){
+    var $link = $target.find('.' + this.param.linkClass),
     $a = $target.find('a').eq(0);
 
     $a = $link[0] ? $link : $a;
 
     // リンク展開
     if($a.attr('target') === '_blank'){
-      return window.open($a.attr('href'), '_blank');
+      window.open($a.attr('href'), '_blank');
     } else {
       location.href = $a.attr('href');
     }
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object BoxHover]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
-    export
+    exports
   --------------------------------------------------------------------------*/
 
   AMP.BoxHover = BoxHover;
-  AMP.boxHover = boxHover;
+  AMP.boxHover = BoxHover.get;
 
 
 }(window, jQuery));

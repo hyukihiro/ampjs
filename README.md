@@ -1,4 +1,4 @@
-# amp JavaScript Library
+# AMP JavaScript Library
 
 ---
 
@@ -11,72 +11,38 @@
 * Android Browser
 
 ---
+## 依存ライブラリ
+
+### amp.core.js
+外部ライブラリの依存なし
 
 
-## 進行
+### amp.jquery.js
+amp/jquery.plugins.min.js
 
-** Core & Utilitys **
+#### jquery-1.8.3.pack.js
+* jquery-1.8.3.min.js++
+* jquery.easing.1.3.min.js
+* jquery.mousewheel.min.js
+* velocity.min.js
+* velocity.easeplus.min.js
 
-| 機能 | タスク | 状態 | コメント | ショートハンド | サンプル |
-|:---:|:----:|:---:|:--------:|:---:|:---:|
-| core         | - | ○ | ○ | - | × |
-| Ease         | - | ○ | ○ | - | - |
-| Mediator     | - | ○ | ○ | - | ○ |
-| Storage      | - | ○ | ○ | - | ○ |
-| MotionDelay  | 実装中 | × | × | × | × |
-| Iterator     | 一時中断 | ○ | ○ | - | ○ |
+#### utilitys.pack.js
+* hogan-3.0.2.min.js
+* imagesloaded.pkgd.min.js
+* underscore-min.js
 
-** jQuery **
+### amp.createjs.js
+* createjs.easel.js
+* createjs.preload.js
+* createjs.tween.js
 
-| 機能 | タスク | 状態 | コメント | ショートハンド | サンプル |
-|:---:|:----:|:---:|:--------:|:---:|:---:|
-| FontResize   | - | ○ | ○ | - | ○ |
-| Render       | - | ○ | ○ | ○ | ○ |
-| Sort         | - | ○ | ○ | ○ | ○ |
-| SmothScroll  | - | ○ | ○ | ○ | ○ |
-| FlatHeight   | - | ○ | ○ | ○ | ○ |
-| Scroll       | - | ○ | ○ | ○ | ○ |
-| Boxhover     | - | ○ | ○ | ○ | ○ |
-| Mediaquery   | - | ○ | ○ | ○ | ○ |
-| Loader       | - | ○ | ○ | ○ | ○ |
-| ScrollToggle | - | ○ | ○ | ○ | ○ |
-| Rollover     | - | ○ | ○ | ○ | ○ |
-| Active       | - | ○ | ○ | ○ | ○ |
-
-| Slipover | 実装中 | × | × | × | × |
-| Alphaover | 実装中 | × | × | × | × |
-
-| Slider     | 実装中 | × | × | × | × |
-| Crossfader | 実装中 | × | × | × | × |
-| Tab        | 未実装 | × | × | × | × |
-| Accordion  | 未実装 | × | × | × | × |
-| Modal      | 未実装 | × | × | × | × |
-| SwitchImage| 一時中断 | × | × | × | × |
-
-
-** createjs **
-
-| 機能 | タスク | 状態 | コメント | ショートハンド | サンプル |
-|:---:|:----:|:---:|:--------:|:---:|:---:|
-| Loader       | - | ○ | ○ | ○ | ○ |
-| Ease         | - | ○ | ○ | - | - |
-
----
-
-## TASKS
-
-* plugins整理・実装・テスト
-* Hummer.js 削除
-
----
-
-## パターン
-* GOFのパターン反映
-* パターン: http://www.ibm.com/developerworks/jp/java/library/j-eaed5/index.html
 
 ---
 
 ## 追加予定ライブラリ
-* RactiveJS
+リアクティブ
+* RxJS
 * BaconJS
+* RactiveJS
 
