@@ -275,7 +275,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP._Debug = Debug;
+  AMP.Debug = Debug;
   AMP.debug = new Debug();
 
 

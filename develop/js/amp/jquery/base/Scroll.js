@@ -121,9 +121,9 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   Scroll.get = function($trigger, options){
-    var inst = new Scroll($trigger, options);
-    inst.on();
-    return inst;
+    var instance = new Scroll($trigger, options);
+    instance.on();
+    return instance;
   };
 
 

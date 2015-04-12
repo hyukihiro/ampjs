@@ -140,7 +140,7 @@ var AMP = AMP || {};
         self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
         self._listeners[eventObj.type].push({
           attr   : eventObj.attr,
-          func     : listener,
+          func   : listener,
           context: context
         });
       });

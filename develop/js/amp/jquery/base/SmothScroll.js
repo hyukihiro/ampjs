@@ -107,9 +107,9 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   SmoothScroll.get = function(options){
-    var smoothScroll = new SmoothScroll(options);
-    smoothScroll.on();
-    return smoothScroll;
+    var instance = new SmoothScroll(options);
+    instance.on();
+    return instance;
   };
 
 
