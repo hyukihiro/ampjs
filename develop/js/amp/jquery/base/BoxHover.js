@@ -114,9 +114,9 @@ var AMP = AMP || {};
    * @return {BoxHover}
    */
   BoxHover.get = function($target, options){
-    var inst = new BoxHover($target, options);
-    inst.on();
-    return inst;
+    var instance = new BoxHover($target, options);
+    instance.on();
+    return instance;
   };
 
 

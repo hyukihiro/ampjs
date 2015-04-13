@@ -98,10 +98,10 @@ var AMP = AMP || {};
    * @return {FlatHeight}
    */
   FlatHeight.get = function($target, split, isResize){
-    var inst = new FlatHeight($target, split, isResize);
-    inst.addEvent();
-    inst.setHeight();
-    return inst;
+    var instance = new FlatHeight($target, split, isResize);
+    instance.addEvent();
+    instance.setHeight();
+    return instance;
   };
 
 

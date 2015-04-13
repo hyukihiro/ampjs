@@ -9,19 +9,20 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
+   * FIXEM:開発版です
    * <h4>ロールオーバー</h4>
    *
    * @class Rollover
    * @constructor
    */
-  function Rollover($image, options){
+  function Rollover($images, options){
     // $image指定がない場合、初期値を設定
-    if(!$image || !($image instanceof jQuery)){
-      options = $image;
-      $image = $('img.rover, input.rover, .all_rover img');
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $('img.rover, input.rover, .all_rover img');
     }
 
-    this.$image = $image;
+    this.$images = $images;
     this.param = $.extend(true, Rollover.defaults, options);
   };
 
@@ -60,10 +61,10 @@ var AMP = AMP || {};
    * <h4>ターゲット画像要素</h4>
    *
    * @default $('img.rover, input.rover, .all_rover img')
-   * @property $image
+   * @property $images
    * @type {jQuery}
    */
-  p.$image = null;
+  p.$images = null;
 
 
   /**
@@ -104,10 +105,10 @@ var AMP = AMP || {};
    * @param  {Object} options ロールオーバーのオプション値
    * @return {Rollover}
    */
-  Rollover.get = function($image, options){
-    var inst = new Rollover($image, options);
-    inst._createRollover().on();
-    return inst;
+  Rollover.get = function($images, options){
+    var instance = new Rollover($images, options);
+    instance._createRollover().on();
+    return instance;
   };
 
 
@@ -122,7 +123,7 @@ var AMP = AMP || {};
     param = self.param,
     $image, image, src, ext, $group;
 
-    self.$image.each(function(i){
+    self.$images.each(function(i){
       $image = self.$image.eq(i);
       image = $image[0];
       image.rollover = {};
@@ -171,11 +172,10 @@ var AMP = AMP || {};
    * @param  {Number} num 要素のインデックス
    * @return {Rollover}
    */
-  p.on = function(num){
-    var self = this,
-    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+  p.on = function(){
+    var self = this;
 
-    $image.each(function(){
+    self.$image.each(function(){
       var $img = $(this),
       img = $img[0];
 

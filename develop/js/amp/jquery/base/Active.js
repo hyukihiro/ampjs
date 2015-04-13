@@ -1,26 +1,31 @@
 var AMP = AMP || {};
 
-
 (function(root, $){
 
   // 'use strict';
 
-  var Active, p;
-
-
-
-  /*--------------------------------------------------------------------------
+  /*----------------------------------------------------------------------
     @constructor
-  --------------------------------------------------------------------------*/
+  ----------------------------------------------------------------------*/
 
   /**
-   * <h4>アクティブ化</h4>
+   * <h4>勝訴のアクティブ化</h4>
    *
-   * @class AMP.Active
+   * @class Active
    * @constructor
-   * @return {Active}
    */
-  Active = function(){};
+  function Active($target, activeClass){
+    this.$target = $target;
+    if(AMP.isString(activeClass)){
+      this.activeClass = activeClass;
+    }
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Active, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Active.prototype;
 
 
 
@@ -35,26 +40,34 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Active.VERSION = '1.0';
+  Active.VERSION = '2.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = Active.prototype;
+  p.className = 'Active';
 
 
   /**
-   * <h4>アクティブタイプリスト</h4>
+   * <h4>対象の要素</h4>
    *
-   * @ static
-   * @property types
-   * @type {Array}
+   * @property $target
+   * @type {jQuery}
    */
-  Active.types = ['text', 'rollover', 'alphaover'];
+  p.$target = null;
+
+
+  /**
+   * <h4>アクティブ要素に付与するクラス名</h4>
+   *
+   * @property activeClass
+   * @type {String}
+   */
+  p.activeClass = 'active';
 
 
 
@@ -63,86 +76,43 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
+   * <h4>Activeインスタンスの生成</h4>
+   * shorthand
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Rollover}
+   * @method get
+   * @param  {jQuery} $target 対象の要素
+   * @param  {String} className クラス名
+   * @return {Active}
    */
-  Active.extend = AMP._extend;
-
-
-  /**
-   * 要素のアクティブ化
-   *
-   * @static
-   * @public
-   * @method active
-   * @param {jQuery} $target 対象の要素
-   * @param {String} type アクティブタイプ
-   * @param {Object} options アクティブオプション
-   * @return {RolloverInstance}
-   */
-  Active.active = p.active = function($target, type, options){
-    if(!($target instanceof jQuery)){
-      throw new TypeError('Please select the jQuery element');
-    }
-
-    // optionsチェック
-    if($.isPlainObject(type)){
-      options = type;
-      type = null;
-    }
-
-    // typeの大文字表記チェック
-    if(AMP.isString(type)){
-      type = type.toLowerCase();
-    }
-
-    // type判定
-    var flag = false,
-    i = 0,
-    l = Active.types.length;
-    for(; i < l; i += 1){
-      if(type === Active.types[i]){
-        flag = true;
-        break;
-      }
-    }
-
-    // type判定エラー時
-    if(!flag){
-      type = $target[0].nodeName === 'IMG' ? Active.types[1] : Active.types[0];
-    }
-
-    // text
-    if(type === Active.types[0]){
-      return $target.addClass(options || 'active');
-
-    // rollover
-    } else if(type === Active.types[1]){
-      options = $.extend(true, {}, AMP.Rollover.defaults, options);
-      return AMP.rollover($target.addClass(options.activeClass), options);
-
-    // alphaover
-    } else if(type === Active.types[2]){
-      options = $.extend(true, {}, AMP.Alphaover.defaults, options);
-      return AMP.alphaover($target.addClass(options.activeClass), options);
-    }
+  Active.get = function($target, className){
+    var instance = new Active($target, className);
+    instance.active();
+    return instance;
   };
 
 
   /**
-   * <h4>クラス名を返す</h4>
+   * <h4>要素のアクティブ化</h4>
    *
-   * @method toString
-   * @return {String} クラス名を返す
+   * @method active
+   * @param {Object} rolloverOptions ロールオーバーオプション
+   * @return {Active}
    */
-  p.toString = function(){
-    return '[object Active]';
+  p.active = function(rolloverOptions){
+    var self = this;
+
+    self.$target.each(function(i){
+      var isImg = self.$target[i].nodeName === 'IMG';
+
+      self.$target.eq(i).addClass(self.activeClass);
+
+      if(isImg){
+        AMP.rollover(self.$target.eq(i), rolloverOptions);
+      }
+    });
+
+    return this;
   };
 
 
@@ -152,7 +122,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Active = Active;
-  AMP.active = Active.active;
+  AMP.active = Active.get;
 
 
 

@@ -20,6 +20,8 @@
   }
 
 
+  /* Array
+  -----------------------------------------------------------------*/
   /**
    * <h4>forEach</h4>
    * 配列の各要素に対して、指定された処理を実行します
@@ -37,6 +39,51 @@
     for(; i < l; i += 1){
       callback.call(context || null, this[i], i, this);
     }
+  };
+
+
+  /* 　Function
+  -----------------------------------------------------------------*/
+  /**
+   * FIXME: βバージョンです。検証していません
+   * <h4>束縛された関数生成</h4>
+   * @param  {Function} context this値としてターゲット関数に渡される値
+   * @param  {Any} Argments 関数に渡す引数
+   * @return {Function}
+   */
+  Function.prototype.bind = Function.prototype.bind || function(context){
+    if (!AMP.isFunction(this)) {
+      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+    }
+
+    var self = this,
+    args   = AMP.argsToArray(arguments, 1),
+    F      = function(){},
+    B      = function(){
+      var ctx = this instanceof F ? this : context;
+      return self.apply(ctx, args.concat(AMP.argsToArray(arguments)));
+    };
+
+    F.prototype = this.prototype;
+    B.prototype = new F();
+    return B;
+  };
+
+
+  /* Object
+  -----------------------------------------------------------------*/
+  /**
+   * <h4>新しいprototypeオブジェクトの生成</h4>
+   * see: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/create
+   *
+   * @method Object.create
+   * @param  {Object} proto プロトタイプオブジェクト
+   * @return {Object}
+   */
+  Object.create = Object.create || function(proto){
+    function Obj(){}
+    Obj.prototype = proto;
+    return new Obj();
   };
 
 
@@ -62,21 +109,6 @@
       }
       return placeHolder;
     }
-  };
-
-
-  /**
-   * <h4>新しいprototypeオブジェクトの生成</h4>
-   * see: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/create
-   *
-   * @method Object.create
-   * @param  {Object} proto プロトタイプオブジェクト
-   * @return {Object}
-   */
-  Object.create = Object.create || function(proto){
-    function Obj(){}
-    Obj.prototype = proto;
-    return new Obj();
   };
 
 

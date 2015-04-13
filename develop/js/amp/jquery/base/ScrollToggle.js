@@ -100,13 +100,13 @@ var AMP = AMP || {};
    * @type {Object}
    */
   ScrollToggle.defaults = {
-    showY    : 300,
-    show     : { opacity : 1},
-    hide     : { opacity : 0},
-    duration : 500,
-    easing   : 'easeInSine',
-    showCall : $.noop,
-    hideCall : $.noop
+    showY   : 300,
+    show    : { opacity : 1},
+    hide    : { opacity : 0},
+    duration: 500,
+    easing  : 'easeInSine',
+    showCall: $.noop,
+    hideCall: $.noop
   };
 
 
@@ -136,9 +136,9 @@ var AMP = AMP || {};
    * @return {Pagetop} Pagetopインスタンスを返す
    */
   ScrollToggle.get = function($target, options){
-    var inst = new ScrollToggle($target, options);
-    inst.on();
-    return inst;
+    var instance = new ScrollToggle($target, options);
+    instance.on();
+    return instance;
   };
 
 
