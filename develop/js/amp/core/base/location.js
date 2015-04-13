@@ -62,5 +62,10 @@ var AMP = AMP || {};
   };
 
 
+  // FIXME: 追加予定
+  // TODO: 表示されているページファイル名を返す
+  // AMP.getCurrentFileName = function(){};
+
+
 
 }(window));

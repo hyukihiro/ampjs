@@ -102,13 +102,13 @@ var AMP = AMP || {};
     el.innerHTML = childNode;
     document.body.appendChild(el);
 
-    //　controll elements
+    // controll elements
     Debug.views = {
       wrap : document.getElementById('AMP_DEBUG'),
       text : document.getElementById('AMP_DEBUG_TEXT')
     };
 
-    //　viewイベント追加
+    // viewイベント追加
     Debug.addEvent();
   };
 
@@ -218,11 +218,11 @@ var AMP = AMP || {};
   /**
    * <h4>ログの出力モードを有効にします</h4>
    *
-   * @method　start
+   * @method start
    * @return {Debug}
    */
   p.start = function(){
-    Debug.isChangeLog　= true;
+    Debug.isChangeLog = true;
     return this;
   };
 
@@ -230,11 +230,11 @@ var AMP = AMP || {};
   /**
    * <h4>ログの出力モードを無効にします</h4>
    *
-   * @method　stop
+   * @method stop
    * @return {Debug}
    */
   p.stop = function(){
-    Debug.isChangeLog　= false;
+    Debug.isChangeLog = false;
     return this;
   };
 
@@ -275,7 +275,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP._Debug = Debug;
+  AMP.Debug = Debug;
   AMP.debug = new Debug();
 
 

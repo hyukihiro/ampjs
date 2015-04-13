@@ -50,7 +50,7 @@ var AMP = AMP || {};
 
 
   /**
-   *　<h4>atgumentsを配列に変換して返す</h4>
+   * <h4>atgumentsを配列に変換して返す</h4>
    *
    * @method argsToArray
    * @param {arguments} args arguments

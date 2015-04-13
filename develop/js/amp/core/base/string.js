@@ -40,7 +40,7 @@ var AMP = AMP || {};
    * @method digit
    * @return {String}
    */
-  AMP.digit = function() {
+  AMP.digit = function(){
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
