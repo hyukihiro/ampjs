@@ -27,8 +27,7 @@
    * 配列の各要素に対して、指定された処理を実行します
    * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
    *
-   * @static
-   * @method Array.forEach
+   * @method Array.prototype.forEach
    * @type {Void}
    */
   Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
@@ -47,6 +46,8 @@
   /**
    * FIXME: βバージョンです。検証していません
    * <h4>束縛された関数生成</h4>
+   *
+   * @method Function.prototype.bind
    * @param  {Function} context this値としてターゲット関数に渡される値
    * @param  {Any} Argments 関数に渡す引数
    * @return {Function}
@@ -110,6 +111,20 @@
       return placeHolder;
     }
   };
+
+
+  /* String
+  -----------------------------------------------------------------*/
+
+  /**
+   * <h4>両端の空白を取り除いた文字列を返す</h4>
+   *
+   * @method String.prototype.trim
+   * @return {String}
+   */
+  String.prototype.trim = String.prototype.trim || function(){
+    return this.replace(/^\s+|\s+$/g, '');
+  }
 
 
 

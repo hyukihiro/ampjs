@@ -74,6 +74,66 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>16進数カラーをRGBに変換します</h4>
+   *
+   * @method hexToRGB
+   * @param {String} hex 16進数カラー
+   * @return {Object} RGB Object
+   */
+  AMP.hexToRGB = function(hex){
+    hex = hex.replace(/^#/, '');
+
+    // hex shorthand時、成型しなおす
+    if(hex.length === 3){
+      var _hex = '';
+      AMP.each(hex, function(chara){
+        _hex += chara + chara;
+      })
+      hex = _hex;
+    }
+
+    // hex値の簡易チェック
+    if (hex.length !== 6) {
+      throw new TypeError('Hex color is not selected');
+    }
+
+    // RGB Object
+    return {
+      r: parseInt(hex.substring(0, 2), 16),
+      g: parseInt(hex.substring(2, 4), 16),
+      b: parseInt(hex.substring(4, 6), 16)
+    }
+  };
+
+
+  /**
+   * <h4>RGBカラーを16進数カラーに変換</h4>
+   *
+   * @method rgbToHex
+   * @param  {Number} r レッド値
+   * @param  {Number} g グリーン値
+   * @param  {Number} b ブルー値
+   * @return {String}　16進数カラー
+   */
+  AMP.rgbToHex = function(r, g, b){
+    var hex = '#';
+
+    AMP.each(AMP.argsToArray(arguments), function(color){
+      var _color = Number(color).toString(16);
+
+      // RGB値チェック
+      if(2 < _color.length){
+        throw new TypeError('RGB color is not selected');
+      }
+
+      hex += _color.length === 1 ? '0' + _color : _color;
+    });
+
+    return hex;
+  };
+
+
+  /**
    * <h4>画面のピクセル比を返す</h4>
    *
    * @static

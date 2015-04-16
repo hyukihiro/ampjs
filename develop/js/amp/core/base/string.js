@@ -58,6 +58,21 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>文字列の全置換</h4>
+   *
+   * @repraceAll
+   * @param  {String} str 置換対象の文字列
+   * @param  {String} del 削除する文字列
+   * @param  {String} add 追加する文字列
+   * @return {String}
+   */
+  AMP.repraceAll = function(str, del, add){
+    add = add ? add : '';
+    return str.split(del).join(add);
+  };
+
+
+  /**
    * <h4>UUIDの生成して返す</h4>
    *
    * @static
