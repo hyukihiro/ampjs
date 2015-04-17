@@ -11,7 +11,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
-   * Eventsクラスを継承しています　Eventsクラスを参照してください
+   * Eventsクラスを継承しています Eventsクラスを参照してください
    * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください
    *
    * @class Mediaquery
@@ -21,7 +21,7 @@ var AMP = AMP || {};
   function Mediaquery(element){
     if(element && element.nodeType === 1){
       this.el = element;
-    }　else {
+    } else {
       this.el = document.getElementsByTagName('head')[0];
     }
   }

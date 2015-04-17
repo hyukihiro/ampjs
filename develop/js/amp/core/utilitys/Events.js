@@ -246,7 +246,7 @@ var AMP = AMP || {};
   p.hasEvent = function(type){
     var flag = false,
     events = this._getEventNameMap(type),
-    listeners　= this._listeners[events.type];
+    listeners = this._listeners[events.type];
 
     // イベントリスナーの有無
     if(listeners){

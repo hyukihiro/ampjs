@@ -11,7 +11,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>フォントリサイズイベント</h4>
-   * Eventsクラスを継承しています　Eventsクラスを参照してください
+   * Eventsクラスを継承しています Eventsクラスを参照してください
    *
    * @class FontResize
    * @constructor
@@ -103,7 +103,7 @@ var AMP = AMP || {};
   p._createElement = function(){
 
     var key = 'AMP_FONT_RESIZE',
-    el = document.createElement('ins');
+    el = document.createElement('ins'),
     text = document.createTextNode(key);
 
     el.id = key;
@@ -138,7 +138,7 @@ var AMP = AMP || {};
         this.trigger(FontResize.eventType);
       }
 
-      //　再起処理
+      // 再起処理
       AMP.requestAnimationFrame(function(){
         self._controller();
       });

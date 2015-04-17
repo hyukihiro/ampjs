@@ -9,22 +9,12 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * FIXEM:開発版です
    * <h4>ロールオーバー</h4>
    *
    * @class Rollover
    * @constructor
    */
-  function Rollover($images, options){
-    // $image指定がない場合、初期値を設定
-    if(!$images || !($images instanceof jQuery)){
-      options = $images;
-      $images = $('img.rover, input.rover, .all_rover img');
-    }
-
-    this.$images = $images;
-    this.param = $.extend(true, Rollover.defaults, options);
-  };
+  function Rollover(){}
 
   // 基底クラスを継承
   AMP.inherits(Rollover, AMP.BASE_CLASS);
@@ -58,36 +48,26 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>ターゲット画像要素</h4>
-   *
-   * @default $('img.rover, input.rover, .all_rover img')
-   * @property $images
-   * @type {jQuery}
-   */
-  p.$images = null;
-
-
-  /**
    * <h4>オプションのデフォルト値</h4>
    *
    * @property defaults
    * @type {Object}
    */
   Rollover.defaults = {
-    groupClass : 'group_over',
+    groupClass : 'group_rover',
     activeClass: 'active',
-    noOverClass: 'no_over',
+    noOverClass: 'no_rover',
     postfix    : '_on'
   };
 
 
   /**
-   * <h4>Rollover.defaultsとオプション値をmixin</h4>
+   * <h4>ロールオーバー要素の初期値</h4>
    *
-   * @property param
-   * @type {Object}
+   * @property imageClass
+   * @type {String}
    */
-  p.param = null;
+  p.imageClass = 'img.rover, input.rover, .all_rover img';
 
 
 
@@ -96,102 +76,42 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>画像のロールオーバー</h4>
-   * Rolloverのショートハンド
-   *
-   * @static
-   * @method rollover
-   * @param  {jQuery} $image 画像要素
-   * @param  {Object} options ロールオーバーのオプション値
-   * @return {Rollover}
-   */
-  Rollover.get = function($images, options){
-    var instance = new Rollover($images, options);
-    instance._createRollover().on();
-    return instance;
-  };
-
-
-  /**
-   * <h4>ロールオーバーの生成</h4>
-   *
-   * @method createRollover
-   * @return {Rollover}
-   */
-  p._createRollover = function(){
-    var self = this,
-    param = self.param,
-    $image, image, src, ext, $group;
-
-    self.$images.each(function(i){
-      $image = self.$image.eq(i);
-      image = $image[0];
-      image.rollover = {};
-
-      // 画像データ設定
-      src = image.src;
-      ext = src.substring(src.lastIndexOf('.'), src.length);
-      $group = $image.closest('.' + param.groupClass);
-
-      // $trigger
-      image.rollover.$trigger = $group[0] ? $group : $image;
-
-      // 現在on画像の場合
-      if(src.lastIndexOf(param.postfix + ext) > -1){
-        image.rollover.onSrc = src;
-        image.rollover.offSrc = src.replace(param.postfix + ext, ext);
-
-        // アクティブでないときoff画像に変更
-        if(!$image.hasClass(param.activeClass)){
-          image.src = image.rollover.offSrc;
-        } else {
-          AMP.preload(image.rollover.offSrc);
-        }
-
-      } else {
-      // 現在off画像の場合
-        image.rollover.offSrc = src;
-        image.rollover.onSrc = src.replace(ext, param.postfix + ext);
-        AMP.preload(image.rollover.onSrc);
-
-        // アクティブの場合on画像に変更
-        if($image.hasClass(param.activeClass)){
-          image.src = image.rollover.onSrc;
-        }
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベントオン</h4>
+   * <h4>ロールオーバー機能ON</h4>
    *
    * @method on
-   * @param  {Number} num 要素のインデックス
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
    * @return {Rollover}
    */
-  p.on = function(){
+  p.on = function($images, options){
     var self = this;
 
-    self.$image.each(function(){
-      var $img = $(this),
-      img = $img[0];
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(self.imageClass);
+    }
 
-      img.rollover.$trigger.off('mouseenter.Rollover mouseleave.Rollover')
-      .on({
-        // mouseover
-        'mouseenter.Rollover': function(){
-          if(!$img.hasClass(self.param.activeClass) && !$img.hasClass(self.param.noOverClass)){
-            img.src = img.rollover.onSrc;
-          }
-        },
-        // mouseout
-        'mouseleave.Rollover': function(){
-          if(!$img.hasClass(self.param.activeClass) && !$img.hasClass(self.param.noOverClass)){
-            img.src = img.rollover.offSrc;
-          }
+    var param = $.extend(true, {}, Rollover.defaults, options);
+
+    $images.each(function(i){
+      var data = self._createRolloverData($images.eq(i), param);
+
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
+
+      // rollover
+      data.$trigger
+      .on('mouseenter.Rollover', function(){
+        if(!data.$image.hasClass(param.noOverClass)){
+          data.image.src = data.onSrc;
+        }
+      })
+      .on('mouseleave.Rollover', function(){
+        if(!data.$image.hasClass(param.noOverClass)){
+          data.image.src = data.offSrc;
         }
       });
     });
@@ -201,18 +121,20 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>イベントオフ</h4>
+   * <h4>ロールオーバー機能OFF</h4>
    *
    * @method off
-   * @param  {Number} num 要素のインデックス
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
    * @return {Rollover}
    */
-  p.off = function(num){
-    var self = this,
-    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+  p.off = function($images, options){
+    var param = $.extend(true, {}, Rollover.defaults, options);
 
-    $image.each(function(){
-      $(this)[0].rollover.$trigger.off('mouseenter.Rollover mouseleave.Rollover');
+    $images.each(function(i){
+      var $group = $images.eq(i).closest('.' + param.groupClass),
+      $trigger = $group[0] ? $group : $images.eq(i);
+      $trigger.off('mouseenter.Rollover mouseleave.Rollover');
     });
 
     return this;
@@ -220,19 +142,30 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>ロールオーバーアクティブ化</h4>
+   * <h4>画像のアクティブ化</h4>
    *
    * @method active
-   * @param  {Number} num 要素のインデックス
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
    * @return {Rollover}
    */
-  p.active = function(num){
+  p.active = function($images, options){
     var self = this,
-    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+    param = $.extend(true, {}, Rollover.defaults, options);
 
-    $image.each(function(){
-      var img = $(this).addClass(self.param.activeClass)[0];
-      img.src = img.rollover.onSrc;
+    $images.addClass(param.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), param);
+
+      // イベント削除
+      data.$trigger
+      .addClass(param.activeClass)
+      .off('mouseenter.Rollover mouseleave.Rollover');
+
+      // off画像の場合
+      if(data.isOffImg){
+        data.image.src = data.onSrc;
+      }
     });
 
     return this;
@@ -240,20 +173,76 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>ロールオーバー待機化</h4>
+   * <h4>画像を待機状態にする</h4>
    *
    * @method passive
-   * @param  {Number} num 要素のインデックス
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
    * @return {Rollover}
    */
-  p.passive = function(num){
+  p.passive = function($images, options){
     var self = this,
-    $image = $.isNumeric(num) ? self.$image.eq(num) : self.$image;
+    param = $.extend(true, {}, Rollover.defaults, options);
 
-    $image.each(function(){
-      var img = $(this).removeClass(self.param.activeClass)[0];
-      img.src = img.rollover.offSrc;
+    $images.removeClass(param.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), param);
+
+      // イベント削除
+      data.$trigger
+      .removeClass(param.activeClass)
+      .off('mouseenter.Rollover mouseleave.Rollover');
+
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
     });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ロールオーバーデータの生成</h4>
+   *
+   * @method _getImageSrc
+   * @private
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} param オプション値
+   * @return {Rollover}
+   */
+  p._createRolloverData = function($image, param){
+    var
+    image = $image[0],
+    src = image.src,
+    ext = src.substring(src.lastIndexOf('.'), src.length),
+    $group = $image.closest('.' + param.groupClass).addClass(param.activeClass),
+    onSrc,
+    offSrc;
+
+    // 現在on画像の場合
+    if(src.lastIndexOf(param.postfix + ext) > -1){
+      onSrc = src;
+      offSrc = src.replace(param.postfix + ext, ext);
+      AMP.preload(offSrc);
+
+    // 現在off画像の場合
+    } else {
+      offSrc = src;
+      onSrc = src.replace(ext, param.postfix + ext);
+      AMP.preload(onSrc);
+    }
+
+    // RolloverData
+    return {
+      $image  : $image,
+      image   : image,
+      $trigger: $group[0] ? $group : $image,
+      onSrc   : onSrc,
+      offSrc  : offSrc,
+      isOffImg: src === offSrc
+    };
   };
 
 
@@ -263,7 +252,8 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Rollover = Rollover;
-  AMP.rollover = Rollover.get;
+  AMP.rollover = new Rollover();
+
 
 
 }(window, jQuery));

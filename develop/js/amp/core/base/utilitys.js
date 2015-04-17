@@ -6,7 +6,7 @@ var AMP = AMP || {};
 
 
   /*======================================================================
-    基本ユーティリティ
+    ユーティリティ
   ======================================================================*/
 
 
@@ -15,7 +15,7 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>DOMイベント削除</h4>
+   * <h4>DOMイベント追加</h4>
    *
    * @method removeEvent
    * @param  {DOM} element  ターゲット要素
@@ -88,7 +88,7 @@ var AMP = AMP || {};
       var _hex = '';
       AMP.each(hex, function(chara){
         _hex += chara + chara;
-      })
+      });
       hex = _hex;
     }
 
@@ -102,7 +102,7 @@ var AMP = AMP || {};
       r: parseInt(hex.substring(0, 2), 16),
       g: parseInt(hex.substring(2, 4), 16),
       b: parseInt(hex.substring(4, 6), 16)
-    }
+    };
   };
 
 
@@ -113,7 +113,7 @@ var AMP = AMP || {};
    * @param  {Number} r レッド値
    * @param  {Number} g グリーン値
    * @param  {Number} b ブルー値
-   * @return {String}　16進数カラー
+   * @return {String} 16進数カラー
    */
   AMP.rgbToHex = function(r, g, b){
     var hex = '#';

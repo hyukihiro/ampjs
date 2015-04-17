@@ -272,7 +272,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Ease　= Ease;
+  AMP.Ease = Ease;
   AMP.ease = new Ease();
 
 

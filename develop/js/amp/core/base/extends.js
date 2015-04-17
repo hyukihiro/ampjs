@@ -122,8 +122,8 @@ var AMP = AMP || {};
    * @param {arguments} subClass サブクラス
    * @return {Function}
    */
-  // AMP.AMPにextendメソッドをExportします
-  AMP._extend = AMP.BASE_CLASS.extend = function(){
+  // AMP._extend = AMP.BASE_CLASS.extend = function(){
+  AMP._extend = function(){
     var subClass = arguments.length ? arguments : function(){};
     return AMP.inherits(subClass, this);
   };
