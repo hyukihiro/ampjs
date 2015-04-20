@@ -4,6 +4,7 @@ var AMP = AMP || {};
 
   // 'use strict';
 
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -16,8 +17,18 @@ var AMP = AMP || {};
    * @constructor
    */
   function SmoothScroll(options){
-    this.$html = $('html, body');
-    this.param = $.extend(true, {}, SmoothScroll.defaults, options);
+    /**
+     * <h4>スムーススクロールエリア</h4>
+     * コンストラクタが呼び出し時に、$('html, body')が渡されます
+     *
+     * @property param.$target
+     * @type {jQuery}
+     */
+    var _param = {
+      $target: $('html, body')
+    };
+
+    this.param = $.extend(true, SmoothScroll.defaults, _param, options);
   }
 
   // 基底クラスを継承
@@ -52,20 +63,11 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>スムーススクロールエリア</h4>
-   * コンストラクタが呼び出し時に、$('html, body')が渡されます
-   *
-   * @property $html
-   * @type {jQuery}
-   */
-  p.$html = null;
-
-
-  /**
    * <h4>オプション初期値</h4>
    *
    * @default
    * defaults: { <ul><li>
+   *   $target : $('html, body'), // {jQuery} ターゲット要素 </li><li>
    *   amount  : 0, // {Number} スクロール量 </li><li>
    *   duration: 600, // {Number} スクロールスピード </li><li>
    *   easing  : 'easeOutExpo', // {String} イージング </li></ul>
@@ -76,6 +78,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   SmoothScroll.defaults = {
+    $target : null,
     amount  : 500,
     duration: 500,
     ease    : 'easeOutCubic'
@@ -122,8 +125,9 @@ var AMP = AMP || {};
   p.on = function(){
     var self = this;
 
+    // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.$html.off('mousewheel.SmoothScroll')
+      self.param.$target.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(){
         self.tween(arguments[1]);
         return false;
@@ -140,7 +144,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.$html.off('mousewheel.SmoothScroll');
+    this.param.$target.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -154,10 +158,10 @@ var AMP = AMP || {};
   p.tween = function(move){
     var self = this,
     param = self.param,
-    y = AMP.isWebkit() ? self.$html.eq(1).scrollTop() : self.$html.eq(0).scrollTop(),
+    y = AMP.isWebkit() ? self.param.$target.eq(1).scrollTop() : self.param.$target.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
-    self.$html.velocity('stop')
+    self.param.$target.velocity('stop')
     .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
   };
 

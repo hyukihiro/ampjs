@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryプロタイプオブジェクト拡張</h3>
-	 * version: 2.0
+	 * VERSION: 2.0
 	 *
 	 * @class jQuery.fn
 	 */
@@ -111,7 +111,6 @@
   /**
    * <h4>ファイルの拡張子を取得</h4>
    *
-   * @static
    * @method getExt
    * @param  {String} attr 取得属性名
    * @return {String} 拡張子を返す

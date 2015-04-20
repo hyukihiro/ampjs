@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryオブジェクト拡張</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery
 	 */
@@ -51,7 +51,6 @@
 
 		$Def.resolve();
 
-		// return jQuery.Deferred
 		return $def.promise();
 	};
 
@@ -63,7 +62,7 @@
    * @static
    * @method stream
    * @param {Function} argments 関数、もしくは配列に格納した関数
-   * @return {jQuery.Deferred} jQuery.Deferredオブジェクトを返す
+   * @return {jQuery.Deferred}
    */
   $.stream = function(){
     var $defer = new $.Deferred(),
@@ -92,6 +91,7 @@
     };
 
     stream(callbacks[count]);
+
     return $defer.promise();
   };
 

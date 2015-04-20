@@ -530,7 +530,7 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
@@ -544,7 +544,7 @@
 	 * イベントオブジェクトに取得したオブジェクトを返します
 	 * <b>インライン要素には効きません</b>
 	 *
-	 * @event slipin マウスインした時の方向を取得したイベント
+	 * @event slipin
 	 * @example
 	 *	$(elm).on('slipin', callback);
 	 *	$(elm).slipin(callback);
@@ -554,7 +554,7 @@
 	 * イベントオブジェクトに取得したオブジェクトを返します
 	 * <b>インライン要素には効きません</b>
 	 *
-	 * @event slipout マウスアウトした時の方向を取得したイベント
+	 * @event slipout
 	 * @example
 	 *	$(elm).on('slipout', callback);
 	 *	$(elm).slipout(callback);
@@ -626,7 +626,7 @@
 	/**
 	 * <h4>slipin, slipout ショートハンド</h4>
 	 *
-	 * @event slipin slipout ショートハンド
+	 * @event slip
 	 * @param  {Function} fnIn  slipinコールバック関数
 	 * @param  {Function} fnOut slipoutコールバック関数
 	 * @example
@@ -646,7 +646,7 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
@@ -654,7 +654,7 @@
 	/**
 	 * <h4>リサイズイベントを間引き、完了後発火します</h4>
 	 *
-	 * @event resizestop リサイズ完了イベント
+	 * @event resizestop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
 	 *	$(window).on('resizestop', callback);
@@ -663,7 +663,7 @@
 	/**
 	 * <h4>スクロールイベントを間引き、完了後発火します</h4>
 	 *
-	 * @event scrollstop スクロール完了イベント
+	 * @event scrollstop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
 	 *	$(window).on('scrollstop', {timer: 1000}, callback);
@@ -721,7 +721,7 @@
 
 	/**
 	 * <h3>jQueryオブジェクト拡張</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery
 	 */
@@ -767,7 +767,6 @@
 
 		$Def.resolve();
 
-		// return jQuery.Deferred
 		return $def.promise();
 	};
 
@@ -779,7 +778,7 @@
    * @static
    * @method stream
    * @param {Function} argments 関数、もしくは配列に格納した関数
-   * @return {jQuery.Deferred} jQuery.Deferredオブジェクトを返す
+   * @return {jQuery.Deferred}
    */
   $.stream = function(){
     var $defer = new $.Deferred(),
@@ -808,6 +807,7 @@
     };
 
     stream(callbacks[count]);
+
     return $defer.promise();
   };
 
@@ -822,7 +822,7 @@
 
 	/**
 	 * <h3>jQueryプロタイプオブジェクト拡張</h3>
-	 * version: 2.0
+	 * VERSION: 2.0
 	 *
 	 * @class jQuery.fn
 	 */
@@ -928,7 +928,6 @@
   /**
    * <h4>ファイルの拡張子を取得</h4>
    *
-   * @static
    * @method getExt
    * @param  {String} attr 取得属性名
    * @return {String} 拡張子を返す

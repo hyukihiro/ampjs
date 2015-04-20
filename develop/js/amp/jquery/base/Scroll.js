@@ -4,6 +4,7 @@ var AMP = AMP || {};
 
   // 'use strict';
 
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -22,8 +23,16 @@ var AMP = AMP || {};
       options = $trigger;
       $trigger = $('a[href^=#]');
     }
-    this.$trigger = $trigger;
+
     this.param = $.extend(true, {}, Scroll.defaults, {$html: $('html, body')}, options);
+
+    /**
+     * <h4>トリガーとなるa要素</h4>
+     *
+     * @property param.$trigger
+     * @type {Object}
+     */
+    this.param.$trigger = $trigger;
   }
 
   // 基底クラスを継承
@@ -55,15 +64,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'Scroll';
-
-
-  /**
-   * <h4>トリガーとなるa要素</h4>
-   *
-   * @property $trigger
-   * @type {Object}
-   */
-  p.$trigger = null;
 
 
   /**
@@ -139,8 +139,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.$trigger.on('click.Scroll', function(){
-      return self.tween(self.$trigger.index(this));
+    self.param.$trigger.on('click.Scroll', function(){
+      return self.tween(self.param.$trigger.index(this));
     });
 
     return this;
@@ -154,7 +154,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.$trigger.off('click.Scroll');
+    this.param.$trigger.off('click.Scroll');
     return this;
   };
 
@@ -168,7 +168,7 @@ var AMP = AMP || {};
   p.tween = function(num){
     var self = this,
     param = self.param,
-    $trigger = self.$trigger.eq(num),
+    $trigger = self.param.$trigger.eq(num),
     $target = $($trigger.attr('href')),
     moveTo;
 

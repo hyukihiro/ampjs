@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
@@ -13,7 +13,7 @@
 	/**
 	 * <h4>リサイズイベントを間引き、完了後発火します</h4>
 	 *
-	 * @event resizestop リサイズ完了イベント
+	 * @event resizestop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
 	 *	$(window).on('resizestop', callback);
@@ -22,7 +22,7 @@
 	/**
 	 * <h4>スクロールイベントを間引き、完了後発火します</h4>
 	 *
-	 * @event scrollstop スクロール完了イベント
+	 * @event scrollstop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
 	 *	$(window).on('scrollstop', {timer: 1000}, callback);

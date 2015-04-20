@@ -4,6 +4,7 @@ var AMP = AMP || {};
 
   // 'use strict';
 
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -23,8 +24,14 @@ var AMP = AMP || {};
       $target = $('.box_hover');
     }
 
-    this.$target = $target;
     this.param = $.extend(true, {}, BoxHover.defaults, options);
+
+    /**
+     * <h4>ターゲット要素</h4>
+     * @property param.$target
+     * @type {jQuery}
+     */
+    this.param.$target = $target;
   }
 
   // 基底クラスを継承
@@ -59,16 +66,6 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>対象の要素</h4>
-   *
-   * @default $('.box_hover')
-   * @property $target
-   * @type {jQuery}
-   */
-  p.$target = null;
-
-
-  /**
    * <h4>デフォルト値</h4>
    * コンストラクタが呼び出す際に、optionsを指定するとparamオブジェクトにmixinします<br>
    *
@@ -90,7 +87,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタ呼び出し時の引数とBoxHover.optionsを、mixinして格納します<br>
+   * コンストラクタ呼び出し時の引数とBoxHover.defaultsを、mixinして格納します<br>
    *
    * @property param
    * @type {Object}
@@ -124,7 +121,6 @@ var AMP = AMP || {};
    * <h4>イベント登録</h4>
    *
    * @method on
-   * @param {jQuery} $target ターゲット要素 省略可
    * @return {BoxHover}
    */
   p.on = function(){
@@ -132,7 +128,7 @@ var AMP = AMP || {};
 
     this.off();
 
-    this.$target.css({cursor: 'pointer'})
+    this.param.$target.css({cursor: 'pointer'})
     .on('mouseenter.BoxHover', function(){
       $(this).addClass(self.param.hoverClass);
     })
@@ -144,7 +140,7 @@ var AMP = AMP || {};
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.$target.find('label input　select textarea').click(function(event){
+    this.param.$target.find('label input select textarea').click(function(event){
       event.stopPropagation();
     });
 
@@ -156,11 +152,10 @@ var AMP = AMP || {};
    * <h4>イベント削除</h4>
    *
    * @method off
-   * @param {jQuery} $target ターゲット要素 省略可
    * @return {BoxHover}
    */
   p.off = function(){
-    this.$target.css({cursor: 'auto'})
+    this.param.$target.css({cursor: 'auto'})
     .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };

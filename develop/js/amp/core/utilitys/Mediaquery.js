@@ -127,8 +127,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>イベント登録</h4>
+   * !!!: override Events.on
    *
-   * @override
    * @method on
    * @param  {String} type イベントタイプ
    * @param  {Function} listener イベントリスナー
@@ -147,8 +147,8 @@ var AMP = AMP || {};
   /**
    * <h4>イベント発行</h4>
    * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
+   * !!!: override Events.trigger
    *
-   * @override
    * @method trigger
    * @param  {String} type イベントタイプ
    * @return {Events}

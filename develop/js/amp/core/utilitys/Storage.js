@@ -84,6 +84,19 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
+   * <h4>Storageインスタンスの生成</h4>
+   * shorthand
+   *
+   * @method get
+   * @param {Boolean} isLocalStorage ローカルストレージを使用するか？
+   * @return {Storage}
+   */
+  Storage.get = function(isLocalStorage){
+    return new Storage(isLocalStorage);
+  };
+
+
+  /**
    * <h4>値のセット</h4>
    *
    * @method setItem
@@ -184,6 +197,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Storage = Storage;
+  AMP.storage = Storage.get;
 
 
 }(window));

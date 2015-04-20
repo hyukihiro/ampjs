@@ -29,12 +29,9 @@
 var AMP = AMP || {};
 
 
-(function(root, $){
+(function(root, $, Hogan){
 
   // 'use strict';
-
-  var Render, render, p;
-
 
 
   /*--------------------------------------------------------------------------
@@ -48,19 +45,21 @@ var AMP = AMP || {};
    *
    * @class AMP.Render
    * @constructor
-   * @param  {jQuery} $tepl jsTemplate要素
+   * @param  {jQuery} $template jsTemplate要素
    * @param  {Object} ajaxOptions $.ajax options
-   * @return {Render}
    */
-  Render = function($tmpl, ajaxOptions){
-    this.$tmpl = $tmpl;
-    this.tmpl  = Hogan.compile($tmpl.html());
-    this.ajaxOptions = $.extend(true, {}, Render.ajaxOptions, ajaxOptions);
 
-    // コンテキスト固定
-    _.bindAll(this, 'getData', 'createTemplate', 'render');
-  };
+  function Render($template, ajaxOptions){
+    this.param.$template   = $template;
+    this.param.template    = Hogan.compile($template.html());
+    this.param.ajaxOptions = $.extend(true, {}, Render.ajaxOptions, ajaxOptions);
+  }
 
+  // 基底クラスを継承
+  AMP.inherits(Render, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Render.prototype;
 
 
   /*--------------------------------------------------------------------------
@@ -68,18 +67,18 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>
-   * Renderのショートハンド
+   * <h4>Renderインスタンスの生成</h4>
+   * shorthand
    *
    * @static
    * @method render
    * @param  {jQuery} $tepl jsTemplate要素
    * @param  {Object} ajaxOptions $.ajax options
-   * @return {Render} Renderインスタンスを返す
+   * @return {Render}
    */
-  render = function($tmpl, ajaxOptions){
-    var inst = new Render($tmpl, ajaxOptions);
-    inst.init();
+  Render.get = function($template, ajaxOptions){
+    var inst = new Render($template, ajaxOptions);
+    inst.start();
     return inst;
   };
 
@@ -96,7 +95,16 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Render.VERSION = '2.0';
+  Render.VERSION = '3.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Render';
 
 
   /**
@@ -121,66 +129,29 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>パラメーター格納オブジェクト</h4>
    *
-   * @property p
+   * @default
+   * defaults { <ul><li>
+   *   $template   : null, {jQuery} js Template要素</li><li>
+   *   $el         : null {jQuery} レンダリングエリアのラッパー要素</li><li>
+   *   template    : null {Hogan} Hoganテンプレート</li><li>
+   *   originalData: null {Object|Array} レンダーオリジナルデータ</li><li>
+   *   renderData  : null {Object|Array} レンダーデータ</li><li>
+   *   ajaxOptions : null {Object} Ajaxオプション値</li></ul>
+   * }
+   *
+   * @property param
    * @type {Object}
    */
-  p = Render.prototype;
-
-
-  /**
-   * <h4>JSTemplate要素</h4>
-   *
-   * @property $tmpl
-   * @type {jQuery}
-   */
-  p.$tmpl = null;
-
-
-  /**
-   * <h4>$tmplをHogan.jsでコンパイルしたデータ</h4>
-   *
-   * @property tmpl
-   * @type {Object}
-   */
-  p.tmpl = null;
-
-
-  /**
-   * <h4>$.ajaxで取得したデータ</h4>
-   *
-   * @property data
-   * @type {Object}
-   */
-  p.data = null;
-
-
-  /**
-   * <h4>jsTemplate要素に流し込むデータ</h4>
-   *
-   * @property tmplData
-   * @type {Object}
-   */
-  p.tmplData = null;
-
-
-  /**
-   * <h4>DOM生成したあと、挿入された要素</h4>
-   *
-   * @property $el
-   * @type {jQuery}
-   */
-  p.$el = null;
-
-
-  /**
-   * <h4>initが実行されたら、jQuery.Deferredオブジェクトを代入します</h4>
-   *
-   * @property $defer
-   * @type {jQuery}
-   */
-  p.$defer = null;
+  p.param = {
+    $template   : null,
+    $el         : null,
+    template    : null,
+    originalData: null,
+    renderData  : null,
+    ajaxOptions : null
+  };
 
 
 
@@ -189,53 +160,45 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Render}
-   */
-   Render.extend = AMP._extend;
-
-
-  /**
    * <h4>初期化</h4>
+   * 処理が完了したことを通知します
    *
-   * @method init
-   * @return {jQuery.Deferred} 処理が完了したことを通知します
+   * @method start
+   * @return {jQuery.Deferred}
    */
-  p.init = function(){
+  p.start = function(){
     var self = this;
 
     // 縦列に処理します
-    this.$defer = $.stream(
-      self.getData,
-      self.createTemplate,
-      self.render
+    return $.stream(
+      function(){
+        return self.ajax();
+      },
+      function(){
+        return self.setRenderData();
+      },
+      function(){
+        return self.render();
+      }
     );
-
-    return this.$defer;
   };
 
 
   /**
    * <h4>$.ajaxで、データを取得します</h4>
    *
-   * @method getData
+   * @method getAjax
    * @return {jQuery.Deferred} 処理が、完了したことを通知します
    */
-  p.getData = function(){
+  p.ajax = function(){
     var self = this;
 
-    return $.ajax(self.ajaxOptions)
-      .fail(self.ajaxFail)
-      .done(function(data){
-        self.data = data;
-        self.ajaxDone(data);
-      });
+    return $.ajax(self.param.ajaxOptions)
+    .fail(self.ajaxFail)
+    .done(function(data){
+      self.param.originalData = data;
+      self.ajaxDone(data);
+    });
   };
 
 
@@ -246,18 +209,14 @@ var AMP = AMP || {};
    * @param {Object} data ajax通信の取得データ
    * @return {Render}
    */
-  p.ajaxDone = function(){
-    return this;
-  };
+  p.ajaxDone = function(){};
 
 
   /**
-   * <h4>ajax通信失敗時、呼び出されます。再度ページを読み込み直すか？</h4>
+   * <h4>ajax通信失敗時、呼び出されます</h4>
+   * 再度ページを読み込み直すか？
    *
    * @method ajaxFail
-   * @param {Object} xhr
-   * @param {Object} status
-   * @param {Object} error
    * @return {Render}
    */
   p.ajaxFail = function(xhr, status, error){
@@ -273,15 +232,78 @@ var AMP = AMP || {};
 
   /**
    * <h4>Hoganに流し込む、データを生成して、tmplDataに格納します</h4>
-   * データ成型が必要な場合は、ここをExtendします
    *
-   * @method createTemplate
+   * @method setRenderData
    * @param {Object} data JSTに流し込むデータ
    * @return {Render}
    */
-  p.createTemplate = function(data){
-    this.tmplData = data || this.data;
+  p.setRenderData = function(renderData){
+    if(renderData){
+      this.param.renderData = renderData;
+    } else {
+      if(AMP.isArray(this.param.originalData)){
+        this.param.renderData = this.param.originalData.concat();
+
+      } else {
+        this.param.renderData = $.extend({}, this.param.originalData);
+      }
+    }
+
     return this;
+  };
+
+
+  /**
+   * <h4>レンダーデータのフィルタリングの際使用します</h4>
+   *
+   * @method filtter
+   * @return {Object}
+   */
+  p.filtter = function(data){
+    return data;
+  };
+
+
+  /**
+   * <h4>レンダリングされている場合、データを削除します</h4>
+   * レンダリングされていない場合は、レンダーエリアをラップする要素を生成します
+   *
+   * @method removePrevHTML
+   * @return {Render}
+   */
+  p.removePrevHTML = function(){
+    if(!this.param.$el){
+      this.param.$template.wrapAll('<div class="js_render" />');
+      this.param.$el = this.param.$template.parent();
+    } else {
+      this.$el.children().remove();
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>生成するHTMLデータがない場合呼び出されます</h4>
+   *
+   * @default '<p class="not_found">データを取得できませんでした。</p>'
+   * @method notFound
+   * @return {String}
+   */
+  p.notFound = function(){
+    return '<p class="not_found">データを取得できませんでした。</p>';
+  };
+
+
+  /**
+   * <h4>レンダリングするHTMLを生成します</h4>
+   *
+   * @method createHTML
+   * @param  {Object|Array} data レンダリングデータ
+   * @return {DOM}
+   */
+  p.createHTML = function(data){
+    this.setRenderData(data);
+    return this.param.template.render(this.param.renderData) || this.notFound();
   };
 
 
@@ -291,21 +313,10 @@ var AMP = AMP || {};
    * @method render
    * @return {Render}
    */
-  p.render = function(){
-    this.$el = $(this.tmpl.render(this.tmplData));
-    this.$tmpl.replaceWith(this.$el);
+  p.render = function(data){
+    this.removePrevHTML();
+    this.param.$el[0].innerHTML = this.createHTML(data);
     return this;
-  };
-
-
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Render]';
   };
 
 
@@ -315,7 +326,8 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Render = Render;
-  AMP.render = render;
+  AMP.render = Render.get;
 
 
-}(window, jQuery));
+
+}(window, jQuery, Hogan));

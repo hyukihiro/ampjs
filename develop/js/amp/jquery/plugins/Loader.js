@@ -4,9 +4,6 @@ var AMP = AMP || {};
 
   // 'use strict';
 
-  var Loader, loader, p;
-
-
   /*--------------------------------------------------------------------------
     @constructor
   --------------------------------------------------------------------------*/
@@ -22,7 +19,7 @@ var AMP = AMP || {};
    * @param {Boolean} isStart ローダー開始するか
    * @return {Loader}
    */
-  Loader = function(elm, isStart){
+  function Loader(elm, isStart){
     this.elm = elm ? elm : this.elm;
     this.imagesloaded = imagesLoaded(this.elm);
     this.length = this.imagesloaded.images.length;
@@ -35,25 +32,11 @@ var AMP = AMP || {};
     return this;
   };
 
+  // 基底クラスを継承
+  AMP.inherits(Loader, AMP.BASE_CLASS);
 
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ローダー</h4>
-   * Loaderのショートハンド<br>
-   * 処理が完了したら、jQuery Deferred Objectを返します
-   *
-   * @static
-   * @method loader
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可 初期: body
-   * @return {Loader} Loader生成してインスタンスを返す
-   */
-  loader = function(elm){
-    return new Loader(elm, true);
-  };
+  // prototype
+  var p = Loader.prototype;
 
 
 
@@ -68,16 +51,25 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '2.0';
+  Loader.VERSION = '3.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Loader';
+
+
+  /**
+   * <h4>パラメーター格納オブジェクト</h4>
+   *
+   * @property param
    * @type {Object}
    */
-  p = Loader.prototype;
+  p.param = null;
 
 
   /**
@@ -141,19 +133,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * AMP._extendをエクスポートしています
-   *
-   * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
-   * @return {Loader}
-   */
-   Loader.extend = AMP._extend;
-
-
-  /**
    * <h4>ローター開始</h4>
    *
    * @method start
@@ -199,24 +178,13 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>クラス名を返す</h4>
-   *
-   * @method toString
-   * @return {String} クラス名を返す
-   */
-  p.toString = function(){
-    return '[object Loader]';
-  };
-
-
 
   /*--------------------------------------------------------------------------
     export
   --------------------------------------------------------------------------*/
 
   AMP.Loader = Loader;
-  AMP.loader = loader;
+  AMP.loader = Loader.get;
 
 
 }(window, jQuery));

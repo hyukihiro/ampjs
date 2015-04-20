@@ -26,6 +26,9 @@
  */
 
 
+// for ie8
+var AMP = {};
+
 (function(root){
 
   // 'use strict';
@@ -38,7 +41,7 @@
 
   // クラス設定
   var
-  CLASS_NAME = 'AMP',
+  CLASS_NAME = 'Amp',
   VERSION    = '3.0.0';
 
 
@@ -48,14 +51,14 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>AMP</h4>
-   * !!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)
-   * !!!: AMP.BaseClassにエクスポートしてます
+   * <h4>Amp</h4>
+   * !!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
+   * !!!: Amp.BASE_CLASSにエクスポートしてます
    *
-   * @class AMP
+   * @class Amp
    * @constructor
    **/
-  function AMP(){}
+  function Amp(){}
 
 
 
@@ -70,7 +73,7 @@
    * @property VERSION
    * @type {String}
    */
-  AMP.VERSION = VERSION;
+  Amp.VERSION = VERSION;
 
 
   /**
@@ -79,7 +82,7 @@
    * @property className
    * @type {String}
    */
-  AMP.prototype.className = CLASS_NAME;
+  Amp.prototype.className = CLASS_NAME;
 
 
 
@@ -96,7 +99,7 @@
    * @return {Extend Class}
    */
   // !!!: export AMP._extend;
-  AMP.extend = null;
+  Amp.extend = null;
 
 
   /**
@@ -105,7 +108,7 @@
    * @method toString
    * @return {String} クラス名を返す
    */
-  AMP.prototype.toString = function(){
+  Amp.prototype.toString = function(){
     return '[object ' + this.className + ']';
   };
 
@@ -118,10 +121,10 @@
   /**
    * <h4>AMP</h4>
    *
-   * @module AMP
+   * @class AMP
    **/
-  root.AMP = new AMP();
-  root.AMP.BASE_CLASS = AMP;
+  AMP = new Amp();
+  AMP.BASE_CLASS = Amp;
 
 
 
@@ -137,6 +140,11 @@ var AMP = AMP || {};
   /*======================================================================
     配列
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
 
 
   /*----------------------------------------------------------------------
@@ -210,6 +218,11 @@ var AMP = AMP || {};
   /*======================================================================
     拡張
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
 
 
   /*----------------------------------------------------------------------
@@ -324,8 +337,8 @@ var AMP = AMP || {};
    * @param {arguments} subClass サブクラス
    * @return {Function}
    */
-  // AMP._extend = AMP.BASE_CLASS.extend = function(){
-  AMP._extend = function(){
+  AMP._extend = AMP.BASE_CLASS.extend = function(){
+  // AMP._extend = function(){
     var subClass = arguments.length ? arguments : function(){};
     return AMP.inherits(subClass, this);
   };
@@ -341,6 +354,12 @@ var AMP = AMP || {};
   /*======================================================================
     フォールバック
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
+
 
 
   /*----------------------------------------------------------------------
@@ -475,6 +494,11 @@ var AMP = AMP || {};
   /*======================================================================
     機能判定
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
 
 
   /*----------------------------------------------------------------------
@@ -763,6 +787,12 @@ var AMP = AMP || {};
   /*======================================================================
     オブジェクト,ブラウザの判定
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
+
 
 
   /*----------------------------------------------------------------------
@@ -1421,6 +1451,12 @@ var AMP = AMP || {};
     locationオブジェクト
   ======================================================================*/
 
+  /**
+   * @class AMP
+   * @constructor
+   */
+
+
 
   /*----------------------------------------------------------------------
     config
@@ -1493,6 +1529,12 @@ var AMP = AMP || {};
     文字列
   ======================================================================*/
 
+  /**
+   * @class AMP
+   * @constructor
+   */
+
+
 
   /*----------------------------------------------------------------------
     @method
@@ -1544,7 +1586,7 @@ var AMP = AMP || {};
   /**
    * <h4>文字列の全置換</h4>
    *
-   * @repraceAll
+   * @method repraceAll
    * @param  {String} str 置換対象の文字列
    * @param  {String} del 削除する文字列
    * @param  {String} add 追加する文字列
@@ -1605,6 +1647,12 @@ var AMP = AMP || {};
   /*======================================================================
     ユーティリティ
   ======================================================================*/
+
+  /**
+   * @class AMP
+   * @constructor
+   */
+
 
 
   /*----------------------------------------------------------------------
@@ -1835,6 +1883,7 @@ var AMP = AMP || {};
 (function(root){
 
   // 'use strict';
+
 
   /*----------------------------------------------------------------------
     @constructor
@@ -2848,8 +2897,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>イベント登録</h4>
+   * !!!: override Events.on
    *
-   * @override
    * @method on
    * @param  {String} type イベントタイプ
    * @param  {Function} listener イベントリスナー
@@ -3006,8 +3055,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>イベント登録</h4>
+   * !!!: override Events.on
    *
-   * @override
    * @method on
    * @param  {String} type イベントタイプ
    * @param  {Function} listener イベントリスナー
@@ -3026,8 +3075,8 @@ var AMP = AMP || {};
   /**
    * <h4>イベント発行</h4>
    * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
+   * !!!: override Events.trigger
    *
-   * @override
    * @method trigger
    * @param  {String} type イベントタイプ
    * @return {Events}
@@ -3163,6 +3212,19 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
+   * <h4>Storageインスタンスの生成</h4>
+   * shorthand
+   *
+   * @method get
+   * @param {Boolean} isLocalStorage ローカルストレージを使用するか？
+   * @return {Storage}
+   */
+  Storage.get = function(isLocalStorage){
+    return new Storage(isLocalStorage);
+  };
+
+
+  /**
    * <h4>値のセット</h4>
    *
    * @method setItem
@@ -3263,6 +3325,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Storage = Storage;
+  AMP.storage = Storage.get;
 
 
 }(window));

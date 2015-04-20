@@ -4,6 +4,7 @@ var AMP = AMP || {};
 
   // 'use strict';
 
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -17,10 +18,37 @@ var AMP = AMP || {};
    * @param  {Object} options オプション値
    */
   function ScrollToggle($target, options){
-    this.$window = $(window);
-    this.$target = $target;
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.scroll_toggle');
+    }
+
     this.param   = $.extend(true, {}, ScrollToggle.defaults, options);
-    this.isShow  = $target.css('display') === 'block';
+
+    /**
+     * <h4>表示・非表示する要素</h4>
+     *
+     * @property $target
+     * @type {jQuery}
+     */
+    this.param.$target = $target;
+
+    /**
+     * <h4>window要素</h4>
+     *
+     * @property $window
+     * @type {jQuery}
+     */
+    this.param.$window = $(root);
+
+    /**
+     * <h4>Display:Block表示されているか?</h4>
+     *
+     * @property isDisplay
+     * @type {Boolean}
+     */
+    this.param.isDisplay = $target.css('display') === 'block';
   }
 
   // 基底クラスを継承
@@ -55,33 +83,6 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>window要素</h4>
-   *
-   * @property $window
-   * @type {jQuery}
-   */
-  p.$window = null;
-
-
-  /**
-   * <h4>表示・非表示する要素</h4>
-   *
-   * @property $target
-   * @type {jQuery}
-   */
-  p.$target = null;
-
-
-  /**
-   * <h4>表示されているか?</h4>
-   *
-   * @property isShow
-   * @type {Boolean}
-   */
-  p.isShow = null;
-
-
-  /**
    * <h4>オプション初期値</h4>
    *
    * @default
@@ -106,7 +107,7 @@ var AMP = AMP || {};
     duration: 500,
     easing  : 'easeInSine',
     showCall: $.noop,
-    hideCall: $.noop
+    hideCall: $.noop,
   };
 
 
@@ -153,13 +154,13 @@ var AMP = AMP || {};
     param = self.param,
     offsetY;
 
-    self.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.$window.scrollTop();
+    self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.param.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.isShow && param.showY < offsetY){
+      if(!self.param.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.isShow && param.showY > offsetY){
+      } else if(self.param.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -175,7 +176,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    self.$window.off('scroll.ScrollToggle');
+    this.param.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -188,8 +189,10 @@ var AMP = AMP || {};
    */
   p.show = function(){
     var self = this;
-    self.isShow = true;
-    self.$target.css({display: 'block'}).css(self.param.hide)
+
+    self.param.isDislpay = true;
+
+    self.param.$target.css({display: 'block'}).css(self.param.hide)
     .velocity('stop')
     .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
 
@@ -205,12 +208,13 @@ var AMP = AMP || {};
    */
   p.hide = function(){
     var self = this;
-    self.isShow = false;
 
-    self.$target
+    self.param.isDislpay = false;
+
+    self.param.$target
     .velocity('stop')
     .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
-      self.$target.css({display: 'none'});
+      self.param.$target.css({display: 'none'});
       self.param.hideCall();
     });
 

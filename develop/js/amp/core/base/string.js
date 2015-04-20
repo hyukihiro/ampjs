@@ -9,6 +9,12 @@ var AMP = AMP || {};
     文字列
   ======================================================================*/
 
+  /**
+   * @class AMP
+   * @constructor
+   */
+
+
 
   /*----------------------------------------------------------------------
     @method
@@ -60,7 +66,7 @@ var AMP = AMP || {};
   /**
    * <h4>文字列の全置換</h4>
    *
-   * @repraceAll
+   * @method repraceAll
    * @param  {String} str 置換対象の文字列
    * @param  {String} del 削除する文字列
    * @param  {String} add 追加する文字列

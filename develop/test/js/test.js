@@ -1,8 +1,16 @@
-window.onload = function(){
 
-AMP.rollover.on($('img'))
+jQuery(function($){
+	// AMP.rollover.on($('img'));
+	// console.log();
+
+	AMP.render($('#tmpl'), {url: 'data/amp.render.json'})
+
+
+
+
+
+});
+
 // .passive($('img'));
-	console.log();
 
-	AMP.debug.log(window.dispatchEvent)
-};
+	// AMP.debug.log(window.dispatchEvent)

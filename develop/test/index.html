@@ -8,7 +8,7 @@
 <meta name="keywords" content="AMP,js,javascript,library">
 <meta name="viewport" content="width=978">
 <meta name="format-detection" content="telephone=no,address=no,email=no">
-<!--[if lt IE 9]><script src="/shared/js/html5shiv.js"></script><![endif]-->
+<!--[if lt IE 9]><script src="js/html5shiv.min.js"></script><![endif]-->
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
 <link rel="stylesheet" href="css/global.css" media="all">
 </head>
@@ -23,6 +23,16 @@
 
 
 <div id="content" class="cf">
+
+<script id="tmpl" type="text/template">
+<dl>
+{{#article}}
+<dt><span class="date">{{date}}</span><span class="ttl">{{title}}</span></dt>
+<dd>{{text}}</dd>
+{{/article}}
+</dl>
+</script>
+
 
 <p><img src="images/btn01_on.png" alt=""></p>
 <p><img src="images/btn02.png" alt=""></p>
@@ -70,6 +80,7 @@
 <script src="../js/amp/core/base/location.js"></script>
 <script src="../js/amp/core/base/string.js"></script>
 <script src="../js/amp/core/base/utilitys.js"></script>
+
 <script src="../js/amp/core/utilitys/Debug.js"></script>
 <script src="../js/amp/core/utilitys/Ease.js"></script>
 <script src="../js/amp/core/utilitys/Events.js"></script>
@@ -84,6 +95,7 @@
 <script src="../js/amp/jquery/base/Scroll.js"></script>
 <script src="../js/amp/jquery/base/ScrollToggle.js"></script>
 
+<script src="../js/amp/jquery/plugins/Render.js"></script>
 
 <!-- test -->
 <script src="js/test.js"></script>

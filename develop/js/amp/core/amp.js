@@ -1,3 +1,6 @@
+// for ie8
+var AMP = {};
+
 (function(root){
 
   // 'use strict';
@@ -10,7 +13,7 @@
 
   // クラス設定
   var
-  CLASS_NAME = 'AMP',
+  CLASS_NAME = 'Amp',
   VERSION    = '3.0.0';
 
 
@@ -20,14 +23,14 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>AMP</h4>
-   * !!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)
-   * !!!: AMP.BaseClassにエクスポートしてます
+   * <h4>Amp</h4>
+   * !!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
+   * !!!: Amp.BASE_CLASSにエクスポートしてます
    *
-   * @class AMP
+   * @class Amp
    * @constructor
    **/
-  function AMP(){}
+  function Amp(){}
 
 
 
@@ -42,7 +45,7 @@
    * @property VERSION
    * @type {String}
    */
-  AMP.VERSION = VERSION;
+  Amp.VERSION = VERSION;
 
 
   /**
@@ -51,7 +54,7 @@
    * @property className
    * @type {String}
    */
-  AMP.prototype.className = CLASS_NAME;
+  Amp.prototype.className = CLASS_NAME;
 
 
 
@@ -68,7 +71,7 @@
    * @return {Extend Class}
    */
   // !!!: export AMP._extend;
-  AMP.extend = null;
+  Amp.extend = null;
 
 
   /**
@@ -77,7 +80,7 @@
    * @method toString
    * @return {String} クラス名を返す
    */
-  AMP.prototype.toString = function(){
+  Amp.prototype.toString = function(){
     return '[object ' + this.className + ']';
   };
 
@@ -90,10 +93,10 @@
   /**
    * <h4>AMP</h4>
    *
-   * @module AMP
+   * @class AMP
    **/
-  root.AMP = new AMP();
-  root.AMP.BASE_CLASS = AMP;
+  AMP = new Amp();
+  AMP.BASE_CLASS = Amp;
 
 
 

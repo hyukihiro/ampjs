@@ -4,6 +4,7 @@ var AMP = AMP || {};
 
   // 'use strict';
 
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
@@ -129,6 +130,12 @@ var AMP = AMP || {};
    * @return {Rollover}
    */
   p.off = function($images, options){
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(this.imageClass);
+    }
+
     var param = $.extend(true, {}, Rollover.defaults, options);
 
     $images.each(function(i){

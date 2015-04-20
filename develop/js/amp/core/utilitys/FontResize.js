@@ -148,8 +148,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>イベント登録</h4>
+   * !!!: override Events.on
    *
-   * @override
    * @method on
    * @param  {String} type イベントタイプ
    * @param  {Function} listener イベントリスナー

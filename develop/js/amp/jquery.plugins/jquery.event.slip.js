@@ -5,7 +5,7 @@
 
 	/**
 	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 1.0
+	 * VERSION: 1.0
 	 *
 	 * @class jQuery.Event
 	 */
@@ -19,7 +19,7 @@
 	 * イベントオブジェクトに取得したオブジェクトを返します
 	 * <b>インライン要素には効きません</b>
 	 *
-	 * @event slipin マウスインした時の方向を取得したイベント
+	 * @event slipin
 	 * @example
 	 *	$(elm).on('slipin', callback);
 	 *	$(elm).slipin(callback);
@@ -29,7 +29,7 @@
 	 * イベントオブジェクトに取得したオブジェクトを返します
 	 * <b>インライン要素には効きません</b>
 	 *
-	 * @event slipout マウスアウトした時の方向を取得したイベント
+	 * @event slipout
 	 * @example
 	 *	$(elm).on('slipout', callback);
 	 *	$(elm).slipout(callback);
@@ -101,7 +101,7 @@
 	/**
 	 * <h4>slipin, slipout ショートハンド</h4>
 	 *
-	 * @event slipin slipout ショートハンド
+	 * @event slip
 	 * @param  {Function} fnIn  slipinコールバック関数
 	 * @param  {Function} fnOut slipoutコールバック関数
 	 * @example
