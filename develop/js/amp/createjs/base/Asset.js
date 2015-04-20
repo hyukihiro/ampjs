@@ -23,7 +23,7 @@
       // underscoreで一時的に対応
       // _.extend(this, container);
     } else {
-      throw new TypeError('Please select DisplayObject');
+      throw new TypeError(container + ' is not a Container');
     }
   };
 

@@ -29,7 +29,7 @@
     if(isType){
       this.selector = selector;
     } else {
-      new TypeError('Please select Stage or Container');
+      new TypeError(selector + ' is not a Stage or Container');
     }
   };
 

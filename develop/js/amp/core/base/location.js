@@ -11,7 +11,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 

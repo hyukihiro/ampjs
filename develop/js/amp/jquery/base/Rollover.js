@@ -51,10 +51,39 @@ var AMP = AMP || {};
   /**
    * <h4>オプションのデフォルト値</h4>
    *
-   * @property defaults
+   * @static
+   * @property rolloverOptions
    * @type {Object}
    */
-  Rollover.defaults = {
+  /**
+   * <h4>グループクラス名</h4>
+   *
+   * @static
+   * @property rolloverOptions.groupClass
+   * @type {String}
+   */
+  /**
+   * <h4>アクティブクラス名</h4>
+   *
+   * @static
+   * @property rolloverOptions.activeClass
+   * @type {String}
+   */
+  /**
+   * <h4>ノーロールオーバークラス名</h4>
+   *
+   * @static
+   * @property rolloverOptions.noOverClass
+   * @type {String}
+   */
+  /**
+   * <h4>ロールオーバー時に付与するファイル名</h4>
+   *
+   * @static
+   * @property rolloverOptions.postfix
+   * @type {String}
+   */
+  Rollover.rolloverOptions = {
     groupClass : 'group_rover',
     activeClass: 'active',
     noOverClass: 'no_rover',
@@ -93,7 +122,7 @@ var AMP = AMP || {};
       $images = $(self.imageClass);
     }
 
-    var param = $.extend(true, {}, Rollover.defaults, options);
+    var param = $.extend(true, {}, Rollover.rolloverOptions, options);
 
     $images.each(function(i){
       var data = self._createRolloverData($images.eq(i), param);
@@ -136,7 +165,7 @@ var AMP = AMP || {};
       $images = $(this.imageClass);
     }
 
-    var param = $.extend(true, {}, Rollover.defaults, options);
+    var param = $.extend(true, {}, Rollover.rolloverOptions, options);
 
     $images.each(function(i){
       var $group = $images.eq(i).closest('.' + param.groupClass),
@@ -158,7 +187,7 @@ var AMP = AMP || {};
    */
   p.active = function($images, options){
     var self = this,
-    param = $.extend(true, {}, Rollover.defaults, options);
+    param = $.extend(true, {}, Rollover.rolloverOptions, options);
 
     $images.addClass(param.activeClass)
     .each(function(i){
@@ -189,7 +218,7 @@ var AMP = AMP || {};
    */
   p.passive = function($images, options){
     var self = this,
-    param = $.extend(true, {}, Rollover.defaults, options);
+    param = $.extend(true, {}, Rollover.rolloverOptions, options);
 
     $images.removeClass(param.activeClass)
     .each(function(i){

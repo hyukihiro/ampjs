@@ -11,7 +11,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -74,7 +73,7 @@ var AMP = AMP || {};
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
     } else {
-      throw new TypeError(fn + ' is not a function');
+      throw new TypeError(fn + ' is not a Function');
     }
   };
 
@@ -100,7 +99,7 @@ var AMP = AMP || {};
 
     // hex値の簡易チェック
     if (hex.length !== 6) {
-      throw new TypeError('Hex color is not selected');
+      throw new TypeError('arguments is not a HEX');
     }
 
     // RGB Object
@@ -129,7 +128,7 @@ var AMP = AMP || {};
 
       // RGB値チェック
       if(2 < _color.length){
-        throw new TypeError('RGB color is not selected');
+        throw new TypeError('arguments is not a RGB');
       }
 
       hex += _color.length === 1 ? '0' + _color : _color;

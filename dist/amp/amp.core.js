@@ -143,7 +143,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -221,7 +220,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -357,7 +355,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -386,7 +383,7 @@ var AMP = AMP || {};
    */
   Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
     if(this === null){
-      throw new TypeError('this is null or not defined');
+      throw new TypeError(this + ' is null or not defined');
     }
     var i = 0, l = this.length;
     for(; i < l; i += 1){
@@ -398,8 +395,8 @@ var AMP = AMP || {};
   /* Function
   -----------------------------------------------------------------*/
   /**
-   * FIXME: βバージョンです。検証していません
    * <h4>束縛された関数生成</h4>
+   * FIXME: βバージョンです。検証していません
    *
    * @method Function.prototype.bind
    * @param  {Function} context this値としてターゲット関数に渡される値
@@ -408,13 +405,13 @@ var AMP = AMP || {};
    */
   Function.prototype.bind = Function.prototype.bind || function(context){
     if (!AMP.isFunction(this)) {
-      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+      throw new TypeError(this + ' is not a callable');
     }
 
     var self = this,
-    args   = AMP.argsToArray(arguments, 1),
-    F      = function(){},
-    B      = function(){
+    args = AMP.argsToArray(arguments, 1),
+    F = function(){},
+    B = function(){
       var ctx = this instanceof F ? this : context;
       return self.apply(ctx, args.concat(AMP.argsToArray(arguments)));
     };
@@ -497,7 +494,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -790,7 +786,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -1453,7 +1448,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -1531,7 +1525,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -1650,7 +1643,6 @@ var AMP = AMP || {};
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -1713,7 +1705,7 @@ var AMP = AMP || {};
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
     } else {
-      throw new TypeError(fn + ' is not a function');
+      throw new TypeError(fn + ' is not a Function');
     }
   };
 
@@ -1739,7 +1731,7 @@ var AMP = AMP || {};
 
     // hex値の簡易チェック
     if (hex.length !== 6) {
-      throw new TypeError('Hex color is not selected');
+      throw new TypeError('arguments is not a HEX');
     }
 
     // RGB Object
@@ -1768,7 +1760,7 @@ var AMP = AMP || {};
 
       // RGB値チェック
       if(2 < _color.length){
-        throw new TypeError('RGB color is not selected');
+        throw new TypeError('arguments is not a RGB');
       }
 
       hex += _color.length === 1 ? '0' + _color : _color;

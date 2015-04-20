@@ -9,7 +9,6 @@
 
   /**
    * @class AMP
-   * @constructor
    */
 
 
@@ -38,7 +37,7 @@
    */
   Array.prototype.forEach = Array.prototype.forEach || function(callback, context){
     if(this === null){
-      throw new TypeError('this is null or not defined');
+      throw new TypeError(this + ' is null or not defined');
     }
     var i = 0, l = this.length;
     for(; i < l; i += 1){
@@ -50,8 +49,8 @@
   /* Function
   -----------------------------------------------------------------*/
   /**
-   * FIXME: βバージョンです。検証していません
    * <h4>束縛された関数生成</h4>
+   * FIXME: βバージョンです。検証していません
    *
    * @method Function.prototype.bind
    * @param  {Function} context this値としてターゲット関数に渡される値
@@ -60,13 +59,13 @@
    */
   Function.prototype.bind = Function.prototype.bind || function(context){
     if (!AMP.isFunction(this)) {
-      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+      throw new TypeError(this + ' is not a callable');
     }
 
     var self = this,
-    args   = AMP.argsToArray(arguments, 1),
-    F      = function(){},
-    B      = function(){
+    args = AMP.argsToArray(arguments, 1),
+    F = function(){},
+    B = function(){
       var ctx = this instanceof F ? this : context;
       return self.apply(ctx, args.concat(AMP.argsToArray(arguments)));
     };

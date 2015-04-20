@@ -12,27 +12,28 @@ var AMP = AMP || {};
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class AMP.Scroll
+   * @class Scroll
    * @constructor
-   * @param  {jQuery} $trigger トリガーとなるa要素 省略可 初期： $('a[href^=#]')
-   * @param  {Object} options オプション値 省略可 初期： Scroll.defaults
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
+   * @param  {Object} options オプション値
    */
-  function Scroll($trigger, options){
-    // $trigger指定がない場合、初期値を設定
-    if(!$trigger || !($trigger instanceof jQuery)){
-      options = $trigger;
-      $trigger = $('a[href^=#]');
+  function Scroll($scrollTrigger, options){
+    // $scrollTrigger指定がない場合、初期値を設定
+    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
+      options = $scrollTrigger;
+      $scrollTrigger = $('a[href^=#]');
     }
 
-    this.param = $.extend(true, {}, Scroll.defaults, {$html: $('html, body')}, options);
+    this.props = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property param.$trigger
+     * @property param.$scrollTrigger
      * @type {Object}
      */
-    this.param.$trigger = $trigger;
+    this.props.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -67,42 +68,88 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>オプション値</h4>
-   *
-   * @default
-   * defaults: { <ul><li>
-   *   $html        : null, // {jQuery} ラッパー要素 初期値: $('html, body') </li><li>
-   *   adjust       : 0, // {Number} スクロール停止位置の調整値 </li><li>
-   *   noScrollClass: 'no-scroll', // {String} スクロールキャンセルするクラス </li><li>
-   *   duration     : 600, // {Number} スクロールスピード </li><li>
-   *   ease         : 'easeOutExpo', // {String} イージング </li><li>
-   *   begin        : $.noop, // {Function} スクロール開始前のコールバック </li><li>
-   *   complete     : $.noop, // {Function} スクロール完了時のコールバック </li><ul>
-   * }
+   * <h4>デフォルト値格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
    *
    * @static
-   * @property defaults
+   * @property scrollOptions
    * @type {Object}
    */
-  Scroll.defaults = {
+  /**
+   * <h4>ページ要素</h4>
+   *
+   * @default $('html, body')
+   * @static
+   * @property scrollOptions.$html
+   * @type {jQuery}
+   */
+  /**
+   * <h4>停止位置調整値</h4>
+   *
+   * @default 0
+   * @static
+   * @property scrollOptions.adjust
+   * @type {Number}
+   */
+  /**
+   * <h4>スクロールしないトリガークラス名</h4>
+   *
+   * @default no_scroll
+   * @static
+   * @property scrollOptions.noScrollClass
+   * @type {String}
+   */
+  /**
+   * <h4>duration</h4>
+   *
+   * @default 800
+   * @static
+   * @property scrollOptions.duration
+   * @type {Number}
+   */
+  /**
+   * <h4>easing</h4>
+   *
+   * @default easeOutQuint
+   * @static
+   * @property scrollOptions.ease
+   * @type {String}
+   */
+
+  /**
+   *　<h4>スクロール前のコールバック</h4>
+   *
+   * @default $.noop
+   * @static
+   * @property beginCall
+   * @type {String}
+   */
+  /**
+   *　<h4>スクロール後のコールバック</h4>
+   *
+   * @default $.noop
+   * @static
+   * @property compCall
+   * @type {String}
+   */
+  Scroll.scrollOptions = {
     $html        : null, // $('html, body'),
     adjust       : 0,
     noScrollClass: 'no-scroll',
     duration     : 800,
-    ease         : 'easeOutQuint',
-    begin        : $.noop,
-    complete     : $.noop
+    ease         : 'easeOutQuint'
+    beginCall    : $.noop,
+    compCall     : $.noop
   };
 
 
   /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
+   * <h4>プロパティ格納オブジェクト</h4>
    *
-   * @property param
+   * @property props
    * @type {Object}
    */
-  p.param = null;
+  p.props = {};
 
 
 
@@ -116,12 +163,12 @@ var AMP = AMP || {};
    *
    * @static
    * @method get
-   * @param  {jQuery} $trigger トリガーとなるa要素 省略可
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
    * @param  {Object} options オプション値 省略可
    * @return {Scroll}
    */
-  Scroll.get = function($trigger, options){
-    var instance = new Scroll($trigger, options);
+  Scroll.get = function($scrollTrigger, options){
+    var instance = new Scroll($scrollTrigger, options);
     instance.on();
     return instance;
   };
@@ -139,8 +186,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.param.$trigger.on('click.Scroll', function(){
-      return self.tween(self.param.$trigger.index(this));
+    self.props.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
     });
 
     return this;
@@ -154,7 +201,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.param.$trigger.off('click.Scroll');
+    this.props.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
@@ -167,24 +214,24 @@ var AMP = AMP || {};
    */
   p.tween = function(num){
     var self = this,
-    param = self.param,
-    $trigger = self.param.$trigger.eq(num),
-    $target = $($trigger.attr('href')),
-    moveTo;
+    param = self.props,
+    $scrollTrigger = self.props.$scrollTrigger.eq(num),
+    $target = $($scrollTrigger.attr('href'));
 
-    if($target[0] && !$trigger.hasClass(param.noScrollClass)){
-      moveTo = $target.offset().top - param.adjust;
+    if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
+      var moveTo = $target.offset().top - param.adjust;
+
       if($(root).scrollTop() !== moveTo){
-        // 縦列処理します
         $.stream(
-          param.begin,
+          param.beginCall,
           function(){
             return param.$html.velocity('stop')
             .velocity('scroll', {offset: moveTo, duration: param.duration, easing: param.ease});
           },
-          param.complete
+          param.compCall
         );
       }
+
       return false;
     }
   };

@@ -14,41 +14,46 @@ var AMP = AMP || {};
    *
    * @class ScrollToggle
    * @constructor
-   * @param  {jQuery} $target 表示・非表示する要素
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
    * @param  {Object} options オプション値
    */
-  function ScrollToggle($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $('.scroll_toggle');
+  function ScrollToggle($scrollToggle, options){
+
+    // $scrollToggle指定がない場合、初期値を設定
+    if(!$scrollToggle || !($scrollToggle instanceof jQuery)){
+      options = $scrollToggle;
+      $scrollToggle = $('.scroll_toggle');
     }
 
-    this.param   = $.extend(true, {}, ScrollToggle.defaults, options);
+    this.props　= $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
-     * @property $target
+     * @default $('.scroll_toggle')
+     * @property props.$scrollToggle
      * @type {jQuery}
      */
-    this.param.$target = $target;
+    this.props.$scrollToggle = $scrollToggle;
+
 
     /**
      * <h4>window要素</h4>
      *
-     * @property $window
+     * @property props.$window
      * @type {jQuery}
      */
-    this.param.$window = $(root);
+    this.props.$window = $(window);
+
 
     /**
-     * <h4>Display:Block表示されているか?</h4>
+     * <h4>Display:Block表示の状態</h4>
      *
-     * @property isDisplay
+     * @property props.isDisplay
      * @type {Boolean}
      */
-    this.param.isDisplay = $target.css('display') === 'block';
+    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -83,42 +88,87 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>オプション初期値</h4>
-   *
-   * @default
-   * defaults: { <ul><li>
-   *   showY    : 300, // {Number} 表示されるoffsetY値 </li><li>
-   *   show     : { opacity : 1}, // {Object} 表示アニメーション時のcssプロパティ </li><li>
-   *   hide     : { opacity : 0}, // {Object} 非表示アニメーション時のcssプロパティ </li><li>
-   *   duration : 400, // デュレーション </li><li>
-   *   easing   : 'easeOutCubic', // イージング </li><li>
-   *   showCall : $.noop // 表示されたときに呼び出す関数 </li><li>
-   *   hideCall : $.noop // 非表示されたときに呼び出す関数 </li></ul>
-   * }
+   * <h4>デフォルト値格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
    *
    * @static
-   * @property defaults
+   * @property scrollToggleOptions
    * @type {Object}
    */
-  ScrollToggle.defaults = {
+  /**
+   *　<h4>表示されるY値</h4>
+   *
+   * @default 300
+   * @static
+   * @property showY
+   * @type {Number}
+   */
+  /**
+   *　<h4>表示のスタイル</h4>
+   *
+   * @default { opacity : 1}
+   * @static
+   * @property showY
+   * @type {Object}
+   */
+  /**
+   *　<h4>非表示のスタイル</h4>
+   *
+   * @default { opacity : 0}
+   * @static
+   * @property showY
+   * @type {Object}
+   */
+  /**
+   *　<h4>duration</h4>
+   *
+   * @default 500
+   * @static
+   * @property duration
+   * @type {Number}
+   */
+  /**
+   *　<h4>easing</h4>
+   *
+   * @default easeInSine
+   * @static
+   * @property ease
+   * @type {String}
+   */
+  /**
+   *　<h4>表示後のコールバック</h4>
+   *
+   * @default $.noop
+   * @static
+   * @property showCall
+   * @type {String}
+   */
+  /**
+   *　<h4>非表示後のコールバック</h4>
+   *
+   * @default $.noop
+   * @static
+   * @property hideCall
+   * @type {String}
+   */
+  ScrollToggle.scrollToggleOptions = {
     showY   : 300,
     show    : { opacity : 1},
     hide    : { opacity : 0},
     duration: 500,
-    easing  : 'easeInSine',
+    ease    : 'easeInSine',
     showCall: $.noop,
-    hideCall: $.noop,
+    hideCall: $.noop
   };
 
 
   /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
+   * <h4>プロパティ格納オブジェクト</h4>
    *
-   * @property param
+   * @property props
    * @type {Object}
    */
-  p.param = null;
+  p.props = {};
 
 
 
@@ -132,12 +182,12 @@ var AMP = AMP || {};
    *
    * @static
    * @method get
-   * @param  {jQuery} $target 表示・非表示する要素
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
    * @param  {Object} options オプション値 省略可
    * @return {Pagetop} Pagetopインスタンスを返す
    */
-  ScrollToggle.get = function($target, options){
-    var instance = new ScrollToggle($target, options);
+  ScrollToggle.get = function($scrollToggle, options){
+    var instance = new ScrollToggle($scrollToggle, options);
     instance.on();
     return instance;
   };
@@ -151,16 +201,16 @@ var AMP = AMP || {};
    */
   p.on = function(){
     var self = this,
-    param = self.param,
+    param = self.props,
     offsetY;
 
-    self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.param.$window.scrollTop();
+    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.props.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.param.isDislpay && param.showY < offsetY){
+      if(!self.props.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.param.isDislpay && param.showY > offsetY){
+      } else if(self.props.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -176,7 +226,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.param.$window.off('scroll.ScrollToggle');
+    this.props.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -190,11 +240,11 @@ var AMP = AMP || {};
   p.show = function(){
     var self = this;
 
-    self.param.isDislpay = true;
+    self.props.isDislpay = true;
 
-    self.param.$target.css({display: 'block'}).css(self.param.hide)
+    self.props.$scrollToggle.css({display: 'block'}).css(self.props.hide)
     .velocity('stop')
-    .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
+    .velocity(self.props.show, self.props.duration, self.props.ease, self.props.showCall);
 
     return this;
   };
@@ -209,13 +259,13 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
 
-    self.param.isDislpay = false;
+    self.props.isDislpay = false;
 
-    self.param.$target
+    self.props.$scrollToggle
     .velocity('stop')
-    .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
-      self.param.$target.css({display: 'none'});
-      self.param.hideCall();
+    .velocity(self.props.hide, self.props.duration, self.props.ease, function(){
+      self.props.$scrollToggle.css({display: 'none'});
+      self.props.hideCall();
     });
 
     return this;
