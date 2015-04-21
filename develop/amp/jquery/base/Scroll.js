@@ -13,6 +13,7 @@ var AMP = AMP || {};
    * <h4>ページ内リンクのスクロール</h4>
    *
    * @class Scroll
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollTrigger トリガーとなるa要素
    * @param  {Object} options オプション値
@@ -24,13 +25,18 @@ var AMP = AMP || {};
       $scrollTrigger = $('a[href^=#]');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
-
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property param.$scrollTrigger
+     * @property props.$scrollTrigger
      * @type {Object}
      */
     this.props.$scrollTrigger = $scrollTrigger;
@@ -68,8 +74,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -78,58 +84,57 @@ var AMP = AMP || {};
   /**
    * <h4>ページ要素</h4>
    *
-   * @default $('html, body')
    * @static
    * @property scrollOptions.$html
+   * @default $('html, body')
    * @type {jQuery}
    */
   /**
    * <h4>停止位置調整値</h4>
    *
-   * @default 0
    * @static
    * @property scrollOptions.adjust
+   * @default 0
    * @type {Number}
    */
   /**
    * <h4>スクロールしないトリガークラス名</h4>
    *
-   * @default no_scroll
    * @static
    * @property scrollOptions.noScrollClass
+   * @default no_scroll
    * @type {String}
    */
   /**
    * <h4>duration</h4>
    *
-   * @default 800
    * @static
    * @property scrollOptions.duration
+   * @default 800
    * @type {Number}
    */
   /**
    * <h4>easing</h4>
    *
-   * @default easeOutQuint
    * @static
    * @property scrollOptions.ease
+   * @default easeOutQuint
    * @type {String}
    */
-
   /**
    *　<h4>スクロール前のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property beginCall
+   * @default $.noop
    * @type {String}
    */
   /**
    *　<h4>スクロール後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property compCall
+   * @default $.noop
    * @type {String}
    */
   Scroll.scrollOptions = {
@@ -141,15 +146,6 @@ var AMP = AMP || {};
     beginCall    : $.noop,
     compCall     : $.noop
   };
-
-
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
 
 
 

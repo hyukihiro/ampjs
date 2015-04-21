@@ -14,9 +14,9 @@ var AMP = AMP || {};
    * デフォルトは、セッションストレージを使用します
    *
    * @class AMP.Storage
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param {Boolean} isLocalStorage ローカルストレージを使用か？
-   * @extends AMP.BASE_CLASS
    */
   function Storage(isLocalStorage){
     if(isLocalStorage){
@@ -63,7 +63,7 @@ var AMP = AMP || {};
   /**
    * <h4>ストレージタイプ</h4>
    *
-   * @default 'sessionStorage'
+   * @default sessionStorage
    * @property type
    * @type {String}
    */

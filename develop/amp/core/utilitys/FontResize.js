@@ -14,8 +14,8 @@ var AMP = AMP || {};
    * Eventsクラスを継承しています Eventsクラスを参照してください
    *
    * @class AMP.FontResize
-   * @constructor
    * @extends AMP.Events
+   * @constructor
    */
   function FontResize(){}
 

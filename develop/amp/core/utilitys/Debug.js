@@ -13,14 +13,12 @@ var AMP = AMP || {};
    * <h4>デバッグ機能</h4>
    *
    * @class AMP.Debug
-   * @constructor
    * @extends AMP.BASE_CLASS
-   *
+   * @constructor
    *
    * @example
    *   AMP.debug.log(any);
    *   AMP.debug.log(any, any...);
-   *
    */
   function Debug(){}
 
@@ -50,7 +48,6 @@ var AMP = AMP || {};
    * <h4>クラス名</h4>
    *
    * @property className
-   * @default Debug
    * @type {String}
    */
   p.className = 'Debug';
@@ -61,7 +58,6 @@ var AMP = AMP || {};
    *
    * @static
    * @property debugViews
-   * @default null
    * @type {Object}
    */
   Debug.views = null;

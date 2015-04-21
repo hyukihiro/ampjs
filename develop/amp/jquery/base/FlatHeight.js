@@ -13,6 +13,7 @@ var AMP = AMP || {};
    * <h4>要素の高さを揃える</h4>
    *
    * @class FlatHeight
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $flatHeight 対象のエリア要素
    * @param  {Number} split 区切る数 省略可
@@ -27,6 +28,13 @@ var AMP = AMP || {};
       $flatHeight = $('.flat_height');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = {};
 
     /**
      * <h4>ターゲット要素</h4>
@@ -37,7 +45,6 @@ var AMP = AMP || {};
      */
     this.props.$flatHeight = $flatHeight;
 
-
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
@@ -46,7 +53,6 @@ var AMP = AMP || {};
      * @type {Number}
      */
     this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
-
 
     /**
      * <h4>サイズ後、リセットしなおすか</h4>
@@ -87,15 +93,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'FlatHeight';
-
-
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
 
 
 

@@ -13,6 +13,7 @@ var AMP = AMP || {};
    * <h4>ロールオーバー</h4>
    *
    * @class Rollover
+   * @extends AMP.BASE_CLASS
    * @constructor
    */
   function Rollover(){}
@@ -60,6 +61,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.groupClass
+   * @default group_rover
    * @type {String}
    */
   /**
@@ -67,6 +69,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.activeClass
+   * @default active
    * @type {String}
    */
   /**
@@ -74,6 +77,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.noOverClass
+   * @default no_rover
    * @type {String}
    */
   /**
@@ -81,6 +85,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.postfix
+   * @default _on
    * @type {String}
    */
   Rollover.rolloverOptions = {
@@ -94,10 +99,11 @@ var AMP = AMP || {};
   /**
    * <h4>ロールオーバー要素の初期値</h4>
    *
+   * @static
    * @property imageClass
    * @type {String}
    */
-  p.imageClass = 'img.rover, input.rover, .all_rover img';
+  Rollover.imageClass = 'img.rover, input.rover, .all_rover img';
 
 
 
@@ -119,7 +125,7 @@ var AMP = AMP || {};
     // $image指定がない場合、初期値を設定
     if(!$images || !($images instanceof jQuery)){
       options = $images;
-      $images = $(self.imageClass);
+      $images = $(Rollover.imageClass);
     }
 
     var param = $.extend(true, {}, Rollover.rolloverOptions, options);
@@ -162,7 +168,7 @@ var AMP = AMP || {};
     // $image指定がない場合、初期値を設定
     if(!$images || !($images instanceof jQuery)){
       options = $images;
-      $images = $(this.imageClass);
+      $images = $(Rollover.imageClass);
     }
 
     var param = $.extend(true, {}, Rollover.rolloverOptions, options);

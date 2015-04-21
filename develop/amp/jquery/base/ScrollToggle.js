@@ -10,9 +10,10 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>スクロール時、座標を判定してのToggle処理</h4>
+   * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    *
    * @class ScrollToggle
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollToggle 表示・非表示する要素
    * @param  {Object} options オプション値
@@ -25,8 +26,13 @@ var AMP = AMP || {};
       $scrollToggle = $('.scroll_toggle');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props　= $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
-
 
     /**
      * <h4>表示・非表示する要素</h4>
@@ -37,7 +43,6 @@ var AMP = AMP || {};
      */
     this.props.$scrollToggle = $scrollToggle;
 
-
     /**
      * <h4>window要素</h4>
      *
@@ -45,7 +50,6 @@ var AMP = AMP || {};
      * @type {jQuery}
      */
     this.props.$window = $(window);
-
 
     /**
      * <h4>Display:Block表示の状態</h4>
@@ -88,8 +92,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
@@ -98,57 +102,57 @@ var AMP = AMP || {};
   /**
    *　<h4>表示されるY値</h4>
    *
-   * @default 300
    * @static
    * @property showY
+   * @default 300
    * @type {Number}
    */
   /**
    *　<h4>表示のスタイル</h4>
    *
-   * @default { opacity : 1}
    * @static
    * @property showY
+   * @default { opacity : 1}
    * @type {Object}
    */
   /**
    *　<h4>非表示のスタイル</h4>
    *
-   * @default { opacity : 0}
    * @static
    * @property showY
+   * @default { opacity : 0}
    * @type {Object}
    */
   /**
    *　<h4>duration</h4>
    *
-   * @default 500
    * @static
    * @property duration
+   * @default 500
    * @type {Number}
    */
   /**
    *　<h4>easing</h4>
    *
-   * @default easeInSine
    * @static
    * @property ease
+   * @default easeInSine
    * @type {String}
    */
   /**
    *　<h4>表示後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property showCall
+   * @default $.noop
    * @type {String}
    */
   /**
    *　<h4>非表示後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property hideCall
+   * @default $.noop
    * @type {String}
    */
   ScrollToggle.scrollToggleOptions = {
@@ -160,15 +164,6 @@ var AMP = AMP || {};
     showCall: $.noop,
     hideCall: $.noop
   };
-
-
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
 
 
 

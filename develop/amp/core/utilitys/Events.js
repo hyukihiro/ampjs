@@ -15,8 +15,8 @@ var AMP = AMP || {};
    * メディエターとしても使用すことも可能です
    *
    * @class AMP.Events
-   * @constructor
    * @extends AMP.BASE_CLASS
+   * @constructor
    *
    * @example
    *   // on<br>

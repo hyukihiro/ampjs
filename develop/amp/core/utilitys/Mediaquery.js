@@ -15,9 +15,9 @@ var AMP = AMP || {};
    * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください
    *
    * @class AMP.Mediaquery
+   * @extends AMP.Events
    * @constructor
    * @param {DOM} element 監視対象要素
-   * @extends AMP.Events
    */
   function Mediaquery(element){
     if(element && element.nodeType === 1){

@@ -12,7 +12,8 @@ var AMP = AMP || {};
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class BoxHover
+   * @class AMP.BoxHover
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
    * @param  {Object} options オプション値
@@ -25,6 +26,12 @@ var AMP = AMP || {};
       $boxHover = $('.box_hover');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
@@ -69,8 +76,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -78,33 +85,24 @@ var AMP = AMP || {};
    */
   /**
    * <h4>ホバー時に付けるクラス名</h4>
-   * オプション デフォルト値
    *
    * @static
    * @property boxHoverOptions.hoverClass
+   * @default hover
    * @type {String}
    */
   /**
    * <h4>複数リンクがある場合、優先するリンククラス</h4>
-   * オプション デフォルト値
    *
    * @static
    * @property boxHoverOptions.linkClass
+   * @default link
    * @type {String}
    */
   BoxHover.boxHoverOptions = {
     hoverClass: 'hover',
     linkClass : 'link'
   };
-
-
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
 
 
 

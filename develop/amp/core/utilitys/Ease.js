@@ -10,11 +10,11 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>Easeingを管理します</h4>
+   * <h4>Easingを管理します</h4>
    *
    * @class AMP.Ease
-   * @constructor
    * @extends AMP.BASE_CLASS
+   * @constructor
    */
   function Ease(){}
 

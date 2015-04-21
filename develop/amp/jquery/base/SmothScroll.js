@@ -14,13 +14,22 @@ var AMP = AMP || {};
    * WindowsPCのみ有効
    *
    * @class SmoothScroll
+   * @extends AMP.BASE_CLASS
    * @constructor
    */
   function SmoothScroll(options){
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true,
+      {},
       SmoothScroll.smoothScrollOptions,
-      options,
-      {$page: $('html, body')}
+      {$page: $('html, body')},
+      options
     );
   }
 
@@ -56,8 +65,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property smoothScrollOptions
@@ -66,29 +75,29 @@ var AMP = AMP || {};
     /**
    * <h4>スムーススクロールエリア</h4>
    *
-   * @default $('html, body')
    * @property smoothScrollOptions.$page
+   * @default $('html, body')
    * @type {jQuery}
    */
   /**
    * <h4>スクロール量</h4>
    *
-   * @default 500
    * @property smoothScrollOptions.amount
+   * @default 500
    * @type {Number}
    */
   /**
    * <h4>duration</h4>
    *
-   * @default 500
    * @property smoothScrollOptions.duration
+   * @default 500
    * @type {Number}
    */
   /**
    * <h4>easing</h4>
    *
-   * @default easeOutCubic
    * @property smoothScrollOptions.ease
+   * @default easeOutCubic
    * @type {String}
    */
   SmoothScroll.smoothScrollOptions = {
@@ -97,16 +106,6 @@ var AMP = AMP || {};
     duration: 500,
     ease    : 'easeOutCubic'
   };
-
-
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.props = {};
 
 
 
