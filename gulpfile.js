@@ -13,7 +13,7 @@ var PROJECT = 'ampjs';
  * ※変更しない
  */
 var PATH = {
-	proxy   : '/test/',   // URL
+	proxy   : '/test/',   // develop
 	develop : 'develop/', // 開発用
 	dist    : 'dist/',    // 配布用
 	docs    : 'docs/'     // ドキュメント用
@@ -25,6 +25,7 @@ var PATH = {
  * ※使用しないプラグインはコメントアウト
  */
 var MODULE = {
+	exec         : require('child_process').exec,
 	gulp         : require('gulp'),
 	browserSync  : require('browser-sync'),
 	concat       : require('gulp-concat'),
@@ -35,6 +36,7 @@ var MODULE = {
 	uglify       : require('gulp-uglify'),
 	plumber      : require('gulp-plumber'),
 	rename       : require('gulp-rename'),
+	shell        : require('gulp-shell'),
 	watch        : require('gulp-watch'),
 	jsDoc        : require('gulp-yuidoc')
 };
@@ -47,7 +49,7 @@ var MODULE = {
 var tasks = (function(){
 	var
 	tasks   = ['watch', 'browserSync', 'js'],
-	options = ['sass', 'ejs',	'ts', 'handlebars'];
+	options = ['ejs',	'ts'];
 
 	for(var i = 0; i < options.length; i += 1){
 		if(MODULE[options[i]]){
@@ -92,9 +94,16 @@ MODULE.gulp.task('default', tasks);
  */
 MODULE.gulp.task('docs', function(){
 	// amp
-  MODULE.gulp.src(PATH.develop + 'js/amp/**/*.js')
-    .pipe(MODULE.jsDoc())
-    .pipe(MODULE.gulp.dest(PATH.docs));
+	MODULE.exec('yuidoc develop/amp/ --config ./yuidoc.json', {
+		"cwd": "./"
+	});
+
+  // MODULE.gulp.src(PATH.develop + 'amp/**/*.js')
+  //   .pipe(MODULE.jsDoc.parser())
+  //   .pipe(MODULE.jsDoc.reporter())
+  //   .pipe(MODULE.jsDoc.generator())
+  //   .pipe(MODULE.jsDoc({paths: {docs: ['../js/classes/']}}))
+  //   .pipe(MODULE.gulp.dest(PATH.docs));
 });
 
 
@@ -155,47 +164,47 @@ MODULE.gulp.task('js', function(){
 	/* lib
 	-----------------------------------------------------------------*/
 	// jquery
-	MODULE.gulp.src(PATH.develop + 'js/lib/jquery/**/*.js')
+	MODULE.gulp.src(PATH.develop + 'lib/jquery/**/*.js')
 	.pipe(MODULE.concat('jquery-1.8.3.pack.js'))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
 	// utilitys
-	MODULE.gulp.src(PATH.develop + 'js/lib/utilitys/**/*.js')
+	MODULE.gulp.src(PATH.develop + 'lib/utilitys/**/*.js')
 	.pipe(MODULE.concat('utilitys.pack.js'))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
 	// createjs
-	MODULE.gulp.src(PATH.develop + 'js/lib/createjs/**/*.js')
+	MODULE.gulp.src(PATH.develop + 'lib/createjs/**/*.js')
 	// .pipe(MODULE.concat('createjs.pack.js'))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib/createjs'));
 
 
 	/* snippet/*.js
 	-----------------------------------------------------------------*/
-	MODULE.gulp.src(PATH.develop + 'js/snippet/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.header(LICENCE))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'snippet/'));
+	//MODULE.gulp.src(PATH.develop + 'snippet/*.js')
+	//.pipe(MODULE.plumber())
+	//.pipe(MODULE.jshint())
+	//.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	//.pipe(MODULE.header(LICENCE))
+	//.pipe(MODULE.gulp.dest(PATH.dist + 'snippet/'));
 
 
 	/* templates/*.js
 	-----------------------------------------------------------------*/
-	MODULE.gulp.src(PATH.develop + 'js/templates/**/*.js')
-	.pipe(MODULE.plumber())
-	.pipe(MODULE.jshint())
-	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'templates/'));
+	//MODULE.gulp.src(PATH.develop + 'templates/**/*.js')
+	//.pipe(MODULE.plumber())
+	//.pipe(MODULE.jshint())
+	//.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	//.pipe(MODULE.gulp.dest(PATH.dist + 'templates/'));
 
 
 	/* AMP
 	-----------------------------------------------------------------*/
 	// amp.core.js
 	MODULE.gulp.src([
-		PATH.develop + 'js/amp/core/*.js',
-		PATH.develop + 'js/amp/core/base/*.js',
-		PATH.develop + 'js/amp/core/utilitys/*.js'
+		PATH.develop + 'amp/core/*.js',
+		PATH.develop + 'amp/core/base/*.js',
+		PATH.develop + 'amp/core/utilitys/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -210,7 +219,7 @@ MODULE.gulp.task('js', function(){
 
 	// amp.jquery.js
 	// amp/jquery.plugins/*.js
-	MODULE.gulp.src(PATH.develop + 'js/amp/jquery.plugins/*.js')
+	MODULE.gulp.src(PATH.develop + 'amp/jquery.plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
@@ -223,7 +232,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// base
-	MODULE.gulp.src(PATH.develop + 'js/amp/jquery/base/*.js')
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/base/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
@@ -236,7 +245,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// amp.jquery.plugins.js
-	MODULE.gulp.src(PATH.develop + 'js/amp/jquery/plugins/*.js')
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))

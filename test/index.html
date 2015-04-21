@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMP.js</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=978">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="js/html5shiv.min.js"></script><![endif]-->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
+<link rel="stylesheet" href="css/global.css" media="all">
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="#page">AMP.js</a></h1>
+<p class="link"><a href="https://bitbucket.org/yoshihitofujiwara/ampjs" target="_blank">Bitbucket Repository</a></p>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+
+<script id="tmpl" type="text/template">
+<dl>
+{{#article}}
+<dt><span class="date">{{date}}</span><span class="ttl">{{title}}</span></dt>
+<dd>{{text}}</dd>
+{{/article}}
+</dl>
+</script>
+
+
+<p><img src="images/btn01_on.png" alt=""></p>
+<p><img src="images/btn02.png" alt=""></p>
+<p><img src="images/btn03.png" class="no_rover" alt=""></p>
+
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; AMP.js 2014-2015</small>
+</footer>
+<!-- #page // --></div>
+
+
+
+
+<!-- lib -->
+<script src="../dist/lib/jquery-1.8.3.pack.js"></script>
+<script src="../dist/lib/utilitys.pack.js"></script>
+<!--[if gte IE 9]><!--><script src="../dist/lib/createjs/createjs-2014.12.12.min.js"></script><!--<![endif]-->
+
+<!-- amp -->
+<script src="../dist/amp/amp.core.js"></script>
+<script src="../dist/amp/jquery.plugins.js"></script>
+<script src="../dist/amp/amp.jquery.js"></script>
+
+<!-- test -->
+<script src="js/test.js"></script>
+
+</body>
+</html>

@@ -1166,7 +1166,7 @@ var AMP = AMP || {};
     adjust       : 0,
     noScrollClass: 'no-scroll',
     duration     : 800,
-    ease         : 'easeOutQuint'
+    ease         : 'easeOutQuint',
     beginCall    : $.noop,
     compCall     : $.noop
   };

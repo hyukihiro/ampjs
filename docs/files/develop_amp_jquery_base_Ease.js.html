@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>develop\amp\jquery\base\Ease.js - AMP.js</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="AMP.js"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
+            
+                <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
+            
+                <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+            
+                <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
+            
+                <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
+            
+                <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+            
+                <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
+            
+                <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
+            
+                <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+            
+                <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
+            
+                <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
+            
+                <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
+            
+                <li><a href="../classes/AMP.String.html">AMP.String</a></li>
+            
+                <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
+            
+                <li><a href="../classes/BoxHover.html">BoxHover</a></li>
+            
+                <li><a href="../classes/Ease.html">Ease</a></li>
+            
+                <li><a href="../classes/Fallback.html">Fallback</a></li>
+            
+                <li><a href="../classes/FlatHeight.html">FlatHeight</a></li>
+            
+                <li><a href="../classes/jQuery.html">jQuery</a></li>
+            
+                <li><a href="../classes/LiquidSlider.html">LiquidSlider</a></li>
+            
+                <li><a href="../classes/Loader.html">Loader</a></li>
+            
+                <li><a href="../classes/Render.html">Render</a></li>
+            
+                <li><a href="../classes/Rollover.html">Rollover</a></li>
+            
+                <li><a href="../classes/Scroll.html">Scroll</a></li>
+            
+                <li><a href="../classes/ScrollToggle.html">ScrollToggle</a></li>
+            
+                <li><a href="../classes/Slider.html">Slider</a></li>
+            
+                <li><a href="../classes/SmoothScroll.html">SmoothScroll</a></li>
+            
+                <li><a href="../classes/XXX_Ease.html">XXX_Ease</a></li>
+            
+                <li><a href="../classes/XXX_Layer.html">XXX_Layer</a></li>
+            
+                <li><a href="../classes/XXX_Loader.html">XXX_Loader</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: develop\amp\jquery\base\Ease.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var AMP = AMP || {};
+
+(function(root, $){
+
+  // &#x27;use strict&#x27;;
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;Easeingを管理します&lt;/h4&gt;
+   * AMP.Easeをextendします
+   *
+   * @class Ease
+   * @constructor
+   */
+  function Ease(){}
+
+  // 基底クラスを継承
+  AMP.inherits(Ease, AMP.Ease);
+
+  // prototype
+  var p = Ease.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;jQuery easeing用ネームスペース&lt;/h4&gt;
+   *
+   * @property $
+   * @type {Object}
+   */
+  p.$ = {};
+
+
+  /* 1 Sine
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._1_SINE_IN
+   * @type {String}
+   */
+  p.$._1_SINE_IN = &#x27;easeInSine&#x27;;
+
+  /**
+   * @property $._1_SINE_OUT
+   * @type {String}
+   */
+  p.$._1_SINE_OUT = &#x27;easeOutSine&#x27;;
+
+  /**
+   * @property $._1_SINE_IN_OUT
+   * @type {String}
+   */
+  p.$._1_SINE_IN_OUT = &#x27;easeInOutSine&#x27;;
+
+
+  /* 2 Quad
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._2_QUAD_IN
+   * @type {String}
+   */
+  p.$._2_QUAD_IN = &#x27;easeInQuad&#x27;;
+
+  /**
+   * @property $._2_QUAD_OUT
+   * @type {String}
+   */
+  p.$._2_QUAD_OUT = &#x27;easeOutQuad&#x27;;
+
+  /**
+   * @property $._2_QUAD_IN_OUT
+   * @type {String}
+   */
+  p.$._2_QUAD_IN_OUT = &#x27;easeInOutQuad&#x27;;
+
+
+  /* 3 Cubic
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._3_CUBIC_IN
+   * @type {String}
+   */
+  p.$._3_CUBIC_IN = &#x27;easeInCubic&#x27;;
+
+  /**
+   * @property $._3_CUBIC_OUT
+   * @type {String}
+   */
+  p.$._3_CUBIC_OUT = &#x27;easeOutCubic&#x27;;
+
+  /**
+   * @property $._3_CUBIC_IN_OUT
+   * @type {String}
+   */
+  p.$._3_CUBIC_IN_OUT = &#x27;easeInOutCubic&#x27;;
+
+
+  /* 4 Quart
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._4_QUART_IN
+   * @type {String}
+   */
+  p.$._4_QUART_IN = &#x27;easeInQuart&#x27;;
+
+  /**
+   * @property $._4_QUART_OUT
+   * @type {String}
+   */
+  p.$._4_QUART_OUT = &#x27;easeOutQuart&#x27;;
+
+  /**
+   * @property $._4_QUART_IN_OUT
+   * @type {String}
+   */
+  p.$._4_QUART_IN_OUT = &#x27;easeInOutQuart&#x27;;
+
+
+  /* 5 Quint
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._5_QUINT_IN
+   * @type {String}
+   */
+  p.$._5_QUINT_IN = &#x27;easeInQuint&#x27;;
+
+  /**
+   * @property $._5_QUINT_OUT
+   * @type {String}
+   */
+  p.$._5_QUINT_OUT = &#x27;easeOutQuint&#x27;;
+
+  /**
+   * @property $._5_QUINT_IN_OUT
+   * @type {String}
+   */
+  p.$._5_QUINT_IN_OUT = &#x27;easeInOutQuint&#x27;;
+
+
+  /* 6 Expo
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._6_EXPO_IN
+   * @type {String}
+   */
+  p.$._6_EXPO_IN = &#x27;easeInExpo&#x27;;
+
+  /**
+   * @property $._6_EXPO_OUT
+   * @type {String}
+   */
+  p.$._6_EXPO_OUT = &#x27;easeOutExpo&#x27;;
+
+  /**
+   * @property $._6_EXPO_IN_OUT
+   * @type {String}
+   */
+  p.$._6_EXPO_IN_OUT = &#x27;easeInOutExpo&#x27;;
+
+
+  /* 7 Circ
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._7_CIRC_IN
+   * @type {String}
+   */
+  p.$._7_CIRC_IN = &#x27;easeInCirc&#x27;;
+
+  /**
+   * @property $._7_CIRC_OUT
+   * @type {String}
+   */
+  p.$._7_CIRC_OUT = &#x27;easeOutCirc&#x27;;
+
+  /**
+   * @property $._7_CIRC_IN_OUT
+   * @type {String}
+   */
+  p.$._7_CIRC_IN_OUT = &#x27;easeInOutCirc&#x27;;
+
+
+  /* Linear
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._LINEAR
+   * @type {String}
+   */
+  p.$._LINEAR = &#x27;linear&#x27;;
+
+
+  /* Back
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._BACK_IN
+   * @type {String}
+   */
+  p.$._BACK_IN = &#x27;easeInBack&#x27;;
+
+  /**
+   * @property $._BACK_OUT
+   * @type {String}
+   */
+  p.$._BACK_OUT = &#x27;easeOutBack&#x27;;
+
+  /**
+   * @property $._BACK_IN_OUT
+   * @type {String}
+   */
+  p.$._BACK_IN_OUT = &#x27;easeInOutBack&#x27;;
+
+
+  /* Elastic
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._ELASTIC_IN
+   * @type {String}
+   */
+  p.$._ELASTIC_IN = &#x27;easeInElastic&#x27;;
+
+  /**
+   * @property $._ELASTIC_OUT
+   * @type {String}
+   */
+  p.$._ELASTIC_OUT = &#x27;easeOutElastic&#x27;;
+
+  /**
+   * @property $._ELASTIC_IN_OUT
+   * @type {String}
+   */
+  p.$._ELASTIC_IN_OUT = &#x27;easeInOutElastic&#x27;;
+
+
+  /* Bounce
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._BOUNCE_IN
+   * @type {String}
+   */
+  p.$._BOUNCE_IN = &#x27;easeInBounce&#x27;;
+
+  /**
+   * @property $._BOUNCE_OUT
+   * @type {String}
+   */
+  p.$._BOUNCE_OUT = &#x27;easeOutBounce&#x27;;
+
+  /**
+   * @property $._BOUNCE_IN_OUT
+   * @type {String}
+   */
+  p.$._BOUNCE_IN_OUT = &#x27;easeInOutBounce&#x27;;
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Ease　= Ease;
+  AMP.ease = new Ease();
+
+
+}(window, jQuery));
+
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
