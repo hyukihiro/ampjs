@@ -3,7 +3,7 @@
         "name": "AMP.js",
         "description": "AMP.js",
         "version": "3.0.0",
-        "url": ""
+        "url": "https://bitbucket.org/yoshihitofujiwara/ampjs"
     },
     "files": {
         "develop\\amp\\core\\base\\array.js": {
@@ -90,9 +90,7 @@
         "develop\\amp\\core\\utilitys\\Ease.js": {
             "name": "develop\\amp\\core\\utilitys\\Ease.js",
             "modules": {},
-            "classes": {
-                "AMP.Ease": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
@@ -179,7 +177,7 @@
             "name": "develop\\amp\\jquery\\base\\BoxHover.js",
             "modules": {},
             "classes": {
-                "BoxHover": 1
+                "AMP.BoxHover": 1
             },
             "fors": {},
             "namespaces": {}
@@ -188,7 +186,7 @@
             "name": "develop\\amp\\jquery\\base\\Ease.js",
             "modules": {},
             "classes": {
-                "Ease": 1
+                "AMP.Ease": 1
             },
             "fors": {},
             "namespaces": {}
@@ -197,7 +195,7 @@
             "name": "develop\\amp\\jquery\\base\\FlatHeight.js",
             "modules": {},
             "classes": {
-                "FlatHeight": 1
+                "AMP.FlatHeight": 1
             },
             "fors": {},
             "namespaces": {}
@@ -206,7 +204,7 @@
             "name": "develop\\amp\\jquery\\base\\Rollover.js",
             "modules": {},
             "classes": {
-                "Rollover": 1
+                "AMP.Rollover": 1
             },
             "fors": {},
             "namespaces": {}
@@ -215,7 +213,7 @@
             "name": "develop\\amp\\jquery\\base\\Scroll.js",
             "modules": {},
             "classes": {
-                "Scroll": 1
+                "AMP.Scroll": 1
             },
             "fors": {},
             "namespaces": {}
@@ -224,7 +222,7 @@
             "name": "develop\\amp\\jquery\\base\\ScrollToggle.js",
             "modules": {},
             "classes": {
-                "ScrollToggle": 1
+                "AMP.ScrollToggle": 1
             },
             "fors": {},
             "namespaces": {}
@@ -233,7 +231,7 @@
             "name": "develop\\amp\\jquery\\base\\SmothScroll.js",
             "modules": {},
             "classes": {
-                "SmoothScroll": 1
+                "AMP.SmoothScroll": 1
             },
             "fors": {},
             "namespaces": {}
@@ -260,7 +258,7 @@
             "name": "develop\\amp\\jquery\\plugins\\Render.js",
             "modules": {},
             "classes": {
-                "Render": 1
+                "AMP.Render": 1
             },
             "fors": {},
             "namespaces": {}
@@ -323,7 +321,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\array.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>配列</h4>"
         },
         "AMP.Extend": {
             "name": "AMP.Extend",
@@ -334,7 +333,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\extend.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>クラス・オブジェクト等の継承、拡張系</h4>"
         },
         "Fallback": {
             "name": "Fallback",
@@ -346,7 +346,7 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\fallback.js",
             "line": 10,
-            "description": "<h4>ブラウザサポートされていない場合代替処理を行います</h4>"
+            "description": "<h4>ブラウザサポートされていない場合、代替処理を行います</h4>"
         },
         "AMP.Has": {
             "name": "AMP.Has",
@@ -357,7 +357,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>機能判定</h4>"
         },
         "AMP.Is": {
             "name": "AMP.Is",
@@ -368,7 +369,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>オブジェクト、ブラウザの判定</h4>"
         },
         "AMP.Location": {
             "name": "AMP.Location",
@@ -379,7 +381,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\location.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>locationオブジェクト</h4>"
         },
         "AMP.String": {
             "name": "AMP.String",
@@ -390,7 +393,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>文字列</h4>"
         },
         "AMP.Utility": {
             "name": "AMP.Utility",
@@ -401,7 +405,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 12
+            "line": 12,
+            "description": "<h4>ユーティリティ</h4>"
         },
         "AMP.Debug": {
             "name": "AMP.Debug",
@@ -413,11 +418,11 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
             "line": 12,
-            "description": "<h4>デバッグ機能</h4>",
-            "is_constructor": 1,
+            "description": "<h4>デバッグ機能</h4>\n!!!: シングルトン<br>\nコンストラクタを呼び出しで、使用しません<br>\n<em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください",
             "extends": "AMP.BASE_CLASS",
+            "is_constructor": 1,
             "example": [
-                "\n  AMP.debug.log(any);\n  AMP.debug.log(any, any...);\n"
+                "\n  AMP.debug.log(any);<br>\n  AMP.debug.log(any, any...);"
             ]
         },
         "AMP.Ease": {
@@ -428,11 +433,11 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "develop\\amp\\core\\utilitys\\Ease.js",
+            "file": "develop\\amp\\jquery\\base\\Ease.js",
             "line": 12,
-            "description": "<h4>Easeingを管理します</h4>",
-            "is_constructor": 1,
-            "extends": "AMP.BASE_CLASS"
+            "description": "<h4>Easingを管理します</h4>",
+            "extends": "AMP.BASE_CLASS",
+            "is_constructor": 1
         },
         "AMP.Events": {
             "name": "AMP.Events",
@@ -445,8 +450,8 @@
             "file": "develop\\amp\\core\\utilitys\\Events.js",
             "line": 12,
             "description": "<h4>イベント</h4>\nイベントクラスの継承して使用出来ます<br>\nメディエターとしても使用すことも可能です",
-            "is_constructor": 1,
             "extends": "AMP.BASE_CLASS",
+            "is_constructor": 1,
             "example": [
                 "\n  // on<br>\n  events.on('change', function(){...});<br>\n  events.on('change.type', typeCall);<br>\n\n  // off<br>\n  events.off('change');<br>\n  events.off('change', typeCall);<br>\n  events.off();<br>\n\n  // tigger<br>\n  events.tigger('change');<br>\n  events.tigger('change.type');\n"
             ]
@@ -461,9 +466,9 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
             "line": 12,
-            "description": "<h4>フォントリサイズイベント</h4>\nEventsクラスを継承しています Eventsクラスを参照してください",
-            "is_constructor": 1,
-            "extends": "AMP.Events"
+            "description": "<h4>フォントリサイズイベント</h4>\n!!!: シングルトン<br>\nコンストラクタを呼び出しで、使用しません<br>\n<em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください",
+            "extends": "AMP.Events",
+            "is_constructor": 1
         },
         "AMP.Mediaquery": {
             "name": "AMP.Mediaquery",
@@ -475,7 +480,8 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
             "line": 12,
-            "description": "<h4>Mediaqueryのブレイクポイントイベント</h4>\nEventsクラスを継承しています Eventsクラスを参照してください\n!!!: 対象の要素(head)にcssでフォントファミリーを指定してください",
+            "description": "<h4>Mediaqueryのブレイクポイントイベント</h4>\n!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>\n!!!: シングルトン<br>\nコンストラクタを呼び出しで、使用しません<br>\n<em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください",
+            "extends": "AMP.Events",
             "is_constructor": 1,
             "params": [
                 {
@@ -483,8 +489,7 @@
                     "description": "監視対象要素",
                     "type": "DOM"
                 }
-            ],
-            "extends": "AMP.Events"
+            ]
         },
         "AMP.Storage": {
             "name": "AMP.Storage",
@@ -496,16 +501,16 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
             "line": 12,
-            "description": "<h4>ストレージ管理</h4>",
+            "description": "<h4>ストレージ管理</h4>\nデフォルトでは、セッションストレージを使用します",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
                     "name": "isLocalStorage",
-                    "description": "ローカルストレージを使用するか？",
+                    "description": "ローカルストレージを使用か？",
                     "type": "Boolean"
                 }
-            ],
-            "extends": "AMP.BASE_CLASS"
+            ]
         },
         "AMP.BASE_CLASS": {
             "name": "AMP.BASE_CLASS",
@@ -517,7 +522,7 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\amp.js",
             "line": 25,
-            "description": "<h4>BASE_CLASS (Amp)</h4>\n!!!: 基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>\n!!!: AmpクラスをAMP.BASE_CLASSにエクスポートしてます",
+            "description": "<h4>BASE_CLASS (Amp)</h4>\n基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>\nAmpクラスをAMP.BASE_CLASSにエクスポートしてます",
             "is_constructor": 1
         },
         "XXX_Layer": {
@@ -583,9 +588,9 @@
                 "type": "Instance"
             }
         },
-        "BoxHover": {
-            "name": "BoxHover",
-            "shortname": "BoxHover",
+        "AMP.BoxHover": {
+            "name": "AMP.BoxHover",
+            "shortname": "AMP.BoxHover",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -594,6 +599,7 @@
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
             "line": 12,
             "description": "<h4>ボックスホバー</h4>",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
@@ -608,22 +614,9 @@
                 }
             ]
         },
-        "Ease": {
-            "name": "Ease",
-            "shortname": "Ease",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 12,
-            "description": "<h4>Easeingを管理します</h4>\nAMP.Easeをextendします",
-            "is_constructor": 1
-        },
-        "FlatHeight": {
-            "name": "FlatHeight",
-            "shortname": "FlatHeight",
+        "AMP.FlatHeight": {
+            "name": "AMP.FlatHeight",
+            "shortname": "AMP.FlatHeight",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -632,6 +625,7 @@
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
             "line": 12,
             "description": "<h4>要素の高さを揃える</h4>",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
@@ -651,9 +645,9 @@
                 }
             ]
         },
-        "Rollover": {
-            "name": "Rollover",
-            "shortname": "Rollover",
+        "AMP.Rollover": {
+            "name": "AMP.Rollover",
+            "shortname": "AMP.Rollover",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -661,12 +655,13 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
             "line": 12,
-            "description": "<h4>ロールオーバー</h4>",
+            "description": "<h4>ロールオーバー</h4>\n!!!: シングルトン<br>\nコンストラクタを呼び出しで、使用しません<br>\n<em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1
         },
-        "Scroll": {
-            "name": "Scroll",
-            "shortname": "Scroll",
+        "AMP.Scroll": {
+            "name": "AMP.Scroll",
+            "shortname": "AMP.Scroll",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -675,6 +670,7 @@
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
             "line": 12,
             "description": "<h4>ページ内リンクのスクロール</h4>",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
@@ -689,9 +685,9 @@
                 }
             ]
         },
-        "ScrollToggle": {
-            "name": "ScrollToggle",
-            "shortname": "ScrollToggle",
+        "AMP.ScrollToggle": {
+            "name": "AMP.ScrollToggle",
+            "shortname": "AMP.ScrollToggle",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -699,7 +695,8 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
             "line": 12,
-            "description": "<h4>スクロール時、座標を判定してのToggle処理</h4>",
+            "description": "<h4>スクロール時、座標を判定してToggle処理をします</h4>",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
@@ -714,9 +711,9 @@
                 }
             ]
         },
-        "SmoothScroll": {
-            "name": "SmoothScroll",
-            "shortname": "SmoothScroll",
+        "AMP.SmoothScroll": {
+            "name": "AMP.SmoothScroll",
+            "shortname": "AMP.SmoothScroll",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -725,6 +722,7 @@
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
             "line": 12,
             "description": "<h4>スムーススクロール</h4>\nWindowsPCのみ有効",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1
         },
         "LiquidSlider": {
@@ -762,7 +760,7 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
             "line": 11,
-            "description": "<h4>ローダー</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<b>imagesloaded.jsに依存します</b>",
+            "description": "<h4>ローダー</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<em>imagesloaded.jsに依存します</em>",
             "is_constructor": 1,
             "params": [
                 {
@@ -781,9 +779,9 @@
                 "type": "Loader"
             }
         },
-        "Render": {
-            "name": "Render",
-            "shortname": "Render",
+        "AMP.Render": {
+            "name": "AMP.Render",
+            "shortname": "AMP.Render",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -791,11 +789,12 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
             "line": 13,
-            "description": "<h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<b>Hogan.jsに依存します</b>",
+            "description": "<h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<em>Hogan.jsに依存します</em>",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
                 {
-                    "name": "$template",
+                    "name": "$tmp",
                     "description": "jsTemplate要素",
                     "type": "JQuery"
                 },
@@ -847,7 +846,7 @@
     "classitems": [
         {
             "file": "develop\\amp\\core\\base\\array.js",
-            "line": 21,
+            "line": 23,
             "description": "<h4>each処理を行います</h4>",
             "static": 1,
             "itemtype": "method",
@@ -872,7 +871,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\array.js",
-            "line": 57,
+            "line": 59,
             "description": "<h4>atgumentsを配列に変換して返す</h4>\nスライス位置を指定して切り取り可能",
             "static": 1,
             "itemtype": "method",
@@ -899,7 +898,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\extend.js",
-            "line": 21,
+            "line": 23,
             "description": "<h4>オブジェクトの拡張</h4>",
             "static": 1,
             "itemtype": "method",
@@ -924,7 +923,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\extend.js",
-            "line": 78,
+            "line": 80,
             "description": "<h4>クラスの継承</h4>\n拡張した、サブクラスを返します<br>\nsuperClassは、可変長引数で、多重継承することが可能",
             "static": 1,
             "itemtype": "method",
@@ -949,7 +948,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\extend.js",
-            "line": 121,
+            "line": 123,
             "description": "<h4>ClassをExtendします</h4>\nClassにextendメソッドをExportして使います",
             "access": "protected",
             "tagname": "",
@@ -971,7 +970,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 20,
+            "line": 21,
             "description": "<h4>consoleがなければ空の関数を返す</h4>",
             "itemtype": "method",
             "name": "console.log",
@@ -983,7 +982,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 36,
+            "line": 37,
             "description": "<h4>forEach</h4>\n配列の各要素に対して、指定された処理を実行します<br>\nArray.forEach未実装のブラウザに、フォールバックして処理を追加しています",
             "itemtype": "method",
             "name": "Array.prototype.forEach",
@@ -992,7 +991,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 58,
+            "line": 59,
             "description": "<h4>束縛された関数生成</h4>\nFIXME: βバージョンです。検証していません",
             "beta": 1,
             "itemtype": "method",
@@ -1017,7 +1016,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 90,
+            "line": 91,
             "description": "<h4>新しいprototypeオブジェクトの生成</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1037,7 +1036,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 105,
+            "line": 106,
             "description": "<h4>連想配列の要素数取得</h4>\nObject.keysの処理を追加",
             "static": 1,
             "itemtype": "method",
@@ -1057,7 +1056,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\fallback.js",
-            "line": 134,
+            "line": 135,
             "description": "<h4>両端の空白を取り除いた文字列を返す</h4>",
             "itemtype": "method",
             "name": "String.prototype.trim",
@@ -1069,7 +1068,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 32,
+            "line": 34,
             "description": "<h4>ApplicationCache機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1082,7 +1081,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 44,
+            "line": 46,
             "description": "<h4>Geolocation機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1095,7 +1094,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 56,
+            "line": 58,
             "description": "<h4>PushState機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1108,7 +1107,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 68,
+            "line": 70,
             "description": "<h4>RequestAnimationFrame機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1121,7 +1120,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 83,
+            "line": 85,
             "description": "<h4>ストレージ機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1134,7 +1133,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 95,
+            "line": 97,
             "description": "<h4>WebSocket機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1147,7 +1146,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 107,
+            "line": 109,
             "description": "<h4>WebWorker機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1160,7 +1159,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 119,
+            "line": 121,
             "description": "<h4>Audio機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1173,7 +1172,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 136,
+            "line": 138,
             "description": "<h4>Canvas機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1186,7 +1185,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 147,
+            "line": 149,
             "description": "<h4>LocationHashの有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1206,7 +1205,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 181,
+            "line": 183,
             "description": "<h4>MsPointer判定 βver</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1219,7 +1218,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 193,
+            "line": 195,
             "description": "<h4>文字列を検索し、指定の文字列があるか判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1244,7 +1243,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 207,
+            "line": 209,
             "description": "<h4>SVG機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1257,7 +1256,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 219,
+            "line": 221,
             "description": "<h4>TouchScreen判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1270,7 +1269,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 238,
+            "line": 240,
             "description": "<h4>Video機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1283,7 +1282,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 255,
+            "line": 257,
             "description": "<h4>XMLSerializerの有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1296,7 +1295,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\has.js",
-            "line": 267,
+            "line": 269,
             "description": "<h4>css3 Transition機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1309,7 +1308,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 32,
+            "line": 34,
             "description": "<h4>developモード</h4>\n開発時に使用します<br>\ndevelopモードは、エラー時コンソールログを出力します",
             "static": 1,
             "itemtype": "property",
@@ -1319,7 +1318,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 52,
+            "line": 54,
             "description": "<h4>配列型判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1339,7 +1338,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 65,
+            "line": 67,
             "description": "<h4>真偽型判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1359,7 +1358,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 78,
+            "line": 80,
             "description": "<h4>関数型判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1379,7 +1378,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 91,
+            "line": 93,
             "description": "<h4>数値型判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1399,7 +1398,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 104,
+            "line": 106,
             "description": "<h4>オブジェクト型判定</h4>\nプレーンオブジェクト",
             "static": 1,
             "itemtype": "method",
@@ -1419,7 +1418,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 118,
+            "line": 120,
             "description": "<h4>文字列型判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1439,7 +1438,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 131,
+            "line": 133,
             "description": "<h4>正規表現判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1459,7 +1458,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 144,
+            "line": 146,
             "description": "<h4>undefined判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1479,7 +1478,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 157,
+            "line": 159,
             "description": "<h4>null判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1499,7 +1498,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 173,
+            "line": 175,
             "description": "<h4>ポジティブ値判定</h4>\n!!!: 数値しか判定しません",
             "static": 1,
             "itemtype": "method",
@@ -1519,7 +1518,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 187,
+            "line": 189,
             "description": "<h4>ネガティブ値判定</h4>\n!!!: 数値しか判定しません",
             "static": 1,
             "itemtype": "method",
@@ -1539,7 +1538,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 201,
+            "line": 203,
             "description": "<h4>割りきれるか判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1564,7 +1563,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 218,
+            "line": 220,
             "description": "<h4>OS判定<h4>",
             "static": 1,
             "itemtype": "method",
@@ -1589,7 +1588,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 249,
+            "line": 251,
             "description": "<h4>Windows判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1602,7 +1601,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 261,
+            "line": 263,
             "description": "<h4>WindowsPhone判定 βver</h4>",
             "beta": 1,
             "static": 1,
@@ -1616,8 +1615,8 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 274,
-            "description": "<h4>Mac判定</h4>\nisoは、含みません。",
+            "line": 276,
+            "description": "<h4>Mac判定</h4>\nisoは、含みません",
             "static": 1,
             "itemtype": "method",
             "name": "isMac",
@@ -1629,7 +1628,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 287,
+            "line": 289,
             "description": "<h4>ios判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1649,7 +1648,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 305,
+            "line": 307,
             "description": "<h4>Android判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1669,7 +1668,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 325,
+            "line": 327,
             "description": "<h4>デバイス判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1689,7 +1688,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 367,
+            "line": 369,
             "description": "<h4>PC判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1702,7 +1701,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 379,
+            "line": 381,
             "description": "<h4>スマートデバイス判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1715,7 +1714,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 391,
+            "line": 393,
             "description": "<h4>SmartPhone判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1728,7 +1727,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 403,
+            "line": 405,
             "description": "<h4>タブレット判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1741,7 +1740,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 415,
+            "line": 417,
             "description": "<h4>iPhone判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1754,7 +1753,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 427,
+            "line": 429,
             "description": "<h4>iPad判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1767,7 +1766,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 439,
+            "line": 441,
             "description": "<h4>iPod判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1780,7 +1779,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 451,
+            "line": 453,
             "description": "<h4>AndroidPhone判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1793,7 +1792,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 463,
+            "line": 465,
             "description": "<h4>AndroidTablet判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1806,7 +1805,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 479,
+            "line": 481,
             "description": "<h4>ブラウザ判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1836,7 +1835,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 524,
+            "line": 526,
             "description": "<h4>IE判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1856,7 +1855,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 541,
+            "line": 543,
             "description": "<h4>IEバージョン範囲判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1881,7 +1880,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 577,
+            "line": 579,
             "description": "<h4>PC版 Chrome判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1894,7 +1893,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 589,
+            "line": 591,
             "description": "<h4>PC版 Firefox判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1907,7 +1906,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 601,
+            "line": 603,
             "description": "<h4>PC版 Safari判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1920,7 +1919,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 613,
+            "line": 615,
             "description": "<h4>PC版 Opera判定</h4>\nFIXME: アップデート予定",
             "static": 1,
             "itemtype": "method",
@@ -1933,7 +1932,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 626,
+            "line": 628,
             "description": "<h4>MobileSafari判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1953,7 +1952,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 643,
+            "line": 645,
             "description": "<h4>Android Browser判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1973,7 +1972,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\is.js",
-            "line": 660,
+            "line": 662,
             "description": "<h4>webkit ブラウザ判定</h4>",
             "static": 1,
             "itemtype": "method",
@@ -1986,7 +1985,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\location.js",
-            "line": 30,
+            "line": 32,
             "description": "<h4>location.hashの取得し、#を省いた文字列を配列に格納して返す</h4>\nlocation.hashがない場合、値を返しません",
             "static": 1,
             "itemtype": "method",
@@ -1999,7 +1998,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\location.js",
-            "line": 45,
+            "line": 47,
             "description": "<h4>リクエストパラメータの値を連想配列として取得</h4>\nパラメータがない場合、空のオブジェクトを返す",
             "static": 1,
             "itemtype": "method",
@@ -2012,7 +2011,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 22,
+            "line": 24,
             "description": "<h4>id生成</h4>\n文字列にナンバーを追加して返します",
             "static": 1,
             "itemtype": "method",
@@ -2032,7 +2031,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 41,
+            "line": 43,
             "description": "<h4>ランダムな4桁のコードを返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2045,7 +2044,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 53,
+            "line": 55,
             "description": "<h4>空白文字を削除して返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2065,7 +2064,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 66,
+            "line": 68,
             "description": "<h4>文字列の全置換</h4>\n対象の文字列と、削除文字列がマッチしたものを全置換します",
             "static": 1,
             "itemtype": "method",
@@ -2095,7 +2094,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 83,
+            "line": 85,
             "description": "<h4>UUIDの生成して返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2108,7 +2107,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\string.js",
-            "line": 96,
+            "line": 98,
             "description": "<h4>xmlを文字列に変換して返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2128,7 +2127,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 22,
+            "line": 24,
             "description": "<h4>DOMイベント追加</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2158,7 +2157,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 42,
+            "line": 44,
             "description": "<h4>DOMイベント削除</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2188,7 +2187,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 62,
+            "line": 64,
             "description": "<h4>匿名関数名を返す</h4>\n無名関数はundefinedを返します",
             "static": 1,
             "itemtype": "method",
@@ -2208,7 +2207,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 84,
+            "line": 86,
             "description": "<h4>16進数カラーをRGBに変換します</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2228,7 +2227,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 118,
+            "line": 120,
             "description": "<h4>RGBカラーを16進数カラーに変換</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2258,7 +2257,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 146,
+            "line": 148,
             "description": "<h4>画面のピクセル比を返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2271,7 +2270,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 158,
+            "line": 160,
             "description": "<h4>画像のプリロード</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2291,7 +2290,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 173,
+            "line": 175,
             "description": "<h4>requestAnimationFrameをエクスポートしています</h4>\n対応していないブラウザは、setTimeoutでフォールバックします",
             "static": 1,
             "itemtype": "method",
@@ -2311,7 +2310,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 200,
+            "line": 202,
             "description": "<h4>cancelAnimationFrameをエクスポートしています</h4>\n対応していないブラウザは、clearTimeoutでフォールバックします",
             "static": 1,
             "itemtype": "method",
@@ -2331,7 +2330,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 226,
+            "line": 228,
             "description": "<h4>現在の時間を返します</h4>\nperformance.nowメソッドをExportしています<br>\nperformanceに対応していないブラウザはgetTimeを返します",
             "static": 1,
             "itemtype": "method",
@@ -2344,7 +2343,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 245,
+            "line": 247,
             "description": "<h4>空の関数</h4>\n何もしません",
             "static": 1,
             "return": {
@@ -2355,7 +2354,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 39,
+            "line": 40,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -2365,11 +2364,10 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 49,
+            "line": 50,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
-            "default": "Debug",
             "type": "{String}",
             "class": "AMP.Debug"
         },
@@ -2380,13 +2378,12 @@
             "static": 1,
             "itemtype": "property",
             "name": "debugViews",
-            "default": "null",
             "type": "{Object}",
             "class": "AMP.Debug"
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 70,
+            "line": 69,
             "description": "<h4>デバッグviewの表示状態</h4>",
             "static": 1,
             "itemtype": "property",
@@ -2397,7 +2394,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 81,
+            "line": 80,
             "description": "<h4>デバッグログの有効・無効</h4>",
             "static": 1,
             "itemtype": "property",
@@ -2408,7 +2405,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 98,
+            "line": 97,
             "description": "<h4>view要素を生成</h4>",
             "access": "private",
             "tagname": "",
@@ -2423,7 +2420,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 129,
+            "line": 128,
             "description": "<h4>viewイベント設定</h4>",
             "access": "private",
             "tagname": "",
@@ -2438,7 +2435,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 190,
+            "line": 189,
             "description": "<h4>ログを出力します</h4>",
             "itemtype": "method",
             "name": "log",
@@ -2457,7 +2454,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 219,
+            "line": 218,
             "description": "<h4>ログのクリア</h4>",
             "itemtype": "method",
             "name": "clear",
@@ -2469,7 +2466,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 233,
+            "line": 232,
             "description": "<h4>ログの出力モードを有効にします</h4>",
             "itemtype": "method",
             "name": "start",
@@ -2481,7 +2478,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 245,
+            "line": 244,
             "description": "<h4>ログの出力モードを無効にします</h4>",
             "itemtype": "method",
             "name": "stop",
@@ -2493,7 +2490,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 257,
+            "line": 256,
             "description": "<h4>ログを非表示にします</h4>",
             "itemtype": "method",
             "name": "hide",
@@ -2505,7 +2502,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Debug.js",
-            "line": 273,
+            "line": 272,
             "description": "<h4>ログを表示します</h4>",
             "itemtype": "method",
             "name": "show",
@@ -2537,7 +2534,7 @@
         {
             "file": "develop\\amp\\core\\utilitys\\Ease.js",
             "line": 52,
-            "description": "<h4>css3 Easing用ネームスペース</h4>\n<a href=\"http://easings.net/ja\">Easingサンプルサイト</a>",
+            "description": "<h4>css3 Easing用ネームスペース</h4>\n<a href=\"http://easings.net/ja\" target=\"_blank\">Easingサンプルサイト</a>",
             "itemtype": "property",
             "name": "css",
             "type": "{Object}",
@@ -3016,7 +3013,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 34,
+            "line": 36,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3026,7 +3023,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 44,
+            "line": 46,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3035,17 +3032,18 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 53,
+            "line": 55,
             "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>",
             "static": 1,
             "itemtype": "property",
-            "name": "eventType 'change'",
+            "name": "eventType",
+            "default": "change",
             "type": "{String}",
             "class": "AMP.FontResize"
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 63,
+            "line": 66,
             "description": "<h4>要素を監視有効・無効の判定フラグ</h4>",
             "itemtype": "property",
             "name": "isFontResize",
@@ -3055,7 +3053,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 73,
+            "line": 76,
             "description": "<h4>監視する要素</h4>",
             "itemtype": "property",
             "name": "el",
@@ -3064,7 +3062,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 82,
+            "line": 85,
             "description": "<h4>監視要素の高さ</h4>",
             "itemtype": "property",
             "name": "height",
@@ -3073,7 +3071,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 97,
+            "line": 100,
             "description": "<h4>監視するフォント要素生成</h4>",
             "access": "private",
             "tagname": "",
@@ -3087,7 +3085,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 124,
+            "line": 127,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3101,8 +3099,8 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\FontResize.js",
-            "line": 150,
-            "description": "<h4>イベント登録</h4>\n!!!: override Events.on",
+            "line": 153,
+            "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
             "params": [
@@ -3130,7 +3128,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 42,
+            "line": 44,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3140,7 +3138,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 52,
+            "line": 54,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3149,7 +3147,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 61,
+            "line": 63,
             "description": "<h4>スタイルを監視する要素</h4>",
             "itemtype": "property",
             "name": "el",
@@ -3159,17 +3157,18 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 71,
+            "line": 73,
             "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>",
             "static": 1,
             "itemtype": "property",
-            "name": "eventType 'change'",
+            "name": "eventType",
+            "default": "change",
             "type": "{String}",
             "class": "AMP.Mediaquery"
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 81,
+            "line": 84,
             "description": "<h4>要素を監視しているか</h4>",
             "itemtype": "property",
             "name": "isObserver",
@@ -3179,7 +3178,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 91,
+            "line": 94,
             "description": "<h4>要素の現在のスタイルを保管します</h4>",
             "itemtype": "property",
             "name": "mediaStyle",
@@ -3188,7 +3187,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 105,
+            "line": 108,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3202,8 +3201,8 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 129,
-            "description": "<h4>イベント登録</h4>\n!!!: override Events.on",
+            "line": 132,
+            "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
             "params": [
@@ -3231,8 +3230,8 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 148,
-            "description": "<h4>イベント発行</h4>\n<p>第二引数以降に値を渡すとcallbackに引数として渡します</p>\n!!!: override Events.trigger",
+            "line": 150,
+            "description": "<h4>イベント発行</h4>\n第二引数以降に値を渡すとcallbackに引数として渡します",
             "itemtype": "method",
             "name": "trigger",
             "params": [
@@ -3250,7 +3249,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Mediaquery.js",
-            "line": 173,
+            "line": 174,
             "description": "<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
             "return": {
                 "description": "",
@@ -3260,7 +3259,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 43,
+            "line": 44,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3270,7 +3269,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 53,
+            "line": 54,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3279,9 +3278,9 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 62,
+            "line": 63,
             "description": "<h4>ストレージタイプ</h4>",
-            "default": "'sessionStorage'",
+            "default": "sessionStorage",
             "itemtype": "property",
             "name": "type",
             "type": "{String}",
@@ -3289,7 +3288,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 72,
+            "line": 73,
             "description": "<h4>ストレージを保管</h4>",
             "access": "private",
             "tagname": "",
@@ -3300,14 +3299,15 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 87,
+            "line": 88,
             "description": "<h4>Storageインスタンスの生成</h4>\nshorthand",
+            "static": 1,
             "itemtype": "method",
             "name": "get",
             "params": [
                 {
                     "name": "isLocalStorage",
-                    "description": "ローカルストレージを使用するか？",
+                    "description": "ローカルストレージを使用か？",
                     "type": "Boolean"
                 }
             ],
@@ -3319,14 +3319,14 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 100,
+            "line": 102,
             "description": "<h4>値のセット</h4>",
             "itemtype": "method",
             "name": "setItem",
             "params": [
                 {
                     "name": "key",
-                    "description": "セットするキー オブジェクトを渡すと、一括で値をセットします",
+                    "description": "セットするキー ※オブジェクトを渡すと、一括で値をセットします",
                     "type": "String | Object"
                 },
                 {
@@ -3343,7 +3343,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 125,
+            "line": 127,
             "description": "<h4>アイテム、ストレージデータの削除</h4>",
             "itemtype": "method",
             "name": "removeItem",
@@ -3362,7 +3362,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 150,
+            "line": 152,
             "description": "<h4>レングスを返す</h4>",
             "itemtype": "method",
             "name": "getLength",
@@ -3374,7 +3374,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 161,
+            "line": 163,
             "description": "<h4>アイテムの取得</h4>",
             "itemtype": "method",
             "name": "getItem",
@@ -3393,7 +3393,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilitys\\Storage.js",
-            "line": 181,
+            "line": 183,
             "description": "<h4>アイテムがあるか判定</h4>",
             "itemtype": "method",
             "name": "hasItem",
@@ -4141,76 +4141,78 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 30,
+            "line": 29,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.BoxHover"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\BoxHover.js",
+            "line": 37,
             "description": "<h4>ターゲット要素</h4>",
             "default": "$('.box_hover')",
             "itemtype": "property",
             "name": "props.$boxHover",
             "type": "{jQuery}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 52,
+            "line": 59,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 62,
+            "line": 69,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 71,
-            "description": "<h4>デフォルト値格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします",
+            "line": 78,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
             "name": "boxHoverOptions",
             "type": "{Object}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 79,
-            "description": "<h4>ホバー時に付けるクラス名</h4>\nオプション デフォルト値",
+            "line": 86,
+            "description": "<h4>ホバー時に付けるクラス名</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "boxHoverOptions.hoverClass",
+            "default": "hover",
             "type": "{String}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 87,
-            "description": "<h4>複数リンクがある場合、優先するリンククラス</h4>\nオプション デフォルト値",
+            "line": 94,
+            "description": "<h4>複数リンクがある場合、優先するリンククラス</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "boxHoverOptions.linkClass",
+            "default": "link",
             "type": "{String}",
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 101,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "props",
-            "type": "{Object}",
-            "class": "BoxHover"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 115,
-            "description": "<h4>BoxHoverインスタンスの生成</h4>\nshorthand",
+            "line": 113,
+            "description": "<h4>BoxHoverインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "get",
@@ -4230,11 +4232,11 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 132,
+            "line": 129,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -4242,11 +4244,11 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 163,
+            "line": 160,
             "description": "<h4>イベント削除</h4>",
             "itemtype": "method",
             "name": "off",
@@ -4254,11 +4256,11 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 176,
+            "line": 173,
             "description": "<h4>リンクの設定</h4>",
             "access": "private",
             "tagname": "",
@@ -4280,327 +4282,327 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "BoxHover"
+            "class": "AMP.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
             "line": 33,
-            "description": "<h4>jQuery easeing用ネームスペース</h4>",
+            "description": "<h4>jQuery Easing用ネームスペース</h4>\n<a href=\"http://easings.net/ja\" target=\"_blank\">Easingサンプルサイト</a>",
             "itemtype": "property",
             "name": "$",
             "type": "{Object}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 44,
+            "line": 45,
             "itemtype": "property",
             "name": "$._1_SINE_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 50,
+            "line": 51,
             "itemtype": "property",
             "name": "$._1_SINE_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 56,
+            "line": 57,
             "itemtype": "property",
             "name": "$._1_SINE_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 65,
+            "line": 66,
             "itemtype": "property",
             "name": "$._2_QUAD_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 71,
+            "line": 72,
             "itemtype": "property",
             "name": "$._2_QUAD_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 77,
+            "line": 78,
             "itemtype": "property",
             "name": "$._2_QUAD_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 86,
+            "line": 87,
             "itemtype": "property",
             "name": "$._3_CUBIC_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 92,
+            "line": 93,
             "itemtype": "property",
             "name": "$._3_CUBIC_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 98,
+            "line": 99,
             "itemtype": "property",
             "name": "$._3_CUBIC_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 107,
+            "line": 108,
             "itemtype": "property",
             "name": "$._4_QUART_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 113,
+            "line": 114,
             "itemtype": "property",
             "name": "$._4_QUART_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 119,
+            "line": 120,
             "itemtype": "property",
             "name": "$._4_QUART_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 128,
+            "line": 129,
             "itemtype": "property",
             "name": "$._5_QUINT_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 134,
+            "line": 135,
             "itemtype": "property",
             "name": "$._5_QUINT_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 140,
+            "line": 141,
             "itemtype": "property",
             "name": "$._5_QUINT_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 149,
+            "line": 150,
             "itemtype": "property",
             "name": "$._6_EXPO_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 155,
+            "line": 156,
             "itemtype": "property",
             "name": "$._6_EXPO_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 161,
+            "line": 162,
             "itemtype": "property",
             "name": "$._6_EXPO_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 170,
+            "line": 171,
             "itemtype": "property",
             "name": "$._7_CIRC_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 176,
+            "line": 177,
             "itemtype": "property",
             "name": "$._7_CIRC_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 182,
+            "line": 183,
             "itemtype": "property",
             "name": "$._7_CIRC_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 191,
+            "line": 192,
             "itemtype": "property",
             "name": "$._LINEAR",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 200,
+            "line": 201,
             "itemtype": "property",
             "name": "$._BACK_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 206,
+            "line": 207,
             "itemtype": "property",
             "name": "$._BACK_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 212,
+            "line": 213,
             "itemtype": "property",
             "name": "$._BACK_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 221,
+            "line": 222,
             "itemtype": "property",
             "name": "$._ELASTIC_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 227,
+            "line": 228,
             "itemtype": "property",
             "name": "$._ELASTIC_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 233,
+            "line": 234,
             "itemtype": "property",
             "name": "$._ELASTIC_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 242,
+            "line": 243,
             "itemtype": "property",
             "name": "$._BOUNCE_IN",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 248,
+            "line": 249,
             "itemtype": "property",
             "name": "$._BOUNCE_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
-            "line": 254,
+            "line": 255,
             "itemtype": "property",
             "name": "$._BOUNCE_IN_OUT",
             "type": "{String}",
-            "class": "Ease"
+            "class": "AMP.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
             "line": 31,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.FlatHeight"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
+            "line": 39,
             "description": "<h4>ターゲット要素</h4>",
             "default": "$('.flat_height')",
             "itemtype": "property",
             "name": "props.$flatHeight",
             "type": "{jQuery}",
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 41,
+            "line": 48,
             "description": "<h4>高さを揃える要素の分割単位</h4>",
             "default": "$flatHeight.length",
             "itemtype": "property",
             "name": "props.split",
             "type": "{Number}",
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 51,
+            "line": 57,
             "description": "<h4>サイズ後、リセットしなおすか</h4>",
             "default": "true",
             "itemtype": "property",
             "name": "props.isResize",
             "type": "{Boolean}",
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 73,
+            "line": 79,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 83,
+            "line": 89,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 92,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "props",
-            "type": "{Object}",
-            "class": "FlatHeight"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 106,
-            "description": "<h4>要素の高さ揃え</h4>\nFlatHeightのショートハンド",
+            "line": 103,
+            "description": "<h4>FlatHeightインスタンス生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "get",
@@ -4625,11 +4627,11 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 125,
+            "line": 121,
             "description": "<h4>イベント設定</h4>\nリサイズイベント、フォントリサイズイベント",
             "itemtype": "method",
             "name": "addEvent",
@@ -4637,11 +4639,11 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 153,
+            "line": 149,
             "description": "<h4>区切りをセットして高さを揃える</h4>",
             "itemtype": "method",
             "name": "setSplit",
@@ -4649,11 +4651,11 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
-            "line": 169,
+            "line": 165,
             "description": "<h4>高さを揃える</h4>",
             "itemtype": "method",
             "name": "setHeight",
@@ -4661,89 +4663,94 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "FlatHeight"
+            "class": "AMP.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 32,
+            "line": 36,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 42,
+            "line": 46,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 51,
+            "line": 55,
             "description": "<h4>オプションのデフォルト値</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "rolloverOptions",
             "type": "{Object}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 58,
+            "line": 62,
             "description": "<h4>グループクラス名</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "rolloverOptions.groupClass",
+            "default": "group_rover",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 65,
+            "line": 70,
             "description": "<h4>アクティブクラス名</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "rolloverOptions.activeClass",
+            "default": "active",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 72,
+            "line": 78,
             "description": "<h4>ノーロールオーバークラス名</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "rolloverOptions.noOverClass",
+            "default": "no_rover",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 79,
+            "line": 86,
             "description": "<h4>ロールオーバー時に付与するファイル名</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "rolloverOptions.postfix",
+            "default": "_on",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 94,
+            "line": 102,
             "description": "<h4>ロールオーバー要素の初期値</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "imageClass",
             "type": "{String}",
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 108,
+            "line": 117,
             "description": "<h4>ロールオーバー機能ON</h4>",
             "itemtype": "method",
             "name": "on",
@@ -4763,11 +4770,11 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 153,
+            "line": 162,
             "description": "<h4>ロールオーバー機能OFF</h4>",
             "itemtype": "method",
             "name": "off",
@@ -4787,11 +4794,11 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 180,
+            "line": 189,
             "description": "<h4>画像のアクティブ化</h4>",
             "itemtype": "method",
             "name": "active",
@@ -4811,11 +4818,11 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 211,
+            "line": 220,
             "description": "<h4>画像を待機状態にする</h4>",
             "itemtype": "method",
             "name": "passive",
@@ -4835,11 +4842,11 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
-            "line": 242,
+            "line": 251,
             "description": "<h4>ロールオーバーデータの生成</h4>",
             "itemtype": "method",
             "name": "_getImageSrc",
@@ -4861,136 +4868,136 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "Rollover"
+            "class": "AMP.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 30,
+            "line": 28,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.Scroll"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Scroll.js",
+            "line": 36,
             "description": "<h4>トリガーとなるa要素</h4>",
             "itemtype": "property",
-            "name": "param.$scrollTrigger",
+            "name": "props.$scrollTrigger",
             "type": "{Object}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 51,
+            "line": 57,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 61,
+            "line": 67,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 70,
-            "description": "<h4>デフォルト値格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします",
+            "line": 76,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions",
             "type": "{Object}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 78,
+            "line": 84,
             "description": "<h4>ページ要素</h4>",
-            "default": "$('html, body')",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions.$html",
+            "default": "$('html, body')",
             "type": "{jQuery}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 86,
+            "line": 92,
             "description": "<h4>停止位置調整値</h4>",
-            "default": "0",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions.adjust",
+            "default": "0",
             "type": "{Number}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 94,
+            "line": 100,
             "description": "<h4>スクロールしないトリガークラス名</h4>",
-            "default": "no_scroll",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions.noScrollClass",
+            "default": "no_scroll",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 102,
+            "line": 108,
             "description": "<h4>duration</h4>",
-            "default": "800",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions.duration",
+            "default": "800",
             "type": "{Number}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 110,
+            "line": 116,
             "description": "<h4>easing</h4>",
-            "default": "easeOutQuint",
             "static": 1,
             "itemtype": "property",
             "name": "scrollOptions.ease",
+            "default": "easeOutQuint",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 119,
+            "line": 124,
             "description": "<h4>スクロール前のコールバック</h4>",
-            "default": "$.noop",
             "static": 1,
             "itemtype": "property",
             "name": "beginCall",
+            "default": "$.noop",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 127,
+            "line": 132,
             "description": "<h4>スクロール後のコールバック</h4>",
-            "default": "$.noop",
             "static": 1,
             "itemtype": "property",
             "name": "compCall",
+            "default": "$.noop",
             "type": "{String}",
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 146,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "props",
-            "type": "{Object}",
-            "class": "Scroll"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 160,
-            "description": "<h4>Scrollインスタンスの生成</h4>\nshorthand",
+            "line": 156,
+            "description": "<h4>Scrollインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "get",
@@ -5010,11 +5017,11 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 177,
+            "line": 172,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -5022,11 +5029,11 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 197,
+            "line": 192,
             "description": "<h4>イベント削除</h4>",
             "itemtype": "method",
             "name": "off",
@@ -5034,11 +5041,11 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
-            "line": 209,
+            "line": 204,
             "description": "<h4>スクロールアニメーション</h4>",
             "itemtype": "method",
             "name": "tween",
@@ -5046,155 +5053,155 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "Scroll"
+            "class": "AMP.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 31,
+            "line": 29,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.ScrollToggle"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
+            "line": 37,
             "description": "<h4>表示・非表示する要素</h4>",
             "default": "$('.scroll_toggle')",
             "itemtype": "property",
             "name": "props.$scrollToggle",
             "type": "{jQuery}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 41,
+            "line": 46,
             "description": "<h4>window要素</h4>",
             "itemtype": "property",
             "name": "props.$window",
             "type": "{jQuery}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 50,
+            "line": 54,
             "description": "<h4>Display:Block表示の状態</h4>",
             "itemtype": "property",
             "name": "props.isDisplay",
             "type": "{Boolean}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 71,
+            "line": 75,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 81,
+            "line": 85,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 90,
-            "description": "<h4>デフォルト値格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします",
+            "line": 94,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
             "name": "scrollToggleOptions",
             "type": "{Object}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 98,
+            "line": 102,
             "description": "<h4>表示されるY値</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "showY",
             "default": "300",
-            "static": 1,
-            "itemtype": "property",
-            "name": "showY",
             "type": "{Number}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 106,
+            "line": 110,
             "description": "<h4>表示のスタイル</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "showY",
             "default": "{ opacity : 1}",
-            "static": 1,
-            "itemtype": "property",
-            "name": "showY",
             "type": "{Object}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 114,
+            "line": 118,
             "description": "<h4>非表示のスタイル</h4>",
-            "default": "{ opacity : 0}",
             "static": 1,
             "itemtype": "property",
             "name": "showY",
+            "default": "{ opacity : 0}",
             "type": "{Object}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 122,
+            "line": 126,
             "description": "<h4>duration</h4>",
-            "default": "500",
             "static": 1,
             "itemtype": "property",
             "name": "duration",
+            "default": "500",
             "type": "{Number}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 130,
+            "line": 134,
             "description": "<h4>easing</h4>",
-            "default": "easeInSine",
             "static": 1,
             "itemtype": "property",
             "name": "ease",
+            "default": "easeInSine",
             "type": "{String}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 138,
+            "line": 142,
             "description": "<h4>表示後のコールバック</h4>",
-            "default": "$.noop",
             "static": 1,
             "itemtype": "property",
             "name": "showCall",
+            "default": "$.noop",
             "type": "{String}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 146,
+            "line": 150,
             "description": "<h4>非表示後のコールバック</h4>",
-            "default": "$.noop",
             "static": 1,
             "itemtype": "property",
             "name": "hideCall",
+            "default": "$.noop",
             "type": "{String}",
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 165,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "props",
-            "type": "{Object}",
-            "class": "ScrollToggle"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 179,
-            "description": "<h4>ScrollToggleインスタンスの生成</h4>\nshorthand",
+            "line": 174,
+            "description": "<h4>ScrollToggleインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "get",
@@ -5214,11 +5221,11 @@
                 "description": "Pagetopインスタンスを返す",
                 "type": "Pagetop"
             },
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 196,
+            "line": 190,
             "description": "<h4>イベントオン</h4>",
             "itemtype": "method",
             "name": "on",
@@ -5226,11 +5233,11 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 222,
+            "line": 216,
             "description": "<h4>イベントオフ</h4>",
             "itemtype": "method",
             "name": "off",
@@ -5238,11 +5245,11 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 234,
+            "line": 228,
             "description": "<h4>表示</h4>",
             "itemtype": "method",
             "name": "show",
@@ -5250,11 +5257,11 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
-            "line": 253,
+            "line": 247,
             "description": "<h4>非表示</h4>",
             "itemtype": "method",
             "name": "hide",
@@ -5262,90 +5269,90 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "ScrollToggle"
+            "class": "AMP.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 39,
+            "line": 22,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.SmoothScroll"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
+            "line": 48,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "SmoothScroll"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 49,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
             "line": 58,
-            "description": "<h4>デフォルト値格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします",
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
+            "class": "AMP.SmoothScroll"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
+            "line": 67,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
             "name": "smoothScrollOptions",
             "type": "{Object}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 66,
+            "line": 75,
             "description": "<h4>スムーススクロールエリア</h4>",
-            "default": "$('html, body')",
             "itemtype": "property",
             "name": "smoothScrollOptions.$page",
+            "default": "$('html, body')",
             "type": "{jQuery}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 73,
+            "line": 82,
             "description": "<h4>スクロール量</h4>",
-            "default": "500",
             "itemtype": "property",
             "name": "smoothScrollOptions.amount",
+            "default": "500",
             "type": "{Number}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 80,
+            "line": 89,
             "description": "<h4>duration</h4>",
-            "default": "500",
             "itemtype": "property",
             "name": "smoothScrollOptions.duration",
+            "default": "500",
             "type": "{Number}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 87,
+            "line": 96,
             "description": "<h4>easing</h4>",
-            "default": "easeOutCubic",
             "itemtype": "property",
             "name": "smoothScrollOptions.ease",
+            "default": "easeOutCubic",
             "type": "{String}",
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 102,
-            "description": "<h4>パラメーター格納オブジェクト</h4>\nコンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します",
-            "itemtype": "property",
-            "name": "param",
-            "type": "{Object}",
-            "class": "SmoothScroll"
-        },
-        {
-            "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 117,
-            "description": "<h4>SmoothScrollインスタンスの生成</h4>\nshorthand",
+            "line": 116,
+            "description": "<h4>SmoothScrollインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "get",
@@ -5360,11 +5367,11 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 133,
+            "line": 131,
             "description": "<h4>初期化</h4>",
             "itemtype": "method",
             "name": "on",
@@ -5372,11 +5379,11 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 154,
+            "line": 152,
             "description": "<h4>イベント削除</h4>",
             "itemtype": "method",
             "name": "off",
@@ -5384,11 +5391,11 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
-            "line": 166,
+            "line": 164,
             "description": "<h4>スクロールアニメーション</h4>",
             "itemtype": "method",
             "name": "tween",
@@ -5396,7 +5403,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "SmoothScroll"
+            "class": "AMP.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5805,8 +5812,71 @@
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 41,
-            "description": "<h4>Renderインスタンスの生成</h4>\nshorthand",
+            "line": 27,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 33,
+            "description": "<h4>js Template要素</h4>",
+            "itemtype": "property",
+            "name": "props.$tmp",
+            "type": "{jQuery}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 39,
+            "description": "<h4>レンダリングエリアのラッパー要素</h4>\n\n初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>\nこれは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です",
+            "itemtype": "property",
+            "name": "props.$el",
+            "type": "{Hogan}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 48,
+            "description": "<h4>Hoganテンプレート</h4>",
+            "itemtype": "property",
+            "name": "props.template",
+            "type": "{Hogan}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 54,
+            "description": "<h4>レンダリングオリジナルデータ保管</h4>",
+            "itemtype": "property",
+            "name": "props.originalData",
+            "type": "{Arrary|Object}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 60,
+            "description": "<h4>レンダリングデータ</h4>",
+            "itemtype": "property",
+            "name": "props.renderData",
+            "type": "{Arrary|Object}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 66,
+            "description": "<h4>$.ajaxオプション値</h4>\nRender.ajaxOptionsとajaxOptionsをmixinした値を格納します",
+            "itemtype": "property",
+            "name": "props.ajaxOptions",
+            "type": "{Object}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 94,
+            "description": "<h4>Renderインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
             "name": "render",
@@ -5826,50 +5896,69 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 63,
+            "line": 115,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 73,
+            "line": 125,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "Render"
-        },
-        {
-            "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 82,
-            "description": "<h4>$.ajaxのoption値</h4>\nコンストラクタが呼び出されたときに、第二引数で指定したoptionsをmixinします<br>\njQuery Ajax API: http://api.jquery.com/jquery.ajax/<br>\najaxOptions: { <ul><li>\n  url     : null, {String} リクエストURL</li><li>\n  chace   : false, {Boolean} キャッシュの有効</li><li>\n  dataType: 'json' {String} データタイプ</li></ul>\n}",
-            "static": 1,
-            "itemtype": "property",
-            "name": "ajaxOptions",
-            "type": "{Object}",
-            "class": "Render"
-        },
-        {
-            "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 103,
-            "description": "<h4>パラメーター格納オブジェクト</h4>",
-            "default": "defaults { <ul><li>\n  $template   : null, {jQuery} js Template要素</li><li>\n  $el         : null {jQuery} レンダリングエリアのラッパー要素</li><li>\n  template    : null {Hogan} Hoganテンプレート</li><li>\n  originalData: null {Object|Array} レンダーオリジナルデータ</li><li>\n  renderData  : null {Object|Array} レンダーデータ</li><li>\n  ajaxOptions : null {Object} Ajaxオプション値</li></ul>\n}",
-            "itemtype": "property",
-            "name": "param",
-            "type": "{Object}",
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
             "line": 134,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します<br>\n<a href=\"http://api.jquery.com/jquery.ajax/\" target=\"_blank\">jQuery Ajax API</a>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "ajaxOptions",
+            "type": "{Object}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 143,
+            "description": "<h4>リクエストURL</h4>",
+            "itemtype": "property",
+            "name": "ajaxOptions.url",
+            "type": "{String}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 149,
+            "description": "<h4>キャッシュの有効化</h4>",
+            "itemtype": "property",
+            "name": "ajaxOptions.chace",
+            "default": "false",
+            "type": "{String}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 156,
+            "description": "<h4>取得するデータタイプ</h4>",
+            "itemtype": "property",
+            "name": "ajaxOptions.dataType",
+            "default": "json",
+            "type": "{String}",
+            "class": "AMP.Render"
+        },
+        {
+            "file": "develop\\amp\\jquery\\plugins\\Render.js",
+            "line": 175,
             "description": "<h4>初期化</h4>\n処理が完了したことを通知します",
             "itemtype": "method",
             "name": "start",
@@ -5877,11 +5966,11 @@
                 "description": "",
                 "type": "jQuery.Deferred"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 159,
+            "line": 200,
             "description": "<h4>$.ajaxで、データを取得します</h4>",
             "itemtype": "method",
             "name": "getAjax",
@@ -5889,11 +5978,11 @@
                 "description": "処理が、完了したことを通知します",
                 "type": "jQuery.Deferred"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 177,
+            "line": 218,
             "description": "<h4>ajax通信成功時、呼び出されます</h4>",
             "itemtype": "method",
             "name": "ajaxDone",
@@ -5908,11 +5997,11 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 187,
+            "line": 228,
             "description": "<h4>ajax通信失敗時、呼び出されます</h4>\n再度ページを読み込み直すか？",
             "itemtype": "method",
             "name": "ajaxFail",
@@ -5920,11 +6009,11 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 205,
+            "line": 246,
             "description": "<h4>Hoganに流し込む、データを生成して、tmplDataに格納します</h4>",
             "itemtype": "method",
             "name": "setRenderData",
@@ -5939,11 +6028,11 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 228,
+            "line": 269,
             "description": "<h4>レンダーデータのフィルタリングの際使用します</h4>",
             "itemtype": "method",
             "name": "filtter",
@@ -5951,11 +6040,11 @@
                 "description": "",
                 "type": "Object"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 239,
+            "line": 280,
             "description": "<h4>レンダリングされている場合、データを削除します</h4>\nレンダリングされていない場合は、レンダーエリアをラップする要素を生成します",
             "itemtype": "method",
             "name": "removePrevHTML",
@@ -5963,11 +6052,11 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 257,
+            "line": 298,
             "description": "<h4>生成するHTMLデータがない場合呼び出されます</h4>",
             "default": "'<p class=\"not_found\">データを取得できませんでした。</p>'",
             "itemtype": "method",
@@ -5976,11 +6065,11 @@
                 "description": "",
                 "type": "String"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 269,
+            "line": 310,
             "description": "<h4>レンダリングするHTMLを生成します</h4>",
             "itemtype": "method",
             "name": "createHTML",
@@ -5995,11 +6084,11 @@
                 "description": "",
                 "type": "DOM"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
-            "line": 282,
+            "line": 323,
             "description": "<h4>DOM生成して、HTMLに挿入します</h4>",
             "itemtype": "method",
             "name": "render",
@@ -6007,7 +6096,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "Render"
+            "class": "AMP.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6516,7 +6605,7 @@
         {
             "file": "develop\\amp\\jquery.plugins\\jquery.event.slip.js",
             "line": 17,
-            "description": "<h4>マウスインした時の方向を取得するイベント</h4>\nイベントオブジェクトに取得したオブジェクトを返します\n<b>インライン要素には効きません</b>",
+            "description": "<h4>マウスインした時の方向を取得するイベント</h4>\nイベントオブジェクトに取得したオブジェクトを返します\n<em>インライン要素には効きません</em>",
             "itemtype": "event",
             "name": "slipin",
             "example": [
@@ -6801,11 +6890,11 @@
     "warnings": [
         {
             "message": "Missing item type\n<h4>空の関数</h4>\n何もしません",
-            "line": " develop\\amp\\core\\base\\utility.js:245"
+            "line": " develop\\amp\\core\\base\\utility.js:247"
         },
         {
             "message": "Missing item type\n<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
-            "line": " develop\\amp\\core\\utilitys\\Mediaquery.js:173"
+            "line": " develop\\amp\\core\\utilitys\\Mediaquery.js:174"
         },
         {
             "message": "Missing item type\n<h4>指定したタイプオブジェクトを検索して配列で返します</h4>\n\nfindObject description]",

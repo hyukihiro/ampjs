@@ -11,13 +11,16 @@ var AMP = AMP || {};
 
   /**
    * <h4>デバッグ機能</h4>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
    * @class AMP.Debug
    * @extends AMP.BASE_CLASS
    * @constructor
    *
    * @example
-   *   AMP.debug.log(any);
+   *   AMP.debug.log(any);<br>
    *   AMP.debug.log(any, any...);
    */
   function Debug(){}

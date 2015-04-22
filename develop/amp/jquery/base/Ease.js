@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>Easingを管理します</h4>
    *
-   * @class Ease
+   * @class AMP.Ease
    * @extends AMP.Ease
    * @constructor
    */
@@ -32,7 +32,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>jQuery Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja">Easingサンプルサイト</a>
+   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
    *
    * @property $
    * @type {Object}

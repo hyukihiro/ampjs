@@ -11,8 +11,11 @@ var AMP = AMP || {};
 
   /**
    * <h4>ロールオーバー</h4>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
-   * @class Rollover
+   * @class AMP.Rollover
    * @extends AMP.BASE_CLASS
    * @constructor
    */

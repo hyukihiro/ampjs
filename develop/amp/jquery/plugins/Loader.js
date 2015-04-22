@@ -11,7 +11,7 @@ var AMP = AMP || {};
   /**
    * <h4>ローダー</h4>
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
-   * <b>imagesloaded.jsに依存します</b>
+   * <em>imagesloaded.jsに依存します</em>
    *
    * @class Loader
    * @constructor

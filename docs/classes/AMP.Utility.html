@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AMP.Utility - AMP.js</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/css/yui-cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <script src="../assets/js/yui-source.js"></script>
+	<title>AMP.js v3.0.0 API Documentation : AMP.Utility</title>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +17,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title="AMP.js"></h1>
+                <h1><a href="https://bitbucket.org/yoshihitofujiwara/ampjs"><img src="../assets/css/logo.png" title="AMP.js"></a></h1>
             
         </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.0</em>
+        <div class="version">
+            <em>API Documentation for: 3.0.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -31,7 +33,6 @@
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -45,6 +46,8 @@
             
                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
             
+                <li><a href="../classes/AMP.BoxHover.html">AMP.BoxHover</a></li>
+            
                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
             
                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
@@ -52,6 +55,8 @@
                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
             
                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+            
+                <li><a href="../classes/AMP.FlatHeight.html">AMP.FlatHeight</a></li>
             
                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
             
@@ -63,19 +68,23 @@
             
                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
             
+                <li><a href="../classes/AMP.Render.html">AMP.Render</a></li>
+            
+                <li><a href="../classes/AMP.Rollover.html">AMP.Rollover</a></li>
+            
+                <li><a href="../classes/AMP.Scroll.html">AMP.Scroll</a></li>
+            
+                <li><a href="../classes/AMP.ScrollToggle.html">AMP.ScrollToggle</a></li>
+            
+                <li><a href="../classes/AMP.SmoothScroll.html">AMP.SmoothScroll</a></li>
+            
                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
             
                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
             
                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
             
-                <li><a href="../classes/BoxHover.html">BoxHover</a></li>
-            
-                <li><a href="../classes/Ease.html">Ease</a></li>
-            
                 <li><a href="../classes/Fallback.html">Fallback</a></li>
-            
-                <li><a href="../classes/FlatHeight.html">FlatHeight</a></li>
             
                 <li><a href="../classes/jQuery.html">jQuery</a></li>
             
@@ -83,17 +92,7 @@
             
                 <li><a href="../classes/Loader.html">Loader</a></li>
             
-                <li><a href="../classes/Render.html">Render</a></li>
-            
-                <li><a href="../classes/Rollover.html">Rollover</a></li>
-            
-                <li><a href="../classes/Scroll.html">Scroll</a></li>
-            
-                <li><a href="../classes/ScrollToggle.html">ScrollToggle</a></li>
-            
                 <li><a href="../classes/Slider.html">Slider</a></li>
-            
-                <li><a href="../classes/SmoothScroll.html">SmoothScroll</a></li>
             
                 <li><a href="../classes/XXX_Ease.html">XXX_Ease</a></li>
             
@@ -113,7 +112,7 @@
             </div>
         </div>
         <div class="yui3-u-3-4">
-                <div id="api-options">
+            <div id="api-options">
         Show:
         <label for="api-show-inherited">
             <input type="checkbox" id="api-show-inherited" checked>
@@ -135,8 +134,6 @@
         </label>
 
     </div>
-
-
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
@@ -148,7 +145,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_base_utility.js.html#l12"><code>develop\amp\core\base\utility.js:12</code></a>
+            Defined in: <a href="../files/develop_amp_core_base_utility.js.html#l12"><code>AMP.Utility:12</code></a>
         </div>
     
 
@@ -160,7 +157,7 @@
 
 
 <div class="box intro">
-    
+    <h4>ユーティリティ</h4>
 </div>
 
 
@@ -341,7 +338,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l200"><code>develop\amp\core\base\utility.js:200</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l202"><code>cancelAnimationFrame:202</code></a>
         
         </p>
 
@@ -449,7 +446,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l62"><code>develop\amp\core\base\utility.js:62</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l64"><code>getFunctionName:64</code></a>
         
         </p>
 
@@ -557,7 +554,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l84"><code>develop\amp\core\base\utility.js:84</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l86"><code>hexToRGB:86</code></a>
         
         </p>
 
@@ -655,7 +652,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l226"><code>develop\amp\core\base\utility.js:226</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l228"><code>now:228</code></a>
         
         </p>
 
@@ -730,7 +727,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l146"><code>develop\amp\core\base\utility.js:146</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l148"><code>pixelRatio:148</code></a>
         
         </p>
 
@@ -812,7 +809,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l158"><code>develop\amp\core\base\utility.js:158</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l160"><code>preload:160</code></a>
         
         </p>
 
@@ -932,7 +929,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l22"><code>develop\amp\core\base\utility.js:22</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l24"><code>removeEvent:24</code></a>
         
         </p>
 
@@ -1082,7 +1079,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l42"><code>develop\amp\core\base\utility.js:42</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l44"><code>removeEvent:44</code></a>
         
         </p>
 
@@ -1220,7 +1217,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l173"><code>develop\amp\core\base\utility.js:173</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l175"><code>requestAnimationFrame:175</code></a>
         
         </p>
 
@@ -1340,7 +1337,7 @@ performanceに対応していないブラウザはgetTimeを返します</p>
             
         
         
-        <a href="../files/develop_amp_core_base_utility.js.html#l118"><code>develop\amp\core\base\utility.js:118</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l120"><code>rgbToHex:120</code></a>
         
         </p>
 

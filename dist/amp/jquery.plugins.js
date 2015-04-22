@@ -32,15 +32,14 @@
 
 
 	/**
-	 * <h3>jQueryイベントを拡張します</h3>
-	 * version: 1.0
+	 * <h4>jQuery拡張</h4>
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
-	 * @class jQuery.Event
+	 * @class jQuery
 	 */
 	/**
 	 * <h4>Flickイベントオブジェクト</h4>
 	 *
-	 * @module Flick
 	 * @type {Object}
 	 */
 	var Flick = {};
@@ -529,10 +528,10 @@
 
 
 	/**
-	 * <h3>jQueryイベントを拡張します</h3>
-	 * VERSION: 1.0
+	 * <h4>jQuery拡張</h4>
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
-	 * @class jQuery.Event
+	 * @class jQuery
 	 */
 
 
@@ -542,7 +541,7 @@
 	/**
 	 * <h4>マウスインした時の方向を取得するイベント</h4>
 	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * <b>インライン要素には効きません</b>
+	 * <em>インライン要素には効きません</em>
 	 *
 	 * @event slipin
 	 * @example
@@ -645,10 +644,10 @@
 
 
 	/**
-	 * <h3>jQueryイベントを拡張します</h3>
-	 * VERSION: 1.0
+	 * <h4>jQuery拡張</h4>
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
-	 * @class jQuery.Event
+	 * @class jQuery
 	 */
 
 	/**
@@ -720,8 +719,8 @@
 
 
 	/**
-	 * <h3>jQueryオブジェクト拡張</h3>
-	 * VERSION: 1.0
+	 * <h4>jQuery拡張</h4>
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
 	 * @class jQuery
 	 */
@@ -736,7 +735,7 @@
 	 *
 	 * @static
 	 * @method sequence
-	 * @param  {Functions or Array} arguments 関数か関数を格納した配列を渡す
+	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
 	 * @return {jQuery.Deferred}
 	 */
 	$.sequence = function(){
@@ -821,10 +820,10 @@
 
 
 	/**
-	 * <h3>jQueryプロタイプオブジェクト拡張</h3>
-	 * VERSION: 2.0
+	 * <h4>jQuery拡張</h4>
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
-	 * @class jQuery.fn
+	 * @class jQuery
 	 */
 
 
@@ -832,16 +831,16 @@
 	 * <h4>cssをアニメーションqueueで管理します</h4>
 	 *
 	 * @method qCss
-	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String or Function} val プロパティ値かコールバック関数
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
 	 * @return {jQuery}
 	 */
 	/**
 	 * <h4>attrをアニメーションqueueで管理します</h4>
 	 *
 	 * @method qAttr
-	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String or Function} val プロパティ値かコールバック関数
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
 	 * @return {jQuery}
 	 */
   $.each({
@@ -862,8 +861,8 @@
 	 * <h4>addClassをアニメーションqueueで管理します</h4>
 	 *
 	 * @method qAddClass
-	 * @param  {String or Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String or Function} val プロパティ値かコールバック関数
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
 	 * @return {jQuery}
 	 */
 	/**

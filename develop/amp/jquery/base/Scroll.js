@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class Scroll
+   * @class AMP.Scroll
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollTrigger トリガーとなるa要素
@@ -122,7 +122,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   *　<h4>スクロール前のコールバック</h4>
+   * <h4>スクロール前のコールバック</h4>
    *
    * @static
    * @property beginCall
@@ -130,7 +130,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   *　<h4>スクロール後のコールバック</h4>
+   * <h4>スクロール後のコールバック</h4>
    *
    * @static
    * @property compCall
@@ -155,7 +155,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>Scrollインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -239,7 +238,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Scroll = Scroll;
-  AMP.scroll = Scroll.get;
 
 
 }(window, jQuery));

@@ -11,7 +11,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>ストレージ管理</h4>
-   * デフォルトは、セッションストレージを使用します
+   * デフォルトでは、セッションストレージを使用します
    *
    * @class AMP.Storage
    * @extends AMP.BASE_CLASS
@@ -200,7 +200,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Storage = Storage;
-  AMP.storage = Storage.get;
 
 
 }(window));

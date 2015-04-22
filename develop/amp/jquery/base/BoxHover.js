@@ -112,7 +112,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>BoxHoverインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -201,7 +200,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.BoxHover = BoxHover;
-  AMP.boxHover = BoxHover.get;
 
 
 }(window, jQuery));

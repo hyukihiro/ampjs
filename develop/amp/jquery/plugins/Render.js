@@ -13,18 +13,71 @@ var AMP = AMP || {};
   /**
    * <h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>
    * 処理が完了したら、jQuery Deferred Objectを返します<br>
-   * <b>Hogan.jsに依存します</b>
+   * <em>Hogan.jsに依存します</em>
    *
-   * @class Render
+   * @class AMP.Render
+   * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $template jsTemplate要素
+   * @param  {jQuery} $tmp jsTemplate要素
    * @param  {Object} ajaxOptions $.ajax options
    */
 
-  function Render($template, ajaxOptions){
-    this.param.$template   = $template;
-    this.param.template    = Hogan.compile($template.html());
-    this.param.ajaxOptions = $.extend(true, {}, Render.ajaxOptions, ajaxOptions);
+  function Render($tmp, ajaxOptions){
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
+    /**
+     * <h4>js Template要素</h4>
+     *
+     * @property props.$tmp
+     * @type {jQuery}
+     */
+    /**
+     * <h4>レンダリングエリアのラッパー要素</h4>
+     *
+     * 初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
+     * これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です
+     *
+     * @property props.$el
+     * @type {Hogan}
+     */
+    /**
+     * <h4>Hoganテンプレート</h4>
+     *
+     * @property props.template
+     * @type {Hogan}
+     */
+    /**
+     * <h4>レンダリングオリジナルデータ保管</h4>
+     *
+     * @property props.originalData
+     * @type {Arrary|Object}
+     */
+    /**
+     * <h4>レンダリングデータ</h4>
+     *
+     * @property props.renderData
+     * @type {Arrary|Object}
+     */
+    /**
+     * <h4>$.ajaxオプション値</h4>
+     * Render.ajaxOptionsとajaxOptionsをmixinした値を格納します
+     *
+     * @property props.ajaxOptions
+     * @type {Object}
+     */
+    this.props = {
+      $tmp        : $tmp,
+      $el         : null,
+      template    : Hogan.compile($tmp.html()),
+      originalData: null,
+      renderData  : null,
+      ajaxOptions : $.extend(true, {}, Render.ajaxOptions, ajaxOptions)
+    };
   }
 
   // 基底クラスを継承
@@ -40,7 +93,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>Renderインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method render
@@ -48,8 +100,8 @@ var AMP = AMP || {};
    * @param  {Object} ajaxOptions $.ajax options
    * @return {Render}
    */
-  Render.get = function($template, ajaxOptions){
-    var inst = new Render($template, ajaxOptions);
+  Render.get = function($tmp, ajaxOptions){
+    var inst = new Render($tmp, ajaxOptions);
     inst.start();
     return inst;
   };
@@ -80,49 +132,38 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>$.ajaxのoption値</h4>
-   * コンストラクタが呼び出されたときに、第二引数で指定したoptionsをmixinします<br>
-   * jQuery Ajax API: http://api.jquery.com/jquery.ajax/<br>
-   * ajaxOptions: { <ul><li>
-   *   url     : null, {String} リクエストURL</li><li>
-   *   chace   : false, {Boolean} キャッシュの有効</li><li>
-   *   dataType: 'json' {String} データタイプ</li></ul>
-   * }
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します<br>
+   * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a>
    *
    * @static
    * @property ajaxOptions
    * @type {Object}
    */
+  /**
+   * <h4>リクエストURL</h4>
+   *
+   * @property ajaxOptions.url
+   * @type {String}
+   */
+  /**
+   * <h4>キャッシュの有効化</h4>
+   *
+   * @property ajaxOptions.chace
+   * @default false
+   * @type {String}
+   */
+  /**
+   * <h4>取得するデータタイプ</h4>
+   *
+   * @property ajaxOptions.dataType
+   * @default json
+   * @type {String}
+   */
   Render.ajaxOptions = {
     url     : null,
     chace   : false,
     dataType: 'json'
-  };
-
-
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   *
-   * @default
-   * defaults { <ul><li>
-   *   $template   : null, {jQuery} js Template要素</li><li>
-   *   $el         : null {jQuery} レンダリングエリアのラッパー要素</li><li>
-   *   template    : null {Hogan} Hoganテンプレート</li><li>
-   *   originalData: null {Object|Array} レンダーオリジナルデータ</li><li>
-   *   renderData  : null {Object|Array} レンダーデータ</li><li>
-   *   ajaxOptions : null {Object} Ajaxオプション値</li></ul>
-   * }
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.param = {
-    $template   : null,
-    $el         : null,
-    template    : null,
-    originalData: null,
-    renderData  : null,
-    ajaxOptions : null
   };
 
 
@@ -165,10 +206,10 @@ var AMP = AMP || {};
   p.ajax = function(){
     var self = this;
 
-    return $.ajax(self.param.ajaxOptions)
+    return $.ajax(self.props.ajaxOptions)
     .fail(self.ajaxFail)
     .done(function(data){
-      self.param.originalData = data;
+      self.props.originalData = data;
       self.ajaxDone(data);
     });
   };
@@ -211,13 +252,13 @@ var AMP = AMP || {};
    */
   p.setRenderData = function(renderData){
     if(renderData){
-      this.param.renderData = renderData;
+      this.props.renderData = renderData;
     } else {
-      if(AMP.isArray(this.param.originalData)){
-        this.param.renderData = this.param.originalData.concat();
+      if(AMP.isArray(this.props.originalData)){
+        this.props.renderData = this.props.originalData.concat();
 
       } else {
-        this.param.renderData = $.extend({}, this.param.originalData);
+        this.props.renderData = $.extend({}, this.props.originalData);
       }
     }
 
@@ -244,9 +285,9 @@ var AMP = AMP || {};
    * @return {Render}
    */
   p.removePrevHTML = function(){
-    if(!this.param.$el){
-      this.param.$template.wrapAll('<div class="js_render" />');
-      this.param.$el = this.param.$template.parent();
+    if(!this.props.$el){
+      this.props.$tmp.wrapAll('<div class="js_render" />');
+      this.props.$el = this.props.$tmp.parent();
     } else {
       this.$el.children().remove();
     }
@@ -275,7 +316,7 @@ var AMP = AMP || {};
    */
   p.createHTML = function(data){
     this.setRenderData(data);
-    return this.param.template.render(this.param.renderData) || this.notFound();
+    return this.props.template.render(this.props.renderData) || this.notFound();
   };
 
 
@@ -287,7 +328,7 @@ var AMP = AMP || {};
    */
   p.render = function(data){
     this.removePrevHTML();
-    this.param.$el[0].innerHTML = this.createHTML(data);
+    this.props.$el[0].innerHTML = this.createHTML(data);
     return this;
   };
 
@@ -298,7 +339,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Render = Render;
-  AMP.render = Render.get;
 
 
 

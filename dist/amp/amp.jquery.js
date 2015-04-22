@@ -40,7 +40,8 @@ var AMP = AMP || {};
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class BoxHover
+   * @class AMP.BoxHover
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
    * @param  {Object} options オプション値
@@ -53,6 +54,12 @@ var AMP = AMP || {};
       $boxHover = $('.box_hover');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
@@ -97,8 +104,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -106,33 +113,24 @@ var AMP = AMP || {};
    */
   /**
    * <h4>ホバー時に付けるクラス名</h4>
-   * オプション デフォルト値
    *
    * @static
    * @property boxHoverOptions.hoverClass
+   * @default hover
    * @type {String}
    */
   /**
    * <h4>複数リンクがある場合、優先するリンククラス</h4>
-   * オプション デフォルト値
    *
    * @static
    * @property boxHoverOptions.linkClass
+   * @default link
    * @type {String}
    */
   BoxHover.boxHoverOptions = {
     hoverClass: 'hover',
     linkClass : 'link'
   };
-
-
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
 
 
 
@@ -142,7 +140,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>BoxHoverインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -231,7 +228,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.BoxHover = BoxHover;
-  AMP.boxHover = BoxHover.get;
 
 
 }(window, jQuery));
@@ -248,10 +244,10 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>Easeingを管理します</h4>
-   * AMP.Easeをextendします
+   * <h4>Easingを管理します</h4>
    *
-   * @class Ease
+   * @class AMP.Ease
+   * @extends AMP.Ease
    * @constructor
    */
   function Ease(){}
@@ -269,7 +265,8 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>jQuery easeing用ネームスペース</h4>
+   * <h4>jQuery Easing用ネームスペース</h4>
+   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
    *
    * @property $
    * @type {Object}
@@ -521,7 +518,8 @@ var AMP = AMP || {};
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class FlatHeight
+   * @class AMP.FlatHeight
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $flatHeight 対象のエリア要素
    * @param  {Number} split 区切る数 省略可
@@ -536,6 +534,13 @@ var AMP = AMP || {};
       $flatHeight = $('.flat_height');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = {};
 
     /**
      * <h4>ターゲット要素</h4>
@@ -546,7 +551,6 @@ var AMP = AMP || {};
      */
     this.props.$flatHeight = $flatHeight;
 
-
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
@@ -555,7 +559,6 @@ var AMP = AMP || {};
      * @type {Number}
      */
     this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
-
 
     /**
      * <h4>サイズ後、リセットしなおすか</h4>
@@ -598,23 +601,13 @@ var AMP = AMP || {};
   p.className = 'FlatHeight';
 
 
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
-
-
 
   /*--------------------------------------------------------------------------
     @method
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>要素の高さ揃え</h4>
-   * FlatHeightのショートハンド
+   * <h4>FlatHeightインスタンス生成</h4>
    *
    * @static
    * @method get
@@ -725,7 +718,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.FlatHeight = FlatHeight;
-  AMP.flatHeight = FlatHeight.get;
 
 
 
@@ -744,8 +736,12 @@ var AMP = AMP || {};
 
   /**
    * <h4>ロールオーバー</h4>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
-   * @class Rollover
+   * @class AMP.Rollover
+   * @extends AMP.BASE_CLASS
    * @constructor
    */
   function Rollover(){}
@@ -793,6 +789,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.groupClass
+   * @default group_rover
    * @type {String}
    */
   /**
@@ -800,6 +797,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.activeClass
+   * @default active
    * @type {String}
    */
   /**
@@ -807,6 +805,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.noOverClass
+   * @default no_rover
    * @type {String}
    */
   /**
@@ -814,6 +813,7 @@ var AMP = AMP || {};
    *
    * @static
    * @property rolloverOptions.postfix
+   * @default _on
    * @type {String}
    */
   Rollover.rolloverOptions = {
@@ -827,10 +827,11 @@ var AMP = AMP || {};
   /**
    * <h4>ロールオーバー要素の初期値</h4>
    *
+   * @static
    * @property imageClass
    * @type {String}
    */
-  p.imageClass = 'img.rover, input.rover, .all_rover img';
+  Rollover.imageClass = 'img.rover, input.rover, .all_rover img';
 
 
 
@@ -852,7 +853,7 @@ var AMP = AMP || {};
     // $image指定がない場合、初期値を設定
     if(!$images || !($images instanceof jQuery)){
       options = $images;
-      $images = $(self.imageClass);
+      $images = $(Rollover.imageClass);
     }
 
     var param = $.extend(true, {}, Rollover.rolloverOptions, options);
@@ -895,7 +896,7 @@ var AMP = AMP || {};
     // $image指定がない場合、初期値を設定
     if(!$images || !($images instanceof jQuery)){
       options = $images;
-      $images = $(this.imageClass);
+      $images = $(Rollover.imageClass);
     }
 
     var param = $.extend(true, {}, Rollover.rolloverOptions, options);
@@ -1041,7 +1042,8 @@ var AMP = AMP || {};
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class Scroll
+   * @class AMP.Scroll
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollTrigger トリガーとなるa要素
    * @param  {Object} options オプション値
@@ -1053,13 +1055,18 @@ var AMP = AMP || {};
       $scrollTrigger = $('a[href^=#]');
     }
 
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
-
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property param.$scrollTrigger
+     * @property props.$scrollTrigger
      * @type {Object}
      */
     this.props.$scrollTrigger = $scrollTrigger;
@@ -1097,8 +1104,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -1107,58 +1114,57 @@ var AMP = AMP || {};
   /**
    * <h4>ページ要素</h4>
    *
-   * @default $('html, body')
    * @static
    * @property scrollOptions.$html
+   * @default $('html, body')
    * @type {jQuery}
    */
   /**
    * <h4>停止位置調整値</h4>
    *
-   * @default 0
    * @static
    * @property scrollOptions.adjust
+   * @default 0
    * @type {Number}
    */
   /**
    * <h4>スクロールしないトリガークラス名</h4>
    *
-   * @default no_scroll
    * @static
    * @property scrollOptions.noScrollClass
+   * @default no_scroll
    * @type {String}
    */
   /**
    * <h4>duration</h4>
    *
-   * @default 800
    * @static
    * @property scrollOptions.duration
+   * @default 800
    * @type {Number}
    */
   /**
    * <h4>easing</h4>
    *
-   * @default easeOutQuint
    * @static
    * @property scrollOptions.ease
+   * @default easeOutQuint
    * @type {String}
    */
-
   /**
-   *　<h4>スクロール前のコールバック</h4>
+   * <h4>スクロール前のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property beginCall
+   * @default $.noop
    * @type {String}
    */
   /**
-   *　<h4>スクロール後のコールバック</h4>
+   * <h4>スクロール後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property compCall
+   * @default $.noop
    * @type {String}
    */
   Scroll.scrollOptions = {
@@ -1172,15 +1178,6 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
-
-
 
   /*--------------------------------------------------------------------------
     @method
@@ -1188,7 +1185,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>Scrollインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -1272,7 +1268,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.Scroll = Scroll;
-  AMP.scroll = Scroll.get;
 
 
 }(window, jQuery));
@@ -1289,9 +1284,10 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>スクロール時、座標を判定してのToggle処理</h4>
+   * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    *
-   * @class ScrollToggle
+   * @class AMP.ScrollToggle
+   * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollToggle 表示・非表示する要素
    * @param  {Object} options オプション値
@@ -1304,8 +1300,13 @@ var AMP = AMP || {};
       $scrollToggle = $('.scroll_toggle');
     }
 
-    this.props　= $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
-
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
@@ -1316,7 +1317,6 @@ var AMP = AMP || {};
      */
     this.props.$scrollToggle = $scrollToggle;
 
-
     /**
      * <h4>window要素</h4>
      *
@@ -1324,7 +1324,6 @@ var AMP = AMP || {};
      * @type {jQuery}
      */
     this.props.$window = $(window);
-
 
     /**
      * <h4>Display:Block表示の状態</h4>
@@ -1367,67 +1366,67 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
    * @type {Object}
    */
   /**
-   *　<h4>表示されるY値</h4>
+   * <h4>表示されるY値</h4>
    *
-   * @default 300
    * @static
    * @property showY
+   * @default 300
    * @type {Number}
    */
   /**
-   *　<h4>表示のスタイル</h4>
+   * <h4>表示のスタイル</h4>
    *
+   * @static
+   * @property showY
    * @default { opacity : 1}
-   * @static
-   * @property showY
    * @type {Object}
    */
   /**
-   *　<h4>非表示のスタイル</h4>
+   * <h4>非表示のスタイル</h4>
    *
+   * @static
+   * @property showY
    * @default { opacity : 0}
-   * @static
-   * @property showY
    * @type {Object}
    */
   /**
-   *　<h4>duration</h4>
+   * <h4>duration</h4>
    *
-   * @default 500
    * @static
    * @property duration
+   * @default 500
    * @type {Number}
    */
   /**
-   *　<h4>easing</h4>
+   * <h4>easing</h4>
    *
-   * @default easeInSine
    * @static
    * @property ease
+   * @default easeInSine
    * @type {String}
    */
   /**
-   *　<h4>表示後のコールバック</h4>
+   * <h4>表示後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property showCall
+   * @default $.noop
    * @type {String}
    */
   /**
-   *　<h4>非表示後のコールバック</h4>
+   * <h4>非表示後のコールバック</h4>
    *
-   * @default $.noop
    * @static
    * @property hideCall
+   * @default $.noop
    * @type {String}
    */
   ScrollToggle.scrollToggleOptions = {
@@ -1441,15 +1440,6 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>プロパティ格納オブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  p.props = {};
-
-
 
   /*--------------------------------------------------------------------------
     @method
@@ -1457,7 +1447,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>ScrollToggleインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -1557,7 +1546,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.ScrollToggle = ScrollToggle;
-  AMP.scrollToggle = ScrollToggle.get;
 
 
 }(window, jQuery));
@@ -1577,14 +1565,23 @@ var AMP = AMP || {};
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class SmoothScroll
+   * @class AMP.SmoothScroll
+   * @extends AMP.BASE_CLASS
    * @constructor
    */
   function SmoothScroll(options){
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
     this.props = $.extend(true,
+      {},
       SmoothScroll.smoothScrollOptions,
-      options,
-      {$page: $('html, body')}
+      {$page: $('html, body')},
+      options
     );
   }
 
@@ -1620,8 +1617,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>デフォルト値格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsを指定するとpropsオブジェクトにmixinします
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
    *
    * @static
    * @property smoothScrollOptions
@@ -1630,29 +1627,29 @@ var AMP = AMP || {};
     /**
    * <h4>スムーススクロールエリア</h4>
    *
-   * @default $('html, body')
    * @property smoothScrollOptions.$page
+   * @default $('html, body')
    * @type {jQuery}
    */
   /**
    * <h4>スクロール量</h4>
    *
-   * @default 500
    * @property smoothScrollOptions.amount
+   * @default 500
    * @type {Number}
    */
   /**
    * <h4>duration</h4>
    *
-   * @default 500
    * @property smoothScrollOptions.duration
+   * @default 500
    * @type {Number}
    */
   /**
    * <h4>easing</h4>
    *
-   * @default easeOutCubic
    * @property smoothScrollOptions.ease
+   * @default easeOutCubic
    * @type {String}
    */
   SmoothScroll.smoothScrollOptions = {
@@ -1663,16 +1660,6 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>パラメーター格納オブジェクト</h4>
-   * コンストラクタが呼び出されたら、defaultsとoptions値をmixinして格納します
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.props = {};
-
-
 
   /*--------------------------------------------------------------------------
     @method
@@ -1680,7 +1667,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>SmoothScrollインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -1750,7 +1736,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.SmoothScroll = SmoothScroll;
-  AMP.smoothScroll = SmoothScroll.get;
 
 
 }(window, jQuery));

@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class FlatHeight
+   * @class AMP.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $flatHeight 対象のエリア要素
@@ -101,8 +101,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>要素の高さ揃え</h4>
-   * FlatHeightのショートハンド
+   * <h4>FlatHeightインスタンス生成</h4>
    *
    * @static
    * @method get
@@ -213,7 +212,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.FlatHeight = FlatHeight;
-  AMP.flatHeight = FlatHeight.get;
 
 
 

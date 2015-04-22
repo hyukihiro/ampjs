@@ -1,9 +1,0 @@
-{
-  "name": "AMP.js",
-  "description": "AMP.js",
-  "version": "3.0.0",
-  "url": "",
-  "options": {
-    "outdir": "docs/"
-  }
-}

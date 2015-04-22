@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AMP.Is - AMP.js</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/css/yui-cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <script src="../assets/js/yui-source.js"></script>
+	<title>AMP.js v3.0.0 API Documentation : AMP.Is</title>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +17,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title="AMP.js"></h1>
+                <h1><a href="https://bitbucket.org/yoshihitofujiwara/ampjs"><img src="../assets/css/logo.png" title="AMP.js"></a></h1>
             
         </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.0</em>
+        <div class="version">
+            <em>API Documentation for: 3.0.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -31,7 +33,6 @@
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -45,6 +46,8 @@
             
                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
             
+                <li><a href="../classes/AMP.BoxHover.html">AMP.BoxHover</a></li>
+            
                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
             
                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
@@ -52,6 +55,8 @@
                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
             
                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+            
+                <li><a href="../classes/AMP.FlatHeight.html">AMP.FlatHeight</a></li>
             
                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
             
@@ -63,19 +68,23 @@
             
                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
             
+                <li><a href="../classes/AMP.Render.html">AMP.Render</a></li>
+            
+                <li><a href="../classes/AMP.Rollover.html">AMP.Rollover</a></li>
+            
+                <li><a href="../classes/AMP.Scroll.html">AMP.Scroll</a></li>
+            
+                <li><a href="../classes/AMP.ScrollToggle.html">AMP.ScrollToggle</a></li>
+            
+                <li><a href="../classes/AMP.SmoothScroll.html">AMP.SmoothScroll</a></li>
+            
                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
             
                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
             
                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
             
-                <li><a href="../classes/BoxHover.html">BoxHover</a></li>
-            
-                <li><a href="../classes/Ease.html">Ease</a></li>
-            
                 <li><a href="../classes/Fallback.html">Fallback</a></li>
-            
-                <li><a href="../classes/FlatHeight.html">FlatHeight</a></li>
             
                 <li><a href="../classes/jQuery.html">jQuery</a></li>
             
@@ -83,17 +92,7 @@
             
                 <li><a href="../classes/Loader.html">Loader</a></li>
             
-                <li><a href="../classes/Render.html">Render</a></li>
-            
-                <li><a href="../classes/Rollover.html">Rollover</a></li>
-            
-                <li><a href="../classes/Scroll.html">Scroll</a></li>
-            
-                <li><a href="../classes/ScrollToggle.html">ScrollToggle</a></li>
-            
                 <li><a href="../classes/Slider.html">Slider</a></li>
-            
-                <li><a href="../classes/SmoothScroll.html">SmoothScroll</a></li>
             
                 <li><a href="../classes/XXX_Ease.html">XXX_Ease</a></li>
             
@@ -113,7 +112,7 @@
             </div>
         </div>
         <div class="yui3-u-3-4">
-                <div id="api-options">
+            <div id="api-options">
         Show:
         <label for="api-show-inherited">
             <input type="checkbox" id="api-show-inherited" checked>
@@ -135,8 +134,6 @@
         </label>
 
     </div>
-
-
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
@@ -148,7 +145,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_base_is.js.html#l12"><code>develop\amp\core\base\is.js:12</code></a>
+            Defined in: <a href="../files/develop_amp_core_base_is.js.html#l12"><code>AMP.Is:12</code></a>
         </div>
     
 
@@ -160,7 +157,7 @@
 
 
 <div class="box intro">
-    
+    <h4>オブジェクト、ブラウザの判定</h4>
 </div>
 
 
@@ -612,7 +609,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l305"><code>develop\amp\core\base\is.js:305</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l307"><code>isAndroid:307</code></a>
         
         </p>
 
@@ -718,7 +715,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l643"><code>develop\amp\core\base\is.js:643</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l645"><code>isAndroidBrowser:645</code></a>
         
         </p>
 
@@ -814,7 +811,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l451"><code>develop\amp\core\base\is.js:451</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l453"><code>isAndroidPhone:453</code></a>
         
         </p>
 
@@ -886,7 +883,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l463"><code>develop\amp\core\base\is.js:463</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l465"><code>isAndroidTablet:465</code></a>
         
         </p>
 
@@ -968,7 +965,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l52"><code>develop\amp\core\base\is.js:52</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l54"><code>isArray:54</code></a>
         
         </p>
 
@@ -1074,7 +1071,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l65"><code>develop\amp\core\base\is.js:65</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l67"><code>isBoolean:67</code></a>
         
         </p>
 
@@ -1186,7 +1183,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l201"><code>develop\amp\core\base\is.js:201</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l203"><code>isBreakNumber:203</code></a>
         
         </p>
 
@@ -1320,7 +1317,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l479"><code>develop\amp\core\base\is.js:479</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l481"><code>isBrowser:481</code></a>
         
         </p>
 
@@ -1449,7 +1446,7 @@ ie, chrome, safari, firefox, opera, mobileSafari, android, webkit</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l577"><code>develop\amp\core\base\is.js:577</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l579"><code>isChrome:579</code></a>
         
         </p>
 
@@ -1531,7 +1528,7 @@ ie, chrome, safari, firefox, opera, mobileSafari, android, webkit</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l325"><code>develop\amp\core\base\is.js:325</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l327"><code>isDevice:327</code></a>
         
         </p>
 
@@ -1628,7 +1625,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l589"><code>develop\amp\core\base\is.js:589</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l591"><code>isFirefox:591</code></a>
         
         </p>
 
@@ -1710,7 +1707,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l78"><code>develop\amp\core\base\is.js:78</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l80"><code>isFunction:80</code></a>
         
         </p>
 
@@ -1816,7 +1813,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l524"><code>develop\amp\core\base\is.js:524</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l526"><code>isIE:526</code></a>
         
         </p>
 
@@ -1928,7 +1925,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l541"><code>develop\amp\core\base\is.js:541</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l543"><code>isIEScope:543</code></a>
         
         </p>
 
@@ -2050,7 +2047,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l287"><code>develop\amp\core\base\is.js:287</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l289"><code>isIos:289</code></a>
         
         </p>
 
@@ -2146,7 +2143,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l427"><code>develop\amp\core\base\is.js:427</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l429"><code>isIPad:429</code></a>
         
         </p>
 
@@ -2218,7 +2215,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l415"><code>develop\amp\core\base\is.js:415</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l417"><code>isIPhone:417</code></a>
         
         </p>
 
@@ -2290,7 +2287,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l439"><code>develop\amp\core\base\is.js:439</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l441"><code>isIPod:441</code></a>
         
         </p>
 
@@ -2362,7 +2359,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l274"><code>develop\amp\core\base\is.js:274</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l276"><code>isMac:276</code></a>
         
         </p>
 
@@ -2374,7 +2371,7 @@ pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphon
 
     <div class="description">
         <p><h4>Mac判定</h4>
-isoは、含みません。</p>
+isoは、含みません</p>
 
     </div>
 
@@ -2446,7 +2443,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l626"><code>develop\amp\core\base\is.js:626</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l628"><code>isMobileSafari:628</code></a>
         
         </p>
 
@@ -2552,7 +2549,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l157"><code>develop\amp\core\base\is.js:157</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l159"><code>isNull:159</code></a>
         
         </p>
 
@@ -2658,7 +2655,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l91"><code>develop\amp\core\base\is.js:91</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l93"><code>isNumber:93</code></a>
         
         </p>
 
@@ -2764,7 +2761,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l104"><code>develop\amp\core\base\is.js:104</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l106"><code>isObject:106</code></a>
         
         </p>
 
@@ -2862,7 +2859,7 @@ isoは、含みません。</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l613"><code>develop\amp\core\base\is.js:613</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l615"><code>isOpera:615</code></a>
         
         </p>
 
@@ -2952,7 +2949,7 @@ FIXME: アップデート予定</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l218"><code>develop\amp\core\base\is.js:218</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l220"><code>isOS:220</code></a>
         
         </p>
 
@@ -3066,7 +3063,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l367"><code>develop\amp\core\base\is.js:367</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l369"><code>isPC:369</code></a>
         
         </p>
 
@@ -3148,7 +3145,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l173"><code>develop\amp\core\base\is.js:173</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l175"><code>isPositive:175</code></a>
         
         </p>
 
@@ -3256,7 +3253,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l187"><code>develop\amp\core\base\is.js:187</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l189"><code>isPositive:189</code></a>
         
         </p>
 
@@ -3364,7 +3361,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l131"><code>develop\amp\core\base\is.js:131</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l133"><code>isRegexp:133</code></a>
         
         </p>
 
@@ -3460,7 +3457,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l601"><code>develop\amp\core\base\is.js:601</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l603"><code>isSafari:603</code></a>
         
         </p>
 
@@ -3532,7 +3529,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l379"><code>develop\amp\core\base\is.js:379</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l381"><code>isSmartDevice:381</code></a>
         
         </p>
 
@@ -3604,7 +3601,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l391"><code>develop\amp\core\base\is.js:391</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l393"><code>isSmartPhone:393</code></a>
         
         </p>
 
@@ -3686,7 +3683,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l118"><code>develop\amp\core\base\is.js:118</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l120"><code>isString:120</code></a>
         
         </p>
 
@@ -3782,7 +3779,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l403"><code>develop\amp\core\base\is.js:403</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l405"><code>isTablet:405</code></a>
         
         </p>
 
@@ -3864,7 +3861,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l144"><code>develop\amp\core\base\is.js:144</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l146"><code>isUndefined:146</code></a>
         
         </p>
 
@@ -3960,7 +3957,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l660"><code>develop\amp\core\base\is.js:660</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l662"><code>isWebkit:662</code></a>
         
         </p>
 
@@ -4032,7 +4029,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l249"><code>develop\amp\core\base\is.js:249</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l251"><code>isWindows:251</code></a>
         
         </p>
 
@@ -4104,7 +4101,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l261"><code>develop\amp\core\base\is.js:261</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l263"><code>isWindowsPhone:263</code></a>
         
         </p>
 
@@ -4160,6 +4157,8 @@ windows, windowsPhone, mac, ios, android</p>
         <span class="flag static">static</span>
     
 
+    
+
     <div class="meta">
         
             
@@ -4171,7 +4170,7 @@ windows, windowsPhone, mac, ios, android</p>
             
         
         
-        <a href="../files/develop_amp_core_base_is.js.html#l32"><code>develop\amp\core\base\is.js:32</code></a>
+        <a href="../files/develop_amp_core_base_is.js.html#l34"><code>isDevelop:34</code></a>
         
         </p>
 

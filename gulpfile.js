@@ -15,6 +15,7 @@ var PROJECT = 'ampjs';
 var PATH = {
 	proxy   : '/test/',   // develop
 	develop : 'develop/', // 開発用
+	build   : 'build/',   // build
 	dist    : 'dist/',    // 配布用
 	docs    : 'docs/'     // ドキュメント用
 };
@@ -94,7 +95,7 @@ MODULE.gulp.task('default', tasks);
  */
 MODULE.gulp.task('docs', function(){
 	// amp
-	MODULE.exec('yuidoc develop/amp/ --config ./yuidoc.json', {
+	MODULE.exec('yuidoc develop/amp/ -t build/yuidoc/yuidoc-bootstrap-theme-custom -H build/yuidoc/yuidoc-bootstrap-theme-custom/helpers/helpers.js --config ./build/yuidoc/yuidoc.json', {
 		"cwd": "./"
 	});
 

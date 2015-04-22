@@ -13,7 +13,7 @@ var AMP = AMP || {};
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class SmoothScroll
+   * @class AMP.SmoothScroll
    * @extends AMP.BASE_CLASS
    * @constructor
    */
@@ -115,7 +115,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>SmoothScrollインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -185,7 +184,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.SmoothScroll = SmoothScroll;
-  AMP.smoothScroll = SmoothScroll.get;
 
 
 }(window, jQuery));

@@ -11,7 +11,9 @@ var AMP = AMP || {};
 
   /**
    * <h4>フォントリサイズイベント</h4>
-   * Eventsクラスを継承しています Eventsクラスを参照してください
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
    * @class AMP.FontResize
    * @extends AMP.Events

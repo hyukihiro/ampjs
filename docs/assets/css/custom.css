@@ -1,0 +1,33 @@
+/*
+http://seesparkbox.com/
+ */
+
+body{
+    background: #f4f4f4;
+}
+
+.header{
+    padding: 0;
+    background: #50b7c8;
+}
+.header h1{
+    margin: 0;
+}
+
+.apis a{
+    padding: 5px 0;
+    margin: 0;
+}
+.yui3-skin-sam .yui3-tab-selected .yui3-tab-label,
+.yui3-skin-sam .yui3-tab-selected .yui3-tab-label:focus,
+.yui3-skin-sam .yui3-tab-selected .yui3-tab-label:hover{
+    background-color: #4cacbe !important;
+}
+
+.yui3-skin-sam .yui3-tabview-list{
+    border-color: #4cacbe !important;
+}
+
+.yui3-skin-sam .yui3-tabview-panel{
+    background: #fff;
+}

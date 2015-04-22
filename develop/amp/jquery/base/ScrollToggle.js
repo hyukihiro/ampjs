@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    *
-   * @class ScrollToggle
+   * @class AMP.ScrollToggle
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollToggle 表示・非表示する要素
@@ -32,7 +32,7 @@ var AMP = AMP || {};
      * @property props
      * @type {Object}
      */
-    this.props　= $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.props = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
@@ -100,7 +100,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   /**
-   *　<h4>表示されるY値</h4>
+   * <h4>表示されるY値</h4>
    *
    * @static
    * @property showY
@@ -108,7 +108,7 @@ var AMP = AMP || {};
    * @type {Number}
    */
   /**
-   *　<h4>表示のスタイル</h4>
+   * <h4>表示のスタイル</h4>
    *
    * @static
    * @property showY
@@ -116,7 +116,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   /**
-   *　<h4>非表示のスタイル</h4>
+   * <h4>非表示のスタイル</h4>
    *
    * @static
    * @property showY
@@ -124,7 +124,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   /**
-   *　<h4>duration</h4>
+   * <h4>duration</h4>
    *
    * @static
    * @property duration
@@ -132,7 +132,7 @@ var AMP = AMP || {};
    * @type {Number}
    */
   /**
-   *　<h4>easing</h4>
+   * <h4>easing</h4>
    *
    * @static
    * @property ease
@@ -140,7 +140,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   *　<h4>表示後のコールバック</h4>
+   * <h4>表示後のコールバック</h4>
    *
    * @static
    * @property showCall
@@ -148,7 +148,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   *　<h4>非表示後のコールバック</h4>
+   * <h4>非表示後のコールバック</h4>
    *
    * @static
    * @property hideCall
@@ -173,7 +173,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>ScrollToggleインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
@@ -273,7 +272,6 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   AMP.ScrollToggle = ScrollToggle;
-  AMP.scrollToggle = ScrollToggle.get;
 
 
 }(window, jQuery));

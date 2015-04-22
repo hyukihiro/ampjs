@@ -51,7 +51,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>css3 Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja">Easingサンプルサイト</a>
+   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
    *
    * @property css
    * @type {Object}

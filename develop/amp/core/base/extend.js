@@ -6,10 +6,12 @@ var AMP = AMP || {};
 
 
   /*======================================================================
-    拡張
+    継承・拡張
   ======================================================================*/
 
   /**
+   * <h4>クラス・オブジェクト等の継承、拡張系</h4>
+   *
    * @class AMP.Extend
    */
 
@@ -129,7 +131,6 @@ var AMP = AMP || {};
    * @return {Function}
    */
   AMP._extend = AMP.BASE_CLASS.extend = function(){
-  // AMP._extend = function(){
     var subClass = arguments.length ? arguments : function(){};
     return AMP.inherits(subClass, this);
   };

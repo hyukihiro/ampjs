@@ -11,8 +11,10 @@ var AMP = AMP || {};
 
   /**
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
-   * Eventsクラスを継承しています Eventsクラスを参照してください<br>
-   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください
+   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
    * @class AMP.Mediaquery
    * @extends AMP.Events

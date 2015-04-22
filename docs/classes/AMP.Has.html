@@ -2,12 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AMP.Has - AMP.js</title>
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/css/yui-cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+
+    <script src="../assets/js/yui-source.js"></script>
+	<title>AMP.js v3.0.0 API Documentation : AMP.Has</title>
 </head>
 <body class="yui3-skin-sam">
 
@@ -15,11 +17,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title="AMP.js"></h1>
+                <h1><a href="https://bitbucket.org/yoshihitofujiwara/ampjs"><img src="../assets/css/logo.png" title="AMP.js"></a></h1>
             
         </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.0</em>
+        <div class="version">
+            <em>API Documentation for: 3.0.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -31,7 +33,6 @@
     <div id="api-tabview" class="tabview">
         <ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-            <li><a href="#api-modules">Modules</a></li>
         </ul>
 
         <div id="api-tabview-filter">
@@ -45,6 +46,8 @@
             
                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
             
+                <li><a href="../classes/AMP.BoxHover.html">AMP.BoxHover</a></li>
+            
                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
             
                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
@@ -52,6 +55,8 @@
                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
             
                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+            
+                <li><a href="../classes/AMP.FlatHeight.html">AMP.FlatHeight</a></li>
             
                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
             
@@ -63,19 +68,23 @@
             
                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
             
+                <li><a href="../classes/AMP.Render.html">AMP.Render</a></li>
+            
+                <li><a href="../classes/AMP.Rollover.html">AMP.Rollover</a></li>
+            
+                <li><a href="../classes/AMP.Scroll.html">AMP.Scroll</a></li>
+            
+                <li><a href="../classes/AMP.ScrollToggle.html">AMP.ScrollToggle</a></li>
+            
+                <li><a href="../classes/AMP.SmoothScroll.html">AMP.SmoothScroll</a></li>
+            
                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
             
                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
             
                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
             
-                <li><a href="../classes/BoxHover.html">BoxHover</a></li>
-            
-                <li><a href="../classes/Ease.html">Ease</a></li>
-            
                 <li><a href="../classes/Fallback.html">Fallback</a></li>
-            
-                <li><a href="../classes/FlatHeight.html">FlatHeight</a></li>
             
                 <li><a href="../classes/jQuery.html">jQuery</a></li>
             
@@ -83,17 +92,7 @@
             
                 <li><a href="../classes/Loader.html">Loader</a></li>
             
-                <li><a href="../classes/Render.html">Render</a></li>
-            
-                <li><a href="../classes/Rollover.html">Rollover</a></li>
-            
-                <li><a href="../classes/Scroll.html">Scroll</a></li>
-            
-                <li><a href="../classes/ScrollToggle.html">ScrollToggle</a></li>
-            
                 <li><a href="../classes/Slider.html">Slider</a></li>
-            
-                <li><a href="../classes/SmoothScroll.html">SmoothScroll</a></li>
             
                 <li><a href="../classes/XXX_Ease.html">XXX_Ease</a></li>
             
@@ -113,7 +112,7 @@
             </div>
         </div>
         <div class="yui3-u-3-4">
-                <div id="api-options">
+            <div id="api-options">
         Show:
         <label for="api-show-inherited">
             <input type="checkbox" id="api-show-inherited" checked>
@@ -135,8 +134,6 @@
         </label>
 
     </div>
-
-
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
@@ -148,7 +145,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_base_has.js.html#l12"><code>develop\amp\core\base\has.js:12</code></a>
+            Defined in: <a href="../files/develop_amp_core_base_has.js.html#l12"><code>AMP.Has:12</code></a>
         </div>
     
 
@@ -160,7 +157,7 @@
 
 
 <div class="box intro">
-    
+    <h4>機能判定</h4>
 </div>
 
 
@@ -394,7 +391,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l32"><code>develop\amp\core\base\has.js:32</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l34"><code>hasAppCache:34</code></a>
         
         </p>
 
@@ -466,7 +463,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l119"><code>develop\amp\core\base\has.js:119</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l121"><code>hasAudio:121</code></a>
         
         </p>
 
@@ -538,7 +535,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l136"><code>develop\amp\core\base\has.js:136</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l138"><code>hasCanvas:138</code></a>
         
         </p>
 
@@ -610,7 +607,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l44"><code>develop\amp\core\base\has.js:44</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l46"><code>hasGeolocation:46</code></a>
         
         </p>
 
@@ -692,7 +689,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l147"><code>develop\amp\core\base\has.js:147</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l149"><code>hasHash:149</code></a>
         
         </p>
 
@@ -788,7 +785,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l56"><code>develop\amp\core\base\has.js:56</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l58"><code>hasPushState:58</code></a>
         
         </p>
 
@@ -860,7 +857,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l68"><code>develop\amp\core\base\has.js:68</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l70"><code>hasReqAnime:70</code></a>
         
         </p>
 
@@ -932,7 +929,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l83"><code>develop\amp\core\base\has.js:83</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l85"><code>hasStorage:85</code></a>
         
         </p>
 
@@ -1020,7 +1017,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l193"><code>develop\amp\core\base\has.js:193</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l195"><code>hasString:195</code></a>
         
         </p>
 
@@ -1132,7 +1129,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l207"><code>develop\amp\core\base\has.js:207</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l209"><code>hasSVG:209</code></a>
         
         </p>
 
@@ -1204,7 +1201,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l219"><code>develop\amp\core\base\has.js:219</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l221"><code>hasTouchScreen:221</code></a>
         
         </p>
 
@@ -1276,7 +1273,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l267"><code>develop\amp\core\base\has.js:267</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l269"><code>hasTransition:269</code></a>
         
         </p>
 
@@ -1348,7 +1345,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l238"><code>develop\amp\core\base\has.js:238</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l240"><code>hasVideo:240</code></a>
         
         </p>
 
@@ -1420,7 +1417,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l95"><code>develop\amp\core\base\has.js:95</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l97"><code>hasWebSocket:97</code></a>
         
         </p>
 
@@ -1492,7 +1489,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l107"><code>develop\amp\core\base\has.js:107</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l109"><code>hasWebWorker:109</code></a>
         
         </p>
 
@@ -1564,7 +1561,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l255"><code>develop\amp\core\base\has.js:255</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l257"><code>hasXMLSerializer:257</code></a>
         
         </p>
 
@@ -1636,7 +1633,7 @@
             
         
         
-        <a href="../files/develop_amp_core_base_has.js.html#l181"><code>develop\amp\core\base\has.js:181</code></a>
+        <a href="../files/develop_amp_core_base_has.js.html#l183"><code>isMsPointer:183</code></a>
         
         </p>
 
