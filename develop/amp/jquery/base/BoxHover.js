@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class AMP.BoxHover
+   * @class AMP.$.BoxHover
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
@@ -29,19 +29,19 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, BoxHover.boxHoverOptions, options);
+    this.params = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.box_hover')
-     * @property props.$boxHover
+     * @property params.$boxHover
      * @type {jQuery}
      */
-    this.props.$boxHover = $boxHover;
+    this.params.$boxHover = $boxHover;
   }
 
   // 基底クラスを継承
@@ -77,7 +77,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -137,19 +137,19 @@ var AMP = AMP || {};
 
     this.off();
 
-    this.props.$boxHover.css({cursor: 'pointer'})
+    this.params.$boxHover.css({cursor: 'pointer'})
     .on('mouseenter.BoxHover', function(){
-      $(this).addClass(self.props.hoverClass);
+      $(this).addClass(self.params.hoverClass);
     })
     .on('mouseleave.BoxHover', function(){
-      $(this).removeClass(self.props.hoverClass);
+      $(this).removeClass(self.params.hoverClass);
     })
     .on('click.BoxHover', function(){
       self._setLink($(this));
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.props.$boxHover.find('label input select textarea').click(function(event){
+    this.params.$boxHover.find('label input select textarea').click(function(event){
       event.stopPropagation();
     });
 
@@ -164,7 +164,7 @@ var AMP = AMP || {};
    * @return {BoxHover}
    */
   p.off = function(){
-    this.props.$boxHover.css({cursor: 'auto'})
+    this.params.$boxHover.css({cursor: 'auto'})
     .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };
@@ -180,7 +180,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._setLink = function($target){
-    var $link = $target.find('.' + this.props.linkClass),
+    var $link = $target.find('.' + this.params.linkClass),
     $a = $target.find('a').eq(0);
 
     $a = $link[0] ? $link : $a;
@@ -199,7 +199,8 @@ var AMP = AMP || {};
     exports
   --------------------------------------------------------------------------*/
 
-  AMP.BoxHover = BoxHover;
+  AMP.$ = AMP.$ = {};
+  AMP.$.BoxHover = BoxHover;
 
 
 }(window, jQuery));

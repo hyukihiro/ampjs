@@ -15,7 +15,7 @@ var AMP = AMP || {};
    * コンストラクタを呼び出しで、使用しません<br>
    * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
-   * @class AMP.Rollover
+   * @class AMP.$.Rollover
    * @extends AMP.BASE_CLASS
    * @constructor
    */
@@ -296,8 +296,9 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Rollover = Rollover;
-  AMP.rollover = new Rollover();
+  AMP.$ = AMP.$ || {};
+  AMP.$.Rollover = Rollover;
+  AMP.$.rollover = new Rollover();
 
 
 

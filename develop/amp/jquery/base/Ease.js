@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>Easingを管理します</h4>
    *
-   * @class AMP.Ease
+   * @class AMP.$.Ease
    * @extends AMP.Ease
    * @constructor
    */

@@ -90,7 +90,9 @@
         "develop\\amp\\core\\utilitys\\Ease.js": {
             "name": "develop\\amp\\core\\utilitys\\Ease.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "AMP.Ease": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -177,7 +179,7 @@
             "name": "develop\\amp\\jquery\\base\\BoxHover.js",
             "modules": {},
             "classes": {
-                "AMP.BoxHover": 1
+                "AMP.$.BoxHover": 1
             },
             "fors": {},
             "namespaces": {}
@@ -186,7 +188,7 @@
             "name": "develop\\amp\\jquery\\base\\Ease.js",
             "modules": {},
             "classes": {
-                "AMP.Ease": 1
+                "AMP.$.Ease": 1
             },
             "fors": {},
             "namespaces": {}
@@ -195,7 +197,7 @@
             "name": "develop\\amp\\jquery\\base\\FlatHeight.js",
             "modules": {},
             "classes": {
-                "AMP.FlatHeight": 1
+                "AMP.$.FlatHeight": 1
             },
             "fors": {},
             "namespaces": {}
@@ -204,7 +206,7 @@
             "name": "develop\\amp\\jquery\\base\\Rollover.js",
             "modules": {},
             "classes": {
-                "AMP.Rollover": 1
+                "AMP.$.Rollover": 1
             },
             "fors": {},
             "namespaces": {}
@@ -213,7 +215,7 @@
             "name": "develop\\amp\\jquery\\base\\Scroll.js",
             "modules": {},
             "classes": {
-                "AMP.Scroll": 1
+                "AMP.$.Scroll": 1
             },
             "fors": {},
             "namespaces": {}
@@ -222,7 +224,7 @@
             "name": "develop\\amp\\jquery\\base\\ScrollToggle.js",
             "modules": {},
             "classes": {
-                "AMP.ScrollToggle": 1
+                "AMP.$.ScrollToggle": 1
             },
             "fors": {},
             "namespaces": {}
@@ -231,7 +233,7 @@
             "name": "develop\\amp\\jquery\\base\\SmothScroll.js",
             "modules": {},
             "classes": {
-                "AMP.SmoothScroll": 1
+                "AMP.$.SmoothScroll": 1
             },
             "fors": {},
             "namespaces": {}
@@ -240,7 +242,7 @@
             "name": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
             "modules": {},
             "classes": {
-                "LiquidSlider": 1
+                "AMP.$.LiquidSlider": 1
             },
             "fors": {},
             "namespaces": {}
@@ -249,7 +251,7 @@
             "name": "develop\\amp\\jquery\\plugins\\Loader.js",
             "modules": {},
             "classes": {
-                "Loader": 1
+                "AMP.$.Loader": 1
             },
             "fors": {},
             "namespaces": {}
@@ -258,7 +260,7 @@
             "name": "develop\\amp\\jquery\\plugins\\Render.js",
             "modules": {},
             "classes": {
-                "AMP.Render": 1
+                "AMP.$.Render": 1
             },
             "fors": {},
             "namespaces": {}
@@ -267,7 +269,7 @@
             "name": "develop\\amp\\jquery\\plugins\\Slider.js",
             "modules": {},
             "classes": {
-                "Slider": 1
+                "AMP.$.Slider": 1
             },
             "fors": {},
             "namespaces": {}
@@ -433,7 +435,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "file": "develop\\amp\\jquery\\base\\Ease.js",
+            "file": "develop\\amp\\core\\utilitys\\Ease.js",
             "line": 12,
             "description": "<h4>Easingを管理します</h4>",
             "extends": "AMP.BASE_CLASS",
@@ -588,9 +590,9 @@
                 "type": "Instance"
             }
         },
-        "AMP.BoxHover": {
-            "name": "AMP.BoxHover",
-            "shortname": "AMP.BoxHover",
+        "AMP.$.BoxHover": {
+            "name": "AMP.$.BoxHover",
+            "shortname": "AMP.$.BoxHover",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -614,9 +616,23 @@
                 }
             ]
         },
-        "AMP.FlatHeight": {
-            "name": "AMP.FlatHeight",
-            "shortname": "AMP.FlatHeight",
+        "AMP.$.Ease": {
+            "name": "AMP.$.Ease",
+            "shortname": "AMP.$.Ease",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "develop\\amp\\jquery\\base\\Ease.js",
+            "line": 12,
+            "description": "<h4>Easingを管理します</h4>",
+            "extends": "AMP.Ease",
+            "is_constructor": 1
+        },
+        "AMP.$.FlatHeight": {
+            "name": "AMP.$.FlatHeight",
+            "shortname": "AMP.$.FlatHeight",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -645,9 +661,9 @@
                 }
             ]
         },
-        "AMP.Rollover": {
-            "name": "AMP.Rollover",
-            "shortname": "AMP.Rollover",
+        "AMP.$.Rollover": {
+            "name": "AMP.$.Rollover",
+            "shortname": "AMP.$.Rollover",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -659,9 +675,9 @@
             "extends": "AMP.BASE_CLASS",
             "is_constructor": 1
         },
-        "AMP.Scroll": {
-            "name": "AMP.Scroll",
-            "shortname": "AMP.Scroll",
+        "AMP.$.Scroll": {
+            "name": "AMP.$.Scroll",
+            "shortname": "AMP.$.Scroll",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -685,9 +701,9 @@
                 }
             ]
         },
-        "AMP.ScrollToggle": {
-            "name": "AMP.ScrollToggle",
-            "shortname": "AMP.ScrollToggle",
+        "AMP.$.ScrollToggle": {
+            "name": "AMP.$.ScrollToggle",
+            "shortname": "AMP.$.ScrollToggle",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -711,9 +727,9 @@
                 }
             ]
         },
-        "AMP.SmoothScroll": {
-            "name": "AMP.SmoothScroll",
-            "shortname": "AMP.SmoothScroll",
+        "AMP.$.SmoothScroll": {
+            "name": "AMP.$.SmoothScroll",
+            "shortname": "AMP.$.SmoothScroll",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -725,9 +741,9 @@
             "extends": "AMP.BASE_CLASS",
             "is_constructor": 1
         },
-        "LiquidSlider": {
-            "name": "LiquidSlider",
-            "shortname": "LiquidSlider",
+        "AMP.$.LiquidSlider": {
+            "name": "AMP.$.LiquidSlider",
+            "shortname": "AMP.$.LiquidSlider",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -750,9 +766,9 @@
                 }
             ]
         },
-        "Loader": {
-            "name": "Loader",
-            "shortname": "Loader",
+        "AMP.$.Loader": {
+            "name": "AMP.$.Loader",
+            "shortname": "AMP.$.Loader",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -779,9 +795,9 @@
                 "type": "Loader"
             }
         },
-        "AMP.Render": {
-            "name": "AMP.Render",
-            "shortname": "AMP.Render",
+        "AMP.$.Render": {
+            "name": "AMP.$.Render",
+            "shortname": "AMP.$.Render",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -805,9 +821,9 @@
                 }
             ]
         },
-        "Slider": {
-            "name": "Slider",
-            "shortname": "Slider",
+        "AMP.$.Slider": {
+            "name": "AMP.$.Slider",
+            "shortname": "AMP.$.Slider",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -4146,7 +4162,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4156,7 +4172,7 @@
             "itemtype": "property",
             "name": "props.$boxHover",
             "type": "{jQuery}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4166,7 +4182,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4175,7 +4191,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4185,7 +4201,7 @@
             "itemtype": "property",
             "name": "boxHoverOptions",
             "type": "{Object}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4196,7 +4212,7 @@
             "name": "boxHoverOptions.hoverClass",
             "default": "hover",
             "type": "{String}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4207,7 +4223,7 @@
             "name": "boxHoverOptions.linkClass",
             "default": "link",
             "type": "{String}",
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4232,7 +4248,7 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4244,7 +4260,7 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4256,7 +4272,7 @@
                 "description": "",
                 "type": "BoxHover"
             },
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -4282,7 +4298,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "AMP.BoxHover"
+            "class": "AMP.$.BoxHover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4291,7 +4307,7 @@
             "itemtype": "property",
             "name": "$",
             "type": "{Object}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4299,7 +4315,7 @@
             "itemtype": "property",
             "name": "$._1_SINE_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4307,7 +4323,7 @@
             "itemtype": "property",
             "name": "$._1_SINE_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4315,7 +4331,7 @@
             "itemtype": "property",
             "name": "$._1_SINE_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4323,7 +4339,7 @@
             "itemtype": "property",
             "name": "$._2_QUAD_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4331,7 +4347,7 @@
             "itemtype": "property",
             "name": "$._2_QUAD_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4339,7 +4355,7 @@
             "itemtype": "property",
             "name": "$._2_QUAD_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4347,7 +4363,7 @@
             "itemtype": "property",
             "name": "$._3_CUBIC_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4355,7 +4371,7 @@
             "itemtype": "property",
             "name": "$._3_CUBIC_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4363,7 +4379,7 @@
             "itemtype": "property",
             "name": "$._3_CUBIC_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4371,7 +4387,7 @@
             "itemtype": "property",
             "name": "$._4_QUART_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4379,7 +4395,7 @@
             "itemtype": "property",
             "name": "$._4_QUART_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4387,7 +4403,7 @@
             "itemtype": "property",
             "name": "$._4_QUART_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4395,7 +4411,7 @@
             "itemtype": "property",
             "name": "$._5_QUINT_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4403,7 +4419,7 @@
             "itemtype": "property",
             "name": "$._5_QUINT_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4411,7 +4427,7 @@
             "itemtype": "property",
             "name": "$._5_QUINT_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4419,7 +4435,7 @@
             "itemtype": "property",
             "name": "$._6_EXPO_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4427,7 +4443,7 @@
             "itemtype": "property",
             "name": "$._6_EXPO_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4435,7 +4451,7 @@
             "itemtype": "property",
             "name": "$._6_EXPO_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4443,7 +4459,7 @@
             "itemtype": "property",
             "name": "$._7_CIRC_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4451,7 +4467,7 @@
             "itemtype": "property",
             "name": "$._7_CIRC_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4459,7 +4475,7 @@
             "itemtype": "property",
             "name": "$._7_CIRC_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4467,7 +4483,7 @@
             "itemtype": "property",
             "name": "$._LINEAR",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4475,7 +4491,7 @@
             "itemtype": "property",
             "name": "$._BACK_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4483,7 +4499,7 @@
             "itemtype": "property",
             "name": "$._BACK_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4491,7 +4507,7 @@
             "itemtype": "property",
             "name": "$._BACK_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4499,7 +4515,7 @@
             "itemtype": "property",
             "name": "$._ELASTIC_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4507,7 +4523,7 @@
             "itemtype": "property",
             "name": "$._ELASTIC_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4515,7 +4531,7 @@
             "itemtype": "property",
             "name": "$._ELASTIC_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4523,7 +4539,7 @@
             "itemtype": "property",
             "name": "$._BOUNCE_IN",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4531,7 +4547,7 @@
             "itemtype": "property",
             "name": "$._BOUNCE_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Ease.js",
@@ -4539,7 +4555,7 @@
             "itemtype": "property",
             "name": "$._BOUNCE_IN_OUT",
             "type": "{String}",
-            "class": "AMP.Ease"
+            "class": "AMP.$.Ease"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4548,7 +4564,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4558,7 +4574,7 @@
             "itemtype": "property",
             "name": "props.$flatHeight",
             "type": "{jQuery}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4568,7 +4584,7 @@
             "itemtype": "property",
             "name": "props.split",
             "type": "{Number}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4578,7 +4594,7 @@
             "itemtype": "property",
             "name": "props.isResize",
             "type": "{Boolean}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4588,7 +4604,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4597,7 +4613,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4627,7 +4643,7 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4639,7 +4655,7 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4651,7 +4667,7 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
@@ -4663,7 +4679,7 @@
                 "description": "",
                 "type": "FlatHeight"
             },
-            "class": "AMP.FlatHeight"
+            "class": "AMP.$.FlatHeight"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4673,7 +4689,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4682,7 +4698,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4692,7 +4708,7 @@
             "itemtype": "property",
             "name": "rolloverOptions",
             "type": "{Object}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4703,7 +4719,7 @@
             "name": "rolloverOptions.groupClass",
             "default": "group_rover",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4714,7 +4730,7 @@
             "name": "rolloverOptions.activeClass",
             "default": "active",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4725,7 +4741,7 @@
             "name": "rolloverOptions.noOverClass",
             "default": "no_rover",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4736,7 +4752,7 @@
             "name": "rolloverOptions.postfix",
             "default": "_on",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4746,7 +4762,7 @@
             "itemtype": "property",
             "name": "imageClass",
             "type": "{String}",
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4770,7 +4786,7 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4794,7 +4810,7 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4818,7 +4834,7 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4842,7 +4858,7 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Rollover.js",
@@ -4868,7 +4884,7 @@
                 "description": "",
                 "type": "Rollover"
             },
-            "class": "AMP.Rollover"
+            "class": "AMP.$.Rollover"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4877,7 +4893,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4886,7 +4902,7 @@
             "itemtype": "property",
             "name": "props.$scrollTrigger",
             "type": "{Object}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4896,7 +4912,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4905,7 +4921,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4915,7 +4931,7 @@
             "itemtype": "property",
             "name": "scrollOptions",
             "type": "{Object}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4926,7 +4942,7 @@
             "name": "scrollOptions.$html",
             "default": "$('html, body')",
             "type": "{jQuery}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4937,7 +4953,7 @@
             "name": "scrollOptions.adjust",
             "default": "0",
             "type": "{Number}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4948,7 +4964,7 @@
             "name": "scrollOptions.noScrollClass",
             "default": "no_scroll",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4959,7 +4975,7 @@
             "name": "scrollOptions.duration",
             "default": "800",
             "type": "{Number}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4970,7 +4986,7 @@
             "name": "scrollOptions.ease",
             "default": "easeOutQuint",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4981,7 +4997,7 @@
             "name": "beginCall",
             "default": "$.noop",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -4992,7 +5008,7 @@
             "name": "compCall",
             "default": "$.noop",
             "type": "{String}",
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -5017,7 +5033,7 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -5029,7 +5045,7 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -5041,7 +5057,7 @@
                 "description": "",
                 "type": "Scroll"
             },
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Scroll.js",
@@ -5053,7 +5069,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "AMP.Scroll"
+            "class": "AMP.$.Scroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5062,7 +5078,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5072,7 +5088,7 @@
             "itemtype": "property",
             "name": "props.$scrollToggle",
             "type": "{jQuery}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5081,7 +5097,7 @@
             "itemtype": "property",
             "name": "props.$window",
             "type": "{jQuery}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5090,7 +5106,7 @@
             "itemtype": "property",
             "name": "props.isDisplay",
             "type": "{Boolean}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5100,7 +5116,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5109,7 +5125,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5119,7 +5135,7 @@
             "itemtype": "property",
             "name": "scrollToggleOptions",
             "type": "{Object}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5130,7 +5146,7 @@
             "name": "showY",
             "default": "300",
             "type": "{Number}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5141,7 +5157,7 @@
             "name": "showY",
             "default": "{ opacity : 1}",
             "type": "{Object}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5152,7 +5168,7 @@
             "name": "showY",
             "default": "{ opacity : 0}",
             "type": "{Object}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5163,7 +5179,7 @@
             "name": "duration",
             "default": "500",
             "type": "{Number}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5174,7 +5190,7 @@
             "name": "ease",
             "default": "easeInSine",
             "type": "{String}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5185,7 +5201,7 @@
             "name": "showCall",
             "default": "$.noop",
             "type": "{String}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5196,7 +5212,7 @@
             "name": "hideCall",
             "default": "$.noop",
             "type": "{String}",
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5221,7 +5237,7 @@
                 "description": "Pagetopインスタンスを返す",
                 "type": "Pagetop"
             },
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5233,7 +5249,7 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5245,7 +5261,7 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5257,7 +5273,7 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\ScrollToggle.js",
@@ -5269,7 +5285,7 @@
                 "description": "",
                 "type": "ScrollToggle"
             },
-            "class": "AMP.ScrollToggle"
+            "class": "AMP.$.ScrollToggle"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5278,7 +5294,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5288,7 +5304,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5297,7 +5313,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5307,7 +5323,7 @@
             "itemtype": "property",
             "name": "smoothScrollOptions",
             "type": "{Object}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5317,7 +5333,7 @@
             "name": "smoothScrollOptions.$page",
             "default": "$('html, body')",
             "type": "{jQuery}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5327,7 +5343,7 @@
             "name": "smoothScrollOptions.amount",
             "default": "500",
             "type": "{Number}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5337,7 +5353,7 @@
             "name": "smoothScrollOptions.duration",
             "default": "500",
             "type": "{Number}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5347,7 +5363,7 @@
             "name": "smoothScrollOptions.ease",
             "default": "easeOutCubic",
             "type": "{String}",
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5367,7 +5383,7 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5379,7 +5395,7 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5391,7 +5407,7 @@
                 "description": "",
                 "type": "SmoothScroll"
             },
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -5403,7 +5419,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "AMP.SmoothScroll"
+            "class": "AMP.$.SmoothScroll"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5413,7 +5429,7 @@
             "itemtype": "property",
             "name": "defaults",
             "type": "{Object}",
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5425,7 +5441,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5437,7 +5453,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5449,7 +5465,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5461,7 +5477,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5480,7 +5496,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5499,7 +5515,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5518,7 +5534,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5537,7 +5553,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5549,7 +5565,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5561,7 +5577,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5573,7 +5589,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5592,7 +5608,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5613,7 +5629,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5627,7 +5643,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5641,7 +5657,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5655,7 +5671,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5674,7 +5690,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5686,7 +5702,7 @@
                 "description": "",
                 "type": "LiquidSlider"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\LiquidSlider.js",
@@ -5700,7 +5716,7 @@
                 "description": "",
                 "type": "jQuery.Deferred"
             },
-            "class": "LiquidSlider"
+            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5710,7 +5726,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5719,7 +5735,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5728,7 +5744,7 @@
             "itemtype": "property",
             "name": "param",
             "type": "{Object}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5737,7 +5753,7 @@
             "itemtype": "property",
             "name": "elm",
             "type": "{DOM}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5746,7 +5762,7 @@
             "itemtype": "property",
             "name": "imagesloaded",
             "type": "{imagesloaded}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5755,7 +5771,7 @@
             "itemtype": "property",
             "name": "$defer",
             "type": "{jQuery.Deferred}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5764,7 +5780,7 @@
             "itemtype": "property",
             "name": "length",
             "type": "{Number}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5773,7 +5789,7 @@
             "itemtype": "property",
             "name": "count",
             "type": "{Number}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5782,7 +5798,7 @@
             "itemtype": "property",
             "name": "loadCount",
             "type": "{Number}",
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5794,7 +5810,7 @@
                 "description": "jQuery.Deferred.promiseを返す",
                 "type": "jQuery.Deferred"
             },
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Loader.js",
@@ -5808,7 +5824,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "Loader"
+            "class": "AMP.$.Loader"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5817,7 +5833,7 @@
             "itemtype": "property",
             "name": "props",
             "type": "{Object}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5826,7 +5842,7 @@
             "itemtype": "property",
             "name": "props.$tmp",
             "type": "{jQuery}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5835,7 +5851,7 @@
             "itemtype": "property",
             "name": "props.$el",
             "type": "{Hogan}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5844,7 +5860,7 @@
             "itemtype": "property",
             "name": "props.template",
             "type": "{Hogan}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5853,7 +5869,7 @@
             "itemtype": "property",
             "name": "props.originalData",
             "type": "{Arrary|Object}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5862,7 +5878,7 @@
             "itemtype": "property",
             "name": "props.renderData",
             "type": "{Arrary|Object}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5871,7 +5887,7 @@
             "itemtype": "property",
             "name": "props.ajaxOptions",
             "type": "{Object}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5896,7 +5912,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5906,7 +5922,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5915,7 +5931,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5925,7 +5941,7 @@
             "itemtype": "property",
             "name": "ajaxOptions",
             "type": "{Object}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5934,7 +5950,7 @@
             "itemtype": "property",
             "name": "ajaxOptions.url",
             "type": "{String}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5944,7 +5960,7 @@
             "name": "ajaxOptions.chace",
             "default": "false",
             "type": "{String}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5954,7 +5970,7 @@
             "name": "ajaxOptions.dataType",
             "default": "json",
             "type": "{String}",
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5966,7 +5982,7 @@
                 "description": "",
                 "type": "jQuery.Deferred"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5978,7 +5994,7 @@
                 "description": "処理が、完了したことを通知します",
                 "type": "jQuery.Deferred"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -5997,7 +6013,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6009,7 +6025,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6028,7 +6044,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6040,7 +6056,7 @@
                 "description": "",
                 "type": "Object"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6052,7 +6068,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6065,7 +6081,7 @@
                 "description": "",
                 "type": "String"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6084,7 +6100,7 @@
                 "description": "",
                 "type": "DOM"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Render.js",
@@ -6096,7 +6112,7 @@
                 "description": "",
                 "type": "Render"
             },
-            "class": "AMP.Render"
+            "class": "AMP.$.Render"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6106,7 +6122,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6117,7 +6133,7 @@
             "itemtype": "property",
             "name": "_name",
             "type": "{String}",
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6127,7 +6143,7 @@
             "itemtype": "property",
             "name": "defaults",
             "type": "{String}",
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6136,7 +6152,7 @@
             "itemtype": "property",
             "name": "param",
             "type": "{Object}",
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6148,13 +6164,13 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
             "line": 161,
             "description": "[setParam description]",
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6166,7 +6182,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6178,7 +6194,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6197,7 +6213,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6216,7 +6232,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6235,7 +6251,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6247,7 +6263,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6266,7 +6282,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6278,7 +6294,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6290,7 +6306,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6302,7 +6318,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6321,7 +6337,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6342,7 +6358,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6356,7 +6372,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6368,7 +6384,7 @@
                 "description": "",
                 "type": "Slider"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6389,7 +6405,7 @@
                 "description": "",
                 "type": "Void"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6403,7 +6419,7 @@
                 "description": "",
                 "type": "jQuery.Deferred"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\plugins\\Slider.js",
@@ -6415,7 +6431,7 @@
                 "description": "",
                 "type": "Number"
             },
-            "class": "Slider"
+            "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery.plugins\\jquery.event.flick.js",

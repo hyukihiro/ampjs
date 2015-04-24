@@ -1,5 +1,15 @@
 
 jQuery(function($){
+
+
+
+
+
+
+
+	// console.log(AMP.Loader.get());
+
+
 	// AMP.rollover.on($('img'));
 	// console.log();
 

@@ -31,3 +31,8 @@ body{
 .yui3-skin-sam .yui3-tabview-panel{
     background: #fff;
 }
+
+#api-tabview-filter,
+#api-tabview-panel{
+    background: #fff;
+}

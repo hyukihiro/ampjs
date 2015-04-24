@@ -40,7 +40,7 @@ var AMP = AMP || {};
   /**
    * <h4>ボックスホバー</h4>
    *
-   * @class AMP.BoxHover
+   * @class AMP.$.BoxHover
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
@@ -57,19 +57,19 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, BoxHover.boxHoverOptions, options);
+    this.params = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.box_hover')
-     * @property props.$boxHover
+     * @property params.$boxHover
      * @type {jQuery}
      */
-    this.props.$boxHover = $boxHover;
+    this.params.$boxHover = $boxHover;
   }
 
   // 基底クラスを継承
@@ -105,7 +105,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -165,19 +165,19 @@ var AMP = AMP || {};
 
     this.off();
 
-    this.props.$boxHover.css({cursor: 'pointer'})
+    this.params.$boxHover.css({cursor: 'pointer'})
     .on('mouseenter.BoxHover', function(){
-      $(this).addClass(self.props.hoverClass);
+      $(this).addClass(self.params.hoverClass);
     })
     .on('mouseleave.BoxHover', function(){
-      $(this).removeClass(self.props.hoverClass);
+      $(this).removeClass(self.params.hoverClass);
     })
     .on('click.BoxHover', function(){
       self._setLink($(this));
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.props.$boxHover.find('label input select textarea').click(function(event){
+    this.params.$boxHover.find('label input select textarea').click(function(event){
       event.stopPropagation();
     });
 
@@ -192,7 +192,7 @@ var AMP = AMP || {};
    * @return {BoxHover}
    */
   p.off = function(){
-    this.props.$boxHover.css({cursor: 'auto'})
+    this.params.$boxHover.css({cursor: 'auto'})
     .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };
@@ -208,7 +208,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._setLink = function($target){
-    var $link = $target.find('.' + this.props.linkClass),
+    var $link = $target.find('.' + this.params.linkClass),
     $a = $target.find('a').eq(0);
 
     $a = $link[0] ? $link : $a;
@@ -227,7 +227,8 @@ var AMP = AMP || {};
     exports
   --------------------------------------------------------------------------*/
 
-  AMP.BoxHover = BoxHover;
+  AMP.$ = AMP.$ = {};
+  AMP.$.BoxHover = BoxHover;
 
 
 }(window, jQuery));
@@ -246,7 +247,7 @@ var AMP = AMP || {};
   /**
    * <h4>Easingを管理します</h4>
    *
-   * @class AMP.Ease
+   * @class AMP.$.Ease
    * @extends AMP.Ease
    * @constructor
    */
@@ -518,7 +519,7 @@ var AMP = AMP || {};
   /**
    * <h4>要素の高さを揃える</h4>
    *
-   * @class AMP.FlatHeight
+   * @class AMP.$.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $flatHeight 対象のエリア要素
@@ -537,37 +538,37 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = {};
+    this.params = {};
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.flat_height')
-     * @property props.$flatHeight
+     * @property params.$flatHeight
      * @type {jQuery}
      */
-    this.props.$flatHeight = $flatHeight;
+    this.params.$flatHeight = $flatHeight;
 
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
      * @default $flatHeight.length
-     * @property props.split
+     * @property params.split
      * @type {Number}
      */
-    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.params.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
      * <h4>サイズ後、リセットしなおすか</h4>
      *
      * @default true
-     * @property props.isResize
+     * @property params.isResize
      * @type {Boolean}
      */
-    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
+    this.params.isResize = AMP.isBoolean(isResize) ? isResize : true;
   }
 
   // 基底クラスを継承
@@ -643,7 +644,7 @@ var AMP = AMP || {};
 
     // window resize
     $(root).on('resizestop.FlatHeight', {timer: 50}, function(){
-      if(self.props.isResize){
+      if(self.params.isResize){
         self.setHeight();
       }
     });
@@ -662,7 +663,7 @@ var AMP = AMP || {};
     if(!AMP.isNumber(num)){
       throw new TypeError(num + ' is not a Number');
     }
-    this.props.split = num;
+    this.params.split = num;
     this.setHeight();
     return this;
   };
@@ -676,34 +677,34 @@ var AMP = AMP || {};
    */
   p.setHeight = function(){
     var self = this,
-    total = self.props.$flatHeight.length,
-    rest = total % self.props.split,
+    total = self.params.$flatHeight.length,
+    rest = total % self.params.split,
     finalRow = total - rest,
     maxHeight = 0,
     targetHeight = 0,
     rowCount = 0,
     i = 0;
 
-    self.props.$flatHeight.height('auto');
+    self.params.$flatHeight.height('auto');
 
-    if(1 < self.props.split){
+    if(1 < self.params.split){
 
       for(; i < total; i += 1){
         // 一番高い高さを求める
-        targetHeight = self.props.$flatHeight.eq(i).height();
+        targetHeight = self.params.$flatHeight.eq(i).height();
         maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
 
         // 行の高さを揃える
-        if((i + 1) % self.props.split === 0){
-          var _start = rowCount * self.props.split,
-          _end = (rowCount += 1) * self.props.split;
+        if((i + 1) % self.params.split === 0){
+          var _start = rowCount * self.params.split,
+          _end = (rowCount += 1) * self.params.split;
 
-          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
+          self.params.$flatHeight.slice(_start, _end).height(maxHeight);
           maxHeight = 0;
 
         // 最終行の高さを揃える
         } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
+          self.params.$flatHeight.slice(rowCount * self.params.split, total).height(maxHeight);
         }
       }
     }
@@ -717,11 +718,689 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.FlatHeight = FlatHeight;
+  AMP.$ = AMP.$ || {};
+  AMP.$.FlatHeight = FlatHeight;
 
 
 
 }(window, jQuery));
+
+var AMP = AMP || {};
+
+(function(root){
+
+  // 'use strict';
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ローダー</h4>
+   * <em>imagesloaded.jsに依存します</em>
+   *
+   * @class AMP.Loader
+   * @constructor
+   * @param  {DOM} el 対象のimgを囲う要素 省略可 初期値： 'body'
+   * @param {Object} options オプション値
+   */
+  function Loader(el){
+    /**
+     * <h4>パラメーター格納オブジェクト</h4>
+     *
+     * @property params
+     * @type {Object}
+     */
+    this.params = {};
+
+    /**
+     * <h4>対象のimgを囲う要素</h4>
+     *
+     * @property el
+     * @type {DOM}
+     */
+    this.params.el = el || 'body';
+
+    /**
+     * <h4>imagesloadedオブジェクト</h4>
+     *
+     * @property imagesloaded
+     * @type {imagesloaded}
+     */
+    this.params.imagesloaded = imagesLoaded(this.params.el);
+
+    /**
+     * <h4>画像数</h4>
+     *
+     * @property length
+     * @type {Number}
+     */
+    this.params.length = this.params.imagesloaded.images.length;
+
+    /**
+     * <h4>画像が読み込まれた数をカウントします</h4>
+     *
+     * @property count
+     * @type {Number}
+     */
+    this.params.updateCount = 0;
+
+    /**
+     * <h4>画像が読み込まれた数をカウントします</h4>
+     *
+     * @property loadCount
+     * @type {Number}
+     */
+    this.params.loadCount = 0;
+
+    // start
+    this._start();
+  };
+
+  // 基底クラスを継承
+  AMP.inherits(Loader, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Loader.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Loader.VERSION = '3.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Loader';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>FlatHeightインスタンス生成</h4>
+   *
+   * @static
+   * @method get
+   * @param {DOM} el 対象のエリア要素
+   * @return {Loader}
+   */
+  Loader.get = function(el){
+    return new Loader(el);
+  };
+
+
+  /**
+   * <h4>ローター開始</h4>
+   *
+   * @method _start
+   * @return {jQuery.Deferred} jQuery.Deferred.promiseを返す
+   */
+  p._start = function(){
+    var self = this;
+
+    // 画像処理完了毎（成功・失敗）にインクリメントする
+    self.params.imagesloaded.on('progress', function(){
+      self.params.updateCount += 1;
+      self._progress.apply(self, AMP.argsToArray(arguments));
+    });
+
+    // fail: 読込み失敗毎
+    self.params.imagesloaded.on('fail', function(){
+      self._failCall.apply(self, AMP.argsToArray(arguments));
+    });
+
+    // done: 読込み成功毎
+    self.params.imagesloaded.on('done', function(){
+      self._doneCall.apply(self, AMP.argsToArray(arguments));
+    });
+
+    // always: 全ての読込み処理完了時
+    self.params.imagesloaded.on('always', function(e){
+      self._alwaysCall.apply(self, AMP.argsToArray(arguments));
+    });
+
+
+    // カウントを更新する
+    self._update();
+
+    return this;
+  };
+
+
+  /**
+   * <h4>カウントのアップデート</h4>
+   *
+   * @private
+   * @method _update
+   * @return {Void}
+   */
+  p._update = function(){
+    var self = this,
+    current = self.params.updateCount / self.params.length * 100;
+
+    // カウンターのインクリメント
+    if(self.params.loadCount < current){
+      self.params.loadCount += 1;
+    }
+
+    self._updateCall(Math.ceil(self.params.loadCount));
+
+    if(100 <= self.params.loadCount){
+      self._compleatCall();
+    } else {
+      AMP.requestAnimationFrame(function(){
+        self._update();
+      });
+    }
+  };
+
+
+  /**
+   * <h4>画像読み込み処理毎に呼び出されます</h4>
+   *
+   * @method progress
+   * @type {Function}
+   */
+
+  p.progress = function(callback){
+    this._progress = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>画像読み込み処理毎に呼び出されます</h4>
+   *
+   * @private
+   * @method _progress
+   * @type {Function}
+   */
+  p._progress = AMP.noop;
+
+
+  /**
+   * <h4>画像読み込み失敗毎に呼び出されます</h4>
+   *
+   * @method fail
+   * @type {Function}
+   */
+  p.fail = function(callback){
+    this._failCall = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>画像読み込み失敗毎に呼び出されます</h4>
+   *
+   * @private
+   * @method _failCall
+   * @type {Function}
+   */
+  p._failCall = AMP.noop;
+
+
+  /**
+   * <h4>画像読み込み毎に呼び出されます</h4>
+   *
+   * @method done
+   * @type {Function}
+   */
+  p.done = function(callback){
+    this._doneCall = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>画像読み込み毎に呼び出されます</h4>
+   *
+   * @private
+   * @method _doneCall
+   * @type {Function}
+   */
+  p._doneCall = AMP.noop;
+
+
+  /**
+   * <h4>画像読み込み処理完了時に呼び出されます</h4>
+   *
+   * @method always
+   * @type {Function}
+   */
+  p.always = function(callback){
+    this._alwaysCall = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>画像読み込み処理完了時に呼び出されます</h4>
+   *
+   * @private
+   * @method _alwaysCall
+   * @type {Function}
+   */
+  p._alwaysCall = AMP.noop;
+
+
+  /**
+   * <h4>カウントアップ時に呼び出されます</h4>
+   *
+   * @method update
+   * @type {Function}
+   */
+  p.update = function(callback){
+    this._updateCall = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>カウントアップ時に呼び出されます</h4>
+   *
+   * @private
+   * @method _updateCall
+   * @type {Function}
+   */
+  p._updateCall = AMP.noop;
+
+
+  /**
+   * <h4>カウント完了時に呼び出されます</h4>
+   *
+   * @method compleat
+   * @type {Function}
+   */
+  p.compleat = function(callback){
+    this._compleatCall = callback || AMP.noop;
+    return this;
+  };
+
+
+  /**
+   * <h4>カウント完了時に呼び出されます</h4>
+   *
+   * @private
+   * @method _compleatCall
+   * @type {Function}
+   */
+  p._compleatCall = AMP.noop;
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Loader = Loader;
+
+
+}(window));
+
+var AMP = AMP || {};
+
+
+(function(root, $, Hogan){
+
+  // 'use strict';
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>
+   * 処理が完了したら、jQuery Deferred Objectを返します<br>
+   * <em>Hogan.jsに依存します</em>
+   *
+   * @class AMP.$.Render
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   * @param  {jQuery} $tmp jsTemplate要素
+   * @param  {Object} ajaxOptions $.ajax options
+   */
+  function Render($tmp, ajaxOptions){
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property params
+     * @type {Object}
+     */
+    /**
+     * <h4>js Template要素</h4>
+     *
+     * @property params.$tmp
+     * @type {jQuery}
+     */
+    /**
+     * <h4>レンダリングエリアのラッパー要素</h4>
+     *
+     * 初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
+     * これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です
+     *
+     * @property params.$el
+     * @type {Hogan}
+     */
+    /**
+     * <h4>Hoganテンプレート</h4>
+     *
+     * @property params.template
+     * @type {Hogan}
+     */
+    /**
+     * <h4>レンダリングオリジナルデータ保管</h4>
+     *
+     * @property params.originalData
+     * @type {Arrary|Object}
+     */
+    /**
+     * <h4>レンダリングデータ</h4>
+     *
+     * @property params.renderData
+     * @type {Arrary|Object}
+     */
+    /**
+     * <h4>$.ajaxオプション値</h4>
+     * Render.ajaxOptionsとajaxOptionsをmixinした値を格納します
+     *
+     * @property params.ajaxOptions
+     * @type {Object}
+     */
+    this.params = {
+      $tmp        : $tmp,
+      $el         : null,
+      template    : Hogan.compile($tmp.html()),
+      originalData: null,
+      renderData  : null,
+      ajaxOptions : $.extend(true, {}, Render.ajaxOptions, ajaxOptions)
+    };
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Render, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Render.prototype;
+
+
+  /*--------------------------------------------------------------------------
+    @shorthand
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Renderインスタンスの生成</h4>
+   *
+   * @static
+   * @method render
+   * @param  {jQuery} $tepl jsTemplate要素
+   * @param  {Object} ajaxOptions $.ajax options
+   * @return {Render}
+   */
+  Render.get = function($tmp, ajaxOptions){
+    var inst = new Render($tmp, ajaxOptions);
+    inst.start();
+    return inst;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Render.VERSION = '3.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Render';
+
+
+  /**
+   * <h4>デフォルト値、格納オブジェクト</h4>
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します<br>
+   * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a>
+   *
+   * @static
+   * @property ajaxOptions
+   * @type {Object}
+   */
+  /**
+   * <h4>リクエストURL</h4>
+   *
+   * @property ajaxOptions.url
+   * @type {String}
+   */
+  /**
+   * <h4>キャッシュの有効化</h4>
+   *
+   * @property ajaxOptions.chace
+   * @default false
+   * @type {String}
+   */
+  /**
+   * <h4>取得するデータタイプ</h4>
+   *
+   * @property ajaxOptions.dataType
+   * @default json
+   * @type {String}
+   */
+  Render.ajaxOptions = {
+    url     : null,
+    chace   : false,
+    dataType: 'json'
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>初期化</h4>
+   * 処理が完了したことを通知します
+   *
+   * @method start
+   * @return {jQuery.Deferred}
+   */
+  p.start = function(){
+    var self = this;
+
+    // 縦列に処理します
+    return $.stream(
+      function(){
+        return self.ajax();
+      },
+      function(){
+        return self.setRenderData();
+      },
+      function(){
+        return self.render();
+      }
+    );
+  };
+
+
+  /**
+   * <h4>$.ajaxで、データを取得します</h4>
+   *
+   * @method getAjax
+   * @return {jQuery.Deferred} 処理が、完了したことを通知します
+   */
+  p.ajax = function(){
+    var self = this;
+
+    return $.ajax(self.params.ajaxOptions)
+    .fail(self.ajaxFail)
+    .done(function(data){
+      self.params.originalData = data;
+      self.ajaxDone(data);
+    });
+  };
+
+
+  /**
+   * <h4>ajax通信成功時、呼び出されます</h4>
+   *
+   * @method ajaxDone
+   * @param {Object} data ajax通信の取得データ
+   * @return {Render}
+   */
+  p.ajaxDone = function(){};
+
+
+  /**
+   * <h4>ajax通信失敗時、呼び出されます</h4>
+   * 再度ページを読み込み直すか？
+   *
+   * @method ajaxFail
+   * @return {Render}
+   */
+  p.ajaxFail = function(xhr, status, error){
+    if(AMP.isDevelop){
+      console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
+    }
+    if(root.confirm('データの取得に失敗しました。\n再度、ページを読み込み直しますか？')){
+      location.reload();
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>Hoganに流し込む、データを生成して、tmplDataに格納します</h4>
+   *
+   * @method setRenderData
+   * @param {Object} data JSTに流し込むデータ
+   * @return {Render}
+   */
+  p.setRenderData = function(renderData){
+    if(renderData){
+      this.params.renderData = renderData;
+    } else {
+      if(AMP.isArray(this.params.originalData)){
+        this.params.renderData = this.params.originalData.concat();
+
+      } else {
+        this.params.renderData = $.extend({}, this.params.originalData);
+      }
+    }
+
+    return this;
+  };
+
+
+  /**
+   * <h4>レンダーデータのフィルタリングの際使用します</h4>
+   *
+   * @method filtter
+   * @return {Object}
+   */
+  p.filtter = function(data){
+    return data;
+  };
+
+
+  /**
+   * <h4>レンダリングされている場合、データを削除します</h4>
+   * レンダリングされていない場合は、レンダーエリアをラップする要素を生成します
+   *
+   * @method removePrevHTML
+   * @return {Render}
+   */
+  p.removePrevHTML = function(){
+    if(!this.params.$el){
+      this.params.$tmp.wrapAll('<div class="js_render" />');
+      this.params.$el = this.params.$tmp.parent();
+    } else {
+      this.$el.children().remove();
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>生成するHTMLデータがない場合呼び出されます</h4>
+   *
+   * @default '<p class="not_found">データを取得できませんでした。</p>'
+   * @method notFound
+   * @return {String}
+   */
+  p.notFound = function(){
+    return '<p class="not_found">データを取得できませんでした。</p>';
+  };
+
+
+  /**
+   * <h4>レンダリングするHTMLを生成します</h4>
+   *
+   * @method createHTML
+   * @param  {Object|Array} data レンダリングデータ
+   * @return {DOM}
+   */
+  p.createHTML = function(data){
+    this.setRenderData(data);
+    return this.params.template.render(this.params.renderData) || this.notFound();
+  };
+
+
+  /**
+   * <h4>DOM生成して、HTMLに挿入します</h4>
+   *
+   * @method render
+   * @return {Render}
+   */
+  p.render = function(data){
+    this.removePrevHTML();
+    this.params.$el[0].innerHTML = this.createHTML(data);
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$ = AMP.$ || {};
+  AMP.$.Render = Render;
+
+
+
+}(window, jQuery, Hogan));
 
 var AMP = AMP || {};
 
@@ -740,7 +1419,7 @@ var AMP = AMP || {};
    * コンストラクタを呼び出しで、使用しません<br>
    * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください
    *
-   * @class AMP.Rollover
+   * @class AMP.$.Rollover
    * @extends AMP.BASE_CLASS
    * @constructor
    */
@@ -1021,8 +1700,9 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Rollover = Rollover;
-  AMP.rollover = new Rollover();
+  AMP.$ = AMP.$ || {};
+  AMP.$.Rollover = Rollover;
+  AMP.$.rollover = new Rollover();
 
 
 
@@ -1042,7 +1722,7 @@ var AMP = AMP || {};
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class AMP.Scroll
+   * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollTrigger トリガーとなるa要素
@@ -1058,18 +1738,18 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+    this.params = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property props.$scrollTrigger
+     * @property params.$scrollTrigger
      * @type {Object}
      */
-    this.props.$scrollTrigger = $scrollTrigger;
+    this.params.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -1105,7 +1785,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -1211,8 +1891,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.props.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.props.$scrollTrigger.index(this));
+    self.params.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.params.$scrollTrigger.index(this));
     });
 
     return this;
@@ -1226,7 +1906,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.props.$scrollTrigger.off('click.Scroll');
+    this.params.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
@@ -1239,8 +1919,8 @@ var AMP = AMP || {};
    */
   p.tween = function(num){
     var self = this,
-    param = self.props,
-    $scrollTrigger = self.props.$scrollTrigger.eq(num),
+    param = self.params,
+    $scrollTrigger = self.params.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
@@ -1267,7 +1947,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Scroll = Scroll;
+  AMP.$ = AMP.$ || {};
+  AMP.$.Scroll = Scroll;
 
 
 }(window, jQuery));
@@ -1286,7 +1967,7 @@ var AMP = AMP || {};
   /**
    * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    *
-   * @class AMP.ScrollToggle
+   * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollToggle 表示・非表示する要素
@@ -1303,35 +1984,35 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.params = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
      * @default $('.scroll_toggle')
-     * @property props.$scrollToggle
+     * @property params.$scrollToggle
      * @type {jQuery}
      */
-    this.props.$scrollToggle = $scrollToggle;
+    this.params.$scrollToggle = $scrollToggle;
 
     /**
      * <h4>window要素</h4>
      *
-     * @property props.$window
+     * @property params.$window
      * @type {jQuery}
      */
-    this.props.$window = $(window);
+    this.params.$window = $(window);
 
     /**
      * <h4>Display:Block表示の状態</h4>
      *
-     * @property props.isDisplay
+     * @property params.isDisplay
      * @type {Boolean}
      */
-    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
+    this.params.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -1367,7 +2048,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
@@ -1469,16 +2150,16 @@ var AMP = AMP || {};
    */
   p.on = function(){
     var self = this,
-    param = self.props,
+    param = self.params,
     offsetY;
 
-    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.props.$window.scrollTop();
+    self.params.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.params.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.props.isDislpay && param.showY < offsetY){
+      if(!self.params.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.props.isDislpay && param.showY > offsetY){
+      } else if(self.params.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -1494,7 +2175,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.props.$window.off('scroll.ScrollToggle');
+    this.params.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -1508,11 +2189,11 @@ var AMP = AMP || {};
   p.show = function(){
     var self = this;
 
-    self.props.isDislpay = true;
+    self.params.isDislpay = true;
 
-    self.props.$scrollToggle.css({display: 'block'}).css(self.props.hide)
+    self.params.$scrollToggle.css({display: 'block'}).css(self.params.hide)
     .velocity('stop')
-    .velocity(self.props.show, self.props.duration, self.props.ease, self.props.showCall);
+    .velocity(self.params.show, self.params.duration, self.params.ease, self.params.showCall);
 
     return this;
   };
@@ -1527,13 +2208,13 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
 
-    self.props.isDislpay = false;
+    self.params.isDislpay = false;
 
-    self.props.$scrollToggle
+    self.params.$scrollToggle
     .velocity('stop')
-    .velocity(self.props.hide, self.props.duration, self.props.ease, function(){
-      self.props.$scrollToggle.css({display: 'none'});
-      self.props.hideCall();
+    .velocity(self.params.hide, self.params.duration, self.params.ease, function(){
+      self.params.$scrollToggle.css({display: 'none'});
+      self.params.hideCall();
     });
 
     return this;
@@ -1545,7 +2226,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.ScrollToggle = ScrollToggle;
+  AMP.$ = AMP.$ || {};
+  AMP.$.ScrollToggle = ScrollToggle;
 
 
 }(window, jQuery));
@@ -1565,7 +2247,7 @@ var AMP = AMP || {};
    * <h4>スムーススクロール</h4>
    * WindowsPCのみ有効
    *
-   * @class AMP.SmoothScroll
+   * @class AMP.$.SmoothScroll
    * @extends AMP.BASE_CLASS
    * @constructor
    */
@@ -1574,10 +2256,10 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true,
+    this.params = $.extend(true,
       {},
       SmoothScroll.smoothScrollOptions,
       {$page: $('html, body')},
@@ -1618,7 +2300,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property smoothScrollOptions
@@ -1691,7 +2373,7 @@ var AMP = AMP || {};
 
     // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.props.$page.off('mousewheel.SmoothScroll')
+      self.params.$page.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(){
         self.tween(arguments[1]);
         return false;
@@ -1708,7 +2390,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.props.$page.off('mousewheel.SmoothScroll');
+    this.params.$page.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -1721,11 +2403,11 @@ var AMP = AMP || {};
    */
   p.tween = function(move){
     var self = this,
-    param = self.props,
-    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    param = self.params,
+    y = AMP.isWebkit() ? self.params.$page.eq(1).scrollTop() : self.params.$page.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
-    self.props.$page.velocity('stop')
+    self.params.$page.velocity('stop')
     .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
   };
 
@@ -1735,7 +2417,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.SmoothScroll = SmoothScroll;
+  AMP.$ = AMP.$ || {};
+  AMP.$.SmoothScroll = SmoothScroll;
 
 
 }(window, jQuery));

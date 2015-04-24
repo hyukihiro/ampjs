@@ -43,7 +43,7 @@ var AMP = AMP || {};
    * velocity.jsに依存しています
    *
    * @constructor
-   * @class Slider
+   * @class AMP.$.Slider
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
    */

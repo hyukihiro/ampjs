@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    *
-   * @class AMP.ScrollToggle
+   * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollToggle 表示・非表示する要素
@@ -29,35 +29,35 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.params = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
      * @default $('.scroll_toggle')
-     * @property props.$scrollToggle
+     * @property params.$scrollToggle
      * @type {jQuery}
      */
-    this.props.$scrollToggle = $scrollToggle;
+    this.params.$scrollToggle = $scrollToggle;
 
     /**
      * <h4>window要素</h4>
      *
-     * @property props.$window
+     * @property params.$window
      * @type {jQuery}
      */
-    this.props.$window = $(window);
+    this.params.$window = $(window);
 
     /**
      * <h4>Display:Block表示の状態</h4>
      *
-     * @property props.isDisplay
+     * @property params.isDisplay
      * @type {Boolean}
      */
-    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
+    this.params.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -93,7 +93,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
@@ -195,16 +195,16 @@ var AMP = AMP || {};
    */
   p.on = function(){
     var self = this,
-    param = self.props,
+    param = self.params,
     offsetY;
 
-    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.props.$window.scrollTop();
+    self.params.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.params.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.props.isDislpay && param.showY < offsetY){
+      if(!self.params.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.props.isDislpay && param.showY > offsetY){
+      } else if(self.params.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -220,7 +220,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.props.$window.off('scroll.ScrollToggle');
+    this.params.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -234,11 +234,11 @@ var AMP = AMP || {};
   p.show = function(){
     var self = this;
 
-    self.props.isDislpay = true;
+    self.params.isDislpay = true;
 
-    self.props.$scrollToggle.css({display: 'block'}).css(self.props.hide)
+    self.params.$scrollToggle.css({display: 'block'}).css(self.params.hide)
     .velocity('stop')
-    .velocity(self.props.show, self.props.duration, self.props.ease, self.props.showCall);
+    .velocity(self.params.show, self.params.duration, self.params.ease, self.params.showCall);
 
     return this;
   };
@@ -253,13 +253,13 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
 
-    self.props.isDislpay = false;
+    self.params.isDislpay = false;
 
-    self.props.$scrollToggle
+    self.params.$scrollToggle
     .velocity('stop')
-    .velocity(self.props.hide, self.props.duration, self.props.ease, function(){
-      self.props.$scrollToggle.css({display: 'none'});
-      self.props.hideCall();
+    .velocity(self.params.hide, self.params.duration, self.params.ease, function(){
+      self.params.$scrollToggle.css({display: 'none'});
+      self.params.hideCall();
     });
 
     return this;
@@ -271,7 +271,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.ScrollToggle = ScrollToggle;
+  AMP.$ = AMP.$ || {};
+  AMP.$.ScrollToggle = ScrollToggle;
 
 
 }(window, jQuery));

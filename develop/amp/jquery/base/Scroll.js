@@ -12,7 +12,7 @@ var AMP = AMP || {};
   /**
    * <h4>ページ内リンクのスクロール</h4>
    *
-   * @class AMP.Scroll
+   * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $scrollTrigger トリガーとなるa要素
@@ -28,18 +28,18 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property props
+     * @property params
      * @type {Object}
      */
-    this.props = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+    this.params = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property props.$scrollTrigger
+     * @property params.$scrollTrigger
      * @type {Object}
      */
-    this.props.$scrollTrigger = $scrollTrigger;
+    this.params.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -75,7 +75,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -181,8 +181,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.props.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.props.$scrollTrigger.index(this));
+    self.params.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.params.$scrollTrigger.index(this));
     });
 
     return this;
@@ -196,7 +196,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.props.$scrollTrigger.off('click.Scroll');
+    this.params.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
@@ -209,8 +209,8 @@ var AMP = AMP || {};
    */
   p.tween = function(num){
     var self = this,
-    param = self.props,
-    $scrollTrigger = self.props.$scrollTrigger.eq(num),
+    param = self.params,
+    $scrollTrigger = self.params.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
@@ -237,7 +237,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Scroll = Scroll;
+  AMP.$ = AMP.$ || {};
+  AMP.$.Scroll = Scroll;
 
 
 }(window, jQuery));

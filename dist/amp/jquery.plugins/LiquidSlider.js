@@ -41,7 +41,7 @@ var AMP = AMP || {};
    * <h4>リキッドスライダー</h4>
    *
    * @constructor
-   * @class LiquidSlider
+   * @class AMP.$.LiquidSlider
    * @param {jQuery} $wrap   スライダーラッパー要素
    * @param {Object} options オプション値
    */
