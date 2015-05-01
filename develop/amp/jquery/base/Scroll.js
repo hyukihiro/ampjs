@@ -28,18 +28,18 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+    this.param = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property params.$scrollTrigger
+     * @property param.$scrollTrigger
      * @type {Object}
      */
-    this.params.$scrollTrigger = $scrollTrigger;
+    this.param.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -75,7 +75,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -181,8 +181,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.params.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.params.$scrollTrigger.index(this));
+    self.param.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.param.$scrollTrigger.index(this));
     });
 
     return this;
@@ -196,7 +196,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.params.$scrollTrigger.off('click.Scroll');
+    this.param.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
@@ -209,8 +209,8 @@ var AMP = AMP || {};
    */
   p.tween = function(num){
     var self = this,
-    param = self.params,
-    $scrollTrigger = self.params.$scrollTrigger.eq(num),
+    param = self.param,
+    $scrollTrigger = self.param.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){

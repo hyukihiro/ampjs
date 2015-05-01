@@ -205,7 +205,7 @@ MODULE.gulp.task('js', function(){
 	MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
-		PATH.develop + 'amp/core/utilitys/*.js'
+		PATH.develop + 'amp/core/utility/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -233,6 +233,10 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// base
+	// MODULE.gulp.src([
+	// 	PATH.develop + 'amp/jquery/base/*.js',
+	// 	PATH.develop + 'amp/jquery/utility/*.js'
+	// })
 	MODULE.gulp.src(PATH.develop + 'amp/jquery/base/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -246,6 +250,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// amp.jquery.plugins.js
+	/*
 	MODULE.gulp.src(PATH.develop + 'amp/jquery/plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -256,7 +261,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.plugins/'));
-
+	*/
 
 	// amp.createjs.js
 	// MODULE.gulp.src([

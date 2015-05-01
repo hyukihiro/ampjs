@@ -29,35 +29,35 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.param = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
      * @default $('.scroll_toggle')
-     * @property params.$scrollToggle
+     * @property param.$scrollToggle
      * @type {jQuery}
      */
-    this.params.$scrollToggle = $scrollToggle;
+    this.param.$scrollToggle = $scrollToggle;
 
     /**
      * <h4>window要素</h4>
      *
-     * @property params.$window
+     * @property param.$window
      * @type {jQuery}
      */
-    this.params.$window = $(window);
+    this.param.$window = $(window);
 
     /**
      * <h4>Display:Block表示の状態</h4>
      *
-     * @property params.isDisplay
+     * @property param.isDisplay
      * @type {Boolean}
      */
-    this.params.isDisplay = $scrollToggle.css('display') !== 'none';
+    this.param.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -93,7 +93,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
@@ -195,16 +195,16 @@ var AMP = AMP || {};
    */
   p.on = function(){
     var self = this,
-    param = self.params,
+    param = self.param,
     offsetY;
 
-    self.params.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.params.$window.scrollTop();
+    self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.param.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.params.isDislpay && param.showY < offsetY){
+      if(!self.param.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.params.isDislpay && param.showY > offsetY){
+      } else if(self.param.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -220,7 +220,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.params.$window.off('scroll.ScrollToggle');
+    this.param.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -234,11 +234,11 @@ var AMP = AMP || {};
   p.show = function(){
     var self = this;
 
-    self.params.isDislpay = true;
+    self.param.isDislpay = true;
 
-    self.params.$scrollToggle.css({display: 'block'}).css(self.params.hide)
+    self.param.$scrollToggle.css({display: 'block'}).css(self.param.hide)
     .velocity('stop')
-    .velocity(self.params.show, self.params.duration, self.params.ease, self.params.showCall);
+    .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
 
     return this;
   };
@@ -253,13 +253,13 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
 
-    self.params.isDislpay = false;
+    self.param.isDislpay = false;
 
-    self.params.$scrollToggle
+    self.param.$scrollToggle
     .velocity('stop')
-    .velocity(self.params.hide, self.params.duration, self.params.ease, function(){
-      self.params.$scrollToggle.css({display: 'none'});
-      self.params.hideCall();
+    .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
+      self.param.$scrollToggle.css({display: 'none'});
+      self.param.hideCall();
     });
 
     return this;

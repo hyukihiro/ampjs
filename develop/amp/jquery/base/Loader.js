@@ -22,10 +22,10 @@ var AMP = AMP || {};
     /**
      * <h4>パラメーター格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = {};
+    this.param = {};
 
     /**
      * <h4>対象のimgを囲う要素</h4>
@@ -33,7 +33,7 @@ var AMP = AMP || {};
      * @property el
      * @type {DOM}
      */
-    this.params.el = el || 'body';
+    this.param.el = el || 'body';
 
     /**
      * <h4>imagesloadedオブジェクト</h4>
@@ -41,7 +41,7 @@ var AMP = AMP || {};
      * @property imagesloaded
      * @type {imagesloaded}
      */
-    this.params.imagesloaded = imagesLoaded(this.params.el);
+    this.param.imagesloaded = imagesLoaded(this.param.el);
 
     /**
      * <h4>画像数</h4>
@@ -49,7 +49,7 @@ var AMP = AMP || {};
      * @property length
      * @type {Number}
      */
-    this.params.length = this.params.imagesloaded.images.length;
+    this.param.length = this.param.imagesloaded.images.length;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
@@ -57,7 +57,7 @@ var AMP = AMP || {};
      * @property count
      * @type {Number}
      */
-    this.params.updateCount = 0;
+    this.param.updateCount = 0;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
@@ -65,7 +65,7 @@ var AMP = AMP || {};
      * @property loadCount
      * @type {Number}
      */
-    this.params.loadCount = 0;
+    this.param.loadCount = 0;
 
     // start
     this._start();
@@ -108,7 +108,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>FlatHeightインスタンス生成</h4>
+   * <h4>Loaderインスタンス生成</h4>
    *
    * @static
    * @method get
@@ -130,23 +130,23 @@ var AMP = AMP || {};
     var self = this;
 
     // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.params.imagesloaded.on('progress', function(){
-      self.params.updateCount += 1;
+    self.param.imagesloaded.on('progress', function(){
+      self.param.updateCount += 1;
       self._progress.apply(self, AMP.argsToArray(arguments));
     });
 
     // fail: 読込み失敗毎
-    self.params.imagesloaded.on('fail', function(){
+    self.param.imagesloaded.on('fail', function(){
       self._failCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // done: 読込み成功毎
-    self.params.imagesloaded.on('done', function(){
+    self.param.imagesloaded.on('done', function(){
       self._doneCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // always: 全ての読込み処理完了時
-    self.params.imagesloaded.on('always', function(e){
+    self.param.imagesloaded.on('always', function(e){
       self._alwaysCall.apply(self, AMP.argsToArray(arguments));
     });
 
@@ -167,16 +167,16 @@ var AMP = AMP || {};
    */
   p._update = function(){
     var self = this,
-    current = self.params.updateCount / self.params.length * 100;
+    current = self.param.updateCount / self.param.length * 100;
 
     // カウンターのインクリメント
-    if(self.params.loadCount < current){
-      self.params.loadCount += 1;
+    if(self.param.loadCount < current){
+      self.param.loadCount += 1;
     }
 
-    self._updateCall(Math.ceil(self.params.loadCount));
+    self._updateCall(Math.ceil(self.param.loadCount));
 
-    if(100 <= self.params.loadCount){
+    if(100 <= self.param.loadCount){
       self._compleatCall();
     } else {
       AMP.requestAnimationFrame(function(){

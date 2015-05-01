@@ -29,19 +29,19 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, BoxHover.boxHoverOptions, options);
+    this.param = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.box_hover')
-     * @property params.$boxHover
+     * @property param.$boxHover
      * @type {jQuery}
      */
-    this.params.$boxHover = $boxHover;
+    this.param.$boxHover = $boxHover;
   }
 
   // 基底クラスを継承
@@ -77,7 +77,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -137,19 +137,19 @@ var AMP = AMP || {};
 
     this.off();
 
-    this.params.$boxHover.css({cursor: 'pointer'})
+    this.param.$boxHover.css({cursor: 'pointer'})
     .on('mouseenter.BoxHover', function(){
-      $(this).addClass(self.params.hoverClass);
+      $(this).addClass(self.param.hoverClass);
     })
     .on('mouseleave.BoxHover', function(){
-      $(this).removeClass(self.params.hoverClass);
+      $(this).removeClass(self.param.hoverClass);
     })
     .on('click.BoxHover', function(){
       self._setLink($(this));
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.params.$boxHover.find('label input select textarea').click(function(event){
+    this.param.$boxHover.find('label input select textarea').click(function(event){
       event.stopPropagation();
     });
 
@@ -164,7 +164,7 @@ var AMP = AMP || {};
    * @return {BoxHover}
    */
   p.off = function(){
-    this.params.$boxHover.css({cursor: 'auto'})
+    this.param.$boxHover.css({cursor: 'auto'})
     .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };
@@ -180,7 +180,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._setLink = function($target){
-    var $link = $target.find('.' + this.params.linkClass),
+    var $link = $target.find('.' + this.param.linkClass),
     $a = $target.find('a').eq(0);
 
     $a = $link[0] ? $link : $a;

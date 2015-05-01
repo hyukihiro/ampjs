@@ -1,58 +1,81 @@
 var AMP = AMP || {};
 
-(function(root, createjs){
+(function(root, CJS){
 
   // 'use strict';
 
-  // see: http://qiita.com/nakajmg/items/65575d54cbed013ff2a5
-  // see: http://kudox.jp/java-script/createjs-preloadjs-loadqueue
 
-
-  var Loader, p, loader;
-
-
-  /*--------------------------------------------------------------------------
+  /*----------------------------------------------------------------------
     @constructor
-  --------------------------------------------------------------------------*/
+  ----------------------------------------------------------------------*/
 
   /**
    * <h4>ローダー</h4>
-   * createrjs.Preloadクラスに依存します
    *
-   * @class XXX_Loader
-   * @constructor
-   * @param  {Array} manifest 読み込みファイルリスト
-   * @param  {Objecr} options 後日記述
-   * @return {Instance}
-   */
-  Loader = function(manifest, options){
-    this.manifest  = amp.isArray(manifest) ? manifest : [manifest];
-    this.param     = amp.extend(true, {}, Loader.defaults, options);
-    this.loadQueue = new createjs.LoadQueue(this.param.useXHR);
-    this.loadQueue.setMaxConnections(this.param.loadMax);
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @shorthand
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ローダー</h4>
-   * Loaderのショートハンド<br>
-   * 処理Loader生成し、initを実行してインスタンスを返す
    *
-   * @static
-   * @method loader
-   * @param  {DOM} elm 対象のimgを囲う要素 省略可
-   * @return {Loader} Loader生成してインスタンスを返す
+   * [Loader description]
+   * @param {[type]} manifest [description]
+   * @param {[type]} options  [description]
    */
-  loader = function(manifest, options){
-    var loader = new Loader(manifest, options);
-    loader.init();
-    return loader;
-  };
+  function Loader(manifest, options){
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property param
+     * @type {Object}
+     */
+    this.param = {};
+
+    /**
+     * <h4>manifestデータ</h4>
+     *
+     * @property param.manifest
+     * @type {Array}
+     */
+    this.param.manifest = AMP.isArray(manifest) ? manifest : [manifest];
+
+    /**
+     * <h4>createjs.Preload LoadQueueオプション</h4>
+     *
+     * @property param.loadQueue
+     * @type {Object}
+     */
+    this.param.loadQueue = AMP.mixin(true, {}, Loader.loadQueueOptions, options);
+
+    /**
+     * <h4>loadCount完了した点数</h4>
+     *
+     * @property loadCount
+     * @type {Number}
+     */
+    this.param.loadCount = 0;
+
+    /**
+     * <h4>進捗カウント</h4>
+     *
+     * @property updateCount
+     * @type {Number}
+     */
+    this.updateCount = null;
+
+    /**
+     * <h4>CJS.LoadQueueインスタンス</h4>
+     *
+     * @property loadQueue
+     * @type {createjs.LoadQueue}
+     */
+    this.param.loadQueue = new CJS.LoadQueue(this.param.loadCount.useXHR);
+
+    // 同時読み込み数の設定
+    this.loadQueue.setMaxConnections(this.param.loadCount.loadMax);
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Loader, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Loader.prototype;
 
 
 
@@ -67,74 +90,29 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '1.2';
+  Loader.VERSION = '2.0.0';
 
 
   /**
-   * <h4>プロトタイプオブジェクト</h4>
+   * <h4>クラス名</h4>
    *
-   * @property p
-   * @type {Object}
+   * @property className
+   * @type {String}
    */
-  p = Loader.prototype;
+  p.className = 'Loader';
 
 
   /**
-   * <h4>createjs.LoadQueueオプション値</h4>
+   * <h4>createjs.Preload.LoadQueueオプション値</h4>
    *
    * @static
-   * @property defaults
+   * @property loadQueueOptions
    * @type {Object}
    */
-  Loader.defaults = {
+  Loader.loadQueueOptions = {
     useXHR: false,
     loadMax: 4
   };
-
-
-  /**
-   * <h4>manifestデータ</h4>
-   *
-   * @property manifest
-   * @type {Array}
-   */
-  p.manifest = null;
-
-
-  /**
-   * <h4>createjs.LoadQueueインスタンス</h4>
-   *
-   * @property loadQueue
-   * @type {createjs.LoadQueue}
-   */
-  p.loadQueue = null;
-
-
-  /**
-   * <h4>Loader.defaultsとコンストラクタ呼び出し時に第二引数に指定した値をmixin</h4>
-   *
-   * @property param
-   * @type {Object}
-   */
-  p.param = null;
-
-
-  /**
-   * <h4>loadCount完了した点数</h4>
-   *
-   * @property loadCount
-   * @type {Number}
-   */
-  p.loadCount = 0;
-
-
-  /**
-   * <h4>進捗カウント</h4>
-   *
-   * @property updateCount
-   * @type {Number}
-   */
-  p.updateCount = null;
 
 
 
@@ -143,16 +121,19 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>クラスを拡張します</h4>
-   * amp._extendをエクスポートしています
+   * <h4>Loaderインスタンス生成</h4>
    *
    * @static
-   * @method extend
-   * @param {Object} protoProp プロトタイプオブジェクト
-   * @param {Object} staticProp staticオブジェクト
+   * @method get
+   * @param {DOM} el 対象のエリア要素
    * @return {Loader}
    */
-   Loader.extend = amp._extend;
+  Loader.get = function(el){
+    return new Loader(el);
+  };
+
+
+
 
 
   /**
@@ -166,7 +147,7 @@ var AMP = AMP || {};
     var self = this;
 
     // updateCountをフラグにシングルトン
-    if(amp.isNumber(self.updateCount)){
+    if(AMP.isNumber(self.updateCount)){
       return self;
     } else {
       self.updateCount = 0;
@@ -278,7 +259,7 @@ var AMP = AMP || {};
   p._controller = function(){
     var self = this;
 
-    amp.requestAnimationFrame(function(){
+    AMP.requestAnimationFrame(function(){
       var current = self.loadCount / self.manifest.length * 100;
 
       // 100までカウントの更新
@@ -336,10 +317,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-
-  AMP.createjs = AMP.createjs || {};
-  AMP.createjs.Loader = Loader;
-  AMP.createjs.loader = loader;
+  AMP.CJS = AMP.CJS || {};
+  AMP.CJS.Loader = Loader;
 
 
 }(window, createjs));

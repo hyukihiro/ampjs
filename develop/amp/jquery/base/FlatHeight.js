@@ -31,37 +31,37 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = {};
+    this.param = {};
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.flat_height')
-     * @property params.$flatHeight
+     * @property param.$flatHeight
      * @type {jQuery}
      */
-    this.params.$flatHeight = $flatHeight;
+    this.param.$flatHeight = $flatHeight;
 
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
      * @default $flatHeight.length
-     * @property params.split
+     * @property param.split
      * @type {Number}
      */
-    this.params.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.param.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
      * <h4>サイズ後、リセットしなおすか</h4>
      *
      * @default true
-     * @property params.isResize
+     * @property param.isResize
      * @type {Boolean}
      */
-    this.params.isResize = AMP.isBoolean(isResize) ? isResize : true;
+    this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
   }
 
   // 基底クラスを継承
@@ -137,7 +137,7 @@ var AMP = AMP || {};
 
     // window resize
     $(root).on('resizestop.FlatHeight', {timer: 50}, function(){
-      if(self.params.isResize){
+      if(self.param.isResize){
         self.setHeight();
       }
     });
@@ -156,7 +156,7 @@ var AMP = AMP || {};
     if(!AMP.isNumber(num)){
       throw new TypeError(num + ' is not a Number');
     }
-    this.params.split = num;
+    this.param.split = num;
     this.setHeight();
     return this;
   };
@@ -170,34 +170,34 @@ var AMP = AMP || {};
    */
   p.setHeight = function(){
     var self = this,
-    total = self.params.$flatHeight.length,
-    rest = total % self.params.split,
+    total = self.param.$flatHeight.length,
+    rest = total % self.param.split,
     finalRow = total - rest,
     maxHeight = 0,
     targetHeight = 0,
     rowCount = 0,
     i = 0;
 
-    self.params.$flatHeight.height('auto');
+    self.param.$flatHeight.height('auto');
 
-    if(1 < self.params.split){
+    if(1 < self.param.split){
 
       for(; i < total; i += 1){
         // 一番高い高さを求める
-        targetHeight = self.params.$flatHeight.eq(i).height();
+        targetHeight = self.param.$flatHeight.eq(i).height();
         maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
 
         // 行の高さを揃える
-        if((i + 1) % self.params.split === 0){
-          var _start = rowCount * self.params.split,
-          _end = (rowCount += 1) * self.params.split;
+        if((i + 1) % self.param.split === 0){
+          var _start = rowCount * self.param.split,
+          _end = (rowCount += 1) * self.param.split;
 
-          self.params.$flatHeight.slice(_start, _end).height(maxHeight);
+          self.param.$flatHeight.slice(_start, _end).height(maxHeight);
           maxHeight = 0;
 
         // 最終行の高さを揃える
         } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.params.$flatHeight.slice(rowCount * self.params.split, total).height(maxHeight);
+          self.param.$flatHeight.slice(rowCount * self.param.split, total).height(maxHeight);
         }
       }
     }

@@ -118,6 +118,19 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>プレーンオブジェクト判定</h4>
+   *
+   * @static
+   * @method isPlainObject
+   * @param  {Object}  obj 判定したいオブジェクト
+   * @return {Boolean}
+   */
+  AMP.isPlainObject = function(obj){
+    return AMP.isObject(obj) && Object.keys(obj).length === 0;
+  };
+
+
+  /**
    * <h4>文字列型判定</h4>
    *
    * @static

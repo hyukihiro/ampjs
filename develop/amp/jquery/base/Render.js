@@ -26,13 +26,13 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
     /**
      * <h4>js Template要素</h4>
      *
-     * @property params.$tmp
+     * @property param.$tmp
      * @type {jQuery}
      */
     /**
@@ -41,35 +41,35 @@ var AMP = AMP || {};
      * 初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
      * これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です
      *
-     * @property params.$el
+     * @property param.$el
      * @type {Hogan}
      */
     /**
      * <h4>Hoganテンプレート</h4>
      *
-     * @property params.template
+     * @property param.template
      * @type {Hogan}
      */
     /**
      * <h4>レンダリングオリジナルデータ保管</h4>
      *
-     * @property params.originalData
+     * @property param.originalData
      * @type {Arrary|Object}
      */
     /**
      * <h4>レンダリングデータ</h4>
      *
-     * @property params.renderData
+     * @property param.renderData
      * @type {Arrary|Object}
      */
     /**
      * <h4>$.ajaxオプション値</h4>
      * Render.ajaxOptionsとajaxOptionsをmixinした値を格納します
      *
-     * @property params.ajaxOptions
+     * @property param.ajaxOptions
      * @type {Object}
      */
-    this.params = {
+    this.param = {
       $tmp        : $tmp,
       $el         : null,
       template    : Hogan.compile($tmp.html()),
@@ -132,7 +132,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します<br>
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します<br>
    * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a>
    *
    * @static
@@ -205,10 +205,10 @@ var AMP = AMP || {};
   p.ajax = function(){
     var self = this;
 
-    return $.ajax(self.params.ajaxOptions)
+    return $.ajax(self.param.ajaxOptions)
     .fail(self.ajaxFail)
     .done(function(data){
-      self.params.originalData = data;
+      self.param.originalData = data;
       self.ajaxDone(data);
     });
   };
@@ -251,13 +251,13 @@ var AMP = AMP || {};
    */
   p.setRenderData = function(renderData){
     if(renderData){
-      this.params.renderData = renderData;
+      this.param.renderData = renderData;
     } else {
-      if(AMP.isArray(this.params.originalData)){
-        this.params.renderData = this.params.originalData.concat();
+      if(AMP.isArray(this.param.originalData)){
+        this.param.renderData = this.param.originalData.concat();
 
       } else {
-        this.params.renderData = $.extend({}, this.params.originalData);
+        this.param.renderData = $.extend({}, this.param.originalData);
       }
     }
 
@@ -284,9 +284,9 @@ var AMP = AMP || {};
    * @return {Render}
    */
   p.removePrevHTML = function(){
-    if(!this.params.$el){
-      this.params.$tmp.wrapAll('<div class="js_render" />');
-      this.params.$el = this.params.$tmp.parent();
+    if(!this.param.$el){
+      this.param.$tmp.wrapAll('<div class="js_render" />');
+      this.param.$el = this.param.$tmp.parent();
     } else {
       this.$el.children().remove();
     }
@@ -315,7 +315,7 @@ var AMP = AMP || {};
    */
   p.createHTML = function(data){
     this.setRenderData(data);
-    return this.params.template.render(this.params.renderData) || this.notFound();
+    return this.param.template.render(this.param.renderData) || this.notFound();
   };
 
 
@@ -327,7 +327,7 @@ var AMP = AMP || {};
    */
   p.render = function(data){
     this.removePrevHTML();
-    this.params.$el[0].innerHTML = this.createHTML(data);
+    this.param.$el[0].innerHTML = this.createHTML(data);
     return this;
   };
 

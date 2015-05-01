@@ -9,29 +9,17 @@
 	 *
 	 * @class jQuery
 	 */
-	/**
-	 * <h4>Flickイベントオブジェクト</h4>
-	 *
-	 * @type {Object}
-	 */
+
+
+	// Flickイベントオブジェクト
 	var Flick = {};
 
 
-	/**
-	 * <h4>バージョン情報</h4>
-	 *
-	 * @property VERSION
-	 * @type {String}
-	 */
-	Flick.VERSION = '1.2';
+	// バージョン情報
+	Flick.VERSION = '1.3.0';
 
 
-	/**
-	 * <h4>イベント設定値</h4>
-	 *
-	 * @property data
-	 * @type {Object}
-	 */
+	// イベント設定値
 	Flick.data = {
     // isCancel: true
     hit : 50,
@@ -39,12 +27,7 @@
 	};
 
 
-	/**
-	 * <h4>タッチイベントが有効か判定</h4>
-	 *
-	 * @property isTouch
-	 * @type {Boolean}
-	 */
+	// タッチイベントが有効か判定
 	Flick.isTouch = (function(){
     var div = document.createElement('div');
     div.setAttribute('ontouchstart', 'return');
@@ -52,12 +35,7 @@
   }());
 
 
-	/**
-	 * <h4>イベントの種類</h4>
-	 *
-	 * @property events
-	 * @type {Object}
-	 */
+	// イベントの種類
 	Flick.events = [
 		'flick',
 		'flickX',
@@ -71,13 +49,7 @@
 	];
 
 
-	/**
-	 * <h4>イベント登録関数の生成</h4>
-	 *
-	 * @method getSetup
-	 * @param  {String} type イベント名
-	 * @return {Function}
-	 */
+	// イベント登録関数の生成
 	Flick.getSetup = function(type){
 		var attr = '._' + type.toUpperCase();
 
@@ -91,13 +63,7 @@
 	};
 
 
-	/**
-	 * <h4>イベント削除関数の生成</h4>
-	 *
-	 * @method getTeardown
-	 * @param  {String} type イベント名
-	 * @return {Function}
-	 */
+	// イベント削除関数の生成
 	Flick.getTeardown = function(type){
 		var attr = '._' + type.toUpperCase();
 		return function(){
@@ -106,13 +72,8 @@
 	};
 
 
-	/**
-	 * <h4>フリックイベントハンドラ</h4>
-	 *
-	 * @method getFlickHandler
-	 * @param  {String} type イベント名
-	 * @return {Void}
-	 */
+	/* フリックイベントハンドラ
+	-----------------------------------------------------------------*/
 	Flick.getFlickHandler = function(type){
 		var attr = '._' + type.toUpperCase(),
 		isSide = (type === 'flick' || type === 'flickX'),
@@ -176,10 +137,8 @@
 	};
 
 
-	/**
-	 * キャンセル処理
-	 * [getCancelHandler description]
-	 */
+	/* キャンセル処理
+	-----------------------------------------------------------------*/
 	Flick.getCancelHandler = function(type){
 		var attr = '._' + type.toUpperCase(),
 		isSide = (type === 'flickcancel' || type === 'flickcancelX'),
@@ -243,16 +202,11 @@
 
 			});
 		};
-
 	};
 
 
-	/**
-	 * <h4>move系イベントハンドラ</h4>
-	 *
-	 * @method getMoveHandler
-	 * @return {Void}
-	 */
+	/* move系イベントハンドラ
+	-----------------------------------------------------------------*/
 	Flick.getMoveHandler = function(type){
 		var attr = '._' + type.toUpperCase(),
 		isSide = (type === 'flickmove' || type === 'flickmoveX'),
@@ -320,13 +274,7 @@
 	};
 
 
-	/**
-	 * <h4>イベントステートデータ生成</h4>
-	 *
-	 * @method createData
-	 * @param  {Object} event イベント開始データ（タッチスタート・マウスダウン）
-	 * @return {Object}
-	 */
+	// イベントステートデータ生成
 	Flick.createEventData = function(event){
 		return {
 			flickEvent: null,
@@ -340,13 +288,7 @@
 	};
 
 
-	/**
-	 * <h4>イベントフラグの生成</h4>
-	 *
-	 * @method hasEventType
-	 * @param  {String}  type イベントタイプ
-	 * @return {Object}
-	 */
+	// イベントフラグの生成
 	Flick.getFlickHasMap = function(type){
 		return {
 			isSide  : (
@@ -367,15 +309,7 @@
 	};
 
 
-	/**
-	 * <h4>move中の値のセット</h4>
-	 *
-	 * @method setMoveData
-	 * @param {Object} event イベントデータオブジェクト
-	 * @param {Object} data ステートデータ
-	 * @param {Object} param イベント設定値
-	 * @return {Void}
-	 */
+	// move中の値のセット
 	Flick.setMoveData = function(event, data, param){
 		data.flickEvent = event;
 

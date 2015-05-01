@@ -2,7 +2,9 @@
 jQuery(function($){
 
 
-
+	$('p').on('flick', function(){
+		AMP.debug.log(event);
+	});
 
 
 

@@ -22,10 +22,10 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true,
+    this.param = $.extend(true,
       {},
       SmoothScroll.smoothScrollOptions,
       {$page: $('html, body')},
@@ -66,7 +66,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property smoothScrollOptions
@@ -139,7 +139,7 @@ var AMP = AMP || {};
 
     // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.params.$page.off('mousewheel.SmoothScroll')
+      self.param.$page.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(){
         self.tween(arguments[1]);
         return false;
@@ -156,7 +156,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.params.$page.off('mousewheel.SmoothScroll');
+    this.param.$page.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -169,11 +169,11 @@ var AMP = AMP || {};
    */
   p.tween = function(move){
     var self = this,
-    param = self.params,
-    y = AMP.isWebkit() ? self.params.$page.eq(1).scrollTop() : self.params.$page.eq(0).scrollTop(),
+    param = self.param,
+    y = AMP.isWebkit() ? self.param.$page.eq(1).scrollTop() : self.param.$page.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
-    self.params.$page.velocity('stop')
+    self.param.$page.velocity('stop')
     .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
   };
 

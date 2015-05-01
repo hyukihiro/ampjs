@@ -1,6 +1,6 @@
 var AMP = AMP || {};
 
-(function(root, $){
+(function(root, CJS){
 
   // 'use strict';
 
@@ -31,232 +31,232 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>jQuery Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   * <h4>createjs Easing用ネームスペース</h4>
+   * see: http://www.CJS.com/Docs/TweenJS/files/tweenjs_p.js.html
    *
-   * @property $
+   * @property createjs
    * @type {Object}
    */
-  p.$ = {};
+  p.CJS = {};
 
 
   /* 1 Sine
   -----------------------------------------------------------------*/
   /**
-   * @property $._1_SINE_IN
+   * @property CJS._1_SINE_IN
    * @type {String}
    */
-  p.$._1_SINE_IN = 'easeInSine';
+  p.CJS._1_SINE_IN = CJS.Ease.sineIn;
 
   /**
-   * @property $._1_SINE_OUT
+   * @property CJS._1_SINE_OUT
    * @type {String}
    */
-  p.$._1_SINE_OUT = 'easeOutSine';
+  p.CJS._1_SINE_OUT = CJS.Ease.sineOut;
 
   /**
-   * @property $._1_SINE_IN_OUT
+   * @property CJS._1_SINE_IN_OUT
    * @type {String}
    */
-  p.$._1_SINE_IN_OUT = 'easeInOutSine';
+  p.CJS._1_SINE_IN_OUT = CJS.Ease.sineInOut;
 
 
   /* 2 Quad
   -----------------------------------------------------------------*/
   /**
-   * @property $._2_QUAD_IN
+   * @property CJS._2_QUAD_IN
    * @type {String}
    */
-  p.$._2_QUAD_IN = 'easeInQuad';
+  p.CJS._2_QUAD_IN = CJS.Ease.quadIn;
 
   /**
-   * @property $._2_QUAD_OUT
+   * @property CJS._2_QUAD_OUT
    * @type {String}
    */
-  p.$._2_QUAD_OUT = 'easeOutQuad';
+  p.CJS._2_QUAD_OUT = CJS.Ease.quadOut;
 
   /**
-   * @property $._2_QUAD_IN_OUT
+   * @property CJS._2_QUAD_IN_OUT
    * @type {String}
    */
-  p.$._2_QUAD_IN_OUT = 'easeInOutQuad';
+  p.CJS._2_QUAD_IN_OUT = CJS.Ease.quadInOut;
 
 
   /* 3 Cubic
   -----------------------------------------------------------------*/
   /**
-   * @property $._3_CUBIC_IN
+   * @property CJS._3_CUBIC_IN
    * @type {String}
    */
-  p.$._3_CUBIC_IN = 'easeInCubic';
+  p.CJS._3_CUBIC_IN = CJS.Ease.cubicIn;
 
   /**
-   * @property $._3_CUBIC_OUT
+   * @property CJS._3_CUBIC_OUT
    * @type {String}
    */
-  p.$._3_CUBIC_OUT = 'easeOutCubic';
+  p.CJS._3_CUBIC_OUT = CJS.Ease.cubicOut;
 
   /**
-   * @property $._3_CUBIC_IN_OUT
+   * @property CJS._3_CUBIC_IN_OUT
    * @type {String}
    */
-  p.$._3_CUBIC_IN_OUT = 'easeInOutCubic';
+  p.CJS._3_CUBIC_IN_OUT = CJS.Ease.cubicInOut;
 
 
   /* 4 Quart
   -----------------------------------------------------------------*/
   /**
-   * @property $._4_QUART_IN
+   * @property CJS._4_QUART_IN
    * @type {String}
    */
-  p.$._4_QUART_IN = 'easeInQuart';
+  p.CJS._4_QUART_IN = CJS.Ease.quartIn;
 
   /**
-   * @property $._4_QUART_OUT
+   * @property CJS._4_QUART_OUT
    * @type {String}
    */
-  p.$._4_QUART_OUT = 'easeOutQuart';
+  p.CJS._4_QUART_OUT = CJS.Ease.quartOut;
 
   /**
-   * @property $._4_QUART_IN_OUT
+   * @property CJS._4_QUART_IN_OUT
    * @type {String}
    */
-  p.$._4_QUART_IN_OUT = 'easeInOutQuart';
+  p.CJS._4_QUART_IN_OUT = CJS.Ease.quartInOut;
 
 
   /* 5 Quint
   -----------------------------------------------------------------*/
   /**
-   * @property $._5_QUINT_IN
+   * @property CJS._5_QUINT_IN
    * @type {String}
    */
-  p.$._5_QUINT_IN = 'easeInQuint';
+  p.CJS._5_QUINT_IN = CJS.Ease.quintIn;
 
   /**
-   * @property $._5_QUINT_OUT
+   * @property CJS._5_QUINT_OUT
    * @type {String}
    */
-  p.$._5_QUINT_OUT = 'easeOutQuint';
+  p.CJS._5_QUINT_OUT = CJS.Ease.quintOut;
 
   /**
-   * @property $._5_QUINT_IN_OUT
+   * @property CJS._5_QUINT_IN_OUT
    * @type {String}
    */
-  p.$._5_QUINT_IN_OUT = 'easeInOutQuint';
+  p.CJS._5_QUINT_IN_OUT = CJS.Ease.quintInOut;
 
 
   /* 6 Expo
   -----------------------------------------------------------------*/
   /**
-   * @property $._6_EXPO_IN
+   * @property CJS._6_EXPO_IN
    * @type {String}
    */
-  p.$._6_EXPO_IN = 'easeInExpo';
+  p.CJS._6_EXPO_IN = CJS.Ease.getPowIn(6);
 
   /**
-   * @property $._6_EXPO_OUT
+   * @property CJS._6_EXPO_OUT
    * @type {String}
    */
-  p.$._6_EXPO_OUT = 'easeOutExpo';
+  p.CJS._6_EXPO_OUT = CJS.Ease.getPowOut(6);
 
   /**
-   * @property $._6_EXPO_IN_OUT
+   * @property CJS._6_EXPO_IN_OUT
    * @type {String}
    */
-  p.$._6_EXPO_IN_OUT = 'easeInOutExpo';
+  p.CJS._6_EXPO_IN_OUT = CJS.Ease.getPowInOut(6);
 
 
   /* 7 Circ
   -----------------------------------------------------------------*/
   /**
-   * @property $._7_CIRC_IN
+   * @property CJS._7_CIRC_IN
    * @type {String}
    */
-  p.$._7_CIRC_IN = 'easeInCirc';
+  p.CJS._7_CIRC_IN = CJS.Ease.circIn;
 
   /**
-   * @property $._7_CIRC_OUT
+   * @property CJS._7_CIRC_OUT
    * @type {String}
    */
-  p.$._7_CIRC_OUT = 'easeOutCirc';
+  p.CJS._7_CIRC_OUT = CJS.Ease.circOut;
 
   /**
-   * @property $._7_CIRC_IN_OUT
+   * @property CJS._7_CIRC_IN_OUT
    * @type {String}
    */
-  p.$._7_CIRC_IN_OUT = 'easeInOutCirc';
+  p.CJS._7_CIRC_IN_OUT = CJS.Ease.circInOut;
 
 
   /* Linear
   -----------------------------------------------------------------*/
   /**
-   * @property $._LINEAR
+   * @property CJS._LINEAR
    * @type {String}
    */
-  p.$._LINEAR = 'linear';
+  p.CJS._LINEAR = CJS.Ease.linear;
 
 
   /* Back
   -----------------------------------------------------------------*/
   /**
-   * @property $._BACK_IN
+   * @property CJS._BACK_IN
    * @type {String}
    */
-  p.$._BACK_IN = 'easeInBack';
+  p.CJS._BACK_IN = CJS.Ease.backIn;
 
   /**
-   * @property $._BACK_OUT
+   * @property CJS._BACK_OUT
    * @type {String}
    */
-  p.$._BACK_OUT = 'easeOutBack';
+  p.CJS._BACK_OUT = CJS.Ease.backOut;
 
   /**
-   * @property $._BACK_IN_OUT
+   * @property CJS._BACK_IN_OUT
    * @type {String}
    */
-  p.$._BACK_IN_OUT = 'easeInOutBack';
+  p.CJS._BACK_IN_OUT = CJS.Ease.backInOut;
 
 
   /* Elastic
   -----------------------------------------------------------------*/
   /**
-   * @property $._ELASTIC_IN
+   * @property CJS._ELASTIC_IN
    * @type {String}
    */
-  p.$._ELASTIC_IN = 'easeInElastic';
+  p.CJS._ELASTIC_IN = CJS.Ease.elasticIn;
 
   /**
-   * @property $._ELASTIC_OUT
+   * @property CJS._ELASTIC_OUT
    * @type {String}
    */
-  p.$._ELASTIC_OUT = 'easeOutElastic';
+  p.CJS._ELASTIC_OUT = CJS.Ease.elasticOut;
 
   /**
-   * @property $._ELASTIC_IN_OUT
+   * @property CJS._ELASTIC_IN_OUT
    * @type {String}
    */
-  p.$._ELASTIC_IN_OUT = 'easeInOutElastic';
+  p.CJS._ELASTIC_IN_OUT = CJS.Ease.elasticInOut;
 
 
   /* Bounce
   -----------------------------------------------------------------*/
   /**
-   * @property $._BOUNCE_IN
+   * @property CJS._BOUNCE_IN
    * @type {String}
    */
-  p.$._BOUNCE_IN = 'easeInBounce';
+  p.CJS._BOUNCE_IN = CJS.Ease.bounceIn;
 
   /**
-   * @property $._BOUNCE_OUT
+   * @property CJS._BOUNCE_OUT
    * @type {String}
    */
-  p.$._BOUNCE_OUT = 'easeOutBounce';
+  p.CJS._BOUNCE_OUT = CJS.Ease.bounceOut;
 
   /**
-   * @property $._BOUNCE_IN_OUT
+   * @property CJS._BOUNCE_IN_OUT
    * @type {String}
    */
-  p.$._BOUNCE_IN_OUT = 'easeInOutBounce';
+  p.CJS._BOUNCE_IN_OUT = CJS.Ease.bounceInOut;
 
 
 
@@ -268,4 +268,5 @@ var AMP = AMP || {};
   AMP.ease = new Ease();
 
 
-}(window, jQuery));
+
+}(window, createjs));
