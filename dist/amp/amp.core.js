@@ -911,6 +911,19 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>プレーンオブジェクト判定</h4>
+   *
+   * @static
+   * @method isPlainObject
+   * @param  {Object}  obj 判定したいオブジェクト
+   * @return {Boolean}
+   */
+  AMP.isPlainObject = function(obj){
+    return AMP.isObject(obj) && Object.keys(obj).length === 0;
+  };
+
+
+  /**
    * <h4>文字列型判定</h4>
    *
    * @static
@@ -1753,6 +1766,78 @@ var AMP = AMP || {};
     } else {
       throw new TypeError(fn + ' is not a Function');
     }
+  };
+
+
+  /**
+   * <h4>DEG</h4>
+   *
+   * @static
+   * @property DEG
+   * @type {Number}
+   */
+  AMP.DEG = Math.PI / 180;
+
+
+  /**
+   * <h4>角度、距離からxy座標を返す </h4>
+   *
+   * @static
+   * @method coords
+   * @param  {Number} deg    角度
+   * @param  {Number} distanceX 距離
+   * @param  {Number} distanceY 距離
+   * @return {Object}
+   */
+  AMP.coords = function(deg, distanceX, distanceY){
+    return {
+      x: AMP.coordX(deg, distanceX),
+      y: AMP.coordY(deg, distanceY)
+    };
+  };
+
+
+  /**
+   * <h4>角度、距離からx座標を算出</h4>
+   *
+   * @static
+   * @method coordX
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceX 距離
+   * @return {Number}
+   */
+  AMP.coordX = function(deg, distanceX){
+    return Math.cos(deg * AMP.DEG) * distanceX;
+  };
+
+
+  /**
+   * <h4>角度、距離からy座標を算出</h4>
+   *
+   * @static
+   * @method coordY
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceY 距離
+   * @return {Number}
+   */
+  AMP.coordY = function(deg, distanceY){
+    return Mas.sin(deg * AMP.DEG) * distanceY;
+  };
+
+
+  /**
+   * <h4>現在と過去の位置から角度を算出</h4>
+   *
+   * @static
+   * @method deg
+   * @param  {Number} x     現在のx座標
+   * @param  {Number} y     現在のy座標
+   * @param  {Number} prevX 前のx座標
+   * @param  {Number} PrevY 前のx座標
+   * @return {Number}
+   */
+  AMP.deg = function(x, y, prevX, PrevY){
+    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
   };
 
 
@@ -3212,6 +3297,188 @@ var AMP = AMP || {};
   AMP.Mediaquery = Mediaquery;
   AMP.mediaquery = new Mediaquery();
 
+
+
+}(window));
+
+var AMP = AMP || {};
+
+(function(root){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>モデル管理</h4>
+   *
+   * @class AMP.Modal
+   * @extends AMP.Events
+   * @constructor
+   * @param {Object} props プロパティ
+   */
+  function Modal(props){
+
+    /**
+     * <h4>プロパティ</h4>
+     *
+     * @private
+     * @property _props
+     * @type {Object}
+     */
+    this._props = AMP.mixin({}, props);
+  }
+
+  // AMP.Eventsクラスを継承
+  AMP.inherits(Modal, AMP.Events);
+
+  // prototype
+  var p = Modal.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Modal.VERSION = '1.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Modal';
+
+
+  /**
+   * <h4>モデルのプロパティが変更時、に発行されるイベントタイプ</h4>
+   *
+   * @static
+   * @property eventType
+   * @default change
+   * @type {String}
+   */
+  Modal.eventType = 'change';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>プロパティの取得</h4>
+   *
+   * @method　get
+   * @param  {String} key 取得したいキー
+   * @return {Any}
+   */
+  p.get = function(key){
+    if(AMP.isUndefined(this._props[key])){
+      return this._props;
+    } else {
+      return this._props[key];
+    }
+  };
+
+
+  /**
+   * [set description]
+   */
+  p.set = function(key, val, isSilent){
+    var isCahnge = false;
+
+    if(AMP.isObject(key)){
+      isSilent = val;
+      isCahnge = true;
+      AMP.mixin(true, this._props, key);
+
+    } else if(this._props[key] !== val){
+      isCahnge = true;
+      this._props[key] = val;
+    }
+
+    if(isCahnge){
+      this._controller(isSilent);
+    }
+
+    return this;
+  };
+
+
+  /**
+   *　<h4>プロパティクリア</h4>
+   *
+   * @method clear
+   * @return {Model}
+   */
+  p.clear = function(isSilent){
+    if(!AMP.isPlainObject(this._props)){
+      this._controller(isSilent);
+      this._props = {};
+    }
+    return this;
+  };
+
+
+  /**
+   *　<h4>値があるか判定します</h4>
+   * undefined, Nullは、falseを返します
+   *
+   * @method has
+   * @return {Boolean}
+   */
+  p.has = function(key){
+    return (!AMP.isUndefined(this._props[key]) && !AMP.isNull(this._props[key]));
+  };
+
+
+  /**
+   * <h4>プロパティーのeach処理</h4>
+   *
+   * @method each
+   * @param  {Function} callback each毎に処理する関数
+   * @return {Model}
+   */
+  p.each = function(callback){
+    AMP.each(this._props, callback);
+    return this;
+  };
+
+
+  /**
+   * <h4>イベントコントローラー</h4>
+   *
+   * @private
+   * @method _controller
+   * @return {Void}
+   */
+  p._controller = function(isSilent){
+    if(!isSilent){
+      this.trigger(Modal.eventType);
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Modal = Modal;
 
 
 }(window));

@@ -57,19 +57,19 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, BoxHover.boxHoverOptions, options);
+    this.param = $.extend(true, {}, BoxHover.boxHoverOptions, options);
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.box_hover')
-     * @property params.$boxHover
+     * @property param.$boxHover
      * @type {jQuery}
      */
-    this.params.$boxHover = $boxHover;
+    this.param.$boxHover = $boxHover;
   }
 
   // 基底クラスを継承
@@ -105,7 +105,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property boxHoverOptions
@@ -165,19 +165,19 @@ var AMP = AMP || {};
 
     this.off();
 
-    this.params.$boxHover.css({cursor: 'pointer'})
+    this.param.$boxHover.css({cursor: 'pointer'})
     .on('mouseenter.BoxHover', function(){
-      $(this).addClass(self.params.hoverClass);
+      $(this).addClass(self.param.hoverClass);
     })
     .on('mouseleave.BoxHover', function(){
-      $(this).removeClass(self.params.hoverClass);
+      $(this).removeClass(self.param.hoverClass);
     })
     .on('click.BoxHover', function(){
       self._setLink($(this));
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.params.$boxHover.find('label input select textarea').click(function(event){
+    this.param.$boxHover.find('label input select textarea').click(function(event){
       event.stopPropagation();
     });
 
@@ -192,7 +192,7 @@ var AMP = AMP || {};
    * @return {BoxHover}
    */
   p.off = function(){
-    this.params.$boxHover.css({cursor: 'auto'})
+    this.param.$boxHover.css({cursor: 'auto'})
     .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
     return this;
   };
@@ -208,7 +208,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._setLink = function($target){
-    var $link = $target.find('.' + this.params.linkClass),
+    var $link = $target.find('.' + this.param.linkClass),
     $a = $target.find('a').eq(0);
 
     $a = $link[0] ? $link : $a;
@@ -538,37 +538,37 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = {};
+    this.param = {};
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.flat_height')
-     * @property params.$flatHeight
+     * @property param.$flatHeight
      * @type {jQuery}
      */
-    this.params.$flatHeight = $flatHeight;
+    this.param.$flatHeight = $flatHeight;
 
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
      * @default $flatHeight.length
-     * @property params.split
+     * @property param.split
      * @type {Number}
      */
-    this.params.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.param.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
      * <h4>サイズ後、リセットしなおすか</h4>
      *
      * @default true
-     * @property params.isResize
+     * @property param.isResize
      * @type {Boolean}
      */
-    this.params.isResize = AMP.isBoolean(isResize) ? isResize : true;
+    this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
   }
 
   // 基底クラスを継承
@@ -644,7 +644,7 @@ var AMP = AMP || {};
 
     // window resize
     $(root).on('resizestop.FlatHeight', {timer: 50}, function(){
-      if(self.params.isResize){
+      if(self.param.isResize){
         self.setHeight();
       }
     });
@@ -663,7 +663,7 @@ var AMP = AMP || {};
     if(!AMP.isNumber(num)){
       throw new TypeError(num + ' is not a Number');
     }
-    this.params.split = num;
+    this.param.split = num;
     this.setHeight();
     return this;
   };
@@ -677,34 +677,34 @@ var AMP = AMP || {};
    */
   p.setHeight = function(){
     var self = this,
-    total = self.params.$flatHeight.length,
-    rest = total % self.params.split,
+    total = self.param.$flatHeight.length,
+    rest = total % self.param.split,
     finalRow = total - rest,
     maxHeight = 0,
     targetHeight = 0,
     rowCount = 0,
     i = 0;
 
-    self.params.$flatHeight.height('auto');
+    self.param.$flatHeight.height('auto');
 
-    if(1 < self.params.split){
+    if(1 < self.param.split){
 
       for(; i < total; i += 1){
         // 一番高い高さを求める
-        targetHeight = self.params.$flatHeight.eq(i).height();
+        targetHeight = self.param.$flatHeight.eq(i).height();
         maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
 
         // 行の高さを揃える
-        if((i + 1) % self.params.split === 0){
-          var _start = rowCount * self.params.split,
-          _end = (rowCount += 1) * self.params.split;
+        if((i + 1) % self.param.split === 0){
+          var _start = rowCount * self.param.split,
+          _end = (rowCount += 1) * self.param.split;
 
-          self.params.$flatHeight.slice(_start, _end).height(maxHeight);
+          self.param.$flatHeight.slice(_start, _end).height(maxHeight);
           maxHeight = 0;
 
         // 最終行の高さを揃える
         } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.params.$flatHeight.slice(rowCount * self.params.split, total).height(maxHeight);
+          self.param.$flatHeight.slice(rowCount * self.param.split, total).height(maxHeight);
         }
       }
     }
@@ -749,10 +749,10 @@ var AMP = AMP || {};
     /**
      * <h4>パラメーター格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = {};
+    this.param = {};
 
     /**
      * <h4>対象のimgを囲う要素</h4>
@@ -760,7 +760,7 @@ var AMP = AMP || {};
      * @property el
      * @type {DOM}
      */
-    this.params.el = el || 'body';
+    this.param.el = el || 'body';
 
     /**
      * <h4>imagesloadedオブジェクト</h4>
@@ -768,7 +768,7 @@ var AMP = AMP || {};
      * @property imagesloaded
      * @type {imagesloaded}
      */
-    this.params.imagesloaded = imagesLoaded(this.params.el);
+    this.param.imagesloaded = imagesLoaded(this.param.el);
 
     /**
      * <h4>画像数</h4>
@@ -776,7 +776,7 @@ var AMP = AMP || {};
      * @property length
      * @type {Number}
      */
-    this.params.length = this.params.imagesloaded.images.length;
+    this.param.length = this.param.imagesloaded.images.length;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
@@ -784,7 +784,7 @@ var AMP = AMP || {};
      * @property count
      * @type {Number}
      */
-    this.params.updateCount = 0;
+    this.param.updateCount = 0;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
@@ -792,11 +792,11 @@ var AMP = AMP || {};
      * @property loadCount
      * @type {Number}
      */
-    this.params.loadCount = 0;
+    this.param.loadCount = 0;
 
     // start
     this._start();
-  };
+  }
 
   // 基底クラスを継承
   AMP.inherits(Loader, AMP.BASE_CLASS);
@@ -835,7 +835,7 @@ var AMP = AMP || {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>FlatHeightインスタンス生成</h4>
+   * <h4>Loaderインスタンス生成</h4>
    *
    * @static
    * @method get
@@ -857,23 +857,23 @@ var AMP = AMP || {};
     var self = this;
 
     // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.params.imagesloaded.on('progress', function(){
-      self.params.updateCount += 1;
+    self.param.imagesloaded.on('progress', function(){
+      self.param.updateCount += 1;
       self._progress.apply(self, AMP.argsToArray(arguments));
     });
 
     // fail: 読込み失敗毎
-    self.params.imagesloaded.on('fail', function(){
+    self.param.imagesloaded.on('fail', function(){
       self._failCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // done: 読込み成功毎
-    self.params.imagesloaded.on('done', function(){
+    self.param.imagesloaded.on('done', function(){
       self._doneCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // always: 全ての読込み処理完了時
-    self.params.imagesloaded.on('always', function(e){
+    self.param.imagesloaded.on('always', function(e){
       self._alwaysCall.apply(self, AMP.argsToArray(arguments));
     });
 
@@ -894,16 +894,16 @@ var AMP = AMP || {};
    */
   p._update = function(){
     var self = this,
-    current = self.params.updateCount / self.params.length * 100;
+    current = self.param.updateCount / self.param.length * 100;
 
     // カウンターのインクリメント
-    if(self.params.loadCount < current){
-      self.params.loadCount += 1;
+    if(self.param.loadCount < current){
+      self.param.loadCount += 1;
     }
 
-    self._updateCall(Math.ceil(self.params.loadCount));
+    self._updateCall(Math.ceil(self.param.loadCount));
 
-    if(100 <= self.params.loadCount){
+    if(100 <= self.param.loadCount){
       self._compleatCall();
     } else {
       AMP.requestAnimationFrame(function(){
@@ -1084,13 +1084,13 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
     /**
      * <h4>js Template要素</h4>
      *
-     * @property params.$tmp
+     * @property param.$tmp
      * @type {jQuery}
      */
     /**
@@ -1099,35 +1099,35 @@ var AMP = AMP || {};
      * 初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
      * これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です
      *
-     * @property params.$el
+     * @property param.$el
      * @type {Hogan}
      */
     /**
      * <h4>Hoganテンプレート</h4>
      *
-     * @property params.template
+     * @property param.template
      * @type {Hogan}
      */
     /**
      * <h4>レンダリングオリジナルデータ保管</h4>
      *
-     * @property params.originalData
+     * @property param.originalData
      * @type {Arrary|Object}
      */
     /**
      * <h4>レンダリングデータ</h4>
      *
-     * @property params.renderData
+     * @property param.renderData
      * @type {Arrary|Object}
      */
     /**
      * <h4>$.ajaxオプション値</h4>
      * Render.ajaxOptionsとajaxOptionsをmixinした値を格納します
      *
-     * @property params.ajaxOptions
+     * @property param.ajaxOptions
      * @type {Object}
      */
-    this.params = {
+    this.param = {
       $tmp        : $tmp,
       $el         : null,
       template    : Hogan.compile($tmp.html()),
@@ -1190,7 +1190,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します<br>
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します<br>
    * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a>
    *
    * @static
@@ -1263,10 +1263,10 @@ var AMP = AMP || {};
   p.ajax = function(){
     var self = this;
 
-    return $.ajax(self.params.ajaxOptions)
+    return $.ajax(self.param.ajaxOptions)
     .fail(self.ajaxFail)
     .done(function(data){
-      self.params.originalData = data;
+      self.param.originalData = data;
       self.ajaxDone(data);
     });
   };
@@ -1309,13 +1309,13 @@ var AMP = AMP || {};
    */
   p.setRenderData = function(renderData){
     if(renderData){
-      this.params.renderData = renderData;
+      this.param.renderData = renderData;
     } else {
-      if(AMP.isArray(this.params.originalData)){
-        this.params.renderData = this.params.originalData.concat();
+      if(AMP.isArray(this.param.originalData)){
+        this.param.renderData = this.param.originalData.concat();
 
       } else {
-        this.params.renderData = $.extend({}, this.params.originalData);
+        this.param.renderData = $.extend({}, this.param.originalData);
       }
     }
 
@@ -1342,9 +1342,9 @@ var AMP = AMP || {};
    * @return {Render}
    */
   p.removePrevHTML = function(){
-    if(!this.params.$el){
-      this.params.$tmp.wrapAll('<div class="js_render" />');
-      this.params.$el = this.params.$tmp.parent();
+    if(!this.param.$el){
+      this.param.$tmp.wrapAll('<div class="js_render" />');
+      this.param.$el = this.param.$tmp.parent();
     } else {
       this.$el.children().remove();
     }
@@ -1373,7 +1373,7 @@ var AMP = AMP || {};
    */
   p.createHTML = function(data){
     this.setRenderData(data);
-    return this.params.template.render(this.params.renderData) || this.notFound();
+    return this.param.template.render(this.param.renderData) || this.notFound();
   };
 
 
@@ -1385,7 +1385,7 @@ var AMP = AMP || {};
    */
   p.render = function(data){
     this.removePrevHTML();
-    this.params.$el[0].innerHTML = this.createHTML(data);
+    this.param.$el[0].innerHTML = this.createHTML(data);
     return this;
   };
 
@@ -1738,18 +1738,18 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+    this.param = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property params.$scrollTrigger
+     * @property param.$scrollTrigger
      * @type {Object}
      */
-    this.params.$scrollTrigger = $scrollTrigger;
+    this.param.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -1785,7 +1785,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property scrollOptions
@@ -1891,8 +1891,8 @@ var AMP = AMP || {};
     // スクロールイベントの重複回避
     this.off();
 
-    self.params.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.params.$scrollTrigger.index(this));
+    self.param.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.param.$scrollTrigger.index(this));
     });
 
     return this;
@@ -1906,7 +1906,7 @@ var AMP = AMP || {};
    * @return {Scroll}
    */
   p.off = function(){
-    this.params.$scrollTrigger.off('click.Scroll');
+    this.param.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
@@ -1919,8 +1919,8 @@ var AMP = AMP || {};
    */
   p.tween = function(num){
     var self = this,
-    param = self.params,
-    $scrollTrigger = self.params.$scrollTrigger.eq(num),
+    param = self.param,
+    $scrollTrigger = self.param.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
@@ -1984,35 +1984,35 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.param = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
      * @default $('.scroll_toggle')
-     * @property params.$scrollToggle
+     * @property param.$scrollToggle
      * @type {jQuery}
      */
-    this.params.$scrollToggle = $scrollToggle;
+    this.param.$scrollToggle = $scrollToggle;
 
     /**
      * <h4>window要素</h4>
      *
-     * @property params.$window
+     * @property param.$window
      * @type {jQuery}
      */
-    this.params.$window = $(window);
+    this.param.$window = $(window);
 
     /**
      * <h4>Display:Block表示の状態</h4>
      *
-     * @property params.isDisplay
+     * @property param.isDisplay
      * @type {Boolean}
      */
-    this.params.isDisplay = $scrollToggle.css('display') !== 'none';
+    this.param.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -2048,7 +2048,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property scrollToggleOptions
@@ -2150,16 +2150,16 @@ var AMP = AMP || {};
    */
   p.on = function(){
     var self = this,
-    param = self.params,
+    param = self.param,
     offsetY;
 
-    self.params.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.params.$window.scrollTop();
+    self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      offsetY = self.param.$window.scrollTop();
 
       // 表示・非表示
-      if(!self.params.isDislpay && param.showY < offsetY){
+      if(!self.param.isDislpay && param.showY < offsetY){
         self.show();
-      } else if(self.params.isDislpay && param.showY > offsetY){
+      } else if(self.param.isDislpay && param.showY > offsetY){
         self.hide();
       }
     }).trigger('scroll.ScrollToggle');
@@ -2175,7 +2175,7 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.params.$window.off('scroll.ScrollToggle');
+    this.param.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -2189,11 +2189,11 @@ var AMP = AMP || {};
   p.show = function(){
     var self = this;
 
-    self.params.isDislpay = true;
+    self.param.isDislpay = true;
 
-    self.params.$scrollToggle.css({display: 'block'}).css(self.params.hide)
+    self.param.$scrollToggle.css({display: 'block'}).css(self.param.hide)
     .velocity('stop')
-    .velocity(self.params.show, self.params.duration, self.params.ease, self.params.showCall);
+    .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
 
     return this;
   };
@@ -2208,13 +2208,13 @@ var AMP = AMP || {};
   p.hide = function(){
     var self = this;
 
-    self.params.isDislpay = false;
+    self.param.isDislpay = false;
 
-    self.params.$scrollToggle
+    self.param.$scrollToggle
     .velocity('stop')
-    .velocity(self.params.hide, self.params.duration, self.params.ease, function(){
-      self.params.$scrollToggle.css({display: 'none'});
-      self.params.hideCall();
+    .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
+      self.param.$scrollToggle.css({display: 'none'});
+      self.param.hideCall();
     });
 
     return this;
@@ -2256,10 +2256,10 @@ var AMP = AMP || {};
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
-     * @property params
+     * @property param
      * @type {Object}
      */
-    this.params = $.extend(true,
+    this.param = $.extend(true,
       {},
       SmoothScroll.smoothScrollOptions,
       {$page: $('html, body')},
@@ -2300,7 +2300,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamsオブジェクトに格納します
+   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
    *
    * @static
    * @property smoothScrollOptions
@@ -2373,7 +2373,7 @@ var AMP = AMP || {};
 
     // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.params.$page.off('mousewheel.SmoothScroll')
+      self.param.$page.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(){
         self.tween(arguments[1]);
         return false;
@@ -2390,7 +2390,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.params.$page.off('mousewheel.SmoothScroll');
+    this.param.$page.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -2403,11 +2403,11 @@ var AMP = AMP || {};
    */
   p.tween = function(move){
     var self = this,
-    param = self.params,
-    y = AMP.isWebkit() ? self.params.$page.eq(1).scrollTop() : self.params.$page.eq(0).scrollTop(),
+    param = self.param,
+    y = AMP.isWebkit() ? self.param.$page.eq(1).scrollTop() : self.param.$page.eq(0).scrollTop(),
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
-    self.params.$page.velocity('stop')
+    self.param.$page.velocity('stop')
     .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
   };
 

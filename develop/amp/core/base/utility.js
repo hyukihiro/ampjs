@@ -84,6 +84,78 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>DEG</h4>
+   *
+   * @static
+   * @property DEG
+   * @type {Number}
+   */
+  AMP.DEG = Math.PI / 180;
+
+
+  /**
+   * <h4>角度、距離からxy座標を返す </h4>
+   *
+   * @static
+   * @method coords
+   * @param  {Number} deg    角度
+   * @param  {Number} distanceX 距離
+   * @param  {Number} distanceY 距離
+   * @return {Object}
+   */
+  AMP.coords = function(deg, distanceX, distanceY){
+    return {
+      x: AMP.coordX(deg, distanceX),
+      y: AMP.coordY(deg, distanceY)
+    };
+  };
+
+
+  /**
+   * <h4>角度、距離からx座標を算出</h4>
+   *
+   * @static
+   * @method coordX
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceX 距離
+   * @return {Number}
+   */
+  AMP.coordX = function(deg, distanceX){
+    return Math.cos(deg * AMP.DEG) * distanceX;
+  };
+
+
+  /**
+   * <h4>角度、距離からy座標を算出</h4>
+   *
+   * @static
+   * @method coordY
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceY 距離
+   * @return {Number}
+   */
+  AMP.coordY = function(deg, distanceY){
+    return Mas.sin(deg * AMP.DEG) * distanceY;
+  };
+
+
+  /**
+   * <h4>現在と過去の位置から角度を算出</h4>
+   *
+   * @static
+   * @method deg
+   * @param  {Number} x     現在のx座標
+   * @param  {Number} y     現在のy座標
+   * @param  {Number} prevX 前のx座標
+   * @param  {Number} PrevY 前のx座標
+   * @return {Number}
+   */
+  AMP.deg = function(x, y, prevX, PrevY){
+    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
+  };
+
+
+  /**
    * <h4>16進数カラーをRGBに変換します</h4>
    *
    * @static

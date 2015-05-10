@@ -100,6 +100,7 @@ var AMP = AMP || {};
 
     if(AMP.isObject(key)){
       isSilent = val;
+      isCahnge = true;
       AMP.mixin(true, this._props, key);
 
     } else if(this._props[key] !== val){

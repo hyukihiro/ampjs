@@ -69,7 +69,7 @@ var AMP = AMP || {};
 
     // start
     this._start();
-  };
+  }
 
   // 基底クラスを継承
   AMP.inherits(Loader, AMP.BASE_CLASS);
