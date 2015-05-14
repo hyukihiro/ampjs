@@ -27,9 +27,9 @@ var AMP = AMP || {};
 			Slider.defaults,
 			{
 				$wrap         : $wrap,
-				$frame        : $wrap.find('.slider-frame'),
-				$slide        : $wrap.find('.slider-list'),
-				$items        : $wrap.find('.slider-list').children(),
+				$frame        : $wrap.find('.frame'),
+				$slide        : $wrap.find('.list'),
+				$items        : $wrap.find('.list').children(),
 				$pointer      : $wrap.find('.pointer'),
 				$thumbnail    : $wrap.find('.thumbnail a'),
 				$prev         : $wrap.find('.prev a'),

@@ -1,0 +1,82 @@
+@charset "utf-8";
+
+
+
+
+/*--------------------------------------------------------------------------
+	.slider
+--------------------------------------------------------------------------*/
+
+
+.slider{
+	position: relative;
+	width: 700px;
+	margin: 0 auto;
+}
+
+.slider .frame{
+	overflow: hidden;
+	position: relative;
+	width: 700px;
+	height: 250px;
+}
+.slider .list{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 10000px;
+}
+.slider .list li{
+	float: left;
+}
+
+
+.slider .prev,
+.slider .next{
+	position: absolute;
+	top: 100px;
+}
+.slider .prev{
+	left: -20px;
+}
+.slider .next{
+	right: -20px;
+}
+
+
+.slider .thumbnail li{
+	padding: 20px 12px 0 0;
+	float: left;
+}
+.slider .thumbnail li a{
+	display: block;
+	border: 3px solid #ccc;
+}
+.slider .thumbnail li a:hover{
+	border-color: #f09;
+}
+
+
+.slider .pointer{
+	letter-spacing: -.4em;
+	text-align: center;
+}
+.slider .pointer li{
+	display: inline;
+}
+.slider .pointer a{
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin: 10px 5px;
+	background: #ccc;
+	border-radius: 100%;
+}
+.slider .pointer a:hover{
+	background: #c09;
+}
+
+
+
+
+

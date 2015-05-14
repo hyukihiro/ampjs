@@ -2,11 +2,14 @@
 jQuery(function($){
 
 
-	$('body').on('flickcancelX', function(events){
-		// console.log(events);
-		// console.log(events.type);
-		AMP.debug.log(events.type);
-	});
+	// $('body').on('flickcancelX', function(events){
+	// 	// console.log(events);
+	// 	// console.log(events.type);
+	// 	AMP.debug.log(events.type);
+	// });
+
+	AMP.$.rollover.on();
+
 
 
 

@@ -210,10 +210,10 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat('amp.core.js'))
+	.pipe(MODULE.concat('amp.js'))
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
-	.pipe(MODULE.rename({basename: 'amp.core.min'}))
+	.pipe(MODULE.rename({basename: 'amp.min'}))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
