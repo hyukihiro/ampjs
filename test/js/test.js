@@ -2,8 +2,10 @@
 jQuery(function($){
 
 
-	$('p').on('flick', function(){
-		AMP.debug.log(event);
+	$('body').on('flickcancelX', function(events){
+		// console.log(events);
+		// console.log(events.type);
+		AMP.debug.log(events.type);
 	});
 
 

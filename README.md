@@ -42,7 +42,8 @@ amp/jquery.plugins.min.js
 
 ## 追加予定ライブラリ
 リアクティブ
+* React
+* Flux
 * RxJS
 * BaconJS
-* RactiveJS
 

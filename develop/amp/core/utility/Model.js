@@ -79,7 +79,7 @@ var AMP = AMP || {};
   /**
    * <h4>プロパティの取得</h4>
    *
-   * @method　get
+   * @method get
    * @param  {String} key 取得したいキー
    * @return {Any}
    */
@@ -117,7 +117,7 @@ var AMP = AMP || {};
 
 
   /**
-   *　<h4>プロパティクリア</h4>
+   * <h4>プロパティクリア</h4>
    *
    * @method clear
    * @return {Model}
@@ -132,7 +132,7 @@ var AMP = AMP || {};
 
 
   /**
-   *　<h4>値があるか判定します</h4>
+   * <h4>値があるか判定します</h4>
    * undefined, Nullは、falseを返します
    *
    * @method has
