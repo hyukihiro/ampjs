@@ -30,6 +30,14 @@
 	float: left;
 }
 
+@media all and (max-width: 1024px){
+	.slider .slide li img{
+		width: 350px;
+		height: 250px;
+	}
+}
+
+
 
 .slider .prev,
 .slider .next{

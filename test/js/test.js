@@ -11,7 +11,7 @@ jQuery(function($){
 	AMP.$.rollover.on();
 
 
-	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1});
+	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1, isLoop: false, isResize: true});
 
 	console.log(slider);
 

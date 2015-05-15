@@ -107,7 +107,7 @@ var AMP = AMP || {};
   }
 
   // 基底クラスを継承
-  AMP.inherits(Slider, AMP.BASE_CLASS);
+  AMP.inherits(Slider, AMP.$.UIController);
 
   // prototype
   var p = Slider.prototype;
@@ -282,6 +282,7 @@ var AMP = AMP || {};
     isInit        : true,
     isFlick       : true,
     isLoop        : true,
+    isResize      : false,
     isTimerCancel : true,
     current       : 0,
     slideStep     : 0,
@@ -317,12 +318,17 @@ var AMP = AMP || {};
 
   /**
    * <h4>初期化</h4>
+   * Singleton
    *
    * @method  init
    * @return {Slider}
    */
   p.init = function(){
-  	var self = this;
+    var self = this;
+
+    if(this._isInit){
+      return this;
+    }
 
 		// param
 		self.setParam();
@@ -335,14 +341,19 @@ var AMP = AMP || {};
 		// event
 		self.addEventResize();
 		self.addEventTimerCancel();
-		self.addEventFlick(self.param.$slide);
-		self.addEventNext(self.param.$next);
-		self.addEventPrev(self.param.$prev);
-		self.addEventPager(self.param.$thumbnail);
-		self.addEventPager(self.param.$pointer.find('a'));
+    self.addEventFlick(self.param.$slide);
+    self.addEventNext(self.param.$next);
+    self.addEventPrev(self.param.$prev);
+    self.addEventPager(self.param.$thumbnail);
+    self.addEventPager(self.param.$pointer.find('a'));
 
 		// timer
 		self.timerStart();
+
+    // 初期化フラグ
+    this._isInit = true;
+
+    return this;
   };
 
 
@@ -380,8 +391,6 @@ var AMP = AMP || {};
       self.param.current = Math.ceil(self.param.current * visible);
     }
 
-
-
     // 表示エリアにある要素数
     self.param.visible = visible;
 
@@ -390,12 +399,12 @@ var AMP = AMP || {};
 
     // スライド最大数
     if(0 < self.param.slideStep){
-      self.param.slideMaxCount = Math.ceil(self.param.displayLength / self.param.slideStep);
+      self.param.slideMaxCount = Math.ceil(self.param.displayLength / self.param.slideStep) - (self.param.visible - self.param.slideStep);
     } else {
       self.param.slideMaxCount = Math.ceil(self.param.displayLength / self.param.visible);
     }
 
-    return self;
+    return this;
   };
 
 
@@ -410,21 +419,26 @@ var AMP = AMP || {};
 	p.addEventResize = function(){
 		var self = this;
 
-		$(window)
-		.off('resize.Slider resizestop.Slider')
+		$(window).off('resize.Slider resizestop.Slider')
 		.on('resize.Slider', function(){
-			self.timerStop();
-			self.setParam();
-			self.setPosition();
-			self.active();
-			self.param.resizeCall(self.param);
-		})
-		.on('resizestop.Slider', function(){
-			self.timerStart();
-			self.param.resizeStopCall(self.param);
+      if(self.param.isResize){
+  			self.timerStop();
+  			self.setParam();
+  			self.setPosition();
+        self.param.resizeCall(self.param);
+      }
+    })
+    .on('resizestop.Slider', function(){
+      if(self.param.isResize){
+        self._createPointer();
+        self.addEventPager(self.param.$pointer.find('a'));
+        self.active();
+        self.timerStart();
+        self.param.resizeStopCall(self.param);
+      }
 		});
 
-		return self;
+		return this;
   };
 
 
@@ -450,64 +464,8 @@ var AMP = AMP || {};
 			}
 		});
 
-		return self;
+		return this;
   };
-
-
-	/**
-	 * <h4>ネクストボタンイベント</h4>
-	 *
-	 * @method addEventNext
-	 * @param {jQuery} $trigger トリガー要素
-	 * @return {Slider}
-	 */
-	p.addEventNext = function($trigger){
-		var self = this;
-		$trigger.off('click.Slider').on('click.Slider', function(){
-			self.next();
-			return false;
-		});
-
-		return self;
-	};
-
-
-	/**
-	 * <h4>プレブボタンイベント</h4>
-	 *
-	 * @method addEventPrev
-	 * @param {jQuery} $trigger トリガー要素
-	 * @return {Slider}
-	 */
-	p.addEventPrev = function($trigger){
-		var self = this;
-
-		$trigger.off('click.Slider').on('click.Slider', function(){
-			self.prev();
-			return false;
-		});
-
-		return self;
-	};
-
-
-	/**
-	 * <h4>ページャーボタンイベント</h4>
-	 *
-	 * @method addEventPrev
-	 * @param {jQuery} $trigger トリガー要素
-	 * @return {Slider}
-	 */
-	p.addEventPager = function($trigger){
-		var self = this;
-
-		$trigger.off('click.Slider').on('click.Slider', function(){
-			self.moveTo($trigger.index(this));
-			return false;
-		});
-
-		return self;
-	};
 
 
   /**
@@ -534,7 +492,7 @@ var AMP = AMP || {};
 			}
 		});
 
-		return self;
+		return this;
 	};
 
 
@@ -563,7 +521,7 @@ var AMP = AMP || {};
 			}, self.param.timer + self.param.duration);
 		}
 
-		return self;
+		return this;
 	};
 
 
@@ -579,45 +537,6 @@ var AMP = AMP || {};
 
 
 	/**
-	 * <h4>次へスライド</h4>
-	 *
-	 * @method next
-	 * @return {Slider}
-	 */
-	p.next = function(){
-		this._controller(this.param.current + 1);
-		return this;
-	};
-
-
-	/**
-	 * <h4>前へスライド</h4>
-	 *
-	 * @method prev
-	 * @return {Slider}
-	 */
-	p.prev = function(){
-		this._controller(this.param.current - 1);
-		return this;
-	};
-
-
-	/**
-	 * <h4>指定したスライドインデックスへスライド</h4>
-	 *
-	 * @method moveTo
-	 * @param  {Number} num 指定したスライドインデックス
-	 * @return {Slider}
-	 */
-	p.moveTo = function(num){
-		if(AMP.isNumber(num) && num < this.param.slideMaxCount){
-			this._controller(num);
-		}
-		return this;
-	};
-
-
-	/**
 	 *<h4> コントローラー</h4>
 	 *
    * @private
@@ -625,54 +544,47 @@ var AMP = AMP || {};
 	 * @param  {Number} step スライドするステップ数
 	 * @return {Void}
 	 */
-  p._controller = function(step){
+  p._controller = function(step, isIndex){
 		var self = this;
 
 		if(self.param._isAnimate){
 			return void 0;
 		}
-		self.param._isAnimate = true;
 
+    // stepの調整
+    if(isIndex){
+      step = step < self.param.slideMaxCount ? step : self.param.slideMaxCount - 1;
+    } else {
+      step = self.param.current + step;
+    }
 
-		// getSlideNumつくる？
-		if(-1 < step && step < self.param.slideMaxCount){
+    //
+    if(-1 < step && step < self.param.slideMaxCount){
       self.param.current = step;
-		} else {
-			if(self.param.isLoop){
-				self.param.current = -1 < step ? step - self.param.slideMaxCount : self.param.slideMaxCount + step;
-			} else {
-				return;
-			}
-		}
+    } else {
+      if(self.param.isLoop){
+        self.param.current = -1 < step ? step - self.param.slideMaxCount : self.param.slideMaxCount + step;
+      } else {
+        return void 0;
+      }
+    }
 
+		self.param._isAnimate = true;
 		self.param.left = self.param.current * self.param.distance * -1;
 
-		// isLoop
-		// current
-		// slideStep
-		// length
-		// displayLength
-		// distance
-		// left
-
 		$.sequence(
-
-			// スライド前のコールバック実行
-			function(){
+      function(){
+  			// スライド前のコールバック実行
 				self.timerStop();
 				self.active();
 				return self.param.tweenBegin(self.param);
 			},
-
-			// スライドとコールバック実行
-			function(){
-				// left値を決める
-
+      function(){
+	   		// スライドとコールバック実行
 				return self._tween();
 			},
-
-			// スライド完了コールバック
-			function(){
+      function(){
+  			// スライド完了コールバック
 				return self.param.tweenCompleat(self.param);
 			},
 			function(){
@@ -685,6 +597,23 @@ var AMP = AMP || {};
 
 	/* Views
 	-----------------------------------------------------------------*/
+  /**
+   * <h4>表示可能な要素の数を取得</h4>
+   *
+   * @method getDisplayLength
+   * @return {Number}
+   */
+  p.getDisplayLength = function(){
+    var count = 0;
+    this.param.$slideItems.each(function(){
+      if($(this).css('display') !== 'none'){
+        count += 1;
+      }
+    });
+    return count;
+  };
+
+
 	/**
 	 * <h4>ポインターの生成</h4>
 	 *
@@ -694,7 +623,7 @@ var AMP = AMP || {};
 	 */
   p._createPointer = function(){
 		if(this.param.$pointer[0]){
-			var pointerHTML = this.param.$pointer[0].innerHTML,
+			var pointerHTML = this.param.$pointer.find('>')[0].outerHTML,
 			print = '',
 			i = 0;
 
@@ -708,19 +637,15 @@ var AMP = AMP || {};
   };
 
 
-
-
   /**
    * ここ途中
    * [setPosition description]
    */
-  p.setPosition = function (){
-  	/*
-		this.param.$slide.css({
-			width: this.param.displayLength * itemWidth,
-			left : this.param.distance * this.param.current * -1
-		});
-*/
+  p.setPosition = function(){
+    this.param.$slide.css({
+      width: this.param.displayLength * this.param.$slideItems.outerWidth(true),
+      left : this.param.left
+    });
 		return this;
   };
 
@@ -784,7 +709,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._move = function(x){
-		this.param.$slide.css({left: this.param.left + x});
+		this.param.$slide.velocity('stop').css({left: this.param.left + x});
   };
 
 
@@ -796,7 +721,8 @@ var AMP = AMP || {};
    * @return {jQuery.Deferred}
    */
   p._resetTween = function(){
-		return this.param.$slide.velocity({left: this.param.left}, this.param.duration / 2, this.param.ease);
+		return this.param.$slide.velocity('stop')
+    .velocity({left: this.param.left}, this.param.duration / 2, this.param.ease);
   };
 
 
@@ -811,23 +737,6 @@ var AMP = AMP || {};
 		return this.param.$slide.velocity('stop')
     .velocity({left: this.param.left}, this.param.duration, this.param.ease);
 	};
-
-
-  /**
-   * <h4>表示可能な要素の数を取得</h4>
-   *
-	 * @method getDisplayLength
-	 * @return {Number}
-   */
-  p.getDisplayLength = function(){
-    var count = 0;
-		this.param.$slideItems.each(function(){
-      if($(this).css('display') !== 'none'){
-        count += 1;
-      }
-    });
-    return count;
-  };
 
 
 

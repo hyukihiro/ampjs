@@ -233,11 +233,10 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// base
-	// MODULE.gulp.src([
-	// 	PATH.develop + 'amp/jquery/base/*.js',
-	// 	PATH.develop + 'amp/jquery/utility/*.js'
-	// })
-	MODULE.gulp.src(PATH.develop + 'amp/jquery/base/*.js')
+	MODULE.gulp.src([
+		PATH.develop + 'amp/jquery/base/*.js',
+		PATH.develop + 'amp/jquery/utility/*.js'
+	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
