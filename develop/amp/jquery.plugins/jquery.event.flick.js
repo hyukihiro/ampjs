@@ -20,7 +20,7 @@
 
 
 	// バージョン情報
-	Flick.VERSION = '1.3.0';
+	Flick.VERSION = '1.3.1';
 
 
 	// イベント設定値
@@ -157,10 +157,11 @@
 			// move
 			$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr)
 			.on('mousemove' + attr + ' touchmove' + attr, function(moveEvent){
-				Flick.setMoveData(moveEvent, data, param);
-				if((data.isMoveX && eventType.isSide) || (data.isMoveY && eventType.isUpdown)){
-					//moveEvent.preventDefault();
+				if(!Flick.isTouch){
+					moveEvent.preventDefault();
 				}
+
+				Flick.setMoveData(moveEvent, data, param);
 			})
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && eventType.isSide,
@@ -218,7 +219,9 @@
 			$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr)
 			.on('mousemove' + attr + ' touchmove' + attr, function(moveEvent){
 				Flick.setMoveData(moveEvent, data, param);
-
+				if(!Flick.isTouch){
+					moveEvent.preventDefault();
+				}
 				// イベントタイプ振り分け
 				if(type === 'flickmove'){
 					if(data.isMoveX || data.isMoveY){
@@ -290,10 +293,12 @@
 			// move
 			$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr)
 			.on('mousemove' + attr + ' touchmove' + attr, function(moveEvent){
-				Flick.setMoveData(moveEvent, data, param);
-				if((data.isMoveX && eventType.isSide) || (data.isMoveY && eventType.isUpdown)){
-					//moveEvent.preventDefault();
+				if(!Flick.isTouch){
+					moveEvent.preventDefault();
 				}
+
+				Flick.setMoveData(moveEvent, data, param);
+				// return false;
 			})
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && eventType.isSide,
@@ -321,8 +326,8 @@
 				$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 
 				if(data && data.flickEvent){
-					var isX = data.isMoveX && param.hit > Math.abs(data.moveX) && eventType.isSide,
-					isY = data.isMoveY && param.hit > Math.abs(data.moveY) && eventType.isUpdown;
+					var isX = param.hit > Math.abs(data.moveX) && eventType.isSide,
+					isY = param.hit > Math.abs(data.moveY) && eventType.isUpdown;
 
 					data.flickEvent.type  = type;
 					data.flickEvent.moveX = data.moveX;
@@ -331,9 +336,9 @@
 					if((eventType.isSide && data.isMoveX) || (eventType.isUpdown && data.isMoveY)){
 						if(type === Flick.events.flickcancel && isX && isY){
 							$target.trigger(data.flickEvent);
-						} else if(type === Flick.events.flickcancelX && isX){
+						} else if(type === Flick.events.flickcancelX && data.isMoveX && isX){
 							$target.trigger(data.flickEvent);
-						} else if(type === Flick.events.flickcancelY && isY){
+						} else if(type === Flick.events.flickcancelY && data.isMoveY && isY){
 							$target.trigger(data.flickEvent);
 						}
 					}

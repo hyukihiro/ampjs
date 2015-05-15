@@ -11,13 +11,14 @@ var AMP = AMP || {};
 
   /**
    * <h4>モデル管理</h4>
+   * FIXME: βバージョン
    *
-   * @class AMP.Modal
+   * @class AMP.Model
    * @extends AMP.Events
    * @constructor
    * @param {Object} props プロパティ
    */
-  function Modal(props){
+  function Model(props){
 
     /**
      * <h4>プロパティ</h4>
@@ -30,10 +31,10 @@ var AMP = AMP || {};
   }
 
   // AMP.Eventsクラスを継承
-  AMP.inherits(Modal, AMP.Events);
+  AMP.inherits(Model, AMP.Events);
 
   // prototype
-  var p = Modal.prototype;
+  var p = Model.prototype;
 
 
 
@@ -48,7 +49,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Modal.VERSION = '1.0.0';
+  Model.VERSION = '1.0.0';
 
 
   /**
@@ -57,7 +58,7 @@ var AMP = AMP || {};
    * @property className
    * @type {String}
    */
-  p.className = 'Modal';
+  p.className = 'Model';
 
 
   /**
@@ -68,7 +69,7 @@ var AMP = AMP || {};
    * @default change
    * @type {String}
    */
-  Modal.eventType = 'change';
+  Model.eventType = 'change';
 
 
 
@@ -165,7 +166,7 @@ var AMP = AMP || {};
    */
   p._controller = function(isSilent){
     if(!isSilent){
-      this.trigger(Modal.eventType);
+      this.trigger(Model.eventType);
     }
   };
 
@@ -175,7 +176,7 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Modal = Modal;
+  AMP.Model = Model;
 
 
 }(window));

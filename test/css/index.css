@@ -20,13 +20,13 @@
 	width: 700px;
 	height: 250px;
 }
-.slider .list{
+.slider .slide{
 	position: absolute;
 	top: 0;
 	left: 0;
 	width: 10000px;
 }
-.slider .list li{
+.slider .slide li{
 	float: left;
 }
 
@@ -52,6 +52,7 @@
 	display: block;
 	border: 3px solid #ccc;
 }
+.slider .thumbnail li a.active,
 .slider .thumbnail li a:hover{
 	border-color: #f09;
 }
@@ -72,11 +73,8 @@
 	background: #ccc;
 	border-radius: 100%;
 }
+.slider .pointer li.active a,
 .slider .pointer a:hover{
 	background: #c09;
 }
-
-
-
-
 

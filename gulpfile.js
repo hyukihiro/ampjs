@@ -16,8 +16,8 @@ var PATH = {
 	proxy   : '/test/',   // develop
 	develop : 'develop/', // 開発用
 	dist    : 'dist/',    // 配布用
-	docsTemp: 'docsTemp/',// ドキュメントテンプレート用
-	docs    : 'docs/'     // ドキュメント用
+	docsTemp: 'js_docs_temp/',// ドキュメントテンプレート用
+	docs    : 'js_docs/'     // ドキュメント用
 };
 
 

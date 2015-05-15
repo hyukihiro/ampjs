@@ -146,7 +146,7 @@ var AMP = AMP || {};
     });
 
     // always: 全ての読込み処理完了時
-    self.param.imagesloaded.on('always', function(e){
+    self.param.imagesloaded.on('always', function(){
       self._alwaysCall.apply(self, AMP.argsToArray(arguments));
     });
 
