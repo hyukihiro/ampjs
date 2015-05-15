@@ -1,0 +1,2034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>AMP.js v3.0.0 API Documentation : AMP.$.Render</title>
+
+<link rel="stylesheet" href="../assets/css/yui-cssgrids-min.css">
+<link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+<link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+<link rel="stylesheet" href="../assets/css/custom.css">
+<link rel="shortcut icon" type="image/x-icon" href="../assets/favicon.ico">
+
+<script src="../assets/js/yui-source.js"></script>
+</head>
+
+<body class="yui3-skin-sam">
+
+
+<div id="doc">
+<div id="hd" class="yui3-g header">
+<div class="yui3-u-3-4">
+<h1><a href="https://bitbucket.org/yoshihitofujiwara/ampjs"><img src="../assets/css/logo.png" title="AMP.js"></a></h1>
+</div>
+<div class="version">
+<em>API Documentation for: 3.0.0</em>
+</div>
+<!-- #hd // --></div>
+
+
+<div id="bd" class="yui3-g">
+<div class="yui3-u-1-4">
+<div id="docs-sidebar" class="sidebar apidocs">
+<div id="api-list">
+<h2 class="off-left">APIs</h2>
+<div id="api-tabview" class="tabview">
+<ul class="tabs">
+<li><a href="#api-classes">Classes</a></li>
+</ul>
+
+<div id="api-tabview-filter">
+<input type="search" id="api-filter" placeholder="Type to filter APIs">
+</div>
+
+<div id="api-tabview-panel">
+<ul id="api-classes" class="apis classes">
+
+<li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+
+<li><a href="../classes/AMP.$.Ease.html">AMP.$.Ease</a></li>
+
+<li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
+
+<li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
+
+<li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
+
+<li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
+
+<li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
+
+<li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
+
+<li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
+
+<li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+
+<li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
+
+<li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
+
+<li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
+
+<li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+
+<li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
+
+<li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
+
+<li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+
+<li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
+
+<li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
+
+<li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+
+<li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
+
+<li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
+
+<li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
+
+<li><a href="../classes/AMP.String.html">AMP.String</a></li>
+
+<li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
+
+<li><a href="../classes/Fallback.html">Fallback</a></li>
+
+<li><a href="../classes/jQuery.html">jQuery</a></li>
+
+<li><a href="../classes/XXX_Ease.html">XXX_Ease</a></li>
+
+<li><a href="../classes/XXX_Layer.html">XXX_Layer</a></li>
+
+<li><a href="../classes/XXX_Loader.html">XXX_Loader</a></li>
+
+</ul>
+
+<ul id="api-modules" class="apis modules">
+
+</ul>
+</div>
+</div>
+</div>
+
+</div>
+<!-- #yui3-u-1-4 // --></div>
+
+
+<div class="yui3-u-3-4">
+<div id="api-options">
+Show:
+<label for="api-show-inherited">
+<input type="checkbox" id="api-show-inherited" checked>
+Inherited
+</label>
+
+<label for="api-show-protected">
+<input type="checkbox" id="api-show-protected">
+Protected
+</label>
+
+<label for="api-show-private">
+<input type="checkbox" id="api-show-private">
+Private
+</label>
+<label for="api-show-deprecated">
+<input type="checkbox" id="api-show-deprecated">
+Deprecated
+</label>
+
+</div>
+
+<div class="apidocs"><div id="docs-main"><div class="content">
+<h1>AMP.$.Render Class</h1>
+<div class="box meta">
+
+
+
+<div class="extends">
+Extends <a href="..\classes\AMP.BASE_CLASS.html" class="crosslink">AMP.BASE_CLASS</a>
+</div>
+
+
+
+<div class="foundat">
+Defined in: <a href="../files/develop_amp_jquery_plugins_Render.js.html#l13"><code>AMP.$.Render:13</code></a>
+</div>
+
+
+
+
+
+</div>
+
+
+
+<div class="box intro">
+<p><h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>
+処理が完了したら、jQuery Deferred Objectを返します<br>
+<em>Hogan.jsに依存します</em></p>
+
+</div>
+
+
+<div class="constructor">
+<h2>Constructor</h2>
+<div id="method_AMP.$.Render" class="method item">
+<h3 class="name"><code>AMP.$.Render</code></h3>
+
+
+<div class="args">
+<span class="paren">(</span><ul class="args-list inline commas">
+
+<li class="arg">
+
+<code>$tmp</code>
+
+</li>
+
+<li class="arg">
+
+<code>ajaxOptions</code>
+
+</li>
+
+</ul><span class="paren">)</span>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l13"><code>AMP.$.Render:13</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+
+</div>
+
+
+<div class="params">
+<h4>Parameters:</h4>
+
+<ul class="params-list">
+
+<li class="param">
+
+<code class="param-name">$tmp</code>
+<span class="type">JQuery</span>
+
+
+
+
+<div class="param-description">
+<p>jsTemplate要素</p>
+
+</div>
+
+
+</li>
+
+<li class="param">
+
+<code class="param-name">ajaxOptions</code>
+<span class="type">Object</span>
+
+
+
+
+<div class="param-description">
+<p>$.ajax options</p>
+
+</div>
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+
+
+</div>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+<ul class="api-class-tabs">
+<li class="api-class-tab index"><a href="#index">Index</a></li>
+
+
+<li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+
+<li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+
+</ul>
+
+<div>
+<div id="index" class="api-class-tabpanel index">
+<h2 class="off-left">Item Index</h2>
+
+
+<div class="index-section methods">
+<h3>Methods</h3>
+
+<ul class="index-list methods extends">
+
+<li class="index-item method">
+<a href="#method_ajaxDone">ajaxDone</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_ajaxFail">ajaxFail</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_createHTML">createHTML</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_filtter">filtter</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_getAjax">getAjax</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_notFound">notFound</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_removePrevHTML">removePrevHTML</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_render">render</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_render">render</a>
+
+
+<span class="flag static">static</span>
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_setRenderData">setRenderData</a>
+
+
+
+</li>
+
+<li class="index-item method">
+<a href="#method_start">start</a>
+
+
+
+</li>
+
+<li class="index-item method inherited">
+<a href="#method_toString">toString</a>
+
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+<div class="index-section properties">
+<h3>Properties</h3>
+
+<ul class="index-list properties extends">
+
+<li class="index-item property">
+<a href="#property_ajaxOptions">ajaxOptions</a>
+<span class="flag static">static</span>
+
+</li>
+
+<li class="index-item property">
+<a href="#property_ajaxOptions.chace">ajaxOptions.chace</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_ajaxOptions.dataType">ajaxOptions.dataType</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_ajaxOptions.url">ajaxOptions.url</a>
+
+
+</li>
+
+<li class="index-item property inherited">
+<a href="#property_className">className</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props">props</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.$el">props.$el</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.$tmp">props.$tmp</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.ajaxOptions">props.ajaxOptions</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.originalData">props.originalData</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.renderData">props.renderData</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_props.template">props.template</a>
+
+
+</li>
+
+<li class="index-item property">
+<a href="#property_VERSION">VERSION</a>
+<span class="flag static">static</span>
+
+</li>
+
+</ul>
+</div>
+
+
+
+
+
+</div>
+
+
+<div id="methods" class="api-class-tabpanel">
+<h2 class="off-left">Methods</h2>
+
+
+<div id="method_ajaxDone" class="method item">
+<h3 class="name"><code>ajaxDone</code></h3>
+
+
+<div class="args">
+<span class="paren">(</span><ul class="args-list inline commas">
+
+<li class="arg">
+
+<code>data</code>
+
+</li>
+
+</ul><span class="paren">)</span>
+</div>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l218"><code>ajaxDone:218</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>ajax通信成功時、呼び出されます</h4>
+</div>
+
+
+<div class="params">
+<h4>Parameters:</h4>
+
+<ul class="params-list">
+
+<li class="param">
+
+<code class="param-name">data</code>
+<span class="type">Object</span>
+
+
+
+
+<div class="param-description">
+<p>ajax通信の取得データ</p>
+
+</div>
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_ajaxFail" class="method item">
+<h3 class="name"><code>ajaxFail</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l228"><code>ajaxFail:228</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<p><h4>ajax通信失敗時、呼び出されます</h4>
+再度ページを読み込み直すか？</p>
+
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_createHTML" class="method item">
+<h3 class="name"><code>createHTML</code></h3>
+
+
+<div class="args">
+<span class="paren">(</span><ul class="args-list inline commas">
+
+<li class="arg">
+
+<code>data</code>
+
+</li>
+
+</ul><span class="paren">)</span>
+</div>
+
+
+
+<span class="returns-inline">
+<span class="type">DOM</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l310"><code>createHTML:310</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>レンダリングするHTMLを生成します</h4>
+</div>
+
+
+<div class="params">
+<h4>Parameters:</h4>
+
+<ul class="params-list">
+
+<li class="param">
+
+<code class="param-name">data</code>
+<span class="type">Object | Array</span>
+
+
+
+
+<div class="param-description">
+<p>レンダリングデータ</p>
+
+</div>
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">DOM</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_filtter" class="method item">
+<h3 class="name"><code>filtter</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">Object</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l269"><code>filtter:269</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>レンダーデータのフィルタリングの際使用します</h4>
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Object</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_getAjax" class="method item">
+<h3 class="name"><code>getAjax</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">jQuery.Deferred</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l200"><code>getAjax:200</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>$.ajaxで、データを取得します</h4>
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">jQuery.Deferred</span>:
+
+<p>処理が、完了したことを通知します</p>
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_notFound" class="method item">
+<h3 class="name"><code>notFound</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">String</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l298"><code>notFound:298</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>生成するHTMLデータがない場合呼び出されます</h4>
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">String</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_removePrevHTML" class="method item">
+<h3 class="name"><code>removePrevHTML</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l280"><code>removePrevHTML:280</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<p><h4>レンダリングされている場合、データを削除します</h4>
+レンダリングされていない場合は、レンダーエリアをラップする要素を生成します</p>
+
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_render" class="method item">
+<h3 class="name"><code>render</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l323"><code>render:323</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>DOM生成して、HTMLに挿入します</h4>
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_render" class="method item">
+<h3 class="name"><code>render</code></h3>
+
+
+<div class="args">
+<span class="paren">(</span><ul class="args-list inline commas">
+
+<li class="arg">
+
+<code>$tepl</code>
+
+</li>
+
+<li class="arg">
+
+<code>ajaxOptions</code>
+
+</li>
+
+</ul><span class="paren">)</span>
+</div>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+<span class="flag static">static</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l94"><code>render:94</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>Renderインスタンスの生成</h4>
+</div>
+
+
+<div class="params">
+<h4>Parameters:</h4>
+
+<ul class="params-list">
+
+<li class="param">
+
+<code class="param-name">$tepl</code>
+<span class="type">JQuery</span>
+
+
+
+
+<div class="param-description">
+<p>jsTemplate要素</p>
+
+</div>
+
+
+</li>
+
+<li class="param">
+
+<code class="param-name">ajaxOptions</code>
+<span class="type">Object</span>
+
+
+
+
+<div class="param-description">
+<p>$.ajax options</p>
+
+</div>
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_setRenderData" class="method item">
+<h3 class="name"><code>setRenderData</code></h3>
+
+
+<div class="args">
+<span class="paren">(</span><ul class="args-list inline commas">
+
+<li class="arg">
+
+<code>data</code>
+
+</li>
+
+</ul><span class="paren">)</span>
+</div>
+
+
+
+<span class="returns-inline">
+<span class="type">Render</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l246"><code>setRenderData:246</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>Hoganに流し込む、データを生成して、tmplDataに格納します</h4>
+</div>
+
+
+<div class="params">
+<h4>Parameters:</h4>
+
+<ul class="params-list">
+
+<li class="param">
+
+<code class="param-name">data</code>
+<span class="type">Object</span>
+
+
+
+
+<div class="param-description">
+<p>JSTに流し込むデータ</p>
+
+</div>
+
+
+</li>
+
+</ul>
+</div>
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">Render</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_start" class="method item">
+<h3 class="name"><code>start</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">jQuery.Deferred</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l175"><code>start:175</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<p><h4>初期化</h4>
+処理が完了したことを通知します</p>
+
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">jQuery.Deferred</span>:
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+<div id="method_toString" class="method item inherited">
+<h3 class="name"><code>toString</code></h3>
+
+
+<span class="paren">()</span>
+
+
+
+<span class="returns-inline">
+<span class="type">String</span>
+</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="meta">
+
+
+<p>Inherited from
+<a href="..\classes\AMP.BASE_CLASS.html#method_toString">AMP.BASE_CLASS</a>:
+
+
+
+<a href="../files/develop_amp_core_amp.js.html#l78"><code>toString:78</code></a>
+
+</p>
+
+
+
+
+
+</div>
+
+<div class="description">
+<h4>クラス名を返す</h4>
+</div>
+
+
+
+
+<div class="returns">
+<h4>Returns:</h4>
+
+<div class="returns-description">
+
+
+<span class="type">String</span>:
+
+<p>クラス名を返す</p>
+
+
+</div>
+</div>
+
+
+
+</div>
+
+
+</div>
+
+
+
+<div id="properties" class="api-class-tabpanel">
+<h2 class="off-left">Properties</h2>
+
+
+<div id="property_ajaxOptions" class="property item">
+<h3 class="name"><code>ajaxOptions</code></h3>
+<span class="type">Object</span>
+
+
+
+
+<span class="flag static">static</span>
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l134"><code>ajaxOptions:134</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<p><h4>デフォルト値、格納オブジェクト</h4>
+コンストラクタが呼び出し時に、optionsとmixinしてpropsオブジェクトに格納します<br>
+<a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a></p>
+
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_ajaxOptions.chace" class="property item">
+<h3 class="name"><code>ajaxOptions.chace</code></h3>
+<span class="type">String</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l149"><code>ajaxOptions.chace:149</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>キャッシュの有効化</h4>
+</div>
+
+<p><strong>Default:</strong> false</p>
+
+
+
+
+</div>
+
+
+<div id="property_ajaxOptions.dataType" class="property item">
+<h3 class="name"><code>ajaxOptions.dataType</code></h3>
+<span class="type">String</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l156"><code>ajaxOptions.dataType:156</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>取得するデータタイプ</h4>
+</div>
+
+<p><strong>Default:</strong> json</p>
+
+
+
+
+</div>
+
+
+<div id="property_ajaxOptions.url" class="property item">
+<h3 class="name"><code>ajaxOptions.url</code></h3>
+<span class="type">String</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l143"><code>ajaxOptions.url:143</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>リクエストURL</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_className" class="property item">
+<h3 class="name"><code>className</code></h3>
+<span class="type">String</span>
+
+
+
+
+
+
+<div class="meta">
+
+<p>Inherited from
+<a href="..\classes\AMP.BASE_CLASS.html#property_className">AMP.BASE_CLASS</a>
+
+but overwritten in
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l125"><code>className:125</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>クラス名</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props" class="property item">
+<h3 class="name"><code>props</code></h3>
+<span class="type">Object</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l27"><code>props:27</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>プロパティ格納オブジェクト</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.$el" class="property item">
+<h3 class="name"><code>props.$el</code></h3>
+<span class="type">Hogan</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l39"><code>props.$el:39</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>レンダリングエリアのラッパー要素</h4>
+
+<p>初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
+これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です</p>
+
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.$tmp" class="property item">
+<h3 class="name"><code>props.$tmp</code></h3>
+<span class="type">JQuery</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l33"><code>props.$tmp:33</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>js Template要素</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.ajaxOptions" class="property item">
+<h3 class="name"><code>props.ajaxOptions</code></h3>
+<span class="type">Object</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l66"><code>props.ajaxOptions:66</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<p><h4>$.ajaxオプション値</h4>
+Render.ajaxOptionsとajaxOptionsをmixinした値を格納します</p>
+
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.originalData" class="property item">
+<h3 class="name"><code>props.originalData</code></h3>
+<span class="type">Arrary | Object</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l54"><code>props.originalData:54</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>レンダリングオリジナルデータ保管</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.renderData" class="property item">
+<h3 class="name"><code>props.renderData</code></h3>
+<span class="type">Arrary | Object</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l60"><code>props.renderData:60</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>レンダリングデータ</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_props.template" class="property item">
+<h3 class="name"><code>props.template</code></h3>
+<span class="type">Hogan</span>
+
+
+
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l48"><code>props.template:48</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>Hoganテンプレート</h4>
+</div>
+
+
+
+
+</div>
+
+
+<div id="property_VERSION" class="property item">
+<h3 class="name"><code>VERSION</code></h3>
+<span class="type">String</span>
+
+
+
+
+<span class="flag static">static</span>
+
+
+
+<div class="meta">
+
+
+
+<p>
+
+Defined in
+
+
+
+
+<a href="../files/develop_amp_jquery_plugins_Render.js.html#l115"><code>VERSION:115</code></a>
+
+</p>
+
+
+
+</div>
+<div class="description">
+<h4>バージョン情報</h4>
+</div>
+
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+</div>
+</div>
+
+</div></div><!-- .apidocs // --></div>
+<!-- .yui3-u-3-4 // --></div>
+<!-- #bd // --></div>
+<!-- #doc // --></div>
+
+
+
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
