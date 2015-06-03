@@ -13,7 +13,7 @@ var AMP = AMP || {};
    * <h4>ローダー</h4>
    * <em>imagesloaded.jsに依存します</em>
    *
-   * @class AMP.Loader
+   * @class AMP.$.Loader
    * @constructor
    * @param  {DOM} el 対象のimgを囲う要素 省略可 初期値： 'body'
    * @param {Object} options オプション値
@@ -324,7 +324,8 @@ var AMP = AMP || {};
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Loader = Loader;
+  AMP.$ = AMP.$ || {};
+  AMP.$.Loader = Loader;
 
 
 }(window));

@@ -1,0 +1,9 @@
+{
+	"name": "AMP.js",
+	"description": "AMP.js",
+	"version": "3.0.0",
+	"url": "https://bitbucket.org/yoshihitofujiwara/ampjs",
+	"options": {
+		"outdir": "docs/"
+	}
+}

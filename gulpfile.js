@@ -15,9 +15,9 @@ var PROJECT = 'ampjs';
 var PATH = {
 	proxy   : '/test/',   // develop
 	develop : 'develop/', // 開発用
-	dist    : 'dist/',    // 配布用
-	docsTemp: 'js_docs_temp/',// ドキュメントテンプレート用
-	docs    : 'js_docs/'     // ドキュメント用
+	dist    : 'dist/'    // 配布用
+	// docsTemp: 'js_docs_temp/',// ドキュメントテンプレート用
+	// docs    : 'js_docs/'     // ドキュメント用
 };
 
 
@@ -95,16 +95,13 @@ MODULE.gulp.task('default', tasks);
  */
 MODULE.gulp.task('docs', function(){
 	// amp
-	MODULE.exec('yuidoc develop/amp/ -t docsTemp/yuidoc/yuidoc-bootstrap-theme-custom -H docsTemp/yuidoc/yuidoc-bootstrap-theme-custom/helpers/helpers.js --config ./docsTemp/yuidoc/yuidoc.json', {
+	MODULE.exec('yuidoc develop/amp/ --config yuidoc.json', {
 		"cwd": "./"
 	});
 
-  // MODULE.gulp.src(PATH.develop + 'amp/**/*.js')
-  //   .pipe(MODULE.jsDoc.parser())
-  //   .pipe(MODULE.jsDoc.reporter())
-  //   .pipe(MODULE.jsDoc.generator())
-  //   .pipe(MODULE.jsDoc({paths: {docs: ['../js/classes/']}}))
-  //   .pipe(MODULE.gulp.dest(PATH.docs));
+	// MODULE.exec('yuidoc develop/amp/ -t docsTemp/yuidoc/yuidoc-bootstrap-theme-custom -H docsTemp/yuidoc/yuidoc-bootstrap-theme-custom/helpers/helpers.js --config ./docsTemp/yuidoc/yuidoc.json', {
+	// 	"cwd": "./"
+	// });
 });
 
 
@@ -165,13 +162,17 @@ MODULE.gulp.task('js', function(){
 	/* lib
 	-----------------------------------------------------------------*/
 	// jquery
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/**/*.js')
-	.pipe(MODULE.concat('jquery-1.8.3.pack.js'))
+	MODULE.gulp.src(PATH.develop + 'lib/jquery/*.js')
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
+	MODULE.gulp.src(PATH.develop + 'lib/jquery/plugins/*.js')
+	.pipe(MODULE.concat('jquery.plugins.js'))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+
+
 	// utilitys
-	MODULE.gulp.src(PATH.develop + 'lib/utilitys/**/*.js')
-	.pipe(MODULE.concat('utilitys.pack.js'))
+	MODULE.gulp.src(PATH.develop + 'lib/utilities/**/*.js')
+	.pipe(MODULE.concat('utilities.pack.js'))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
 	// createjs
@@ -205,7 +206,7 @@ MODULE.gulp.task('js', function(){
 	MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
-		PATH.develop + 'amp/core/utility/*.js'
+		PATH.develop + 'amp/core/utilities/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -233,10 +234,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 	// base
-	MODULE.gulp.src([
-		PATH.develop + 'amp/jquery/base/*.js',
-		PATH.develop + 'amp/jquery/utility/*.js'
-	])
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/base/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
@@ -247,6 +245,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
+
+	// utility
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/utilities/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE))
+	.pipe(MODULE.rename({extname : '.min.js'}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'));
+
 
 	// amp.jquery.plugins.js
 	/*
