@@ -44,7 +44,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Debug.VERSION = '1.0.0';
+  Debug.VERSION = '1.0.1';
 
 
   /**
@@ -104,20 +104,20 @@ var AMP = AMP || {};
    */
   Debug._createView = function(){
     // view要素生成
-    var childNode = '<div style="z-index:19791218;min-width:250px;font-size:12px;background:#41454e;">\n<div class="ttl" style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>\n<textarea id="AMP_DEBUG_TEXT" style="box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>\n</div>';
+    var childNode = '<div style="min-width:250px;font-size:12px;background:#41454e;">\n<div class="ttl" style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>\n<textarea id="AMP_DEBUG_TEXT" style="box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>\n</div>';
 
     // view要素の追加
     var el = document.createElement('div');
 
     el.id = 'AMP_DEBUG';
-    el.setAttribute('style', 'position:fixed;left:10px;bottom:10px;');
+    el.setAttribute('style', 'position:fixed;z-index:999999;left:10px;bottom:10px;');
     el.innerHTML = childNode;
     document.body.appendChild(el);
 
     // controll elements
     Debug.views = {
-      wrap : document.getElementById('AMP_DEBUG'),
-      text : document.getElementById('AMP_DEBUG_TEXT')
+      wrap: document.getElementById('AMP_DEBUG'),
+      text: document.getElementById('AMP_DEBUG_TEXT')
     };
 
     // viewイベント追加
