@@ -61,7 +61,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.0.0';
+  Scroll.VERSION = '3.0.1';
 
 
   /**
@@ -95,7 +95,7 @@ var AMP = AMP || {};
    * @static
    * @property scrollOptions.adjust
    * @default 0
-   * @type {Number}
+   * @type {Number|Function}
    */
   /**
    * <h4>スクロールしないトリガークラス名</h4>
@@ -214,7 +214,8 @@ var AMP = AMP || {};
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
-      var moveTo = $target.offset().top - param.adjust;
+      var adjust = AMP.isFunction(param.adjust) ? param.adjust() || 0 : param.adjust,
+      moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
         $.stream(

@@ -14,15 +14,51 @@ var AMP = AMP || {};
    * <h4>ホバーの3Dアクション</h4>
    * ※IE10以上対象
    *
+   * @example  要素構成: .float > .float_frame > .float_inner
+   *
    * @class AMP.$.Float3d
    * @constructor
    * @param  {jQuery} $target 対象の要素
    * @param  {Object} options オプション値
    */
 	function Float3d($target, options){
-		this.param = $.extend(true, {}, Float3d.float3dOptions, options);
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.float');
+    }
+
+    /**
+     * <h4>プロパティ格納オブジェクト</h4>
+     *
+     * @property param
+     * @type {Object}
+     */
+    this.param = $.extend(true, {}, Float3d.float3dOptions, options);
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @propaty $target
+     * @type {jQuery}
+     */
     this.param.$target = $target;
+
+    /**
+     * <h4>html要素</h4>
+     *
+     * @propaty $html
+     * @type {jQuery}
+     */
 		this.param.$html = $('html');
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @private
+     * @propaty _isFloating
+     * @type {Boolean}
+     */
     this.param._isFloating = false;
 	}
 
@@ -45,7 +81,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Float3d.VERSION = '1.0.0';
+  Float3d.VERSION = '1.0.1';
 
 
   /**
@@ -165,19 +201,19 @@ var AMP = AMP || {};
 
     self.param.$target
     .on('mouseenter.Float3d', function(onEvent){
-      self._onTween(this, onEvent);
+      self.onTween(this, onEvent);
 
       self.param._isFloating = true;
-      self._floatTween($(this).children(), 0);
+      self.floatTween($(this).children(), 0);
 
       // moveEvent登録
       $(this).on('mousemove.Float3d', function(moveEvent){
-        self._onTween(this, moveEvent);
+        self.onTween(this, moveEvent);
       });
     })
     .on('mouseleave.Float3d', function(outEvent){
       self.param._isFloating = false;
-      self._outTween(this, outEvent);
+      self.outTween(this, outEvent);
 
       // moveEvent削除
       $(this).off('mousemove.Float3d');
@@ -213,13 +249,12 @@ var AMP = AMP || {};
   /**
    * <h4>マウスオンTween</h4>
    *
-   * @private
-   * @method _onTween
+   * @method onTween
    * @param  {DOM} target 対象の要素
    * @param  {Object} event イベントオブジェクト
    * @return {Void}
    */
-  p._onTween = function(target, event){
+  p.onTween = function(target, event){
     var $target = $(target).children(),
     offset = this.offsetRatio(target, event);
 
@@ -240,12 +275,11 @@ var AMP = AMP || {};
    * <h4>選択中のTween</h4>
    * 再起処理します
    *
-   * @private
-   * @method _floatTween
+   * @method floatTween
    * @param  {DOM} target 対象の要素
    * @return {Void}
    */
-  p._floatTween = function($target, angle){
+  p.floatTween = function($target, angle){
     var self = this;
 
     angle = typeof angle === 'number' ? angle : 0;
@@ -263,7 +297,7 @@ var AMP = AMP || {};
       complete: function(){
         // 再起処理
         if(self.param._isFloating){
-          self._floatTween($target, angle);
+          self.floatTween($target, angle);
         }
       }
     });
@@ -273,12 +307,11 @@ var AMP = AMP || {};
   /**
    * <h4>マウスアウトTween</h4>
    *
-   * @private
-   * @method _outTween
+   * @method outTween
    * @param  {DOM} target 対象の要素
    * @return {Void}
    */
-  p._outTween = function(target){
+  p.outTween = function(target){
     var self = this;
 
     $(target).children()
@@ -332,7 +365,7 @@ var AMP = AMP || {};
       x: ((offset.x - center.x) / center.x).toFixed(2),
       y: ((center.y - offset.y) / center.y).toFixed(2)
     };
-   };
+  };
 
 
 

@@ -40,7 +40,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = '3.0.0';
+  FontResize.VERSION = '3.0.1';
 
 
   /**
@@ -143,9 +143,15 @@ var AMP = AMP || {};
       }
 
       // 再起処理
-      AMP.requestAnimationFrame(function(){
-        self._controller();
-      });
+      if(AMP.hasRequestAnimationFrame()){
+        AMP.requestAnimationFrame(function(){
+          self._controller();
+        });
+      } else {
+        setTimeout(function(){
+          self._controller();
+        }, 50);
+      }
     }
   };
 

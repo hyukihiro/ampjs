@@ -204,7 +204,7 @@ var AMP = AMP || {};
    * !!!: 数値しか判定しません
    *
    * @static
-   * @method isPositive
+   * @method isNegative
    * @param  {Number} num 判定したい数値
    * @return {Boolean}
    */

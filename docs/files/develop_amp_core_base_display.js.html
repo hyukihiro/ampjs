@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\base\has.js - AMP.js</title>
+    <title>develop\amp\core\base\display.js - AMP.js</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\base\has.js</h1>
+<h1 class="file-heading">File: develop\amp\core\base\display.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -115,287 +115,152 @@ var AMP = AMP || {};
 
 
   /*======================================================================
-    機能判定
+    表示
   ======================================================================*/
 
   /**
-   * &lt;h4&gt;機能判定&lt;/h4&gt;
+   * &lt;h4&gt;表示&lt;/h4&gt;
    *
-   * @class AMP.Has
+   * @class AMP.Display
    */
+
 
 
   /*----------------------------------------------------------------------
-    config
+    @method
   ----------------------------------------------------------------------*/
 
-  var
-  url  = root.location,
-  doc  = document,
-  html = doc.documentElement;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
   /**
-   * &lt;h4&gt;ApplicationCache機能の有無&lt;/h4&gt;
+   * &lt;h4&gt;RAD&lt;/h4&gt;
    *
    * @static
-   * @method hasAppCache
-   * @return {Boolean}
+   * @property RAD
+   * @type {Number}
    */
-  AMP.hasAppCache = function(){
-    return &#x27;applicationCache&#x27; in root;
-  };
+  AMP.RAD = Math.PI / 180;
 
 
   /**
-   * &lt;h4&gt;Geolocation機能の有無&lt;/h4&gt;
+   * &lt;h4&gt;角度、距離からxy座標を返す &lt;/h4&gt;
    *
    * @static
-   * @method hasGeolocation
-   * @return {Boolean}
+   * @method coords
+   * @param  {Number} deg    角度
+   * @param  {Number} distanceX 距離
+   * @param  {Number} distanceY 距離
+   * @return {Object}
    */
-  AMP.hasGeolocation = function(){
-    return &#x27;geolocation&#x27; in navigator;
-  };
-
-
-  /**
-   * &lt;h4&gt;PushState機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasPushState
-   * @return {Boolean}
-   */
-  AMP.hasPushState = function(){
-    return &#x27;pushState&#x27; in root.history;
-  };
-
-
-  /**
-   * &lt;h4&gt;RequestAnimationFrame機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasRequestAnimationFrame
-   * @return {Boolean}
-   */
-  AMP.hasRequestAnimationFrame = function(){
-    return !!(root.requestAnimationFrame ||
-      root.webkitRequestAnimationFrame ||
-      root.mozRequestAnimationFrame ||
-      root.msRequestAnimationFrame);
-  };
-
-
-  /**
-   * &lt;h4&gt;ストレージ機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasStorage
-   * @return {Boolean}
-   */
-  AMP.hasStorage = function(){
-    return &#x27;sessionStorage&#x27; in root &amp;&amp; &#x27;localStorage&#x27; in root;
-  };
-
-
-  /**
-   * &lt;h4&gt;WebSocket機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasWebSocket
-   * @return {Boolean}
-   */
-  AMP.hasWebSocket = function(){
-    return &#x27;WebSocket&#x27; in root;
-  };
-
-
-  /**
-   * &lt;h4&gt;WebWorker機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasWebWorker
-   * @return {Boolean}
-   */
-  AMP.hasWebWorker = function(){
-    return &#x27;Worker&#x27; in root;
-  };
-
-
-  /**
-   * &lt;h4&gt;Audio機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasAudio
-   * @return {Boolean}
-   */
-  AMP.hasAudio = function(){
-    // hack for ietester
-    if(AMP.isBrowser(&#x27;ie&#x27;, 9)){
-      return true;
-    } else {
-      return !!doc.createElement(&#x27;audio&#x27;).canPlayType;
-    }
-  };
-
-
-  /**
-   * &lt;h4&gt;Canvas機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasCanvas
-   * @return {Boolean}
-   */
-  AMP.hasCanvas = function(){
-    return !!doc.createElement(&#x27;canvas&#x27;).getContext;
-  };
-
-  /**
-   * &lt;h4&gt;LocationHashの有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasHash
-   * @param {String} key ハッシュ名 省略可
-   * @return {Boolean}
-   */
-  AMP.hasHash = function(key){
-    var flag = false;
-
-    if(url.href.indexOf(&#x27;#&#x27;) &gt; -1){
-      if(key){
-        var k = key.replace(/^#/, &#x27;&#x27;),
-        vals = url.hash.split(&#x27;#&#x27;),
-        i = 1,
-        l = vals.length;
-
-        for(; i &lt; l; i += 1){
-          if(k === vals[i]){
-            flag = true;
-            break;
-          }
-        }
-
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  };
-
-
-  /**
-   * &lt;h4&gt;MsPointer判定 βver&lt;/h4&gt;
-   *
-   * @static
-   * @method hasMsPointer
-   * @return {Boolean}
-   */
-  AMP.hasMsPointer = function(){
-    return root.navigator.msPointerEnabled &gt; -1;
-  };
-
-
-  /**
-   * &lt;h4&gt;文字列を検索し、指定の文字列があるか判定&lt;/h4&gt;
-   *
-   * @static
-   * @method hasString
-   * @param  {String}  str   対象の文字列
-   * @param  {String}  haStr 検索文字
-   * @return {Boolean}
-   */
-  AMP.hasString = function(str, hasStr){
-    return AMP.isString(str) &amp;&amp; str.indexOf(hasStr) &gt; -1;
-  };
-
-
-  /**
-   * &lt;h4&gt;SVG機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasSVG
-   * @return {Boolean}
-   */
-  AMP.hasSVG = function(){
-    return &#x27;SVGAngle&#x27; in root;
-  };
-
-
-  /**
-   * &lt;h4&gt;TouchScreen判定&lt;/h4&gt;
-   *
-   * @static
-   * @method hasTouchScreen
-   * @return {Boolean}
-   */
-  AMP.hasTouchScreen = (function(){
-    var hasTouchScreen,
-    div = doc.createElement(&#x27;div&#x27;);
-
-    div.setAttribute(&#x27;ontouchstart&#x27;, &#x27;return&#x27;);
-    hasTouchScreen = (typeof div.ontouchstart === &#x27;function&#x27;);
-    return function(){
-      return hasTouchScreen;
+  AMP.coords = function(deg, distanceX, distanceY){
+    return {
+      x: AMP.coordX(deg, distanceX),
+      y: AMP.coordY(deg, distanceY)
     };
-  }());
+  };
 
 
   /**
-   * &lt;h4&gt;Video機能の有無&lt;/h4&gt;
+   * &lt;h4&gt;角度、距離からx座標を算出&lt;/h4&gt;
    *
    * @static
-   * @method hasVideo
-   * @return {Boolean}
+   * @method coordX
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceX 距離
+   * @return {Number}
    */
-  AMP.hasVideo = function(){
-    // hack for ietester
-    if(AMP.isBrowser(&#x27;ie&#x27;, 9)){
-      return true;
-    } else {
-      return !!doc.createElement(&#x27;video&#x27;).canPlayType;
+  AMP.coordX = function(deg, distanceX){
+    return Math.cos(deg * AMP.RAD) * distanceX;
+  };
+
+
+  /**
+   * &lt;h4&gt;角度、距離からy座標を算出&lt;/h4&gt;
+   *
+   * @static
+   * @method coordY
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceY 距離
+   * @return {Number}
+   */
+  AMP.coordY = function(deg, distanceY){
+    return Mas.sin(deg * AMP.RAD) * distanceY;
+  };
+
+
+  /**
+   * &lt;h4&gt;現在と過去の位置から角度を算出&lt;/h4&gt;
+   *
+   * @static
+   * @method deg
+   * @param  {Number} x     現在のx座標
+   * @param  {Number} y     現在のy座標
+   * @param  {Number} prevX 前のx座標
+   * @param  {Number} PrevY 前のx座標
+   * @return {Number}
+   */
+  AMP.deg = function(x, y, prevX, PrevY){
+    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
+  };
+
+
+  /**
+   * &lt;h4&gt;16進数カラーをRGBに変換します&lt;/h4&gt;
+   *
+   * @static
+   * @method hexToRGB
+   * @param {String} hex 16進数カラー
+   * @return {Object} RGB Object
+   */
+  AMP.hexToRGB = function(hex){
+    hex = hex.replace(/^#/, &#x27;&#x27;);
+
+    // hex shorthand時、成型しなおす
+    if(hex.length === 3){
+      var _hex = &#x27;&#x27;;
+      AMP.each(hex, function(chara){
+        _hex += chara + chara;
+      });
+      hex = _hex;
     }
+
+    // hex値の簡易チェック
+    if (hex.length !== 6) {
+      throw new TypeError(&#x27;arguments is not a HEX&#x27;);
+    }
+
+    // RGB Object
+    return {
+      r: parseInt(hex.substring(0, 2), 16),
+      g: parseInt(hex.substring(2, 4), 16),
+      b: parseInt(hex.substring(4, 6), 16)
+    };
   };
 
 
   /**
-   * &lt;h4&gt;XMLSerializerの有無&lt;/h4&gt;
+   * &lt;h4&gt;RGBカラーを16進数カラーに変換&lt;/h4&gt;
    *
    * @static
-   * @method hasXMLSerializer
-   * @return {Boolean}
+   * @method rgbToHex
+   * @param  {Number} r レッド値
+   * @param  {Number} g グリーン値
+   * @param  {Number} b ブルー値
+   * @return {String} 16進数カラー
    */
-  AMP.hasXMLSerializer = function(){
-    return &#x27;XMLSerializer&#x27; in root;
-  };
+  AMP.rgbToHex = function(r, g, b){
+    var hex = &#x27;#&#x27;;
 
+    AMP.each(AMP.argsToArray(arguments), function(color){
+      var _color = Number(color).toString(16);
 
-  /**
-   * &lt;h4&gt;css3 Transition機能の有無&lt;/h4&gt;
-   *
-   * @static
-   * @method hasTransition
-   * @return {Boolean}
-   */
-  AMP.hasTransition = function(){
-    var props = [&#x27;transition&#x27;, &#x27;-webkit-transition&#x27;, &#x27;-moz-transition&#x27;, &#x27;-ms-transition&#x27;, &#x27;-o-transition&#x27;],
-    i = 0,
-    l = props.length,
-    flag = false;
-
-    for(; i &lt; l; i += 1){
-      if(props[i] in html.style){
-        flag = true;
-        break;
+      // RGB値チェック
+      if(2 &lt; _color.length){
+        throw new TypeError(&#x27;arguments is not a RGB&#x27;);
       }
-    }
 
-    return flag;
+      hex += _color.length === 1 ? &#x27;0&#x27; + _color : _color;
+    });
+
+    return hex;
   };
 
 

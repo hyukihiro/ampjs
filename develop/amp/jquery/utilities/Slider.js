@@ -12,7 +12,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>スライダー</h4>
-   * velocity.jsに依存しています
+   * velocity.jsに依存しています<br>
+   * FIEXME: βバージョンです
    *
    * @constructor
    * @class AMP.$.Slider
@@ -306,7 +307,7 @@ var AMP = AMP || {};
    * <h4>Sliderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Slider
+   * @method get
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
    * @return {Slider}

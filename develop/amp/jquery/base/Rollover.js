@@ -251,7 +251,7 @@ var AMP = AMP || {};
   /**
    * <h4>ロールオーバーデータの生成</h4>
    *
-   * @method _getImageSrc
+   * @method _createRolloverData
    * @private
    * @param  {jQuery} $images 対象の画像要素
    * @param  {Object} param オプション値

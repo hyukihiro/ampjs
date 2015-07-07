@@ -15,6 +15,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "develop\\amp\\core\\base\\display.js": {
+            "name": "develop\\amp\\core\\base\\display.js",
+            "modules": {},
+            "classes": {
+                "AMP.Display": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "develop\\amp\\core\\base\\extend.js": {
             "name": "develop\\amp\\core\\base\\extend.js",
             "modules": {},
@@ -121,15 +130,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "develop\\amp\\core\\utilities\\Model.js": {
-            "name": "develop\\amp\\core\\utilities\\Model.js",
-            "modules": {},
-            "classes": {
-                "AMP.Model": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "develop\\amp\\core\\utilities\\Storage.js": {
             "name": "develop\\amp\\core\\utilities\\Storage.js",
             "modules": {},
@@ -144,45 +144,6 @@
             "modules": {},
             "classes": {
                 "AMP.BASE_CLASS": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "develop\\amp\\createjs\\display\\Polygon.js": {
-            "name": "develop\\amp\\createjs\\display\\Polygon.js",
-            "modules": {},
-            "classes": {
-                "AMP.CJS.Polygon": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
-        "develop\\amp\\createjs\\utilities\\Ease.js": {
-            "name": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "develop\\amp\\createjs\\utilities\\Loader.js": {
-            "name": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "develop\\amp\\createjs\\utilities\\_Loader.js": {
-            "name": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
-        "develop\\amp\\jquery\\_bk\\LiquidSlider.js": {
-            "name": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "modules": {},
-            "classes": {
-                "AMP.$.LiquidSlider": 1
             },
             "fors": {},
             "namespaces": {}
@@ -219,6 +180,15 @@
             "modules": {},
             "classes": {
                 "AMP.$.Loader": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "develop\\amp\\jquery\\base\\MediaImages.js": {
+            "name": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "modules": {},
+            "classes": {
+                "MediaImageChange": 1
             },
             "fors": {},
             "namespaces": {}
@@ -346,6 +316,18 @@
             "file": "develop\\amp\\core\\base\\array.js",
             "line": 12,
             "description": "<h4>配列</h4>"
+        },
+        "AMP.Display": {
+            "name": "AMP.Display",
+            "shortname": "AMP.Display",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 12,
+            "description": "<h4>表示</h4>"
         },
         "AMP.Extend": {
             "name": "AMP.Extend",
@@ -514,27 +496,6 @@
                 }
             ]
         },
-        "AMP.Model": {
-            "name": "AMP.Model",
-            "shortname": "AMP.Model",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 12,
-            "description": "<h4>モデル管理</h4>\nFIXME: βバージョン",
-            "extends": "AMP.Events",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "props",
-                    "description": "プロパティ",
-                    "type": "Object"
-                }
-            ]
-        },
         "AMP.Storage": {
             "name": "AMP.Storage",
             "shortname": "AMP.Storage",
@@ -568,45 +529,6 @@
             "line": 25,
             "description": "<h4>BASE_CLASS (Amp)</h4>\n基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>\nAmpクラスをAMP.BASE_CLASSにエクスポートしてます",
             "is_constructor": 1
-        },
-        "AMP.CJS.Polygon": {
-            "name": "AMP.CJS.Polygon",
-            "shortname": "AMP.CJS.Polygon",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "develop\\amp\\createjs\\display\\Polygon.js",
-            "line": 12,
-            "description": "<h4>ポリゴンの生成</h4>",
-            "extends": "AMP.BASE_CLASS",
-            "is_constructor": 1
-        },
-        "AMP.$.LiquidSlider": {
-            "name": "AMP.$.LiquidSlider",
-            "shortname": "AMP.$.LiquidSlider",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 12,
-            "description": "<h4>リキッドスライダー</h4>",
-            "is_constructor": 1,
-            "params": [
-                {
-                    "name": "$wrap",
-                    "description": "スライダーラッパー要素",
-                    "type": "JQuery"
-                },
-                {
-                    "name": "options",
-                    "description": "オプション値",
-                    "type": "Object"
-                }
-            ]
         },
         "AMP.$.BoxHover": {
             "name": "AMP.$.BoxHover",
@@ -690,6 +612,32 @@
                 }
             ]
         },
+        "MediaImageChange": {
+            "name": "MediaImageChange",
+            "shortname": "MediaImageChange",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 13,
+            "description": "<h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>\n!!! AMP.Mediaqueryを継承しています",
+            "extends": "AMP.Mediaquery",
+            "params": [
+                {
+                    "name": "$images",
+                    "description": "画像を書き換える要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション値",
+                    "type": "Object"
+                }
+            ],
+            "is_constructor": 1
+        },
         "AMP.$.Render": {
             "name": "AMP.$.Render",
             "shortname": "AMP.$.Render",
@@ -700,7 +648,7 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\base\\Render.js",
             "line": 13,
-            "description": "<h4>Ajax通信でデータ交換フォーマットを受け取りDOM生成します</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<em>Hogan.jsに依存します</em>",
+            "description": "<h4>Ajax通信でJSONを受け取りDOM生成します</h4>\n処理が完了したら、jQuery Deferred Objectを返します<br>\n<em>Hogan.jsに依存します</em>",
             "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
@@ -820,6 +768,9 @@
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
             "line": 13,
             "description": "<h4>ホバーの3Dアクション</h4>\n※IE10以上対象",
+            "example": [
+                "  要素構成: .float > .float_frame > .float_inner"
+            ],
             "is_constructor": 1,
             "params": [
                 {
@@ -843,8 +794,8 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 305,
-            "description": "<h4>Sliderインスタンスの生成</h4>",
+            "line": 13,
+            "description": "<h4>スライダー</h4>\nvelocity.jsに依存しています<br>\nFIEXME: βバージョンです",
             "is_constructor": 1,
             "params": [
                 {
@@ -857,12 +808,7 @@
                     "description": "オプション値",
                     "type": "Object"
                 }
-            ],
-            "static": 1,
-            "return": {
-                "description": "",
-                "type": "Slider"
-            }
+            ]
         },
         "jQuery": {
             "name": "jQuery",
@@ -929,6 +875,181 @@
             ],
             "type": "{Array}",
             "class": "AMP.Array"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 24,
+            "description": "<h4>RAD</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "RAD",
+            "type": "{Number}",
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 34,
+            "description": "<h4>角度、距離からxy座標を返す </h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "coords",
+            "params": [
+                {
+                    "name": "deg",
+                    "description": "角度",
+                    "type": "Number"
+                },
+                {
+                    "name": "distanceX",
+                    "description": "距離",
+                    "type": "Number"
+                },
+                {
+                    "name": "distanceY",
+                    "description": "距離",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 52,
+            "description": "<h4>角度、距離からx座標を算出</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "coordX",
+            "params": [
+                {
+                    "name": "deg",
+                    "description": "角度",
+                    "type": "Number"
+                },
+                {
+                    "name": "distanceX",
+                    "description": "距離",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 66,
+            "description": "<h4>角度、距離からy座標を算出</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "coordY",
+            "params": [
+                {
+                    "name": "deg",
+                    "description": "角度",
+                    "type": "Number"
+                },
+                {
+                    "name": "distanceY",
+                    "description": "距離",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 80,
+            "description": "<h4>現在と過去の位置から角度を算出</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "deg",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "現在のx座標",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "現在のy座標",
+                    "type": "Number"
+                },
+                {
+                    "name": "prevX",
+                    "description": "前のx座標",
+                    "type": "Number"
+                },
+                {
+                    "name": "PrevY",
+                    "description": "前のx座標",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 96,
+            "description": "<h4>16進数カラーをRGBに変換します</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "hexToRGB",
+            "params": [
+                {
+                    "name": "hex",
+                    "description": "16進数カラー",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "RGB Object",
+                "type": "Object"
+            },
+            "class": "AMP.Display"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\display.js",
+            "line": 130,
+            "description": "<h4>RGBカラーを16進数カラーに変換</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "rgbToHex",
+            "params": [
+                {
+                    "name": "r",
+                    "description": "レッド値",
+                    "type": "Number"
+                },
+                {
+                    "name": "g",
+                    "description": "グリーン値",
+                    "type": "Number"
+                },
+                {
+                    "name": "b",
+                    "description": "ブルー値",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "16進数カラー",
+                "type": "String"
+            },
+            "class": "AMP.Display"
         },
         {
             "file": "develop\\amp\\core\\base\\extend.js",
@@ -1145,7 +1266,7 @@
             "description": "<h4>RequestAnimationFrame機能の有無</h4>",
             "static": 1,
             "itemtype": "method",
-            "name": "hasReqAnime",
+            "name": "hasRequestAnimationFrame",
             "return": {
                 "description": "",
                 "type": "Boolean"
@@ -1243,7 +1364,7 @@
             "description": "<h4>MsPointer判定 βver</h4>",
             "static": 1,
             "itemtype": "method",
-            "name": "isMsPointer",
+            "name": "hasMsPointer",
             "return": {
                 "description": "",
                 "type": "Boolean"
@@ -1576,7 +1697,7 @@
             "description": "<h4>ネガティブ値判定</h4>\n!!!: 数値しか判定しません",
             "static": 1,
             "itemtype": "method",
-            "name": "isPositive",
+            "name": "isNegative",
             "params": [
                 {
                     "name": "num",
@@ -2185,7 +2306,7 @@
             "description": "<h4>DOMイベント追加</h4>",
             "static": 1,
             "itemtype": "method",
-            "name": "removeEvent",
+            "name": "addEvent",
             "params": [
                 {
                     "name": "element",
@@ -2262,181 +2383,6 @@
         {
             "file": "develop\\amp\\core\\base\\utility.js",
             "line": 86,
-            "description": "<h4>DEG</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "DEG",
-            "type": "{Number}",
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 96,
-            "description": "<h4>角度、距離からxy座標を返す </h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "coords",
-            "params": [
-                {
-                    "name": "deg",
-                    "description": "角度",
-                    "type": "Number"
-                },
-                {
-                    "name": "distanceX",
-                    "description": "距離",
-                    "type": "Number"
-                },
-                {
-                    "name": "distanceY",
-                    "description": "距離",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Object"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 114,
-            "description": "<h4>角度、距離からx座標を算出</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "coordX",
-            "params": [
-                {
-                    "name": "deg",
-                    "description": "角度",
-                    "type": "Number"
-                },
-                {
-                    "name": "distanceX",
-                    "description": "距離",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Number"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 128,
-            "description": "<h4>角度、距離からy座標を算出</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "coordY",
-            "params": [
-                {
-                    "name": "deg",
-                    "description": "角度",
-                    "type": "Number"
-                },
-                {
-                    "name": "distanceY",
-                    "description": "距離",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Number"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 142,
-            "description": "<h4>現在と過去の位置から角度を算出</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "deg",
-            "params": [
-                {
-                    "name": "x",
-                    "description": "現在のx座標",
-                    "type": "Number"
-                },
-                {
-                    "name": "y",
-                    "description": "現在のy座標",
-                    "type": "Number"
-                },
-                {
-                    "name": "prevX",
-                    "description": "前のx座標",
-                    "type": "Number"
-                },
-                {
-                    "name": "PrevY",
-                    "description": "前のx座標",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Number"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 158,
-            "description": "<h4>16進数カラーをRGBに変換します</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "hexToRGB",
-            "params": [
-                {
-                    "name": "hex",
-                    "description": "16進数カラー",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "RGB Object",
-                "type": "Object"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 192,
-            "description": "<h4>RGBカラーを16進数カラーに変換</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "rgbToHex",
-            "params": [
-                {
-                    "name": "r",
-                    "description": "レッド値",
-                    "type": "Number"
-                },
-                {
-                    "name": "g",
-                    "description": "グリーン値",
-                    "type": "Number"
-                },
-                {
-                    "name": "b",
-                    "description": "ブルー値",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "16進数カラー",
-                "type": "String"
-            },
-            "class": "AMP.Utility"
-        },
-        {
-            "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 220,
             "description": "<h4>画面のピクセル比を返す</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2449,7 +2395,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 232,
+            "line": 98,
             "description": "<h4>画像のプリロード</h4>",
             "static": 1,
             "itemtype": "method",
@@ -2469,7 +2415,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 247,
+            "line": 113,
             "description": "<h4>requestAnimationFrameをエクスポートしています</h4>\n対応していないブラウザは、setTimeoutでフォールバックします",
             "static": 1,
             "itemtype": "method",
@@ -2489,7 +2435,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 274,
+            "line": 140,
             "description": "<h4>cancelAnimationFrameをエクスポートしています</h4>\n対応していないブラウザは、clearTimeoutでフォールバックします",
             "static": 1,
             "itemtype": "method",
@@ -2509,7 +2455,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 300,
+            "line": 166,
             "description": "<h4>現在の時間を返します</h4>\nperformance.nowメソッドをExportしています<br>\nperformanceに対応していないブラウザはgetTimeを返します",
             "static": 1,
             "itemtype": "method",
@@ -2522,7 +2468,7 @@
         },
         {
             "file": "develop\\amp\\core\\base\\utility.js",
-            "line": 319,
+            "line": 185,
             "description": "<h4>空の関数</h4>\n何もしません",
             "static": 1,
             "return": {
@@ -2556,7 +2502,7 @@
             "description": "<h4>デバッグview要素を格納用オブジェクト</h4>",
             "static": 1,
             "itemtype": "property",
-            "name": "debugViews",
+            "name": "views",
             "type": "{Object}",
             "class": "AMP.Debug"
         },
@@ -2590,7 +2536,7 @@
             "tagname": "",
             "static": 1,
             "itemtype": "method",
-            "name": "createView",
+            "name": "_createView",
             "return": {
                 "description": "",
                 "type": "Void"
@@ -2605,7 +2551,7 @@
             "tagname": "",
             "static": 1,
             "itemtype": "method",
-            "name": "addEvent",
+            "name": "_addEvent",
             "return": {
                 "description": "",
                 "type": "Void"
@@ -3112,7 +3058,7 @@
             "access": "private",
             "tagname": "",
             "itemtype": "method",
-            "name": "_addEvent",
+            "name": "_removeEvent",
             "params": [
                 {
                     "name": "type",
@@ -3278,7 +3224,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 153,
+            "line": 159,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -3437,129 +3383,6 @@
             "class": "AMP.Mediaquery"
         },
         {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 23,
-            "description": "<h4>プロパティ</h4>",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "property",
-            "name": "_props",
-            "type": "{Object}",
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 45,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 55,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 64,
-            "description": "<h4>モデルのプロパティが変更時、に発行されるイベントタイプ</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "eventType",
-            "default": "change",
-            "type": "{String}",
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 80,
-            "description": "<h4>プロパティの取得</h4>",
-            "itemtype": "method",
-            "name": "get",
-            "params": [
-                {
-                    "name": "key",
-                    "description": "取得したいキー",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Any"
-            },
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 96,
-            "description": "[set description]",
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 120,
-            "description": "<h4>プロパティクリア</h4>",
-            "itemtype": "method",
-            "name": "clear",
-            "return": {
-                "description": "",
-                "type": "Model"
-            },
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 135,
-            "description": "<h4>値があるか判定します</h4>\nundefined, Nullは、falseを返します",
-            "itemtype": "method",
-            "name": "has",
-            "return": {
-                "description": "",
-                "type": "Boolean"
-            },
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 147,
-            "description": "<h4>プロパティーのeach処理</h4>",
-            "itemtype": "method",
-            "name": "each",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "each毎に処理する関数",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Model"
-            },
-            "class": "AMP.Model"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Model.js",
-            "line": 160,
-            "description": "<h4>イベントコントローラー</h4>",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_controller",
-            "return": {
-                "description": "",
-                "type": "Void"
-            },
-            "class": "AMP.Model"
-        },
-        {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
             "line": 44,
             "description": "<h4>バージョン情報</h4>",
@@ -3652,7 +3475,7 @@
             "params": [
                 {
                     "name": "key",
-                    "description": "削除するキー 省略時、ストレージデータを削除します ※可変長引数可",
+                    "description": "削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します",
                     "type": "String"
                 }
             ],
@@ -3664,7 +3487,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 152,
+            "line": 151,
             "description": "<h4>レングスを返す</h4>",
             "itemtype": "method",
             "name": "getLength",
@@ -3676,7 +3499,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 163,
+            "line": 162,
             "description": "<h4>アイテムの取得</h4>",
             "itemtype": "method",
             "name": "getItem",
@@ -3695,7 +3518,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 183,
+            "line": 182,
             "description": "<h4>アイテムがあるか判定</h4>",
             "itemtype": "method",
             "name": "hasItem",
@@ -3763,1101 +3586,6 @@
                 "type": "String"
             },
             "class": "AMP.BASE_CLASS"
-        },
-        {
-            "file": "develop\\amp\\createjs\\display\\Polygon.js",
-            "line": 34,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.CJS.Polygon"
-        },
-        {
-            "file": "develop\\amp\\createjs\\display\\Polygon.js",
-            "line": 44,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.CJS.Polygon"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 33,
-            "description": "<h4>createjs Easing用ネームスペース</h4>\nsee: http://www.CJS.com/Docs/TweenJS/files/tweenjs_p.js.html",
-            "itemtype": "property",
-            "name": "createjs",
-            "type": "{Object}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 45,
-            "itemtype": "property",
-            "name": "CJS._1_SINE_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 51,
-            "itemtype": "property",
-            "name": "CJS._1_SINE_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 57,
-            "itemtype": "property",
-            "name": "CJS._1_SINE_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 66,
-            "itemtype": "property",
-            "name": "CJS._2_QUAD_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 72,
-            "itemtype": "property",
-            "name": "CJS._2_QUAD_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 78,
-            "itemtype": "property",
-            "name": "CJS._2_QUAD_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 87,
-            "itemtype": "property",
-            "name": "CJS._3_CUBIC_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 93,
-            "itemtype": "property",
-            "name": "CJS._3_CUBIC_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 99,
-            "itemtype": "property",
-            "name": "CJS._3_CUBIC_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 108,
-            "itemtype": "property",
-            "name": "CJS._4_QUART_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 114,
-            "itemtype": "property",
-            "name": "CJS._4_QUART_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 120,
-            "itemtype": "property",
-            "name": "CJS._4_QUART_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 129,
-            "itemtype": "property",
-            "name": "CJS._5_QUINT_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 135,
-            "itemtype": "property",
-            "name": "CJS._5_QUINT_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 141,
-            "itemtype": "property",
-            "name": "CJS._5_QUINT_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 150,
-            "itemtype": "property",
-            "name": "CJS._6_EXPO_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 156,
-            "itemtype": "property",
-            "name": "CJS._6_EXPO_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 162,
-            "itemtype": "property",
-            "name": "CJS._6_EXPO_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 171,
-            "itemtype": "property",
-            "name": "CJS._7_CIRC_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 177,
-            "itemtype": "property",
-            "name": "CJS._7_CIRC_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 183,
-            "itemtype": "property",
-            "name": "CJS._7_CIRC_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 192,
-            "itemtype": "property",
-            "name": "CJS._LINEAR",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 201,
-            "itemtype": "property",
-            "name": "CJS._BACK_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 207,
-            "itemtype": "property",
-            "name": "CJS._BACK_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 213,
-            "itemtype": "property",
-            "name": "CJS._BACK_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 222,
-            "itemtype": "property",
-            "name": "CJS._ELASTIC_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 228,
-            "itemtype": "property",
-            "name": "CJS._ELASTIC_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 234,
-            "itemtype": "property",
-            "name": "CJS._ELASTIC_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 243,
-            "itemtype": "property",
-            "name": "CJS._BOUNCE_IN",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 249,
-            "itemtype": "property",
-            "name": "CJS._BOUNCE_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Ease.js",
-            "line": 255,
-            "itemtype": "property",
-            "name": "CJS._BOUNCE_IN_OUT",
-            "type": "{String}",
-            "class": "AMP.Ease"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 12,
-            "description": "<h4>ローダー</h4>\n\n\n[Loader description]",
-            "params": [
-                {
-                    "name": "manifest",
-                    "description": "[description]",
-                    "type": "[type]"
-                },
-                {
-                    "name": "options",
-                    "description": "[description]",
-                    "type": "[type]"
-                }
-            ],
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 22,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "param",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 30,
-            "description": "<h4>manifestデータ</h4>",
-            "itemtype": "property",
-            "name": "param.manifest",
-            "type": "{Array}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 38,
-            "description": "<h4>createjs.Preload LoadQueueオプション</h4>",
-            "itemtype": "property",
-            "name": "param.loadQueue",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 46,
-            "description": "<h4>loadCount完了した点数</h4>",
-            "itemtype": "property",
-            "name": "loadCount",
-            "type": "{Number}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 54,
-            "description": "<h4>進捗カウント</h4>",
-            "itemtype": "property",
-            "name": "updateCount",
-            "type": "{Number}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 62,
-            "description": "<h4>CJS.LoadQueueインスタンス</h4>",
-            "itemtype": "property",
-            "name": "loadQueue",
-            "type": "{createjs.LoadQueue}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 86,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 96,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 105,
-            "description": "<h4>createjs.Preload.LoadQueueオプション値</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "loadQueueOptions",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 123,
-            "description": "<h4>Loaderインスタンス生成</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "get",
-            "params": [
-                {
-                    "name": "el",
-                    "description": "対象のエリア要素",
-                    "type": "DOM"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 139,
-            "description": "<h4>初期化</h4>\nシングルトンパターン",
-            "itemtype": "method",
-            "name": "init",
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 179,
-            "description": "<h4>ファイルの読み込み毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "done",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 197,
-            "description": "<h4>読み込み失敗時に実行します</h4>",
-            "itemtype": "method",
-            "name": "fail",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 215,
-            "description": "<h4>進捗毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "progress",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 233,
-            "description": "<h4>フレーム毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "update",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 251,
-            "description": "<h4>Loaderイベントを管理します</h4>\nカウントの更新・updateイベントの発行",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_controller",
-            "return": {
-                "description": "",
-                "type": "Void"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 284,
-            "description": "<h4>読み込み完了時に実行します</h4>",
-            "itemtype": "method",
-            "name": "complete",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\Loader.js",
-            "line": 302,
-            "description": "<h4>updateの処理が完了したら実行</h4>",
-            "itemtype": "method",
-            "name": "updateComplete",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 12,
-            "description": "<h4>ローダー</h4>\n\n\n[Loader description]",
-            "params": [
-                {
-                    "name": "manifest",
-                    "description": "[description]",
-                    "type": "[type]"
-                },
-                {
-                    "name": "options",
-                    "description": "[description]",
-                    "type": "[type]"
-                }
-            ],
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 22,
-            "description": "<h4>プロパティ格納オブジェクト</h4>",
-            "itemtype": "property",
-            "name": "param",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 30,
-            "description": "<h4>manifestデータ</h4>",
-            "itemtype": "property",
-            "name": "param.manifest",
-            "type": "{Array}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 38,
-            "description": "<h4>createjs.Preload LoadQueueオプション</h4>",
-            "itemtype": "property",
-            "name": "param.loadQueue",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 46,
-            "description": "<h4>loadCount完了した点数</h4>",
-            "itemtype": "property",
-            "name": "loadCount",
-            "type": "{Number}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 54,
-            "description": "<h4>進捗カウント</h4>",
-            "itemtype": "property",
-            "name": "updateCount",
-            "type": "{Number}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 62,
-            "description": "<h4>CJS.LoadQueueインスタンス</h4>",
-            "itemtype": "property",
-            "name": "loadQueue",
-            "type": "{createjs.LoadQueue}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 86,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 96,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 105,
-            "description": "<h4>createjs.Preload.LoadQueueオプション値</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "loadQueueOptions",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 123,
-            "description": "<h4>Loaderインスタンス生成</h4>",
-            "static": 1,
-            "itemtype": "method",
-            "name": "get",
-            "params": [
-                {
-                    "name": "el",
-                    "description": "対象のエリア要素",
-                    "type": "DOM"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 139,
-            "description": "<h4>初期化</h4>\nシングルトンパターン",
-            "itemtype": "method",
-            "name": "init",
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 179,
-            "description": "<h4>ファイルの読み込み毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "done",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 197,
-            "description": "<h4>読み込み失敗時に実行します</h4>",
-            "itemtype": "method",
-            "name": "fail",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 215,
-            "description": "<h4>進捗毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "progress",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 233,
-            "description": "<h4>フレーム毎に実行します</h4>",
-            "itemtype": "method",
-            "name": "update",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 251,
-            "description": "<h4>Loaderイベントを管理します</h4>\nカウントの更新・updateイベントの発行",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_controller",
-            "return": {
-                "description": "",
-                "type": "Void"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 284,
-            "description": "<h4>読み込み完了時に実行します</h4>",
-            "itemtype": "method",
-            "name": "complete",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\createjs\\utilities\\_Loader.js",
-            "line": 302,
-            "description": "<h4>updateの処理が完了したら実行</h4>",
-            "itemtype": "method",
-            "name": "updateComplete",
-            "params": [
-                {
-                    "name": "callback",
-                    "description": "コールバック",
-                    "type": "Function"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "Loader"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 59,
-            "description": "オプションのデフォルト値",
-            "static": 1,
-            "itemtype": "property",
-            "name": "defaults",
-            "type": "{Object}",
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 86,
-            "description": "初期化",
-            "itemtype": "method",
-            "name": "init",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 121,
-            "description": "パラメーター、スタイルの設定",
-            "itemtype": "method",
-            "name": "setStyle",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 160,
-            "description": "リサイズイベント",
-            "itemtype": "method",
-            "name": "addEventResize",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 183,
-            "description": "フリックイベント",
-            "itemtype": "method",
-            "name": "addEventFlick",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 210,
-            "description": "ネクストボタンイベント",
-            "itemtype": "method",
-            "name": "addEventNext",
-            "params": [
-                {
-                    "name": "$trigger",
-                    "description": "トリガー要素",
-                    "type": "JQuery"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 227,
-            "description": "プレブボタンイベント",
-            "itemtype": "method",
-            "name": "addEventPrev",
-            "params": [
-                {
-                    "name": "$trigger",
-                    "description": "トリガー要素",
-                    "type": "JQuery"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 245,
-            "description": "ページャーボタンイベント",
-            "itemtype": "method",
-            "name": "addEventPrev",
-            "params": [
-                {
-                    "name": "$trigger",
-                    "description": "トリガー要素",
-                    "type": "JQuery"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 263,
-            "description": "タイマースタート",
-            "itemtype": "method",
-            "name": "timerStart",
-            "params": [
-                {
-                    "name": "num",
-                    "description": "セットするタイマー値(省略可)",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 288,
-            "description": "タイマー停止",
-            "itemtype": "method",
-            "name": "timerStop",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 302,
-            "description": "次へスライド",
-            "itemtype": "method",
-            "name": "next",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 313,
-            "description": "前へスライド",
-            "itemtype": "method",
-            "name": "prev",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 324,
-            "description": "指定したスライドインデックスへスライド",
-            "itemtype": "method",
-            "name": "moveTo",
-            "params": [
-                {
-                    "name": "num",
-                    "description": "指定したスライドインデックス",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 339,
-            "description": "コントローラー",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_controller",
-            "params": [
-                {
-                    "name": "step",
-                    "description": "スライドするステップ数",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 383,
-            "description": "スライドアイテムの生成",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_createSlideItems",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 404,
-            "description": "ポインターの生成",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_createPointer",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 426,
-            "description": "アクティブな要素にクラスを振ります",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_active",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 470,
-            "description": "x値分へスライド",
-            "itemtype": "method",
-            "name": "_move",
-            "params": [
-                {
-                    "name": "x",
-                    "description": "スライドするx座標値",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 482,
-            "description": "センターポジションへスライドアニメーション",
-            "itemtype": "method",
-            "name": "_moveCenter",
-            "return": {
-                "description": "",
-                "type": "LiquidSlider"
-            },
-            "class": "AMP.$.LiquidSlider"
-        },
-        {
-            "file": "develop\\amp\\jquery\\_bk\\LiquidSlider.js",
-            "line": 493,
-            "description": "スライドアニメーションを実行",
-            "access": "private",
-            "tagname": "",
-            "itemtype": "method",
-            "name": "_active",
-            "return": {
-                "description": "",
-                "type": "jQuery.Deferred"
-            },
-            "class": "AMP.$.LiquidSlider"
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
@@ -5293,7 +4021,7 @@
         {
             "file": "develop\\amp\\jquery\\base\\FlatHeight.js",
             "line": 57,
-            "description": "<h4>サイズ後、リセットしなおすか</h4>",
+            "description": "<h4>リサイズ後、セットし直すか？</h4>",
             "default": "true",
             "itemtype": "property",
             "name": "param.isResize",
@@ -5623,6 +4351,179 @@
             "name": "_compleatCall",
             "type": "{Function}",
             "class": "AMP.$.Loader"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 28,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "param",
+            "type": "{Object}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 44,
+            "description": "<h4>画像を書き換える要素</h4>",
+            "itemtype": "property",
+            "name": "param.$images",
+            "type": "{jQuery}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 52,
+            "description": "<h4>現在の状態</h4>",
+            "itemtype": "property",
+            "name": "param.current",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 76,
+            "description": "<h4>バージョン情報</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 86,
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 95,
+            "description": "<h4>デフォルト値、格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "mediaImagesOptions",
+            "type": "{Object}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 101,
+            "description": "<h4>監視対象要素</h4>",
+            "itemtype": "property",
+            "name": "mediaImagesOptions.element",
+            "type": "{DOM}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 107,
+            "description": "<h4>画像ファイルパス格納属性名</h4>",
+            "itemtype": "property",
+            "name": "mediaImagesOptions.attrKey",
+            "default": "'data-media-img'",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 114,
+            "description": "<h4>画像ファイルに追加するprefix</h4>",
+            "itemtype": "property",
+            "name": "mediaImagesOptions.imagePrefix",
+            "default": "'_'",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 121,
+            "description": "<h4>対象要素監視しているか？</h4>",
+            "itemtype": "property",
+            "name": "mediaImagesOptions.isObserver",
+            "type": "{String}",
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 140,
+            "description": "<h4>MediaImageChangeインスタンスの生成</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "$images",
+                    "description": "画像を書き換える要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション値",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "MediaImageChange"
+            },
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 154,
+            "description": "<h4>ブレイクポイントの監視を開始します</h4>",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "",
+                "type": "MediaImageChange"
+            },
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 174,
+            "description": "<h4>ブレイクポイントの監視をストップします</h4>",
+            "itemtype": "method",
+            "name": "stop",
+            "return": {
+                "description": "",
+                "type": "MediaImageChange"
+            },
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 186,
+            "description": "<h4>監視の状態を切り替えます</h4>",
+            "itemtype": "method",
+            "name": "setObserver",
+            "params": [
+                {
+                    "name": "isState",
+                    "description": "メディアクエリの変更を監視するか",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "MediaImageChange"
+            },
+            "class": "MediaImageChange"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\MediaImages.js",
+            "line": 199,
+            "description": "<h4>画像を変更します</h4>",
+            "itemtype": "method",
+            "name": "switch",
+            "return": {
+                "description": "",
+                "type": "MediaImageChange"
+            },
+            "class": "MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Render.js",
@@ -6096,7 +4997,7 @@
             "line": 251,
             "description": "<h4>ロールオーバーデータの生成</h4>",
             "itemtype": "method",
-            "name": "_getImageSrc",
+            "name": "_createRolloverData",
             "access": "private",
             "tagname": "",
             "params": [
@@ -6183,7 +5084,7 @@
             "itemtype": "property",
             "name": "scrollOptions.adjust",
             "default": "0",
-            "type": "{Number}",
+            "type": "{Number|Function}",
             "class": "AMP.$.Scroll"
         },
         {
@@ -6749,7 +5650,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 119,
+            "line": 118,
             "description": "<h4>Prevボタンイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventPrev",
@@ -6768,7 +5669,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 136,
+            "line": 135,
             "description": "<h4>Prevボタンイベント削除</h4>",
             "itemtype": "method",
             "name": "removeEventPrev",
@@ -6787,7 +5688,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 149,
+            "line": 148,
             "description": "<h4>指定インデックスへ</h4>",
             "itemtype": "method",
             "name": "moveTo",
@@ -6806,7 +5707,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 162,
+            "line": 161,
             "description": "<h4>次へ</h4>",
             "itemtype": "method",
             "name": "next",
@@ -6818,7 +5719,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 174,
+            "line": 173,
             "description": "<h4>前へ</h4>",
             "itemtype": "method",
             "name": "prev",
@@ -6830,7 +5731,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 186,
+            "line": 185,
             "description": "<h4>コントローラー</h4>\n送られてきた値を制御します",
             "access": "private",
             "tagname": "",
@@ -6844,7 +5745,42 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 41,
+            "line": 31,
+            "description": "<h4>プロパティ格納オブジェクト</h4>",
+            "itemtype": "property",
+            "name": "param",
+            "type": "{Object}",
+            "class": "AMP.$.Float3d"
+        },
+        {
+            "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
+            "line": 39,
+            "description": "<h4>float要素</h4>",
+            "propaty": "$target",
+            "type": "{jQuery}",
+            "class": "AMP.$.Float3d"
+        },
+        {
+            "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
+            "line": 47,
+            "description": "<h4>html要素</h4>",
+            "propaty": "$html",
+            "type": "{jQuery}",
+            "class": "AMP.$.Float3d"
+        },
+        {
+            "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
+            "line": 55,
+            "description": "<h4>float要素</h4>",
+            "access": "private",
+            "tagname": "",
+            "propaty": "_isFloating",
+            "type": "{Boolean}",
+            "class": "AMP.$.Float3d"
+        },
+        {
+            "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
+            "line": 77,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6854,7 +5790,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 51,
+            "line": 87,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -6863,7 +5799,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 60,
+            "line": 96,
             "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
@@ -6873,7 +5809,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 68,
+            "line": 104,
             "description": "<h4>3D変形の奥行きの深さを指定する値</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6883,7 +5819,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 75,
+            "line": 111,
             "description": "<h4>Z方向の距離で移動を指定する値</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6893,7 +5829,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 82,
+            "line": 118,
             "description": "<h4>回転表示を指定する値</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6903,7 +5839,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 89,
+            "line": 125,
             "description": "<h4>floating時に回転する幅く</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6913,7 +5849,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 96,
+            "line": 132,
             "description": "<h4>floating時の回転するスピードく</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6923,7 +5859,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 103,
+            "line": 139,
             "description": "<h4>hover時のdurationく</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6933,7 +5869,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 110,
+            "line": 146,
             "description": "<h4>hover時のeasingく</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6943,7 +5879,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 133,
+            "line": 169,
             "description": "<h4>Float3dインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
@@ -6968,7 +5904,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 149,
+            "line": 185,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -6980,7 +5916,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 196,
+            "line": 232,
             "description": "<h4>イベント削除</h4>",
             "itemtype": "method",
             "name": "off",
@@ -6992,12 +5928,10 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 213,
+            "line": 249,
             "description": "<h4>マウスオンTween</h4>",
-            "access": "private",
-            "tagname": "",
             "itemtype": "method",
-            "name": "_onTween",
+            "name": "onTween",
             "params": [
                 {
                     "name": "target",
@@ -7018,12 +5952,10 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 239,
+            "line": 274,
             "description": "<h4>選択中のTween</h4>\n再起処理します",
-            "access": "private",
-            "tagname": "",
             "itemtype": "method",
-            "name": "_floatTween",
+            "name": "floatTween",
             "params": [
                 {
                     "name": "target",
@@ -7039,12 +5971,10 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 273,
+            "line": 307,
             "description": "<h4>マウスアウトTween</h4>",
-            "access": "private",
-            "tagname": "",
             "itemtype": "method",
-            "name": "_outTween",
+            "name": "outTween",
             "params": [
                 {
                     "name": "target",
@@ -7060,7 +5990,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Float3d.js",
-            "line": 308,
+            "line": 341,
             "description": "<h4>エリアセンター中心に座標位置の比率を返す</h4>\n比率は0を中心に-1から1までの小数点2桁の数値",
             "itemtype": "method",
             "name": "offsetRatio",
@@ -7084,7 +6014,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 23,
+            "line": 24,
             "description": "<h4>プロパティ格納オブジェクト</h4>",
             "itemtype": "property",
             "name": "param",
@@ -7093,7 +6023,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 29,
+            "line": 30,
             "description": "<h4>スライダー要素</h4>",
             "itemtype": "property",
             "name": "param.$wrap",
@@ -7102,7 +6032,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 35,
+            "line": 36,
             "description": "<h4>スライダーアイテム要素数</h4>",
             "itemtype": "property",
             "name": "param.length",
@@ -7111,7 +6041,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 41,
+            "line": 42,
             "description": "<h4>表示されてる要素数</h4>",
             "itemtype": "property",
             "name": "param.displayLength",
@@ -7120,7 +6050,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 47,
+            "line": 48,
             "description": "<h4>$frame内に表示されている要素数</h4>",
             "itemtype": "property",
             "name": "param.visible",
@@ -7129,7 +6059,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 53,
+            "line": 54,
             "description": "<h4>スライドする距離</h4>",
             "itemtype": "property",
             "name": "param.distance",
@@ -7138,7 +6068,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 59,
+            "line": 60,
             "description": "<h4>left値</h4>",
             "itemtype": "property",
             "name": "param.left",
@@ -7147,7 +6077,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 65,
+            "line": 66,
             "description": "<h4>タイマーID</h4>",
             "access": "private",
             "tagname": "",
@@ -7158,7 +6088,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 72,
+            "line": 73,
             "description": "<h4>アニメーション状態管理フラグ</h4>",
             "access": "private",
             "tagname": "",
@@ -7169,7 +6099,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 121,
+            "line": 122,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -7179,7 +6109,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 131,
+            "line": 132,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -7188,7 +6118,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 140,
+            "line": 141,
             "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出された際に、option値とmixinしてparamに格納します。",
             "static": 1,
             "itemtype": "property",
@@ -7198,7 +6128,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 148,
+            "line": 149,
             "description": "<h4>スライダーフレーム要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$frame",
@@ -7207,7 +6137,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 154,
+            "line": 155,
             "description": "<h4>スライドする要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$slide",
@@ -7216,7 +6146,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 160,
+            "line": 161,
             "description": "<h4>スライドする子要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$slideItems",
@@ -7225,7 +6155,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 166,
+            "line": 167,
             "description": "<h4>ポインター要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$pointer",
@@ -7234,7 +6164,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 172,
+            "line": 173,
             "description": "<h4>サムネイル要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$thumbnail",
@@ -7243,7 +6173,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 178,
+            "line": 179,
             "description": "<h4>prevナビ要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$prev",
@@ -7252,7 +6182,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 184,
+            "line": 185,
             "description": "<h4>nextナビ要素</h4>",
             "itemtype": "property",
             "name": "sliderOptions.$next",
@@ -7261,7 +6191,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 190,
+            "line": 191,
             "description": "<h4>コンストラクタ呼び出されたときに、スライダーを初期化するか</h4>",
             "itemtype": "property",
             "name": "sliderOptions.isInit",
@@ -7270,7 +6200,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 196,
+            "line": 197,
             "description": "<h4>フリックイベントを有効にするか</h4>",
             "itemtype": "property",
             "name": "sliderOptions.isFlick",
@@ -7279,7 +6209,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 202,
+            "line": 203,
             "description": "<h4>スライドループを有効にするか</h4>",
             "itemtype": "property",
             "name": "sliderOptions.isLoop",
@@ -7288,7 +6218,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 208,
+            "line": 209,
             "description": "<h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>",
             "itemtype": "property",
             "name": "sliderOptions.isTimerCancel",
@@ -7297,7 +6227,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 214,
+            "line": 215,
             "description": "<h4>現在アクティブなスライドアイテムインデックス</h4>",
             "itemtype": "property",
             "name": "sliderOptions.current",
@@ -7306,7 +6236,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 220,
+            "line": 221,
             "description": "<h4>スライドステップ数を固定したい場合、ステップ数の指定</h4>",
             "itemtype": "property",
             "name": "sliderOptions.slideStep",
@@ -7315,7 +6245,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 226,
+            "line": 227,
             "description": "<h4>スライドタイマーの間隔</h4>",
             "itemtype": "property",
             "name": "sliderOptions.timer",
@@ -7324,7 +6254,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 232,
+            "line": 233,
             "description": "<h4>スライドduration</h4>",
             "itemtype": "property",
             "name": "sliderOptions.duration",
@@ -7333,7 +6263,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 238,
+            "line": 239,
             "description": "<h4>スライドease</h4>",
             "itemtype": "property",
             "name": "sliderOptions.ease",
@@ -7342,7 +6272,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 244,
+            "line": 245,
             "description": "<h4>アクティブ要素に付与するクラス名</h4>",
             "itemtype": "property",
             "name": "sliderOptions.activeClass",
@@ -7351,7 +6281,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 250,
+            "line": 251,
             "description": "<h4>スライド前に実行する関数</h4>",
             "itemtype": "property",
             "name": "sliderOptions.tweenBegin",
@@ -7360,7 +6290,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 256,
+            "line": 257,
             "description": "<h4>スライド完了時に実行する関数</h4>",
             "itemtype": "property",
             "name": "sliderOptions.tweenCompleat",
@@ -7369,7 +6299,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 262,
+            "line": 263,
             "description": "<h4>リサイズ時に実行する関数</h4>",
             "itemtype": "property",
             "name": "sliderOptions.resizeCall",
@@ -7378,7 +6308,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 268,
+            "line": 269,
             "description": "<h4>リサイズに完了時に実行する関数</h4>",
             "itemtype": "property",
             "name": "sliderOptions.resizeStopCall",
@@ -7387,7 +6317,32 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 319,
+            "line": 306,
+            "description": "<h4>Sliderインスタンスの生成</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "$wrap",
+                    "description": "スライダー要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション値",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Slider"
+            },
+            "class": "AMP.$.Slider"
+        },
+        {
+            "file": "develop\\amp\\jquery\\utilities\\Slider.js",
+            "line": 320,
             "description": "<h4>初期化</h4>\nSingleton",
             "itemtype": "method",
             "name": "init",
@@ -7399,7 +6354,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 360,
+            "line": 361,
             "description": "<h4>パラメーターの設定</h4>",
             "itemtype": "method",
             "name": "setParam",
@@ -7411,7 +6366,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 413,
+            "line": 414,
             "description": "<h4>リサイズイベント</h4>",
             "itemtype": "method",
             "name": "addEventResize",
@@ -7423,7 +6378,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 445,
+            "line": 446,
             "description": "<h4>タイマーキャンセルイベント</h4>\nスライダーにマウスオンされた状態の時、タイマー処理をキャンセルします",
             "itemtype": "method",
             "name": "addEventTimerCancel",
@@ -7435,7 +6390,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 471,
+            "line": 472,
             "description": "<h4>フリックイベント</h4>",
             "itemtype": "method",
             "name": "addEventFlick",
@@ -7447,7 +6402,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 501,
+            "line": 502,
             "description": "<h4>タイマースタート</h4>",
             "itemtype": "method",
             "name": "timerStart",
@@ -7466,7 +6421,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 528,
+            "line": 529,
             "description": "タイマー停止",
             "itemtype": "method",
             "name": "timerStop",
@@ -7478,7 +6433,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 539,
+            "line": 540,
             "description": "<h4> コントローラー</h4>",
             "access": "private",
             "tagname": "",
@@ -7499,7 +6454,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 600,
+            "line": 601,
             "description": "<h4>表示可能な要素の数を取得</h4>",
             "itemtype": "method",
             "name": "getDisplayLength",
@@ -7511,7 +6466,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 617,
+            "line": 618,
             "description": "<h4>ポインターの生成</h4>",
             "access": "private",
             "tagname": "",
@@ -7525,13 +6480,13 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 640,
+            "line": 641,
             "description": "ここ途中\n[setPosition description]",
             "class": "AMP.$.Slider"
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 653,
+            "line": 654,
             "description": "<h4>要素のアクティブ化</h4>",
             "itemtype": "method",
             "name": "active",
@@ -7543,7 +6498,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 703,
+            "line": 704,
             "description": "<h4>指定x座標分移動</h4>",
             "access": "private",
             "tagname": "",
@@ -7564,7 +6519,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 716,
+            "line": 717,
             "description": "<h4>スライド位置を戻す</h4>",
             "access": "private",
             "tagname": "",
@@ -7578,7 +6533,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 729,
+            "line": 730,
             "description": "<h4>スライドアニメーションを実行</h4>",
             "access": "private",
             "tagname": "",
@@ -7877,28 +6832,40 @@
     ],
     "warnings": [
         {
+            "message": "unknown tag: propaty",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:39"
+        },
+        {
+            "message": "unknown tag: propaty",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:47"
+        },
+        {
+            "message": "unknown tag: propaty",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:55"
+        },
+        {
             "message": "Missing item type\n<h4>空の関数</h4>\n何もしません",
-            "line": " develop\\amp\\core\\base\\utility.js:319"
+            "line": " develop\\amp\\core\\base\\utility.js:185"
         },
         {
             "message": "Missing item type\n<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
             "line": " develop\\amp\\core\\utilities\\Mediaquery.js:174"
         },
         {
-            "message": "Missing item type\n[set description]",
-            "line": " develop\\amp\\core\\utilities\\Model.js:96"
+            "message": "Missing item type\n<h4>float要素</h4>",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:39"
         },
         {
-            "message": "Missing item type\n<h4>ローダー</h4>\n\n\n[Loader description]",
-            "line": " develop\\amp\\createjs\\utilities\\Loader.js:12"
+            "message": "Missing item type\n<h4>html要素</h4>",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:47"
         },
         {
-            "message": "Missing item type\n<h4>ローダー</h4>\n\n\n[Loader description]",
-            "line": " develop\\amp\\createjs\\utilities\\_Loader.js:12"
+            "message": "Missing item type\n<h4>float要素</h4>",
+            "line": " develop\\amp\\jquery\\utilities\\Float3d.js:55"
         },
         {
             "message": "Missing item type\nここ途中\n[setPosition description]",
-            "line": " develop\\amp\\jquery\\utilities\\Slider.js:640"
+            "line": " develop\\amp\\jquery\\utilities\\Slider.js:641"
         }
     ]
 }

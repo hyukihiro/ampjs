@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -135,7 +134,7 @@ var AMP = AMP || {};
    * &lt;h4&gt;DOMイベント追加&lt;/h4&gt;
    *
    * @static
-   * @method removeEvent
+   * @method addEvent
    * @param  {DOM} element  ターゲット要素
    * @param  {String} type     イベント名
    * @param  {Function} listener 実行する関数
@@ -190,140 +189,6 @@ var AMP = AMP || {};
     } else {
       throw new TypeError(fn + &#x27; is not a Function&#x27;);
     }
-  };
-
-
-  /**
-   * &lt;h4&gt;DEG&lt;/h4&gt;
-   *
-   * @static
-   * @property DEG
-   * @type {Number}
-   */
-  AMP.DEG = Math.PI / 180;
-
-
-  /**
-   * &lt;h4&gt;角度、距離からxy座標を返す &lt;/h4&gt;
-   *
-   * @static
-   * @method coords
-   * @param  {Number} deg    角度
-   * @param  {Number} distanceX 距離
-   * @param  {Number} distanceY 距離
-   * @return {Object}
-   */
-  AMP.coords = function(deg, distanceX, distanceY){
-    return {
-      x: AMP.coordX(deg, distanceX),
-      y: AMP.coordY(deg, distanceY)
-    };
-  };
-
-
-  /**
-   * &lt;h4&gt;角度、距離からx座標を算出&lt;/h4&gt;
-   *
-   * @static
-   * @method coordX
-   * @param  {Number} deg   角度
-   * @param  {Number} distanceX 距離
-   * @return {Number}
-   */
-  AMP.coordX = function(deg, distanceX){
-    return Math.cos(deg * AMP.DEG) * distanceX;
-  };
-
-
-  /**
-   * &lt;h4&gt;角度、距離からy座標を算出&lt;/h4&gt;
-   *
-   * @static
-   * @method coordY
-   * @param  {Number} deg   角度
-   * @param  {Number} distanceY 距離
-   * @return {Number}
-   */
-  AMP.coordY = function(deg, distanceY){
-    return Mas.sin(deg * AMP.DEG) * distanceY;
-  };
-
-
-  /**
-   * &lt;h4&gt;現在と過去の位置から角度を算出&lt;/h4&gt;
-   *
-   * @static
-   * @method deg
-   * @param  {Number} x     現在のx座標
-   * @param  {Number} y     現在のy座標
-   * @param  {Number} prevX 前のx座標
-   * @param  {Number} PrevY 前のx座標
-   * @return {Number}
-   */
-  AMP.deg = function(x, y, prevX, PrevY){
-    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
-  };
-
-
-  /**
-   * &lt;h4&gt;16進数カラーをRGBに変換します&lt;/h4&gt;
-   *
-   * @static
-   * @method hexToRGB
-   * @param {String} hex 16進数カラー
-   * @return {Object} RGB Object
-   */
-  AMP.hexToRGB = function(hex){
-    hex = hex.replace(/^#/, &#x27;&#x27;);
-
-    // hex shorthand時、成型しなおす
-    if(hex.length === 3){
-      var _hex = &#x27;&#x27;;
-      AMP.each(hex, function(chara){
-        _hex += chara + chara;
-      });
-      hex = _hex;
-    }
-
-    // hex値の簡易チェック
-    if (hex.length !== 6) {
-      throw new TypeError(&#x27;arguments is not a HEX&#x27;);
-    }
-
-    // RGB Object
-    return {
-      r: parseInt(hex.substring(0, 2), 16),
-      g: parseInt(hex.substring(2, 4), 16),
-      b: parseInt(hex.substring(4, 6), 16)
-    };
-  };
-
-
-  /**
-   * &lt;h4&gt;RGBカラーを16進数カラーに変換&lt;/h4&gt;
-   *
-   * @static
-   * @method rgbToHex
-   * @param  {Number} r レッド値
-   * @param  {Number} g グリーン値
-   * @param  {Number} b ブルー値
-   * @return {String} 16進数カラー
-   */
-  AMP.rgbToHex = function(r, g, b){
-    var hex = &#x27;#&#x27;;
-
-    AMP.each(AMP.argsToArray(arguments), function(color){
-      var _color = Number(color).toString(16);
-
-      // RGB値チェック
-      if(2 &lt; _color.length){
-        throw new TypeError(&#x27;arguments is not a RGB&#x27;);
-      }
-
-      hex += _color.length === 1 ? &#x27;0&#x27; + _color : _color;
-    });
-
-    return hex;
   };
 
 

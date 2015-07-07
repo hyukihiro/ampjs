@@ -55,7 +55,7 @@ var AMP = AMP || {};
     this.param.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
-     * <h4>サイズ後、リセットしなおすか</h4>
+     * <h4>リサイズ後、セットし直すか？</h4>
      *
      * @default true
      * @property param.isResize

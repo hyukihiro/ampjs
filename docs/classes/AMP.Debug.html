@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -186,18 +185,18 @@ AMP.debug.log(any, any...);</p>
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private">
-                                <a href="#method_addEvent">addEvent</a>
+                                <a href="#method__addEvent">_addEvent</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method__createView">_createView</a>
 
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
                                 <a href="#method_clear">clear</a>
 
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method_createView">createView</a>
-
-                                    <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
                                 <a href="#method_hide">hide</a>
@@ -235,11 +234,6 @@ AMP.debug.log(any, any...);</p>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_debugViews">debugViews</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_isChangeLog">isChangeLog</a>
 
                                     <span class="flag static">static</span>
@@ -254,6 +248,11 @@ AMP.debug.log(any, any...);</p>
 
                                     <span class="flag static">static</span>
                             </li>
+                            <li class="index-item property">
+                                <a href="#property_views">views</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
                     </ul>
                 </div>
 
@@ -263,8 +262,8 @@ AMP.debug.log(any, any...);</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method_addEvent" class="method item private">
-    <h3 class="name"><code>addEvent</code></h3>
+<div id="method__addEvent" class="method item private">
+    <h3 class="name"><code>_addEvent</code></h3>
 
         <span class="paren">()</span>
 
@@ -292,6 +291,48 @@ AMP.debug.log(any, any...);</p>
 
     <div class="description">
         <h4>viewイベント設定</h4>
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Void</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method__createView" class="method item private">
+    <h3 class="name"><code>_createView</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_core_utilities_Debug.js.html#l97"><code>develop\amp\core\utilities\Debug.js:97</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>view要素を生成</h4>
     </div>
 
 
@@ -340,48 +381,6 @@ AMP.debug.log(any, any...);</p>
 
             <div class="returns-description">
                         <span class="type">Debug</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_createView" class="method item private">
-    <h3 class="name"><code>createView</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Void</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_utilities_Debug.js.html#l97"><code>develop\amp\core\utilities\Debug.js:97</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>view要素を生成</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Void</span>:
             </div>
         </div>
 
@@ -683,31 +682,6 @@ AMP.debug.log(any, any...);</p>
                     
                     
                     </div>
-                    <div id="property_debugViews" class="property item">
-                        <h3 class="name"><code>debugViews</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_core_utilities_Debug.js.html#l59"><code>develop\amp\core\utilities\Debug.js:59</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>デバッグview要素を格納用オブジェクト</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_isChangeLog" class="property item">
                         <h3 class="name"><code>isChangeLog</code></h3>
                         <span class="type">Boolean</span>
@@ -780,6 +754,31 @@ AMP.debug.log(any, any...);</p>
                     
                         <div class="description">
                             <h4>バージョン情報</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_views" class="property item">
+                        <h3 class="name"><code>views</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_core_utilities_Debug.js.html#l59"><code>develop\amp\core\utilities\Debug.js:59</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>デバッグview要素を格納用オブジェクト</h4>
                         </div>
                     
                     

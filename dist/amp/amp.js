@@ -42,7 +42,7 @@ var AMP = {};
   // クラス設定
   var
   CLASS_NAME = 'Amp',
-  VERSION    = '3.0.0';
+  VERSION    = '3.0.1';
 
 
 
@@ -204,6 +204,166 @@ var AMP = AMP || {};
   		return slice.call(args, index, lastIndex);
   	};
   }());
+
+
+}(window));
+
+var AMP = AMP || {};
+
+(function(root){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    表示
+  ======================================================================*/
+
+  /**
+   * <h4>表示</h4>
+   *
+   * @class AMP.Display
+   */
+
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>RAD</h4>
+   *
+   * @static
+   * @property RAD
+   * @type {Number}
+   */
+  AMP.RAD = Math.PI / 180;
+
+
+  /**
+   * <h4>角度、距離からxy座標を返す </h4>
+   *
+   * @static
+   * @method coords
+   * @param  {Number} deg    角度
+   * @param  {Number} distanceX 距離
+   * @param  {Number} distanceY 距離
+   * @return {Object}
+   */
+  AMP.coords = function(deg, distanceX, distanceY){
+    return {
+      x: AMP.coordX(deg, distanceX),
+      y: AMP.coordY(deg, distanceY)
+    };
+  };
+
+
+  /**
+   * <h4>角度、距離からx座標を算出</h4>
+   *
+   * @static
+   * @method coordX
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceX 距離
+   * @return {Number}
+   */
+  AMP.coordX = function(deg, distanceX){
+    return Math.cos(deg * AMP.RAD) * distanceX;
+  };
+
+
+  /**
+   * <h4>角度、距離からy座標を算出</h4>
+   *
+   * @static
+   * @method coordY
+   * @param  {Number} deg   角度
+   * @param  {Number} distanceY 距離
+   * @return {Number}
+   */
+  AMP.coordY = function(deg, distanceY){
+    return Mas.sin(deg * AMP.RAD) * distanceY;
+  };
+
+
+  /**
+   * <h4>現在と過去の位置から角度を算出</h4>
+   *
+   * @static
+   * @method deg
+   * @param  {Number} x     現在のx座標
+   * @param  {Number} y     現在のy座標
+   * @param  {Number} prevX 前のx座標
+   * @param  {Number} PrevY 前のx座標
+   * @return {Number}
+   */
+  AMP.deg = function(x, y, prevX, PrevY){
+    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
+  };
+
+
+  /**
+   * <h4>16進数カラーをRGBに変換します</h4>
+   *
+   * @static
+   * @method hexToRGB
+   * @param {String} hex 16進数カラー
+   * @return {Object} RGB Object
+   */
+  AMP.hexToRGB = function(hex){
+    hex = hex.replace(/^#/, '');
+
+    // hex shorthand時、成型しなおす
+    if(hex.length === 3){
+      var _hex = '';
+      AMP.each(hex, function(chara){
+        _hex += chara + chara;
+      });
+      hex = _hex;
+    }
+
+    // hex値の簡易チェック
+    if (hex.length !== 6) {
+      throw new TypeError('arguments is not a HEX');
+    }
+
+    // RGB Object
+    return {
+      r: parseInt(hex.substring(0, 2), 16),
+      g: parseInt(hex.substring(2, 4), 16),
+      b: parseInt(hex.substring(4, 6), 16)
+    };
+  };
+
+
+  /**
+   * <h4>RGBカラーを16進数カラーに変換</h4>
+   *
+   * @static
+   * @method rgbToHex
+   * @param  {Number} r レッド値
+   * @param  {Number} g グリーン値
+   * @param  {Number} b ブルー値
+   * @return {String} 16進数カラー
+   */
+  AMP.rgbToHex = function(r, g, b){
+    var hex = '#';
+
+    AMP.each(AMP.argsToArray(arguments), function(color){
+      var _color = Number(color).toString(16);
+
+      // RGB値チェック
+      if(2 < _color.length){
+        throw new TypeError('arguments is not a RGB');
+      }
+
+      hex += _color.length === 1 ? '0' + _color : _color;
+    });
+
+    return hex;
+  };
+
 
 
 }(window));
@@ -569,10 +729,10 @@ var AMP = AMP || {};
    * <h4>RequestAnimationFrame機能の有無</h4>
    *
    * @static
-   * @method hasReqAnime
+   * @method hasRequestAnimationFrame
    * @return {Boolean}
    */
-  AMP.hasReqAnime = function(){
+  AMP.hasRequestAnimationFrame = function(){
     return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||
@@ -682,7 +842,7 @@ var AMP = AMP || {};
    * <h4>MsPointer判定 βver</h4>
    *
    * @static
-   * @method isMsPointer
+   * @method hasMsPointer
    * @return {Boolean}
    */
   AMP.hasMsPointer = function(){
@@ -997,7 +1157,7 @@ var AMP = AMP || {};
    * !!!: 数値しか判定しません
    *
    * @static
-   * @method isPositive
+   * @method isNegative
    * @param  {Number} num 判定したい数値
    * @return {Boolean}
    */
@@ -1711,7 +1871,7 @@ var AMP = AMP || {};
    * <h4>DOMイベント追加</h4>
    *
    * @static
-   * @method removeEvent
+   * @method addEvent
    * @param  {DOM} element  ターゲット要素
    * @param  {String} type     イベント名
    * @param  {Function} listener 実行する関数
@@ -1766,140 +1926,6 @@ var AMP = AMP || {};
     } else {
       throw new TypeError(fn + ' is not a Function');
     }
-  };
-
-
-  /**
-   * <h4>DEG</h4>
-   *
-   * @static
-   * @property DEG
-   * @type {Number}
-   */
-  AMP.DEG = Math.PI / 180;
-
-
-  /**
-   * <h4>角度、距離からxy座標を返す </h4>
-   *
-   * @static
-   * @method coords
-   * @param  {Number} deg    角度
-   * @param  {Number} distanceX 距離
-   * @param  {Number} distanceY 距離
-   * @return {Object}
-   */
-  AMP.coords = function(deg, distanceX, distanceY){
-    return {
-      x: AMP.coordX(deg, distanceX),
-      y: AMP.coordY(deg, distanceY)
-    };
-  };
-
-
-  /**
-   * <h4>角度、距離からx座標を算出</h4>
-   *
-   * @static
-   * @method coordX
-   * @param  {Number} deg   角度
-   * @param  {Number} distanceX 距離
-   * @return {Number}
-   */
-  AMP.coordX = function(deg, distanceX){
-    return Math.cos(deg * AMP.DEG) * distanceX;
-  };
-
-
-  /**
-   * <h4>角度、距離からy座標を算出</h4>
-   *
-   * @static
-   * @method coordY
-   * @param  {Number} deg   角度
-   * @param  {Number} distanceY 距離
-   * @return {Number}
-   */
-  AMP.coordY = function(deg, distanceY){
-    return Mas.sin(deg * AMP.DEG) * distanceY;
-  };
-
-
-  /**
-   * <h4>現在と過去の位置から角度を算出</h4>
-   *
-   * @static
-   * @method deg
-   * @param  {Number} x     現在のx座標
-   * @param  {Number} y     現在のy座標
-   * @param  {Number} prevX 前のx座標
-   * @param  {Number} PrevY 前のx座標
-   * @return {Number}
-   */
-  AMP.deg = function(x, y, prevX, PrevY){
-    return Math.atan2(PrevY - y, prevX - x) * 180 / Math.PI;
-  };
-
-
-  /**
-   * <h4>16進数カラーをRGBに変換します</h4>
-   *
-   * @static
-   * @method hexToRGB
-   * @param {String} hex 16進数カラー
-   * @return {Object} RGB Object
-   */
-  AMP.hexToRGB = function(hex){
-    hex = hex.replace(/^#/, '');
-
-    // hex shorthand時、成型しなおす
-    if(hex.length === 3){
-      var _hex = '';
-      AMP.each(hex, function(chara){
-        _hex += chara + chara;
-      });
-      hex = _hex;
-    }
-
-    // hex値の簡易チェック
-    if (hex.length !== 6) {
-      throw new TypeError('arguments is not a HEX');
-    }
-
-    // RGB Object
-    return {
-      r: parseInt(hex.substring(0, 2), 16),
-      g: parseInt(hex.substring(2, 4), 16),
-      b: parseInt(hex.substring(4, 6), 16)
-    };
-  };
-
-
-  /**
-   * <h4>RGBカラーを16進数カラーに変換</h4>
-   *
-   * @static
-   * @method rgbToHex
-   * @param  {Number} r レッド値
-   * @param  {Number} g グリーン値
-   * @param  {Number} b ブルー値
-   * @return {String} 16進数カラー
-   */
-  AMP.rgbToHex = function(r, g, b){
-    var hex = '#';
-
-    AMP.each(AMP.argsToArray(arguments), function(color){
-      var _color = Number(color).toString(16);
-
-      // RGB値チェック
-      if(2 < _color.length){
-        throw new TypeError('arguments is not a RGB');
-      }
-
-      hex += _color.length === 1 ? '0' + _color : _color;
-    });
-
-    return hex;
   };
 
 
@@ -2076,7 +2102,7 @@ var AMP = AMP || {};
    * <h4>デバッグview要素を格納用オブジェクト</h4>
    *
    * @static
-   * @property debugViews
+   * @property views
    * @type {Object}
    */
   Debug.views = null;
@@ -2115,7 +2141,7 @@ var AMP = AMP || {};
    *
    * @private
    * @static
-   * @method createView
+   * @method _createView
    * @return {Void}
    */
   Debug._createView = function(){
@@ -2146,7 +2172,7 @@ var AMP = AMP || {};
    *
    * @private
    * @static
-   * @method addEvent
+   * @method _addEvent
    * @return {Void}
    */
   Debug._addEvent = function(){
@@ -2767,7 +2793,7 @@ var AMP = AMP || {};
    * TODO: 内部処理最適化予定
    *
    * @private
-   * @method _addEvent
+   * @method _removeEvent
    * @param {String} type イベントタイプ
    * @param {Function} listener コールバック関数
    * @return {Void}
@@ -2959,7 +2985,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = '3.0.0';
+  FontResize.VERSION = '3.0.1';
 
 
   /**
@@ -3062,9 +3088,15 @@ var AMP = AMP || {};
       }
 
       // 再起処理
-      AMP.requestAnimationFrame(function(){
-        self._controller();
-      });
+      if(AMP.hasRequestAnimationFrame()){
+        AMP.requestAnimationFrame(function(){
+          self._controller();
+        });
+      } else {
+        setTimeout(function(){
+          self._controller();
+        }, 50);
+      }
     }
   };
 
@@ -3313,189 +3345,6 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>モデル管理</h4>
-   * FIXME: βバージョン
-   *
-   * @class AMP.Model
-   * @extends AMP.Events
-   * @constructor
-   * @param {Object} props プロパティ
-   */
-  function Model(props){
-
-    /**
-     * <h4>プロパティ</h4>
-     *
-     * @private
-     * @property _props
-     * @type {Object}
-     */
-    this._props = AMP.mixin({}, props);
-  }
-
-  // AMP.Eventsクラスを継承
-  AMP.inherits(Model, AMP.Events);
-
-  // prototype
-  var p = Model.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Model.VERSION = '1.0.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Model';
-
-
-  /**
-   * <h4>モデルのプロパティが変更時、に発行されるイベントタイプ</h4>
-   *
-   * @static
-   * @property eventType
-   * @default change
-   * @type {String}
-   */
-  Model.eventType = 'change';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>プロパティの取得</h4>
-   *
-   * @method get
-   * @param  {String} key 取得したいキー
-   * @return {Any}
-   */
-  p.get = function(key){
-    if(AMP.isUndefined(this._props[key])){
-      return this._props;
-    } else {
-      return this._props[key];
-    }
-  };
-
-
-  /**
-   * [set description]
-   */
-  p.set = function(key, val, isSilent){
-    var isCahnge = false;
-
-    if(AMP.isObject(key)){
-      isSilent = val;
-      isCahnge = true;
-      AMP.mixin(true, this._props, key);
-
-    } else if(this._props[key] !== val){
-      isCahnge = true;
-      this._props[key] = val;
-    }
-
-    if(isCahnge){
-      this._controller(isSilent);
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>プロパティクリア</h4>
-   *
-   * @method clear
-   * @return {Model}
-   */
-  p.clear = function(isSilent){
-    if(!AMP.isPlainObject(this._props)){
-      this._controller(isSilent);
-      this._props = {};
-    }
-    return this;
-  };
-
-
-  /**
-   * <h4>値があるか判定します</h4>
-   * undefined, Nullは、falseを返します
-   *
-   * @method has
-   * @return {Boolean}
-   */
-  p.has = function(key){
-    return (!AMP.isUndefined(this._props[key]) && !AMP.isNull(this._props[key]));
-  };
-
-
-  /**
-   * <h4>プロパティーのeach処理</h4>
-   *
-   * @method each
-   * @param  {Function} callback each毎に処理する関数
-   * @return {Model}
-   */
-  p.each = function(callback){
-    AMP.each(this._props, callback);
-    return this;
-  };
-
-
-  /**
-   * <h4>イベントコントローラー</h4>
-   *
-   * @private
-   * @method _controller
-   * @return {Void}
-   */
-  p._controller = function(isSilent){
-    if(!isSilent){
-      this.trigger(Model.eventType);
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Model = Model;
-
-
-}(window));
-
-var AMP = AMP || {};
-
-(function(root){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>ストレージ管理</h4>
    * デフォルトでは、セッションストレージを使用します
    *
@@ -3534,7 +3383,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Storage.VERSION = '2.0.0';
+  Storage.VERSION = '2.0.1';
 
 
   /**
@@ -3614,7 +3463,7 @@ var AMP = AMP || {};
    * <h4>アイテム、ストレージデータの削除</h4>
    *
    * @method removeItem
-   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します ※可変長引数可
+   * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
    * @return {Storage}
    */
   p.removeItem = function(key){
@@ -3623,9 +3472,8 @@ var AMP = AMP || {};
     if(this._storage){
       if(AMP.isUndefined(key)){
         this._storage.clear();
-
       } else {
-        AMP.each(AMP.argToAarguments, function(item){
+        AMP.each(AMP.argsToArray(arguments), function(item){
           self._storage.removeItem(item);
         });
       }

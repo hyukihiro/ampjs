@@ -48,7 +48,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Storage.VERSION = '2.0.0';
+  Storage.VERSION = '2.0.1';
 
 
   /**
@@ -128,7 +128,7 @@ var AMP = AMP || {};
    * <h4>アイテム、ストレージデータの削除</h4>
    *
    * @method removeItem
-   * @param  {String} key 削除するキー 省略時、ストレージデータを削除します ※可変長引数可
+   * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
    * @return {Storage}
    */
   p.removeItem = function(key){
@@ -137,9 +137,8 @@ var AMP = AMP || {};
     if(this._storage){
       if(AMP.isUndefined(key)){
         this._storage.clear();
-
       } else {
-        AMP.each(AMP.argToAarguments, function(item){
+        AMP.each(AMP.argsToArray(arguments), function(item){
           self._storage.removeItem(item);
         });
       }

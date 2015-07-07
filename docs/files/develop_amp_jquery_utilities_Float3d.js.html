@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -124,15 +123,51 @@ var AMP = AMP || {};
    * &lt;h4&gt;ホバーの3Dアクション&lt;/h4&gt;
    * ※IE10以上対象
    *
+   * @example  要素構成: .float &gt; .float_frame &gt; .float_inner
+   *
    * @class AMP.$.Float3d
    * @constructor
    * @param  {jQuery} $target 対象の要素
    * @param  {Object} options オプション値
    */
 	function Float3d($target, options){
-		this.param = $.extend(true, {}, Float3d.float3dOptions, options);
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $(&#x27;.float&#x27;);
+    }
+
+    /**
+     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     *
+     * @property param
+     * @type {Object}
+     */
+    this.param = $.extend(true, {}, Float3d.float3dOptions, options);
+
+    /**
+     * &lt;h4&gt;float要素&lt;/h4&gt;
+     *
+     * @propaty $target
+     * @type {jQuery}
+     */
     this.param.$target = $target;
+
+    /**
+     * &lt;h4&gt;html要素&lt;/h4&gt;
+     *
+     * @propaty $html
+     * @type {jQuery}
+     */
 		this.param.$html = $(&#x27;html&#x27;);
+
+    /**
+     * &lt;h4&gt;float要素&lt;/h4&gt;
+     *
+     * @private
+     * @propaty _isFloating
+     * @type {Boolean}
+     */
     this.param._isFloating = false;
 	}
 
@@ -155,7 +190,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Float3d.VERSION = &#x27;1.0.0&#x27;;
+  Float3d.VERSION = &#x27;1.0.1&#x27;;
 
 
   /**
@@ -275,19 +310,19 @@ var AMP = AMP || {};
 
     self.param.$target
     .on(&#x27;mouseenter.Float3d&#x27;, function(onEvent){
-      self._onTween(this, onEvent);
+      self.onTween(this, onEvent);
 
       self.param._isFloating = true;
-      self._floatTween($(this).children(), 0);
+      self.floatTween($(this).children(), 0);
 
       // moveEvent登録
       $(this).on(&#x27;mousemove.Float3d&#x27;, function(moveEvent){
-        self._onTween(this, moveEvent);
+        self.onTween(this, moveEvent);
       });
     })
     .on(&#x27;mouseleave.Float3d&#x27;, function(outEvent){
       self.param._isFloating = false;
-      self._outTween(this, outEvent);
+      self.outTween(this, outEvent);
 
       // moveEvent削除
       $(this).off(&#x27;mousemove.Float3d&#x27;);
@@ -323,13 +358,12 @@ var AMP = AMP || {};
   /**
    * &lt;h4&gt;マウスオンTween&lt;/h4&gt;
    *
-   * @private
-   * @method _onTween
+   * @method onTween
    * @param  {DOM} target 対象の要素
    * @param  {Object} event イベントオブジェクト
    * @return {Void}
    */
-  p._onTween = function(target, event){
+  p.onTween = function(target, event){
     var $target = $(target).children(),
     offset = this.offsetRatio(target, event);
 
@@ -350,12 +384,11 @@ var AMP = AMP || {};
    * &lt;h4&gt;選択中のTween&lt;/h4&gt;
    * 再起処理します
    *
-   * @private
-   * @method _floatTween
+   * @method floatTween
    * @param  {DOM} target 対象の要素
    * @return {Void}
    */
-  p._floatTween = function($target, angle){
+  p.floatTween = function($target, angle){
     var self = this;
 
     angle = typeof angle === &#x27;number&#x27; ? angle : 0;
@@ -373,7 +406,7 @@ var AMP = AMP || {};
       complete: function(){
         // 再起処理
         if(self.param._isFloating){
-          self._floatTween($target, angle);
+          self.floatTween($target, angle);
         }
       }
     });
@@ -383,12 +416,11 @@ var AMP = AMP || {};
   /**
    * &lt;h4&gt;マウスアウトTween&lt;/h4&gt;
    *
-   * @private
-   * @method _outTween
+   * @method outTween
    * @param  {DOM} target 対象の要素
    * @return {Void}
    */
-  p._outTween = function(target){
+  p.outTween = function(target){
     var self = this;
 
     $(target).children()
@@ -442,7 +474,7 @@ var AMP = AMP || {};
       x: ((offset.x - center.x) / center.x).toFixed(2),
       y: ((center.y - offset.y) / center.y).toFixed(2)
     };
-   };
+  };
 
 
 

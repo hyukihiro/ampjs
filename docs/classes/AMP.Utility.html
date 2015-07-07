@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -126,7 +125,6 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
     </ul>
 
     <div>
@@ -138,37 +136,17 @@
 
                     <ul class="index-list methods">
                             <li class="index-item method">
+                                <a href="#method_addEvent">addEvent</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_cancelAnimationFrame">cancelAnimationFrame</a>
 
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
-                                <a href="#method_coords">coords</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_coordX">coordX</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_coordY">coordY</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_deg">deg</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_getFunctionName">getFunctionName</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_hexToRGB">hexToRGB</a>
 
                                     <span class="flag static">static</span>
                             </li>
@@ -193,34 +171,13 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
-                                <a href="#method_removeEvent">removeEvent</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
                                 <a href="#method_requestAnimationFrame">requestAnimationFrame</a>
 
                                     <span class="flag static">static</span>
                             </li>
-                            <li class="index-item method">
-                                <a href="#method_rgbToHex">rgbToHex</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_DEG">DEG</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                    </ul>
-                </div>
 
 
         </div>
@@ -228,6 +185,98 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_addEvent" class="method item">
+    <h3 class="name"><code>addEvent</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>element</code>
+                </li>
+                <li class="arg">
+                        <code>type</code>
+                </li>
+                <li class="arg">
+                        <code>listener</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">DOM</span>
+        </span>
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_core_base_utility.js.html#l24"><code>develop\amp\core\base\utility.js:24</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>DOMイベント追加</h4>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">element</code>
+                        <span class="type">DOM</span>
+
+
+                    <div class="param-description">
+                        <p>ターゲット要素</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>イベント名</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">listener</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>実行する関数</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">DOM</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_cancelAnimationFrame" class="method item">
     <h3 class="name"><code>cancelAnimationFrame</code></h3>
 
@@ -253,7 +302,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l274"><code>develop\amp\core\base\utility.js:274</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l140"><code>develop\amp\core\base\utility.js:140</code></a>
         </p>
 
 
@@ -276,360 +325,6 @@
 
                     <div class="param-description">
                         <p>タイマーNumber</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_coords" class="method item">
-    <h3 class="name"><code>coords</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>deg</code>
-                </li>
-                <li class="arg">
-                        <code>distanceX</code>
-                </li>
-                <li class="arg">
-                        <code>distanceY</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l96"><code>develop\amp\core\base\utility.js:96</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>角度、距離からxy座標を返す </h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">deg</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>角度</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">distanceX</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>距離</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">distanceY</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>距離</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Object</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_coordX" class="method item">
-    <h3 class="name"><code>coordX</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>deg</code>
-                </li>
-                <li class="arg">
-                        <code>distanceX</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l114"><code>develop\amp\core\base\utility.js:114</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>角度、距離からx座標を算出</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">deg</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>角度</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">distanceX</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>距離</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_coordY" class="method item">
-    <h3 class="name"><code>coordY</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>deg</code>
-                </li>
-                <li class="arg">
-                        <code>distanceY</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l128"><code>develop\amp\core\base\utility.js:128</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>角度、距離からy座標を算出</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">deg</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>角度</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">distanceY</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>距離</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_deg" class="method item">
-    <h3 class="name"><code>deg</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>x</code>
-                </li>
-                <li class="arg">
-                        <code>y</code>
-                </li>
-                <li class="arg">
-                        <code>prevX</code>
-                </li>
-                <li class="arg">
-                        <code>PrevY</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l142"><code>develop\amp\core\base\utility.js:142</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>現在と過去の位置から角度を算出</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">x</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>現在のx座標</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">y</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>現在のy座標</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">prevX</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>前のx座標</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">PrevY</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>前のx座標</p>
 
                     </div>
 
@@ -712,72 +407,6 @@
 
 
 </div>
-<div id="method_hexToRGB" class="method item">
-    <h3 class="name"><code>hexToRGB</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>hex</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Object</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l158"><code>develop\amp\core\base\utility.js:158</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>16進数カラーをRGBに変換します</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">hex</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>16進数カラー</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Object</span>:
-                    <p>RGB Object</p>
-
-            </div>
-        </div>
-
-
-</div>
 <div id="method_now" class="method item">
     <h3 class="name"><code>now</code></h3>
 
@@ -797,7 +426,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l300"><code>develop\amp\core\base\utility.js:300</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l166"><code>develop\amp\core\base\utility.js:166</code></a>
         </p>
 
 
@@ -840,7 +469,7 @@ performanceに対応していないブラウザはgetTimeを返します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l220"><code>develop\amp\core\base\utility.js:220</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l86"><code>develop\amp\core\base\utility.js:86</code></a>
         </p>
 
 
@@ -887,7 +516,7 @@ performanceに対応していないブラウザはgetTimeを返します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l232"><code>develop\amp\core\base\utility.js:232</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l98"><code>develop\amp\core\base\utility.js:98</code></a>
         </p>
 
 
@@ -1020,98 +649,6 @@ performanceに対応していないブラウザはgetTimeを返します
 
 
 </div>
-<div id="method_removeEvent" class="method item">
-    <h3 class="name"><code>removeEvent</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>element</code>
-                </li>
-                <li class="arg">
-                        <code>type</code>
-                </li>
-                <li class="arg">
-                        <code>listener</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">DOM</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l24"><code>develop\amp\core\base\utility.js:24</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>DOMイベント追加</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">element</code>
-                        <span class="type">DOM</span>
-
-
-                    <div class="param-description">
-                        <p>ターゲット要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">type</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>イベント名</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">listener</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>実行する関数</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">DOM</span>:
-            </div>
-        </div>
-
-
-</div>
 <div id="method_requestAnimationFrame" class="method item">
     <h3 class="name"><code>requestAnimationFrame</code></h3>
 
@@ -1137,7 +674,7 @@ performanceに対応していないブラウザはgetTimeを返します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l247"><code>develop\amp\core\base\utility.js:247</code></a>
+        <a href="../files/develop_amp_core_base_utility.js.html#l113"><code>develop\amp\core\base\utility.js:113</code></a>
         </p>
 
 
@@ -1177,131 +714,8 @@ performanceに対応していないブラウザはgetTimeを返します
 
 
 </div>
-<div id="method_rgbToHex" class="method item">
-    <h3 class="name"><code>rgbToHex</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>r</code>
-                </li>
-                <li class="arg">
-                        <code>g</code>
-                </li>
-                <li class="arg">
-                        <code>b</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_utility.js.html#l192"><code>develop\amp\core\base\utility.js:192</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>RGBカラーを16進数カラーに変換</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">r</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>レッド値</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">g</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>グリーン値</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">b</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>ブルー値</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">String</span>:
-                    <p>16進数カラー</p>
-
-            </div>
-        </div>
-
-
-</div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                    <div id="property_DEG" class="property item">
-                        <h3 class="name"><code>DEG</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_core_base_utility.js.html#l86"><code>develop\amp\core\base\utility.js:86</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>DEG</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-            </div>
 
 
     </div>

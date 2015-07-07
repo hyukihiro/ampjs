@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -162,12 +161,17 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
+                                <a href="#method_hasMsPointer">hasMsPointer</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
                                 <a href="#method_hasPushState">hasPushState</a>
 
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
-                                <a href="#method_hasReqAnime">hasReqAnime</a>
+                                <a href="#method_hasRequestAnimationFrame">hasRequestAnimationFrame</a>
 
                                     <span class="flag static">static</span>
                             </li>
@@ -213,11 +217,6 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_hasXMLSerializer">hasXMLSerializer</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_isMsPointer">isMsPointer</a>
 
                                     <span class="flag static">static</span>
                             </li>
@@ -459,6 +458,47 @@
 
 
 </div>
+<div id="method_hasMsPointer" class="method item">
+    <h3 class="name"><code>hasMsPointer</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_core_base_has.js.html#l183"><code>develop\amp\core\base\has.js:183</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>MsPointer判定 βver</h4>
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_hasPushState" class="method item">
     <h3 class="name"><code>hasPushState</code></h3>
 
@@ -500,8 +540,8 @@
 
 
 </div>
-<div id="method_hasReqAnime" class="method item">
-    <h3 class="name"><code>hasReqAnime</code></h3>
+<div id="method_hasRequestAnimationFrame" class="method item">
+    <h3 class="name"><code>hasRequestAnimationFrame</code></h3>
 
         <span class="paren">()</span>
 
@@ -934,47 +974,6 @@
 
     <div class="description">
         <h4>XMLSerializerの有無</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Boolean</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_isMsPointer" class="method item">
-    <h3 class="name"><code>isMsPointer</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Boolean</span>
-        </span>
-
-
-
-
-        <span class="flag static">static</span>
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_core_base_has.js.html#l183"><code>develop\amp\core\base\has.js:183</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>MsPointer判定 βver</h4>
     </div>
 
 

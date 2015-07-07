@@ -60,7 +60,7 @@ var AMP = AMP || {};
    * <h4>デバッグview要素を格納用オブジェクト</h4>
    *
    * @static
-   * @property debugViews
+   * @property views
    * @type {Object}
    */
   Debug.views = null;
@@ -99,7 +99,7 @@ var AMP = AMP || {};
    *
    * @private
    * @static
-   * @method createView
+   * @method _createView
    * @return {Void}
    */
   Debug._createView = function(){
@@ -130,7 +130,7 @@ var AMP = AMP || {};
    *
    * @private
    * @static
-   * @method addEvent
+   * @method _addEvent
    * @return {Void}
    */
   Debug._addEvent = function(){

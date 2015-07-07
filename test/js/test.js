@@ -2,6 +2,11 @@
 jQuery(function($){
 
 
+	var float3d = AMP.$.Float3d.get($('.float'));
+	console.log(float3d);
+
+
+
 	// $('body').on('flickcancelX', function(events){
 	// 	// console.log(events);
 	// 	// console.log(events.type);
@@ -9,11 +14,9 @@ jQuery(function($){
 	// });
 
 	AMP.$.rollover.on();
-
-
 	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1, isLoop: false, isResize: true});
 
-	console.log(slider);
+	// console.log(slider);
 
 
 	// console.log(AMP.Loader.get());

@@ -1,6 +1,6 @@
 # AMP JavaScript Library
 
-DATE: 2015.06.03
+DATE: 2015.07.07
 
 ---
 
@@ -95,8 +95,7 @@ dist/lib/utilities.pack.js
 
 ## Add Planned Library
 ```
+createjs
 React  
 Flux  
-RxJS
-BaconJS
 ```

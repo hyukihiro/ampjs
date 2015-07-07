@@ -71,10 +71,10 @@ var AMP = AMP || {};
    * <h4>RequestAnimationFrame機能の有無</h4>
    *
    * @static
-   * @method hasReqAnime
+   * @method hasRequestAnimationFrame
    * @return {Boolean}
    */
-  AMP.hasReqAnime = function(){
+  AMP.hasRequestAnimationFrame = function(){
     return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||
@@ -184,7 +184,7 @@ var AMP = AMP || {};
    * <h4>MsPointer判定 βver</h4>
    *
    * @static
-   * @method isMsPointer
+   * @method hasMsPointer
    * @return {Boolean}
    */
   AMP.hasMsPointer = function(){

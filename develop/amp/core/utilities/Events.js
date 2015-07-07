@@ -172,7 +172,7 @@ var AMP = AMP || {};
    * TODO: 内部処理最適化予定
    *
    * @private
-   * @method _addEvent
+   * @method _removeEvent
    * @param {String} type イベントタイプ
    * @param {Function} listener コールバック関数
    * @return {Void}

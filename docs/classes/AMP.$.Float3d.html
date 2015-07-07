@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.LiquidSlider.html">AMP.$.LiquidSlider</a></li>
                                 <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -52,8 +51,8 @@
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
                                 <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
-                                <li><a href="../classes/AMP.CJS.Polygon.html">AMP.CJS.Polygon</a></li>
                                 <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Display.html">AMP.Display</a></li>
                                 <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
                                 <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
                                 <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
@@ -62,12 +61,12 @@
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
-                                <li><a href="../classes/AMP.Model.html">AMP.Model</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
                                 <li><a href="../classes/AMP.String.html">AMP.String</a></li>
                                 <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
                                 <li><a href="../classes/Fallback.html">Fallback</a></li>
                                 <li><a href="../classes/jQuery.html">jQuery</a></li>
+                                <li><a href="../classes/MediaImageChange.html">MediaImageChange</a></li>
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
@@ -189,6 +188,14 @@
 
 
 
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>要素構成: .float &gt; .float_frame &gt; .float_inner</p>
+
+            </div>
+        </div>
 </div>
     </div>
 
@@ -208,16 +215,8 @@
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
-                            <li class="index-item method private">
-                                <a href="#method__floatTween">_floatTween</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method__onTween">_onTween</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method__outTween">_outTween</a>
+                            <li class="index-item method">
+                                <a href="#method_floatTween">floatTween</a>
 
                             </li>
                             <li class="index-item method">
@@ -235,6 +234,14 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_on">on</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_onTween">onTween</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_outTween">outTween</a>
 
                             </li>
                     </ul>
@@ -289,6 +296,10 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
+                                <a href="#property_param">param</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_VERSION">VERSION</a>
 
                                     <span class="flag static">static</span>
@@ -302,8 +313,8 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method__floatTween" class="method item private">
-    <h3 class="name"><code>_floatTween</code></h3>
+<div id="method_floatTween" class="method item">
+    <h3 class="name"><code>floatTween</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
@@ -318,7 +329,6 @@
         </span>
 
 
-        <span class="flag private">private</span>
 
 
 
@@ -327,7 +337,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l239"><code>develop\amp\jquery\utilities\Float3d.js:239</code></a>
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l274"><code>develop\amp\jquery\utilities\Float3d.js:274</code></a>
         </p>
 
 
@@ -337,148 +347,6 @@
     <div class="description">
         <h4>選択中のTween</h4>
 再起処理します
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">target</code>
-                        <span class="type">DOM</span>
-
-
-                    <div class="param-description">
-                        <p>対象の要素</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Void</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method__onTween" class="method item private">
-    <h3 class="name"><code>_onTween</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>target</code>
-                </li>
-                <li class="arg">
-                        <code>event</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Void</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l213"><code>develop\amp\jquery\utilities\Float3d.js:213</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>マウスオンTween</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">target</code>
-                        <span class="type">DOM</span>
-
-
-                    <div class="param-description">
-                        <p>対象の要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">event</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>イベントオブジェクト</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Void</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method__outTween" class="method item private">
-    <h3 class="name"><code>_outTween</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>target</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Void</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l273"><code>develop\amp\jquery\utilities\Float3d.js:273</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>マウスアウトTween</h4>
     </div>
 
         <div class="params">
@@ -537,7 +405,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l133"><code>develop\amp\jquery\utilities\Float3d.js:133</code></a>
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l169"><code>develop\amp\jquery\utilities\Float3d.js:169</code></a>
         </p>
 
 
@@ -605,7 +473,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l196"><code>develop\amp\jquery\utilities\Float3d.js:196</code></a>
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l232"><code>develop\amp\jquery\utilities\Float3d.js:232</code></a>
         </p>
 
 
@@ -654,7 +522,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l308"><code>develop\amp\jquery\utilities\Float3d.js:308</code></a>
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l341"><code>develop\amp\jquery\utilities\Float3d.js:341</code></a>
         </p>
 
 
@@ -725,7 +593,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l149"><code>develop\amp\jquery\utilities\Float3d.js:149</code></a>
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l185"><code>develop\amp\jquery\utilities\Float3d.js:185</code></a>
         </p>
 
 
@@ -747,6 +615,146 @@
 
 
 </div>
+<div id="method_onTween" class="method item">
+    <h3 class="name"><code>onTween</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>target</code>
+                </li>
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l249"><code>develop\amp\jquery\utilities\Float3d.js:249</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>マウスオンTween</h4>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">target</code>
+                        <span class="type">DOM</span>
+
+
+                    <div class="param-description">
+                        <p>対象の要素</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>イベントオブジェクト</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Void</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_outTween" class="method item">
+    <h3 class="name"><code>outTween</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>target</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l307"><code>develop\amp\jquery\utilities\Float3d.js:307</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>マウスアウトTween</h4>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">target</code>
+                        <span class="type">DOM</span>
+
+
+                    <div class="param-description">
+                        <p>対象の要素</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Void</span>:
+            </div>
+        </div>
+
+
+</div>
             </div>
 
             <div id="properties" class="api-class-tabpanel">
@@ -763,7 +771,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l51"><code>develop\amp\jquery\utilities\Float3d.js:51</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l87"><code>develop\amp\jquery\utilities\Float3d.js:87</code></a>
                             </p>
                     
                     
@@ -788,7 +796,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l60"><code>develop\amp\jquery\utilities\Float3d.js:60</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l96"><code>develop\amp\jquery\utilities\Float3d.js:96</code></a>
                             </p>
                     
                     
@@ -814,7 +822,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l103"><code>develop\amp\jquery\utilities\Float3d.js:103</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l139"><code>develop\amp\jquery\utilities\Float3d.js:139</code></a>
                             </p>
                     
                     
@@ -839,7 +847,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l110"><code>develop\amp\jquery\utilities\Float3d.js:110</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l146"><code>develop\amp\jquery\utilities\Float3d.js:146</code></a>
                             </p>
                     
                     
@@ -864,7 +872,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l68"><code>develop\amp\jquery\utilities\Float3d.js:68</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l104"><code>develop\amp\jquery\utilities\Float3d.js:104</code></a>
                             </p>
                     
                     
@@ -889,7 +897,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l89"><code>develop\amp\jquery\utilities\Float3d.js:89</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l125"><code>develop\amp\jquery\utilities\Float3d.js:125</code></a>
                             </p>
                     
                     
@@ -914,7 +922,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l82"><code>develop\amp\jquery\utilities\Float3d.js:82</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l118"><code>develop\amp\jquery\utilities\Float3d.js:118</code></a>
                             </p>
                     
                     
@@ -939,7 +947,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l96"><code>develop\amp\jquery\utilities\Float3d.js:96</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l132"><code>develop\amp\jquery\utilities\Float3d.js:132</code></a>
                             </p>
                     
                     
@@ -964,7 +972,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l75"><code>develop\amp\jquery\utilities\Float3d.js:75</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l111"><code>develop\amp\jquery\utilities\Float3d.js:111</code></a>
                             </p>
                     
                     
@@ -972,6 +980,30 @@
                     
                         <div class="description">
                             <h4>Z方向の距離で移動を指定する値</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_param" class="property item">
+                        <h3 class="name"><code>param</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l31"><code>develop\amp\jquery\utilities\Float3d.js:31</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>プロパティ格納オブジェクト</h4>
                         </div>
                     
                     
@@ -989,7 +1021,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l41"><code>develop\amp\jquery\utilities\Float3d.js:41</code></a>
+                            <a href="../files/develop_amp_jquery_utilities_Float3d.js.html#l77"><code>develop\amp\jquery\utilities\Float3d.js:77</code></a>
                             </p>
                     
                     

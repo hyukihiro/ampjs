@@ -13,6 +13,29 @@
 <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
 <link rel="stylesheet" href="css/global.css" media="all">
 <link rel="stylesheet" href="css/index.css" media="all">
+
+<style type="text/css">
+.float{
+	/*position: relative;*/
+	outline: 1px solid #f09;
+	width: 500px;
+	height: 300px;
+	background: #fff;
+}
+.float_frame{
+	width: 100%;
+	height: 100%;
+	background: #ccc;
+}
+.float_inner{
+	width: 100%;
+	height: 100%;
+	background: #000;
+
+}
+
+</style>
+
 </head>
 
 
@@ -70,7 +93,12 @@
 -->
 
 
+<div class="float"><div class="float_frame"><div class="float_inner"></div></div></div>
+
 <!-- #content // --></div>
+
+
+
 
 
 <footer>
@@ -92,6 +120,7 @@
 <script src="../dist/amp/jquery.plugins.js"></script>
 <script src="../dist/amp/amp.jquery.js"></script>
 <script src="../dist/amp/jquery.utilities/Slider.js"></script>
+<script src="../dist/amp/jquery.utilities/Float3d.js"></script>
 
 <!-- test -->
 <script src="js/test.js"></script>
