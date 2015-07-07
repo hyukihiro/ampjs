@@ -5,6 +5,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AMP.$.FlatHeight",
         "AMP.$.Float3d",
         "AMP.$.Loader",
+        "AMP.$.MediaImageChange",
         "AMP.$.Render",
         "AMP.$.Rollover",
         "AMP.$.Scroll",
@@ -28,7 +29,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "AMP.String",
         "AMP.Utility",
         "Fallback",
-        "MediaImageChange",
         "jQuery"
     ],
     "modules": [],

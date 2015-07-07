@@ -188,7 +188,7 @@
             "name": "develop\\amp\\jquery\\base\\MediaImages.js",
             "modules": {},
             "classes": {
-                "MediaImageChange": 1
+                "AMP.$.MediaImageChange": 1
             },
             "fors": {},
             "namespaces": {}
@@ -612,9 +612,9 @@
                 }
             ]
         },
-        "MediaImageChange": {
-            "name": "MediaImageChange",
-            "shortname": "MediaImageChange",
+        "AMP.$.MediaImageChange": {
+            "name": "AMP.$.MediaImageChange",
+            "shortname": "AMP.$.MediaImageChange",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -4359,7 +4359,7 @@
             "itemtype": "property",
             "name": "param",
             "type": "{Object}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4368,7 +4368,7 @@
             "itemtype": "property",
             "name": "param.$images",
             "type": "{jQuery}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4377,7 +4377,7 @@
             "itemtype": "property",
             "name": "param.current",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4387,7 +4387,7 @@
             "itemtype": "property",
             "name": "VERSION",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4396,7 +4396,7 @@
             "itemtype": "property",
             "name": "className",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4405,7 +4405,7 @@
             "itemtype": "property",
             "name": "mediaImagesOptions",
             "type": "{Object}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4414,7 +4414,7 @@
             "itemtype": "property",
             "name": "mediaImagesOptions.element",
             "type": "{DOM}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4424,7 +4424,7 @@
             "name": "mediaImagesOptions.attrKey",
             "default": "'data-media-img'",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4434,7 +4434,7 @@
             "name": "mediaImagesOptions.imagePrefix",
             "default": "'_'",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4443,7 +4443,7 @@
             "itemtype": "property",
             "name": "mediaImagesOptions.isObserver",
             "type": "{String}",
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4468,7 +4468,7 @@
                 "description": "",
                 "type": "MediaImageChange"
             },
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4480,7 +4480,7 @@
                 "description": "",
                 "type": "MediaImageChange"
             },
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4492,7 +4492,7 @@
                 "description": "",
                 "type": "MediaImageChange"
             },
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4511,7 +4511,7 @@
                 "description": "",
                 "type": "MediaImageChange"
             },
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
@@ -4523,7 +4523,7 @@
                 "description": "",
                 "type": "MediaImageChange"
             },
-            "class": "MediaImageChange"
+            "class": "AMP.$.MediaImageChange"
         },
         {
             "file": "develop\\amp\\jquery\\base\\Render.js",
