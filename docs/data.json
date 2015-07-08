@@ -2478,6 +2478,33 @@
             "class": "AMP.Utility"
         },
         {
+            "file": "develop\\amp\\core\\base\\utility.js",
+            "line": 195,
+            "description": "<h4>乱数の生成</h4>",
+            "params": [
+                {
+                    "name": "min",
+                    "description": "最小値 ※省略可",
+                    "type": "Number"
+                },
+                {
+                    "name": "max",
+                    "description": "最大値 ※省略可",
+                    "type": "Number"
+                },
+                {
+                    "name": "isRound",
+                    "description": "四捨五入するか ※省略可",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "乱数を返します",
+                "type": "Number"
+            },
+            "class": "AMP.Utility"
+        },
+        {
             "file": "develop\\amp\\core\\utilities\\Debug.js",
             "line": 40,
             "description": "<h4>バージョン情報</h4>",
@@ -2907,26 +2934,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Events.js",
-            "line": 50,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.Events"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Events.js",
-            "line": 60,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.Events"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Events.js",
-            "line": 69,
+            "line": 37,
             "description": "<h4>イベントリスナーを連想配列で格納します</h4>",
             "example": [
                 "\n_listeners = {\n   attr    : eventObj.attr,\n   func    : listener,\n   context : context\n}"
@@ -2936,6 +2944,25 @@
             "itemtype": "property",
             "name": "_listeners",
             "type": "{Object}",
+            "class": "AMP.Events"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Events.js",
+            "line": 66,
+            "description": "<h4>バージョン情報</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "AMP.Events"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Events.js",
+            "line": 76,
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
             "class": "AMP.Events"
         },
         {
@@ -3100,7 +3127,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Events.js",
-            "line": 258,
+            "line": 251,
             "description": "<h4>イベントが登録されているか判定します</h4>",
             "itemtype": "method",
             "name": "hasEvent",
@@ -3119,7 +3146,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Events.js",
-            "line": 290,
+            "line": 283,
             "description": "<h4>イベント発行</h4>\n<p>第二引数以降に値を渡すとcallbackに引数として渡します</p>",
             "itemtype": "method",
             "name": "trigger",
@@ -3138,7 +3165,35 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 36,
+            "line": 23,
+            "description": "<h4>要素を監視有効・無効の判定フラグ</h4>",
+            "itemtype": "property",
+            "name": "isFontResize",
+            "default": "true",
+            "type": "{Boolean}",
+            "class": "AMP.FontResize"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\FontResize.js",
+            "line": 32,
+            "description": "<h4>監視する要素</h4>",
+            "itemtype": "property",
+            "name": "el",
+            "type": "{DOM}",
+            "class": "AMP.FontResize"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\FontResize.js",
+            "line": 40,
+            "description": "<h4>監視要素の高さ</h4>",
+            "itemtype": "property",
+            "name": "height",
+            "type": "{Number}",
+            "class": "AMP.FontResize"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\FontResize.js",
+            "line": 61,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3148,7 +3203,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 46,
+            "line": 71,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3157,7 +3212,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 55,
+            "line": 80,
             "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3168,35 +3223,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 66,
-            "description": "<h4>要素を監視有効・無効の判定フラグ</h4>",
-            "itemtype": "property",
-            "name": "isFontResize",
-            "default": "true",
-            "type": "{Boolean}",
-            "class": "AMP.FontResize"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 76,
-            "description": "<h4>監視する要素</h4>",
-            "itemtype": "property",
-            "name": "el",
-            "type": "{DOM}",
-            "class": "AMP.FontResize"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 85,
-            "description": "<h4>監視要素の高さ</h4>",
-            "itemtype": "property",
-            "name": "height",
-            "type": "{Number}",
-            "class": "AMP.FontResize"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 100,
+            "line": 97,
             "description": "<h4>監視するフォント要素生成</h4>",
             "access": "private",
             "tagname": "",
@@ -3210,7 +3237,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 127,
+            "line": 124,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3224,7 +3251,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 159,
+            "line": 156,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -3253,26 +3280,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 44,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.Mediaquery"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 54,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.Mediaquery"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 63,
+            "line": 25,
             "description": "<h4>スタイルを監視する要素</h4>",
             "itemtype": "property",
             "name": "el",
@@ -3282,18 +3290,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 73,
-            "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "eventType",
-            "default": "change",
-            "type": "{String}",
-            "class": "AMP.Mediaquery"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 84,
+            "line": 38,
             "description": "<h4>要素を監視しているか</h4>",
             "itemtype": "property",
             "name": "isObserver",
@@ -3303,7 +3300,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 94,
+            "line": 47,
             "description": "<h4>要素の現在のスタイルを保管します</h4>",
             "itemtype": "property",
             "name": "mediaStyle",
@@ -3312,7 +3309,37 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 108,
+            "line": 68,
+            "description": "<h4>バージョン情報</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "AMP.Mediaquery"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
+            "line": 78,
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
+            "class": "AMP.Mediaquery"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
+            "line": 87,
+            "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>\n!!! FIXME : イベント属性追加予定 ///",
+            "static": 1,
+            "itemtype": "property",
+            "name": "eventType",
+            "default": "change",
+            "type": "{String}",
+            "class": "AMP.Mediaquery"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
+            "line": 104,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3326,7 +3353,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 132,
+            "line": 128,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -3355,7 +3382,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 150,
+            "line": 146,
             "description": "<h4>イベント発行</h4>\n第二引数以降に値を渡すとcallbackに引数として渡します",
             "itemtype": "method",
             "name": "trigger",
@@ -3374,7 +3401,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 174,
+            "line": 170,
             "description": "<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
             "return": {
                 "description": "",
@@ -3384,26 +3411,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 44,
-            "description": "<h4>バージョン情報</h4>",
-            "static": 1,
-            "itemtype": "property",
-            "name": "VERSION",
-            "type": "{String}",
-            "class": "AMP.Storage"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 54,
-            "description": "<h4>クラス名</h4>",
-            "itemtype": "property",
-            "name": "className",
-            "type": "{String}",
-            "class": "AMP.Storage"
-        },
-        {
-            "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 63,
+            "line": 22,
             "description": "<h4>ストレージタイプ</h4>",
             "default": "sessionStorage",
             "itemtype": "property",
@@ -3413,7 +3421,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 73,
+            "line": 29,
             "description": "<h4>ストレージを保管</h4>",
             "access": "private",
             "tagname": "",
@@ -3424,7 +3432,26 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 88,
+            "line": 58,
+            "description": "<h4>バージョン情報</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "AMP.Storage"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Storage.js",
+            "line": 68,
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
+            "class": "AMP.Storage"
+        },
+        {
+            "file": "develop\\amp\\core\\utilities\\Storage.js",
+            "line": 82,
             "description": "<h4>Storageインスタンスの生成</h4>\nshorthand",
             "static": 1,
             "itemtype": "method",
@@ -3444,7 +3471,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 102,
+            "line": 96,
             "description": "<h4>値のセット</h4>",
             "itemtype": "method",
             "name": "setItem",
@@ -3468,7 +3495,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 127,
+            "line": 121,
             "description": "<h4>アイテム、ストレージデータの削除</h4>",
             "itemtype": "method",
             "name": "removeItem",
@@ -3487,7 +3514,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 151,
+            "line": 145,
             "description": "<h4>レングスを返す</h4>",
             "itemtype": "method",
             "name": "getLength",
@@ -3499,7 +3526,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 162,
+            "line": 156,
             "description": "<h4>アイテムの取得</h4>",
             "itemtype": "method",
             "name": "getItem",
@@ -3518,7 +3545,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Storage.js",
-            "line": 182,
+            "line": 176,
             "description": "<h4>アイテムがあるか判定</h4>",
             "itemtype": "method",
             "name": "hasItem",
@@ -6848,8 +6875,12 @@
             "line": " develop\\amp\\core\\base\\utility.js:185"
         },
         {
+            "message": "Missing item type\n<h4>乱数の生成</h4>",
+            "line": " develop\\amp\\core\\base\\utility.js:195"
+        },
+        {
             "message": "Missing item type\n<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
-            "line": " develop\\amp\\core\\utilities\\Mediaquery.js:174"
+            "line": " develop\\amp\\core\\utilities\\Mediaquery.js:170"
         },
         {
             "message": "Missing item type\n<h4>float要素</h4>",

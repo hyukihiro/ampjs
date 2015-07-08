@@ -192,4 +192,42 @@ var AMP = AMP || {};
   AMP.noop = function(){};
 
 
+  /**
+   * <h4>乱数の生成</h4>
+   *
+   * @param  {Number}  min     最小値 ※省略可
+   * @param  {Number}  max     最大値 ※省略可
+   * @param  {Boolean} isRound 四捨五入するか ※省略可
+   * @return {Number} 乱数を返します
+   */
+  AMP.random = function(min, max, isRound){
+    var random = Math.random(),
+    value;
+
+    if(arguments.length === 0 || AMP.isBoolean(min)){
+      isRound = min;
+      value = random;
+
+    } else if(arguments.length === 1 || AMP.isBoolean(max)){
+      isRound = max;
+      value = random * min;
+
+    } else {
+      if (min > max) {
+        var num = min;
+        min = max;
+        max = num;
+      }
+      value = random * (max - min) + min;
+    }
+
+    if(isRound){
+      return Math.round(value);
+    } else{
+      return value;
+    }
+  };
+
+
+
 }(window));

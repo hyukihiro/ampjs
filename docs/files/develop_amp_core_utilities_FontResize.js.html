@@ -128,7 +128,32 @@ var AMP = AMP || {};
    * @extends AMP.Events
    * @constructor
    */
-  function FontResize(){}
+  function FontResize(){
+    /**
+     * &lt;h4&gt;要素を監視有効・無効の判定フラグ&lt;/h4&gt;
+     *
+     * @property isFontResize
+     * @default true
+     * @type {Boolean}
+     */
+    this.isFontResize = true;
+
+    /**
+     * &lt;h4&gt;監視する要素&lt;/h4&gt;
+     *
+     * @property el
+     * @type {DOM}
+     */
+    this.el = null;
+
+    /**
+     * &lt;h4&gt;監視要素の高さ&lt;/h4&gt;
+     *
+     * @property height
+     * @type {Number}
+     */
+    this.height = null;
+  }
 
   // AMP.Eventsクラスを継承
   AMP.inherits(FontResize, AMP.Events);
@@ -170,34 +195,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   FontResize.eventType = &#x27;change&#x27;;
-
-
-  /**
-   * &lt;h4&gt;要素を監視有効・無効の判定フラグ&lt;/h4&gt;
-   *
-   * @property isFontResize
-   * @default true
-   * @type {Boolean}
-   */
-  p.isFontResize = true;
-
-
-  /**
-   * &lt;h4&gt;監視する要素&lt;/h4&gt;
-   *
-   * @property el
-   * @type {DOM}
-   */
-  p.el = null;
-
-
-  /**
-   * &lt;h4&gt;監視要素の高さ&lt;/h4&gt;
-   *
-   * @property height
-   * @type {Number}
-   */
-  p.height = null;
 
 
 

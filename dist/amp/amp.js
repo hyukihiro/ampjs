@@ -42,7 +42,7 @@ var AMP = {};
   // クラス設定
   var
   CLASS_NAME = 'Amp',
-  VERSION    = '3.0.1';
+  VERSION    = '3.0.2';
 
 
 
@@ -2038,6 +2038,44 @@ var AMP = AMP || {};
   AMP.noop = function(){};
 
 
+  /**
+   * <h4>乱数の生成</h4>
+   *
+   * @param  {Number}  min     最小値 ※省略可
+   * @param  {Number}  max     最大値 ※省略可
+   * @param  {Boolean} isRound 四捨五入するか ※省略可
+   * @return {Number} 乱数を返します
+   */
+  AMP.random = function(min, max, isRound){
+    var random = Math.random(),
+    value;
+
+    if(arguments.length === 0 || AMP.isBoolean(min)){
+      isRound = min;
+      value = random;
+
+    } else if(arguments.length === 1 || AMP.isBoolean(max)){
+      isRound = max;
+      value = random * min;
+
+    } else {
+      if (min > max) {
+        var num = min;
+        min = max;
+        max = num;
+      }
+      value = random * (max - min) + min;
+    }
+
+    if(isRound){
+      return Math.round(value);
+    } else{
+      return value;
+    }
+  };
+
+
+
 }(window));
 
 var AMP = AMP || {};
@@ -2654,7 +2692,23 @@ var AMP = AMP || {};
    *   events.tigger('change.type');
    *
    */
-  function Events(){}
+  function Events(){
+    /**
+     * <h4>イベントリスナーを連想配列で格納します</h4>
+     *
+     * @example
+     * _listeners = {
+     *    attr    : eventObj.attr,
+     *    func    : listener,
+     *    context : context
+     * }
+     *
+     * @private
+     * @property _listeners
+     * @type {Object}
+     */
+    this._listeners = {};
+  }
 
   // 基底クラスを継承
   AMP.inherits(Events, AMP.BASE_CLASS);
@@ -2675,7 +2729,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = '2.0.0';
+  Events.VERSION = '2.0.1';
 
 
   /**
@@ -2686,22 +2740,6 @@ var AMP = AMP || {};
    */
   p.className = 'Events';
 
-
-  /**
-   * <h4>イベントリスナーを連想配列で格納します</h4>
-   *
-   * @example
-   * _listeners = {
-   *    attr    : eventObj.attr,
-   *    func    : listener,
-   *    context : context
-   * }
-   *
-   * @private
-   * @property _listeners
-   * @type {Object}
-   */
-  p._listeners = {};
 
 
   /*--------------------------------------------------------------------------
@@ -2861,17 +2899,10 @@ var AMP = AMP || {};
    * @return {Object}
    */
   p._getEventNameMap = function(type){
-    var num = type.indexOf('.'),
-    attr;
-
-    if(num !== -1){
-      attr = type.substr(num);
-      type = type.substr(0, num);
-    }
-
+    var events = type.split('.');
     return {
-      type: type,
-      attr: attr
+      type: events[0],
+      attr: events[1]
     };
   };
 
@@ -2964,7 +2995,32 @@ var AMP = AMP || {};
    * @extends AMP.Events
    * @constructor
    */
-  function FontResize(){}
+  function FontResize(){
+    /**
+     * <h4>要素を監視有効・無効の判定フラグ</h4>
+     *
+     * @property isFontResize
+     * @default true
+     * @type {Boolean}
+     */
+    this.isFontResize = true;
+
+    /**
+     * <h4>監視する要素</h4>
+     *
+     * @property el
+     * @type {DOM}
+     */
+    this.el = null;
+
+    /**
+     * <h4>監視要素の高さ</h4>
+     *
+     * @property height
+     * @type {Number}
+     */
+    this.height = null;
+  }
 
   // AMP.Eventsクラスを継承
   AMP.inherits(FontResize, AMP.Events);
@@ -3006,34 +3062,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   FontResize.eventType = 'change';
-
-
-  /**
-   * <h4>要素を監視有効・無効の判定フラグ</h4>
-   *
-   * @property isFontResize
-   * @default true
-   * @type {Boolean}
-   */
-  p.isFontResize = true;
-
-
-  /**
-   * <h4>監視する要素</h4>
-   *
-   * @property el
-   * @type {DOM}
-   */
-  p.el = null;
-
-
-  /**
-   * <h4>監視要素の高さ</h4>
-   *
-   * @property height
-   * @type {Number}
-   */
-  p.height = null;
 
 
 
@@ -3155,11 +3183,35 @@ var AMP = AMP || {};
    * @param {DOM} element 監視対象要素
    */
   function Mediaquery(element){
+    /**
+     * <h4>スタイルを監視する要素</h4>
+     *
+     * @property el
+     * @default head
+     * @type {DOM}
+     */
     if(element && element.nodeType === 1){
       this.el = element;
     } else {
       this.el = document.getElementsByTagName('head')[0];
     }
+
+    /**
+     * <h4>要素を監視しているか</h4>
+     *
+     * @property isObserver
+     * @default false
+     * @type {Boolean}
+     */
+    this.isObserver = false;
+
+    /**
+     * <h4>要素の現在のスタイルを保管します</h4>
+     *
+     * @property mediaStyle
+     * @type {String}
+     */
+    this.mediaStyle = null;
   }
 
   // AMP.Eventsクラスを継承
@@ -3181,7 +3233,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.0';
+  Mediaquery.VERSION = '2.0.1';
 
 
   /**
@@ -3194,17 +3246,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>スタイルを監視する要素</h4>
-   *
-   * @property el
-   * @default head
-   * @type {DOM}
-   */
-  p.el = null;
-
-
-  /**
    * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
+   * !!! FIXME : イベント属性追加予定 ///
    *
    * @static
    * @property eventType
@@ -3212,25 +3255,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   Mediaquery.eventType = 'change';
-
-
-  /**
-   * <h4>要素を監視しているか</h4>
-   *
-   * @property isObserver
-   * @default false
-   * @type {Boolean}
-   */
-  p.isObserver = false;
-
-
-  /**
-   * <h4>要素の現在のスタイルを保管します</h4>
-   *
-   * @property mediaStyle
-   * @type {String}
-   */
-  p.mediaStyle = null;
 
 
 
@@ -3354,6 +3378,20 @@ var AMP = AMP || {};
    * @param {Boolean} isLocalStorage ローカルストレージを使用か？
    */
   function Storage(isLocalStorage){
+    /**
+     * <h4>ストレージタイプ</h4>
+     *
+     * @default sessionStorage
+     * @property type
+     * @type {String}
+     */
+    /**
+     * <h4>ストレージを保管</h4>
+     *
+     * @private
+     * @property _storage
+     * @type {Object}
+     */
     if(isLocalStorage){
       this.type     = 'localStorage';
       this._storage = localStorage;
@@ -3393,26 +3431,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'Storage';
-
-
-  /**
-   * <h4>ストレージタイプ</h4>
-   *
-   * @default sessionStorage
-   * @property type
-   * @type {String}
-   */
-  p.type = 'sessionStorage';
-
-
-  /**
-   * <h4>ストレージを保管</h4>
-   *
-   * @private
-   * @property _storage
-   * @type {Object}
-   */
-  p._storage = null;
 
 
 

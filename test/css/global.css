@@ -34,6 +34,16 @@ mark{background-color:#ff9;color:#000;font-style:italic;font-weight:bold;}
 img {max-width: 100%;}
 
 
+head{
+	font-family: pc;
+}
+@media all and (max-width: 767px){
+	head{
+		font-family: sp;
+	}
+}
+
+
 /*
 colors
 #F5F1E9

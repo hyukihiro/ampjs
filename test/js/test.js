@@ -2,10 +2,33 @@
 jQuery(function($){
 
 
-	var float3d = AMP.$.Float3d.get($('.float'));
-	console.log(float3d);
+	var e = new AMP.Events();
+
+	e.on('hoge', function(){
+		alert(0);
+	});
+
+	var e2 = new AMP.Events();
+	e2.on('hoge', function(){
+		alert(1);
+	});
 
 
+	e.trigger('hoge')
+
+
+	// AMP.mediaquery.on('change', function(event){
+	// 	console.log(event);
+	// });
+	// new AMP.$.MediaImageChange($('img'));
+
+	// AMP.mediaquery.on('change', function(event){
+	// 	console.log(event);
+	// });
+
+
+	// var float3d = AMP.$.Float3d.get($('.float'));
+	// console.log(float3d);
 
 	// $('body').on('flickcancelX', function(events){
 	// 	// console.log(events);

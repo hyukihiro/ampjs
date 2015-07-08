@@ -22,11 +22,35 @@ var AMP = AMP || {};
    * @param {DOM} element 監視対象要素
    */
   function Mediaquery(element){
+    /**
+     * <h4>スタイルを監視する要素</h4>
+     *
+     * @property el
+     * @default head
+     * @type {DOM}
+     */
     if(element && element.nodeType === 1){
       this.el = element;
     } else {
       this.el = document.getElementsByTagName('head')[0];
     }
+
+    /**
+     * <h4>要素を監視しているか</h4>
+     *
+     * @property isObserver
+     * @default false
+     * @type {Boolean}
+     */
+    this.isObserver = false;
+
+    /**
+     * <h4>要素の現在のスタイルを保管します</h4>
+     *
+     * @property mediaStyle
+     * @type {String}
+     */
+    this.mediaStyle = null;
   }
 
   // AMP.Eventsクラスを継承
@@ -48,7 +72,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.0';
+  Mediaquery.VERSION = '2.0.1';
 
 
   /**
@@ -61,17 +85,8 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>スタイルを監視する要素</h4>
-   *
-   * @property el
-   * @default head
-   * @type {DOM}
-   */
-  p.el = null;
-
-
-  /**
    * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
+   * !!! FIXME : イベント属性追加予定 ///
    *
    * @static
    * @property eventType
@@ -79,25 +94,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   Mediaquery.eventType = 'change';
-
-
-  /**
-   * <h4>要素を監視しているか</h4>
-   *
-   * @property isObserver
-   * @default false
-   * @type {Boolean}
-   */
-  p.isObserver = false;
-
-
-  /**
-   * <h4>要素の現在のスタイルを保管します</h4>
-   *
-   * @property mediaStyle
-   * @type {String}
-   */
-  p.mediaStyle = null;
 
 
 

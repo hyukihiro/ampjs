@@ -37,6 +37,7 @@ var MODULE = {
 	uglify       : require('gulp-uglify'),
 	plumber      : require('gulp-plumber'),
 	rename       : require('gulp-rename'),
+	spritLine    : require('gulp-strip-line'),
 	shell        : require('gulp-shell'),
 	watch        : require('gulp-watch'),
 	jsDoc        : require('gulp-yuidoc')
@@ -212,6 +213,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.concat('amp.js'))
+	.pipe(MODULE.spritLine(/\s\/{2}$/))
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({basename: 'amp.min'}))
@@ -226,6 +228,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.concat('jquery.plugins.js'))
+	.pipe(MODULE.spritLine(/\s\/{2}$/))
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({extname : '.min.js'}))
@@ -239,6 +242,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.concat('amp.jquery.js'))
+	.pipe(MODULE.spritLine(/\s\/{2}$/))
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({basename: 'amp.jquery.min'}))
@@ -251,6 +255,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.spritLine(/\s\/{2}$/))
 	.pipe(MODULE.header(LICENCE))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
 	.pipe(MODULE.uglify())

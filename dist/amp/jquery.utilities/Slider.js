@@ -587,7 +587,7 @@ var AMP = AMP || {};
       step = self.param.current + step;
     }
 
-    //
+
     if(-1 < step && step < self.param.slideMaxCount){
       self.param.current = step;
     } else {

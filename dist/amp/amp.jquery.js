@@ -1073,7 +1073,7 @@ var AMP = AMP || {};
    * <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
    * !!! AMP.Mediaqueryを継承しています
    *
-   * @class MediaImageChange
+   * @class AMP.$.MediaImageChange
    * @extends AMP.Mediaquery
    * @param {jQuery} $images 画像を書き換える要素
    * @param {Object} options オプション値

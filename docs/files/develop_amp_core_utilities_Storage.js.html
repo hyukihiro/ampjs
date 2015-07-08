@@ -128,6 +128,20 @@ var AMP = AMP || {};
    * @param {Boolean} isLocalStorage ローカルストレージを使用か？
    */
   function Storage(isLocalStorage){
+    /**
+     * &lt;h4&gt;ストレージタイプ&lt;/h4&gt;
+     *
+     * @default sessionStorage
+     * @property type
+     * @type {String}
+     */
+    /**
+     * &lt;h4&gt;ストレージを保管&lt;/h4&gt;
+     *
+     * @private
+     * @property _storage
+     * @type {Object}
+     */
     if(isLocalStorage){
       this.type     = &#x27;localStorage&#x27;;
       this._storage = localStorage;
@@ -167,26 +181,6 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = &#x27;Storage&#x27;;
-
-
-  /**
-   * &lt;h4&gt;ストレージタイプ&lt;/h4&gt;
-   *
-   * @default sessionStorage
-   * @property type
-   * @type {String}
-   */
-  p.type = &#x27;sessionStorage&#x27;;
-
-
-  /**
-   * &lt;h4&gt;ストレージを保管&lt;/h4&gt;
-   *
-   * @private
-   * @property _storage
-   * @type {Object}
-   */
-  p._storage = null;
 
 
 

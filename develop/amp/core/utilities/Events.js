@@ -33,7 +33,23 @@ var AMP = AMP || {};
    *   events.tigger('change.type');
    *
    */
-  function Events(){}
+  function Events(){
+    /**
+     * <h4>イベントリスナーを連想配列で格納します</h4>
+     *
+     * @example
+     * _listeners = {
+     *    attr    : eventObj.attr,
+     *    func    : listener,
+     *    context : context
+     * }
+     *
+     * @private
+     * @property _listeners
+     * @type {Object}
+     */
+    this._listeners = {};
+  }
 
   // 基底クラスを継承
   AMP.inherits(Events, AMP.BASE_CLASS);
@@ -54,7 +70,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = '2.0.0';
+  Events.VERSION = '2.0.1';
 
 
   /**
@@ -65,22 +81,6 @@ var AMP = AMP || {};
    */
   p.className = 'Events';
 
-
-  /**
-   * <h4>イベントリスナーを連想配列で格納します</h4>
-   *
-   * @example
-   * _listeners = {
-   *    attr    : eventObj.attr,
-   *    func    : listener,
-   *    context : context
-   * }
-   *
-   * @private
-   * @property _listeners
-   * @type {Object}
-   */
-  p._listeners = {};
 
 
   /*--------------------------------------------------------------------------
@@ -240,17 +240,10 @@ var AMP = AMP || {};
    * @return {Object}
    */
   p._getEventNameMap = function(type){
-    var num = type.indexOf('.'),
-    attr;
-
-    if(num !== -1){
-      attr = type.substr(num);
-      type = type.substr(0, num);
-    }
-
+    var events = type.split('.');
     return {
-      type: type,
-      attr: attr
+      type: events[0],
+      attr: events[1]
     };
   };
 
