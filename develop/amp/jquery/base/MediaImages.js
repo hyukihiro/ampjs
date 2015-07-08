@@ -95,18 +95,21 @@ var AMP = AMP || {};
   /**
    * <h4>デフォルト値、格納オブジェクト</h4>
    *
+   * @static
    * @property mediaImagesOptions
    * @type {Object}
    */
   /**
    * <h4>監視対象要素</h4>
    *
+   * @static
    * @property mediaImagesOptions.element
    * @type {DOM}
    */
   /**
    * <h4>画像ファイルパス格納属性名</h4>
    *
+   * @static
    * @property mediaImagesOptions.attrKey
    * @default 'data-media-img'
    * @type {String}
@@ -114,6 +117,7 @@ var AMP = AMP || {};
   /**
    * <h4>画像ファイルに追加するprefix</h4>
    *
+   * @static
    * @property mediaImagesOptions.imagePrefix
    * @default '_'
    * @type {String}
@@ -121,6 +125,7 @@ var AMP = AMP || {};
   /**
    * <h4>対象要素監視しているか？</h4>
    *
+   * @static
    * @property mediaImagesOptions.isObserver
    * @type {String}
    */
