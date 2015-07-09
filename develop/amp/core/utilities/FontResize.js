@@ -44,6 +44,9 @@ var AMP = AMP || {};
      * @type {Number}
      */
     this.height = null;
+
+    // superClass constructor call
+    FontResize.Events_constructor.call(this);
   }
 
   // AMP.Eventsクラスを継承

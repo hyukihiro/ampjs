@@ -3193,7 +3193,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 61,
+            "line": 64,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3203,7 +3203,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 71,
+            "line": 74,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3212,7 +3212,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 80,
+            "line": 83,
             "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3223,7 +3223,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 97,
+            "line": 100,
             "description": "<h4>監視するフォント要素生成</h4>",
             "access": "private",
             "tagname": "",
@@ -3237,7 +3237,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 124,
+            "line": 127,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3251,7 +3251,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\FontResize.js",
-            "line": 156,
+            "line": 159,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -3309,7 +3309,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 68,
+            "line": 71,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3319,7 +3319,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 78,
+            "line": 81,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3328,7 +3328,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 87,
+            "line": 90,
             "description": "<h4>フォントサイズ変更時の発行するイベントタイプ</h4>\n!!! FIXME : イベント属性追加予定 ///",
             "static": 1,
             "itemtype": "property",
@@ -3339,7 +3339,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 104,
+            "line": 107,
             "description": "<h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>",
             "access": "private",
             "tagname": "",
@@ -3353,7 +3353,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 128,
+            "line": 131,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -3382,7 +3382,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 146,
+            "line": 149,
             "description": "<h4>イベント発行</h4>\n第二引数以降に値を渡すとcallbackに引数として渡します",
             "itemtype": "method",
             "name": "trigger",
@@ -3401,7 +3401,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Mediaquery.js",
-            "line": 170,
+            "line": 173,
             "description": "<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
             "return": {
                 "description": "",
@@ -4429,6 +4429,7 @@
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
             "line": 95,
             "description": "<h4>デフォルト値、格納オブジェクト</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "mediaImagesOptions",
             "type": "{Object}",
@@ -4436,8 +4437,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 101,
+            "line": 102,
             "description": "<h4>監視対象要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "mediaImagesOptions.element",
             "type": "{DOM}",
@@ -4445,8 +4447,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 107,
+            "line": 109,
             "description": "<h4>画像ファイルパス格納属性名</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "mediaImagesOptions.attrKey",
             "default": "'data-media-img'",
@@ -4455,8 +4458,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 114,
+            "line": 117,
             "description": "<h4>画像ファイルに追加するprefix</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "mediaImagesOptions.imagePrefix",
             "default": "'_'",
@@ -4465,8 +4469,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 121,
+            "line": 125,
             "description": "<h4>対象要素監視しているか？</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "mediaImagesOptions.isObserver",
             "type": "{String}",
@@ -4474,7 +4479,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 140,
+            "line": 145,
             "description": "<h4>MediaImageChangeインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
@@ -4499,7 +4504,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 154,
+            "line": 159,
             "description": "<h4>ブレイクポイントの監視を開始します</h4>",
             "itemtype": "method",
             "name": "start",
@@ -4511,7 +4516,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 174,
+            "line": 179,
             "description": "<h4>ブレイクポイントの監視をストップします</h4>",
             "itemtype": "method",
             "name": "stop",
@@ -4523,7 +4528,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 186,
+            "line": 191,
             "description": "<h4>監視の状態を切り替えます</h4>",
             "itemtype": "method",
             "name": "setObserver",
@@ -4542,7 +4547,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\MediaImages.js",
-            "line": 199,
+            "line": 204,
             "description": "<h4>画像を変更します</h4>",
             "itemtype": "method",
             "name": "switch",
@@ -6880,7 +6885,7 @@
         },
         {
             "message": "Missing item type\n<h4>要素のスタイルを返します</h4>\n\n＠method getStyle",
-            "line": " develop\\amp\\core\\utilities\\Mediaquery.js:170"
+            "line": " develop\\amp\\core\\utilities\\Mediaquery.js:173"
         },
         {
             "message": "Missing item type\n<h4>float要素</h4>",

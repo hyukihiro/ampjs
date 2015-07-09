@@ -3020,6 +3020,9 @@ var AMP = AMP || {};
      * @type {Number}
      */
     this.height = null;
+
+    // superClass constructor call
+    FontResize.Events_constructor.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -3212,6 +3215,9 @@ var AMP = AMP || {};
      * @type {String}
      */
     this.mediaStyle = null;
+
+    // superClass constructor call
+    Mediaquery.Events_constructor.call(this);
   }
 
   // AMP.Eventsクラスを継承
