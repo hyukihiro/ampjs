@@ -84,11 +84,23 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>型の取得</h4>
+   *
+   * @method type
+   * @return {String} 型名を返す
+   */
+  AMP.type = function(){
+  };
+
+
+
+
+  /**
    * <h4>画面のピクセル比を返す</h4>
    *
    * @static
    * @method pixelRatio
-   * @return {Number}
+   * @return {Number} 画面のピクセル比を返す
    */
   AMP.pixelRatio = function(){
     return root.devicePixelRatio || 1;

@@ -207,12 +207,6 @@ var AMP = AMP || {};
    * @type {Boolean}
    */
   /**
-   * <h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>
-   *
-   * @property sliderOptions.isTimerCancel
-   * @type {Boolean}
-   */
-  /**
    * <h4>現在アクティブなスライドアイテムインデックス</h4>
    *
    * @property sliderOptions.current
@@ -222,12 +216,6 @@ var AMP = AMP || {};
    * <h4>スライドステップ数を固定したい場合、ステップ数の指定</h4>
    *
    * @property sliderOptions.slideStep
-   * @type {Number}
-   */
-  /**
-   * <h4>スライドタイマーの間隔</h4>
-   *
-   * @property sliderOptions.timer
    * @type {Number}
    */
   /**
@@ -444,32 +432,6 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>タイマーキャンセルイベント</h4>
-   * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
-   *
-	 * @method addEventTimerCancel
-	 * @return {Slider}
-   */
-  p.addEventTimerCancel = function(){
-		var self = this;
-
-		self.param.$wrap.off('mouseenter.Slider mouseleave.Slider')
-		.on('mouseenter.Slider', function(){
-			if(self.param.isTimerCancel){
-				self.timerStop();
-			}
-		})
-		.on('mouseleave.Slider', function(){
-			if(self.param.isTimerCancel){
-				self.timerStart();
-			}
-		});
-
-		return this;
-  };
-
-
-  /**
    * <h4>フリックイベント</h4>
    *
    * @method addEventFlick
@@ -499,44 +461,6 @@ var AMP = AMP || {};
 
   /* Controllers
   -----------------------------------------------------------------*/
-	/**
-	 * <h4>タイマースタート</h4>
-	 *
-	 * @method timerStart
-	 * @param  {Number} num セットするタイマー値(省略可)
-	 * @return {Slider}
-	 */
-	p.timerStart = function(num){
-		var self = this;
-
-		if(AMP.isNumber(num)){
-			self.param.timer = num;
-		}
-
-		// タイマーをクリア
-		self.timerStop();
-
-		if(0 < self.param.timer){
-			self.param._timerId = setTimeout(function(){
-				self.next();
-			}, self.param.timer + self.param.duration);
-		}
-
-		return this;
-	};
-
-
-	/**
-	 * タイマー停止
-	 * @method timerStop
-	 * @return {Slider}
-	 */
-	p.timerStop = function(){
-		clearTimeout(this.param._timerId);
-		return this;
-	};
-
-
 	/**
 	 *<h4> コントローラー</h4>
 	 *
@@ -612,29 +536,6 @@ var AMP = AMP || {};
       }
     });
     return count;
-  };
-
-
-	/**
-	 * <h4>ポインターの生成</h4>
-	 *
-	 * @private
-	 * @method _createPointer
-	 * @return {Slider}
-	 */
-  p._createPointer = function(){
-		if(this.param.$pointer[0]){
-			var pointerHTML = this.param.$pointer.find('>')[0].outerHTML,
-			print = '',
-			i = 0;
-
-			for(; i < this.param.slideMaxCount; i += 1){
-				print += pointerHTML;
-			}
-			this.param.$pointer[0].innerHTML = print;
-		}
-
-		return this;
   };
 
 

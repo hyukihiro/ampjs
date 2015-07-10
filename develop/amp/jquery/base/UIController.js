@@ -14,10 +14,19 @@ var AMP = AMP || {};
    * <h4>UIコントローラ</h4>
    * このクラスを継承する事でUIコントローラを提供します
    *
+   * @protected
    * @constructor
    * @class AMP.$.UIController
+   * @param {Object} options オプション値
    */
-  function UIController(){}
+  function UIController(options){
+    var param = $.extend({}, UIController.uiOptions, options);
+
+    // exports
+    this.param = this.param || {};
+    this.param.isTimerCancel = param.isTimerCancel;
+    this.param.timer = param.timer;
+  }
 
   // 基底クラスを継承
   AMP.inherits(UIController, AMP.BASE_CLASS);
@@ -38,7 +47,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = '1.0.0';
+  UIController.VERSION = '1.0.1';
 
 
   /**
@@ -48,6 +57,24 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'UIController';
+
+
+  /**
+   * <h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>
+   *
+   * @property uiOptions.isTimerCancel
+   * @type {Boolean}
+   */
+  /**
+   * <h4>スライドタイマーの間隔</h4>
+   *
+   * @property uiOptions.timer
+   * @type {Number}
+   */
+  UIController.uiOptions = {
+    isTimerCancel : true,
+    timer         : 0
+  };
 
 
 
@@ -144,6 +171,95 @@ var AMP = AMP || {};
     return this;
   };
 
+
+  /**
+   * <h4>タイマースタート</h4>
+   *
+   * @method timerStart
+   * @param  {Number} num セットするタイマー値(省略可)
+   * @return {Slider}
+   */
+  p.timerStart = function(num){
+    var self = this;
+
+    if(AMP.isNumber(num)){
+      self.param.timer = num;
+    }
+
+    // タイマーをクリア
+    self.timerStop();
+
+    if(0 < self.param.timer){
+      self.param._timerId = setTimeout(function(){
+        self.next();
+      }, self.param.timer + self.param.duration);
+    }
+
+    return this;
+  };
+
+/*
+-----------------------------------------------------------------*/
+
+  /**
+   * <h4>タイマーキャンセルイベント</h4>
+   * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
+   *
+   * @method addEventTimerCancel
+   * @return {Slider}
+   */
+  p.addEventTimerCancel = function($target){
+    var self = this;
+
+    $target.off('mouseenter.Slider mouseleave.Slider')
+    .on('mouseenter.Slider', function(){
+      if(self.param.isTimerCancel){
+        self.timerStop();
+      }
+    })
+    .on('mouseleave.Slider', function(){
+      if(self.param.isTimerCancel){
+        self.timerStart();
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * タイマー停止
+   * @method timerStop
+   * @return {Slider}
+   */
+  p.timerStop = function(){
+    clearTimeout(this.param._timerId);
+    return this;
+  };
+
+  /**
+   * <h4>ポインターの生成</h4>
+   *
+   * @private
+   * @method _createPointer
+   * @return {Slider}
+   */
+  p._createPointer = function(){
+    if(this.param.$pointer[0]){
+      var pointerHTML = this.param.$pointer.find('>')[0].outerHTML,
+      print = '',
+      i = 0;
+
+      for(; i < this.param.slideMaxCount; i += 1){
+        print += pointerHTML;
+      }
+      this.param.$pointer[0].innerHTML = print;
+    }
+
+    return this;
+  };
+/*
+-----------------------------------------------------------------*/
 
   /**
    * <h4>指定インデックスへ</h4>
