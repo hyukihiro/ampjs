@@ -58,19 +58,6 @@ var AMP = AMP || {};
      * @type {Number}
      */
     /**
-     * <h4>left値</h4>
-     *
-     * @property param.left
-     * @type {Number}
-     */
-    /**
-     * <h4>タイマーID</h4>
-     *
-     * @private
-     * @property param._timerId
-     * @type {String}
-     */
-    /**
      * <h4>アニメーション状態管理フラグ</h4>
      *
      * @private
@@ -94,17 +81,42 @@ var AMP = AMP || {};
 				displayLength: 0,
 				visible      : 0,
 				distance     : 0,
-				left         : 0,
-        slideMaxCount: 0,
-				_timerId     : null,
 				_isAnimate   : false
 			},
 			options
 		);
 
-		if(this.param.isInit){
-			this.init();
-		}
+    /**
+     * <h4>カウンター</h4>
+     * @property counter
+     * @type {AMP.Counter}
+     */
+    this.counter = new AMP.Counter(this.param.current, $slider.find('.slide').children().length, this.param.isLoop);
+    // 削除
+    // this.param.current = void 0;
+    delete this.param.current;
+
+    /**
+     * <h4>座標を管理</h4>
+     * @property vector
+     * @type {AMP.Vector}
+     */
+    this.vector = new AMP.Vector();
+
+    /**
+     * <h4>タイマー管理</h4>
+     * @method timer
+     * @type {AMP.Timer}
+     */
+    this.timer = new AMP.Timer(this.param.timer);
+    // 削除
+    // this.param.timer = void 0;
+    delete this.param.timer;
+
+
+    if(this.param.isInit){
+      this.init();
+    }
   }
 
   // 基底クラスを継承
@@ -349,7 +361,8 @@ var AMP = AMP || {};
     self.addEventPager(self.param.$pointer.find('a'));
 
 		// timer
-		self.timerStart();
+    self.timer.addCallback(self.next);
+    self.setTimer();
 
     // 初期化フラグ
     this._isInit = true;
@@ -386,10 +399,11 @@ var AMP = AMP || {};
 		}
 
     // インデックス値
+    var current = 0;
     if(self.param.visible < visible){
-      self.param.current = Math.ceil(self.param.current / visible);
+      current = Math.ceil(self.counter.getCount() / visible);
     } else {
-      self.param.current = Math.ceil(self.param.current * visible);
+      current = Math.ceil(self.counter.getCount() * visible);
     }
 
     // 表示エリアにある要素数
@@ -399,11 +413,16 @@ var AMP = AMP || {};
     self.param.displayLength = self.getDisplayLength();
 
     // スライド最大数
+    var max = 0;
     if(0 < self.param.slideStep){
-      self.param.slideMaxCount = Math.ceil(self.param.displayLength / self.param.slideStep) - (self.param.visible - self.param.slideStep);
+      max = Math.ceil(self.param.displayLength / self.param.slideStep) - (self.param.visible - self.param.slideStep);
     } else {
-      self.param.slideMaxCount = Math.ceil(self.param.displayLength / self.param.visible);
+      max = Math.ceil(self.param.displayLength / self.param.visible);
     }
+
+    // カウントセット
+    self.counter.setCount(current);
+    self.counter.setLength(max);
 
     return this;
   };
@@ -423,7 +442,7 @@ var AMP = AMP || {};
 		$(window).off('resize.Slider resizestop.Slider')
 		.on('resize.Slider', function(){
       if(self.param.isResize){
-  			self.timerStop();
+  			self.timer.stop();
   			self.setParam();
   			self.setPosition();
         self.param.resizeCall(self.param);
@@ -434,7 +453,7 @@ var AMP = AMP || {};
         self._createPointer();
         self.addEventPager(self.param.$pointer.find('a'));
         self.active();
-        self.timerStart();
+        self.timer.start();
         self.param.resizeStopCall(self.param);
       }
 		});
@@ -456,12 +475,12 @@ var AMP = AMP || {};
 		self.param.$wrap.off('mouseenter.Slider mouseleave.Slider')
 		.on('mouseenter.Slider', function(){
 			if(self.param.isTimerCancel){
-				self.timerStop();
+				self.timer.stop();
 			}
 		})
 		.on('mouseleave.Slider', function(){
 			if(self.param.isTimerCancel){
-				self.timerStart();
+				self.timer.start();
 			}
 		});
 
@@ -500,39 +519,21 @@ var AMP = AMP || {};
   /* Controllers
   -----------------------------------------------------------------*/
 	/**
-	 * <h4>タイマースタート</h4>
+	 * <h4>タイマーのセット</h4>
 	 *
-	 * @method timerStart
-	 * @param  {Number} num セットするタイマー値(省略可)
+	 * @method setTimer
+	 * @param  {Number} interval タイマーの間隔 ※省略可
 	 * @return {Slider}
 	 */
-	p.timerStart = function(num){
-		var self = this;
+	p.setTimer = function(interval){
+		this.timer.stop();
 
-		if(AMP.isNumber(num)){
-			self.param.timer = num;
+    if(!AMP.isNumber(interval)){
+      interval = this.timer.interval;
+    }
+		if(0 < interval){
+      this.timer.start(interval + this.param.duration);
 		}
-
-		// タイマーをクリア
-		self.timerStop();
-
-		if(0 < self.param.timer){
-			self.param._timerId = setTimeout(function(){
-				self.next();
-			}, self.param.timer + self.param.duration);
-		}
-
-		return this;
-	};
-
-
-	/**
-	 * タイマー停止
-	 * @method timerStop
-	 * @return {Slider}
-	 */
-	p.timerStop = function(){
-		clearTimeout(this.param._timerId);
 		return this;
 	};
 
@@ -554,29 +555,29 @@ var AMP = AMP || {};
 
     // stepの調整
     if(isIndex){
-      step = step < self.param.slideMaxCount ? step : self.param.slideMaxCount - 1;
+      step = step < self.counter.getLength() ? step : self.counter.getLength() - 1;
     } else {
-      step = self.param.current + step;
+      step = self.counter.getCount() + step;
     }
 
     //
-    if(-1 < step && step < self.param.slideMaxCount){
-      self.param.current = step;
+    if(-1 < step && step < self.counter.getLength()){
+      self.counter.setCount(step);
     } else {
       if(self.param.isLoop){
-        self.param.current = -1 < step ? step - self.param.slideMaxCount : self.param.slideMaxCount + step;
+        self.counter.getCount() = -1 < step ? step - self.counter.getLength() : self.counter.getLength() + step;
       } else {
         return void 0;
       }
     }
 
 		self.param._isAnimate = true;
-		self.param.left = self.param.current * self.param.distance * -1;
+    self.vector.set(self.counter.getCount() * self.param.distance * -1);
 
 		$.sequence(
       function(){
   			// スライド前のコールバック実行
-				self.timerStop();
+        self.timer.stop();
 				self.active();
 				return self.param.tweenBegin(self.param);
 			},
@@ -589,7 +590,7 @@ var AMP = AMP || {};
 				return self.param.tweenCompleat(self.param);
 			},
 			function(){
-				self.timerStart();
+				self.timer.start();
 				self.param._isAnimate = false;
 			}
 		);
@@ -626,9 +627,10 @@ var AMP = AMP || {};
 		if(this.param.$pointer[0]){
 			var pointerHTML = this.param.$pointer.find('>')[0].outerHTML,
 			print = '',
-			i = 0;
+			i = 0,
+      l = this.counter.getLength();
 
-			for(; i < this.param.slideMaxCount; i += 1){
+			for(; i < l; i += 1){
 				print += pointerHTML;
 			}
 			this.param.$pointer[0].innerHTML = print;
@@ -645,7 +647,7 @@ var AMP = AMP || {};
   p.setPosition = function(){
     this.param.$slide.css({
       width: this.param.displayLength * this.param.$slideItems.outerWidth(true),
-      left : this.param.left
+      left : this.vector.x
     });
 		return this;
   };
@@ -661,9 +663,9 @@ var AMP = AMP || {};
     var index;
 
     if(0 < this.param.slideStep){
-      index = this.param.current * this.param.slideStep;
+      index = this.counter.getCount() * this.param.slideStep;
     } else {
-      index = this.param.current * this.param.visible;
+      index = this.counter.getCount() * this.param.visible;
     }
 
     // $slideItems
@@ -680,18 +682,18 @@ var AMP = AMP || {};
 		// $pointer
 		if(this.param.$pointer[0]){
 			this.param.$pointer.children().removeClass(this.param.activeClass)
-			.eq(this.param.current).addClass(this.param.activeClass);
+			.eq(this.counter.getCount()).addClass(this.param.activeClass);
 		}
 
 		// $next
-		if(this.param.current === this.param.slideMaxCount - 1){
+		if(this.counter.getCount() === this.counter.getLength() - 1){
 			this.param.$next.addClass(this.param.activeClass);
 		} else {
 			this.param.$next.removeClass(this.param.activeClass);
 		}
 
 		// $prev
-		if(this.param.current === 0){
+		if(this.counter.getCount() === 0){
 			this.param.$prev.addClass(this.param.activeClass);
 		} else {
 			this.param.$prev.removeClass(this.param.activeClass);
@@ -710,7 +712,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._move = function(x){
-		this.param.$slide.velocity('stop').css({left: this.param.left + x});
+		this.param.$slide.velocity('stop').css({left: this.vector.x + x});
   };
 
 
@@ -723,7 +725,7 @@ var AMP = AMP || {};
    */
   p._resetTween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.duration / 2, this.param.ease);
+    .velocity({left: this.vector.x}, this.param.duration / 2, this.param.ease);
   };
 
 
@@ -736,7 +738,7 @@ var AMP = AMP || {};
 	 */
 	p._tween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.duration, this.param.ease);
+    .velocity({left: this.vector.x}, this.param.duration, this.param.ease);
 	};
 
 

@@ -26,9 +26,9 @@ jQuery(function($){
 	// });
 
 	AMP.$.rollover.on();
-	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1, isLoop: false, isResize: true});
 
-	// console.log(slider);
+	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1, isLoop: false, isResize: true, timer: 100});
+	console.log(slider);
 
 
 	// console.log(AMP.Loader.get());
