@@ -2701,7 +2701,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = '1.0.0';
+  UIController.VERSION = '1.0.1';
 
 
   /**
@@ -2711,6 +2711,23 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'UIController';
+
+
+  /**
+   * <h4>パラメーター</h4>
+   *
+   * @property param
+   * @type {Object}
+   */
+  /**
+   * <h4>現在値</h4>
+   *
+   * @property param.current
+   * @type {Number}
+   */
+  p.param = {
+    current: 0
+  };
 
 
 
@@ -2803,7 +2820,48 @@ var AMP = AMP || {};
    * @return {Instance}
    */
   p.removeEventPrev = function($prev){
-    $prev.on('click.' + this.className);
+    $prev.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>フリックイベント</h4>
+   *
+   * @method addEventFlick
+   * @return {Slider}
+   */
+  p.addEventFlick = function($trigger){
+    var self = this;
+
+    $trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
+    .on('flickmoveX.' + this.className, function(moveEvent){
+      self._move(moveEvent.moveX);
+    })
+    .on('flickcancelX.' + this.className, function(){
+      self._resetTween();
+    })
+    .on('flickX.' + this.className, function(flickEvent){
+      if(0 < flickEvent.moveX){
+        self.prev();
+      } else {
+        self.next();
+      }
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>指定インデックスへ</h4>
+   * アニメート無
+   *
+   * @method current
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.current = function(index){
+    this._controller(index, true);
     return this;
   };
 
@@ -2816,7 +2874,7 @@ var AMP = AMP || {};
    * @return {Instance}
    */
   p.moveTo = function(index){
-    this._controller(index, true);
+    this._controller(index);
     return this;
   };
 
@@ -2828,7 +2886,7 @@ var AMP = AMP || {};
    * @return {Instance}
    */
   p.next = function(){
-    this._controller(1);
+    this._controller(this.param.current + 1);
     return this;
   };
 
@@ -2840,7 +2898,7 @@ var AMP = AMP || {};
    * @return {Instance}
    */
   p.prev = function(){
-    this._controller(-1);
+    this._controller(this.param.current -1);
     return this;
   };
 
@@ -2852,9 +2910,11 @@ var AMP = AMP || {};
    * @protected
    * @private
    * @method _controller
+   * @param {Number} index スライドインデック
+   * @param {Boolean} noAnimate アニメート無
    * @return {Instance}
    */
-  p._controller = function(num, isIndex){};
+  p._controller = function(index, noAnimate){};
 
 
 

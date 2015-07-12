@@ -1,3 +1,31 @@
+/**
+ * AMP JavaScript Library
+ *
+ * @licence MIT Licence
+ *
+ * author Yoshihito Fujiwara
+ * source https://bitbucket.org/yoshihitofujiwara/ampjs
+ * Copyright (c) 2014 Yoshihito Fujiwara
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
+
 var AMP = AMP || {};
 
 
@@ -12,7 +40,8 @@ var AMP = AMP || {};
 
   /**
    * <h4>スライダー</h4>
-   * velocity.jsに依存しています
+   * velocity.jsに依存しています<br>
+   * FIEXME: βバージョンです
    *
    * @constructor
    * @class AMP.$.Slider
@@ -39,9 +68,15 @@ var AMP = AMP || {};
      * @type {Number}
      */
     /**
+     * <h4>表示されてる要素数</h4>
+     *
+     * @property param.displayLength
+     * @type {Number}
+     */
+    /**
      * <h4>$frame内に表示されている要素数</h4>
      *
-     * @property param._visibleLength
+     * @property param.visible
      * @type {Number}
      */
     /**
@@ -49,19 +84,6 @@ var AMP = AMP || {};
      *
      * @property param.distance
      * @type {Number}
-     */
-    /**
-     * <h4>left値</h4>
-     *
-     * @property param.left
-     * @type {Number}
-     */
-    /**
-     * <h4>タイマーID</h4>
-     *
-     * @private
-     * @property param._timerId
-     * @type {String}
      */
     /**
      * <h4>アニメーション状態管理フラグ</h4>
@@ -75,29 +97,54 @@ var AMP = AMP || {};
 			{},
 			Slider.sliderOptions,
 			{
-        $wrap         : $slider,
-        $frame        : $slider.find('.frame'),
-        $slide        : $slider.find('.slide'),
-        $slideItems   : $slider.find('.slide').children(),
-        $pointer      : $slider.find('.pointer'),
-        $thumbnail    : $slider.find('.thumbnail a'),
-        $prev         : $slider.find('.prev a'),
-        $next         : $slider.find('.next a'),
-        length        : $slider.find('.slide').children().length,
-        slideMaxLength: 0,
-        distance      : 0,
-        left          : 0,
-        _stepLength   : 0,
-        _visibleLength: 1,
-        _timerId      : null,
-        _isAnimate    : false
+				$wrap        : $slider,
+				$frame       : $slider.find('.frame'),
+				$slide       : $slider.find('.slide'),
+				$slideItems  : $slider.find('.slide').children(),
+				$pointer     : $slider.find('.pointer'),
+				$thumbnail   : $slider.find('.thumbnail a'),
+				$prev        : $slider.find('.prev a'),
+				$next        : $slider.find('.next a'),
+				length       : $slider.find('.slide').children().length,
+				displayLength: 0,
+				visible      : 0,
+				distance     : 0,
+				_isAnimate   : false
 			},
 			options
 		);
 
-		if(this.param.isInit){
-			this.init();
-		}
+    /**
+     * <h4>カウンター</h4>
+     * @property counter
+     * @type {AMP.Counter}
+     */
+    this.counter = new AMP.Counter(this.param.current, $slider.find('.slide').children().length, this.param.isLoop);
+    // 削除
+    // this.param.current = void 0;
+    delete this.param.current;
+
+    /**
+     * <h4>座標を管理</h4>
+     * @property vector
+     * @type {AMP.Vector}
+     */
+    this.vector = new AMP.Vector();
+
+    /**
+     * <h4>タイマー管理</h4>
+     * @method timer
+     * @type {AMP.Timer}
+     */
+    this.timer = new AMP.Timer(this.param.timer);
+    // 削除
+    // this.param.timer = void 0;
+    delete this.param.timer;
+
+
+    if(this.param.isInit){
+      this.init();
+    }
   }
 
   // 基底クラスを継承
@@ -194,6 +241,12 @@ var AMP = AMP || {};
    * @type {Boolean}
    */
   /**
+   * <h4>スライドループを有効にするか</h4>
+   *
+   * @property sliderOptions.isLoop
+   * @type {Boolean}
+   */
+  /**
    * <h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>
    *
    * @property sliderOptions.isTimerCancel
@@ -218,16 +271,34 @@ var AMP = AMP || {};
    * @type {Number}
    */
   /**
-   * <h4>リキッドスライドモード</h4>
+   * <h4>スライドduration</h4>
    *
-   * @property sliderOptions.isLiquid
-   * @type {Boolean|Function}
+   * @property sliderOptions.duration
+   * @type {Number}
+   */
+  /**
+   * <h4>スライドease</h4>
+   *
+   * @property sliderOptions.ease
+   * @type {String}
    */
   /**
    * <h4>アクティブ要素に付与するクラス名</h4>
    *
    * @property sliderOptions.activeClass
    * @type {String}
+   */
+  /**
+   * <h4>スライド前に実行する関数</h4>
+   *
+   * @property sliderOptions.tweenBegin
+   * @type {Function}
+   */
+  /**
+   * <h4>スライド完了時に実行する関数</h4>
+   *
+   * @property sliderOptions.tweenCompleat
+   * @type {Function}
    */
   /**
    * <h4>リサイズ時に実行する関数</h4>
@@ -241,13 +312,6 @@ var AMP = AMP || {};
    * @property sliderOptions.resizeStopCall
    * @type {Function}
    */
-  /**
-   * <h4>スライドアニメーションのオプション値</h4>
-   * 参照： <a href="http://julian.com/research/velocity/#arguments">オプション値</a>
-   *
-   * @property sliderOptions.slideOptions
-   * @type {Object}
-   */
   Slider.sliderOptions = {
     $frame        : null,
     $slide        : null,
@@ -258,22 +322,19 @@ var AMP = AMP || {};
     $next         : null,
     isInit        : true,
     isFlick       : true,
-    isResize      : true,
+    isLoop        : true,
+    isResize      : false,
     isTimerCancel : true,
-    // isLiquid      : false,
     current       : 0,
     slideStep     : 0,
     timer         : 0,
+    duration      : 500,
+    ease          : 'easeOutQuart',
     activeClass   : 'active',
+    tweenBegin    : $.noop,
+    tweenCompleat : $.noop,
     resizeCall    : $.noop,
-    resizeStopCall: $.noop,
-    slideOptions  : {
-      easing      : 'easeOutQuart',
-      duration    : 500,
-      begin       : $.noop,
-      progress    : $.noop,
-      complete    : $.noop
-    }
+    resizeStopCall: $.noop
   };
 
 
@@ -286,7 +347,7 @@ var AMP = AMP || {};
    * <h4>Sliderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Slider
+   * @method get
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
    * @return {Slider}
@@ -304,31 +365,35 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.init = function(){
-    // 初期化フラグ
+    var self = this;
+
     if(this._isInit){
       return this;
     }
+
+		// param
+		self.setParam();
+
+		// view
+		self._createPointer();
+		self.setPosition();
+		self.active();
+
+		// event
+		self.addEventResize();
+		self.addEventTimerCancel();
+    self.addEventFlick(self.param.$slide);
+    self.addEventNext(self.param.$next);
+    self.addEventPrev(self.param.$prev);
+    self.addEventPager(self.param.$thumbnail);
+    self.addEventPager(self.param.$pointer.find('a'));
+
+		// timer
+    self.timer.addCallback(self.next);
+    self.setTimer();
+
+    // 初期化フラグ
     this._isInit = true;
-
-    // param
-    this.setParam();
-
-    // view
-    this.createPointer();
-    this.setPosition();
-    this.active();
-
-    // event
-    this.addEventResize();
-    this.addEventTimerCancel();
-    this.addEventThumbnail(this.param.$thumbnail);
-    this.addEventFlick(this.param.$slide);
-    this.addEventNext(this.param.$next);
-    this.addEventPrev(this.param.$prev);
-    this.addEventPager(this.param.$pointer.find('a'));
-
-    // timer
-    this.timerStart();
 
     return this;
   };
@@ -341,40 +406,51 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.setParam = function(){
+    var self = this,
+    stageWidth, itemWidth, visible;
+
     // ステージの幅
-		var stageWidth = this.param.$frame.width();
+		stageWidth = self.param.$frame.width();
 
 		// アイテム要素の幅
-		var itemWidth = this.param.$slideItems.outerWidth(true);
+		itemWidth = self.param.$slideItems.outerWidth(true);
 
 		// 表示エリアにある要素数
-		var visibleLength = ~~(stageWidth / itemWidth);
-
-    // ステップ数
-    var step = this._getStepLength(visibleLength);
-
-    // 現在のインデックをセット
-    if(this._stepLength < step){
-      this.param.current = Math.ceil(this.param.current / step);
-    } else {
-      var current = this.param.current * step;
-      this.param.current = Math.ceil(current / visibleLength);
-    }
-
-    this._stepLength = step;
-
-
-    // 表示エリアにある要素数
-    this.param._visibleLength = visibleLength || 1;
+		visible = ~~(stageWidth / itemWidth);
 
 		// 移動距離
-		this.param.distance = step * itemWidth;
+    // スライドステップ指定時は、ステップ数がフレーム内に収まっている場合のみ設定する
+		if(0 < self.param.slideStep && self.param.slideStep <= visible){
+			self.param.distance = self.param.slideStep * itemWidth;
+		} else {
+			self.param.distance = visible * itemWidth;
+		}
+
+    // インデックス値
+    var current = 0;
+    if(self.param.visible < visible){
+      current = Math.ceil(self.counter.getCount() / visible);
+    } else {
+      current = Math.ceil(self.counter.getCount() * visible);
+    }
+
+    // 表示エリアにある要素数
+    self.param.visible = visible;
+
+    // アイテム要素の表示数
+    self.param.displayLength = self.getDisplayLength();
 
     // スライド最大数
-    this.param.slideMaxLength = Math.ceil(this._getDisplayLength() / step);
+    var max = 0;
+    if(0 < self.param.slideStep){
+      max = Math.ceil(self.param.displayLength / self.param.slideStep) - (self.param.visible - self.param.slideStep);
+    } else {
+      max = Math.ceil(self.param.displayLength / self.param.visible);
+    }
 
-    // 現在値
-    this.param.left = this.param.current * this.param.distance * -1;
+    // カウントセット
+    self.counter.setCount(current);
+    self.counter.setLength(max);
 
     return this;
   };
@@ -394,43 +470,23 @@ var AMP = AMP || {};
 		$(window).off('resize.Slider resizestop.Slider')
 		.on('resize.Slider', function(){
       if(self.param.isResize){
-  			self.timerStop();
-        self.param.resizeCall();
+  			self.timer.stop();
+  			self.setParam();
+  			self.setPosition();
+        self.param.resizeCall(self.param);
       }
     })
     .on('resizestop.Slider', function(){
       if(self.param.isResize){
-  			self.setParam();
-  			self.setPosition();
-        self.createPointer();
+        self._createPointer();
         self.addEventPager(self.param.$pointer.find('a'));
         self.active();
-        self.timerStart();
-        self.param.resizeStopCall();
+        self.timer.start();
+        self.param.resizeStopCall(self.param);
       }
 		});
 
 		return this;
-  };
-
-
-  /**
-   * <h4>Thumbnailボタンイベント追加</h4>
-   *
-   * @method addEventThumbnail
-   * @param {jQuery} $thumbnail Thumbnailトリガー要素
-   * @return {Slider}
-   */
-  p.addEventThumbnail = function($thumbnail){
-    var self = this;
-
-    $thumbnail.on('click.' + self.className, function(){
-      var index = ~~($thumbnail.index(this) / self._stepLength);
-      self.moveTo(index);
-      return false;
-    });
-
-    return this;
   };
 
 
@@ -447,12 +503,12 @@ var AMP = AMP || {};
 		self.param.$wrap.off('mouseenter.Slider mouseleave.Slider')
 		.on('mouseenter.Slider', function(){
 			if(self.param.isTimerCancel){
-				self.timerStop();
+				self.timer.stop();
 			}
 		})
 		.on('mouseleave.Slider', function(){
 			if(self.param.isTimerCancel){
-				self.timerStart();
+				self.timer.start();
 			}
 		});
 
@@ -460,43 +516,52 @@ var AMP = AMP || {};
   };
 
 
-
-  /* Controllers
-  -----------------------------------------------------------------*/
-	/**
-	 * <h4>タイマースタート</h4>
-	 *
-	 * @method timerStart
-	 * @param  {Number} num セットするタイマー値(省略可)
-	 * @return {Slider}
-	 */
-	p.timerStart = function(num){
+  /**
+   * <h4>フリックイベント</h4>
+   *
+   * @method addEventFlick
+   * @return {Slider}
+   */
+	p.addEventFlick = function($trigger){
 		var self = this;
 
-		if(AMP.isNumber(num)){
-			self.param.timer = num;
-		}
-
-		// タイマーをクリア
-		self.timerStop();
-
-		if(0 < self.param.timer){
-			self.param._timerId = setTimeout(function(){
+		$trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
+		.on('flickmoveX.Slider', function(event){
+			self._move(event.moveX);
+		})
+		.on('flickcancelX.Slider', function(){
+			self._resetTween();
+		})
+		.on('flickX.Slider', function(event){
+			if(0 < event.moveX){
+				self.prev();
+			} else {
 				self.next();
-			}, self.param.timer + self.param.slideOptions.duration);
-		}
+			}
+		});
 
 		return this;
 	};
 
 
+  /* Controllers
+  -----------------------------------------------------------------*/
 	/**
-	 * タイマー停止
-	 * @method timerStop
+	 * <h4>タイマーのセット</h4>
+	 *
+	 * @method setTimer
+	 * @param  {Number} interval タイマーの間隔 ※省略可
 	 * @return {Slider}
 	 */
-	p.timerStop = function(){
-		clearTimeout(this.param._timerId);
+	p.setTimer = function(interval){
+		this.timer.stop();
+
+    if(!AMP.isNumber(interval)){
+      interval = this.timer.interval;
+    }
+		if(0 < interval){
+      this.timer.start(interval + this.param.duration);
+		}
 		return this;
 	};
 
@@ -506,50 +571,57 @@ var AMP = AMP || {};
 	 *
    * @private
 	 * @method _controller
-	 * @param  {Number} index スライドする位置
+	 * @param  {Number} step スライドするステップ数
 	 * @return {Void}
 	 */
-  p._controller = function(index, noAnimate){
+  p._controller = function(step, isIndex){
 		var self = this;
 
 		if(self.param._isAnimate){
 			return void 0;
 		}
 
-    // indexの調整
-    if(index < 0){
-      index = self.param.slideMaxLength - 1;
-    } else if(index >= self.param.slideMaxLength){
-      index = 0;
-    }
-
-    // パラメータ更新
-    self.param.current = index;
-    self.param.left = self.param.current * self.param.distance * -1;
-
-    // アニメート判定
-    if(noAnimate){
-      self.setPosition();
+    // stepの調整
+    if(isIndex){
+      step = step < self.counter.getLength() ? step : self.counter.getLength() - 1;
     } else {
-      $.sequence(
-        function(){
-          // スライド前
-          self.param._isAnimate = true;
-  				self.timerStop();
-  				self.active();
-  			},
-        function(){
-  	   		// スライド
-  				return self._tween();
-  			},
-  			function(){
-          // スライド後
-  				self.timerStart();
-  				self.param._isAnimate = false;
-  			}
-  		);
+      step = self.counter.getCount() + step;
     }
 
+
+    if(-1 < step && step < self.counter.getLength()){
+      self.counter.setCount(step);
+    } else {
+      if(self.param.isLoop){
+        self.counter.getCount() = -1 < step ? step - self.counter.getLength() : self.counter.getLength() + step;
+      } else {
+        return void 0;
+      }
+    }
+
+		self.param._isAnimate = true;
+    self.vector.set(self.counter.getCount() * self.param.distance * -1);
+
+		$.sequence(
+      function(){
+  			// スライド前のコールバック実行
+        self.timer.stop();
+				self.active();
+				return self.param.tweenBegin(self.param);
+			},
+      function(){
+	   		// スライドとコールバック実行
+				return self._tween();
+			},
+      function(){
+  			// スライド完了コールバック
+				return self.param.tweenCompleat(self.param);
+			},
+			function(){
+				self.timer.start();
+				self.param._isAnimate = false;
+			}
+		);
   };
 
 
@@ -558,11 +630,10 @@ var AMP = AMP || {};
   /**
    * <h4>表示可能な要素の数を取得</h4>
    *
-   * @private
-   * @method _getDisplayLength
+   * @method getDisplayLength
    * @return {Number}
    */
-  p._getDisplayLength = function(){
+  p.getDisplayLength = function(){
     var count = 0;
     this.param.$slideItems.each(function(){
       if($(this).css('display') !== 'none'){
@@ -573,42 +644,21 @@ var AMP = AMP || {};
   };
 
 
-  /**
-   * <h4>スライドするアイテム要素の数の取得</h4>
-   *
-   * @private
-   * @method _getStepLength
-   * @param  {Number} visibleLength スライド領域に表示されているアイテム要素の数
-   * @return {Number}
-   */
-  p._getStepLength = function(visibleLength){
-    var isStep = this.param.slideStep && this.param.slideStep <= (visibleLength || this.param.visibleLength);
-
-    if(visibleLength){
-      this.param.visibleLength = visibleLength;
-    }
-
-    if(isStep){
-      return this.param.slideStep;
-    } else {
-      return this.param.visibleLength;
-    }
-  };
-
-
 	/**
 	 * <h4>ポインターの生成</h4>
 	 *
-	 * @method createPointer
+	 * @private
+	 * @method _createPointer
 	 * @return {Slider}
 	 */
-  p.createPointer = function(){
+  p._createPointer = function(){
 		if(this.param.$pointer[0]){
 			var pointerHTML = this.param.$pointer.find('>')[0].outerHTML,
 			print = '',
-			i = 0;
+			i = 0,
+      l = this.counter.getLength();
 
-			for(; i < this.param.slideMaxLength; i += 1){
+			for(; i < l; i += 1){
 				print += pointerHTML;
 			}
 			this.param.$pointer[0].innerHTML = print;
@@ -618,16 +668,14 @@ var AMP = AMP || {};
   };
 
 
- /**
-  * <h4>スライドスタイルのセット</h4>
-  *
-  * @method setPosition
-  * @return {Slider}
-  */
+  /**
+   * ここ途中
+   * [setPosition description]
+   */
   p.setPosition = function(){
     this.param.$slide.css({
-      width: this._getDisplayLength() * this.param.$slideItems.outerWidth(true),
-      left : this.param.left
+      width: this.param.displayLength * this.param.$slideItems.outerWidth(true),
+      left : this.vector.x
     });
 		return this;
   };
@@ -640,34 +688,40 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.active = function(){
-    var index = this.param.current * this._stepLength;
+    var index;
+
+    if(0 < this.param.slideStep){
+      index = this.counter.getCount() * this.param.slideStep;
+    } else {
+      index = this.counter.getCount() * this.param.visible;
+    }
 
     // $slideItems
     this.param.$slideItems.removeClass(this.param.activeClass)
-    .slice(index, index + this.param._visibleLength)
+    .slice(index, index + this.param.visible)
     .addClass(this.param.activeClass);
 
     // $thumbnail
     if(this.param.$thumbnail[0]){
       this.param.$thumbnail.removeClass(this.param.activeClass)
-      .slice(index, index + this.param._visibleLength).addClass(this.param.activeClass);
+      .slice(index, index + this.param.visible).addClass(this.param.activeClass);
     }
 
 		// $pointer
 		if(this.param.$pointer[0]){
 			this.param.$pointer.children().removeClass(this.param.activeClass)
-			.eq(this.param.current).addClass(this.param.activeClass);
+			.eq(this.counter.getCount()).addClass(this.param.activeClass);
 		}
 
 		// $next
-		if(this.param.current === this.param.slideMaxLength - 1){
+		if(this.counter.getCount() === this.counter.getLength() - 1){
 			this.param.$next.addClass(this.param.activeClass);
 		} else {
 			this.param.$next.removeClass(this.param.activeClass);
 		}
 
 		// $prev
-		if(this.param.current === 0){
+		if(this.counter.getCount() === 0){
 			this.param.$prev.addClass(this.param.activeClass);
 		} else {
 			this.param.$prev.removeClass(this.param.activeClass);
@@ -686,7 +740,7 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._move = function(x){
-		this.param.$slide.velocity('stop').css({left: this.param.left + x});
+		this.param.$slide.velocity('stop').css({left: this.vector.x + x});
   };
 
 
@@ -699,7 +753,7 @@ var AMP = AMP || {};
    */
   p._resetTween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.slideOptions.duration / 2, this.param.slideOptions.easing);
+    .velocity({left: this.vector.x}, this.param.duration / 2, this.param.ease);
   };
 
 
@@ -712,7 +766,7 @@ var AMP = AMP || {};
 	 */
 	p._tween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.slideOptions);
+    .velocity({left: this.vector.x}, this.param.duration, this.param.ease);
 	};
 
 

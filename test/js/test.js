@@ -7,7 +7,7 @@ jQuery(function($){
 
 
 	AMP.mediaquery.on('change', function(event){
-		console.log(event);
+		// console.log(event);
 	});
 	// new AMP.$.MediaImageChange($('img'));
 
@@ -27,8 +27,11 @@ jQuery(function($){
 
 	AMP.$.rollover.on();
 
-	var slider = AMP.$.Slider.get($('.slider'), {slideStep: 1, isLoop: false, isResize: true, timer: 100});
-	console.log(slider);
+	imagesLoaded('body', function(){
+	var slider = AMP.$.Slider.get($('.slider'));
+
+	})
+
 
 
 	// console.log(AMP.Loader.get());
