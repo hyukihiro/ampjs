@@ -644,13 +644,13 @@ var AMP = AMP || {};
 
     // $slideItems
     this.param.$slideItems.removeClass(this.param.activeClass)
-    .slice(index, index + this.param._visibleLength)
+    .slice(index, index + this.param._stepLength)
     .addClass(this.param.activeClass);
 
     // $thumbnail
     if(this.param.$thumbnail[0]){
       this.param.$thumbnail.removeClass(this.param.activeClass)
-      .slice(index, index + this.param._visibleLength).addClass(this.param.activeClass);
+      .slice(index, index + this.param._stepLength).addClass(this.param.activeClass);
     }
 
 		// $pointer
