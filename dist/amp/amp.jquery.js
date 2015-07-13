@@ -2678,8 +2678,9 @@ var AMP = AMP || {};
    * このクラスを継承する事でUIコントローラを提供します
    *
    * @protected
-   * @constructor
    * @class AMP.$.UIController
+   * @extends AMP.BASE_CLASS
+   * @constructor
    */
   function UIController(){}
 

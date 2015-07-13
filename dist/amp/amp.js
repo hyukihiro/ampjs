@@ -3652,6 +3652,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>Vectorを管理します</h4>
+   * βver
    *
    * @class AMP.Vector
    * @extends AMP.BASE_CLASS

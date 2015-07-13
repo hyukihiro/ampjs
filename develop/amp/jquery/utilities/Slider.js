@@ -534,9 +534,9 @@ var AMP = AMP || {};
 
     // indexの調整
     if(index < 0){
-      index = 0;
       index = self.param.slideMaxLength - 1;
     } else if(index >= self.param.slideMaxLength){
+      index = 0;
     }
 
     // パラメータ更新
