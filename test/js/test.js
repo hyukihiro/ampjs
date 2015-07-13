@@ -28,7 +28,7 @@ jQuery(function($){
 	AMP.$.rollover.on();
 
 	imagesLoaded('body', function(){
-	var slider = AMP.$.Slider.get($('.slider'));
+		var slider = AMP.$.Slider.get($('.slider'), {current: 1});
 
 	})
 
