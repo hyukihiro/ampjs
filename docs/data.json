@@ -557,7 +557,7 @@
             "extension_for": [],
             "file": "develop\\amp\\core\\utilities\\Vector.js",
             "line": 14,
-            "description": "<h4>Vectorを管理します</h4>",
+            "description": "<h4>Vectorを管理します</h4>\nβver",
             "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
@@ -818,6 +818,7 @@
             "description": "<h4>UIコントローラ</h4>\nこのクラスを継承する事でUIコントローラを提供します",
             "access": "protected",
             "tagname": "",
+            "extends": "AMP.BASE_CLASS",
             "is_constructor": 1
         },
         "AMP.$.Float3d": {
@@ -857,9 +858,10 @@
             "plugin_for": [],
             "extension_for": [],
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 286,
+            "line": 304,
             "description": "<h4>Sliderインスタンスの生成</h4>",
             "is_constructor": 1,
+            "extends": "AMP.$.UIController",
             "params": [
                 {
                     "name": "$slider",
@@ -3671,7 +3673,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 40,
+            "line": 41,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -3681,7 +3683,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 50,
+            "line": 51,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -3690,7 +3692,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 59,
+            "line": 60,
             "description": "<h4>X座標</h4>",
             "itemtype": "property",
             "name": "x",
@@ -3699,7 +3701,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 68,
+            "line": 69,
             "description": "<h4>Y座標</h4>",
             "itemtype": "property",
             "name": "y",
@@ -3708,7 +3710,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 77,
+            "line": 78,
             "description": "<h4>Z座標</h4>",
             "itemtype": "property",
             "name": "z",
@@ -3717,7 +3719,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 90,
+            "line": 91,
             "description": "<h4>Vectorインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
@@ -3747,7 +3749,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 105,
+            "line": 106,
             "description": "<h4>Vectorのクローンを生成します</h4>",
             "itemtype": "method",
             "name": "clone",
@@ -3759,7 +3761,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 116,
+            "line": 117,
             "description": "<h4>座標のセット</h4>",
             "itemtype": "method",
             "name": "set",
@@ -3788,7 +3790,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 134,
+            "line": 135,
             "description": "<h4>ベクトルの大きさの取得</h4>",
             "itemtype": "method",
             "name": "getMag",
@@ -3800,7 +3802,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 145,
+            "line": 146,
             "description": "<h4>座標3点の累乗積</h4>",
             "itemtype": "method",
             "name": "getMagSqrt",
@@ -3812,7 +3814,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 156,
+            "line": 157,
             "description": "<h4>座標の加算</h4>",
             "itemtype": "method",
             "name": "add",
@@ -3841,7 +3843,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 174,
+            "line": 175,
             "description": "<h4>座標の減算</h4>",
             "itemtype": "method",
             "name": "sub",
@@ -3870,7 +3872,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 192,
+            "line": 193,
             "description": "<h4>座標の乗算</h4>",
             "itemtype": "method",
             "name": "mult",
@@ -3889,7 +3891,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 207,
+            "line": 208,
             "description": "<h4>座標の除算</h4>",
             "itemtype": "method",
             "name": "div",
@@ -3908,7 +3910,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 222,
+            "line": 223,
             "description": "<h4>ベクトルの正規化</h4>",
             "itemtype": "method",
             "name": "normalize",
@@ -3920,7 +3922,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 237,
+            "line": 238,
             "description": "<h4>限界値の制限</h4>",
             "itemtype": "method",
             "name": "limit",
@@ -3939,7 +3941,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 254,
+            "line": 255,
             "description": "<h4>ベクトルの大きさの設定</h4>",
             "itemtype": "method",
             "name": "mag",
@@ -3958,7 +3960,7 @@
         },
         {
             "file": "develop\\amp\\core\\utilities\\Vector.js",
-            "line": 280,
+            "line": 281,
             "description": "<h4>座標オブジェクトを生成</h4>",
             "access": "private",
             "tagname": "",
@@ -6012,7 +6014,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 35,
+            "line": 36,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6022,7 +6024,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 45,
+            "line": 46,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -6031,7 +6033,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 54,
+            "line": 55,
             "description": "<h4>パラメーター</h4>",
             "itemtype": "property",
             "name": "param",
@@ -6040,7 +6042,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 60,
+            "line": 61,
             "description": "<h4>現在値</h4>",
             "itemtype": "property",
             "name": "param.current",
@@ -6049,7 +6051,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 76,
+            "line": 77,
             "description": "<h4>Pagerボタンイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventPager",
@@ -6068,7 +6070,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 93,
+            "line": 94,
             "description": "<h4>Pagerボタンイベント削除</h4>",
             "itemtype": "method",
             "name": "removeEventPager",
@@ -6087,7 +6089,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 106,
+            "line": 107,
             "description": "<h4>Nextボタンイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventNext",
@@ -6106,7 +6108,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 123,
+            "line": 124,
             "description": "<h4>Nextボタンイベント削除</h4>",
             "itemtype": "method",
             "name": "removeEventNext",
@@ -6125,7 +6127,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 136,
+            "line": 137,
             "description": "<h4>Prevボタンイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventPrev",
@@ -6144,7 +6146,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 153,
+            "line": 154,
             "description": "<h4>Prevボタンイベント削除</h4>",
             "itemtype": "method",
             "name": "removeEventPrev",
@@ -6163,7 +6165,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 166,
+            "line": 167,
             "description": "<h4>フリックイベント</h4>",
             "itemtype": "method",
             "name": "addEventFlick",
@@ -6175,7 +6177,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 193,
+            "line": 194,
             "description": "<h4>指定インデックスへ</h4>\nアニメート無",
             "itemtype": "method",
             "name": "current",
@@ -6194,7 +6196,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 207,
+            "line": 208,
             "description": "<h4>指定インデックスへ</h4>",
             "itemtype": "method",
             "name": "moveTo",
@@ -6213,7 +6215,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 220,
+            "line": 221,
             "description": "<h4>次へ</h4>",
             "itemtype": "method",
             "name": "next",
@@ -6225,7 +6227,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 232,
+            "line": 233,
             "description": "<h4>前へ</h4>",
             "itemtype": "method",
             "name": "prev",
@@ -6237,7 +6239,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\UIController.js",
-            "line": 244,
+            "line": 245,
             "description": "<h4>コントローラー</h4>\n送られてきた値を制御します",
             "access": "private",
             "tagname": "",
@@ -6532,7 +6534,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 23,
+            "line": 24,
             "description": "<h4>プロパティ格納オブジェクト</h4>",
             "itemtype": "property",
             "name": "param",
@@ -6541,7 +6543,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 29,
+            "line": 30,
             "description": "<h4>スライダー要素</h4>",
             "itemtype": "property",
             "name": "param.$wrap",
@@ -6550,7 +6552,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 35,
+            "line": 36,
             "description": "<h4>スライダーアイテム要素数</h4>",
             "itemtype": "property",
             "name": "param.length",
@@ -6559,7 +6561,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 41,
+            "line": 42,
             "description": "<h4>スライドで進むアイテム数</h4>",
             "access": "private",
             "tagname": "",
@@ -6571,7 +6573,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 49,
+            "line": 50,
             "description": "<h4>スライドカウントのMAX値</h4>",
             "itemtype": "property",
             "name": "param.slideMaxLength",
@@ -6580,7 +6582,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 55,
+            "line": 56,
             "description": "<h4>スライドする距離</h4>",
             "itemtype": "property",
             "name": "param.distance",
@@ -6589,7 +6591,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 61,
+            "line": 62,
             "description": "<h4>left値</h4>",
             "itemtype": "property",
             "name": "param.left",
@@ -6598,7 +6600,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 67,
+            "line": 68,
             "description": "<h4>タイマーID</h4>",
             "access": "private",
             "tagname": "",
@@ -6609,7 +6611,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 74,
+            "line": 75,
             "description": "<h4>アニメーション状態管理フラグ</h4>",
             "access": "private",
             "tagname": "",
@@ -6620,7 +6622,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 122,
+            "line": 123,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -6630,7 +6632,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 132,
+            "line": 133,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -6639,7 +6641,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 141,
+            "line": 142,
             "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出された際に、option値とmixinしてparamに格納します。",
             "static": 1,
             "itemtype": "property",
@@ -6649,8 +6651,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 149,
+            "line": 150,
             "description": "<h4>スライダーフレーム要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$frame",
             "type": "{jQuery}",
@@ -6658,8 +6661,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 155,
+            "line": 157,
             "description": "<h4>スライドする要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$slide",
             "type": "{jQuery}",
@@ -6667,8 +6671,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 161,
+            "line": 164,
             "description": "<h4>スライドする子要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$slideItems",
             "type": "{jQuery}",
@@ -6676,8 +6681,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 167,
+            "line": 171,
             "description": "<h4>ポインター要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$pointer",
             "type": "{jQuery}",
@@ -6685,8 +6691,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 173,
+            "line": 178,
             "description": "<h4>サムネイル要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$thumbnail",
             "type": "{jQuery}",
@@ -6694,8 +6701,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 179,
+            "line": 185,
             "description": "<h4>prevナビ要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$prev",
             "type": "{jQuery}",
@@ -6703,8 +6711,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 185,
+            "line": 192,
             "description": "<h4>nextナビ要素</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.$next",
             "type": "{jQuery}",
@@ -6712,8 +6721,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 191,
+            "line": 199,
             "description": "<h4>コンストラクタ呼び出されたときに、スライダーを初期化するか</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.isInit",
             "type": "{Boolean}",
@@ -6721,8 +6731,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 197,
+            "line": 206,
             "description": "<h4>フリックイベントを有効にするか</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.isFlick",
             "type": "{Boolean}",
@@ -6730,8 +6741,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 203,
+            "line": 213,
             "description": "<h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.isTimerCancel",
             "type": "{Boolean}",
@@ -6739,8 +6751,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 209,
+            "line": 220,
             "description": "<h4>現在アクティブなスライドアイテムインデックス</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.current",
             "type": "{Number}",
@@ -6748,8 +6761,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 215,
+            "line": 227,
             "description": "<h4>スライドステップ数を固定したい場合、ステップ数の指定</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.slideStep",
             "type": "{Number}",
@@ -6757,8 +6771,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 221,
+            "line": 234,
             "description": "<h4>スライドタイマーの間隔</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.timer",
             "type": "{Number}",
@@ -6766,8 +6781,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 227,
+            "line": 241,
             "description": "<h4>アクティブ要素に付与するクラス名</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.activeClass",
             "type": "{String}",
@@ -6775,8 +6791,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 233,
+            "line": 248,
             "description": "<h4>リサイズ時に実行する関数</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.resizeCall",
             "type": "{Function}",
@@ -6784,8 +6801,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 239,
+            "line": 255,
             "description": "<h4>リサイズに完了時に実行する関数</h4>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.resizeStopCall",
             "type": "{Function}",
@@ -6793,8 +6811,9 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 245,
+            "line": 262,
             "description": "<h4>スライドアニメーションのオプション値</h4>\n<p>参照： <a href=\"http://julian.com/research/velocity/#arguments\" target=\"_blank\">オプション値</a></p>",
+            "static": 1,
             "itemtype": "property",
             "name": "sliderOptions.slideOptions",
             "type": "{Object}",
@@ -6802,7 +6821,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 300,
+            "line": 318,
             "description": "<h4>初期化</h4>\nSingleton",
             "itemtype": "method",
             "name": "init",
@@ -6814,7 +6833,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 338,
+            "line": 356,
             "description": "<h4>パラメーターの設定</h4>",
             "itemtype": "method",
             "name": "setParam",
@@ -6826,7 +6845,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 383,
+            "line": 401,
             "description": "<h4>リサイズイベント</h4>",
             "itemtype": "method",
             "name": "addEventResize",
@@ -6838,7 +6857,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 415,
+            "line": 433,
             "description": "<h4>Thumbnailボタンイベント追加</h4>",
             "itemtype": "method",
             "name": "addEventThumbnail",
@@ -6857,7 +6876,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 435,
+            "line": 453,
             "description": "<h4>タイマーキャンセルイベント</h4>\nスライダーにマウスオンされた状態の時、タイマー処理をキャンセルします",
             "itemtype": "method",
             "name": "addEventTimerCancel",
@@ -6869,7 +6888,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 464,
+            "line": 482,
             "description": "<h4>タイマースタート</h4>",
             "itemtype": "method",
             "name": "timerStart",
@@ -6888,7 +6907,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 491,
+            "line": 509,
             "description": "タイマー停止",
             "itemtype": "method",
             "name": "timerStop",
@@ -6900,7 +6919,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 502,
+            "line": 520,
             "description": "<h4> コントローラー</h4>",
             "access": "private",
             "tagname": "",
@@ -6921,7 +6940,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 555,
+            "line": 573,
             "description": "<h4>表示可能な要素の数を取得</h4>",
             "access": "private",
             "tagname": "",
@@ -6935,7 +6954,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 573,
+            "line": 591,
             "description": "<h4>ポインターの生成</h4>",
             "itemtype": "method",
             "name": "createPointer",
@@ -6947,7 +6966,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 595,
+            "line": 613,
             "description": "<h4>スライドスタイルのセット</h4>",
             "itemtype": "method",
             "name": "setPosition",
@@ -6959,7 +6978,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 610,
+            "line": 628,
             "description": "<h4>要素のアクティブ化</h4>",
             "itemtype": "method",
             "name": "active",
@@ -6971,7 +6990,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 654,
+            "line": 672,
             "description": "<h4>指定x座標分移動</h4>",
             "access": "private",
             "tagname": "",
@@ -6992,7 +7011,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 667,
+            "line": 685,
             "description": "<h4>スライド位置を戻す</h4>",
             "access": "private",
             "tagname": "",
@@ -7006,7 +7025,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\utilities\\Slider.js",
-            "line": 680,
+            "line": 698,
             "description": "<h4>スライドアニメーションを実行</h4>",
             "access": "private",
             "tagname": "",

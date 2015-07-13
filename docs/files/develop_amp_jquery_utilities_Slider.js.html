@@ -127,6 +127,7 @@ var AMP = AMP || {};
    *
    * @constructor
    * @class AMP.$.Slider
+   * @extends AMP.$.UIController
    * @param {jQuery} $slider スライダー要素
    * @param {Object} options オプション値
    */
@@ -260,96 +261,112 @@ var AMP = AMP || {};
   /**
    * &lt;h4&gt;スライダーフレーム要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$frame
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;スライドする要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$slide
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;スライドする子要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$slideItems
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;ポインター要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$pointer
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;サムネイル要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$thumbnail
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;prevナビ要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$prev
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;nextナビ要素&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.$next
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;コンストラクタ呼び出されたときに、スライダーを初期化するか&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.isInit
    * @type {Boolean}
    */
   /**
    * &lt;h4&gt;フリックイベントを有効にするか&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.isFlick
    * @type {Boolean}
    */
   /**
    * &lt;h4&gt;スライダー要素にマウスオンされたときタイマーを無効にするか&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.isTimerCancel
    * @type {Boolean}
    */
   /**
    * &lt;h4&gt;現在アクティブなスライドアイテムインデックス&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.current
    * @type {Number}
    */
   /**
    * &lt;h4&gt;スライドステップ数を固定したい場合、ステップ数の指定&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.slideStep
    * @type {Number}
    */
   /**
    * &lt;h4&gt;スライドタイマーの間隔&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.timer
    * @type {Number}
    */
   /**
    * &lt;h4&gt;アクティブ要素に付与するクラス名&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.activeClass
    * @type {String}
    */
   /**
    * &lt;h4&gt;リサイズ時に実行する関数&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.resizeCall
    * @type {Function}
    */
   /**
    * &lt;h4&gt;リサイズに完了時に実行する関数&lt;/h4&gt;
    *
+   * @static
    * @property sliderOptions.resizeStopCall
    * @type {Function}
    */
@@ -357,6 +374,7 @@ var AMP = AMP || {};
    * &lt;h4&gt;スライドアニメーションのオプション値&lt;/h4&gt;
    * &lt;p&gt;参照： &lt;a href=&quot;http://julian.com/research/velocity/#arguments&quot; target=&quot;_blank&quot;&gt;オプション値&lt;/a&gt;&lt;/p&gt;
    *
+   * @static
    * @property sliderOptions.slideOptions
    * @type {Object}
    */
