@@ -13,7 +13,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>Vectorを管理します</h4>
-   * βver
    *
    * @class AMP.Vector
    * @extends AMP.BASE_CLASS
@@ -45,7 +44,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Vector.VERSION = '1.0.1';
+  Vector.VERSION = '1.0.2';
 
 
   /**
@@ -55,6 +54,34 @@ var AMP = AMP || {};
    * @type {String}
    */
   p.className = 'Vector';
+
+
+  /**
+   * <h4>π (半円)</h4>
+   *
+   *
+   * @property PI
+   * @type {Number}
+   */
+  Vector.PI =　Math.PI;
+
+
+  /**
+   * <h4>π * 2 (円)</h4>
+   *
+   * @property PI_TWO
+   * @type {Number}
+   */
+  Vector.PI_TWO = Vector.PI * 2;
+
+
+  /**
+   * <h4>π * 2 (1/4円)</h4>
+   *
+   * @property PI_HARF
+   * @type {Number}
+   */
+  Vector.PI_HARF = Vector.PI / 2;
 
 
   /**
@@ -84,9 +111,98 @@ var AMP = AMP || {};
   p.z = 0;
 
 
+  // 後で追記
+  p._angleMode = 'radians';
+  Vector.MODE_RADIANS = 'radians';
+  Vector.MODE_DEGREES = 'degrees';
+
+
+
   /*--------------------------------------------------------------------------
     @method
   --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ラジアンを角度に変換して返す</h4>
+   *
+   * @static
+   * @method radToDeg
+   * @param  {Number} rad ラジアン
+   * @return {Number}
+   */
+  Vector.radToDeg = function(rad){
+    return 360 * rad / (2 * Vector.PI);
+  };
+
+
+  /**
+   * <h4>角度をラジアンに変換して返す</h4>
+   *
+   * @static
+   * @method degToRad
+   * @param  {Number} deg 角度
+   * @return {Number}
+   */
+  Vector.degToRad = function(deg){
+    return 2 * Vector.PI * deg / 360;
+  };
+
+
+  /**
+   * <h4>角度から2Dベクトルを作成</h4>
+   *
+   * @static
+   * @method fromDeg
+   * @param  {Number} deg 角度
+   * @return {Vector}
+   */
+  Vector.fromDeg = function(deg){
+    var radians = Vector.degToRad(deg);
+    return Vector.get(Math.cos(radians), Math.sin(radians), 0);
+  };
+
+
+  /**
+   * <h4>ランダムな2Dベクトルを作成</h4>
+   *
+   * @static
+   * @method random2D
+   * @return {Vector}
+   */
+  Vector.random2D = function(){
+    return Vector.fromAngle(AMP.random(360));
+  };
+
+
+  /**
+   * <h4>ランダムな3Dベクトルを作成</h4>
+   *
+   * @static
+   * @method random3D
+   * @return {Vector}
+   */
+  Vector.random3D = function(){
+    var deg = AMP.random(0, Vector.PI_TWO),
+    z = AMP.random(-1, 1),
+    x = Math.sqrt(1 - z * z) * Math.cos(deg),
+    y = Math.sqrt(1 - z * z) * Math.sin(deg);
+    return Vector.get(x, y, z);
+  };
+
+
+  /**
+   * <h4>2つのベクターデータの中間角度を返す</h4>
+   *
+   * @method degBetween
+   * @param  {Vector} vector1 Vectorインスタンス
+   * @param  {Vector} vector2 Vectorインスタンス
+   * @return {Number}
+   */
+  Vector.degBetween = function(vector1, vector2){
+    var radians = Math.acos(vector1.dot(vector2) / (vector1.mag() * vector2.mag()));
+    return Vector.radToDeg(radians);
+  };
+
 
   /**
    * <h4>Vectorインスタンスの生成</h4>
@@ -124,10 +240,10 @@ var AMP = AMP || {};
    * @return {Vector}
    */
   p.set = function(x, y, z){
-    var offset = this._createOffset(x, y, z);
-    this.x = offset.x;
-    this.y = offset.y;
-    this.z = offset.z;
+    var coord = this._createCoord(x, y, z);
+    this.x = coord.x;
+    this.y = coord.y;
+    this.z = coord.z;
     return this;
   };
 
@@ -164,10 +280,10 @@ var AMP = AMP || {};
    * @return {Vector}
    */
   p.add = function(x, y, z){
-    var offset = this._createOffset(x, y, z);
-    this.x += offset.x;
-    this.y += offset.y;
-    this.z += offset.z;
+    var coord = this._createCoord(x, y, z);
+    this.x += coord.x;
+    this.y += coord.y;
+    this.z += coord.z;
     return this;
   };
 
@@ -182,10 +298,10 @@ var AMP = AMP || {};
    * @return {Vector}
    */
   p.sub = function(x, y, z){
-    var offset = this._createOffset(x, y, z);
-    this.x -= offset.x;
-    this.y -= offset.y;
-    this.z -= offset.z;
+    var coord = this._createCoord(x, y, z);
+    this.x -= coord.x;
+    this.y -= coord.y;
+    this.z -= coord.z;
     return this;
   };
 
@@ -221,13 +337,83 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>ベクトルの大きさを返す</h4>
+   *
+   * @method mag
+   * @param {Number} num ベクトルの大きさ
+   * @return {Vector}
+   */
+  p.mag = function(){
+    return Math.sqrt(this.magSqrt());
+  };
+
+
+  /**
+   * <h4>ベクトル累乗積を返す</h4>
+   *
+   * @method magSqrt
+   * @return {Number}
+   */
+  p.magSqrt = function(){
+    return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
+  };
+
+
+  /**
+   * <h4>ベクトルのドット積</h4>
+   *
+   * @method dot
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+   p.dot = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    return this.x * coord.x + this.y * coord.y + this.z * coord.z;
+   };
+
+
+  /**
+   * <h4>2つのベクトルのクロス積(3D)</h4>
+   *
+   * @method cross
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+  p.cross = function(x, y, z){
+    var coord = this._createCoord(x, y, z),
+    _x = this.y * coord.z - this.z * coord.y,
+    _y = this.z * coord.x - this.x * coord.z,
+    _z = this.x * coord.y - this.y * coord.x;
+    return Vector.get(_x, _y, _z);
+  };
+
+
+  /**
+   * <h4>2つのベクトル間のユーグリッド距離</h4>
+   *
+   * @method cross
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+  p.dist = function(x, y, z){
+    return Vector.get(x, y, z).sub(this).mag();
+  };
+
+
+  /**
    * <h4>ベクトルの正規化</h4>
    *
    * @method normalize
    * @return {Vector}
    */
   p.normalize = function(){
-    var mag = this.getMag2D();
+    var mag = this.mag();
     if(mag !== 0){
       this.div(mag);
     }
@@ -243,7 +429,7 @@ var AMP = AMP || {};
    * @return {Vector}
    */
   p.limit = function(max){
-    var magSqrt = this.getMagSqrt();
+    var magSqrt = this.magSqrt();
     if(max * max < magSqrt) {
       this.div(Math.sqrt(magSqrt));
       this.mult(max);
@@ -253,42 +439,119 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>ベクトルの大きさの設定</h4>
+   * <h4>ベクトルの大きさを設定</h4>
    *
-   * @method mag
-   * @param {Number} num ベクトルの大きさ
+   * @method setMag
+   * @param {Number} num 乗数
    * @return {Vector}
    */
-  p.mag = function(num){
+  p.setMag = function(num){
     this.normalize().mult(num);
     return this;
   };
 
 
-  /*
-  p.heading = function(){};
-  p.rotate = function(){};
-  p.lerp = function(){};
-  p.dist = function(){};
-  p.angleBetween = function(){};
-  p.dot = function(){};
-  p.cross = function(){};
-  p.random2D = function(){};
-  p.random3D = function(){};
-  */
+  /**
+   * <h4>角度で表される2Dベクトルの方向</h4>
+   *
+   * @method heading
+   * @return {Number}
+   */
+  p.heading = function(){
+    var h = Math.atan2(this.y, this.x);
+    if(this._angleMode === Vector.RADIANS){
+      return h;
+    } else {
+      return Vector.radToDeg(h);
+    }
+  };
+
+
+  /**
+   * <h4>指定した角度へ2Dベクトル回転</h4>
+   *
+   * @method rotate
+   * @param  {Number} deg 回転する度数
+   * @return {Vector}
+   */
+  p.rotate = function(deg) {
+    if(this._angleMode === Vector.MODE_DEGREES) {
+      deg = Vector.degToRad(deg);
+    }
+
+    var heading = this.heading() + deg;
+    var mag = this.mag();
+    this.x = Math.cos(heading) * mag;
+    this.y = Math.sin(heading) * mag;
+    return this;
+  };
+
+
+  /**
+   * <h4>別のベクトルに対する線形補間</h4>
+   *
+   * @method lerp
+   * @param {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param {Number} y y座標値
+   * @param {Number} z z座標値
+   * @param {Number} amount 量
+   *
+   * @return {Vector}
+   */
+  p.lerp = function(x, y, z, amount){
+    if(!AMP.isNumber(x)){
+      var coord = this._createCoord(x);
+      amount = y;
+      x = coord.x;
+      y = coord.y;
+      z = coord.z;
+    }
+
+    this.x += (x - this.x) * amount || 0;
+    this.y += (y - this.y) * amount || 0;
+    this.z += (z - this.z) * amount || 0;
+    return this;
+  };
+
+
+  /**
+   * <h4>座標を配列にして返す</h4>
+   *
+   * @method toArray
+   * @return {Array}
+   */
+  p.toArray = function(){
+    var coord = _createCoord(this);
+    return [coord.x, coord.y, coord.z];
+  };
+
+
+  /**
+   * <h4>座標が等しいか判定します</h4>
+   *
+   * @method isEquals
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Boolean}
+   */
+  p.isEquals = function(x, y, z){
+    var coord = _createCoord(this);
+    return this.x === coord.x && this.y === coord.y && this.z === coord.z;
+  };
 
 
   /**
    * <h4>座標オブジェクトを生成</h4>
    *
    * @private
-   * @method _createOffset
+   * @method _createCoord
    * @param  {Number|Object} x x座標値もしくは、座標オブジェクト
    * @param  {Number} y y座標値
    * @param  {Number} z z座標値
    * @return {Object}   x,y,z座標を格納したオブジェクト
    */
-  p._createOffset = function(x, y, z){
+  p._createCoord = function(x, y, z){
     if(AMP.isObject(x)){
       return x;
     } else if(AMP.isArray(x)){
