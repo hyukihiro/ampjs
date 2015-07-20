@@ -22,6 +22,8 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    */
   function Vector(x, y, z){
+    // FIXME: 一旦仮
+    this._angleMode = Vector.ANGLE_MODE_RADIANS;
     this.set(x, y, z);
   }
 
@@ -44,7 +46,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Vector.VERSION = '1.0.2';
+  Vector.VERSION = '1.0.3';
 
 
   /**
@@ -85,6 +87,36 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>アングルモード、ラジアンモードタイプ名</h4>
+   *
+   * @static
+   * @property ANGLE_MODE_RADIANS
+   * @type {String}
+   */
+  Vector.ANGLE_MODE_RADIANS = 'radians';
+
+
+  /**
+   * <h4>アングルモード、角度モードタイプ名</h4>
+   *
+   * @static
+   * @property ANGLE_MODE_DEGREES
+   * @type {String}
+   */
+  Vector.ANGLE_MODE_DEGREES = 'degrees';
+
+
+  /**
+   * <h4>アングルモード</h4>
+   *
+   * @private
+   * @property _angleMode
+   * @type {String}
+   */
+  p._angleMode = 'radians';
+
+
+  /**
    * <h4>X座標</h4>
    *
    * @property x
@@ -109,12 +141,6 @@ var AMP = AMP || {};
    * @type {Number}
    */
   p.z = 0;
-
-
-  // 後で追記
-  p._angleMode = 'radians';
-  Vector.MODE_RADIANS = 'radians';
-  Vector.MODE_DEGREES = 'degrees';
 
 
 
@@ -220,13 +246,41 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>Vectorのクローンを生成します</h4>
+   * <h4>Vectorのcopyを生成します</h4>
    *
-   * @method clone
+   * @method copy
    * @return {Vector}
    */
-  p.clone = function(){
+  p.copy = function(){
     return new Vector(this);
+  };
+
+
+  /**
+   * <h4>アングルモードの設定</h4>
+   *
+   * @method setAngleMode
+   * @param {String} type アングルモード名（radians　or degrees）
+   * @return {Vector}
+   */
+  p.setAngleMode = function(type){
+    if(type === Vector.ANGLE_MODE_RADIANS){
+      this._angleMode = Vector.ANGLE_MODE_RADIANS;
+    } else if(type === Vector.ANGLE_MODE_DEGREES){
+      this._angleMode = Vector.ANGLE_MODE_DEGREES;
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>アングルモードの取得</h4>
+   *
+   * @method getAngleMode
+   * @return {String} アングルモードを返す（radians　or degrees）
+   */
+  p.getAngleMode = function(){
+    return this._angleMode;
   };
 
 
@@ -388,7 +442,7 @@ var AMP = AMP || {};
     _x = this.y * coord.z - this.z * coord.y,
     _y = this.z * coord.x - this.x * coord.z,
     _z = this.x * coord.y - this.y * coord.x;
-    return Vector.get(_x, _y, _z);
+    return new Vector(_x, _y, _z);
   };
 
 
@@ -402,7 +456,7 @@ var AMP = AMP || {};
    * @return {Number}
    */
   p.dist = function(x, y, z){
-    return Vector.get(x, y, z).sub(this).mag();
+    return new Vector(x, y, z).sub(this).mag();
   };
 
 
@@ -475,12 +529,13 @@ var AMP = AMP || {};
    * @return {Vector}
    */
   p.rotate = function(deg) {
-    if(this._angleMode === Vector.MODE_DEGREES) {
+    if(this._angleMode === Vector.ANGLE_MODE_DEGREES) {
       deg = Vector.degToRad(deg);
     }
 
-    var heading = this.heading() + deg;
-    var mag = this.mag();
+    var heading = this.heading() + deg,
+    mag = this.mag();
+
     this.x = Math.cos(heading) * mag;
     this.y = Math.sin(heading) * mag;
     return this;
