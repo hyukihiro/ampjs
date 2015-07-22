@@ -65,7 +65,7 @@ var AMP = AMP || {};
    * @property PI
    * @type {Number}
    */
-  Vector.PI =　Math.PI;
+  Vector.PI = Math.PI;
 
 
   /**
