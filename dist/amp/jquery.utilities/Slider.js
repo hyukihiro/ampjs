@@ -122,9 +122,12 @@ var AMP = AMP || {};
         $next         : $slider.find('.next a'),
         length        : $slider.find('.slide').children().length,
         _stepLength   : null,
+        _liquidLength : null,
         slideMaxLength: 0,
         distance      : 0,
         left          : 0,
+        _liquidClone  : 2,
+        _adjustLeft   : 0,
         _timerId      : null,
         _isAnimate    : false
 			},
@@ -155,7 +158,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.0.0';
+  Slider.VERSION = '1.0.1';
 
 
   /**
@@ -307,7 +310,7 @@ var AMP = AMP || {};
     isFlick       : true,
     isResize      : true,
     isTimerCancel : true,
-    // isLiquid      : false,
+    isLiquid      : false,
     current       : 0,
     slideStep     : 0,
     timer         : 0,
@@ -388,6 +391,11 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.setParam = function(){
+    if(this.param.isLiquid){
+      // ここから
+    }
+
+
     // ステージの幅
 		var stageWidth = this.param.$frame.width();
 
@@ -415,8 +423,15 @@ var AMP = AMP || {};
 		this.param.distance = step * itemWidth;
 
     // スライド最大数
-
     this.param.slideMaxLength = Math.ceil(this._getDisplayLength() / step);
+
+    // フレームのセンタリング
+    if(this.param.distance < stageWidth){
+      this.param._adjustLeft = ~~((this.param.distance - stageWidth) / -2);
+    } else {
+      this.param._adjustLeft = 0;
+    }
+
     // 現在地
     this.param.left = this.param.current * this.param.distance * -1;
 
@@ -615,6 +630,10 @@ var AMP = AMP || {};
     return count;
   };
 
+  p.setLiquidItem = function(){
+
+  }
+
 
 	/**
 	 * <h4>ポインターの生成</h4>
@@ -647,7 +666,7 @@ var AMP = AMP || {};
   p.setPosition = function(){
     this.param.$slide.css({
       width: this._getDisplayLength() * this.param.$slideItems.outerWidth(true),
-      left : this.param.left
+      left : this.param.left　+　this.param._adjustLeft
     });
 		return this;
   };
@@ -680,8 +699,8 @@ var AMP = AMP || {};
 		}
 
 		// $next
-      this.param.$next.addClass(this.param.activeClass);
 		if(this.param.current === this.param.slideMaxLength - 1){
+      this.param.$next.addClass(this.param.activeClass);
 		} else {
 			this.param.$next.removeClass(this.param.activeClass);
 		}
@@ -706,7 +725,8 @@ var AMP = AMP || {};
    * @return {Void}
    */
   p._move = function(x){
-		this.param.$slide.velocity('stop').css({left: this.param.left + x});
+		this.param.$slide.velocity('stop')
+    .css({left: this.param.left　+ this.param._adjustLeft + x});
   };
 
 
@@ -719,7 +739,9 @@ var AMP = AMP || {};
    */
   p._resetTween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.slideOptions.duration / 2, this.param.slideOptions.easing);
+    .velocity({
+      left: this.param.left + this.param._adjustLeft
+    }, this.param.slideOptions.duration / 2, this.param.slideOptions.easing);
   };
 
 
@@ -732,7 +754,7 @@ var AMP = AMP || {};
 	 */
 	p._tween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left}, this.param.slideOptions);
+    .velocity({left: this.param.left + this.param._adjustLeft}, this.param.slideOptions);
 	};
 
 

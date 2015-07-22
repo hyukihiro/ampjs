@@ -27,7 +27,7 @@ var AMP = AMP || {};
     this.set(x, y, z);
   }
 
-  // AMP.Eventsクラスを継承
+  // 基底クラスを継承
   AMP.inherits(Vector, AMP.BASE_CLASS);
 
   // prototype
@@ -576,8 +576,22 @@ var AMP = AMP || {};
    * @return {Array}
    */
   p.toArray = function(){
-    var coord = _createCoord(this);
-    return [coord.x, coord.y, coord.z];
+    return [this.x, this.y, this.z];
+  };
+
+
+  /**
+   * <h4>座標オブジェクトを返します</h4>
+   *
+   * @method toJSON
+   * @return {Object}
+   */
+  p.toJSON = function(){
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.z
+    };
   };
 
 
@@ -591,7 +605,7 @@ var AMP = AMP || {};
    * @return {Boolean}
    */
   p.isEquals = function(x, y, z){
-    var coord = _createCoord(this);
+    var coord = this._createCoord(x, y, z);
     return this.x === coord.x && this.y === coord.y && this.z === coord.z;
   };
 
