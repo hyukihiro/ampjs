@@ -48,7 +48,7 @@
 
 
 	// バージョン情報
-	Flick.VERSION = '1.3.1';
+	Flick.VERSION = '1.3.2';
 
 
 	// イベント設定値
@@ -96,8 +96,8 @@
 			isMoveY   : false,
 			moveX     : 0,
 			moveY     : 0,
-			startX    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageX: event.pageX,
-			startY    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageY: event.pageY
+			startX    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageX : event.pageX,
+			startY    : Flick.isTouch ? event.originalEvent.changedTouches[0].pageY : event.pageY
 		};
 	};
 
@@ -190,6 +190,13 @@
 				}
 
 				Flick.setMoveData(moveEvent, data, param);
+
+				// イベントタイプが有効か判定して無効の場合削除
+				if((type === 'flickX' && data.isMoveY && !data.isMoveX) ||
+					(type === 'flickY' && data.isMoveX && !data.isMoveY))
+				{
+					$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
+				}
 			})
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && eventType.isSide,
@@ -246,6 +253,7 @@
 			// move
 			$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr)
 			.on('mousemove' + attr + ' touchmove' + attr, function(moveEvent){
+
 				Flick.setMoveData(moveEvent, data, param);
 				if(!Flick.isTouch){
 					moveEvent.preventDefault();
@@ -259,14 +267,18 @@
 						$target.trigger(data.flickEvent);
 					}
 				} else if(type === 'flickmoveX'){
-					if(data.isMoveX){
+					if(data.isMoveY && !data.isMoveX){
+						$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
+					} else if(data.isMoveX){
 						data.flickEvent.type = type;
 						data.flickEvent.moveX = data.moveX;
 						data.flickEvent.moveY = data.moveY;
 						$target.trigger(data.flickEvent);
 					}
 				} else if(type === 'flickmoveY'){
-					if(data.isMoveY){
+					if(data.isMoveX && !data.isMoveY){
+						$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
+					} else if(data.isMoveY){
 						data.flickEvent.type = type;
 						data.flickEvent.moveX = data.moveX;
 						data.flickEvent.moveY = data.moveY;
@@ -326,7 +338,13 @@
 				}
 
 				Flick.setMoveData(moveEvent, data, param);
-				// return false;
+
+				// イベントタイプが有効か判定して無効の場合削除
+				if((type === 'flickcancelX' && data.isMoveY && !data.isMoveX) ||
+					(type === 'flickcancelY' && data.isMoveX && !data.isMoveY))
+				{
+					$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
+				}
 			})
 			.on('click' + attr, function(clickEvent){
 				var isX = data.isMoveX && param.area < Math.abs(data.moveX) && eventType.isSide,
