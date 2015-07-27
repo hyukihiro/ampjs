@@ -84,7 +84,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   /**
-   * <h4>ホバー時に付けるクラス名</h4>
+   * <h4>ホバー時に、box要素に付与するクラス名</h4>
    *
    * @static
    * @property boxHoverOptions.hoverClass
@@ -92,7 +92,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   * <h4>複数リンクがある場合、優先するリンククラス</h4>
+   * <h4>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</h4>
    *
    * @static
    * @property boxHoverOptions.linkClass

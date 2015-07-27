@@ -95,7 +95,8 @@ dist/lib/utilities.pack.js
 
 ## Add Planned Library
 ```
-createjs
+chroma
+createjs / TweenMax
 React  
 Flux  
 ```

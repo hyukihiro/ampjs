@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMP.js</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<!-- <meta name="viewport" content="width=978"> -->
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="js/html5shiv.min.js"></script><![endif]-->
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
+<link rel="stylesheet" href="css/global.css" media="all">
+<link rel="stylesheet" href="css/index.css" media="all">
+
+<!-- lib -->
+<script src="../dist/lib/jquery-1.8.3.min.js"></script>
+<script src="../dist/lib/jquery.plugins.js"></script>
+<script src="../dist/lib/utilities.pack.js"></script>
+
+<!-- amp -->
+<script src="../dist/amp/amp.js"></script>
+<script src="../dist/amp/jquery.plugins.js"></script>
+<script src="../dist/amp/amp.jquery.js"></script>
+<script src="../dist/amp/jquery.utilities/Slider.js"></script>
+<script src="../dist/amp/jquery.utilities/Float3d.js"></script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="#page">AMP.js</a></h1>
+<p class="link"><a href="https://bitbucket.org/yoshihitofujiwara/ampjs" target="_blank">Bitbucket Repository</a></p>
+<!-- header // --></header>
+<div id="content" class="cf">
+
+
+
+<div class="page_description">
+<h1>AMP.$</h1>
+<p>AMP.$ネームスペースは、jQuery用のプラグインクラスをエクスポートしています。<br>
+このクラスを使用する場合は、distフォルダ内にある以下のファイルをインストールしておいてください。</p>
+
+<code><pre>
+dist/
+	lib/
+		jquery-1.8.3.min.js (1.8.3以上推奨)
+		jquery.plugins.js
+		utilities.pack.js
+
+	amp/
+		amp.js
+		jquery.plugins.js
+		amp.jquery.js
+
+		jquery.utilities/ (必要に応じてインストールしてください)
+			Slider.js
+			Float3d.js
+</pre></code>
+<!-- .description // --></div>
+
+
+<section id="BoxHover" class="sec_base">
+<div class="lead">
+<h2>BoxHover</h2>
+<p>aリンクエリアをボックスエリアに拡張します</p>
+</div>
+
+<div class="example">
+<h3>Example</h3>
+<div class="box_hover">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <a href="#">LINK</a></p>
+</div>
+<!-- .example // --></div>
+
+<div class="code">
+<h3>Code</h3>
+<h4>HTML</h4>
+<pre><code>
+<div class="box_hover">
+<p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <a href="#">LINK</a></p>
+</div>
+</code></pre>
+
+<h4>CSS</h4>
+<pre><code>
+.box_hover{
+}
+</code></pre>
+
+<h4>JS</h4>
+<pre><code>
+jQuery(function($){
+	// new AMP.$.BoxHover();
+	// AMP.$.BoxHover.get();
+});
+</code></pre>
+<!-- .code // --></div>
+
+<div class="params">
+<h3>Params</h3>
+<h4>Arguments</h4>
+<table class="table_params">
+<tr>
+<th>Param Index</th>
+<th>Param</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>1</td>
+<td>$boxHover</td>
+<td>jQuery</td>
+<td>対象のbox要素 <br>※省略可 初期値 $('.box-hover')</td>
+</tr>
+<tr>
+<td>2</td>
+<td>options</td>
+<td>Object</td>
+<td>オプション値 <br>※省略可 初期値以下参照</td>
+</tr>
+</table>
+
+<h4>Options</h4>
+<table class="table_params">
+<tr>
+<th>Option Key</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+<tr>
+<td>hoverClass</td>
+<td>String</td>
+<td>hover</td>
+<td>ホバー時に、box要素に付与するクラス名</td>
+</tr>
+<tr>
+<td>linkClass</td>
+<td>String</td>
+<td>link</td>
+<td>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</td>
+</tr>
+</table>
+<!-- .params // --></div>
+
+<script>
+jQuery(function($){
+	// var boxhover = new AMP.$.BoxHover();
+	// boxhover.on();
+	//
+	// 上記のショートハンドを提供します
+	// AMP.$.BoxHover.get();
+
+	AMP.$.BoxHover.get();
+});
+</script>
+<!-- .sec_base // --></section>
+
+
+
+
+
+
+<!-- #content // --></div>
+<footer>
+<small>Copyright &copy; AMP.js 2014-2015</small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>

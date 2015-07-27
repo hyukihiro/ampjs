@@ -52,7 +52,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  SmoothScroll.VERSION = '3.0.0';
+  SmoothScroll.VERSION = '3.0.1';
 
 
   /**
@@ -96,7 +96,7 @@ var AMP = AMP || {};
   /**
    * <h4>easing</h4>
    *
-   * @property smoothScrollOptions.ease
+   * @property smoothScrollOptions.easing
    * @default easeOutCubic
    * @type {String}
    */
@@ -104,7 +104,7 @@ var AMP = AMP || {};
     $page   : null,
     amount  : 500,
     duration: 500,
-    ease    : 'easeOutCubic'
+    easing  : 'easeOutCubic'
   };
 
 
@@ -174,7 +174,7 @@ var AMP = AMP || {};
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
     self.param.$page.velocity('stop')
-    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
+    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.easing});
   };
 
 

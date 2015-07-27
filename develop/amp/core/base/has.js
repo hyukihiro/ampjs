@@ -71,10 +71,10 @@ var AMP = AMP || {};
    * <h4>RequestAnimationFrame機能の有無</h4>
    *
    * @static
-   * @method hasRequestAnimationFrame
+   * @method hasRAF
    * @return {Boolean}
    */
-  AMP.hasRequestAnimationFrame = function(){
+  AMP.hasRAF = function(){
     return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||

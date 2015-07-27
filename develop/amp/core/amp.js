@@ -14,7 +14,7 @@ var AMP = {};
   // クラス設定
   var
   CLASS_NAME = 'Amp',
-  VERSION    = '3.0.2';
+  VERSION    = '3.0.3';
 
 
 

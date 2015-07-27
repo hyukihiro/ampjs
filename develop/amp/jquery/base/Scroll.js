@@ -61,7 +61,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.0.1';
+  Scroll.VERSION = '3.1.0';
 
 
   /**
@@ -106,45 +106,22 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   * <h4>duration</h4>
+   * <h4>スクロールアニメーションのオプション値</h4>
+   * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
-   * @property scrollOptions.duration
-   * @default 800
-   * @type {Number}
-   */
-  /**
-   * <h4>easing</h4>
-   *
-   * @static
-   * @property scrollOptions.ease
-   * @default easeOutQuint
-   * @type {String}
-   */
-  /**
-   * <h4>スクロール前のコールバック</h4>
-   *
-   * @static
-   * @property beginCall
-   * @default $.noop
-   * @type {String}
-   */
-  /**
-   * <h4>スクロール後のコールバック</h4>
-   *
-   * @static
-   * @property compCall
-   * @default $.noop
-   * @type {String}
+   * @property scrollOptions.tween
+   * @default  {duration: 800, easing: 'easeOutQuint'}
+   * @type {Object}
    */
   Scroll.scrollOptions = {
     $html        : null, // $('html, body'),
     adjust       : 0,
     noScrollClass: 'no-scroll',
-    duration     : 800,
-    ease         : 'easeOutQuint',
-    beginCall    : $.noop,
-    compCall     : $.noop
+    tween        : {
+      duration   : 800,
+      easing     : 'easeOutQuint'
+    }
   };
 
 
@@ -203,14 +180,16 @@ var AMP = AMP || {};
 
   /**
    * <h4>スクロールアニメーション</h4>
+   * FIXME: Stringも対応予定
    *
    * @method tween
+   * @param {Number} num トリガー要素のインデックス
    * @return {Void}
    */
   p.tween = function(num){
     var self = this,
     param = self.param,
-    $scrollTrigger = self.param.$scrollTrigger.eq(num),
+    $scrollTrigger = param.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
@@ -218,16 +197,9 @@ var AMP = AMP || {};
       moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
-        $.stream(
-          param.beginCall,
-          function(){
-            return param.$html.velocity('stop')
-            .velocity('scroll', {offset: moveTo, duration: param.duration, easing: param.ease});
-          },
-          param.compCall
-        );
+        var tween = $.extend({offset: moveTo}, param.tween);
+        param.$html.velocity('stop').velocity('scroll', tween);
       }
-
       return false;
     }
   };
