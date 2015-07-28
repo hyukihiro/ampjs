@@ -193,8 +193,7 @@
 
 				// イベントタイプが有効か判定して無効の場合削除
 				if((type === 'flickX' && data.isMoveY && !data.isMoveX) ||
-					(type === 'flickY' && data.isMoveX && !data.isMoveY))
-				{
+					(type === 'flickY' && data.isMoveX && !data.isMoveY)){
 					$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 				}
 			})
