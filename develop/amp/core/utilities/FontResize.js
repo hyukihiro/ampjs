@@ -143,7 +143,7 @@ var AMP = AMP || {};
       }
 
       // 再起処理
-      if(AMP.hasRequestAnimationFrame()){
+      if(AMP.hasRAF()){
         AMP.requestAnimationFrame(function(){
           self._controller();
         });

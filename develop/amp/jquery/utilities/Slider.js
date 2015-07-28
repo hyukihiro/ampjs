@@ -130,7 +130,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.0.1';
+  Slider.VERSION = '1.0.2';
 
 
   /**
@@ -267,7 +267,7 @@ var AMP = AMP || {};
    * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
-   * @property sliderOptions.slideOptions
+   * @property sliderOptions.tween
    * @type {Object}
    */
   Slider.sliderOptions = {
@@ -289,7 +289,7 @@ var AMP = AMP || {};
     activeClass   : 'active',
     resizeCall    : $.noop,
     resizeStopCall: $.noop,
-    slideOptions  : {
+    tween         : {
       easing      : 'easeOutQuart',
       duration    : 500,
       begin       : $.noop,
@@ -514,7 +514,7 @@ var AMP = AMP || {};
 		if(0 < self.param.timer){
 			self.param._timerId = setTimeout(function(){
 				self.next();
-			}, self.param.timer + self.param.slideOptions.duration);
+			}, self.param.timer + self.param.tween.duration);
 		}
 
 		return this;
@@ -602,9 +602,11 @@ var AMP = AMP || {};
     return count;
   };
 
-  p.setLiquidItem = function(){
 
-  }
+  /* FIXME: 追加予定
+  p.setLiquidItem = function(){
+  };
+  */
 
 
 	/**
@@ -713,7 +715,7 @@ var AMP = AMP || {};
 		return this.param.$slide.velocity('stop')
     .velocity({
       left: this.param.left + this.param._adjustLeft
-    }, this.param.slideOptions.duration / 2, this.param.slideOptions.easing);
+    }, this.param.tween.duration / 2, this.param.tween.easing);
   };
 
 
@@ -726,7 +728,7 @@ var AMP = AMP || {};
 	 */
 	p._tween = function(){
 		return this.param.$slide.velocity('stop')
-    .velocity({left: this.param.left + this.param._adjustLeft}, this.param.slideOptions);
+    .velocity({left: this.param.left + this.param._adjustLeft}, this.param.tween);
 	};
 
 
