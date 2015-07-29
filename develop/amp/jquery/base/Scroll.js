@@ -117,7 +117,7 @@ var AMP = AMP || {};
   Scroll.scrollOptions = {
     $html        : null, // $('html, body'),
     adjust       : 0,
-    noScrollClass: 'no-scroll',
+    noScrollClass: 'no_scroll',
     tween        : {
       duration   : 800,
       easing     : 'easeOutQuint'

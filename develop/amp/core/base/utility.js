@@ -22,46 +22,6 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>DOMイベント追加</h4>
-   *
-   * @static
-   * @method addEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
-   * @param  {Function} listener 実行する関数
-   * @return {DOM}
-   */
-  AMP.addEvent = function(element, type, listener){
-    if(element.addEventListener){
-      element.addEventListener(type, listener, false);
-    } else {
-      element.attachEvent('on' + type, listener);
-    }
-    return element;
-  };
-
-
-  /**
-   * <h4>DOMイベント削除</h4>
-   *
-   * @static
-   * @method removeEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
-   * @param  {Function} listener 実行する関数
-   * @return {DOM}
-   */
-  AMP.removeEvent = function(element, type, listener){
-    if(element.addEventListener){
-      element.removeEventListener(type, listener, false);
-    } else {
-      element.detachEvent('on' + type, listener);
-    }
-    return element;
-  };
-
-
-  /**
    * <h4>匿名関数名を返す</h4>
    * 無名関数はundefinedを返します
    *
@@ -83,16 +43,47 @@ var AMP = AMP || {};
   };
 
 
+var class2type = {};
+
+var toString = class2type.toString;
+
+var hasOwn = class2type.hasOwnProperty;
+
   /**
    * <h4>型の取得</h4>
    *
    * @method type
    * @return {String} 型名を返す
    */
-  AMP.type = function(){
+  AMP.type = function(obj){
+    if(AMP.isArray(obj)){
+      return 'array';
+
+    } else if(AMP.isBoolean(obj)){
+      return 'boolean';
+
+    } else if(AMP.isFunction(obj)){
+      return 'function';
+
+    } else if(AMP.isNumber(obj)){
+      return 'number';
+
+    } else if(AMP.isObject(obj)){
+      return 'object';
+
+    } else if(AMP.isString(obj)){
+      return 'string';
+
+    } else if(AMP.isRegexp(obj)){
+      return 'regexp';
+
+    } else if(AMP.isNull(obj)){
+      return 'null';
+
+    } else {
+      return 'undefined';
+    }
   };
-
-
 
 
   /**
@@ -125,6 +116,7 @@ var AMP = AMP || {};
   /**
    * <h4>requestAnimationFrameをエクスポートしています</h4>
    * 対応していないブラウザは、setTimeoutでフォールバックします
+   * FIXME: contextの処理追加予定 ///
    *
    * @static
    * @method requestAnimationFrame
@@ -142,7 +134,6 @@ var AMP = AMP || {};
       }
     );
 
-    // contextの処理追加予定
     return function(callback){
       return requestAnimation(callback);
     };

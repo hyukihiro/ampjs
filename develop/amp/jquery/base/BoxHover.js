@@ -63,7 +63,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = '3.0.0';
+  BoxHover.VERSION = '3.0.1';
 
 
   /**
@@ -145,7 +145,7 @@ var AMP = AMP || {};
       $(this).removeClass(self.param.hoverClass);
     })
     .on('click.BoxHover', function(){
-      self._setLink($(this));
+      self._setLink();
     });
 
     // フォーム要素はイベント伝播をキャンセル
@@ -171,19 +171,14 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>リンクの設定</h4>
+   * <h4>ページ遷移</h4>
    *
-   * @private
-   * @method _setLink
-   * @param {Object} event イベントオブジェクト
-   * @param {Object} param paramオブジェクト
+   * @method transition
    * @return {Void}
    */
-  p._setLink = function($target){
-    var $link = $target.find('.' + this.param.linkClass),
-    $a = $target.find('a').eq(0);
-
-    $a = $link[0] ? $link : $a;
+  p.transition = function(){
+    var $link = this.param.$boxHover.find('.' + this.param.linkClass),
+    $a = $link[0] ? $link : $target.find('a').eq(0);
 
     // リンク展開
     if($a.attr('target') === '_blank'){

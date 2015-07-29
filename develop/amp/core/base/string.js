@@ -53,6 +53,28 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>json形式オブジェクトを文字列にして返す</h4>
+   *
+   * @static
+   * @method jsonToString
+   * @param  {Object} obj オブジェクト
+   * @return {String}
+   */
+  AMP.jsonToString = function(obj){
+    var cache = [];
+    return JSON.stringify(obj, function(key, value){
+      if(typeof value === 'object' && value !== null){
+        if(cache.indexOf(value) !== -1){
+          return;
+        }
+        cache.push(value);
+      }
+      return value;
+    }, '\t');
+  };
+
+
+  /**
    * <h4>空白文字を削除して返す</h4>
    *
    * @static
@@ -116,7 +138,6 @@ var AMP = AMP || {};
       }
     }
   };
-
 
 
 }(window));

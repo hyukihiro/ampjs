@@ -22,7 +22,7 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    */
   function Vector(x, y, z){
-    // FIXME: 一旦仮
+    // FIXME: 一旦仮 ///
     this._angleMode = Vector.ANGLE_MODE_RADIANS;
     this.set(x, y, z);
   }
@@ -422,10 +422,10 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    * @return {Number}
    */
-   p.dot = function(x, y, z){
+  p.dot = function(x, y, z){
     var coord = this._createCoord(x, y, z);
     return this.x * coord.x + this.y * coord.y + this.z * coord.z;
-   };
+  };
 
 
   /**

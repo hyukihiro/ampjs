@@ -228,14 +228,18 @@ var AMP = AMP || {};
     if(this.param.isReverse){
       if(!this.param.isDislpay && this.param.showY > y){
         this.show();
+        this.param.isDislpay = true;
       } else if(this.param.isDislpay && this.param.showY < y){
         this.hide();
+        this.param.isDislpay = false;
       }
     } else {
       if(!this.param.isDislpay && this.param.showY < y){
         this.show();
+        this.param.isDislpay = true;
       } else if(this.param.isDislpay && this.param.showY > y){
         this.hide();
+        this.param.isDislpay = false;
       }
     }
   };
@@ -260,8 +264,6 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.show = function(){
-    this.param.isDislpay = true;
-
     this.param.$scrollToggle
     .css({display: 'block'})
     .css(this.param.hide)
@@ -279,8 +281,6 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.hide = function(){
-    this.param.isDislpay = false;
-
     this.param.$scrollToggle
     .velocity('stop')
     .velocity(this.param.hide, this.param.duration, this.param.easing, function(){

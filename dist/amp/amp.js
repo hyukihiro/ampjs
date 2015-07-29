@@ -42,7 +42,7 @@ var AMP = {};
   // クラス設定
   var
   CLASS_NAME = 'Amp',
-  VERSION    = '3.0.3';
+  VERSION    = '3.0.4';
 
 
 
@@ -153,8 +153,8 @@ var AMP = AMP || {};
    *
    * @static
    * @method each
-   * @param  {Object}   obj      イテレーションを行うオブジェクト
-   * @param  {Function} callback イテレーション毎のコールバック関数
+   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
+   * @param  {Function} callback  イテレーション毎のコールバック関数
    * @return {Object} 第一引数に渡されたオブジェクト
    */
 	AMP.each = function(obj, callback){
@@ -185,7 +185,7 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>atgumentsを配列に変換して返す</h4>
+   * <h4>argumentsを配列に変換して返す</h4>
    * スライス位置を指定して切り取り可能
    *
    * @static
@@ -220,7 +220,7 @@ var AMP = AMP || {};
   ======================================================================*/
 
   /**
-   * <h4>クラス・オブジェクト等の継承、拡張系</h4>
+   * <h4>クラス・オブジェクト等の継承、拡張</h4>
    *
    * @class AMP.Extend
    */
@@ -363,10 +363,13 @@ var AMP = AMP || {};
    * @class Fallback
    */
 
+
   /*----------------------------------------------------------------------
     @method
   ----------------------------------------------------------------------*/
 
+  /* window
+  -----------------------------------------------------------------*/
 
   /**
    * <h4>consoleがなければ空の関数を返す</h4>
@@ -490,6 +493,49 @@ var AMP = AMP || {};
    */
   String.prototype.trim = String.prototype.trim || function(){
     return this.replace(/^\s+|\s+$/g, '');
+  };
+
+
+  /* DOM
+  -----------------------------------------------------------------*/
+
+  /**
+   * <h4>DOMイベント追加</h4>
+   *
+   * @static
+   * @method addEvent
+   * @param  {DOM} element  ターゲット要素
+   * @param  {String} type     イベント名
+   * @param  {Function} listener 実行する関数
+   * @return {DOM}
+   */
+  AMP.addEvent = function(element, type, listener){
+    if(element.addEventListener){
+      element.addEventListener(type, listener, false);
+    } else {
+      element.attachEvent('on' + type, listener);
+    }
+    return element;
+  };
+
+
+  /**
+   * <h4>DOMイベント削除</h4>
+   *
+   * @static
+   * @method removeEvent
+   * @param  {DOM} element  ターゲット要素
+   * @param  {String} type     イベント名
+   * @param  {Function} listener 実行する関数
+   * @return {DOM}
+   */
+  AMP.removeEvent = function(element, type, listener){
+    if(element.addEventListener){
+      element.removeEventListener(type, listener, false);
+    } else {
+      element.detachEvent('on' + type, listener);
+    }
+    return element;
   };
 
 
@@ -898,7 +944,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>オブジェクト型判定</h4>
-   * プレーンオブジェクト
    *
    * @static
    * @method isObject
@@ -1030,7 +1075,7 @@ var AMP = AMP || {};
    * @method isOS
    * @param  {String} key OS名<br>
    * windows, windowsPhone, mac, ios, android
-   * @param  {String | Number} ver バージョンナンバー Android ios のみ有効
+   * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
   AMP.isOS = function(key, ver){
@@ -1097,7 +1142,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isIos
-   * @param {Number | String} バージョンナンバー 省略可
+   * @param {Number|String} バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isIos = function(ver){
@@ -1115,7 +1160,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isAndroid
-   * @param {Number | String} バージョンナンバー 省略可
+   * @param {Number|String} バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isAndroid = function(ver){
@@ -1305,6 +1350,9 @@ var AMP = AMP || {};
         return AMP.isIE(ver);
       }
 
+    } else if(k === 'edge'){
+      return AMP.isEdge(ver);
+
     } else if(k === 'chrome'){
       return AMP.isChrome();
 
@@ -1383,6 +1431,20 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>Microsoft Edge判定</h4>
+   *
+   * @static
+   * @method isEdge
+   * @param  {Number|String}  ver バージョン名
+   * @return {Boolean}
+   */
+  AMP.isEdge = function(ver){
+    ver = ver || '';
+    return ua.indexOf('edge/' + ver) > -1;
+  };
+
+
+  /**
    * <h4>PC版 Chrome判定</h4>
    *
    * @static
@@ -1420,7 +1482,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>PC版 Opera判定</h4>
-   * FIXME: アップデート予定
    *
    * @static
    * @method isOpera
@@ -1436,7 +1497,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isMobileSafari
-   * @param {Number | String} ver バージョンナンバー  省略可
+   * @param {Number|String} ver バージョンナンバー  省略可
    * @return {Boolean}
    */
   AMP.isMobileSafari = function(ver){
@@ -1453,7 +1514,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isAndroidBrowser
-   * @param {Number | String} ver バージョンナンバー 省略可
+   * @param {Number|String} ver バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isAndroidBrowser = function(ver){
@@ -1512,17 +1573,20 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>location.hashの取得し、#を省いた文字列を配列に格納して返す</h4>
-   * location.hashがない場合、値を返しません
+   * <h4>location.hashの取得し、配列にして返す</h4>
    *
    * @static
    * @method getHash
    * @return {Array}
    */
   AMP.getHash = function(){
-    if(url.hash.length){
-      return url.hash.split('#').slice(1);
+    var ary = url.hash.split('#').slice(1);
+    if(ary.length){
+      AMP.each(ary, function(item, i){
+        ary[i] = '#' + item;
+      });
     }
+    return ary;
   };
 
 
@@ -1551,11 +1615,6 @@ var AMP = AMP || {};
 
     return map;
   };
-
-
-  // FIXME: 追加予定
-  // TODO: 表示されているページファイル名を返す
-  // AMP.getCurrentFileName = function(){};
 
 
 
@@ -1612,6 +1671,28 @@ var AMP = AMP || {};
    */
   AMP.digit = function(){
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  };
+
+
+  /**
+   * <h4>json形式オブジェクトを文字列にして返す</h4>
+   *
+   * @static
+   * @method jsonToString
+   * @param  {Object} obj オブジェクト
+   * @return {String}
+   */
+  AMP.jsonToString = function(obj){
+    var cache = [];
+    return JSON.stringify(obj, function(key, value){
+      if(typeof value === 'object' && value !== null){
+        if(cache.indexOf(value) !== -1){
+          return;
+        }
+        cache.push(value);
+      }
+      return value;
+    }, '\t');
   };
 
 
@@ -1681,7 +1762,6 @@ var AMP = AMP || {};
   };
 
 
-
 }(window));
 
 var AMP = AMP || {};
@@ -1708,46 +1788,6 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>DOMイベント追加</h4>
-   *
-   * @static
-   * @method addEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
-   * @param  {Function} listener 実行する関数
-   * @return {DOM}
-   */
-  AMP.addEvent = function(element, type, listener){
-    if(element.addEventListener){
-      element.addEventListener(type, listener, false);
-    } else {
-      element.attachEvent('on' + type, listener);
-    }
-    return element;
-  };
-
-
-  /**
-   * <h4>DOMイベント削除</h4>
-   *
-   * @static
-   * @method removeEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
-   * @param  {Function} listener 実行する関数
-   * @return {DOM}
-   */
-  AMP.removeEvent = function(element, type, listener){
-    if(element.addEventListener){
-      element.removeEventListener(type, listener, false);
-    } else {
-      element.detachEvent('on' + type, listener);
-    }
-    return element;
-  };
-
-
-  /**
    * <h4>匿名関数名を返す</h4>
    * 無名関数はundefinedを返します
    *
@@ -1769,16 +1809,47 @@ var AMP = AMP || {};
   };
 
 
+var class2type = {};
+
+var toString = class2type.toString;
+
+var hasOwn = class2type.hasOwnProperty;
+
   /**
    * <h4>型の取得</h4>
    *
    * @method type
    * @return {String} 型名を返す
    */
-  AMP.type = function(){
+  AMP.type = function(obj){
+    if(AMP.isArray(obj)){
+      return 'array';
+
+    } else if(AMP.isBoolean(obj)){
+      return 'boolean';
+
+    } else if(AMP.isFunction(obj)){
+      return 'function';
+
+    } else if(AMP.isNumber(obj)){
+      return 'number';
+
+    } else if(AMP.isObject(obj)){
+      return 'object';
+
+    } else if(AMP.isString(obj)){
+      return 'string';
+
+    } else if(AMP.isRegexp(obj)){
+      return 'regexp';
+
+    } else if(AMP.isNull(obj)){
+      return 'null';
+
+    } else {
+      return 'undefined';
+    }
   };
-
-
 
 
   /**
@@ -1811,6 +1882,7 @@ var AMP = AMP || {};
   /**
    * <h4>requestAnimationFrameをエクスポートしています</h4>
    * 対応していないブラウザは、setTimeoutでフォールバックします
+   * FIXME: contextの処理追加予定 ///
    *
    * @static
    * @method requestAnimationFrame
@@ -1828,7 +1900,6 @@ var AMP = AMP || {};
       }
     );
 
-    // contextの処理追加予定
     return function(callback){
       return requestAnimation(callback);
     };
@@ -3090,7 +3161,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.1';
+  Mediaquery.VERSION = '2.0.2';
 
 
   /**
@@ -3172,12 +3243,16 @@ var AMP = AMP || {};
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
+
+    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          item.func.apply(item.context, args);
         }
       });
     }
@@ -3437,7 +3512,7 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    */
   function Vector(x, y, z){
-    // FIXME: 一旦仮
+    // FIXME: 一旦仮 ///
     this._angleMode = Vector.ANGLE_MODE_RADIANS;
     this.set(x, y, z);
   }
@@ -3837,10 +3912,10 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    * @return {Number}
    */
-   p.dot = function(x, y, z){
+  p.dot = function(x, y, z){
     var coord = this._createCoord(x, y, z);
     return this.x * coord.x + this.y * coord.y + this.z * coord.z;
-   };
+  };
 
 
   /**

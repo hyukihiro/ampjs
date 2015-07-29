@@ -80,7 +80,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  MediaImageChange.VERSION = '1.0.0';
+  MediaImageChange.VERSION = '1.0.1';
 
 
   /**
@@ -152,7 +152,7 @@ var AMP = AMP || {};
    * @return {MediaImageChange}
    */
   MediaImageChange.get = function($images, options){
-    return new MediaImageChange($images, options);
+    return new MediaImageChange($images, options).start();
   };
 
 

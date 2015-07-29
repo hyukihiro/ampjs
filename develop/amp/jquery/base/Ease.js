@@ -18,7 +18,7 @@ var AMP = AMP || {};
    */
   function Ease(){}
 
-  // 基底クラスを継承
+  // AMP.Easeクラスを継承
   AMP.inherits(Ease, AMP.Ease);
 
   // prototype

@@ -25,8 +25,8 @@ var AMP = AMP || {};
    *
    * @static
    * @method each
-   * @param  {Object}   obj      イテレーションを行うオブジェクト
-   * @param  {Function} callback イテレーション毎のコールバック関数
+   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
+   * @param  {Function} callback  イテレーション毎のコールバック関数
    * @return {Object} 第一引数に渡されたオブジェクト
    */
 	AMP.each = function(obj, callback){
@@ -57,7 +57,7 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>atgumentsを配列に変換して返す</h4>
+   * <h4>argumentsを配列に変換して返す</h4>
    * スライス位置を指定して切り取り可能
    *
    * @static

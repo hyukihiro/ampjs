@@ -18,7 +18,6 @@ var AMP = AMP || {};
    * @constructor
    */
   function SmoothScroll(options){
-
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
@@ -122,9 +121,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   SmoothScroll.get = function(options){
-    var instance = new SmoothScroll(options);
-    instance.on();
-    return instance;
+    return new SmoothScroll(options).on();
   };
 
 

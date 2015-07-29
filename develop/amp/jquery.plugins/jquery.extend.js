@@ -65,32 +65,26 @@
    * @return {jQuery.Deferred}
    */
   $.stream = function(){
+  	var slice = Array.prototype.slice;
     var $defer = new $.Deferred(),
     count = 0,
-    callbacks;
+    callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
 
-    if($.isArray(arguments[0])){
-      callbacks = arguments[0];
-    } else {
-      callbacks = [].slice.apply(arguments);
-    }
-
-    callbacks[callbacks.length] = $defer.resolve;
+    callbacks.push($defer.resolve);
+    stream();
 
     // callbacksを再帰的に縦列処理する
-    var stream = function(fn, args){
-      $.when(fn(args))
-      .fail($defer.reject)
-      .done(function(returns){
-        $defer.notify(returns);
-        count += 1;
-        if(count !== callbacks.length){
-          stream(callbacks[count], returns);
-        }
-      });
+    function stream(){
+    	$.when.call(null, callbacks[count].apply(null, arguments))
+    	.fail($defer.reject)
+    	.done(function(){
+    		$defer.notify.call(null, arguments);
+    		count += 1;
+    		if(count < callbacks.length){
+    			stream.apply(null, arguments);
+    		}
+    	});
     };
-
-    stream(callbacks[count]);
 
     return $defer.promise();
   };

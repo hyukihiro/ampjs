@@ -75,7 +75,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.1';
+  Mediaquery.VERSION = '2.0.2';
 
 
   /**
@@ -157,12 +157,16 @@ var AMP = AMP || {};
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
+
+    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          item.func.apply(item.context, args);
         }
       });
     }

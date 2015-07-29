@@ -363,10 +363,8 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.setParam = function(){
-    if(this.param.isLiquid){
-      // ここから
-    }
-
+    // if(this.param.isLiquid){ ///
+    // } ///
 
     // ステージの幅
 		var stageWidth = this.param.$frame.width();
@@ -603,10 +601,8 @@ var AMP = AMP || {};
   };
 
 
-  /* FIXME: 追加予定
-  p.setLiquidItem = function(){
-  };
-  */
+  // FIXME: 追加予定 ///
+  // p.setLiquidItem = function(){}; ///
 
 
 	/**
@@ -640,7 +636,7 @@ var AMP = AMP || {};
   p.setPosition = function(){
     this.param.$slide.css({
       width: this._getDisplayLength() * this.param.$slideItems.outerWidth(true),
-      left : this.param.left　+　this.param._adjustLeft
+      left : this.param.left + this.param._adjustLeft
     });
 		return this;
   };
@@ -700,7 +696,7 @@ var AMP = AMP || {};
    */
   p._move = function(x){
 		this.param.$slide.velocity('stop')
-    .css({left: this.param.left　+ this.param._adjustLeft + x});
+    .css({left: this.param.left + this.param._adjustLeft + x});
   };
 
 

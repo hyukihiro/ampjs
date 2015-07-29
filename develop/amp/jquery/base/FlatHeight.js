@@ -62,6 +62,10 @@ var AMP = AMP || {};
      * @type {Boolean}
      */
     this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
+
+
+    this._addEvent();
+    this.setHeight();
   }
 
   // 基底クラスを継承
@@ -83,7 +87,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '3.0.0';
+  FlatHeight.VERSION = '3.0.1';
 
 
   /**
@@ -111,10 +115,7 @@ var AMP = AMP || {};
    * @return {FlatHeight}
    */
   FlatHeight.get = function($flatHeight, split, isResize){
-    var instance = new FlatHeight($flatHeight, split, isResize);
-    instance.addEvent();
-    instance.setHeight();
-    return instance;
+    return new FlatHeight($flatHeight, split, isResize);
   };
 
 
@@ -122,10 +123,11 @@ var AMP = AMP || {};
    * <h4>イベント設定</h4>
    * リサイズイベント、フォントリサイズイベント
    *
+   * @private
    * @method addEvent
    * @return {FlatHeight}
    */
-  p.addEvent = function(){
+  p._addEvent = function(){
     var self = this;
 
     // fontresize

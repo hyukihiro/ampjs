@@ -30,17 +30,20 @@ var AMP = AMP || {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>location.hashの取得し、#を省いた文字列を配列に格納して返す</h4>
-   * location.hashがない場合、値を返しません
+   * <h4>location.hashの取得し、配列にして返す</h4>
    *
    * @static
    * @method getHash
    * @return {Array}
    */
   AMP.getHash = function(){
-    if(url.hash.length){
-      return url.hash.split('#').slice(1);
+    var ary = url.hash.split('#').slice(1);
+    if(ary.length){
+      AMP.each(ary, function(item, i){
+        ary[i] = '#' + item;
+      });
     }
+    return ary;
   };
 
 
@@ -69,11 +72,6 @@ var AMP = AMP || {};
 
     return map;
   };
-
-
-  // FIXME: 追加予定
-  // TODO: 表示されているページファイル名を返す
-  // AMP.getCurrentFileName = function(){};
 
 
 

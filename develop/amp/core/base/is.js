@@ -105,7 +105,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>オブジェクト型判定</h4>
-   * プレーンオブジェクト
    *
    * @static
    * @method isObject
@@ -237,7 +236,7 @@ var AMP = AMP || {};
    * @method isOS
    * @param  {String} key OS名<br>
    * windows, windowsPhone, mac, ios, android
-   * @param  {String | Number} ver バージョンナンバー Android ios のみ有効
+   * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
   AMP.isOS = function(key, ver){
@@ -304,7 +303,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isIos
-   * @param {Number | String} バージョンナンバー 省略可
+   * @param {Number|String} バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isIos = function(ver){
@@ -322,7 +321,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isAndroid
-   * @param {Number | String} バージョンナンバー 省略可
+   * @param {Number|String} バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isAndroid = function(ver){
@@ -512,6 +511,9 @@ var AMP = AMP || {};
         return AMP.isIE(ver);
       }
 
+    } else if(k === 'edge'){
+      return AMP.isEdge(ver);
+
     } else if(k === 'chrome'){
       return AMP.isChrome();
 
@@ -590,6 +592,20 @@ var AMP = AMP || {};
 
 
   /**
+   * <h4>Microsoft Edge判定</h4>
+   *
+   * @static
+   * @method isEdge
+   * @param  {Number|String}  ver バージョン名
+   * @return {Boolean}
+   */
+  AMP.isEdge = function(ver){
+    ver = ver || '';
+    return ua.indexOf('edge/' + ver) > -1;
+  };
+
+
+  /**
    * <h4>PC版 Chrome判定</h4>
    *
    * @static
@@ -627,7 +643,6 @@ var AMP = AMP || {};
 
   /**
    * <h4>PC版 Opera判定</h4>
-   * FIXME: アップデート予定
    *
    * @static
    * @method isOpera
@@ -643,7 +658,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isMobileSafari
-   * @param {Number | String} ver バージョンナンバー  省略可
+   * @param {Number|String} ver バージョンナンバー  省略可
    * @return {Boolean}
    */
   AMP.isMobileSafari = function(ver){
@@ -660,7 +675,7 @@ var AMP = AMP || {};
    *
    * @static
    * @method isAndroidBrowser
-   * @param {Number | String} ver バージョンナンバー 省略可
+   * @param {Number|String} ver バージョンナンバー 省略可
    * @return {Boolean}
    */
   AMP.isAndroidBrowser = function(ver){

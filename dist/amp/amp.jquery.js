@@ -91,7 +91,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = '3.0.0';
+  BoxHover.VERSION = '3.0.1';
 
 
   /**
@@ -173,7 +173,7 @@ var AMP = AMP || {};
       $(this).removeClass(self.param.hoverClass);
     })
     .on('click.BoxHover', function(){
-      self._setLink($(this));
+      self._setLink();
     });
 
     // フォーム要素はイベント伝播をキャンセル
@@ -199,19 +199,14 @@ var AMP = AMP || {};
 
 
   /**
-   * <h4>リンクの設定</h4>
+   * <h4>ページ遷移</h4>
    *
-   * @private
-   * @method _setLink
-   * @param {Object} event イベントオブジェクト
-   * @param {Object} param paramオブジェクト
+   * @method transition
    * @return {Void}
    */
-  p._setLink = function($target){
-    var $link = $target.find('.' + this.param.linkClass),
-    $a = $target.find('a').eq(0);
-
-    $a = $link[0] ? $link : $a;
+  p.transition = function(){
+    var $link = this.param.$boxHover.find('.' + this.param.linkClass),
+    $a = $link[0] ? $link : $target.find('a').eq(0);
 
     // リンク展開
     if($a.attr('target') === '_blank'){
@@ -253,7 +248,7 @@ var AMP = AMP || {};
    */
   function Ease(){}
 
-  // 基底クラスを継承
+  // AMP.Easeクラスを継承
   AMP.inherits(Ease, AMP.Ease);
 
   // prototype
@@ -569,6 +564,10 @@ var AMP = AMP || {};
      * @type {Boolean}
      */
     this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
+
+
+    this._addEvent();
+    this.setHeight();
   }
 
   // 基底クラスを継承
@@ -590,7 +589,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '3.0.0';
+  FlatHeight.VERSION = '3.0.1';
 
 
   /**
@@ -618,10 +617,7 @@ var AMP = AMP || {};
    * @return {FlatHeight}
    */
   FlatHeight.get = function($flatHeight, split, isResize){
-    var instance = new FlatHeight($flatHeight, split, isResize);
-    instance.addEvent();
-    instance.setHeight();
-    return instance;
+    return new FlatHeight($flatHeight, split, isResize);
   };
 
 
@@ -629,10 +625,11 @@ var AMP = AMP || {};
    * <h4>イベント設定</h4>
    * リサイズイベント、フォントリサイズイベント
    *
+   * @private
    * @method addEvent
    * @return {FlatHeight}
    */
-  p.addEvent = function(){
+  p._addEvent = function(){
     var self = this;
 
     // fontresize
@@ -1139,7 +1136,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  MediaImageChange.VERSION = '1.0.0';
+  MediaImageChange.VERSION = '1.0.1';
 
 
   /**
@@ -1211,7 +1208,7 @@ var AMP = AMP || {};
    * @return {MediaImageChange}
    */
   MediaImageChange.get = function($images, options){
-    return new MediaImageChange($images, options);
+    return new MediaImageChange($images, options).start();
   };
 
 
@@ -2064,7 +2061,7 @@ var AMP = AMP || {};
   Scroll.scrollOptions = {
     $html        : null, // $('html, body'),
     adjust       : 0,
-    noScrollClass: 'no-scroll',
+    noScrollClass: 'no_scroll',
     tween        : {
       duration   : 800,
       easing     : 'easeOutQuint'
@@ -2393,14 +2390,18 @@ var AMP = AMP || {};
     if(this.param.isReverse){
       if(!this.param.isDislpay && this.param.showY > y){
         this.show();
+        this.param.isDislpay = true;
       } else if(this.param.isDislpay && this.param.showY < y){
         this.hide();
+        this.param.isDislpay = false;
       }
     } else {
       if(!this.param.isDislpay && this.param.showY < y){
         this.show();
+        this.param.isDislpay = true;
       } else if(this.param.isDislpay && this.param.showY > y){
         this.hide();
+        this.param.isDislpay = false;
       }
     }
   };
@@ -2425,8 +2426,6 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.show = function(){
-    this.param.isDislpay = true;
-
     this.param.$scrollToggle
     .css({display: 'block'})
     .css(this.param.hide)
@@ -2444,8 +2443,6 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.hide = function(){
-    this.param.isDislpay = false;
-
     this.param.$scrollToggle
     .velocity('stop')
     .velocity(this.param.hide, this.param.duration, this.param.easing, function(){
@@ -2488,7 +2485,6 @@ var AMP = AMP || {};
    * @constructor
    */
   function SmoothScroll(options){
-
     /**
      * <h4>プロパティ格納オブジェクト</h4>
      *
@@ -2592,9 +2588,7 @@ var AMP = AMP || {};
    * @return {SmoothScroll}
    */
   SmoothScroll.get = function(options){
-    var instance = new SmoothScroll(options);
-    instance.on();
-    return instance;
+    return new SmoothScroll(options).on();
   };
 
 
