@@ -20,7 +20,7 @@
 
 
 	// バージョン情報
-	Flick.VERSION = '1.3.2';
+	Flick.VERSION = '1.3.3';
 
 
 	// イベント設定値
@@ -233,6 +233,7 @@
 				// イベントタイプ振り分け
 				if(type === 'flickmove'){
 					if(data.isMoveX || data.isMoveY){
+	          moveEvent.preventDefault();
 						data.flickEvent.type = type;
 						data.flickEvent.moveX = data.moveX;
 						data.flickEvent.moveY = data.moveY;
@@ -242,6 +243,7 @@
 					if(data.isMoveY && !data.isMoveX){
 						$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 					} else if(data.isMoveX){
+	          moveEvent.preventDefault();
 						data.flickEvent.type = type;
 						data.flickEvent.moveX = data.moveX;
 						data.flickEvent.moveY = data.moveY;
@@ -251,6 +253,7 @@
 					if(data.isMoveX && !data.isMoveY){
 						$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 					} else if(data.isMoveY){
+	          moveEvent.preventDefault();
 						data.flickEvent.type = type;
 						data.flickEvent.moveX = data.moveX;
 						data.flickEvent.moveY = data.moveY;
@@ -259,9 +262,9 @@
 				}
 
 				// エリア最小値を超えればイベントキャンセル
-        if((data.isMoveX && eventType.isSide) || (data.isMoveY && eventType.isUpdown)){
-          moveEvent.preventDefault();
-        }
+        // if((data.isMoveX && eventType.isSide) || (data.isMoveY && eventType.isUpdown)){
+	          // moveEvent.preventDefault();
+        // }
 			})
 			.on('click' + attr, function(clickEvent){
 				if(eventType.isSide && data.isMoveX && param.area < Math.abs(data.moveX)){

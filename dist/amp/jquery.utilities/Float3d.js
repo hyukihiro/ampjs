@@ -109,7 +109,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Float3d.VERSION = '1.0.1';
+  Float3d.VERSION = '1.0.2';
 
 
   /**
@@ -175,7 +175,7 @@ var AMP = AMP || {};
    * <h4>hover時のeasingく</h4>
    *
    * @static
-   * @property float3dOptions.ease
+   * @property float3dOptions.easing
    * @type {String}
    */
 	Float3d.float3dOptions = {
@@ -185,7 +185,7 @@ var AMP = AMP || {};
     range      : 5,
     speed      : 150,
     duration   : 400,
-    ease       : 'easeOutExpo'
+    easing     : 'easeOutExpo'
 	};
 
 
@@ -226,11 +226,9 @@ var AMP = AMP || {};
     .children().css({perspective: this.param.perspective})
     .children().css({perspective: this.param.perspective});
 
-
     self.param.$target
     .on('mouseenter.Float3d', function(onEvent){
       self.onTween(this, onEvent);
-
       self.param._isFloating = true;
       self.floatTween($(this).children(), 0);
 
@@ -294,7 +292,7 @@ var AMP = AMP || {};
       rotateZ   : this.param.rotate * offset.x
     }, {
       duration: this.param.duration,
-      easing  : this.param.ease
+      easing  : this.param.easing
     });
   };
 
@@ -361,7 +359,7 @@ var AMP = AMP || {};
       rotateZ: 0
     }, {
       duration: self.param.duration,
-      easing  : self.param.ease
+      easing  : self.param.easing
     });
   };
 

@@ -42,7 +42,7 @@ var AMP = {};
   // クラス設定
   var
   CLASS_NAME = 'Amp',
-  VERSION    = '3.0.2';
+  VERSION    = '3.0.3';
 
 
 
@@ -569,10 +569,10 @@ var AMP = AMP || {};
    * <h4>RequestAnimationFrame機能の有無</h4>
    *
    * @static
-   * @method hasRequestAnimationFrame
+   * @method hasRAF
    * @return {Boolean}
    */
-  AMP.hasRequestAnimationFrame = function(){
+  AMP.hasRAF = function(){
     return !!(root.requestAnimationFrame ||
       root.webkitRequestAnimationFrame ||
       root.mozRequestAnimationFrame ||
@@ -2970,7 +2970,7 @@ var AMP = AMP || {};
       }
 
       // 再起処理
-      if(AMP.hasRequestAnimationFrame()){
+      if(AMP.hasRAF()){
         AMP.requestAnimationFrame(function(){
           self._controller();
         });

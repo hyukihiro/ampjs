@@ -112,7 +112,7 @@ var AMP = AMP || {};
    * @type {Object}
    */
   /**
-   * <h4>ホバー時に付けるクラス名</h4>
+   * <h4>ホバー時に、box要素に付与するクラス名</h4>
    *
    * @static
    * @property boxHoverOptions.hoverClass
@@ -120,7 +120,7 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   * <h4>複数リンクがある場合、優先するリンククラス</h4>
+   * <h4>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</h4>
    *
    * @static
    * @property boxHoverOptions.linkClass
@@ -2008,7 +2008,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.0.1';
+  Scroll.VERSION = '3.1.0';
 
 
   /**
@@ -2053,45 +2053,22 @@ var AMP = AMP || {};
    * @type {String}
    */
   /**
-   * <h4>duration</h4>
+   * <h4>スクロールアニメーションのオプション値</h4>
+   * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
-   * @property scrollOptions.duration
-   * @default 800
-   * @type {Number}
-   */
-  /**
-   * <h4>easing</h4>
-   *
-   * @static
-   * @property scrollOptions.ease
-   * @default easeOutQuint
-   * @type {String}
-   */
-  /**
-   * <h4>スクロール前のコールバック</h4>
-   *
-   * @static
-   * @property beginCall
-   * @default $.noop
-   * @type {String}
-   */
-  /**
-   * <h4>スクロール後のコールバック</h4>
-   *
-   * @static
-   * @property compCall
-   * @default $.noop
-   * @type {String}
+   * @property scrollOptions.tween
+   * @default  {duration: 800, easing: 'easeOutQuint'}
+   * @type {Object}
    */
   Scroll.scrollOptions = {
     $html        : null, // $('html, body'),
     adjust       : 0,
     noScrollClass: 'no-scroll',
-    duration     : 800,
-    ease         : 'easeOutQuint',
-    beginCall    : $.noop,
-    compCall     : $.noop
+    tween        : {
+      duration   : 800,
+      easing     : 'easeOutQuint'
+    }
   };
 
 
@@ -2150,14 +2127,16 @@ var AMP = AMP || {};
 
   /**
    * <h4>スクロールアニメーション</h4>
+   * FIXME: Stringも対応予定
    *
    * @method tween
+   * @param {Number} num トリガー要素のインデックス
    * @return {Void}
    */
   p.tween = function(num){
     var self = this,
     param = self.param,
-    $scrollTrigger = self.param.$scrollTrigger.eq(num),
+    $scrollTrigger = param.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
@@ -2165,16 +2144,9 @@ var AMP = AMP || {};
       moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
-        $.stream(
-          param.beginCall,
-          function(){
-            return param.$html.velocity('stop')
-            .velocity('scroll', {offset: moveTo, duration: param.duration, easing: param.ease});
-          },
-          param.compCall
-        );
+        var tween = $.extend({offset: moveTo}, param.tween);
+        param.$html.velocity('stop').velocity('scroll', tween);
       }
-
       return false;
     }
   };
@@ -2245,7 +2217,7 @@ var AMP = AMP || {};
     this.param.$window = $(window);
 
     /**
-     * <h4>Display:Block表示の状態</h4>
+     * <h4>Displayスタイルの状態</h4>
      *
      * @property param.isDisplay
      * @type {Boolean}
@@ -2272,7 +2244,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = '3.0.0';
+  ScrollToggle.VERSION = '3.1.0';
 
 
   /**
@@ -2301,10 +2273,19 @@ var AMP = AMP || {};
    * @type {Number}
    */
   /**
+   * <h4>表示・非表示の座標判定を反転します</h4>
+   * 初期は、Y座標300pxを超えると表示しますが、300px超えると非表示にします
+   *
+   * @static
+   * @property isReverse
+   * @default 300
+   * @type {Number}
+   */
+  /**
    * <h4>表示のスタイル</h4>
    *
    * @static
-   * @property showY
+   * @property show
    * @default { opacity : 1}
    * @type {Object}
    */
@@ -2312,7 +2293,7 @@ var AMP = AMP || {};
    * <h4>非表示のスタイル</h4>
    *
    * @static
-   * @property showY
+   * @property hide
    * @default { opacity : 0}
    * @type {Object}
    */
@@ -2328,7 +2309,7 @@ var AMP = AMP || {};
    * <h4>easing</h4>
    *
    * @static
-   * @property ease
+   * @property easing
    * @default easeInSine
    * @type {String}
    */
@@ -2349,13 +2330,14 @@ var AMP = AMP || {};
    * @type {String}
    */
   ScrollToggle.scrollToggleOptions = {
-    showY   : 300,
-    show    : { opacity : 1},
-    hide    : { opacity : 0},
-    duration: 500,
-    ease    : 'easeInSine',
-    showCall: $.noop,
-    hideCall: $.noop
+    showY    : 300,
+    isReverse: false,
+    show     : { opacity : 1},
+    hide     : { opacity : 0},
+    duration : 500,
+    easing   : 'easeInSine',
+    showCall : $.noop,
+    hideCall : $.noop
   };
 
 
@@ -2387,22 +2369,40 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.on = function(){
-    var self = this,
-    param = self.param,
-    offsetY;
+    var self = this;
 
     self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      offsetY = self.param.$window.scrollTop();
-
-      // 表示・非表示
-      if(!self.param.isDislpay && param.showY < offsetY){
-        self.show();
-      } else if(self.param.isDislpay && param.showY > offsetY){
-        self.hide();
-      }
+      self._scrollController(self.param.$window.scrollTop());
     }).trigger('scroll.ScrollToggle');
 
     return this;
+  };
+
+
+  /**
+   * <h4>スクロールイベントをコントロール</h4>
+   *
+   * @private
+   * @method _scrollController
+   * @param {Number} y スクロールY値
+   * @return {Void}
+   */
+  p._scrollController = function(y){
+    var self = this;
+
+    if(this.param.isReverse){
+      if(!this.param.isDislpay && this.param.showY > y){
+        this.show();
+      } else if(this.param.isDislpay && this.param.showY < y){
+        this.hide();
+      }
+    } else {
+      if(!this.param.isDislpay && this.param.showY < y){
+        this.show();
+      } else if(this.param.isDislpay && this.param.showY > y){
+        this.hide();
+      }
+    }
   };
 
 
@@ -2425,13 +2425,13 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.show = function(){
-    var self = this;
+    this.param.isDislpay = true;
 
-    self.param.isDislpay = true;
-
-    self.param.$scrollToggle.css({display: 'block'}).css(self.param.hide)
+    this.param.$scrollToggle
+    .css({display: 'block'})
+    .css(this.param.hide)
     .velocity('stop')
-    .velocity(self.param.show, self.param.duration, self.param.ease, self.param.showCall);
+    .velocity(this.param.show, this.param.duration, this.param.easing, this.param.showCall);
 
     return this;
   };
@@ -2444,15 +2444,13 @@ var AMP = AMP || {};
    * @return {ScrollToggle}
    */
   p.hide = function(){
-    var self = this;
+    this.param.isDislpay = false;
 
-    self.param.isDislpay = false;
-
-    self.param.$scrollToggle
+    this.param.$scrollToggle
     .velocity('stop')
-    .velocity(self.param.hide, self.param.duration, self.param.ease, function(){
-      self.param.$scrollToggle.css({display: 'none'});
-      self.param.hideCall();
+    .velocity(this.param.hide, this.param.duration, this.param.easing, function(){
+      this.param.$scrollToggle.css({display: 'none'});
+      this.param.hideCall();
     });
 
     return this;
@@ -2524,7 +2522,7 @@ var AMP = AMP || {};
    * @property VERSION
    * @type {String}
    */
-  SmoothScroll.VERSION = '3.0.0';
+  SmoothScroll.VERSION = '3.0.1';
 
 
   /**
@@ -2568,7 +2566,7 @@ var AMP = AMP || {};
   /**
    * <h4>easing</h4>
    *
-   * @property smoothScrollOptions.ease
+   * @property smoothScrollOptions.easing
    * @default easeOutCubic
    * @type {String}
    */
@@ -2576,7 +2574,7 @@ var AMP = AMP || {};
     $page   : null,
     amount  : 500,
     duration: 500,
-    ease    : 'easeOutCubic'
+    easing  : 'easeOutCubic'
   };
 
 
@@ -2646,7 +2644,7 @@ var AMP = AMP || {};
     scrollY = move > 0 ? y - param.amount : y + param.amount;
 
     self.param.$page.velocity('stop')
-    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.ease});
+    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.easing});
   };
 
 
