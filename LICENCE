@@ -1,8 +1,8 @@
 /**
- * AMP JavaScript Library
+ * AMPjs Javascript Library
+ * <%= data.description %> version <%= data.version %>
  *
- * @licence MIT Licence
- *
+ * The MIT License (MIT)
  * author Yoshihito Fujiwara
  * source https://bitbucket.org/yoshihitofujiwara/ampjs
  * Copyright (c) 2014 Yoshihito Fujiwara
@@ -24,5 +24,3 @@
  * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
-
