@@ -1,6 +1,10 @@
-var AMP = AMP || {};
+/// AMPjs Javascript Library
+/// The MIT License (MIT)
+/// author Yoshihito Fujiwara
+/// source https://bitbucket.org/yoshihitofujiwara/ampjs
+/// Copyright (c) 2014 Yoshihito Fujiwara
 
-(function(root){
+(function(root, AMP){
 
   // 'use strict';
 
@@ -89,7 +93,7 @@ var AMP = AMP || {};
 
   /**
    * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
-   * !!! FIXME : イベント属性追加予定 ///
+   * !!! FIXME : イベント属性追加予定
    *
    * @static
    * @property eventType
@@ -200,5 +204,4 @@ var AMP = AMP || {};
   AMP.mediaquery = new Mediaquery();
 
 
-
-}(window));
+}(window, AMP));
