@@ -8,35 +8,37 @@ jQuery(function($){
 
 
 
-	AMP.mediaquery.on('change.hoge', function(a){
-		console.log(a);
-		// alert(a);
-	});
 
-	// AMP.mediaquery.trigger('change', '0')
-// console.log($('.float')[0]);
-	$.stream(
-		function(){
-			return $.stream(
-				function(){
-					return $('.float').delay(1000).animate({width: 50});
-				},
-				function(x){
-					console.log(x);
-				}
-			);
-		},
-		function(){
-			return $.stream(
-				function(){
-					return $('.float').delay(1000).animate({width: 200});
-				},
-				function(x){
-					console.log(x);
-				}
-			);
-		}
-	)
+
+// 	AMP.mediaquery.on('change.hoge', function(a){
+// 		console.log(a);
+// 		// alert(a);
+// 	});
+
+// 	// AMP.mediaquery.trigger('change', '0')
+// // console.log($('.float')[0]);
+// 	$.stream(
+// 		function(){
+// 			return $.stream(
+// 				function(){
+// 					return $('.float').delay(1000).animate({width: 50});
+// 				},
+// 				function(x){
+// 					console.log(x);
+// 				}
+// 			);
+// 		},
+// 		function(){
+// 			return $.stream(
+// 				function(){
+// 					return $('.float').delay(1000).animate({width: 200});
+// 				},
+// 				function(x){
+// 					console.log(x);
+// 				}
+// 			);
+// 		}
+// 	)
 
 
 

@@ -1,9 +1,18 @@
-var AMP = AMP || {};
+/// AMPjs Javascript Library
+/// The MIT License (MIT)
+/// author Yoshihito Fujiwara
+/// source https://bitbucket.org/yoshihitofujiwara/ampjs
+/// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-(function(root, $, Hogan){
+(function(root, AMP, $, Hogan){
 
   // 'use strict';
+
+
+  if(!Hogan){
+    throw new Error('Hogan not found');
+  }
+
 
 
   /*--------------------------------------------------------------------------
@@ -341,5 +350,4 @@ var AMP = AMP || {};
   AMP.$.Render = Render;
 
 
-
-}(window, jQuery, Hogan));
+}(window, AMP, jQuery, Hogan));

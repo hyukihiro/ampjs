@@ -1,4 +1,9 @@
-// for ie8
+/// AMPjs Javascript Library
+/// The MIT License (MIT)
+/// author Yoshihito Fujiwara
+/// source https://bitbucket.org/yoshihitofujiwara/ampjs
+/// Copyright (c) 2014 Yoshihito Fujiwara
+
 var AMP = {};
 
 (function(root){
@@ -6,15 +11,13 @@ var AMP = {};
   // 'use strict';
 
 
-
   /*======================================================================
     Ampクラス
   ======================================================================*/
 
   // クラス設定
-  var
-  CLASS_NAME = 'Amp',
-  VERSION    = '3.0.4';
+  var CLASS_NAME = 'Amp',
+  VERSION = '<%= version %>';
 
 
 
@@ -93,7 +96,6 @@ var AMP = {};
 
   AMP = new Amp();
   AMP.BASE_CLASS = Amp;
-
 
 
 }(window));
