@@ -4,12 +4,7 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-var AMP = AMP || {};
-
-
-(function(root){
-
+(function(root, AMP){
 
   // 'use strict';
 
@@ -29,7 +24,7 @@ var AMP = AMP || {};
    * @param  {Number} z z座標値
    */
   function Vector(x, y, z){
-    // FIXME: 一旦仮 ///
+    /// FIXME: 一旦仮
     this._angleMode = Vector.ANGLE_MODE_RADIANS;
     this.set(x, y, z);
   }
@@ -654,5 +649,4 @@ var AMP = AMP || {};
   AMP.Vector = Vector;
 
 
-
-}(window));
+}(window, AMP));

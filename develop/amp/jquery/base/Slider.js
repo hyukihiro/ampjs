@@ -4,11 +4,7 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-var AMP = AMP || {};
-
-
-(function(root, $){
+(function(root, AMP, $){
 
   // 'use strict';
 
@@ -370,8 +366,8 @@ var AMP = AMP || {};
    * @return {Slider}
    */
   p.setParam = function(){
-    // if(this.param.isLiquid){ ///
-    // } ///
+    /// if(this.param.isLiquid){
+    /// }
 
     // ステージの幅
 		var stageWidth = this.param.$frame.width();
@@ -608,8 +604,8 @@ var AMP = AMP || {};
   };
 
 
-  // FIXME: 追加予定 ///
-  // p.setLiquidItem = function(){}; ///
+  /// FIXME: 追加予定
+  /// p.setLiquidItem = function(){};
 
 
 	/**
@@ -744,4 +740,4 @@ var AMP = AMP || {};
   AMP.$.Slider = Slider;
 
 
-}(window, jQuery));
+}(window, AMP, jQuery));

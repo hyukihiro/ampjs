@@ -4,7 +4,6 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
 (function($){
 
 	// 'use strict';
@@ -91,11 +90,10 @@
     			stream.apply(null, arguments);
     		}
     	});
-    };
+    }
 
     return $defer.promise();
   };
-
 
 
 }(jQuery));

@@ -4,11 +4,7 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-var AMP = AMP || {};
-
-
-(function(root, $){
+(function(root, AMP, $){
 
   // 'use strict';
 
@@ -239,4 +235,4 @@ var AMP = AMP || {};
   AMP.$.MediaImageChange = MediaImageChange;
 
 
-}(window, jQuery));
+}(window, AMP, jQuery));

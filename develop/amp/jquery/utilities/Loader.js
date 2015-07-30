@@ -4,12 +4,15 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-var AMP = AMP || {};
-
-(function(root){
+(function(root, AMP, $, imagesLoaded){
 
   // 'use strict';
+
+
+  if(!imagesLoaded){
+    throw new Error('imagesLoaded not found');
+  }
+
 
 
   /*--------------------------------------------------------------------------
@@ -335,4 +338,4 @@ var AMP = AMP || {};
   AMP.$.Loader = Loader;
 
 
-}(window));
+}(window, AMP, jQuery, imagesLoaded));

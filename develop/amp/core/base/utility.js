@@ -4,10 +4,7 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-var AMP = AMP || {};
-
-(function(root){
+(function(root, AMP){
 
   // 'use strict';
 
@@ -123,7 +120,7 @@ var hasOwn = class2type.hasOwnProperty;
   /**
    * <h4>requestAnimationFrameをエクスポートしています</h4>
    * 対応していないブラウザは、setTimeoutでフォールバックします
-   * FIXME: contextの処理追加予定 ///
+   * FIXME: contextの処理追加予定
    *
    * @static
    * @method requestAnimationFrame
@@ -239,5 +236,4 @@ var hasOwn = class2type.hasOwnProperty;
   };
 
 
-
-}(window));
+}(window, AMP));

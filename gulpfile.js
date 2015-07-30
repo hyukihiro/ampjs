@@ -138,7 +138,7 @@ MODULE.gulp.task('js', function(){
 	MODULE.gulp.src(PATH.develop + 'lib/jquery/*.js')
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/plugins/*.js')
+	MODULE.gulp.src(PATH.develop + 'lib/jquery/plugins/**/*.js')
 	.pipe(MODULE.concat('jquery.plugins.js'))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
@@ -163,11 +163,10 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat(BANNER.core.name + '.' + BANNER.core.version + '.js'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
+	.pipe(MODULE.concat(BANNER.core.name + '.' + BANNER.core.version + '.js'))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.template(BANNER.core))
-	// .pipe(MODULE.replace('<%= AMP_VERSION %>', BANNER.core.version))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({extname : '.min.js'}))
 	.pipe(MODULE.uglify())
@@ -181,8 +180,9 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.concat(BANNER.jqueryPlugin.name + '.' + BANNER.jqueryPlugin.version + '.js'))
-	.pipe(MODULE.strip_line(/\s\/{3}$/))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jqueryPlugin}))
+	.pipe(MODULE.template(BANNER.jqueryPlugin))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({extname : '.min.js'}))
 	.pipe(MODULE.uglify())
@@ -192,13 +192,17 @@ MODULE.gulp.task('js', function(){
 
 	// amp.jquery.js
 	// base
-	MODULE.gulp.src(PATH.develop + 'amp/jquery/base/*.js')
+	MODULE.gulp.src([
+		PATH.develop + 'amp/jquery/AMP.$.js',
+		PATH.develop + 'amp/jquery/base/*.js'
+	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.concat(BANNER.jquery.name + '.' + BANNER.jquery.version + '.js'))
-	.pipe(MODULE.strip_line(/\s\/{3}$/))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
+	.pipe(MODULE.template(BANNER.jquery))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
 	.pipe(MODULE.rename({extname: '.min.js'}))
 	.pipe(MODULE.uglify())
@@ -210,7 +214,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.strip_line(/\s\/{3}$/))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
 	.pipe(MODULE.uglify())

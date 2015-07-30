@@ -16,9 +16,8 @@ var AMP = {};
   ======================================================================*/
 
   // クラス設定
-  var
-  CLASS_NAME = 'Amp',
-  VERSION    = '<%= version %>';
+  var CLASS_NAME = 'Amp',
+  VERSION = '<%= version %>';
 
 
 
@@ -97,7 +96,6 @@ var AMP = {};
 
   AMP = new Amp();
   AMP.BASE_CLASS = Amp;
-
 
 
 }(window));

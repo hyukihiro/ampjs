@@ -4,8 +4,7 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-
-(function(root){
+(function(root, AMP){
 
   // 'use strict';
 
@@ -196,5 +195,4 @@
   };
 
 
-
-}(window));
+}(window, AMP));
