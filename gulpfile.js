@@ -126,6 +126,16 @@ MODULE.gulp.task('browser_sync', function(){
 // 	.pipe(MODULE.gulp.dest(PATH.dist));
 // });
 
+MODULE.gulp.task('inject', function(){
+	var source = MODULE.gulp.src([
+		PATH.dist + 'lib/**/*.js',
+		PATH.dist + 'amp/**/*.min.js'
+	]);
+
+	MODULE.gulp.src('demo/**/*html')
+	.pipe(MODULE.inject(source, {relative: true}))
+  .pipe(MODULE.gulp.dest('demo/'));
+});
 
 /**
  * js: jsHint & コピー
@@ -149,13 +159,13 @@ MODULE.gulp.task('js', function(){
 
 	// createjs
 	MODULE.gulp.src(PATH.develop + 'lib/createjs/**/*.js')
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib/createjs'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
 
 
 	/* AMP
 	-----------------------------------------------------------------*/
 	// amp.core.js
-	MODULE.gulp.src([
+	 MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
 		PATH.develop + 'amp/core/utilities/*.js'
@@ -225,4 +235,5 @@ MODULE.gulp.task('js', function(){
 
 	// amp.createjs.js
 	// add code
+
 });
