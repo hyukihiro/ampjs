@@ -115,7 +115,9 @@
   }
 
   // 基底クラスを継承
-  AMP.inherits(Slider, AMP.$.UIController);
+  console.log(AMP.$);
+
+  // AMP.inherits(Slider, AMP.$.UIController);
 
   // prototype
   var p = Slider.prototype;

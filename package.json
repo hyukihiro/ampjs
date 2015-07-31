@@ -4,23 +4,14 @@
   "license"    : "MIT Licence",
   "author"     : "Yoshihito Fujiwara",
   "url"        : "https://bitbucket.org/yoshihitofujiwara/ampjs",
-  "yuidoc": {
-    "name": "AMP.js",
-    "description": "AMP.js",
-    "version": "3.0.0",
-    "url": "https://bitbucket.org/yoshihitofujiwara/ampjs",
-    "options": {
-      "outdir": "docs/"
-    }
-  },
   "banner": {
     "core": {
       "name"       : "amp",
-      "version"    : "3.0.4",
+      "version"    : "YUIDOCに記載",
       "description": "AMPjs Core File"
     },
     "jqueryPlugin": {
-      "name"       : "jquery.plugins",
+      "name"       : "amp.jquery.plugins",
       "version"    : "3.0.0",
       "description": "AMPjs jQuery Plugin File"
     },

@@ -6,6 +6,8 @@
  * PACKAGE_JSON: package.json読み込み
  */
 var PACKAGE_JSON = require('./package.json');
+var YUIDOC_JSON  = require('./yuidoc.json');
+
 
 
 /**
@@ -30,7 +32,7 @@ var LICENCE = require('fs').readFileSync(PATH.license, 'utf8');
  * BANNER: バナーテキスト
  */
 var BANNER = PACKAGE_JSON.banner;
-
+BANNER.core.version = YUIDOC_JSON.version;
 
 /**
  * MODULE: モジュール自動追加
@@ -76,7 +78,7 @@ MODULE.gulp.task('default', tasks);
  * cmd : gulp docs
  */
 MODULE.gulp.task('docs', function(){
-	require('child_process').exec('yuidoc ' + PATH.docs  + ' --config ' + PATH.yuidoc, {
+	require('child_process').exec('yuidoc ' + PATH.docs  + ' --config yuidoc.json', {
 		"cwd": "./"
 	});
 });
@@ -126,6 +128,10 @@ MODULE.gulp.task('browser_sync', function(){
 // 	.pipe(MODULE.gulp.dest(PATH.dist));
 // });
 
+
+/**
+ * inject: HTMLファイルにjsタグを挿入
+ */
 MODULE.gulp.task('inject', function(){
 	var source = MODULE.gulp.src([
 		PATH.dist + 'lib/**/*.js',
@@ -136,6 +142,7 @@ MODULE.gulp.task('inject', function(){
 	.pipe(MODULE.inject(source, {relative: true}))
   .pipe(MODULE.gulp.dest('demo/'));
 });
+
 
 /**
  * js: jsHint & コピー
