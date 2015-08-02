@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMP.js</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="./assets/js/html5shiv.min.js"></script><![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="./assets/css/global.css" media="all">
+<link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
+
+<!-- inject:js -->
+<script src="../dist/lib/createjs-2014.12.12.min.js"></script>
+<script src="../dist/lib/jquery-1.8.3.min.js"></script>
+<script src="../dist/lib/jquery.plugins.js"></script>
+<script src="../dist/lib/utilities.js"></script>
+<script src="../dist/amp/amp.3.0.5.min.js"></script>
+<script src="../dist/amp/amp.jquery.3.0.1.min.js"></script>
+<script src="../dist/amp/amp.jquery.plugins.3.0.1.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Loader.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Render.min.js"></script>
+<!-- endinject -->
+
+<script src="./assets/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/behave/behave.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$('textarea.code').exCodePrettify({
+		showRunButton : true,
+		showDemo : true,
+		editCode : true,
+		behaveJS : true
+	});
+});
+</script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="./index.html">AMPjs DEMO</a></h1>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+<section>
+<h2>AMP.Is</h2>
+<div class="lead">
+<p>OS,Device,Browser,型など判定処理をします。<br>
+詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<ul>
+<li>OSは、windows <span class="os"></span></li>
+<li>デバイスは、スマートデバイス <span class="device"></span></li>
+<li>ブラウザは、IE <span class="browser"></span></li>
+</ul>
+</textarea>
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+// OS判定
+// 引数リスト： windows, windowsPhone, mac, ios, android
+if(AMP.isOS('windows')){
+	$('.os').text('です。');
+} else {
+	$('.os').text('ではありません。');
+}
+
+// OS判定
+// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
+if(AMP.isDevice('smartdevice')){
+	$('.device').text('です。');
+} else {
+	$('.device').text('ではありません。');
+}
+
+// Browser判定
+// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
+if(AMP.isBrowser('ie')){
+	$('.browser').text('です。');
+} else {
+	$('.browser').text('ではありません。');
+}
+</textarea>
+</div>
+</section>
+
+
+<p>後日追加</p>
+<!--
+<section>
+<h2>AMP.Is</h2>
+<div class="lead">
+<p>OS,Device,Browser,型など判定処理をします。<br>
+詳しくはAPIを参照してください。</p>
+</div>
+</section>
+ -->
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>
