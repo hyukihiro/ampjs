@@ -57,7 +57,8 @@
     this.mediaStyle = null;
 
     // superClass constructor call
-    Mediaquery.Events_constructor.call(this);
+    // Mediaquery.Events_constructor.call(this);
+    AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承

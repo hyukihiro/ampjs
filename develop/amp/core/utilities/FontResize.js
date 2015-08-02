@@ -50,7 +50,8 @@
     this.height = null;
 
     // superClass constructor call
-    FontResize.Events_constructor.call(this);
+    // FontResize.Events_constructor.call(this);
+    AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承

@@ -48,7 +48,7 @@
    * @property VERSION
    * @type {String}
    */
-  Debug.VERSION = '1.0.1';
+  Debug.VERSION = '1.0.2';
 
 
   /**
@@ -212,6 +212,8 @@
           Debug.views.text.value += data + '\n';
         }
       });
+
+      Debug.views.text.scrollTop = Debug.views.text.scrollHeight;
     }
 
     return this;

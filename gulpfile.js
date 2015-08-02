@@ -9,7 +9,6 @@ var PACKAGE_JSON = require('./package.json');
 var YUIDOC_JSON  = require('./yuidoc.json');
 
 
-
 /**
  * PROJECT: プロジェクト名
  */
@@ -211,7 +210,7 @@ MODULE.gulp.task('js', function(){
 	// base
 	MODULE.gulp.src([
 		PATH.develop + 'amp/jquery/AMP.$.js',
-		PATH.develop + 'amp/jquery/base/*.js'
+		PATH.develop + 'amp/jquery/base/**/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -233,6 +232,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
+	// .pipe(MODULE.rename({prefix: BANNER.jquery.name + '.'}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))

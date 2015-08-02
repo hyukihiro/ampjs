@@ -231,7 +231,6 @@
     export
   ----------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ || {};
   AMP.$.MediaImageChange = MediaImageChange;
 
 
