@@ -52,61 +52,69 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>jQuery.ResizeStop</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>window resizeイベントを間引きresize完了後、イベントを実行します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
+<p class="resize_txt"></p>
 </textarea>
+
 <!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
+var resizestopCount = 0;
+var $txt = $('.resize_txt');
+$(window).resizestop(function(){
+	$txt.html('resizestopが <span class="em">' + (++resizestopCount) +'</span> 回完了しました。')
+});
 
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
+/*
+// timerオプションで、間引くタイミングを調整可能
+$(window).on('resizestop', {timer: 500}, function(){
+	// some code..
+});
+*/
+</textarea>
+</div>
+</section>
 
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+<section>
+<h2>jQuery.ScrollStop</h2>
+<div class="lead">
+<p>scrollイベントを間引きscroll完了後、イベントを実行します。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p class="scroll_txt"></p>
+</textarea>
+
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+var scrollstopCount = 0;
+var $txt = $('.scroll_txt');
+$(window).scrollstop(function(){
+	$txt.html('scrollstopが <span class="em">' + (++scrollstopCount) +'</span> 回完了しました。')
+});
+
+/*
+// timerオプションで、間引くタイミングを調整可能
+$(window).on('scrollstop', {timer: 500}, function(){
+	// some code..
+});
+*/
 </textarea>
 </div>
 </section>
 
 
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
+
 <!-- #content // --></div>
 
 

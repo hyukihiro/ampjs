@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMPjs</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="./assets/js/html5shiv.min.js"></script><![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="./assets/css/global.css" media="all">
+<link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
+
+<!-- inject:js -->
+<script src="../dist/lib/createjs-2014.12.12.min.js"></script>
+<script src="../dist/lib/jquery-1.8.3.min.js"></script>
+<script src="../dist/lib/jquery.plugins.js"></script>
+<script src="../dist/lib/utilities.js"></script>
+<script src="../dist/amp/amp.3.0.5.min.js"></script>
+<script src="../dist/amp/amp.jquery.3.0.1.min.js"></script>
+<script src="../dist/amp/amp.jquery.plugins.3.0.1.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Loader.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Render.min.js"></script>
+<!-- endinject -->
+
+<script src="./assets/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/behave/behave.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$('textarea.code').exCodePrettify({
+		showRunButton : true,
+		showDemo : true,
+		editCode : true,
+		behaveJS : true
+	});
+});
+</script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="./index.html">AMPjs DEMO</a></h1>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+<section>
+<h2>jQuery.sequence</h2>
+<div class="lead">
+<p>縦列、並列処理を行います。<br>
+jQuery.Deferredを使い縦列、並列処理を行いますのでjQuery.Deferredを使用している、ajax,animate等組み合わせて使用することが可能です。<br>
+また、jQuery.sequence自体、jQuery.Deferredオブジェクトを返しますので、入れ子構造も可能です。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p class="btn">
+<a class="blue sequenceStart" href="#">start</a>
+<a class="red sequenceReset" href="#">reset</a>
+</p>
+<ul class="list_box01 btn cf">
+<li class="blue"></li>
+<li class="green"></li>
+<li class="red"></li>
+</ul>
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.list_box01 {
+	margin-top: 30px;
+}
+.list_box01 li{
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 0 4px;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+var isSequence = false;
+
+$('.sequenceStart').click(function(){
+	if(!isSequence){
+		reset();
+		start();
+		isSequence = true;
+	}
+	return false;
+});
+
+$('.sequenceReset').click(function(){
+	if(!isSequence){
+		reset();
+	}
+	return false;
+});
+
+// アニメーションを実行
+function start(){
+	$.sequence(
+		function(){
+			// このファンクション内に書いたコードは、並列処理で実行されます。
+			// return で処理完了後、次のfunctionに進みます。
+
+			// return を省いた場合は、次の関数と並列で処理されます。
+			// $('.list_box01 .blue').velocity({opacity: 0});
+
+			return $('.list_box01 .blue').velocity({opacity: 0});
+		},
+		function(){
+			return $('.list_box01 .green').velocity({opacity: 0});
+		},
+		function(){
+			return $('.list_box01 .red').velocity({opacity: 0});
+		},
+		function(){
+			isSequence = false;
+			alert('sequence処理が完了しました。');
+		}
+	);
+};
+
+// 初期スタイルに戻す
+function reset(){
+	$('.list_box01 li').velocity('stop').css({opacity: 1});
+};
+</textarea>
+</div>
+</section>
+
+<section>
+<h2>jQuery.stream</h2>
+<div class="lead">
+<p>縦列、並列処理を行います。<br>
+jQuery.sequenceと同様にjQuery.Deferredを使い縦列、並列処理を行います。<br>
+streamの内部的な処理は、$.whenメソッドを再帰的に呼び出して実行している点がsequencと違います。<br>
+コールバック関数のreturn値は、次の関数の引数として渡します。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p class="btn">
+<a class="blue streamStart" href="#">start</a>
+<a class="red streamReset" href="#">reset</a>
+</p>
+<ul class="list_box02 btn cf">
+<li class="blue"></li>
+<li class="green"></li>
+<li class="red"></li>
+</ul>
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.list_box02 {
+	margin-top: 30px;
+}
+.list_box02 li{
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 0 4px;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+var isStream = false;
+
+$('.streamStart').click(function(){
+	if(!isStream){
+		reset();
+		start();
+		isStream = true;
+	}
+	return false;
+});
+
+$('.streamReset').click(function(){
+	if(!isStream){
+		reset();
+	}
+	return false;
+});
+
+// アニメーションを実行
+function start(){
+	$.stream(
+		function(){
+			return $('.list_box02 .blue').velocity({opacity: 0});
+		},
+		function($prev){
+			// $prevは、前の関数の戻り値
+			$prev.velocity({opacity: 0.5});
+			return $('.list_box02 .green').velocity({opacity: 0});
+		},
+		function($prev){
+			$prev.velocity({opacity: 0.5});
+			return $('.list_box02 .red').velocity({opacity: 0});
+		},
+		function($prev){
+			return $prev.velocity({opacity: 0.5});
+		},
+		function(){
+			isStream = false;
+			alert('stream処理が完了しました。');
+		}
+	);
+};
+
+// 初期スタイルに戻す
+function reset(){
+	$('.list_box02 li').velocity('stop').css({opacity: 1});
+};
+</textarea>
+</div>
+</section>
+
+
+
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>

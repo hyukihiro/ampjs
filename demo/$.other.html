@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMPjs</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="./assets/js/html5shiv.min.js"></script><![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="./assets/css/global.css" media="all">
+<link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
+
+<!-- inject:js -->
+<script src="../dist/lib/createjs-2014.12.12.min.js"></script>
+<script src="../dist/lib/jquery-1.8.3.min.js"></script>
+<script src="../dist/lib/jquery.plugins.js"></script>
+<script src="../dist/lib/utilities.js"></script>
+<script src="../dist/amp/amp.3.0.5.min.js"></script>
+<script src="../dist/amp/amp.jquery.3.0.1.min.js"></script>
+<script src="../dist/amp/amp.jquery.plugins.3.0.1.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Loader.min.js"></script>
+<script src="../dist/amp/jquery.utilities/Render.min.js"></script>
+<!-- endinject -->
+
+<script src="./assets/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/behave/behave.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$('textarea.code').exCodePrettify({
+		showRunButton : true,
+		showDemo : true,
+		editCode : true,
+		behaveJS : true
+	});
+});
+</script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="./index.html">AMPjs DEMO</a></h1>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+<section>
+<h2>jQuery.fn.queue</h2>
+<div class="lead">
+<p>jQuery.queueシリーズは、animation queueで扱えるメソッドとして追加しています。<br>
+animate同様stopやdelayメソッドが有効になり、aimate周りの関数と組みあわせて使用することが可能になります。<br>
+queueを組み合わせることで、ネスト構造が無くフラットにメソッドチェーンで実行することが可能になりますので、<br>
+animateのコールバックヘルを回避することが出来ます。<br>
+追加メソッドは以下のリストを参照。</p>
+<ul class="list_disc list_frame">
+<li>attr &rarr; qAttr (属性の取得・変更)</li>
+<li>css &rarr; qCss (cssの取得・変更)</li>
+<li>addClass &rarr; qAddClass (classの追加)</li>
+<li>removeClass &rarr; qRemoveClass (classの削除)</li>
+<li>qCall (コールバック関数)</li>
+</ul>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p class="q_txt">現在のclassは : </p>
+<ul class="list_box01 btn cf">
+<li class="blue"></li>
+</ul>
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.list_box01 {
+	margin-top: 30px;
+}
+.list_box01 li{
+	float: left;
+	width: 100px;
+	height: 100px;
+	margin: 0 4px;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+
+var $box01 = $('.list_box01 li');
+var $q_txt = $('.q_txt');
+
+// 現在のclass命を出力
+qPrint();
+
+// queueの実行
+$box01.eq(0)
+.delay(800)
+.qCss({visibility: 'hidden'})
+.qAddClass('hidden')
+.qCall(qPrint)
+.delay(800)
+.qCss({visibility: 'visible'})
+.qRemoveClass('hidden')
+.qCall(qPrint)
+.delay(800)
+.qCss({opacity: 0.5})
+.qAddClass('active')
+.qCall(qPrint)
+.delay(800)
+.animate({opacity: 1}, 800)
+.qRemoveClass('active')
+.qCall(qPrint)
+
+function qPrint(){
+	var str = '';
+	str = '現在のclassは : ' + $box01.eq(0).attr('class');
+	$q_txt.html(str);
+};
+</textarea>
+</div>
+</section>
+
+
+<section>
+<h2>jQuery.fn.replaceAttr</h2>
+<div class="lead">
+<p>replaceAttrは、attribute値の文字列の置き換え処理を行います。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p>on, offボタンをクリックして、Button画像を切り替えます。</p>
+<p class="btn">
+<a class="blue on" href="#">on</a>
+<a class="green off" href="#">off</a>
+</p>
+<img class="replaceAttr" src="assets/images/btn01.png" width="200" height="70" alt="">
+</textarea>
+
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+var $img = $('img.replaceAttr');
+
+// 選択状態
+$('.btn .on').click(function(){
+	// 引数： 属性名, 削除する文字列, 追加する文字列
+	$img.replaceAttr('src', 'btn01.png', 'btn01_on.png');
+	return false;
+});
+
+// 待機状態
+$('.btn .off').click(function(){
+	$img.replaceAttr('src', 'btn01_on.png', 'btn01.png');
+	return false;
+});
+</textarea>
+</div>
+</section>
+
+
+
+<section>
+<h2>jQuery.fn.getExt</h2>
+<div class="lead">
+<p>getExtは、ファイルの拡張子を取得します。<br>
+第一引数は、取得したい拡張子属性名、第二引数は、query・hashを含むか(boolean)初期は、含みません。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<p class="getExt_txt">ファイル拡張子は、</p>
+<img class="getExt" src="assets/images/btn01.png" width="200" height="70" alt="">
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.getExt_txt{
+	margin-bottom: 20px;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+// 拡張子の取得
+var ext = $('img.getExt').getExt('src');
+
+// queryやhash含む場合
+// var ext = $('img.getExt').getExt('src', true);
+
+$('.getExt_txt').html('ファイル拡張子は、 <span class="em">' + ext + '</span>');
+</textarea>
+</div>
+</section>
+
+
+
+
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>

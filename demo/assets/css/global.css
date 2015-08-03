@@ -97,7 +97,7 @@ a:hover {
 	header
 ---------------------------------------------------------------------------*/
 header {
-	z-index: 100;
+	z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
@@ -158,6 +158,24 @@ header h1 a:hover{
 	font-size: 18px;
 }
 
+/* list_disc */
+.list_disc{
+	padding-left: 1.5em;
+}
+.list_disc li{
+	list-style-type: disc;
+}
+
+
+/* .list_frame */
+.list_frame{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 12px 20px 12px 40px;
+	border: 1px solid #ddd;
+	background: #f8f8f8;
+}
+
 /* .run_txt */
 p.run_txt{
 	margin-bottom: 20px;
@@ -169,11 +187,14 @@ p.run_txt{
 }
 
 /* .btn */
+p.btn{
+	margin-bottom: 20px;
+}
 p.btn a{
 	display: inline-block;
 	min-width: 20%;
 	padding: 12px 10px;
-	margin: 4px;
+	margin: 4px 8px 4px 0;
 	font-size: 16px;
 	font-weight: bold;
 	color: #fff;

@@ -83,7 +83,7 @@
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = '3.1.0';
+  ScrollToggle.VERSION = '3.1.1';
 
 
   /**
@@ -195,9 +195,7 @@
    * @return {Pagetop} Pagetopインスタンスを返す
    */
   ScrollToggle.get = function($scrollToggle, options){
-    var instance = new ScrollToggle($scrollToggle, options);
-    instance.on();
-    return instance;
+    return new ScrollToggle($scrollToggle, options).on();
   };
 
 
@@ -228,7 +226,6 @@
    */
   p._scrollController = function(y){
     var self = this;
-
     if(this.param.isReverse){
       if(!this.param.isDislpay && this.param.showY > y){
         this.show();
@@ -285,11 +282,12 @@
    * @return {ScrollToggle}
    */
   p.hide = function(){
+    var self = this;
     this.param.$scrollToggle
     .velocity('stop')
     .velocity(this.param.hide, this.param.duration, this.param.easing, function(){
-      this.param.$scrollToggle.css({display: 'none'});
-      this.param.hideCall();
+      self.param.$scrollToggle.css({display: 'none'});
+      self.param.hideCall();
     });
 
     return this;

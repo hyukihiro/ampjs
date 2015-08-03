@@ -52,61 +52,72 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>jQuery.Flick</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>jQueryイベントクラスを拡張しFlickイベントを追加しています。<br>
+drag中は、flickmove。dragout時に、flickかflickcancelかhit判定してイベントを発行します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
+
+<div class="flick">
+<p class="txt">Flick ME!</p>
+</div>
 </textarea>
-<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.flick{
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+	padding: 30px;
+	background: #e6e6e6;
+	text-align: center;
+}
+</textarea>
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
 
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
+$('.flick')
+.on('flickmove', function(eventMove){
+	// フリックムーブイベント
+	print(eventMove);
+})
+.on('flickcancel', function(eventCancel){
+	// キャンセルイベント
+	print(eventCancel);
+})
+.on('flick', function(eventFlick){
+	// フリックイベント
+	print(eventFlick);
+});
 
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+var $txt = $('.flick').find('.txt');
+function print(eventObj){
+  var str = '';
+  str += 'イベントタイプ: ' + eventObj.type;
+  str += '<br>X軸の移動距離: ' + eventObj.moveX + 'px';
+  str += '<br>Y軸の移動距離: ' + eventObj.moveY + 'px';
+  $txt.html(str);
+};
+
+/*
+// Example
+// XY指定内は4方向、Xは、X軸のみ、Yは、Y軸のみ。
+// moveイベントタイプ
+// flickmove, flickmoveX, flickmoveY
+
+// cancelイベントタイプ
+// flickcancel, flickcancelX, flickcancelY
+
+// flickイベントタイプ
+// flick, flickX, flickY
+*/
 </textarea>
 </div>
 </section>
-
-
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
 <!-- #content // --></div>
 
 

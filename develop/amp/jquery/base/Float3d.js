@@ -179,9 +179,7 @@
    * @return {Float3d}
    */
   Float3d.get = function($target, options){
-    var instance = new Float3d($target, options);
-    instance.on();
-    return instance;
+    return new Float3d($target, options).on();
   };
 
 

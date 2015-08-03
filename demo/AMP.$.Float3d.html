@@ -52,61 +52,34 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>AMP.$.Float3d</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>ホバーに3Dエフェクトを加えます。<br>
+第一引数に対象の要素、第二引数にoption値を設定。<br>option値は、APIリファレンスを参照してください。<br>
+要素に付けるクラス名の指定はありませんが、要素の構成は、wrap要素 > inner要素 > floating要素の3階層になります。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
+<div class="float_wrap"><div class="float_inner">
+<img src="assets/images/img.png" alt="">
+</div><!-- .float // --></div>
 </textarea>
-<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.float_wrap{
+	max-width: 400px;
+	margin: 0 auto;
+	background: #be4f59;
+}
+</textarea>
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
-
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
-
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+AMP.$.Float3d.get($('.float_wrap'));
 </textarea>
 </div>
 </section>
-
-
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
 <!-- #content // --></div>
 
 

@@ -52,61 +52,26 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>AMP.$.MediaImages</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>ブレイクポイントで画像を切り替えます。<br>
+AMP.Mediaqueryを継承していますので、headで割り当てたfont-familyの文字列を見て処理を判定し、data属性にセットした画像パスをsrcに書き換えを行います。<br>
+サンプルではwindowサイズ変更時にブレイクポイントで画像が切り替わります。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
+<img src="assets/images/spacer.png" data-media-img="assets/images/img.png" alt="">
 </textarea>
+
 <!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
-
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
-
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+AMP.$.MediaImageChange.get();
 </textarea>
 </div>
 </section>
-
-
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
 <!-- #content // --></div>
 
 

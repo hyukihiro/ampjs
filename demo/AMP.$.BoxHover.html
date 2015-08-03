@@ -52,61 +52,46 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>AMP.$.BoxHover</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>リンクエリアを、ボックスエリアに拡張します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
+<div class="box_hover">
+<p>Dummy Text...<br>Dummy Text...<br>Dummy Text...</p>
+<p><a href="AMP.$.BoxHover.html" target="_blank">Link blank</a></p>
+</div>
+<div class="box_hover">
+<p>Dummy Text...<br>Dummy Text...<br>Dummy Text...</p>
+<p><a href="AMP.$.BoxHover.html">Link1</a></p>
+<p><a class="link" href="AMP.$.BoxHover.html" target="_blank">Link2 blank</a></p>
+</div>
+
 </textarea>
-<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.box_hover{
+	padding: 20px 30px;
+	border: 1px solid #ddd;
+}
+.box_hover.hover{
+	background: #e9e9e9;
+}
+</textarea>
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
+// 以下同じ
+// new AMP.$.BoxHover($('.box_item'))
+// AMP.$.BoxHover.get($('.box_item'))
 
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
-
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+// 要素の初期値は、$('.box_hover')
+AMP.$.BoxHover.get();
 </textarea>
 </div>
 </section>
-
-
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
 <!-- #content // --></div>
 
 

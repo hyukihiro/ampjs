@@ -52,61 +52,61 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.Is</h2>
+<h2>AMP.$.BoxHover</h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>リンクエリアを、ボックスエリアに拡張します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
+<ul class="flat_height_list cf">
+<li class="flat_height">ダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+<li class="flat_height">ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
+<li class="flat_height">ダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキストダミーテキスト</li>
 </ul>
 </textarea>
-<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.flat_height_list li{
+	box-sizing: border-box;
+	width: 33.3%;
+	float: left;
+	margin-bottom: 30px;
+	padding: 10px;
+	border: 1px solid #ddd;
+	font-size: 12px;
+}
+@media all and (max-width: 767px){
+	.flat_height_list li{
+		width: 50%;
+	}
+}
+</textarea>
+
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// OS判定
-// 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
+// 以下同じ
+// new AMP.$.FlatHeight($('.flat_height_list li'));
+// AMP.$.FlatHeight.get($('.flat_height_list li'));
 
-// OS判定
-// 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
+// 第一引数はの初期値要素は、$('.flat_height')
+// var flatHeight = AMP.$.FlatHeight.get(3);
 
-// Browser判定
-// 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+// 第二引数は、分割数
+var flatHeight = AMP.$.FlatHeight.get($('.flat_height_list').find('li'), 3);
+
+AMP.mediaquery.on('change', function(mediaEvent){
+	// 分割数を変更
+	if(mediaEvent.mediaStyle === 'sp'){
+		flatHeight.setSplit(2);
+	} else {
+		flatHeight.setSplit(3);
+	}
+})
+.trigger('change');
 </textarea>
 </div>
 </section>
-
-
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
-<div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
-</div>
-</section>
- -->
 <!-- #content // --></div>
 
 

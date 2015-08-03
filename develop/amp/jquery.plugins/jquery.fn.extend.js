@@ -121,13 +121,19 @@
    * @param  {String} attr 取得属性名
    * @return {String} 拡張子を返す
    */
-  $.fn.getExt = function(attr){
-    var val = this.attr(attr);
-    if(val.indexOf('.') > -1){
-      // var last = val.lastIndexOf('?') > -1 ? val.lastIndexOf('?') : val.length;
-      // return val.substring(val.lastIndexOf('.'), val.length);
-      return val.substring(val.lastIndexOf('.'));
+  $.fn.getExt = function(attr, isQuery){
+    var str = this.attr(attr),
+    val;
+
+    if(str.indexOf('.') > -1){
+      val = str.substring(str.lastIndexOf('.'));
+
+			if(!isQuery){
+				val = val.split('?')[0].split('#')[0];
+			}
     }
+
+    return val;
   };
 
 
