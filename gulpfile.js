@@ -170,11 +170,11 @@ MODULE.gulp.task('js', function(){
 
 	/* AMP
 	-----------------------------------------------------------------*/
-	// amp.core.js
+	// amp/ amp.js
 	 MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
-		PATH.develop + 'amp/core/utilities/*.js'
+		PATH.develop + 'amp/core/class/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -189,8 +189,21 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
+	// amp/utilities/
+	 MODULE.gulp.src(PATH.develop + 'amp/core/utilities/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
+	.pipe(MODULE.rename({prefix : BANNER.core.name + '.'}))
+	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities/'))
+	.pipe(MODULE.rename({extname : '.min.js'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities/'));
 
-	// amp/jquery.plugins/*.js
+	// amp/amp.jquery.plugins.js
 	MODULE.gulp.src(PATH.develop + 'amp/jquery.plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -206,7 +219,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 
-	// amp.jquery.js
+	// amp/amp.jquery.js
 	// base
 	MODULE.gulp.src([
 		PATH.develop + 'amp/jquery/AMP.$.js',
@@ -225,19 +238,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// utility
+	// amp/utilities/
 	MODULE.gulp.src(PATH.develop + 'amp/jquery/utilities/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
-	// .pipe(MODULE.rename({prefix: BANNER.jquery.name + '.'}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
+	.pipe(MODULE.rename({prefix: BANNER.jquery.name + '.'}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities'))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.rename({extname : '.min.js'}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities'));
 
 
 	// amp.createjs.js

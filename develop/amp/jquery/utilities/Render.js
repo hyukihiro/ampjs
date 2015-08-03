@@ -10,7 +10,7 @@
 
 
   if(!Hogan){
-    throw new Error('Hogan not found');
+    throw new Error('Hogan is not found');
   }
 
 
@@ -343,10 +343,9 @@
 
 
   /*--------------------------------------------------------------------------
-    exports
+    export
   --------------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ || {};
   AMP.$.Render = Render;
 
 

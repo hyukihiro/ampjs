@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>develop\amp\core\utilities\Vector.js - AMPjs</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 3.0.5</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
+                                <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
+                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
+                                <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
+                                <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
+                                <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
+                                <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
+                                <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
+                                <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
+                                <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
+                                <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
+                                <li><a href="../classes/AMP.BASE_CLASS.html">AMP.BASE_CLASS</a></li>
+                                <li><a href="../classes/AMP.Debug.html">AMP.Debug</a></li>
+                                <li><a href="../classes/AMP.Ease.html">AMP.Ease</a></li>
+                                <li><a href="../classes/AMP.Events.html">AMP.Events</a></li>
+                                <li><a href="../classes/AMP.Extend.html">AMP.Extend</a></li>
+                                <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
+                                <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
+                                <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
+                                <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
+                                <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
+                                <li><a href="../classes/AMP.String.html">AMP.String</a></li>
+                                <li><a href="../classes/AMP.Utility.html">AMP.Utility</a></li>
+                                <li><a href="../classes/AMP.Vector.html">AMP.Vector</a></li>
+                                <li><a href="../classes/Fallback.html">Fallback</a></li>
+                                <li><a href="../classes/jQuery.html">jQuery</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: develop\amp\core\utilities\Vector.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+/// AMPjs Javascript Library
+/// The MIT License (MIT)
+/// author Yoshihito Fujiwara
+/// source https://bitbucket.org/yoshihitofujiwara/ampjs
+/// Copyright (c) 2014 Yoshihito Fujiwara
+
+(function(root, AMP){
+
+  // &#x27;use strict&#x27;;
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;Vectorを管理します&lt;/h4&gt;
+   *
+   * @class AMP.Vector
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   * @param  {Number|Object} x座標値もしくは、xyz座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   */
+  function Vector(x, y, z){
+    /// FIXME: 一旦仮
+    this._angleMode = Vector.ANGLE_MODE_RADIANS;
+    this.set(x, y, z);
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Vector, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Vector.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;バージョン情報&lt;/h4&gt;
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Vector.VERSION = &#x27;1.0.3&#x27;;
+
+
+  /**
+   * &lt;h4&gt;クラス名&lt;/h4&gt;
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = &#x27;Vector&#x27;;
+
+
+  /**
+   * &lt;h4&gt;π (半円)&lt;/h4&gt;
+   *
+   *
+   * @property PI
+   * @type {Number}
+   */
+  Vector.PI = Math.PI;
+
+
+  /**
+   * &lt;h4&gt;π * 2 (円)&lt;/h4&gt;
+   *
+   * @property PI_TWO
+   * @type {Number}
+   */
+  Vector.PI_TWO = Vector.PI * 2;
+
+
+  /**
+   * &lt;h4&gt;π * 2 (1/4円)&lt;/h4&gt;
+   *
+   * @property PI_HARF
+   * @type {Number}
+   */
+  Vector.PI_HARF = Vector.PI / 2;
+
+
+  /**
+   * &lt;h4&gt;アングルモード、ラジアンモードタイプ名&lt;/h4&gt;
+   *
+   * @static
+   * @property ANGLE_MODE_RADIANS
+   * @type {String}
+   */
+  Vector.ANGLE_MODE_RADIANS = &#x27;radians&#x27;;
+
+
+  /**
+   * &lt;h4&gt;アングルモード、角度モードタイプ名&lt;/h4&gt;
+   *
+   * @static
+   * @property ANGLE_MODE_DEGREES
+   * @type {String}
+   */
+  Vector.ANGLE_MODE_DEGREES = &#x27;degrees&#x27;;
+
+
+  /**
+   * &lt;h4&gt;アングルモード&lt;/h4&gt;
+   *
+   * @private
+   * @property _angleMode
+   * @type {String}
+   */
+  p._angleMode = &#x27;radians&#x27;;
+
+
+  /**
+   * &lt;h4&gt;X座標&lt;/h4&gt;
+   *
+   * @property x
+   * @type {Number}
+   */
+  p.x = 0;
+
+
+  /**
+   * &lt;h4&gt;Y座標&lt;/h4&gt;
+   *
+   * @property y
+   * @type {Number}
+   */
+  p.y = 0;
+
+
+  /**
+   * &lt;h4&gt;Z座標&lt;/h4&gt;
+   *
+   * @property z
+   * @type {Number}
+   */
+  p.z = 0;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;ラジアンを角度に変換して返す&lt;/h4&gt;
+   *
+   * @static
+   * @method radToDeg
+   * @param  {Number} rad ラジアン
+   * @return {Number}
+   */
+  Vector.radToDeg = function(rad){
+    return 360 * rad / (2 * Vector.PI);
+  };
+
+
+  /**
+   * &lt;h4&gt;角度をラジアンに変換して返す&lt;/h4&gt;
+   *
+   * @static
+   * @method degToRad
+   * @param  {Number} deg 角度
+   * @return {Number}
+   */
+  Vector.degToRad = function(deg){
+    return 2 * Vector.PI * deg / 360;
+  };
+
+
+  /**
+   * &lt;h4&gt;角度から2Dベクトルを作成&lt;/h4&gt;
+   *
+   * @static
+   * @method fromDeg
+   * @param  {Number} deg 角度
+   * @return {Vector}
+   */
+  Vector.fromDeg = function(deg){
+    var radians = Vector.degToRad(deg);
+    return Vector.get(Math.cos(radians), Math.sin(radians), 0);
+  };
+
+
+  /**
+   * &lt;h4&gt;ランダムな2Dベクトルを作成&lt;/h4&gt;
+   *
+   * @static
+   * @method random2D
+   * @return {Vector}
+   */
+  Vector.random2D = function(){
+    return Vector.fromAngle(AMP.random(360));
+  };
+
+
+  /**
+   * &lt;h4&gt;ランダムな3Dベクトルを作成&lt;/h4&gt;
+   *
+   * @static
+   * @method random3D
+   * @return {Vector}
+   */
+  Vector.random3D = function(){
+    var deg = AMP.random(0, Vector.PI_TWO),
+    z = AMP.random(-1, 1),
+    x = Math.sqrt(1 - z * z) * Math.cos(deg),
+    y = Math.sqrt(1 - z * z) * Math.sin(deg);
+    return Vector.get(x, y, z);
+  };
+
+
+  /**
+   * &lt;h4&gt;2つのベクターデータの中間角度を返す&lt;/h4&gt;
+   *
+   * @method degBetween
+   * @param  {Vector} vector1 Vectorインスタンス
+   * @param  {Vector} vector2 Vectorインスタンス
+   * @return {Number}
+   */
+  Vector.degBetween = function(vector1, vector2){
+    var radians = Math.acos(vector1.dot(vector2) / (vector1.mag() * vector2.mag()));
+    return Vector.radToDeg(radians);
+  };
+
+
+  /**
+   * &lt;h4&gt;Vectorインスタンスの生成&lt;/h4&gt;
+   *
+   * @static
+   * @method get
+   * @param  {Number|Object} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Vector}
+   */
+  Vector.get = function(x, y, z){
+    return new Vector(x, y, z);
+  };
+
+
+  /**
+   * &lt;h4&gt;Vectorのcopyを生成します&lt;/h4&gt;
+   *
+   * @method copy
+   * @return {Vector}
+   */
+  p.copy = function(){
+    return new Vector(this);
+  };
+
+
+  /**
+   * &lt;h4&gt;アングルモードの設定&lt;/h4&gt;
+   *
+   * @method setAngleMode
+   * @param {String} type アングルモード名（radians　or degrees）
+   * @return {Vector}
+   */
+  p.setAngleMode = function(type){
+    if(type === Vector.ANGLE_MODE_RADIANS){
+      this._angleMode = Vector.ANGLE_MODE_RADIANS;
+    } else if(type === Vector.ANGLE_MODE_DEGREES){
+      this._angleMode = Vector.ANGLE_MODE_DEGREES;
+    }
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;アングルモードの取得&lt;/h4&gt;
+   *
+   * @method getAngleMode
+   * @return {String} アングルモードを返す（radians　or degrees）
+   */
+  p.getAngleMode = function(){
+    return this._angleMode;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標のセット&lt;/h4&gt;
+   *
+   * @method set
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Vector}
+   */
+  p.set = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    this.x = coord.x;
+    this.y = coord.y;
+    this.z = coord.z;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトルの大きさの取得&lt;/h4&gt;
+   *
+   * @method getMag
+   * @return {Number} ベクトルの大きさを返す
+   */
+  p.getMag = function(){
+    return Math.sqrt(this.getMagSqrt());
+  };
+
+
+  /**
+   * &lt;h4&gt;座標3点の累乗積&lt;/h4&gt;
+   *
+   * @method getMagSqrt
+   * @return {Number}
+   */
+  p.getMagSqrt = function(){
+    return this.x * this.x + this.y * this.y + this.z * this.z;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標の加算&lt;/h4&gt;
+   *
+   * @method add
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Vector}
+   */
+  p.add = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    this.x += coord.x;
+    this.y += coord.y;
+    this.z += coord.z;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標の減算&lt;/h4&gt;
+   *
+   * @method sub
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Vector}
+   */
+  p.sub = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    this.x -= coord.x;
+    this.y -= coord.y;
+    this.z -= coord.z;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標の乗算&lt;/h4&gt;
+   *
+   * @method mult
+   * @param  {Number} num 乗数
+   * @return {Vector}
+   */
+  p.mult = function(num){
+    this.x *= num;
+    this.y *= num;
+    this.z *= num;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標の除算&lt;/h4&gt;
+   *
+   * @method div
+   * @param  {Number} num 除数
+   * @return {Vector}
+   */
+  p.div = function(num){
+    this.x /= num;
+    this.y /= num;
+    this.z /= num;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトルの大きさを返す&lt;/h4&gt;
+   *
+   * @method mag
+   * @param {Number} num ベクトルの大きさ
+   * @return {Vector}
+   */
+  p.mag = function(){
+    return Math.sqrt(this.magSqrt());
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトル累乗積を返す&lt;/h4&gt;
+   *
+   * @method magSqrt
+   * @return {Number}
+   */
+  p.magSqrt = function(){
+    return Math.pow(this.x, 2) + Math.pow(this.y, 2) + Math.pow(this.z, 2);
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトルのドット積&lt;/h4&gt;
+   *
+   * @method dot
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+  p.dot = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    return this.x * coord.x + this.y * coord.y + this.z * coord.z;
+  };
+
+
+  /**
+   * &lt;h4&gt;2つのベクトルのクロス積(3D)&lt;/h4&gt;
+   *
+   * @method cross
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+  p.cross = function(x, y, z){
+    var coord = this._createCoord(x, y, z),
+    _x = this.y * coord.z - this.z * coord.y,
+    _y = this.z * coord.x - this.x * coord.z,
+    _z = this.x * coord.y - this.y * coord.x;
+    return new Vector(_x, _y, _z);
+  };
+
+
+  /**
+   * &lt;h4&gt;2つのベクトル間のユーグリッド距離&lt;/h4&gt;
+   *
+   * @method cross
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Number}
+   */
+  p.dist = function(x, y, z){
+    return new Vector(x, y, z).sub(this).mag();
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトルの正規化&lt;/h4&gt;
+   *
+   * @method normalize
+   * @return {Vector}
+   */
+  p.normalize = function(){
+    var mag = this.mag();
+    if(mag !== 0){
+      this.div(mag);
+    }
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;限界値の制限&lt;/h4&gt;
+   *
+   * @method limit
+   * @param  {Number} max 限界値
+   * @return {Vector}
+   */
+  p.limit = function(max){
+    var magSqrt = this.magSqrt();
+    if(max * max &lt; magSqrt) {
+      this.div(Math.sqrt(magSqrt));
+      this.mult(max);
+    }
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;ベクトルの大きさを設定&lt;/h4&gt;
+   *
+   * @method setMag
+   * @param {Number} num 乗数
+   * @return {Vector}
+   */
+  p.setMag = function(num){
+    this.normalize().mult(num);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;角度で表される2Dベクトルの方向&lt;/h4&gt;
+   *
+   * @method heading
+   * @return {Number}
+   */
+  p.heading = function(){
+    var h = Math.atan2(this.y, this.x);
+    if(this._angleMode === Vector.RADIANS){
+      return h;
+    } else {
+      return Vector.radToDeg(h);
+    }
+  };
+
+
+  /**
+   * &lt;h4&gt;指定した角度へ2Dベクトル回転&lt;/h4&gt;
+   *
+   * @method rotate
+   * @param  {Number} deg 回転する度数
+   * @return {Vector}
+   */
+  p.rotate = function(deg) {
+    if(this._angleMode === Vector.ANGLE_MODE_DEGREES) {
+      deg = Vector.degToRad(deg);
+    }
+
+    var heading = this.heading() + deg,
+    mag = this.mag();
+
+    this.x = Math.cos(heading) * mag;
+    this.y = Math.sin(heading) * mag;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;別のベクトルに対する線形補間&lt;/h4&gt;
+   *
+   * @method lerp
+   * @param {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param {Number} y y座標値
+   * @param {Number} z z座標値
+   * @param {Number} amount 量
+   *
+   * @return {Vector}
+   */
+  p.lerp = function(x, y, z, amount){
+    if(!AMP.isNumber(x)){
+      var coord = this._createCoord(x);
+      amount = y;
+      x = coord.x;
+      y = coord.y;
+      z = coord.z;
+    }
+
+    this.x += (x - this.x) * amount || 0;
+    this.y += (y - this.y) * amount || 0;
+    this.z += (z - this.z) * amount || 0;
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標を配列にして返す&lt;/h4&gt;
+   *
+   * @method toArray
+   * @return {Array}
+   */
+  p.toArray = function(){
+    return [this.x, this.y, this.z];
+  };
+
+
+  /**
+   * &lt;h4&gt;座標オブジェクトを返します&lt;/h4&gt;
+   *
+   * @method toJSON
+   * @return {Object}
+   */
+  p.toJSON = function(){
+    return {
+      x: this.x,
+      y: this.y,
+      z: this.z
+    };
+  };
+
+
+  /**
+   * &lt;h4&gt;座標が等しいか判定します&lt;/h4&gt;
+   *
+   * @method isEquals
+   * @param  {Number|Object|Array} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Boolean}
+   */
+  p.isEquals = function(x, y, z){
+    var coord = this._createCoord(x, y, z);
+    return this.x === coord.x &amp;&amp; this.y === coord.y &amp;&amp; this.z === coord.z;
+  };
+
+
+  /**
+   * &lt;h4&gt;座標オブジェクトを生成&lt;/h4&gt;
+   *
+   * @private
+   * @method _createCoord
+   * @param  {Number|Object} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Object}   x,y,z座標を格納したオブジェクト
+   */
+  p._createCoord = function(x, y, z){
+    if(AMP.isObject(x)){
+      return x;
+    } else if(AMP.isArray(x)){
+      return {
+        x: x[0] || 0,
+        y: x[1] || 0,
+        z: x[2] || 0
+      };
+    } else {
+      return {
+        x: x || 0,
+        y: y || 0,
+        z: z || 0
+      };
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Vector = Vector;
+
+
+}(window, AMP));
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
