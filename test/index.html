@@ -6,11 +6,11 @@
 <title>AMPjs</title>
 <meta name="description" content="AMP Javascript Library">
 <meta name="keywords" content="AMP,js,javascript,library">
-<!-- <meta name="viewport" content="width=978"> -->
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="format-detection" content="telephone=no,address=no,email=no">
 <!--[if lt IE 9]><script src="js/html5shiv.min.js"></script><![endif]-->
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Rokkitt:400,700">
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" href="css/global.css" media="all">
 <link rel="stylesheet" href="css/index.css" media="all">
 
@@ -41,8 +41,7 @@
 <body>
 <div id="page">
 <header>
-<h1><a href="#page">AMP.js</a></h1>
-<p class="link"><a href="https://bitbucket.org/yoshihitofujiwara/ampjs" target="_blank">Bitbucket Repository</a></p>
+<h1><a href="./index.html">AMPjs TEST</a></h1>
 <!-- header // --></header>
 
 
@@ -101,54 +100,55 @@
 
 
 <footer>
-<small>Copyright &copy; AMP.js 2014-2015</small>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
 </footer>
 <!-- #page // --></div>
 
 
 <!-- lib -->
-<script src="../dist/lib/jquery-1.8.3.min.js"></script>
-<script src="../dist/lib/jquery.plugins.js"></script>
-<script src="../dist/lib/utilities.js"></script>
-<!--[if gte IE 9]><!--><script src="../dist/lib/createjs-2014.12.12.min.js"></script><!--<![endif]-->
+<script src="../dist/libs/jquery-1.8.3.min.js"></script>
+<script src="../dist/libs/jquery.plugins.js"></script>
+<script src="../dist/libs/utils.js"></script>
+<!--[if gte IE 9]><!--><script src="../dist/libs/createjs-2014.12.12.min.js"></script><!--<![endif]-->
 
-<!-- amp -->
+<!-- amp develop -->
 <script src="../develop/amp/core/amp.js"></script>
 <script src="../develop/amp/core/base/array.js"></script>
 <script src="../develop/amp/core/base/extend.js"></script>
 <script src="../develop/amp/core/base/fallback.js"></script>
+<script src="../develop/amp/core/base/has.js"></script>
+<script src="../develop/amp/core/base/is.js"></script>
 <script src="../develop/amp/core/base/location.js"></script>
 <script src="../develop/amp/core/base/string.js"></script>
-<script src="../develop/amp/core/base/is.js"></script>
 <script src="../develop/amp/core/base/utility.js"></script>
-<script src="../develop/amp/core/base/has.js"></script>
-<script src="../develop/amp/core/utilities/Debug.js"></script>
-<script src="../develop/amp/core/utilities/Ease.js"></script>
-<script src="../develop/amp/core/utilities/Events.js"></script>
-<script src="../develop/amp/core/utilities/Mediaquery.js"></script>
-<script src="../develop/amp/core/utilities/Storage.js"></script>
-<script src="../develop/amp/core/utilities/Vector.js"></script>
-<script src="../develop/amp/core/utilities/FontResize.js"></script>
-<script src="../develop/amp/jquery.plugins/jquery.event.slip.js"></script>
-<script src="../develop/amp/jquery.plugins/jquery.event.stop.js"></script>
-<script src="../develop/amp/jquery.plugins/jquery.extend.js"></script>
-<script src="../develop/amp/jquery.plugins/jquery.fn.extend.js"></script>
-<script src="../develop/amp/jquery.plugins/jquery.event.flick.js"></script>
+<script src="../develop/amp/core/class/Debug.js"></script>
+<script src="../develop/amp/core/class/Ease.js"></script>
+<script src="../develop/amp/core/class/Events.js"></script>
+<script src="../develop/amp/core/class/FontResize.js"></script>
+<script src="../develop/amp/core/class/Mediaquery.js"></script>
+<script src="../develop/amp/core/class/Storage.js"></script>
+<script src="../develop/amp/core/class/Vector.js"></script>
+<script src="../develop/amp/core/utils/Loader.js"></script>
+
+<script src="../develop/amp/jquery.plugins/EventFlick.js"></script>
+<script src="../develop/amp/jquery.plugins/EventSlip.js"></script>
+<script src="../develop/amp/jquery.plugins/EventStop.js"></script>
+<script src="../develop/amp/jquery.plugins/Extend.js"></script>
+<script src="../develop/amp/jquery.plugins/FnExtend.js"></script>
+
 <script src="../develop/amp/jquery/AMP.$.js"></script>
-<script src="../develop/amp/jquery/base/Rollover.js"></script>
+<script src="../develop/amp/jquery/base/BoxHover.js"></script>
 <script src="../develop/amp/jquery/base/Ease.js"></script>
 <script src="../develop/amp/jquery/base/FlatHeight.js"></script>
+<script src="../develop/amp/jquery/base/Float3d.js"></script>
 <script src="../develop/amp/jquery/base/MediaImages.js"></script>
-<script src="../develop/amp/jquery/base/UIController.js"></script>
-<script src="../develop/amp/jquery/base/BoxHover.js"></script>
+<script src="../develop/amp/jquery/base/Rollover.js"></script>
 <script src="../develop/amp/jquery/base/Scroll.js"></script>
 <script src="../develop/amp/jquery/base/ScrollToggle.js"></script>
 <script src="../develop/amp/jquery/base/SmothScroll.js"></script>
-<script src="../develop/amp/jquery/base/Float3d.js"></script>
+<script src="../develop/amp/jquery/base/UIController.js"></script>
 <script src="../develop/amp/jquery/base/inherits/Slider.js"></script>
-<script src="../develop/amp/jquery/utilities/Render.js"></script>
-<script src="../develop/amp/jquery/utilities/Loader.js"></script>
-
+<script src="../develop/amp/jquery/utils/Render.js"></script>
 
 <!-- test -->
 <script src="js/test.js"></script>

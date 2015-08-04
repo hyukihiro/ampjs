@@ -24,7 +24,7 @@
    * @property VERSION
    * @type {String}
    */
-  View.VERSION = '1.0';
+  View.VERSION = '0.0.0';
 
 
   /**

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\utilities\FontResize.js - AMPjs</title>
+    <title>develop\amp\jquery.plugins\FnExtend.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\utilities\FontResize.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery.plugins\FnExtend.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -113,192 +113,140 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-(function(root, AMP){
+(function($){
 
-  // &#x27;use strict&#x27;;
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;フォントリサイズイベント&lt;/h4&gt;
-   * !!!: シングルトン&lt;br&gt;
-   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
-   * &lt;em&gt;AMP.fontResize&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
-   *
-   * @class AMP.FontResize
-   * @extends AMP.Events
-   * @constructor
-   */
-  function FontResize(){
-    /**
-     * &lt;h4&gt;要素を監視有効・無効の判定フラグ&lt;/h4&gt;
-     *
-     * @property isFontResize
-     * @default true
-     * @type {Boolean}
-     */
-    this.isFontResize = true;
-
-    /**
-     * &lt;h4&gt;監視する要素&lt;/h4&gt;
-     *
-     * @property el
-     * @type {DOM}
-     */
-    this.el = null;
-
-    /**
-     * &lt;h4&gt;監視要素の高さ&lt;/h4&gt;
-     *
-     * @property height
-     * @type {Number}
-     */
-    this.height = null;
-
-    // superClass constructor call
-    // FontResize.Events_constructor.call(this);
-    AMP.Events.call(this);
-  }
-
-  // AMP.Eventsクラスを継承
-  AMP.inherits(FontResize, AMP.Events);
-
-  // prototype
-  var p = FontResize.prototype;
+	// &#x27;use strict&#x27;;
 
 
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;バージョン情報&lt;/h4&gt;
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  FontResize.VERSION = &#x27;3.0.1&#x27;;
+	/**
+	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
+	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 *
+	 * @class jQuery
+	 */
 
 
-  /**
-   * &lt;h4&gt;クラス名&lt;/h4&gt;
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = &#x27;FontResize&#x27;;
+	/**
+	 * &lt;h4&gt;cssをアニメーションqueueで管理します&lt;/h4&gt;
+	 *
+	 * @method qCss
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @return {jQuery}
+	 */
+	/**
+	 * &lt;h4&gt;attrをアニメーションqueueで管理します&lt;/h4&gt;
+	 *
+	 * @method qAttr
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @return {jQuery}
+	 */
+  $.each({
+		css : &#x27;qCss&#x27;,
+		attr: &#x27;qAttr&#x27;
+	}, function(orig, fix){
+
+		$.fn[fix] = function(prop, val){
+			var self = this;
+			return self.queue(function(){
+				return self[orig](prop, val).dequeue();
+			});
+		};
+	});
 
 
-  /**
-   * &lt;h4&gt;フォントサイズ変更時の発行するイベントタイプ&lt;/h4&gt;
-   *
-   * @static
-   * @property eventType
-   * @default change
-   * @type {String}
-   */
-  FontResize.eventType = &#x27;change&#x27;;
+	/**
+	 * &lt;h4&gt;addClassをアニメーションqueueで管理します&lt;/h4&gt;
+	 *
+	 * @method qAddClass
+	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
+	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @return {jQuery}
+	 */
+	/**
+	 * &lt;h4&gt;removeClassをアニメーションqueueで管理します&lt;/h4&gt;
+	 *
+	 * @method qRemoveClass
+	 * @param  {String} prop クラス名
+	 * @param  {Function} val コールバック関数
+	 * @return {jQuery}
+	 */
+  $.each({
+		addClass   : &#x27;qAddClass&#x27;,
+		removeClass: &#x27;qRemoveClass&#x27;
+	}, function(orig, fix){
+
+		$.fn[fix] = function(val){
+			var self = this;
+			return self.queue(function(){
+				return self[orig](val).dequeue();
+			});
+		};
+	});
 
 
+	/**
+	 * &lt;h4&gt;コールバック関数をアニメーションqueueで管理します&lt;/h4&gt;
+	 *
+	 * @method qCall
+	 * @param  {Function} fn コールバック関数
+	 * @return {jQuery}
+	 */
+	$.fn.qCall = function(fn){
+		var self = this;
+		return self.queue(function(){
+			fn();
+			return self.dequeue();
+		});
+	};
 
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
 
+	/**
+	 * &lt;h4&gt;属性値のreplace処理&lt;/h4&gt;
+	 *
+	 * @method replaceAttr
+	 * @param  {String} attr 属性名
+	 * @param  {String} del  削除する文字列
+	 * @param  {String} add  追加する文字列
+	 * @return {jQuery}
+	 */
+	$.fn.replaceAttr = function(attr, del, add){
+		var	val = this.attr(attr);
 
-  /**
-   * &lt;h4&gt;監視するフォント要素生成&lt;/h4&gt;
-   *
-   * @private
-   * @method _createElement
-   * @return {Void}
-   */
-  p._createElement = function(){
-
-    var key = &#x27;AMP_FONT_RESIZE&#x27;,
-    el = document.createElement(&#x27;ins&#x27;),
-    text = document.createTextNode(key);
-
-    el.id = key;
-    el.setAttribute(&#x27;style&#x27;, &#x27;display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;&#x27;);
-    el.appendChild(text);
-    document.body.appendChild(el);
-
-    // property
-    this.el = document.getElementById(key);
-    this.height = this.el.clientHeight;
-
-    // set controller
-    this._controller();
-  };
+		if(val){
+			add = add ? add : &#x27;&#x27;;
+			return this.attr(attr, val.replace(del, add));
+		} else {
+			return this;
+		}
+	};
 
 
   /**
-   * &lt;h4&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/h4&gt;
+   * &lt;h4&gt;ファイルの拡張子を取得&lt;/h4&gt;
    *
-   * @private
-   * @method _controller
-   * @return {Void}
+   * @method getExt
+   * @param  {String} attr 取得属性名
+   * @return {String} 拡張子を返す
    */
-  p._controller = function(){
-    var self = this,
-    height = self.el.clientHeight;
+  $.fn.getExt = function(attr, isQuery){
+    var str = this.attr(attr),
+    val;
 
-    if(self.isFontResize){
-      // フォントサイズに変更があれば
-      if(self.height !== height){
-        self.height = height;
-        this.trigger(FontResize.eventType);
-      }
+    if(str.indexOf(&#x27;.&#x27;) &gt; -1){
+      val = str.substring(str.lastIndexOf(&#x27;.&#x27;));
 
-      // 再起処理
-      if(AMP.hasRAF()){
-        AMP.requestAnimationFrame(function(){
-          self._controller();
-        });
-      } else {
-        setTimeout(function(){
-          self._controller();
-        }, 50);
-      }
+			if(!isQuery){
+				val = val.split(&#x27;?&#x27;)[0].split(&#x27;#&#x27;)[0];
+			}
     }
+
+    return val;
   };
 
 
-  /**
-   * &lt;h4&gt;イベント登録&lt;/h4&gt;
-   *
-   * @method on
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.on = function(type, listener, context){
-    // 監視要素がない場合、要素を追加する
-    if(!this.el){
-      this._createElement();
-    }
-    this._addEvent(type, listener, context);
-    return this;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.FontResize = FontResize;
-  AMP.fontResize = new FontResize();
-
-
-}(window, AMP));
+}(jQuery));
 
     </pre>
 </div>

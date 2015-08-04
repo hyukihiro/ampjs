@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\utilities\Events.js - AMPjs</title>
+    <title>develop\amp\core\class\Ease.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\utilities\Events.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\Ease.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -123,52 +123,19 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;イベント&lt;/h4&gt;
-   * イベントクラスの継承して使用出来ます&lt;br&gt;
-   * メディエーターとしても使用すことも可能です
+   * &lt;h4&gt;Easingを管理します&lt;/h4&gt;
    *
-   * @class AMP.Events
+   * @class AMP.Ease
    * @extends AMP.BASE_CLASS
    * @constructor
-   *
-   * @example
-   *   // on&lt;br&gt;
-   *   events.on(&#x27;change&#x27;, function(){...});&lt;br&gt;
-   *   events.on(&#x27;change.type&#x27;, typeCall);&lt;br&gt;
-   *
-   *   // off&lt;br&gt;
-   *   events.off(&#x27;change&#x27;);&lt;br&gt;
-   *   events.off(&#x27;change&#x27;, typeCall);&lt;br&gt;
-   *   events.off();&lt;br&gt;
-   *
-   *   // tigger&lt;br&gt;
-   *   events.tigger(&#x27;change&#x27;);&lt;br&gt;
-   *   events.tigger(&#x27;change.type&#x27;);
-   *
    */
-  function Events(){
-    /**
-     * &lt;h4&gt;イベントリスナーを連想配列で格納します&lt;/h4&gt;
-     *
-     * @example
-     * _listeners = {
-     *    attr    : eventObj.attr,
-     *    func    : listener,
-     *    context : context
-     * }
-     *
-     * @private
-     * @property _listeners
-     * @type {Object}
-     */
-    this._listeners = {};
-  }
+  function Ease(){}
 
   // 基底クラスを継承
-  AMP.inherits(Events, AMP.BASE_CLASS);
+  AMP.inherits(Ease, AMP.BASE_CLASS);
 
   // prototype
-  var p = Events.prototype;
+  var p = Ease.prototype;
 
 
 
@@ -183,7 +150,7 @@
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = &#x27;2.0.1&#x27;;
+  Ease.VERSION = &#x27;2.0.0&#x27;;
 
 
   /**
@@ -192,230 +159,227 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Events&#x27;;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;イベント登録&lt;/h4&gt;
-   * イベント名に属性値を付与することが出来ます
-   *
-   * @method on
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.on = function(type, listener, context){
-    this._addEvent(type, listener, context);
-    return this;
-  };
+  p.className = &#x27;Ease&#x27;;
 
 
   /**
-   * &lt;h4&gt;1度だけ実行するイベント登録&lt;/h4&gt;
+   * &lt;h4&gt;css3 Easing用ネームスペース&lt;/h4&gt;
+   * &lt;a href=&quot;http://easings.net/ja&quot; target=&quot;_blank&quot;&gt;Easingサンプルサイト&lt;/a&gt;
    *
-   * @method onece
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener  イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
+   * @property css
+   * @type {Object}
    */
-  p.onece = function(type, listener, context){
-    var self = this;
+  p.css = {};
 
-    self.on(type, function(){
-      self.off(type);
-      listener.apply(self, arguments);
-    }, context);
 
-    return this;
-  };
-
+  /* 1 Sine
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._1_SINE_IN
+   * @type {String}
+   */
+  p.css._1_SINE_IN = &#x27;cubic-bezier(0.47, 0, 0.745, 0.715)&#x27;;
 
   /**
-   * &lt;h4&gt;イベント削除&lt;/h4&gt;
-   *
-   * @method off
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener  イベントリスナー
-   * @return {Events}
+   * @property css._1_SINE_IN
+   * @type {String}
    */
-  p.off = function(type, listener){
-    this._removeEvent(type, listener);
-    return this;
-  };
-
+  p.css._1_SINE_OUT = &#x27;cubic-bezier(0.39, 0.575, 0.565, 1)&#x27;;
 
   /**
-   * &lt;h4&gt;イベント追加&lt;/h4&gt;
-   *
-   * @private
-   * @method _addEvent
-   * @param {String} type イベントタイプ
-   * @param {Function} listener コールバック関数
-   * @param {Object} context コンテキスト
-   * @return {Void}
+   * @property css._1_SINE_IN_OUT
+   * @type {String}
    */
-  p._addEvent = function(type, listener, context){
-    var self = this,
-    events = type.split(&#x27; &#x27;);
+  p.css._1_SINE_IN_OUT = &#x27;cubic-bezier(0.445, 0.05, 0.55, 0.95)&#x27;;
 
-    // listenerが関数かチェック
-    if(AMP.isFunction(listener)){
-      AMP.each(events, function(item){
-        var eventObj = self._getEventNameMap(item);
-        self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
-        self._listeners[eventObj.type].push({
-          attr   : eventObj.attr,
-          func   : listener,
-          context: context
-        });
-      });
-    }
-  };
 
+  /* 2 Quad
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._2_QUAD_IN
+   * @type {String}
+   */
+  p.css._2_QUAD_IN = &#x27;cubic-bezier(0.55, 0.085, 0.68, 0.53)&#x27;;
 
   /**
-   * &lt;h4&gt;イベント削除&lt;/h4&gt;
-   * TODO: 内部処理最適化予定
-   *
-   * @private
-   * @method _removeEvent
-   * @param {String} type イベントタイプ
-   * @param {Function} listener コールバック関数
-   * @return {Void}
+   * @property css._2_QUAD_OUT
+   * @type {String}
    */
-  p._removeEvent = function(type, listener){
-    var self = this,
-    events = type ? type.split(&#x27; &#x27;) : [],
-    ary = null,
-    listeners;
-
-    listener = AMP.getFunctionName(listener);
-
-    AMP.each(events, function(event){
-      var eventObj = self._getEventNameMap(event);
-
-      // イベント属性指定がある場合
-      if(eventObj &amp;&amp; eventObj.attr &amp;&amp; self._listeners[eventObj.type]){
-        listeners = self._listeners[eventObj.type];
-
-        AMP.each(listeners, function(item){
-          if(item.attr !== eventObj.attr){
-            if(listener){
-              if(listener !== AMP.getFunctionName(item.func)){
-                ary = ary || [];
-                ary.push(item);
-              }
-            } else {
-              ary = ary || [];
-              ary.push(item);
-            }
-          }
-        });
-
-        self._listeners[eventObj.type] = ary;
-
-      // イベントタイプ指定ある場合
-      } else if(eventObj){
-        if(listener){
-          listeners = self._listeners[eventObj.type];
-
-          AMP.each(listeners, function(item){
-            if(listener !== AMP.getFunctionName(item.func)){
-              ary = ary || [];
-              ary.push(item);
-            }
-          });
-        }
-        self._listeners[eventObj.type] = ary;
-
-      // イベント全て削除
-      } else {
-        self._listeners = null;
-        self._listeners = {};
-      }
-    });
-  };
-
+  p.css._2_QUAD_OUT = &#x27;cubic-bezier(0.25, 0.46, 0.45, 0.94)&#x27;;
 
   /**
-   * &lt;h4&gt;イベント名、イベント属性を連想配列にして返す&lt;/h4&gt;
-   *
-   * @private
-   * @method _getEventNameMap
-   * @param  {String} type イベントタイプ
-   * @return {Object}
+   * @property css._2_QUAD_IN_OUT
+   * @type {String}
    */
-  p._getEventNameMap = function(type){
-    var events = type.split(&#x27;.&#x27;);
-    return {
-      type: events[0],
-      attr: events[1]
-    };
-  };
+  p.css._2_QUAD_IN_OUT = &#x27;cubic-bezier(0.455, 0.03, 0.515, 0.955)&#x27;;
 
+
+  /* 3 Cubic
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._3_CUBIC_IN
+   * @type {String}
+   */
+  p.css._3_CUBIC_IN = &#x27;cubic-bezier(0.55, 0.055, 0.675, 0.19)&#x27;;
 
   /**
-   * &lt;h4&gt;イベントが登録されているか判定します&lt;/h4&gt;
-   *
-   * @method hasEvent
-   * @param  {String} type イベントタイプ
-   * @return {Boolean}
+   * @property css._3_CUBIC_OUT
+   * @type {String}
    */
-  p.hasEvent = function(type){
-    var flag = false,
-    events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
-
-    // イベントリスナーの有無
-    if(listeners){
-      // 属性指定がある場合
-      if(events.attr){
-        AMP.each(listeners, function(item){
-          if(item.attr === events.attr){
-            flag = true;
-            return false;
-          }
-        });
-
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  };
-
+  p.css._3_CUBIC_OUT = &#x27;cubic-bezier(0.215, 0.61, 0.355, 1)&#x27;;
 
   /**
-   * &lt;h4&gt;イベント発行&lt;/h4&gt;
-   * &lt;p&gt;第二引数以降に値を渡すとcallbackに引数として渡します&lt;/p&gt;
-   *
-   * @method trigger
-   * @param  {String} type イベントタイプ
-   * @return {Events}
+   * @property css._3_CUBIC_IN_OUT
+   * @type {String}
    */
-  p.trigger = function(type){
-    var self = this,
-    events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+  p.css._3_CUBIC_IN_OUT = &#x27;cubic-bezier(0.645, 0.045, 0.355, 1)&#x27;;
 
-    if(listeners){
-      AMP.each(listeners, function(item){
-        if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
-        }
-      });
-    }
 
-    return self;
-  };
+  /* 4 Quart
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._4_QUART_IN
+   * @type {String}
+   */
+  p.css._4_QUART_IN = &#x27;cubic-bezier(0.895, 0.03, 0.685, 0.22)&#x27;;
+
+  /**
+   * @property css._4_QUART_OUT
+   * @type {String}
+   */
+  p.css._4_QUART_OUT = &#x27;cubic-bezier(0.165, 0.84, 0.44, 1)&#x27;;
+
+  /**
+   * @property css._4_QUART_IN_OUT
+   * @type {String}
+   */
+  p.css._4_QUART_IN_OUT = &#x27;cubic-bezier(0.77, 0, 0.175, 1)&#x27;;
+
+
+  /* 5 Quint
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._5_QUINT_IN
+   * @type {String}
+   */
+  p.css._5_QUINT_IN = &#x27;cubic-bezier(0.755, 0.05, 0.855, 0.06)&#x27;;
+
+  /**
+   * @property css._5_QUINT_OUT
+   * @type {String}
+   */
+  p.css._5_QUINT_OUT = &#x27;cubic-bezier(0.23, 1, 0.32, 1)&#x27;;
+
+  /**
+   * @property css._5_QUINT_IN_OUT
+   * @type {String}
+   */
+  p.css._5_QUINT_IN_OUT = &#x27;cubic-bezier(0.86, 0, 0.07, 1)&#x27;;
+
+
+  /* 6 Expo
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._6_EXPO_IN
+   * @type {String}
+   */
+  p.css._6_EXPO_IN = &#x27;cubic-bezier(0.95, 0.05, 0.795, 0.035)&#x27;;
+
+  /**
+   * @property css._6_EXPO_OUT
+   * @type {String}
+   */
+  p.css._6_EXPO_OUT = &#x27;cubic-bezier(0.19, 1, 0.22, 1)&#x27;;
+
+  /**
+   * @property css._6_EXPO_IN_OUT
+   * @type {String}
+   */
+  p.css._6_EXPO_IN_OUT = &#x27;cubic-bezier(1, 0, 0, 1)&#x27;;
+
+
+  /* 7 Cric
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._7_CIRC_IN
+   * @type {String}
+   */
+  p.css._7_CIRC_IN = &#x27;cubic-bezier(0.6, 0.04, 0.98, 0.335)&#x27;;
+
+  /**
+   * @property css._7_CIRC_OUT
+   * @type {String}
+   */
+  p.css._7_CIRC_OUT = &#x27;cubic-bezier(0.075, 0.82, 0.165, 1);&#x27;;
+
+  /**
+   * @property css._7_CIRC_IN_OUT
+   * @type {String}
+   */
+  p.css._7_CIRC_IN_OUT = &#x27;cubic-bezier(0.785, 0.135, 0.15, 0.86)&#x27;;
+
+
+  /* 7 Back
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._BACK_IN
+   * @type {String}
+   */
+  p.css._BACK_IN = &#x27;cubic-bezier(0.6, -0.28, 0.735, 0.045)&#x27;;
+
+  /**
+   * @property css._BACK_OUT
+   * @type {String}
+   */
+  p.css._BACK_OUT = &#x27;cubic-bezier(0.175, 0.885, 0.32, 1.275)&#x27;;
+
+  /**
+   * @property css._BACK_IN_OUT
+   * @type {String}
+   */
+  p.css._BACK_IN_OUT = &#x27;cubic-bezier(0.68, -0.55, 0.265, 1.55)&#x27;;
+
+
+  /* Elastic
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._ELASTIC_IN
+   * @type {String}
+   */
+  p.css._ELASTIC_IN = null;
+
+  /**
+   * @property css._ELASTIC_OUT
+   * @type {String}
+   */
+  p.css._ELASTIC_OUT = null;
+
+  /**
+   * @property css._ELASTIC_IN_OUT
+   * @type {String}
+   */
+  p.css._ELASTIC_IN_OUT = null;
+
+
+  /* Bounce
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._BOUNCE_IN
+   * @type {String}
+   */
+  p.css._BOUNCE_IN = null;
+
+  /**
+   * @property css._BOUNCE_OUT
+   * @type {String}
+   */
+  p.css._BOUNCE_OUT = null;
+
+  /**
+   * @property css._BOUNCE_IN_OUT
+   * @type {String}
+   */
+  p.css._BOUNCE_IN_OUT = null;
 
 
 
@@ -423,7 +387,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Events = Events;
+  AMP.Ease = Ease;
+  AMP.ease = new Ease();
 
 
 }(window, AMP));

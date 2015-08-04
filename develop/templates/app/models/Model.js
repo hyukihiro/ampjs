@@ -24,7 +24,7 @@
    * @property VERSION
    * @type {String}
    */
-  Model.VERSION = '1.0';
+  Model.VERSION = '0.0.0';
 
 
   /**

@@ -16,10 +16,10 @@
    * スニペット的なコードは、ここで管理します
    *
    * @constructor
-   * @class Utilitys
-   * @return {Utilitys}
+   * @class Utilities
+   * @return {Utilities}
    */
-  function Utilitys(){}
+  function Utilities(){}
 
 
 
@@ -34,7 +34,7 @@
    * @property VERSION
    * @type {String}
    */
-  Utilitys.VERSION = '1.0';
+  Utilities.VERSION = '0.0.0';
 
 
   /**
@@ -43,7 +43,7 @@
    * @property p
    * @type {Object}
    */
-  p = Utilitys.prototype;
+  p = Utilities.prototype;
 
 
   /**
@@ -52,7 +52,7 @@
    * @property name
    * @type {Object}
    */
-  p.name = 'Utilitys';
+  p.name = 'Utilities';
 
 
 
@@ -67,7 +67,7 @@
    * @return {String} クラス名を返す
    */
   p.toString = function(){
-    return '[object Utilitys name=' + this.name + ']';
+    return '[object Utilities name=' + this.name + ']';
   };
 
 
@@ -77,8 +77,8 @@
   --------------------------------------------------------------------------*/
 
   root.app = root.app || {};
-  root.app.Utilitys = Utilitys;
-  root.app.utilitys = new Utilitys();
+  root.app.Utilities = Utilities;
+  root.app.utilitys = new Utilities();
 
 
 }(window));

@@ -77,6 +77,20 @@ AMP.$、AMP.cjsのネームスペース以外は、AMPjsのコア機能です。
 ```
 <script src="/dist/js/amp/amp.3.x.x.js"></script>
 ```
+#### AMPjs ユーティリティクラス
+AMPjs ユーティリティクラス(/dist/amp/utils/amp.*.js)のディレクトリファイルは、ユーティリティ機能を提供します。  
+外部ユーティリティ系ライブラリに依存します。
+使用の際は、上記のファイルに加え以下のファイルをインストールしてください。
+
+
+```
+// 外部ライブラリ
+<script src="/dist/js/libs/utils.js"></script>
+
+// AMPjsファイル
+<script src="/dist/js/amp/utils/amp.{filename}.js"></script>
+```
+
 
 
 ### AMPjs jQueryモジュール
@@ -87,8 +101,8 @@ jQueryコアファイルは、1.8.3以上のバージョンを推奨します。
 
 ```
 // 外部ライブラリ
-<script src="/dist/lib/jquery.1.8.3.min.js"></script>
-<script src="/dist/lib/jquery.plugins.min.js"></script>
+<script src="/dist/libs/jquery.1.8.3.min.js"></script>
+<script src="/dist/libs/jquery.plugins.min.js"></script>
 
 // AMPjsファイル
 <script src="/dist/amp/amp.3.x.x.min.js"></script>
@@ -98,17 +112,17 @@ jQueryコアファイルは、1.8.3以上のバージョンを推奨します。
 
 
 #### AMPjs jQueryユーティリティクラス
-AMPjs jQueryユーティリティクラス(/dist/amp/jquery.utilities/*.js)のディレクトリファイルは、ユーティリティ機能を提供します。  
+AMPjs jQueryユーティリティクラス(/dist/amp/utils/amp.jquery.*.js)のディレクトリファイルは、ユーティリティ機能を提供します。  
 jQuery以外の外部ユーティリティ系ライブラリに依存します。
 使用の際は、上記のファイルに加え以下のファイルをインストールしてください。
 
 
 ```
 // 外部ライブラリ
-<script src="/dist/js/utilities.js"></script>
+<script src="/dist/js/libs/utils.js"></script>
 
 // AMPjsファイル
-<script src="/dist/js/amp/jquery.utilities/{filename}.js"></script>
+<script src="/dist/js/amp/utils/amp.jquery.{filename}.js"></script>
 ```
 
 

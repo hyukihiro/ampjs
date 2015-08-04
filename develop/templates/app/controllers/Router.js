@@ -42,7 +42,7 @@
    * @property VERSION
    * @type {String}
    */
-  Router.VERSION = '1.0';
+  Router.VERSION = '0.0.0';
 
 
   /**

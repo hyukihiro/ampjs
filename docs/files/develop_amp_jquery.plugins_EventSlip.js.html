@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery.plugins\jquery.extend.js - AMPjs</title>
+    <title>develop\amp\jquery.plugins\EventSlip.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery.plugins\jquery.extend.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery.plugins\EventSlip.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -127,82 +127,104 @@
 
 
 	/*--------------------------------------------------------------------------
-		@sequence
+		@slip
 	--------------------------------------------------------------------------*/
 	/**
-	 * &lt;h4&gt;コールバック関数管理 &lt;/h4&gt;
-	 * Deferred resolve通知を受けたら次の関数へ移る
+	 * &lt;h4&gt;マウスインした時の方向を取得するイベント&lt;/h4&gt;
+	 * イベントオブジェクトに取得したオブジェクトを返します
+	 * &lt;em&gt;インライン要素には効きません&lt;/em&gt;
 	 *
-	 * @static
-	 * @method sequence
-	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
-	 * @return {jQuery.Deferred}
+	 * @event slipin
+	 * @example
+	 *	$(elm).on(&#x27;slipin&#x27;, callback);
+	 *	$(elm).slipin(callback);
 	 */
-	$.sequence = function(){
-		/*jslint loopfunc: true */
-		var $def = new $.Deferred(),
-		$Def = new $.Deferred(),
-		callbacks,
-		piped;
+	/**
+	 * &lt;h4&gt;マウスアウトした時の方向を取得するイベント&lt;/h4&gt;
+	 * イベントオブジェクトに取得したオブジェクトを返します
+	 * &lt;b&gt;インライン要素には効きません&lt;/b&gt;
+	 *
+	 * @event slipout
+	 * @example
+	 *	$(elm).on(&#x27;slipout&#x27;, callback);
+	 *	$(elm).slipout(callback);
+	 */
+	$.each({
+		mouseenter: &#x27;slipin&#x27;,
+		mouseleave: &#x27;slipout&#x27;
+	}, function(orig, fix){
 
-		if($.isArray(arguments[0])){
-			callbacks = arguments[0];
-		} else {
-			callbacks = [].slice.apply(arguments);
-		}
+		$.event.special[fix] = {
 
-		callbacks[callbacks.length] = $def.resolve;
+			// on
+			setup: function(){
+				$(this).on(orig, $.event.special[fix].handler);
+			},
 
-		var i = 0,
-		l = callbacks.length;
+			// off
+			teardown: function(){
+				$(this).off(orig, $.event.special[fix].handler);
+			},
 
-		for(; i &lt; l; i += 1){
-			if($.isFunction(callbacks[i])){
-				piped = (piped ? piped : $Def).pipe($.proxy(function(){
-					return this();
-				}, callbacks[i])).fail($def.reject);
+			// handler
+			handler: function(event){
+				var obj = {},
+				$this = $(this),
+				offset = $this.offset(),
+				w = $this.width(),
+				h = $this.height(),
+				x = (event.pageX - offset.left - (w / 2)) * (w &gt; h ? (h / w) : 1),
+				y = (event.pageY - offset.top - (h / 2)) * (h &gt; w ? (w / h) : 1),
+				direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+
+				obj.originalEvent = event;
+				obj.x = x;
+				obj.y = y;
+				obj.type = fix;
+				// obj.direction = direction;
+
+				switch(direction){
+				case 0:
+					obj.direction = &#x27;top&#x27;;
+					break;
+
+				case 1:
+					obj.direction = &#x27;right&#x27;;
+					break;
+
+				case 2:
+					obj.direction = &#x27;bottom&#x27;;
+					break;
+
+				case 3:
+					obj.direction = &#x27;left&#x27;;
+					break;
+				}
+
+				$this.trigger(obj);
 			}
-		}
+		};
 
-		$Def.resolve();
 
-		return $def.promise();
+		// add shorthand
+		$.fn[fix] = function(data, fn){
+			return arguments.length &gt; 0 ? this.on(fix, null, data, fn) : this.trigger(fix);
+		};
+	});
+
+
+	/**
+	 * &lt;h4&gt;slipin, slipout ショートハンド&lt;/h4&gt;
+	 *
+	 * @event slip
+	 * @param  {Function} fnIn  slipinコールバック関数
+	 * @param  {Function} fnOut slipoutコールバック関数
+	 * @example
+	 *	$(elm).slip(inCallback, outCallback);
+	 */
+	$.fn.slip = function(fnIn, fnOut){
+		return this.slipin(fnIn).slipout(fnOut || fnIn);
 	};
-
-
-  /**
-   * &lt;h4&gt;引数に渡した関数を縦列処理します&lt;/h4&gt;
-   * 実行した関数の戻り値は、次の関数の引数とproglessに渡します。
-   *
-   * @static
-   * @method stream
-   * @param {Function} argments 関数、もしくは配列に格納した関数
-   * @return {jQuery.Deferred}
-   */
-  $.stream = function(){
-  	var slice = Array.prototype.slice;
-    var $defer = new $.Deferred(),
-    count = 0,
-    callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
-
-    callbacks.push($defer.resolve);
-    stream();
-
-    // callbacksを再帰的に縦列処理する
-    function stream(){
-    	$.when.call(null, callbacks[count].apply(null, arguments))
-    	.fail($defer.reject)
-    	.done(function(){
-    		$defer.notify.call(null, arguments);
-    		count += 1;
-    		if(count &lt; callbacks.length){
-    			stream.apply(null, arguments);
-    		}
-    	});
-    }
-
-    return $defer.promise();
-  };
 
 
 }(jQuery));

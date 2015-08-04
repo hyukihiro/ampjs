@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\utilities\Ease.js - AMPjs</title>
+    <title>develop\amp\core\class\Storage.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\utilities\Ease.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\Storage.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -123,19 +123,44 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Easingを管理します&lt;/h4&gt;
+   * &lt;h4&gt;ストレージ管理&lt;/h4&gt;
+   * デフォルトでは、セッションストレージを使用します
    *
-   * @class AMP.Ease
+   * @class AMP.Storage
    * @extends AMP.BASE_CLASS
    * @constructor
+   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
    */
-  function Ease(){}
+  function Storage(isLocalStorage){
+    /**
+     * &lt;h4&gt;ストレージタイプ&lt;/h4&gt;
+     *
+     * @default sessionStorage
+     * @property type
+     * @type {String}
+     */
+    /**
+     * &lt;h4&gt;ストレージを保管&lt;/h4&gt;
+     *
+     * @private
+     * @property _storage
+     * @type {Object}
+     */
+    if(isLocalStorage){
+      this.type     = &#x27;localStorage&#x27;;
+      this._storage = localStorage;
+
+    } else {
+      this.type     = &#x27;sessionStorage&#x27;;
+      this._storage = sessionStorage;
+    }
+  }
 
   // 基底クラスを継承
-  AMP.inherits(Ease, AMP.BASE_CLASS);
+  AMP.inherits(Storage, AMP.BASE_CLASS);
 
   // prototype
-  var p = Ease.prototype;
+  var p = Storage.prototype;
 
 
 
@@ -150,7 +175,7 @@
    * @property VERSION
    * @type {String}
    */
-  Ease.VERSION = &#x27;2.0.0&#x27;;
+  Storage.VERSION = &#x27;2.0.1&#x27;;
 
 
   /**
@@ -159,227 +184,120 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Ease&#x27;;
+  p.className = &#x27;Storage&#x27;;
 
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;css3 Easing用ネームスペース&lt;/h4&gt;
-   * &lt;a href=&quot;http://easings.net/ja&quot; target=&quot;_blank&quot;&gt;Easingサンプルサイト&lt;/a&gt;
+   * &lt;h4&gt;Storageインスタンスの生成&lt;/h4&gt;
+   * shorthand
    *
-   * @property css
-   * @type {Object}
+   * @static
+   * @method get
+   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @return {Storage}
    */
-  p.css = {};
+  Storage.get = function(isLocalStorage){
+    return new Storage(isLocalStorage);
+  };
 
-
-  /* 1 Sine
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._1_SINE_IN
-   * @type {String}
-   */
-  p.css._1_SINE_IN = &#x27;cubic-bezier(0.47, 0, 0.745, 0.715)&#x27;;
 
   /**
-   * @property css._1_SINE_IN
-   * @type {String}
+   * &lt;h4&gt;値のセット&lt;/h4&gt;
+   *
+   * @method setItem
+   * @param {String | Object} key セットするキー ※オブジェクトを渡すと、一括で値をセットします
+   * @param {Any} val セットする値
+   * @return {Storage}
    */
-  p.css._1_SINE_OUT = &#x27;cubic-bezier(0.39, 0.575, 0.565, 1)&#x27;;
+  p.setItem = function(key, val){
+    var self = this;
+
+    if(self._storage){
+      if(AMP.isObject(key)){
+        AMP.each(key, function(item, index){
+          self._storage.setItem(index, item);
+        });
+      } else {
+        self._storage.setItem(key, val);
+      }
+    }
+
+    return self;
+  };
+
 
   /**
-   * @property css._1_SINE_IN_OUT
-   * @type {String}
+   * &lt;h4&gt;アイテム、ストレージデータの削除&lt;/h4&gt;
+   *
+   * @method removeItem
+   * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
+   * @return {Storage}
    */
-  p.css._1_SINE_IN_OUT = &#x27;cubic-bezier(0.445, 0.05, 0.55, 0.95)&#x27;;
+  p.removeItem = function(key){
+    var self = this;
 
+    if(this._storage){
+      if(AMP.isUndefined(key)){
+        this._storage.clear();
+      } else {
+        AMP.each(AMP.argsToArray(arguments), function(item){
+          self._storage.removeItem(item);
+        });
+      }
+    }
 
-  /* 2 Quad
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._2_QUAD_IN
-   * @type {String}
-   */
-  p.css._2_QUAD_IN = &#x27;cubic-bezier(0.55, 0.085, 0.68, 0.53)&#x27;;
+    return this;
+  };
 
-  /**
-   * @property css._2_QUAD_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_OUT = &#x27;cubic-bezier(0.25, 0.46, 0.45, 0.94)&#x27;;
-
-  /**
-   * @property css._2_QUAD_IN_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_IN_OUT = &#x27;cubic-bezier(0.455, 0.03, 0.515, 0.955)&#x27;;
-
-
-  /* 3 Cubic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._3_CUBIC_IN
-   * @type {String}
-   */
-  p.css._3_CUBIC_IN = &#x27;cubic-bezier(0.55, 0.055, 0.675, 0.19)&#x27;;
 
   /**
-   * @property css._3_CUBIC_OUT
-   * @type {String}
+   * &lt;h4&gt;レングスを返す&lt;/h4&gt;
+   *
+   * @method getLength
+   * @return {Number}
    */
-  p.css._3_CUBIC_OUT = &#x27;cubic-bezier(0.215, 0.61, 0.355, 1)&#x27;;
+  p.getLength = function(){
+    return this._storage &amp;&amp; this._storage.length;
+  };
+
 
   /**
-   * @property css._3_CUBIC_IN_OUT
-   * @type {String}
+   * &lt;h4&gt;アイテムの取得&lt;/h4&gt;
+   *
+   * @method getItem
+   * @param  {String} key 取得するキー 省略時は、ストレージオブジェクトを返す
+   * @return {Any}
    */
-  p.css._3_CUBIC_IN_OUT = &#x27;cubic-bezier(0.645, 0.045, 0.355, 1)&#x27;;
+  p.getItem = function(key){
+    if(this._storage){
+      if(AMP.isUndefined(key)){
+        if(this._storage.length){
+          return this._storage;
+        }
+      } else {
+        return this._storage.getItem(key);
+      }
+    }
+  };
 
-
-  /* 4 Quart
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._4_QUART_IN
-   * @type {String}
-   */
-  p.css._4_QUART_IN = &#x27;cubic-bezier(0.895, 0.03, 0.685, 0.22)&#x27;;
-
-  /**
-   * @property css._4_QUART_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_OUT = &#x27;cubic-bezier(0.165, 0.84, 0.44, 1)&#x27;;
-
-  /**
-   * @property css._4_QUART_IN_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_IN_OUT = &#x27;cubic-bezier(0.77, 0, 0.175, 1)&#x27;;
-
-
-  /* 5 Quint
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._5_QUINT_IN
-   * @type {String}
-   */
-  p.css._5_QUINT_IN = &#x27;cubic-bezier(0.755, 0.05, 0.855, 0.06)&#x27;;
 
   /**
-   * @property css._5_QUINT_OUT
-   * @type {String}
+   * &lt;h4&gt;アイテムがあるか判定&lt;/h4&gt;
+   *
+   * @method hasItem
+   * @param  {String}  key 判定するキー
+   * @return {Boolean}
    */
-  p.css._5_QUINT_OUT = &#x27;cubic-bezier(0.23, 1, 0.32, 1)&#x27;;
-
-  /**
-   * @property css._5_QUINT_IN_OUT
-   * @type {String}
-   */
-  p.css._5_QUINT_IN_OUT = &#x27;cubic-bezier(0.86, 0, 0.07, 1)&#x27;;
-
-
-  /* 6 Expo
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._6_EXPO_IN
-   * @type {String}
-   */
-  p.css._6_EXPO_IN = &#x27;cubic-bezier(0.95, 0.05, 0.795, 0.035)&#x27;;
-
-  /**
-   * @property css._6_EXPO_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_OUT = &#x27;cubic-bezier(0.19, 1, 0.22, 1)&#x27;;
-
-  /**
-   * @property css._6_EXPO_IN_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_IN_OUT = &#x27;cubic-bezier(1, 0, 0, 1)&#x27;;
-
-
-  /* 7 Cric
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._7_CIRC_IN
-   * @type {String}
-   */
-  p.css._7_CIRC_IN = &#x27;cubic-bezier(0.6, 0.04, 0.98, 0.335)&#x27;;
-
-  /**
-   * @property css._7_CIRC_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_OUT = &#x27;cubic-bezier(0.075, 0.82, 0.165, 1);&#x27;;
-
-  /**
-   * @property css._7_CIRC_IN_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_IN_OUT = &#x27;cubic-bezier(0.785, 0.135, 0.15, 0.86)&#x27;;
-
-
-  /* 7 Back
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BACK_IN
-   * @type {String}
-   */
-  p.css._BACK_IN = &#x27;cubic-bezier(0.6, -0.28, 0.735, 0.045)&#x27;;
-
-  /**
-   * @property css._BACK_OUT
-   * @type {String}
-   */
-  p.css._BACK_OUT = &#x27;cubic-bezier(0.175, 0.885, 0.32, 1.275)&#x27;;
-
-  /**
-   * @property css._BACK_IN_OUT
-   * @type {String}
-   */
-  p.css._BACK_IN_OUT = &#x27;cubic-bezier(0.68, -0.55, 0.265, 1.55)&#x27;;
-
-
-  /* Elastic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._ELASTIC_IN
-   * @type {String}
-   */
-  p.css._ELASTIC_IN = null;
-
-  /**
-   * @property css._ELASTIC_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_OUT = null;
-
-  /**
-   * @property css._ELASTIC_IN_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_IN_OUT = null;
-
-
-  /* Bounce
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BOUNCE_IN
-   * @type {String}
-   */
-  p.css._BOUNCE_IN = null;
-
-  /**
-   * @property css._BOUNCE_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_OUT = null;
-
-  /**
-   * @property css._BOUNCE_IN_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_IN_OUT = null;
+  p.hasItem = function(key){
+    if(this._storage){
+      return this._storage.getItem(key) !== null;
+    }
+  };
 
 
 
@@ -387,8 +305,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Ease = Ease;
-  AMP.ease = new Ease();
+  AMP.Storage = Storage;
 
 
 }(window, AMP));

@@ -60,7 +60,6 @@ var syncFiles = [
 
 
 
-
 /*--------------------------------------------------------------------------
 	Task
 --------------------------------------------------------------------------*/
@@ -133,12 +132,14 @@ MODULE.gulp.task('browser_sync', function(){
  */
 MODULE.gulp.task('inject', function(){
 	var source = MODULE.gulp.src([
-		PATH.dist + 'lib/**/*.js',
-		PATH.dist + 'amp/**/*.min.js'
+		PATH.dist + 'libs/**/*.js',
+		PATH.dist + 'amp/*.min.js',
+		PATH.dist + 'amp/utils/*.min.js',
 	]);
 
 	MODULE.gulp.src('demo/**/*html')
 	.pipe(MODULE.inject(source, {relative: true}))
+	// .pipe(MODULE.inject(source.pipe(MODULE.angular_filesort()), {relative: true}))
   .pipe(MODULE.gulp.dest('demo/'));
 });
 
@@ -151,21 +152,21 @@ MODULE.gulp.task('js', function(){
 	/* lib
 	-----------------------------------------------------------------*/
 	// jquery
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/*.js')
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	MODULE.gulp.src(PATH.develop + 'libs/jquery/*.js')
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/plugins/**/*.js')
+	MODULE.gulp.src(PATH.develop + 'libs/jquery/plugins/**/*.js')
 	.pipe(MODULE.concat('jquery.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 	// utilitys
-	MODULE.gulp.src(PATH.develop + 'lib/utilities/**/*.js')
-	.pipe(MODULE.concat('utilities.js'))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	MODULE.gulp.src(PATH.develop + 'libs/utils/**/*.js')
+	.pipe(MODULE.concat('utils.js'))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 	// createjs
-	MODULE.gulp.src(PATH.develop + 'lib/createjs/**/*.js')
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	MODULE.gulp.src(PATH.develop + 'libs/createjs/**/*.js')
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 
 	/* AMP
@@ -189,19 +190,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// amp/utilities/
-	 MODULE.gulp.src(PATH.develop + 'amp/core/utilities/*.js')
+	// amp/utils/
+	 MODULE.gulp.src(PATH.develop + 'amp/core/utils/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.rename({prefix : BANNER.core.name + '.'}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities/'))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils/'))
 	.pipe(MODULE.rename({extname : '.min.js'}))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities/'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils/'));
 
 	// amp/amp.jquery.plugins.js
 	MODULE.gulp.src(PATH.develop + 'amp/jquery.plugins/*.js')
@@ -238,19 +239,19 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// amp/utilities/
-	MODULE.gulp.src(PATH.develop + 'amp/jquery/utilities/*.js')
+	// amp/utils/
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/utils/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.rename({prefix: BANNER.jquery.name + '.'}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities'))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils'))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.rename({extname : '.min.js'}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utilities'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils'));
 
 
 	// amp.createjs.js

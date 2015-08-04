@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\utilities\Loader.js - AMPjs</title>
+    <title>develop\amp\core\class\Events.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\utilities\Loader.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\Events.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -113,88 +113,62 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-(function(root, AMP, $, imagesLoaded){
+(function(root, AMP){
 
   // &#x27;use strict&#x27;;
 
 
-  if(!imagesLoaded){
-    throw new Error(&#x27;imagesLoaded not found&#x27;);
-  }
-
-
-
-  /*--------------------------------------------------------------------------
+  /*----------------------------------------------------------------------
     @constructor
-  --------------------------------------------------------------------------*/
+  ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ローダー&lt;/h4&gt;
-   * &lt;em&gt;imagesloaded.jsに依存します&lt;/em&gt;
+   * &lt;h4&gt;イベント&lt;/h4&gt;
+   * イベントクラスの継承して使用出来ます&lt;br&gt;
+   * メディエーターとしても使用すことも可能です
    *
-   * @class AMP.$.Loader
+   * @class AMP.Events
+   * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {DOM} el 対象のimgを囲う要素 省略可 初期値： &#x27;body&#x27;
-   * @param {Object} options オプション値
+   *
+   * @example
+   *   // on&lt;br&gt;
+   *   events.on(&#x27;change&#x27;, function(){...});&lt;br&gt;
+   *   events.on(&#x27;change.type&#x27;, typeCall);&lt;br&gt;
+   *
+   *   // off&lt;br&gt;
+   *   events.off(&#x27;change&#x27;);&lt;br&gt;
+   *   events.off(&#x27;change&#x27;, typeCall);&lt;br&gt;
+   *   events.off();&lt;br&gt;
+   *
+   *   // tigger&lt;br&gt;
+   *   events.tigger(&#x27;change&#x27;);&lt;br&gt;
+   *   events.tigger(&#x27;change.type&#x27;);
+   *
    */
-  function Loader(el){
+  function Events(){
     /**
-     * &lt;h4&gt;パラメーター格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;イベントリスナーを連想配列で格納します&lt;/h4&gt;
      *
-     * @property param
+     * @example
+     * _listeners = {
+     *    attr    : eventObj.attr,
+     *    func    : listener,
+     *    context : context
+     * }
+     *
+     * @private
+     * @property _listeners
      * @type {Object}
      */
-    this.param = {};
-
-    /**
-     * &lt;h4&gt;対象のimgを囲う要素&lt;/h4&gt;
-     *
-     * @property el
-     * @type {DOM}
-     */
-    this.param.el = el || &#x27;body&#x27;;
-
-    /**
-     * &lt;h4&gt;imagesloadedオブジェクト&lt;/h4&gt;
-     *
-     * @property imagesloaded
-     * @type {imagesloaded}
-     */
-    this.param.imagesloaded = imagesLoaded(this.param.el);
-
-    /**
-     * &lt;h4&gt;画像数&lt;/h4&gt;
-     *
-     * @property length
-     * @type {Number}
-     */
-    this.param.length = this.param.imagesloaded.images.length;
-
-    /**
-     * &lt;h4&gt;画像が読み込まれた数をカウントします&lt;/h4&gt;
-     *
-     * @property count
-     * @type {Number}
-     */
-    this.param.updateCount = 0;
-
-    /**
-     * &lt;h4&gt;画像が読み込まれた数をカウントします&lt;/h4&gt;
-     *
-     * @property loadCount
-     * @type {Number}
-     */
-    this.param.loadCount = 0;
-
-    // start
-    this._start();
+    this._listeners = {};
   }
 
   // 基底クラスを継承
-  AMP.inherits(Loader, AMP.BASE_CLASS);
+  AMP.inherits(Events, AMP.BASE_CLASS);
 
   // prototype
-  var p = Loader.prototype;
+  var p = Events.prototype;
 
 
 
@@ -209,7 +183,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = &#x27;3.0.0&#x27;;
+  Events.VERSION = &#x27;2.0.1&#x27;;
 
 
   /**
@@ -218,7 +192,7 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Loader&#x27;;
+  p.className = &#x27;Events&#x27;;
 
 
 
@@ -227,227 +201,232 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Loaderインスタンス生成&lt;/h4&gt;
+   * &lt;h4&gt;イベント登録&lt;/h4&gt;
+   * イベント名に属性値を付与することが出来ます
    *
-   * @static
-   * @method get
-   * @param {DOM} el 対象のエリア要素
-   * @return {Loader}
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
    */
-  Loader.get = function(el){
-    return new Loader(el);
+  p.on = function(type, listener, context){
+    this._addEvent(type, listener, context);
+    return this;
   };
 
 
   /**
-   * &lt;h4&gt;ローター開始&lt;/h4&gt;
+   * &lt;h4&gt;1度だけ実行するイベント登録&lt;/h4&gt;
    *
-   * @method _start
-   * @return {jQuery.Deferred} jQuery.Deferred.promiseを返す
+   * @method onece
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener  イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
    */
-  p._start = function(){
+  p.onece = function(type, listener, context){
     var self = this;
 
-    // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.param.imagesloaded.on(&#x27;progress&#x27;, function(){
-      self.param.updateCount += 1;
-      self._progress.apply(self, AMP.argsToArray(arguments));
-    });
-
-    // fail: 読込み失敗毎
-    self.param.imagesloaded.on(&#x27;fail&#x27;, function(){
-      self._failCall.apply(self, AMP.argsToArray(arguments));
-    });
-
-    // done: 読込み成功毎
-    self.param.imagesloaded.on(&#x27;done&#x27;, function(){
-      self._doneCall.apply(self, AMP.argsToArray(arguments));
-    });
-
-    // always: 全ての読込み処理完了時
-    self.param.imagesloaded.on(&#x27;always&#x27;, function(){
-      self._alwaysCall.apply(self, AMP.argsToArray(arguments));
-    });
-
-
-    // カウントを更新する
-    self._update();
+    self.on(type, function(){
+      self.off(type);
+      listener.apply(self, arguments);
+    }, context);
 
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;カウントのアップデート&lt;/h4&gt;
+   * &lt;h4&gt;イベント削除&lt;/h4&gt;
+   *
+   * @method off
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener  イベントリスナー
+   * @return {Events}
+   */
+  p.off = function(type, listener){
+    this._removeEvent(type, listener);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;イベント追加&lt;/h4&gt;
    *
    * @private
-   * @method _update
+   * @method _addEvent
+   * @param {String} type イベントタイプ
+   * @param {Function} listener コールバック関数
+   * @param {Object} context コンテキスト
    * @return {Void}
    */
-  p._update = function(){
+  p._addEvent = function(type, listener, context){
     var self = this,
-    current = self.param.updateCount / self.param.length * 100;
+    events = type.split(&#x27; &#x27;);
 
-    // カウンターのインクリメント
-    if(self.param.loadCount &lt; current){
-      self.param.loadCount += 1;
-    }
-
-    self._updateCall(Math.ceil(self.param.loadCount));
-
-    if(100 &lt;= self.param.loadCount){
-      self._compleatCall();
-    } else {
-      AMP.requestAnimationFrame(function(){
-        self._update();
+    // listenerが関数かチェック
+    if(AMP.isFunction(listener)){
+      AMP.each(events, function(item){
+        var eventObj = self._getEventNameMap(item);
+        self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
+        self._listeners[eventObj.type].push({
+          attr   : eventObj.attr,
+          func   : listener,
+          context: context
+        });
       });
     }
   };
 
 
   /**
-   * &lt;h4&gt;画像読み込み処理毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;イベント削除&lt;/h4&gt;
+   * TODO: 内部処理最適化予定
    *
-   * @method progress
-   * @type {Function}
+   * @private
+   * @method _removeEvent
+   * @param {String} type イベントタイプ
+   * @param {Function} listener コールバック関数
+   * @return {Void}
    */
+  p._removeEvent = function(type, listener){
+    var self = this,
+    events = type ? type.split(&#x27; &#x27;) : [],
+    ary = null,
+    listeners;
 
-  p.progress = function(callback){
-    this._progress = callback || AMP.noop;
-    return this;
+    listener = AMP.getFunctionName(listener);
+
+    AMP.each(events, function(event){
+      var eventObj = self._getEventNameMap(event);
+
+      // イベント属性指定がある場合
+      if(eventObj &amp;&amp; eventObj.attr &amp;&amp; self._listeners[eventObj.type]){
+        listeners = self._listeners[eventObj.type];
+
+        AMP.each(listeners, function(item){
+          if(item.attr !== eventObj.attr){
+            if(listener){
+              if(listener !== AMP.getFunctionName(item.func)){
+                ary = ary || [];
+                ary.push(item);
+              }
+            } else {
+              ary = ary || [];
+              ary.push(item);
+            }
+          }
+        });
+
+        self._listeners[eventObj.type] = ary;
+
+      // イベントタイプ指定ある場合
+      } else if(eventObj){
+        if(listener){
+          listeners = self._listeners[eventObj.type];
+
+          AMP.each(listeners, function(item){
+            if(listener !== AMP.getFunctionName(item.func)){
+              ary = ary || [];
+              ary.push(item);
+            }
+          });
+        }
+        self._listeners[eventObj.type] = ary;
+
+      // イベント全て削除
+      } else {
+        self._listeners = null;
+        self._listeners = {};
+      }
+    });
   };
 
 
   /**
-   * &lt;h4&gt;画像読み込み処理毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;イベント名、イベント属性を連想配列にして返す&lt;/h4&gt;
    *
    * @private
-   * @method _progress
-   * @type {Function}
+   * @method _getEventNameMap
+   * @param  {String} type イベントタイプ
+   * @return {Object}
    */
-  p._progress = AMP.noop;
-
-
-  /**
-   * &lt;h4&gt;画像読み込み失敗毎に呼び出されます&lt;/h4&gt;
-   *
-   * @method fail
-   * @type {Function}
-   */
-  p.fail = function(callback){
-    this._failCall = callback || AMP.noop;
-    return this;
+  p._getEventNameMap = function(type){
+    var events = type.split(&#x27;.&#x27;);
+    return {
+      type: events[0],
+      attr: events[1]
+    };
   };
 
 
   /**
-   * &lt;h4&gt;画像読み込み失敗毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;イベントが登録されているか判定します&lt;/h4&gt;
    *
-   * @private
-   * @method _failCall
-   * @type {Function}
+   * @method hasEvent
+   * @param  {String} type イベントタイプ
+   * @return {Boolean}
    */
-  p._failCall = AMP.noop;
+  p.hasEvent = function(type){
+    var flag = false,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type];
 
+    // イベントリスナーの有無
+    if(listeners){
+      // 属性指定がある場合
+      if(events.attr){
+        AMP.each(listeners, function(item){
+          if(item.attr === events.attr){
+            flag = true;
+            return false;
+          }
+        });
 
-  /**
-   * &lt;h4&gt;画像読み込み毎に呼び出されます&lt;/h4&gt;
-   *
-   * @method done
-   * @type {Function}
-   */
-  p.done = function(callback){
-    this._doneCall = callback || AMP.noop;
-    return this;
+      } else {
+        flag = true;
+      }
+    }
+
+    return flag;
   };
 
 
   /**
-   * &lt;h4&gt;画像読み込み毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;イベント発行&lt;/h4&gt;
+   * &lt;p&gt;第二引数以降に値を渡すとcallbackに引数として渡します&lt;/p&gt;
    *
-   * @private
-   * @method _doneCall
-   * @type {Function}
+   * @method trigger
+   * @param  {String} type イベントタイプ
+   * @return {Events}
    */
-  p._doneCall = AMP.noop;
+  p.trigger = function(type){
+    var self = this,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type];
 
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+        }
+      });
+    }
 
-  /**
-   * &lt;h4&gt;画像読み込み処理完了時に呼び出されます&lt;/h4&gt;
-   *
-   * @method always
-   * @type {Function}
-   */
-  p.always = function(callback){
-    this._alwaysCall = callback || AMP.noop;
-    return this;
+    return self;
   };
-
-
-  /**
-   * &lt;h4&gt;画像読み込み処理完了時に呼び出されます&lt;/h4&gt;
-   *
-   * @private
-   * @method _alwaysCall
-   * @type {Function}
-   */
-  p._alwaysCall = AMP.noop;
-
-
-  /**
-   * &lt;h4&gt;カウントアップ時に呼び出されます&lt;/h4&gt;
-   *
-   * @method update
-   * @type {Function}
-   */
-  p.update = function(callback){
-    this._updateCall = callback || AMP.noop;
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;カウントアップ時に呼び出されます&lt;/h4&gt;
-   *
-   * @private
-   * @method _updateCall
-   * @type {Function}
-   */
-  p._updateCall = AMP.noop;
-
-
-  /**
-   * &lt;h4&gt;カウント完了時に呼び出されます&lt;/h4&gt;
-   *
-   * @method compleat
-   * @type {Function}
-   */
-  p.compleat = function(callback){
-    this._compleatCall = callback || AMP.noop;
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;カウント完了時に呼び出されます&lt;/h4&gt;
-   *
-   * @private
-   * @method _compleatCall
-   * @type {Function}
-   */
-  p._compleatCall = AMP.noop;
 
 
 
   /*--------------------------------------------------------------------------
-    exports
+    export
   --------------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ || {};
-  AMP.$.Loader = Loader;
+  AMP.Events = Events;
 
 
-}(window, AMP, jQuery, imagesLoaded));
+}(window, AMP));
 
     </pre>
 </div>

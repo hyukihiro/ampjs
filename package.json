@@ -4,6 +4,7 @@
   "license"    : "MIT Licence",
   "author"     : "Yoshihito Fujiwara",
   "url"        : "https://bitbucket.org/yoshihitofujiwara/ampjs",
+  "repository" : "https://bitbucket.org/yoshihitofujiwara/ampjs",
   "banner": {
     "core": {
       "name"       : "amp",

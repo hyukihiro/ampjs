@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery.plugins\jquery.event.stop.js - AMPjs</title>
+    <title>develop\amp\jquery.plugins\Extend.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery.plugins\jquery.event.stop.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery.plugins\Extend.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,65 +125,84 @@
 	 * @class jQuery
 	 */
 
+
+	/*--------------------------------------------------------------------------
+		@sequence
+	--------------------------------------------------------------------------*/
 	/**
-	 * &lt;h4&gt;リサイズイベントを間引き、完了後発火します&lt;/h4&gt;
+	 * &lt;h4&gt;コールバック関数管理 &lt;/h4&gt;
+	 * Deferred resolve通知を受けたら次の関数へ移る
 	 *
-	 * @event resizestop
-	 * @param {Object} 間引く時間を指定 default {timer: 200}
-	 * @example
-	 *	$(window).on(&#x27;resizestop&#x27;, callback);
-	 *	$(window).on(&#x27;resizestop&#x27;, {timer: 1000}, callback);
+	 * @static
+	 * @method sequence
+	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
+	 * @return {jQuery.Deferred}
 	 */
-	/**
-	 * &lt;h4&gt;スクロールイベントを間引き、完了後発火します&lt;/h4&gt;
-	 *
-	 * @event scrollstop
-	 * @param {Object} 間引く時間を指定 default {timer: 200}
-	 * @example
-	 *	$(window).on(&#x27;scrollstop&#x27;, {timer: 1000}, callback);
-	 *	$(window).on(&#x27;scrollstop&#x27;, callback);
-	 *	$(window).scrollstop(callback);
-	 */
-	$.each({
-		resize: &#x27;resizestop&#x27;,
-		scroll: &#x27;scrollstop&#x27;
-	}, function(orig, fix){
+	$.sequence = function(){
+		/*jslint loopfunc: true */
+		var $def = new $.Deferred(),
+		$Def = new $.Deferred(),
+		callbacks,
+		piped;
 
-		$.event.special[fix] = {
-			// data
-			data: {
-				eventType: fix,
-				timer    : 100,
-				timerId  : null
-			},
+		if($.isArray(arguments[0])){
+			callbacks = arguments[0];
+		} else {
+			callbacks = [].slice.apply(arguments);
+		}
 
-			// on
-			setup: function(obj){
-				var data = $.extend({}, $.event.special[fix].data, obj);
-				$(this).on(orig, function(){
-					$.event.special[fix].handler(data);
-				});
-			},
+		callbacks[callbacks.length] = $def.resolve;
 
-			// off
-			teardown: function(){
-				$(this).off(orig);
-			},
+		var i = 0,
+		l = callbacks.length;
 
-			// handler
-			handler: function(data){
-				clearTimeout(data.timerId);
-				data.timerId = setTimeout(function(){
-					$(this).trigger(data.eventType);
-				}, data.timer);
+		for(; i &lt; l; i += 1){
+			if($.isFunction(callbacks[i])){
+				piped = (piped ? piped : $Def).pipe($.proxy(function(){
+					return this();
+				}, callbacks[i])).fail($def.reject);
 			}
-		};
+		}
 
-		// add shorthand
-		$.fn[fix] = function(data, fn){
-			return arguments.length &gt; 0 ? this.on(fix, null, data, fn) : this.trigger(fix);
-		};
-	});
+		$Def.resolve();
+
+		return $def.promise();
+	};
+
+
+  /**
+   * &lt;h4&gt;引数に渡した関数を縦列処理します&lt;/h4&gt;
+   * 実行した関数の戻り値は、次の関数の引数とproglessに渡します。
+   *
+   * @static
+   * @method stream
+   * @param {Function} argments 関数、もしくは配列に格納した関数
+   * @return {jQuery.Deferred}
+   */
+  $.stream = function(){
+  	var slice = Array.prototype.slice;
+    var $defer = new $.Deferred(),
+    count = 0,
+    callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
+
+    callbacks.push($defer.resolve);
+    stream();
+
+    // callbacksを再帰的に縦列処理する
+    function stream(){
+    	$.when.call(null, callbacks[count].apply(null, arguments))
+    	.fail($defer.reject)
+    	.done(function(){
+    		$defer.notify.call(null, arguments);
+    		count += 1;
+    		if(count &lt; callbacks.length){
+    			stream.apply(null, arguments);
+    		}
+    	});
+    }
+
+    return $defer.promise();
+  };
 
 
 }(jQuery));

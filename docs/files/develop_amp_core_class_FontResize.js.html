@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery.plugins\jquery.event.slip.js - AMPjs</title>
+    <title>develop\amp\core\class\FontResize.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery.plugins\jquery.event.slip.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\FontResize.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -113,121 +113,192 @@
 /// source https://bitbucket.org/yoshihitofujiwara/ampjs
 /// Copyright (c) 2014 Yoshihito Fujiwara
 
-(function($){
+(function(root, AMP){
 
-	// &#x27;use strict&#x27;;
-
-
-	/**
-	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
-	 *
-	 * @class jQuery
-	 */
+  // &#x27;use strict&#x27;;
 
 
-	/*--------------------------------------------------------------------------
-		@slip
-	--------------------------------------------------------------------------*/
-	/**
-	 * &lt;h4&gt;マウスインした時の方向を取得するイベント&lt;/h4&gt;
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * &lt;em&gt;インライン要素には効きません&lt;/em&gt;
-	 *
-	 * @event slipin
-	 * @example
-	 *	$(elm).on(&#x27;slipin&#x27;, callback);
-	 *	$(elm).slipin(callback);
-	 */
-	/**
-	 * &lt;h4&gt;マウスアウトした時の方向を取得するイベント&lt;/h4&gt;
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * &lt;b&gt;インライン要素には効きません&lt;/b&gt;
-	 *
-	 * @event slipout
-	 * @example
-	 *	$(elm).on(&#x27;slipout&#x27;, callback);
-	 *	$(elm).slipout(callback);
-	 */
-	$.each({
-		mouseenter: &#x27;slipin&#x27;,
-		mouseleave: &#x27;slipout&#x27;
-	}, function(orig, fix){
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
 
-		$.event.special[fix] = {
+  /**
+   * &lt;h4&gt;フォントリサイズイベント&lt;/h4&gt;
+   * !!!: シングルトン&lt;br&gt;
+   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
+   * &lt;em&gt;AMP.fontResize&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
+   *
+   * @class AMP.FontResize
+   * @extends AMP.Events
+   * @constructor
+   */
+  function FontResize(){
+    /**
+     * &lt;h4&gt;要素を監視有効・無効の判定フラグ&lt;/h4&gt;
+     *
+     * @property isFontResize
+     * @default true
+     * @type {Boolean}
+     */
+    this.isFontResize = true;
 
-			// on
-			setup: function(){
-				$(this).on(orig, $.event.special[fix].handler);
-			},
+    /**
+     * &lt;h4&gt;監視する要素&lt;/h4&gt;
+     *
+     * @property el
+     * @type {DOM}
+     */
+    this.el = null;
 
-			// off
-			teardown: function(){
-				$(this).off(orig, $.event.special[fix].handler);
-			},
+    /**
+     * &lt;h4&gt;監視要素の高さ&lt;/h4&gt;
+     *
+     * @property height
+     * @type {Number}
+     */
+    this.height = null;
 
-			// handler
-			handler: function(event){
-				var obj = {},
-				$this = $(this),
-				offset = $this.offset(),
-				w = $this.width(),
-				h = $this.height(),
-				x = (event.pageX - offset.left - (w / 2)) * (w &gt; h ? (h / w) : 1),
-				y = (event.pageY - offset.top - (h / 2)) * (h &gt; w ? (w / h) : 1),
-				direction = Math.round((((Math.atan2(y, x) * (180 / Math.PI)) + 180) / 90) + 3) % 4;
+    // superClass constructor call
+    // FontResize.Events_constructor.call(this);
+    AMP.Events.call(this);
+  }
 
-				obj.originalEvent = event;
-				obj.x = x;
-				obj.y = y;
-				obj.type = fix;
-				// obj.direction = direction;
+  // AMP.Eventsクラスを継承
+  AMP.inherits(FontResize, AMP.Events);
 
-				switch(direction){
-				case 0:
-					obj.direction = &#x27;top&#x27;;
-					break;
-
-				case 1:
-					obj.direction = &#x27;right&#x27;;
-					break;
-
-				case 2:
-					obj.direction = &#x27;bottom&#x27;;
-					break;
-
-				case 3:
-					obj.direction = &#x27;left&#x27;;
-					break;
-				}
-
-				$this.trigger(obj);
-			}
-		};
+  // prototype
+  var p = FontResize.prototype;
 
 
-		// add shorthand
-		$.fn[fix] = function(data, fn){
-			return arguments.length &gt; 0 ? this.on(fix, null, data, fn) : this.trigger(fix);
-		};
-	});
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * &lt;h4&gt;バージョン情報&lt;/h4&gt;
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  FontResize.VERSION = &#x27;3.0.1&#x27;;
 
 
-	/**
-	 * &lt;h4&gt;slipin, slipout ショートハンド&lt;/h4&gt;
-	 *
-	 * @event slip
-	 * @param  {Function} fnIn  slipinコールバック関数
-	 * @param  {Function} fnOut slipoutコールバック関数
-	 * @example
-	 *	$(elm).slip(inCallback, outCallback);
-	 */
-	$.fn.slip = function(fnIn, fnOut){
-		return this.slipin(fnIn).slipout(fnOut || fnIn);
-	};
+  /**
+   * &lt;h4&gt;クラス名&lt;/h4&gt;
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = &#x27;FontResize&#x27;;
 
 
-}(jQuery));
+  /**
+   * &lt;h4&gt;フォントサイズ変更時の発行するイベントタイプ&lt;/h4&gt;
+   *
+   * @static
+   * @property eventType
+   * @default change
+   * @type {String}
+   */
+  FontResize.eventType = &#x27;change&#x27;;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+
+  /**
+   * &lt;h4&gt;監視するフォント要素生成&lt;/h4&gt;
+   *
+   * @private
+   * @method _createElement
+   * @return {Void}
+   */
+  p._createElement = function(){
+
+    var key = &#x27;AMP_FONT_RESIZE&#x27;,
+    el = document.createElement(&#x27;ins&#x27;),
+    text = document.createTextNode(key);
+
+    el.id = key;
+    el.setAttribute(&#x27;style&#x27;, &#x27;display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;&#x27;);
+    el.appendChild(text);
+    document.body.appendChild(el);
+
+    // property
+    this.el = document.getElementById(key);
+    this.height = this.el.clientHeight;
+
+    // set controller
+    this._controller();
+  };
+
+
+  /**
+   * &lt;h4&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/h4&gt;
+   *
+   * @private
+   * @method _controller
+   * @return {Void}
+   */
+  p._controller = function(){
+    var self = this,
+    height = self.el.clientHeight;
+
+    if(self.isFontResize){
+      // フォントサイズに変更があれば
+      if(self.height !== height){
+        self.height = height;
+        this.trigger(FontResize.eventType);
+      }
+
+      // 再起処理
+      if(AMP.hasRAF()){
+        AMP.requestAnimationFrame(function(){
+          self._controller();
+        });
+      } else {
+        setTimeout(function(){
+          self._controller();
+        }, 50);
+      }
+    }
+  };
+
+
+  /**
+   * &lt;h4&gt;イベント登録&lt;/h4&gt;
+   *
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.on = function(type, listener, context){
+    // 監視要素がない場合、要素を追加する
+    if(!this.el){
+      this._createElement();
+    }
+    this._addEvent(type, listener, context);
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.FontResize = FontResize;
+  AMP.fontResize = new FontResize();
+
+
+}(window, AMP));
 
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\utilities\Debug.js - AMPjs</title>
+    <title>develop\amp\core\class\Mediaquery.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -41,7 +41,6 @@
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
-                                <li><a href="../classes/AMP.$.Loader.html">AMP.$.Loader</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
                                 <li><a href="../classes/AMP.$.Render.html">AMP.$.Render</a></li>
                                 <li><a href="../classes/AMP.$.Rollover.html">AMP.$.Rollover</a></li>
@@ -59,6 +58,7 @@
                                 <li><a href="../classes/AMP.FontResize.html">AMP.FontResize</a></li>
                                 <li><a href="../classes/AMP.Has.html">AMP.Has</a></li>
                                 <li><a href="../classes/AMP.Is.html">AMP.Is</a></li>
+                                <li><a href="../classes/AMP.Loader.html">AMP.Loader</a></li>
                                 <li><a href="../classes/AMP.Location.html">AMP.Location</a></li>
                                 <li><a href="../classes/AMP.Mediaquery.html">AMP.Mediaquery</a></li>
                                 <li><a href="../classes/AMP.Storage.html">AMP.Storage</a></li>
@@ -103,7 +103,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\utilities\Debug.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\Mediaquery.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -123,26 +123,58 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;デバッグ機能&lt;/h4&gt;
+   * &lt;h4&gt;Mediaqueryのブレイクポイントイベント&lt;/h4&gt;
+   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください&lt;br&gt;
    * !!!: シングルトン&lt;br&gt;
    * コンストラクタを呼び出しで、使用しません&lt;br&gt;
-   * &lt;em&gt;AMP.debug&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
+   * &lt;em&gt;AMP.mediaquery&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
    *
-   * @class AMP.Debug
-   * @extends AMP.BASE_CLASS
+   * @class AMP.Mediaquery
+   * @extends AMP.Events
    * @constructor
-   *
-   * @example
-   *   AMP.debug.log(any);&lt;br&gt;
-   *   AMP.debug.log(any, any...);
+   * @param {DOM} element 監視対象要素
    */
-  function Debug(){}
+  function Mediaquery(element){
+    /**
+     * &lt;h4&gt;スタイルを監視する要素&lt;/h4&gt;
+     *
+     * @property el
+     * @default head
+     * @type {DOM}
+     */
+    if(element &amp;&amp; element.nodeType === 1){
+      this.el = element;
+    } else {
+      this.el = document.getElementsByTagName(&#x27;head&#x27;)[0];
+    }
 
-  // 基底クラスを継承
-  AMP.inherits(Debug, AMP.BASE_CLASS);
+    /**
+     * &lt;h4&gt;要素を監視しているか&lt;/h4&gt;
+     *
+     * @property isObserver
+     * @default false
+     * @type {Boolean}
+     */
+    this.isObserver = false;
+
+    /**
+     * &lt;h4&gt;要素の現在のスタイルを保管します&lt;/h4&gt;
+     *
+     * @property mediaStyle
+     * @type {String}
+     */
+    this.mediaStyle = null;
+
+    // superClass constructor call
+    // Mediaquery.Events_constructor.call(this);
+    AMP.Events.call(this);
+  }
+
+  // AMP.Eventsクラスを継承
+  AMP.inherits(Mediaquery, AMP.Events);
 
   // prototype
-  var p = Debug.prototype;
+  var p = Mediaquery.prototype;
 
 
 
@@ -157,7 +189,7 @@
    * @property VERSION
    * @type {String}
    */
-  Debug.VERSION = &#x27;1.0.2&#x27;;
+  Mediaquery.VERSION = &#x27;2.0.2&#x27;;
 
 
   /**
@@ -166,39 +198,19 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Debug&#x27;;
+  p.className = &#x27;Mediaquery&#x27;;
 
 
   /**
-   * &lt;h4&gt;デバッグview要素を格納用オブジェクト&lt;/h4&gt;
+   * &lt;h4&gt;フォントサイズ変更時の発行するイベントタイプ&lt;/h4&gt;
+   * !!! FIXME : イベント属性追加予定
    *
    * @static
-   * @property views
-   * @type {Object}
+   * @property eventType
+   * @default change
+   * @type {String}
    */
-  Debug.views = null;
-
-
-  /**
-   * &lt;h4&gt;デバッグviewの表示状態&lt;/h4&gt;
-   *
-   * @static
-   * @property isShow
-   * @default true
-   * @type {Boolean}
-   */
-  Debug.isShow = true;
-
-
-  /**
-   * &lt;h4&gt;デバッグログの有効・無効&lt;/h4&gt;
-   *
-   * @static
-   * @property isChangeLog
-   * @default true
-   * @type {Boolean}
-   */
-  Debug.isChangeLog = true;
+  Mediaquery.eventType = &#x27;change&#x27;;
 
 
 
@@ -207,195 +219,89 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;view要素を生成&lt;/h4&gt;
+   * &lt;h4&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/h4&gt;
    *
    * @private
-   * @static
-   * @method _createView
+   * @method _controller
    * @return {Void}
    */
-  Debug._createView = function(){
-    // view要素生成
-    var childNode = &#x27;&lt;div style=&quot;min-width:250px;font-size:12px;background:#41454e;&quot;&gt;\n&lt;div class=&quot;ttl&quot; style=&quot;padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;&quot;&gt;DEBUG&lt;/div&gt;\n&lt;textarea id=&quot;AMP_DEBUG_TEXT&quot; style=&quot;box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;&quot;&gt;&lt;/textarea&gt;\n&lt;/div&gt;&#x27;;
+  p._controller = function(){
+    var self = this;
 
-    // view要素の追加
-    var el = document.createElement(&#x27;div&#x27;);
+    // set property
+    this.isObserver = true;
+    this.mediaStyle = this.getStyle();
 
-    el.id = &#x27;AMP_DEBUG&#x27;;
-    el.setAttribute(&#x27;style&#x27;, &#x27;position:fixed;z-index:999999;left:10px;bottom:10px;&#x27;);
-    el.innerHTML = childNode;
-    document.body.appendChild(el);
-
-    // controll elements
-    Debug.views = {
-      wrap: document.getElementById(&#x27;AMP_DEBUG&#x27;),
-      text: document.getElementById(&#x27;AMP_DEBUG_TEXT&#x27;)
-    };
-
-    // viewイベント追加
-    Debug._addEvent();
-  };
-
-
-  /**
-   * &lt;h4&gt;viewイベント設定&lt;/h4&gt;
-   *
-   * @private
-   * @static
-   * @method _addEvent
-   * @return {Void}
-   */
-  Debug._addEvent = function(){
-    var isDrag = false,
-    x = null,
-    y = null;
-
-    // down
-    Debug.views.wrap.onmousedown  = function(){
-      isDrag = true;
-    };
-
-    // move
-    document.onmousemove = function(){
-      if(isDrag){
-        var _x = event.clientX;
-        _y = event.clientY;
-
-        if(AMP.isNumber(x)){
-          var diffX = _x - x;
-          var diffY = _y - y;
-          x = _x;
-          y = _y;
-
-          var position = &#x27;position:fixed;&#x27;;
-          position += &#x27;top:&#x27; + (Debug.views.wrap.offsetTop + diffY) + &#x27;px;&#x27;;
-          position += &#x27;left:&#x27; + (Debug.views.wrap.offsetLeft + diffX) + &#x27;px;&#x27;;
-          Debug.views.wrap.setAttribute(&#x27;style&#x27;, position);
-
-          return false;
-
-        } else {
-          x = _x;
-          y = _y;
-        }
+    // event
+    AMP.addEvent(root, &#x27;resize&#x27;, function(){
+      if(self.mediaStyle !== self.getStyle()){
+        self.mediaStyle = self.getStyle();
+        self.trigger(Mediaquery.eventType);
       }
-    };
-
-    // up
-    document.onmouseup = function(){
-      isDrag = false;
-      x = null;
-      y = null;
-    };
-
-    // cancel
-    Debug.views.text.onmousemove = function(){
-      isDrag = false;
-    };
-    Debug.views.wrap.onscroll = function(){
-      return false;
-    };
+    });
   };
 
 
   /**
-   * &lt;h4&gt;ログを出力します&lt;/h4&gt;
+   * &lt;h4&gt;イベント登録&lt;/h4&gt;
    *
-   * @method log
-   * @param {Any} args 出力するオブジェクト ※可変長引数可能
-   * @return {Debug}
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
    */
-  p.log = function(){
-    if(!Debug.views){
-      Debug._createView();
+  p.on = function(type, listener, context){
+    if(!this.isObserver){
+      this._controller();
     }
+    this._addEvent(type, listener, context);
+    return this;
+  };
 
-    if(Debug.isChangeLog){
-      AMP.each(AMP.argsToArray(arguments), function(data){
-        // データタイプに合わせてログを出力
-        if(AMP.isArray(data)){
-          Debug.views.text.value += JSON.stringify(data) + &#x27;\n&#x27;;
-        } else if(AMP.isObject(data)){
-          Debug.views.text.value += JSON.stringify(data, null, &#x27;\t&#x27;) + &#x27;\n&#x27;;
-        } else {
-          Debug.views.text.value += data + &#x27;\n&#x27;;
+
+  /**
+   * &lt;h4&gt;イベント発行&lt;/h4&gt;
+   * 第二引数以降に値を渡すとcallbackに引数として渡します
+   *
+   * @method trigger
+   * @param  {String} type イベントタイプ
+   * @return {Events}
+   */
+  p.trigger = function(type){
+    var self = this,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
+
+    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
+
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          item.func.apply(item.context, args);
         }
       });
-
-      Debug.views.text.scrollTop = Debug.views.text.scrollHeight;
     }
-
-    return this;
+    return self;
   };
 
 
   /**
-   * &lt;h4&gt;ログのクリア&lt;/h4&gt;
+   * &lt;h4&gt;要素のスタイルを返します&lt;/h4&gt;
    *
-   * @method clear
-   * @return {Debug}
+   * ＠method getStyle
+   * @return {String}
    */
-  p.clear = function(){
-    if(Debug.views){
-      Debug.views.text.value = &#x27;&#x27;;
+  p.getStyle = function(){
+    if(root.getComputedStyle){
+      return getComputedStyle(this.el).getPropertyValue(&#x27;font-family&#x27;);
+    } else {
+      // !!!: jshintのチェックを緩和します
+      /*jshint -W069 */
+      return this.el.currentStyle[&#x27;fontFamily&#x27;];
     }
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;ログの出力モードを有効にします&lt;/h4&gt;
-   *
-   * @method start
-   * @return {Debug}
-   */
-  p.start = function(){
-    Debug.isChangeLog = true;
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;ログの出力モードを無効にします&lt;/h4&gt;
-   *
-   * @method stop
-   * @return {Debug}
-   */
-  p.stop = function(){
-    Debug.isChangeLog = false;
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;ログを非表示にします&lt;/h4&gt;
-   *
-   * @method hide
-   * @return {Debug}
-   */
-  p.hide = function(){
-    if(Debug.views &amp;&amp; Debug.isShow){
-      var style = Debug.views.wrap.getAttribute(&#x27;style&#x27;) + &#x27;display:none;&#x27;;
-      Debug.views.wrap.setAttribute(&#x27;style&#x27;, style);
-      Debug.isShow = false;
-    }
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;ログを表示します&lt;/h4&gt;
-   *
-   * @method show
-   * @return {Debug}
-   */
-  p.show = function(){
-    if(Debug.views &amp;&amp; !Debug.isShow){
-      var style = Debug.views.wrap.getAttribute(&#x27;style&#x27;) + &#x27;display:block;&#x27;;
-      Debug.views.wrap.setAttribute(&#x27;style&#x27;, style);
-      Debug.isShow = true;
-    }
-    return this;
   };
 
 
@@ -404,8 +310,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.Debug = Debug;
-  AMP.debug = new Debug();
+  AMP.Mediaquery = Mediaquery;
+  AMP.mediaquery = new Mediaquery();
 
 
 }(window, AMP));
