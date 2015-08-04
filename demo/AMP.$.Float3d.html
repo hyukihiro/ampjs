@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMPjs</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="./assets/js/html5shiv.min.js"></script><![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="./assets/css/global.css" media="all">
+<link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
+
+<!-- inject:js -->
+<script src="../dist/libs/jquery-1.8.3.min.js"></script>
+<script src="../dist/libs/jquery.plugins.js"></script>
+<script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.5.min.js"></script>
+<script src="../dist/amp/amp.jquery.plugins-3.0.2.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.0.2.min.js"></script>
+<script src="../dist/amp/utils/amp.Loader.min.js"></script>
+<script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
+<!-- endinject -->
+
+<script src="./assets/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/behave/behave.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$('textarea.code').exCodePrettify({
+		showRunButton : true,
+		showDemo : true,
+		editCode : true,
+		behaveJS : true
+	});
+});
+</script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="./index.html">AMPjs DEMO</a></h1>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+<section>
+<h2>AMP.$.Float3d</h2>
+<div class="lead">
+<p>ホバーに3Dエフェクトを加えます。<br>
+第一引数に対象の要素、第二引数にoption値を設定。<br>option値は、APIリファレンスを参照してください。<br>
+要素に付けるクラス名の指定はありませんが、要素の構成は、wrap要素 > inner要素 > floating要素の3階層になります。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+<div class="float_wrap"><div class="float_inner">
+<img src="assets/images/img.png" alt="">
+</div><!-- .float // --></div>
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.float_wrap{
+	max-width: 400px;
+	margin: 0 auto;
+	background: #be4f59;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+AMP.$.Float3d.get($('.float_wrap'));
+</textarea>
+</div>
+</section>
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>

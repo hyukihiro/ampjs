@@ -6,6 +6,7 @@
  * PACKAGE_JSON: package.json読み込み
  */
 var PACKAGE_JSON = require('./package.json');
+var YUIDOC_JSON  = require('./yuidoc.json');
 
 
 /**
@@ -30,7 +31,7 @@ var LICENCE = require('fs').readFileSync(PATH.license, 'utf8');
  * BANNER: バナーテキスト
  */
 var BANNER = PACKAGE_JSON.banner;
-
+BANNER.core.version = YUIDOC_JSON.version;
 
 /**
  * MODULE: モジュール自動追加
@@ -59,7 +60,6 @@ var syncFiles = [
 
 
 
-
 /*--------------------------------------------------------------------------
 	Task
 --------------------------------------------------------------------------*/
@@ -76,7 +76,7 @@ MODULE.gulp.task('default', tasks);
  * cmd : gulp docs
  */
 MODULE.gulp.task('docs', function(){
-	require('child_process').exec('yuidoc ' + PATH.docs  + ' --config ' + PATH.yuidoc, {
+	require('child_process').exec('yuidoc ' + PATH.docs  + ' --config yuidoc.json', {
 		"cwd": "./"
 	});
 });
@@ -128,6 +128,23 @@ MODULE.gulp.task('browser_sync', function(){
 
 
 /**
+ * inject: HTMLファイルにjsタグを挿入
+ */
+MODULE.gulp.task('inject', function(){
+	var source = MODULE.gulp.src([
+		PATH.dist + 'libs/**/*.js',
+		PATH.dist + 'amp/*.min.js',
+		PATH.dist + 'amp/utils/*.min.js',
+	]);
+
+	MODULE.gulp.src('demo/**/*html')
+	.pipe(MODULE.inject(source, {relative: true}))
+	// .pipe(MODULE.inject(source.pipe(MODULE.angular_filesort()), {relative: true}))
+  .pipe(MODULE.gulp.dest('demo/'));
+});
+
+
+/**
  * js: jsHint & コピー
  */
 MODULE.gulp.task('js', function(){
@@ -135,36 +152,36 @@ MODULE.gulp.task('js', function(){
 	/* lib
 	-----------------------------------------------------------------*/
 	// jquery
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/*.js')
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	MODULE.gulp.src(PATH.develop + 'libs/jquery/*.js')
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
-	MODULE.gulp.src(PATH.develop + 'lib/jquery/plugins/**/*.js')
+	MODULE.gulp.src(PATH.develop + 'libs/jquery/plugins/**/*.js')
 	.pipe(MODULE.concat('jquery.plugins.js'))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 	// utilitys
-	MODULE.gulp.src(PATH.develop + 'lib/utilities/**/*.js')
-	.pipe(MODULE.concat('utilities.js'))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib'));
+	MODULE.gulp.src(PATH.develop + 'libs/utils/**/*.js')
+	.pipe(MODULE.concat('utils.js'))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 	// createjs
-	MODULE.gulp.src(PATH.develop + 'lib/createjs/**/*.js')
-	.pipe(MODULE.gulp.dest(PATH.dist + 'lib/createjs'));
+	MODULE.gulp.src(PATH.develop + 'libs/createjs/**/*.js')
+	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 
 	/* AMP
 	-----------------------------------------------------------------*/
-	// amp.core.js
-	MODULE.gulp.src([
+	// amp/ amp.js
+	 MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
-		PATH.develop + 'amp/core/utilities/*.js'
+		PATH.develop + 'amp/core/class/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
-	.pipe(MODULE.concat(BANNER.core.name + '.' + BANNER.core.version + '.js'))
+	.pipe(MODULE.concat(BANNER.core.name + '-' + BANNER.core.version + '.js'))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.template(BANNER.core))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
@@ -173,13 +190,26 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
+	// amp/utils/
+	 MODULE.gulp.src(PATH.develop + 'amp/core/utils/*.js')
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
+	.pipe(MODULE.rename({prefix : BANNER.core.name + '.'}))
+	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils/'))
+	.pipe(MODULE.rename({extname : '.min.js'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils/'));
 
-	// amp/jquery.plugins/*.js
+	// amp/amp.jquery.plugins.js
 	MODULE.gulp.src(PATH.develop + 'amp/jquery.plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat(BANNER.jqueryPlugin.name + '.' + BANNER.jqueryPlugin.version + '.js'))
+	.pipe(MODULE.concat(BANNER.jqueryPlugin.name + '-' + BANNER.jqueryPlugin.version + '.js'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jqueryPlugin}))
 	.pipe(MODULE.template(BANNER.jqueryPlugin))
@@ -190,16 +220,16 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 
-	// amp.jquery.js
+	// amp/amp.jquery.js
 	// base
 	MODULE.gulp.src([
 		PATH.develop + 'amp/jquery/AMP.$.js',
-		PATH.develop + 'amp/jquery/base/*.js'
+		PATH.develop + 'amp/jquery/base/**/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
-	.pipe(MODULE.concat(BANNER.jquery.name + '.' + BANNER.jquery.version + '.js'))
+	.pipe(MODULE.concat(BANNER.jquery.name + '-' + BANNER.jquery.version + '.js'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.template(BANNER.jquery))
@@ -209,20 +239,22 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// utility
-	MODULE.gulp.src(PATH.develop + 'amp/jquery/utilities/*.js')
+	// amp/utils/
+	MODULE.gulp.src(PATH.develop + 'amp/jquery/utils/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
 	.pipe(MODULE.jshint.reporter('jshint-stylish'))
 	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'))
+	.pipe(MODULE.rename({prefix: BANNER.jquery.name + '.'}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils'))
 	.pipe(MODULE.uglify())
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.rename({extname : '.min.js'}))
-	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/jquery.utilities'));
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils'));
 
 
 	// amp.createjs.js
 	// add code
+
 });

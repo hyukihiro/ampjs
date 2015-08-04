@@ -500,7 +500,7 @@
    * @static
    * @method isBrowser
    * @param  {String} key ブラウザ名<br>
-   * ie, chrome, safari, firefox, opera, mobileSafari, android, webkit
+   * ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
    * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
    * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}

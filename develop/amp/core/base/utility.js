@@ -38,6 +38,8 @@
     if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
+      } else if (fn.prototype.className) {
+        return fn.prototype.className;
       } else {
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
@@ -46,12 +48,6 @@
     }
   };
 
-
-var class2type = {};
-
-var toString = class2type.toString;
-
-var hasOwn = class2type.hasOwnProperty;
 
   /**
    * <h4>型の取得</h4>

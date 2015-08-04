@@ -105,8 +105,8 @@
    */
   SmoothScroll.smoothScrollOptions = {
     $page   : null,
-    amount  : 500,
-    duration: 500,
+    amount  : 400,
+    duration: 600,
     easing  : 'easeOutCubic'
   };
 
@@ -184,7 +184,6 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ || {};
   AMP.$.SmoothScroll = SmoothScroll;
 
 

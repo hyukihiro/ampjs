@@ -67,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = '3.0.1';
+  BoxHover.VERSION = '3.0.2';
 
 
   /**
@@ -149,12 +149,17 @@
       $(this).removeClass(self.param.hoverClass);
     })
     .on('click.BoxHover', function(){
-      self._setLink();
+      self.transition($(this));
+    })
+    .find('a')
+    .on('click.BoxHover', function(clickEvent){
+      clickEvent.stopPropagation();
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.param.$boxHover.find('label input select textarea').click(function(event){
-      event.stopPropagation();
+    this.param.$boxHover.find('label input select textarea')
+    .on('click.BoxHover', function(clickEvent){
+      clickEvent.stopPropagation();
     });
 
     return this;
@@ -168,37 +173,42 @@
    * @return {BoxHover}
    */
   p.off = function(){
-    this.param.$boxHover.css({cursor: 'auto'})
-    .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover');
+    this.param.$boxHover
+    .css({cursor: 'auto'})
+    .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover')
+    .find('a').off('click.BoxHover');
+
+    this.param.$boxHover.find('label input select textarea').off('click.BoxHover');
+
     return this;
   };
 
 
   /**
-   * <h4>ページ遷移</h4>
+   * <h4>リンクページへ遷移</h4>
    *
    * @method transition
    * @return {Void}
    */
-  p.transition = function(){
-    var $link = this.param.$boxHover.find('.' + this.param.linkClass),
-    $a = $link[0] ? $link : $target.find('a').eq(0);
+  p.transition = function($box){
+    var $link = $box.find('.' + this.param.linkClass);
+
+    $link = $link[0] ? $link : $box.find('a').eq(0);
 
     // リンク展開
-    if($a.attr('target') === '_blank'){
-      window.open($a.attr('href'), '_blank');
+    if($link.attr('target') === '_blank'){
+      window.open($link.attr('href'), '_blank');
     } else {
-      location.href = $a.attr('href');
+      location.href = $link.attr('href');
     }
   };
 
 
 
   /*--------------------------------------------------------------------------
-    exports
+    export
   --------------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ = {};
   AMP.$.BoxHover = BoxHover;
 
 

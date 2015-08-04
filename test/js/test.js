@@ -6,7 +6,7 @@ jQuery(function($){
 	//
 	// console.log(AMP.Vector.radToDeg);
 
-
+	console.log(AMP.$);
 
 
 

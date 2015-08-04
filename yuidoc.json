@@ -1,7 +1,7 @@
 {
   "name"       : "AMPjs",
   "description": "AMPjs Javascript Library",
-  "version"    : "3.0.4",
+  "version"    : "3.0.5",
   "url"        : "https://bitbucket.org/yoshihitofujiwara/ampjs",
 	"options"    : {"outdir": "docs/"}
 }

@@ -4,20 +4,21 @@
   "license"    : "MIT Licence",
   "author"     : "Yoshihito Fujiwara",
   "url"        : "https://bitbucket.org/yoshihitofujiwara/ampjs",
+  "repository" : "https://bitbucket.org/yoshihitofujiwara/ampjs",
   "banner": {
     "core": {
       "name"       : "amp",
-      "version"    : "3.0.4",
+      "version"    : "YUIDOCに記載",
       "description": "AMPjs Core File"
     },
     "jqueryPlugin": {
-      "name"       : "jquery.plugins",
-      "version"    : "3.0.0",
+      "name"       : "amp.jquery.plugins",
+      "version"    : "3.0.2",
       "description": "AMPjs jQuery Plugin File"
     },
     "jquery": {
       "name"       : "amp.jquery",
-      "version"    : "3.0.0",
+      "version"    : "3.0.2",
       "description": "AMPjs jQuery Module File"
     },
     "createjs": {
@@ -36,6 +37,7 @@
     "gulp-rename"          : "~1.2.0",
     "gulp-shell"           : "~0.4.1",
     "gulp-jshint"          : "~1.6.4",
+    "gulp-inject"          : "~1.5.0",
     "gulp-plumber"         : "~0.6.3",
     "gulp-replace"         : "~0.5.3",
     "gulp-template"        : "~3.0.0",
@@ -51,14 +53,5 @@
     "license": "LICENCE"
   },
   "main"       : "index.js",
-  "scripts"    : { "test": "echo \"Error: no test specified\" && exit 1"},
-  "yuidoc": {
-    "name": "AMP.js",
-    "description": "AMP.js",
-    "version": "3.0.0",
-    "url": "https://bitbucket.org/yoshihitofujiwara/ampjs",
-    "options": {
-      "outdir": "docs/"
-    }
-  }
+  "scripts"    : { "test": "echo \"Error: no test specified\" && exit 1"}
 }

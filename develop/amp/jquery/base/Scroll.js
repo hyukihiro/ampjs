@@ -65,7 +65,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.1.0';
+  Scroll.VERSION = '3.1.1';
 
 
   /**
@@ -144,9 +144,7 @@
    * @return {Scroll}
    */
   Scroll.get = function($scrollTrigger, options){
-    var instance = new Scroll($scrollTrigger, options);
-    instance.on();
-    return instance;
+    return new Scroll($scrollTrigger, options).on();
   };
 
 
@@ -214,7 +212,6 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$ = AMP.$ || {};
   AMP.$.Scroll = Scroll;
 
 

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>AMPjs</title>
+<meta name="description" content="AMP Javascript Library">
+<meta name="keywords" content="AMP,js,javascript,library">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name=viewport content="width=device-width, initial-scale=1">
+<meta name="format-detection" content="telephone=no,address=no,email=no">
+<!--[if lt IE 9]><script src="./assets/js/html5shiv.min.js"></script><![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./assets/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="./assets/css/global.css" media="all">
+<link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
+
+<!-- inject:js -->
+<script src="../dist/libs/jquery-1.8.3.min.js"></script>
+<script src="../dist/libs/jquery.plugins.js"></script>
+<script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.5.min.js"></script>
+<script src="../dist/amp/amp.jquery.plugins-3.0.2.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.0.2.min.js"></script>
+<script src="../dist/amp/utils/amp.Loader.min.js"></script>
+<script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
+<!-- endinject -->
+
+<script src="./assets/jquery.ex-code-prettify/google-code-prettify/prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.js"></script>
+<script src="./assets/jquery.ex-code-prettify/behave/behave.js"></script>
+<script type="text/javascript">
+jQuery(function($){
+	$('textarea.code').exCodePrettify({
+		showRunButton : true,
+		showDemo : true,
+		editCode : true,
+		behaveJS : true
+	});
+});
+</script>
+</head>
+
+
+<body>
+<div id="page">
+<header>
+<h1><a href="./index.html">AMPjs DEMO</a></h1>
+<!-- header // --></header>
+
+
+<div id="content" class="cf">
+<section>
+<h2>jQuery.Slip</h2>
+<div class="lead">
+<p>jQueryイベントクラスを拡張しSlipイベントを追加しています。<br>
+Slipイベントは、mouseenter, mouseleave実行時に要素のどのエリアからヒットしたのか所得することが可能です。<br>
+対象要素は、width,heightが所得できる要素（inline以外）が対象となります。<br>
+mouseenter, mouseleave, hoverイベントを拡張したイベントとして実装しています。</p>
+</div>
+
+<div class="ex-code-prettify demo-right">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
+<p class="run_txt">Runで実行してください。</p>
+
+<div class="slip">
+<p class="txt">Slip ME!</p>
+<span class="over"></span>
+</div>
+</textarea>
+
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
+.slip{
+	overflow: hidden;
+	position: relative;
+	width: 180px;
+	height: 180px;
+	margin: 0 auto;
+	padding: 30px;
+	background: #e6e6e6;
+	text-align: center;
+}
+.slip .over{
+	content: "";
+	position: absolute;
+	top: -100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #357ebd;
+	opacity: .5;
+}
+</textarea>
+
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+
+$('.slip').slip(
+	function(eventEnter){
+		print(eventEnter);
+		toggle(eventEnter);
+	},
+	function(eventLeave){
+		print(eventLeave);
+		toggle(eventLeave);
+	}
+);
+
+function toggle (eventObj){
+	// eventObj.type
+	// イベントタイプは、slipin, slipoutのどちらか
+	var isIn = eventObj.type === 'slipin';
+
+	var style = {
+		start: {},
+		end: {}
+	};
+
+	// eventObj.direction
+	// イベントの方向は、top, bottom, right, leftの4方向
+	if(eventObj.direction === 'top'){
+		style.start.top =	isIn ? '-100%' : '0';
+		style.start.left = 0;
+		style.end.top =	isIn ? '0' : '-100%';
+		style.end.left = 0;
+
+	} else if(eventObj.direction === 'bottom'){
+		style.start.top =	isIn ? '100%' : '0';
+		style.start.left = 0;
+		style.end.top =	isIn ? '0' : '100%';
+		style.end.left = 0;
+
+	} else if(eventObj.direction === 'left'){
+		style.start.top =	0;
+		style.start.left = isIn ? '-100%' : '0';
+		style.end.top =	0;
+		style.end.left = isIn ? '0' : '-100%';
+
+	} else if(eventObj.direction === 'right'){
+		style.start.top =	0;
+		style.start.left = isIn ? '100%' : '0';
+		style.end.top =	0;
+		style.end.left = isIn ? 0 : '100%';
+	}
+
+	// アニメーション
+	$('.slip .over')
+	.velocity('stop')
+	.velocity(style.start, 0)
+	.velocity(style.end, 200, 'easeOutQuart')
+}
+
+var $txt = $('.slip').find('.txt');
+function print(eventObj){
+  var str = '';
+  str += 'イベントタイプ: ' + eventObj.type;
+  str += '<br>イベント方向: ' + eventObj.direction;
+  $txt.html(str);
+};
+
+/*
+// Example
+// over out
+$('.slip').slip(overCallback, outCallback);
+
+// over
+$('.slip').slipin(overCallback);
+$('.slip').on('slipin', overCallback);
+
+// out
+$('.slip').slipout(outCallback);
+$('.slip').on('slipout', outCallback);
+*/
+</textarea>
+</div>
+</section>
+<!-- #content // --></div>
+
+
+<footer>
+<small>Copyright &copy; 2014 Yoshihito Fujiwara </small>
+</footer>
+<!-- #page // --></div>
+</body>
+</html>
