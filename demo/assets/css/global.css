@@ -149,6 +149,11 @@ header h1 a:hover{
 	font-size: 28px;
 	font-family: 'Abel', sans-serif;
 }
+#content h2 a{
+	display: inline-block;
+	margin-left: .5em;
+	font-size: 20px;
+}
 
 
 /* em */
@@ -221,6 +226,9 @@ p.btn a:hover{
 	#content h2{
 		margin: 25px 0 5px;
 		font-size: 18px;
+	}
+	#content h2 a{
+		font-size: 15px;
 	}
 }
 

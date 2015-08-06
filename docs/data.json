@@ -622,7 +622,7 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
             "line": 16,
-            "description": "<h4>ボックスホバー</h4>",
+            "description": "<h4>AMP.$.BoxHover</h4>\n<p>リンクエリアを、BOXエリアまで拡大させます</p>\n<p><a href=\"../../demo/AMP.$.BoxHover.html\">DEMO</a></p>",
             "extends": "AMP.BASE_CLASS",
             "is_constructor": 1,
             "params": [
@@ -855,7 +855,8 @@
             "extension_for": [],
             "file": "develop\\amp\\jquery.plugins\\FnExtend.js",
             "line": 12,
-            "description": "<h4>jQuery拡張</h4>\njQueryオブジェクトを拡張し、Pluginとして使用します"
+            "description": "<h4>jQuery拡張</h4>\njQueryオブジェクトを拡張し、Pluginとして使用します",
+            "itemtype": "event"
         }
     },
     "classitems": [
@@ -5025,7 +5026,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 33,
+            "line": 35,
             "description": "<h4>プロパティ格納オブジェクト</h4>",
             "itemtype": "property",
             "name": "param",
@@ -5034,7 +5035,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 41,
+            "line": 43,
             "description": "<h4>ターゲット要素</h4>",
             "default": "$('.box_hover')",
             "itemtype": "property",
@@ -5044,7 +5045,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 63,
+            "line": 65,
             "description": "<h4>バージョン情報</h4>",
             "static": 1,
             "itemtype": "property",
@@ -5054,7 +5055,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 73,
+            "line": 75,
             "description": "<h4>クラス名</h4>",
             "itemtype": "property",
             "name": "className",
@@ -5063,7 +5064,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 82,
+            "line": 84,
             "description": "<h4>デフォルト値、格納オブジェクト</h4>\nコンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します",
             "static": 1,
             "itemtype": "property",
@@ -5073,7 +5074,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 90,
+            "line": 92,
             "description": "<h4>ホバー時に、box要素に付与するクラス名</h4>",
             "static": 1,
             "itemtype": "property",
@@ -5084,7 +5085,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 98,
+            "line": 100,
             "description": "<h4>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</h4>",
             "static": 1,
             "itemtype": "property",
@@ -5095,7 +5096,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 117,
+            "line": 119,
             "description": "<h4>BoxHoverインスタンスの生成</h4>",
             "static": 1,
             "itemtype": "method",
@@ -5120,7 +5121,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 133,
+            "line": 135,
             "description": "<h4>イベント登録</h4>",
             "itemtype": "method",
             "name": "on",
@@ -5132,7 +5133,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 169,
+            "line": 171,
             "description": "<h4>イベント削除</h4>",
             "itemtype": "method",
             "name": "off",
@@ -5144,7 +5145,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\base\\BoxHover.js",
-            "line": 187,
+            "line": 189,
             "description": "<h4>リンクページへ遷移</h4>",
             "itemtype": "method",
             "name": "transition",

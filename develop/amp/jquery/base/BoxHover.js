@@ -14,13 +14,15 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>ボックスホバー</h4>
+   * <h4>AMP.$.BoxHover</h4>
+   * <p>リンクエリアを、BOXエリアまで拡大させます。<br>
+   * <a href="../../demo/AMP.$.BoxHover.html">DEMO</a></p>
    *
    * @class AMP.$.BoxHover
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
-   * @param  {Object} options オプション値
+   * @param  {Object} options オプション値 (boxHoverOptions参照)
    */
   function BoxHover($boxHover, options){
 
@@ -31,7 +33,8 @@
     }
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>option値は、初期値とmixinしてparamで管理します</p>
      *
      * @property param
      * @type {Object}

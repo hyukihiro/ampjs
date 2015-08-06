@@ -14,6 +14,7 @@
 	 * jQueryオブジェクトを拡張し、Pluginとして使用します
 	 *
 	 * @class jQuery
+	 * @event flick
 	 */
 
 
