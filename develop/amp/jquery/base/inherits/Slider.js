@@ -620,8 +620,8 @@
 			print = '',
 			i = 0;
 
+      for(; i < this.param.slideMaxLength; i += 1){
         print += pointerHTML;
-			for(; i < this.param.slideMaxLength; i += 1){
 			}
 			this.param.$pointer[0].innerHTML = print;
 		}

@@ -1992,801 +1992,6 @@ var AMP = {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>Easingを管理します</h4>
-   *
-   * @class AMP.Ease
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   */
-  function Ease(){}
-
-  // 基底クラスを継承
-  AMP.inherits(Ease, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Ease.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Ease.VERSION = '2.0.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Ease';
-
-
-  /**
-   * <h4>css3 Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
-   *
-   * @property css
-   * @type {Object}
-   */
-  p.css = {};
-
-
-  /* 1 Sine
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._1_SINE_IN
-   * @type {String}
-   */
-  p.css._1_SINE_IN = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
-
-  /**
-   * @property css._1_SINE_IN
-   * @type {String}
-   */
-  p.css._1_SINE_OUT = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
-
-  /**
-   * @property css._1_SINE_IN_OUT
-   * @type {String}
-   */
-  p.css._1_SINE_IN_OUT = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
-
-
-  /* 2 Quad
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._2_QUAD_IN
-   * @type {String}
-   */
-  p.css._2_QUAD_IN = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
-
-  /**
-   * @property css._2_QUAD_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_OUT = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-
-  /**
-   * @property css._2_QUAD_IN_OUT
-   * @type {String}
-   */
-  p.css._2_QUAD_IN_OUT = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
-
-
-  /* 3 Cubic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._3_CUBIC_IN
-   * @type {String}
-   */
-  p.css._3_CUBIC_IN = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
-
-  /**
-   * @property css._3_CUBIC_OUT
-   * @type {String}
-   */
-  p.css._3_CUBIC_OUT = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
-
-  /**
-   * @property css._3_CUBIC_IN_OUT
-   * @type {String}
-   */
-  p.css._3_CUBIC_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
-
-
-  /* 4 Quart
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._4_QUART_IN
-   * @type {String}
-   */
-  p.css._4_QUART_IN = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
-
-  /**
-   * @property css._4_QUART_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_OUT = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
-
-  /**
-   * @property css._4_QUART_IN_OUT
-   * @type {String}
-   */
-  p.css._4_QUART_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
-
-
-  /* 5 Quint
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._5_QUINT_IN
-   * @type {String}
-   */
-  p.css._5_QUINT_IN = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
-
-  /**
-   * @property css._5_QUINT_OUT
-   * @type {String}
-   */
-  p.css._5_QUINT_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
-
-  /**
-   * @property css._5_QUINT_IN_OUT
-   * @type {String}
-   */
-  p.css._5_QUINT_IN_OUT = 'cubic-bezier(0.86, 0, 0.07, 1)';
-
-
-  /* 6 Expo
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._6_EXPO_IN
-   * @type {String}
-   */
-  p.css._6_EXPO_IN = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
-
-  /**
-   * @property css._6_EXPO_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_OUT = 'cubic-bezier(0.19, 1, 0.22, 1)';
-
-  /**
-   * @property css._6_EXPO_IN_OUT
-   * @type {String}
-   */
-  p.css._6_EXPO_IN_OUT = 'cubic-bezier(1, 0, 0, 1)';
-
-
-  /* 7 Cric
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._7_CIRC_IN
-   * @type {String}
-   */
-  p.css._7_CIRC_IN = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
-
-  /**
-   * @property css._7_CIRC_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_OUT = 'cubic-bezier(0.075, 0.82, 0.165, 1);';
-
-  /**
-   * @property css._7_CIRC_IN_OUT
-   * @type {String}
-   */
-  p.css._7_CIRC_IN_OUT = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
-
-
-  /* 7 Back
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BACK_IN
-   * @type {String}
-   */
-  p.css._BACK_IN = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
-
-  /**
-   * @property css._BACK_OUT
-   * @type {String}
-   */
-  p.css._BACK_OUT = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-
-  /**
-   * @property css._BACK_IN_OUT
-   * @type {String}
-   */
-  p.css._BACK_IN_OUT = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-
-
-  /* Elastic
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._ELASTIC_IN
-   * @type {String}
-   */
-  p.css._ELASTIC_IN = null;
-
-  /**
-   * @property css._ELASTIC_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_OUT = null;
-
-  /**
-   * @property css._ELASTIC_IN_OUT
-   * @type {String}
-   */
-  p.css._ELASTIC_IN_OUT = null;
-
-
-  /* Bounce
-  -----------------------------------------------------------------*/
-  /**
-   * @property css._BOUNCE_IN
-   * @type {String}
-   */
-  p.css._BOUNCE_IN = null;
-
-  /**
-   * @property css._BOUNCE_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_OUT = null;
-
-  /**
-   * @property css._BOUNCE_IN_OUT
-   * @type {String}
-   */
-  p.css._BOUNCE_IN_OUT = null;
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Ease = Ease;
-  AMP.ease = new Ease();
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>イベント</h4>
-   * イベントクラスの継承して使用出来ます<br>
-   * メディエーターとしても使用すことも可能です
-   *
-   * @class AMP.Events
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   *
-   * @example
-   *   // on<br>
-   *   events.on('change', function(){...});<br>
-   *   events.on('change.type', typeCall);<br>
-   *
-   *   // off<br>
-   *   events.off('change');<br>
-   *   events.off('change', typeCall);<br>
-   *   events.off();<br>
-   *
-   *   // tigger<br>
-   *   events.tigger('change');<br>
-   *   events.tigger('change.type');
-   *
-   */
-  function Events(){
-    /**
-     * <h4>イベントリスナーを連想配列で格納します</h4>
-     *
-     * @example
-     * _listeners = {
-     *    attr    : eventObj.attr,
-     *    func    : listener,
-     *    context : context
-     * }
-     *
-     * @private
-     * @property _listeners
-     * @type {Object}
-     */
-    this._listeners = {};
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(Events, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Events.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Events.VERSION = '2.0.1';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Events';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>イベント登録</h4>
-   * イベント名に属性値を付与することが出来ます
-   *
-   * @method on
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.on = function(type, listener, context){
-    this._addEvent(type, listener, context);
-    return this;
-  };
-
-
-  /**
-   * <h4>1度だけ実行するイベント登録</h4>
-   *
-   * @method onece
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener  イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.onece = function(type, listener, context){
-    var self = this;
-
-    self.on(type, function(){
-      self.off(type);
-      listener.apply(self, arguments);
-    }, context);
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener  イベントリスナー
-   * @return {Events}
-   */
-  p.off = function(type, listener){
-    this._removeEvent(type, listener);
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント追加</h4>
-   *
-   * @private
-   * @method _addEvent
-   * @param {String} type イベントタイプ
-   * @param {Function} listener コールバック関数
-   * @param {Object} context コンテキスト
-   * @return {Void}
-   */
-  p._addEvent = function(type, listener, context){
-    var self = this,
-    events = type.split(' ');
-
-    // listenerが関数かチェック
-    if(AMP.isFunction(listener)){
-      AMP.each(events, function(item){
-        var eventObj = self._getEventNameMap(item);
-        self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
-        self._listeners[eventObj.type].push({
-          attr   : eventObj.attr,
-          func   : listener,
-          context: context
-        });
-      });
-    }
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   * TODO: 内部処理最適化予定
-   *
-   * @private
-   * @method _removeEvent
-   * @param {String} type イベントタイプ
-   * @param {Function} listener コールバック関数
-   * @return {Void}
-   */
-  p._removeEvent = function(type, listener){
-    var self = this,
-    events = type ? type.split(' ') : [],
-    ary = null,
-    listeners;
-
-    listener = AMP.getFunctionName(listener);
-
-    AMP.each(events, function(event){
-      var eventObj = self._getEventNameMap(event);
-
-      // イベント属性指定がある場合
-      if(eventObj && eventObj.attr && self._listeners[eventObj.type]){
-        listeners = self._listeners[eventObj.type];
-
-        AMP.each(listeners, function(item){
-          if(item.attr !== eventObj.attr){
-            if(listener){
-              if(listener !== AMP.getFunctionName(item.func)){
-                ary = ary || [];
-                ary.push(item);
-              }
-            } else {
-              ary = ary || [];
-              ary.push(item);
-            }
-          }
-        });
-
-        self._listeners[eventObj.type] = ary;
-
-      // イベントタイプ指定ある場合
-      } else if(eventObj){
-        if(listener){
-          listeners = self._listeners[eventObj.type];
-
-          AMP.each(listeners, function(item){
-            if(listener !== AMP.getFunctionName(item.func)){
-              ary = ary || [];
-              ary.push(item);
-            }
-          });
-        }
-        self._listeners[eventObj.type] = ary;
-
-      // イベント全て削除
-      } else {
-        self._listeners = null;
-        self._listeners = {};
-      }
-    });
-  };
-
-
-  /**
-   * <h4>イベント名、イベント属性を連想配列にして返す</h4>
-   *
-   * @private
-   * @method _getEventNameMap
-   * @param  {String} type イベントタイプ
-   * @return {Object}
-   */
-  p._getEventNameMap = function(type){
-    var events = type.split('.');
-    return {
-      type: events[0],
-      attr: events[1]
-    };
-  };
-
-
-  /**
-   * <h4>イベントが登録されているか判定します</h4>
-   *
-   * @method hasEvent
-   * @param  {String} type イベントタイプ
-   * @return {Boolean}
-   */
-  p.hasEvent = function(type){
-    var flag = false,
-    events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
-
-    // イベントリスナーの有無
-    if(listeners){
-      // 属性指定がある場合
-      if(events.attr){
-        AMP.each(listeners, function(item){
-          if(item.attr === events.attr){
-            flag = true;
-            return false;
-          }
-        });
-
-      } else {
-        flag = true;
-      }
-    }
-
-    return flag;
-  };
-
-
-  /**
-   * <h4>イベント発行</h4>
-   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
-   *
-   * @method trigger
-   * @param  {String} type イベントタイプ
-   * @return {Events}
-   */
-  p.trigger = function(type){
-    var self = this,
-    events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
-
-    if(listeners){
-      AMP.each(listeners, function(item){
-        if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
-        }
-      });
-    }
-
-    return self;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Events = Events;
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ストレージ管理</h4>
-   * デフォルトでは、セッションストレージを使用します
-   *
-   * @class AMP.Storage
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
-   */
-  function Storage(isLocalStorage){
-    /**
-     * <h4>ストレージタイプ</h4>
-     *
-     * @default sessionStorage
-     * @property type
-     * @type {String}
-     */
-    /**
-     * <h4>ストレージを保管</h4>
-     *
-     * @private
-     * @property _storage
-     * @type {Object}
-     */
-    if(isLocalStorage){
-      this.type     = 'localStorage';
-      this._storage = localStorage;
-
-    } else {
-      this.type     = 'sessionStorage';
-      this._storage = sessionStorage;
-    }
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(Storage, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Storage.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Storage.VERSION = '2.0.1';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Storage';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Storageインスタンスの生成</h4>
-   * shorthand
-   *
-   * @static
-   * @method get
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
-   * @return {Storage}
-   */
-  Storage.get = function(isLocalStorage){
-    return new Storage(isLocalStorage);
-  };
-
-
-  /**
-   * <h4>値のセット</h4>
-   *
-   * @method setItem
-   * @param {String | Object} key セットするキー ※オブジェクトを渡すと、一括で値をセットします
-   * @param {Any} val セットする値
-   * @return {Storage}
-   */
-  p.setItem = function(key, val){
-    var self = this;
-
-    if(self._storage){
-      if(AMP.isObject(key)){
-        AMP.each(key, function(item, index){
-          self._storage.setItem(index, item);
-        });
-      } else {
-        self._storage.setItem(key, val);
-      }
-    }
-
-    return self;
-  };
-
-
-  /**
-   * <h4>アイテム、ストレージデータの削除</h4>
-   *
-   * @method removeItem
-   * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
-   * @return {Storage}
-   */
-  p.removeItem = function(key){
-    var self = this;
-
-    if(this._storage){
-      if(AMP.isUndefined(key)){
-        this._storage.clear();
-      } else {
-        AMP.each(AMP.argsToArray(arguments), function(item){
-          self._storage.removeItem(item);
-        });
-      }
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>レングスを返す</h4>
-   *
-   * @method getLength
-   * @return {Number}
-   */
-  p.getLength = function(){
-    return this._storage && this._storage.length;
-  };
-
-
-  /**
-   * <h4>アイテムの取得</h4>
-   *
-   * @method getItem
-   * @param  {String} key 取得するキー 省略時は、ストレージオブジェクトを返す
-   * @return {Any}
-   */
-  p.getItem = function(key){
-    if(this._storage){
-      if(AMP.isUndefined(key)){
-        if(this._storage.length){
-          return this._storage;
-        }
-      } else {
-        return this._storage.getItem(key);
-      }
-    }
-  };
-
-
-  /**
-   * <h4>アイテムがあるか判定</h4>
-   *
-   * @method hasItem
-   * @param  {String}  key 判定するキー
-   * @return {Boolean}
-   */
-  p.hasItem = function(key){
-    if(this._storage){
-      return this._storage.getItem(key) !== null;
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Storage = Storage;
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>Vectorを管理します</h4>
    *
    * @class AMP.Vector
@@ -3435,6 +2640,801 @@ var AMP = {};
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>ストレージ管理</h4>
+   * デフォルトでは、セッションストレージを使用します
+   *
+   * @class AMP.Storage
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   */
+  function Storage(isLocalStorage){
+    /**
+     * <h4>ストレージタイプ</h4>
+     *
+     * @default sessionStorage
+     * @property type
+     * @type {String}
+     */
+    /**
+     * <h4>ストレージを保管</h4>
+     *
+     * @private
+     * @property _storage
+     * @type {Object}
+     */
+    if(isLocalStorage){
+      this.type     = 'localStorage';
+      this._storage = localStorage;
+
+    } else {
+      this.type     = 'sessionStorage';
+      this._storage = sessionStorage;
+    }
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Storage, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Storage.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Storage.VERSION = '2.0.1';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Storage';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Storageインスタンスの生成</h4>
+   * shorthand
+   *
+   * @static
+   * @method get
+   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @return {Storage}
+   */
+  Storage.get = function(isLocalStorage){
+    return new Storage(isLocalStorage);
+  };
+
+
+  /**
+   * <h4>値のセット</h4>
+   *
+   * @method setItem
+   * @param {String | Object} key セットするキー ※オブジェクトを渡すと、一括で値をセットします
+   * @param {Any} val セットする値
+   * @return {Storage}
+   */
+  p.setItem = function(key, val){
+    var self = this;
+
+    if(self._storage){
+      if(AMP.isObject(key)){
+        AMP.each(key, function(item, index){
+          self._storage.setItem(index, item);
+        });
+      } else {
+        self._storage.setItem(key, val);
+      }
+    }
+
+    return self;
+  };
+
+
+  /**
+   * <h4>アイテム、ストレージデータの削除</h4>
+   *
+   * @method removeItem
+   * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
+   * @return {Storage}
+   */
+  p.removeItem = function(key){
+    var self = this;
+
+    if(this._storage){
+      if(AMP.isUndefined(key)){
+        this._storage.clear();
+      } else {
+        AMP.each(AMP.argsToArray(arguments), function(item){
+          self._storage.removeItem(item);
+        });
+      }
+    }
+
+    return this;
+  };
+
+
+  /**
+   * <h4>レングスを返す</h4>
+   *
+   * @method getLength
+   * @return {Number}
+   */
+  p.getLength = function(){
+    return this._storage && this._storage.length;
+  };
+
+
+  /**
+   * <h4>アイテムの取得</h4>
+   *
+   * @method getItem
+   * @param  {String} key 取得するキー 省略時は、ストレージオブジェクトを返す
+   * @return {Any}
+   */
+  p.getItem = function(key){
+    if(this._storage){
+      if(AMP.isUndefined(key)){
+        if(this._storage.length){
+          return this._storage;
+        }
+      } else {
+        return this._storage.getItem(key);
+      }
+    }
+  };
+
+
+  /**
+   * <h4>アイテムがあるか判定</h4>
+   *
+   * @method hasItem
+   * @param  {String}  key 判定するキー
+   * @return {Boolean}
+   */
+  p.hasItem = function(key){
+    if(this._storage){
+      return this._storage.getItem(key) !== null;
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Storage = Storage;
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>イベント</h4>
+   * イベントクラスの継承して使用出来ます<br>
+   * メディエーターとしても使用すことも可能です
+   *
+   * @class AMP.Events
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   *
+   * @example
+   *   // on<br>
+   *   events.on('change', function(){...});<br>
+   *   events.on('change.type', typeCall);<br>
+   *
+   *   // off<br>
+   *   events.off('change');<br>
+   *   events.off('change', typeCall);<br>
+   *   events.off();<br>
+   *
+   *   // tigger<br>
+   *   events.tigger('change');<br>
+   *   events.tigger('change.type');
+   *
+   */
+  function Events(){
+    /**
+     * <h4>イベントリスナーを連想配列で格納します</h4>
+     *
+     * @example
+     * _listeners = {
+     *    attr    : eventObj.attr,
+     *    func    : listener,
+     *    context : context
+     * }
+     *
+     * @private
+     * @property _listeners
+     * @type {Object}
+     */
+    this._listeners = {};
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Events, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Events.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Events.VERSION = '2.0.1';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Events';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>イベント登録</h4>
+   * イベント名に属性値を付与することが出来ます
+   *
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.on = function(type, listener, context){
+    this._addEvent(type, listener, context);
+    return this;
+  };
+
+
+  /**
+   * <h4>1度だけ実行するイベント登録</h4>
+   *
+   * @method onece
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener  イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.onece = function(type, listener, context){
+    var self = this;
+
+    self.on(type, function(){
+      self.off(type);
+      listener.apply(self, arguments);
+    }, context);
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener  イベントリスナー
+   * @return {Events}
+   */
+  p.off = function(type, listener){
+    this._removeEvent(type, listener);
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント追加</h4>
+   *
+   * @private
+   * @method _addEvent
+   * @param {String} type イベントタイプ
+   * @param {Function} listener コールバック関数
+   * @param {Object} context コンテキスト
+   * @return {Void}
+   */
+  p._addEvent = function(type, listener, context){
+    var self = this,
+    events = type.split(' ');
+
+    // listenerが関数かチェック
+    if(AMP.isFunction(listener)){
+      AMP.each(events, function(item){
+        var eventObj = self._getEventNameMap(item);
+        self._listeners[eventObj.type] = self._listeners[eventObj.type] || [];
+        self._listeners[eventObj.type].push({
+          attr   : eventObj.attr,
+          func   : listener,
+          context: context
+        });
+      });
+    }
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   * TODO: 内部処理最適化予定
+   *
+   * @private
+   * @method _removeEvent
+   * @param {String} type イベントタイプ
+   * @param {Function} listener コールバック関数
+   * @return {Void}
+   */
+  p._removeEvent = function(type, listener){
+    var self = this,
+    events = type ? type.split(' ') : [],
+    ary = null,
+    listeners;
+
+    listener = AMP.getFunctionName(listener);
+
+    AMP.each(events, function(event){
+      var eventObj = self._getEventNameMap(event);
+
+      // イベント属性指定がある場合
+      if(eventObj && eventObj.attr && self._listeners[eventObj.type]){
+        listeners = self._listeners[eventObj.type];
+
+        AMP.each(listeners, function(item){
+          if(item.attr !== eventObj.attr){
+            if(listener){
+              if(listener !== AMP.getFunctionName(item.func)){
+                ary = ary || [];
+                ary.push(item);
+              }
+            } else {
+              ary = ary || [];
+              ary.push(item);
+            }
+          }
+        });
+
+        self._listeners[eventObj.type] = ary;
+
+      // イベントタイプ指定ある場合
+      } else if(eventObj){
+        if(listener){
+          listeners = self._listeners[eventObj.type];
+
+          AMP.each(listeners, function(item){
+            if(listener !== AMP.getFunctionName(item.func)){
+              ary = ary || [];
+              ary.push(item);
+            }
+          });
+        }
+        self._listeners[eventObj.type] = ary;
+
+      // イベント全て削除
+      } else {
+        self._listeners = null;
+        self._listeners = {};
+      }
+    });
+  };
+
+
+  /**
+   * <h4>イベント名、イベント属性を連想配列にして返す</h4>
+   *
+   * @private
+   * @method _getEventNameMap
+   * @param  {String} type イベントタイプ
+   * @return {Object}
+   */
+  p._getEventNameMap = function(type){
+    var events = type.split('.');
+    return {
+      type: events[0],
+      attr: events[1]
+    };
+  };
+
+
+  /**
+   * <h4>イベントが登録されているか判定します</h4>
+   *
+   * @method hasEvent
+   * @param  {String} type イベントタイプ
+   * @return {Boolean}
+   */
+  p.hasEvent = function(type){
+    var flag = false,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type];
+
+    // イベントリスナーの有無
+    if(listeners){
+      // 属性指定がある場合
+      if(events.attr){
+        AMP.each(listeners, function(item){
+          if(item.attr === events.attr){
+            flag = true;
+            return false;
+          }
+        });
+
+      } else {
+        flag = true;
+      }
+    }
+
+    return flag;
+  };
+
+
+  /**
+   * <h4>イベント発行</h4>
+   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
+   *
+   * @method trigger
+   * @param  {String} type イベントタイプ
+   * @return {Events}
+   */
+  p.trigger = function(type){
+    var self = this,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type];
+
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+        }
+      });
+    }
+
+    return self;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Events = Events;
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>Easingを管理します</h4>
+   *
+   * @class AMP.Ease
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   */
+  function Ease(){}
+
+  // 基底クラスを継承
+  AMP.inherits(Ease, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Ease.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Ease.VERSION = '2.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Ease';
+
+
+  /**
+   * <h4>css3 Easing用ネームスペース</h4>
+   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   *
+   * @property css
+   * @type {Object}
+   */
+  p.css = {};
+
+
+  /* 1 Sine
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._1_SINE_IN
+   * @type {String}
+   */
+  p.css._1_SINE_IN = 'cubic-bezier(0.47, 0, 0.745, 0.715)';
+
+  /**
+   * @property css._1_SINE_IN
+   * @type {String}
+   */
+  p.css._1_SINE_OUT = 'cubic-bezier(0.39, 0.575, 0.565, 1)';
+
+  /**
+   * @property css._1_SINE_IN_OUT
+   * @type {String}
+   */
+  p.css._1_SINE_IN_OUT = 'cubic-bezier(0.445, 0.05, 0.55, 0.95)';
+
+
+  /* 2 Quad
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._2_QUAD_IN
+   * @type {String}
+   */
+  p.css._2_QUAD_IN = 'cubic-bezier(0.55, 0.085, 0.68, 0.53)';
+
+  /**
+   * @property css._2_QUAD_OUT
+   * @type {String}
+   */
+  p.css._2_QUAD_OUT = 'cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+
+  /**
+   * @property css._2_QUAD_IN_OUT
+   * @type {String}
+   */
+  p.css._2_QUAD_IN_OUT = 'cubic-bezier(0.455, 0.03, 0.515, 0.955)';
+
+
+  /* 3 Cubic
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._3_CUBIC_IN
+   * @type {String}
+   */
+  p.css._3_CUBIC_IN = 'cubic-bezier(0.55, 0.055, 0.675, 0.19)';
+
+  /**
+   * @property css._3_CUBIC_OUT
+   * @type {String}
+   */
+  p.css._3_CUBIC_OUT = 'cubic-bezier(0.215, 0.61, 0.355, 1)';
+
+  /**
+   * @property css._3_CUBIC_IN_OUT
+   * @type {String}
+   */
+  p.css._3_CUBIC_IN_OUT = 'cubic-bezier(0.645, 0.045, 0.355, 1)';
+
+
+  /* 4 Quart
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._4_QUART_IN
+   * @type {String}
+   */
+  p.css._4_QUART_IN = 'cubic-bezier(0.895, 0.03, 0.685, 0.22)';
+
+  /**
+   * @property css._4_QUART_OUT
+   * @type {String}
+   */
+  p.css._4_QUART_OUT = 'cubic-bezier(0.165, 0.84, 0.44, 1)';
+
+  /**
+   * @property css._4_QUART_IN_OUT
+   * @type {String}
+   */
+  p.css._4_QUART_IN_OUT = 'cubic-bezier(0.77, 0, 0.175, 1)';
+
+
+  /* 5 Quint
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._5_QUINT_IN
+   * @type {String}
+   */
+  p.css._5_QUINT_IN = 'cubic-bezier(0.755, 0.05, 0.855, 0.06)';
+
+  /**
+   * @property css._5_QUINT_OUT
+   * @type {String}
+   */
+  p.css._5_QUINT_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
+
+  /**
+   * @property css._5_QUINT_IN_OUT
+   * @type {String}
+   */
+  p.css._5_QUINT_IN_OUT = 'cubic-bezier(0.86, 0, 0.07, 1)';
+
+
+  /* 6 Expo
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._6_EXPO_IN
+   * @type {String}
+   */
+  p.css._6_EXPO_IN = 'cubic-bezier(0.95, 0.05, 0.795, 0.035)';
+
+  /**
+   * @property css._6_EXPO_OUT
+   * @type {String}
+   */
+  p.css._6_EXPO_OUT = 'cubic-bezier(0.19, 1, 0.22, 1)';
+
+  /**
+   * @property css._6_EXPO_IN_OUT
+   * @type {String}
+   */
+  p.css._6_EXPO_IN_OUT = 'cubic-bezier(1, 0, 0, 1)';
+
+
+  /* 7 Cric
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._7_CIRC_IN
+   * @type {String}
+   */
+  p.css._7_CIRC_IN = 'cubic-bezier(0.6, 0.04, 0.98, 0.335)';
+
+  /**
+   * @property css._7_CIRC_OUT
+   * @type {String}
+   */
+  p.css._7_CIRC_OUT = 'cubic-bezier(0.075, 0.82, 0.165, 1);';
+
+  /**
+   * @property css._7_CIRC_IN_OUT
+   * @type {String}
+   */
+  p.css._7_CIRC_IN_OUT = 'cubic-bezier(0.785, 0.135, 0.15, 0.86)';
+
+
+  /* 7 Back
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._BACK_IN
+   * @type {String}
+   */
+  p.css._BACK_IN = 'cubic-bezier(0.6, -0.28, 0.735, 0.045)';
+
+  /**
+   * @property css._BACK_OUT
+   * @type {String}
+   */
+  p.css._BACK_OUT = 'cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+
+  /**
+   * @property css._BACK_IN_OUT
+   * @type {String}
+   */
+  p.css._BACK_IN_OUT = 'cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+
+
+  /* Elastic
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._ELASTIC_IN
+   * @type {String}
+   */
+  p.css._ELASTIC_IN = null;
+
+  /**
+   * @property css._ELASTIC_OUT
+   * @type {String}
+   */
+  p.css._ELASTIC_OUT = null;
+
+  /**
+   * @property css._ELASTIC_IN_OUT
+   * @type {String}
+   */
+  p.css._ELASTIC_IN_OUT = null;
+
+
+  /* Bounce
+  -----------------------------------------------------------------*/
+  /**
+   * @property css._BOUNCE_IN
+   * @type {String}
+   */
+  p.css._BOUNCE_IN = null;
+
+  /**
+   * @property css._BOUNCE_OUT
+   * @type {String}
+   */
+  p.css._BOUNCE_OUT = null;
+
+  /**
+   * @property css._BOUNCE_IN_OUT
+   * @type {String}
+   */
+  p.css._BOUNCE_IN_OUT = null;
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Ease = Ease;
+  AMP.ease = new Ease();
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
    * <h4>デバッグ機能</h4>
    * !!!: シングルトン<br>
    * コンストラクタを呼び出しで、使用しません<br>
@@ -3769,6 +3769,398 @@ var AMP = {};
     this.height = null;
 
     // superClass constructor call
+    FontResize.Events_constructor.call(this);
+    // AMP.Events.call(this);
+  }
+
+  // AMP.Eventsクラスを継承
+  AMP.inherits(FontResize, AMP.Events);
+
+  // prototype
+  var p = FontResize.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  FontResize.VERSION = '3.0.1';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'FontResize';
+
+
+  /**
+   * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
+   *
+   * @static
+   * @property eventType
+   * @default change
+   * @type {String}
+   */
+  FontResize.eventType = 'change';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+
+  /**
+   * <h4>監視するフォント要素生成</h4>
+   *
+   * @private
+   * @method _createElement
+   * @return {Void}
+   */
+  p._createElement = function(){
+
+    var key = 'AMP_FONT_RESIZE',
+    el = document.createElement('ins'),
+    text = document.createTextNode(key);
+
+    el.id = key;
+    el.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
+    el.appendChild(text);
+    document.body.appendChild(el);
+
+    // property
+    this.el = document.getElementById(key);
+    this.height = this.el.clientHeight;
+
+    // set controller
+    this._controller();
+  };
+
+
+  /**
+   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   *
+   * @private
+   * @method _controller
+   * @return {Void}
+   */
+  p._controller = function(){
+    var self = this,
+    height = self.el.clientHeight;
+
+    if(self.isFontResize){
+      // フォントサイズに変更があれば
+      if(self.height !== height){
+        self.height = height;
+        this.trigger(FontResize.eventType);
+      }
+
+      // 再起処理
+      if(AMP.hasRAF()){
+        AMP.requestAnimationFrame(function(){
+          self._controller();
+        });
+      } else {
+        setTimeout(function(){
+          self._controller();
+        }, 50);
+      }
+    }
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.on = function(type, listener, context){
+    // 監視要素がない場合、要素を追加する
+    if(!this.el){
+      this._createElement();
+    }
+    this._addEvent(type, listener, context);
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.FontResize = FontResize;
+  AMP.fontResize = new FontResize();
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>Mediaqueryのブレイクポイントイベント</h4>
+   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   *
+   * @class AMP.Mediaquery
+   * @extends AMP.Events
+   * @constructor
+   * @param {DOM} element 監視対象要素
+   */
+  function Mediaquery(element){
+    /**
+     * <h4>スタイルを監視する要素</h4>
+     *
+     * @property el
+     * @default head
+     * @type {DOM}
+     */
+    if(element && element.nodeType === 1){
+      this.el = element;
+    } else {
+      this.el = document.getElementsByTagName('head')[0];
+    }
+
+    /**
+     * <h4>要素を監視しているか</h4>
+     *
+     * @property isObserver
+     * @default false
+     * @type {Boolean}
+     */
+    this.isObserver = false;
+
+    /**
+     * <h4>要素の現在のスタイルを保管します</h4>
+     *
+     * @property mediaStyle
+     * @type {String}
+     */
+    this.mediaStyle = null;
+
+    // superClass constructor call
+    Mediaquery.Events_constructor.call(this);
+    // AMP.Events.call(this);
+  }
+
+  // AMP.Eventsクラスを継承
+  AMP.inherits(Mediaquery, AMP.Events);
+
+  // prototype
+  var p = Mediaquery.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Mediaquery.VERSION = '2.0.2';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Mediaquery';
+
+
+  /**
+   * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
+   * !!! FIXME : イベント属性追加予定
+   *
+   * @static
+   * @property eventType
+   * @default change
+   * @type {String}
+   */
+  Mediaquery.eventType = 'change';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   *
+   * @private
+   * @method _controller
+   * @return {Void}
+   */
+  p._controller = function(){
+    var self = this;
+
+    // set property
+    this.isObserver = true;
+    this.mediaStyle = this.getStyle();
+
+    // event
+    AMP.addEvent(root, 'resize', function(){
+      if(self.mediaStyle !== self.getStyle()){
+        self.mediaStyle = self.getStyle();
+        self.trigger(Mediaquery.eventType);
+      }
+    });
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.on = function(type, listener, context){
+    if(!this.isObserver){
+      this._controller();
+    }
+    this._addEvent(type, listener, context);
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント発行</h4>
+   * 第二引数以降に値を渡すとcallbackに引数として渡します
+   *
+   * @method trigger
+   * @param  {String} type イベントタイプ
+   * @return {Events}
+   */
+  p.trigger = function(type){
+    var self = this,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
+
+    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
+
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          item.func.apply(item.context, args);
+        }
+      });
+    }
+    return self;
+  };
+
+
+  /**
+   * <h4>要素のスタイルを返します</h4>
+   *
+   * ＠method getStyle
+   * @return {String}
+   */
+  p.getStyle = function(){
+    if(root.getComputedStyle){
+      return getComputedStyle(this.el).getPropertyValue('font-family');
+    } else {
+      // !!!: jshintのチェックを緩和します
+      /*jshint -W069 */
+      return this.el.currentStyle['fontFamily'];
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Mediaquery = Mediaquery;
+  AMP.mediaquery = new Mediaquery();
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>フォントリサイズイベント</h4>
+   * !!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   *
+   * @class AMP.FontResize
+   * @extends AMP.Events
+   * @constructor
+   */
+  function FontResize(){
+    /**
+     * <h4>要素を監視有効・無効の判定フラグ</h4>
+     *
+     * @property isFontResize
+     * @default true
+     * @type {Boolean}
+     */
+    this.isFontResize = true;
+
+    /**
+     * <h4>監視する要素</h4>
+     *
+     * @property el
+     * @type {DOM}
+     */
+    this.el = null;
+
+    /**
+     * <h4>監視要素の高さ</h4>
+     *
+     * @property height
+     * @type {Number}
+     */
+    this.height = null;
+
+    // superClass constructor call
     // FontResize.Events_constructor.call(this);
     AMP.Events.call(this);
   }
@@ -3964,8 +4356,8 @@ var AMP = {};
     this.mediaStyle = null;
 
     // superClass constructor call
-    // Mediaquery.Events_constructor.call(this);
-    AMP.Events.call(this);
+    Mediaquery.Events_constructor.call(this);
+    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
