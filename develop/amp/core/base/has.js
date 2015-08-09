@@ -14,7 +14,7 @@
   ======================================================================*/
 
   /**
-   * <h4>機能判定</h4>
+   * <h4>所持判定</h4>
    *
    * @class AMP.Has
    */
@@ -72,7 +72,7 @@
 
 
   /**
-   * <h4>RequestAnimationFrame機能の有無</h4>
+   * <h4>RAF(requestAnimationFrame)機能の有無</h4>
    *
    * @static
    * @method hasRAF
@@ -271,7 +271,7 @@
 
 
   /**
-   * <h4>css3 Transition機能の有無</h4>
+   * <h4>CSS3 Transition機能の有無</h4>
    *
    * @static
    * @method hasTransition

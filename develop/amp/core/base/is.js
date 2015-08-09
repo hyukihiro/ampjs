@@ -32,23 +32,6 @@
 
 
   /*----------------------------------------------------------------------
-    @property
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>developモード</h4>
-   * 開発時に使用します<br>
-   * developモードは、エラー時コンソールログを出力します
-   *
-   * @static
-   * @property isDevelop
-   * @type {Boolean}
-   */
-  AMP.isDevelop = false;
-
-
-
-  /*----------------------------------------------------------------------
     @method
   ----------------------------------------------------------------------*/
 
@@ -60,7 +43,7 @@
    *
    * @static
    * @method isArray
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isArray = Array.isArray || function(obj){
@@ -73,7 +56,7 @@
    *
    * @static
    * @method isBoolean
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isBoolean = function(obj){
@@ -86,7 +69,7 @@
    *
    * @static
    * @method isFunction
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isFunction = function(obj){
@@ -99,7 +82,7 @@
    *
    * @static
    * @method isNumber
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNumber = function(obj){
@@ -112,7 +95,7 @@
    *
    * @static
    * @method isObject
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isObject = function(obj){
@@ -125,7 +108,7 @@
    *
    * @static
    * @method isPlainObject
-   * @param  {Object}  obj 判定したいオブジェクト
+   * @param  {Object}  obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isPlainObject = function(obj){
@@ -138,7 +121,7 @@
    *
    * @static
    * @method isString
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isString = function(obj){
@@ -151,7 +134,7 @@
    *
    * @static
    * @method isRegexp
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isRegexp = function(obj) {
@@ -164,7 +147,7 @@
    *
    * @static
    * @method isUndefined
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isUndefined = function(obj){
@@ -177,7 +160,7 @@
    *
    * @static
    * @method isNull
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNull = function(obj) {
@@ -190,7 +173,7 @@
 
   /**
    * <h4>ポジティブ値判定</h4>
-   * !!!: 数値しか判定しません
+   * <p>数値しか判定しません</p>
    *
    * @static
    * @method isPositive
@@ -204,7 +187,7 @@
 
   /**
    * <h4>ネガティブ値判定</h4>
-   * !!!: 数値しか判定しません
+   * <p>数値しか判定しません</p>
    *
    * @static
    * @method isNegative
@@ -277,7 +260,8 @@
 
 
   /**
-   * <h4>WindowsPhone判定 βver</h4>
+   * <h4>WindowsPhone判定</h4>
+   * FIXME: βver.
    *
    * @beta
    * @static
@@ -291,7 +275,7 @@
 
   /**
    * <h4>Mac判定</h4>
-   * isoは、含みません
+   * <p>isoは、含みません</p>
    *
    * @static
    * @method isMac
@@ -675,7 +659,7 @@
 
 
   /**
-   * <h4>Android Browser判定</h4>
+   * <h4>AndroidBrowser判定</h4>
    *
    * @static
    * @method isAndroidBrowser

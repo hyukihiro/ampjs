@@ -55,7 +55,7 @@
 
   /**
    * <h4>css3 Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   * <p><a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a></p>
    *
    * @property css
    * @type {Object}

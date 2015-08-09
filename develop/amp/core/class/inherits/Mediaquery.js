@@ -15,28 +15,27 @@
 
   /**
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
-   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
-   * !!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   * <p>!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
+   * シングルトン: コンストラクタを呼び出しで使用しません<br>
+   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください</p>
    *
    * @class AMP.Mediaquery
    * @extends AMP.Events
    * @constructor
-   * @param {DOM} element 監視対象要素
+   * @param {DOM} elm 監視対象要素
    */
-  function Mediaquery(element){
+  function Mediaquery(elm){
     /**
      * <h4>スタイルを監視する要素</h4>
      *
-     * @property el
+     * @property elm
      * @default head
      * @type {DOM}
      */
-    if(element && element.nodeType === 1){
-      this.el = element;
+    if(elm && elm.nodeType === 1){
+      this.elm = elm;
     } else {
-      this.el = document.getElementsByTagName('head')[0];
+      this.elm = document.getElementsByTagName('head')[0];
     }
 
     /**
@@ -58,7 +57,6 @@
 
     // superClass constructor call
     Mediaquery.Events_constructor.call(this);
-    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -80,7 +78,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.2';
+  Mediaquery.VERSION = '2.0.3';
 
 
   /**
@@ -94,7 +92,7 @@
 
   /**
    * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
-   * !!! FIXME : イベント属性追加予定
+   * FIXME: イベント属性追加予定
    *
    * @static
    * @property eventType
@@ -110,7 +108,8 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   * <h4>イベントコントローラー</h4>
+   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
    *
    * @private
    * @method _controller
@@ -153,7 +152,7 @@
 
   /**
    * <h4>イベント発行</h4>
-   * 第二引数以降に値を渡すとcallbackに引数として渡します
+   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
    *
    * @method trigger
    * @param  {String} type イベントタイプ
@@ -182,16 +181,16 @@
   /**
    * <h4>要素のスタイルを返します</h4>
    *
-   * ＠method getStyle
+   * @method getStyle
    * @return {String}
    */
   p.getStyle = function(){
     if(root.getComputedStyle){
-      return getComputedStyle(this.el).getPropertyValue('font-family');
+      return getComputedStyle(this.elm).getPropertyValue('font-family');
     } else {
       // !!!: jshintのチェックを緩和します
-      /*jshint -W069 */
-      return this.el.currentStyle['fontFamily'];
+      /* jshint -W069 */
+      return this.elm.currentStyle['fontFamily'];
     }
   };
 

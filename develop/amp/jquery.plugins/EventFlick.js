@@ -8,13 +8,11 @@
 
 	// 'use strict';
 
-
 	/**
 	 * <h4>jQuery拡張</h4>
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * <p>jQueryオブジェクトを拡張し、Pluginとして使用します</p>
 	 *
 	 * @class jQuery
-	 * @event flick
 	 */
 
 
@@ -451,13 +449,93 @@
 	};
 
 
-
 	/*--------------------------------------------------------------------------
 		export
 	--------------------------------------------------------------------------*/
 
 	$._Flick = Flick;
 
+	/**
+	 * <h4>フリックイベント</h4>
+	 * <p>X軸、Y軸4方向のフリックイベント</p>
+	 *
+	 * @event flick
+	 * @example
+	 *	$(elm).on('flick', callback);
+	 *	$(elm).flick(callback);
+	 */
+	/**
+	 * <h4>フリックXイベント</h4>
+	 * <p>X軸2方向のフリックイベント</p>
+	 *
+	 * @event flickX
+	 * @example
+	 *	$(elm).on('flickX', callback);
+	 *	$(elm).flickX(callback);
+	 */
+	/**
+	 * <h4>フリックYイベント</h4>
+	 * <p>Y軸2方向のフリックイベント</p>
+	 *
+	 * @event flickY
+	 * @example
+	 *	$(elm).on('flickY', callback);
+	 *	$(elm).flickY(callback);
+	 */
+	/**
+	 * <h4>フリックキャンセルイベント</h4>
+	 * <p>X軸、Y軸4方向のフリックキャンセルイベント</p>
+	 *
+	 * @event flickcancel
+	 * @example
+	 *	$(elm).on('flickcancel', callback);
+	 *	$(elm).flickcancel(callback);
+	 */
+	/**
+	 * <h4>フリックXキャンセルイベント</h4>
+	 * <p>X軸2方向のフリックキャンセルイベント</p>
+	 *
+	 * @event flickcancelX
+	 * @example
+	 *	$(elm).on('flickcancelX', callback);
+	 *	$(elm).flickcancelX(callback);
+	 */
+	/**
+	 * <h4>フリックYキャンセルイベント</h4>
+	 * <p>Y軸2方向のフリックキャンセルイベント</p>
+	 *
+	 * @event flickcancelY
+	 * @example
+	 *	$(elm).on('flickcancelY', callback);
+	 *	$(elm).flickcancelY(callback);
+	 */
+	/**
+	 * <h4>フリックムーブイベント</h4>
+	 * <p>X軸、Y軸4方向のフリックムーブイベント</p>
+	 *
+	 * @event flickmove
+	 * @example
+	 *	$(elm).on('flickmove', callback);
+	 *	$(elm).flickmove(callback);
+	 */
+	/**
+	 * <h4>フリックXムーブイベント</h4>
+	 * <p>X軸2方向のフリックムーブイベント</p>
+	 *
+	 * @event flickmoveX
+	 * @example
+	 *	$(elm).on('flickmoveX', callback);
+	 *	$(elm).flickmoveX(callback);
+	 */
+	/**
+	 * <h4>フリックYムーブイベント</h4>
+	 * <p>Y軸2方向のフリックムーブイベント</p>
+	 *
+	 * @event flickmoveY
+	 * @example
+	 *	$(elm).on('flickmoveY', callback);
+	 *	$(elm).flickmoveY(callback);
+	 */
 	$.each(Flick.events, function(index, key){
 		// add Event
 		$.event.special[key] = Flick[key];

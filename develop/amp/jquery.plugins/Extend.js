@@ -11,7 +11,7 @@
 
 	/**
 	 * <h4>jQuery拡張</h4>
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * <p>jQueryオブジェクトを拡張し、Pluginとして使用します</p>
 	 *
 	 * @class jQuery
 	 */
@@ -21,8 +21,8 @@
 		@sequence
 	--------------------------------------------------------------------------*/
 	/**
-	 * <h4>コールバック関数管理 </h4>
-	 * Deferred resolve通知を受けたら次の関数へ移る
+	 * <h4>縦列・並列処理の管理</h4>
+	 * <p>Deferred resolve通知を受けたら次の関数へ移ります</p>
 	 *
 	 * @static
 	 * @method sequence
@@ -62,8 +62,8 @@
 
 
   /**
-   * <h4>引数に渡した関数を縦列処理します</h4>
-   * 実行した関数の戻り値は、次の関数の引数とproglessに渡します。
+   * <h4>縦列・並列処理の管理</h4>
+   * <p>実行した関数の戻り値は、次の関数の引数とproglessに渡します</p>
    *
    * @static
    * @method stream
@@ -80,16 +80,16 @@
     stream();
 
     // callbacksを再帰的に縦列処理する
-    function stream(){
-    	$.when.call(null, callbacks[count].apply(null, arguments))
-    	.fail($defer.reject)
-    	.done(function(){
-    		$defer.notify.call(null, arguments);
-    		count += 1;
-    		if(count < callbacks.length){
-    			stream.apply(null, arguments);
-    		}
-    	});
+		function stream(){
+			$.when.call(null, callbacks[count].apply(null, arguments))
+			.fail($defer.reject)
+			.done(function(){
+				$defer.notify.call(null, arguments);
+				count += 1;
+				if(count < callbacks.length){
+					stream.apply(null, arguments);
+				}
+			});
     }
 
     return $defer.promise();

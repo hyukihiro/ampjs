@@ -7,7 +7,9 @@
 
 (function(root, AMP){
 
-	// module AMP.$
+	/**
+	 * @class AMP.$
+	 */
 	AMP.$ = {};
 
 	/**

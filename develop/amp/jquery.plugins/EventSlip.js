@@ -11,7 +11,7 @@
 
 	/**
 	 * <h4>jQuery拡張</h4>
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * <p>jQueryオブジェクトを拡張し、Pluginとして使用します</p>
 	 *
 	 * @class jQuery
 	 */
@@ -22,8 +22,8 @@
 	--------------------------------------------------------------------------*/
 	/**
 	 * <h4>マウスインした時の方向を取得するイベント</h4>
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * <em>インライン要素には効きません</em>
+	 * <p>イベントオブジェクトに取得したオブジェクトを返します<br>
+	 * <em>インライン要素は対象外です</em></p>
 	 *
 	 * @event slipin
 	 * @example
@@ -32,8 +32,8 @@
 	 */
 	/**
 	 * <h4>マウスアウトした時の方向を取得するイベント</h4>
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * <b>インライン要素には効きません</b>
+	 * <p>イベントオブジェクトに取得したオブジェクトを返します<br>
+	 * <em>インライン要素は対象外です</em></p>
 	 *
 	 * @event slipout
 	 * @example
@@ -108,8 +108,8 @@
 	 * <h4>slipin, slipout ショートハンド</h4>
 	 *
 	 * @event slip
-	 * @param  {Function} fnIn  slipinコールバック関数
-	 * @param  {Function} fnOut slipoutコールバック関数
+	 * @param {Function} fnIn  slipinコールバック関数
+	 * @param {Function} fnOut slipoutコールバック関数
 	 * @example
 	 *	$(elm).slip(inCallback, outCallback);
 	 */

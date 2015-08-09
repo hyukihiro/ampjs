@@ -11,7 +11,7 @@
 
 	/**
 	 * <h4>jQuery拡張</h4>
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * <p>jQueryオブジェクトを拡張し、Pluginとして使用します</p>
 	 *
 	 * @class jQuery
 	 */

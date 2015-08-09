@@ -14,7 +14,7 @@
   ======================================================================*/
 
   /**
-   * <h4>ブラウザサポートされていない場合、代替処理を行います</h4>
+   * <h4>フォールバック</h4>
    *
    * @class Fallback
    */
@@ -45,8 +45,8 @@
 
   /**
    * <h4>forEach</h4>
-   * 配列の各要素に対して、指定された処理を実行します<br>
-   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
+   * <p>配列の各要素に対して、指定された処理を実行します<br>
+   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています</p>
    *
    * @method Array.prototype.forEach
    * @type {Void}
@@ -67,7 +67,7 @@
 
   /**
    * <h4>束縛された関数生成</h4>
-   * FIXME: βバージョンです。検証していません
+   * FIXME: βver.
    *
    * @beta
    * @method Function.prototype.bind
@@ -98,23 +98,22 @@
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>新しいprototypeオブジェクトの生成</h4>
+   * <h4>新しいオブジェクトの生成</h4>
    *
    * @static
    * @method Object.create
-   * @param  {Object} proto プロトタイプオブジェクト
+   * @param  {Object} obj オブジェクト
    * @return {Object}
    */
-  Object.create = Object.create || function(proto){
+  Object.create = Object.create || function(obj){
     function Obj(){}
-    Obj.prototype = proto;
+    Obj.prototype = obj;
     return new Obj();
   };
 
 
   /**
    * <h4>連想配列の要素数取得</h4>
-   * Object.keysの処理を追加
    *
    * @static
    * @method Object.keys
@@ -142,7 +141,7 @@
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>両端の空白を取り除いた文字列を返す</h4>
+   * <h4>文字列の両端の空白削除</h4>
    *
    * @method String.prototype.trim
    * @return {String}
@@ -156,7 +155,7 @@
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>DOMイベント追加</h4>
+   * <h4>ターゲットにイベントリスナーを登録</h4>
    *
    * @static
    * @method addEvent
@@ -176,12 +175,12 @@
 
 
   /**
-   * <h4>DOMイベント削除</h4>
+   * <h4>ターゲットからイベントリスナーを削除</h4>
    *
    * @static
    * @method removeEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
+   * @param  {DOM} element ターゲット要素
+   * @param  {String} type イベント名
    * @param  {Function} listener 実行する関数
    * @return {DOM}
    */
