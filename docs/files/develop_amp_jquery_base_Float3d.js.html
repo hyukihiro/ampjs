@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -123,8 +124,9 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ホバーの3Dアクション&lt;/h4&gt;
-   * ※IE10以上対象
+   * &lt;h4&gt;ホバー3Dアニメーション&lt;/h4&gt;
+   * &lt;p&gt;&lt;em&gt;IE10以上対象&lt;/em&gt;&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.Float3d.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @example  要素構成: .float &gt; .float_frame &gt; .float_inner
    *
@@ -141,12 +143,13 @@
     }
 
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, Float3d.float3dOptions, options);
+    this.props = $.extend(true, {}, Float3d.options, options);
 
     /**
      * &lt;h4&gt;float要素&lt;/h4&gt;
@@ -154,7 +157,7 @@
      * @propaty $target
      * @type {jQuery}
      */
-    this.param.$target = $target;
+    this.props.$target = $target;
 
     /**
      * &lt;h4&gt;html要素&lt;/h4&gt;
@@ -162,7 +165,7 @@
      * @propaty $html
      * @type {jQuery}
      */
-		this.param.$html = $(&#x27;html&#x27;);
+		this.props.$html = $(&#x27;html&#x27;);
 
     /**
      * &lt;h4&gt;float要素&lt;/h4&gt;
@@ -171,7 +174,7 @@
      * @propaty _isFloating
      * @type {Boolean}
      */
-    this.param._isFloating = false;
+    this.props._isFloating = false;
 	}
 
   // 基底クラスを継承
@@ -193,7 +196,7 @@
    * @property VERSION
    * @type {String}
    */
-  Float3d.VERSION = &#x27;1.0.2&#x27;;
+  Float3d.VERSION = &#x27;1.1.0&#x27;;
 
 
   /**
@@ -206,63 +209,63 @@
 
 
   /**
-   * &lt;h4&gt;デフォルト値、格納オブジェクト&lt;/h4&gt;
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
    * @static
-   * @property float3dOptions
+   * @property options
    * @type {Object}
    */
   /**
    * &lt;h4&gt;3D変形の奥行きの深さを指定する値&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.perspective
+   * @property options.perspective
    * @type {Number}
    */
   /**
    * &lt;h4&gt;Z方向の距離で移動を指定する値&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.translateZ
+   * @property options.translateZ
    * @type {Number}
    */
   /**
    * &lt;h4&gt;回転表示を指定する値&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.rotate
+   * @property options.rotate
    * @type {Number}
    */
   /**
    * &lt;h4&gt;floating時に回転する幅く&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.range
+   * @property options.range
    * @type {Number}
    */
   /**
    * &lt;h4&gt;floating時の回転するスピードく&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.speed
+   * @property options.speed
    * @type {Number}
    */
   /**
    * &lt;h4&gt;hover時のdurationく&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.duration
+   * @property options.duration
    * @type {Number}
    */
   /**
    * &lt;h4&gt;hover時のeasingく&lt;/h4&gt;
    *
    * @static
-   * @property float3dOptions.easing
+   * @property options.easing
    * @type {String}
    */
-	Float3d.float3dOptions = {
+	Float3d.options = {
     perspective: 400,
     translateZ : -150,
     rotate     : 7.5,
@@ -304,14 +307,14 @@
     // イベント重複回避
     self.off();
 
-    self.param.$target.css({perspective: this.param.perspective})
-    .children().css({perspective: this.param.perspective})
-    .children().css({perspective: this.param.perspective});
+    self.props.$target.css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective});
 
-    self.param.$target
+    self.props.$target
     .on(&#x27;mouseenter.Float3d&#x27;, function(onEvent){
       self.onTween(this, onEvent);
-      self.param._isFloating = true;
+      self.props._isFloating = true;
       self.floatTween($(this).children(), 0);
 
       // moveEvent登録
@@ -320,7 +323,7 @@
       });
     })
     .on(&#x27;mouseleave.Float3d&#x27;, function(outEvent){
-      self.param._isFloating = false;
+      self.props._isFloating = false;
       self.outTween(this, outEvent);
 
       // moveEvent削除
@@ -328,9 +331,9 @@
     });
 
      // moveEvent削除
-    this.param.$html.on(&#x27;mouseleave.Float3d&#x27;, function(){
-      self.param.$target.parent().off(&#x27;mousemove.Float3d&#x27;);
-      self.param._isFloating = false;
+    this.props.$html.on(&#x27;mouseleave.Float3d&#x27;, function(){
+      self.props.$target.parent().off(&#x27;mousemove.Float3d&#x27;);
+      self.props._isFloating = false;
     });
 
     return this;
@@ -344,11 +347,11 @@
    * @return {Float3d}
    */
   p.off = function(){
-    this.param.$target.off(&#x27;.Float3d&#x27;).css({perspective: 0})
-    .children().css({perspective: this.param.perspective})
-    .children().css({perspective: this.param.perspective});
+    this.props.$target.off(&#x27;.Float3d&#x27;).css({perspective: 0})
+    .children().css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective});
 
-    this.param.$html.off(&#x27;.Float3d&#x27;);
+    this.props.$html.off(&#x27;.Float3d&#x27;);
 
     return this;
   };
@@ -368,13 +371,13 @@
 
     $target.velocity(&#x27;stop&#x27;)
     .velocity({
-      translateZ: this.param.translateZ,
-      rotateX   : this.param.rotate * offset.y,
-      rotateY   : this.param.rotate * offset.x,
-      rotateZ   : this.param.rotate * offset.x
+      translateZ: this.props.translateZ,
+      rotateX   : this.props.rotate * offset.y,
+      rotateY   : this.props.rotate * offset.x,
+      rotateZ   : this.props.rotate * offset.x
     }, {
-      duration: this.param.duration,
-      easing  : this.param.easing
+      duration: this.props.duration,
+      easing  : this.props.easing
     });
   };
 
@@ -391,20 +394,20 @@
     var self = this;
 
     angle = typeof angle === &#x27;number&#x27; ? angle : 0;
-    angle += Math.PI / self.param.speed;
+    angle += Math.PI / self.props.speed;
 
     $target.children()
     .velocity(&#x27;stop&#x27;)
     .velocity({
-      rotateX: (self.param.range * Math.cos(angle + Math.PI)),
-      rotateY: (self.param.range * Math.sin(angle + Math.PI)),
-      rotateZ: (self.param.range * Math.sin(angle + Math.PI))
+      rotateX: (self.props.range * Math.cos(angle + Math.PI)),
+      rotateY: (self.props.range * Math.sin(angle + Math.PI)),
+      rotateZ: (self.props.range * Math.sin(angle + Math.PI))
     }, {
       duration: 1000 / 60,
       easing  : &#x27;linear&#x27;,
       complete: function(){
         // 再起処理
-        if(self.param._isFloating){
+        if(self.props._isFloating){
           self.floatTween($target, angle);
         }
       }
@@ -430,8 +433,8 @@
       rotateY   : 0,
       rotateZ   : 0
     }, {
-      duration: self.param.duration,
-      easing  : self.param.ease
+      duration: self.props.duration,
+      easing  : self.props.ease
     })
     .children()
     .velocity(&#x27;stop&#x27;)
@@ -440,8 +443,8 @@
       rotateY: 0,
       rotateZ: 0
     }, {
-      duration: self.param.duration,
-      easing  : self.param.easing
+      duration: self.props.duration,
+      easing  : self.props.easing
     });
   };
 

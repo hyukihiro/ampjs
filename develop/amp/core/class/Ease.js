@@ -15,6 +15,7 @@
 
   /**
    * <h4>Easingを管理します</h4>
+   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
    *
    * @class AMP.Ease
    * @extends AMP.BASE_CLASS

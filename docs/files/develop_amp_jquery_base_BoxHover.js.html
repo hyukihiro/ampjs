@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -124,14 +125,14 @@
 
   /**
    * &lt;h4&gt;AMP.$.BoxHover&lt;/h4&gt;
-   * &lt;p&gt;リンクエリアを、BOXエリアまで拡大させます&lt;/p&gt;
-   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.BoxHover.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;p&gt;リンクエリアを、BOXエリアまで拡大させます&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.BoxHover.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.$.BoxHover
    * @extends AMP.BASE_CLASS
    * @constructor
    * @param  {jQuery} $target 対象のbox要素
-   * @param  {Object} options オプション値
+   * @param  {Object} options オプション値 (BoxHover.options参照)
    */
   function BoxHover($boxHover, options){
 
@@ -142,21 +143,22 @@
     }
 
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, BoxHover.boxHoverOptions, options);
+    this.props = $.extend(true, {}, BoxHover.options, options);
 
     /**
      * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
      *
      * @default $(&#x27;.box_hover&#x27;)
-     * @property param.$boxHover
+     * @property props.$boxHover
      * @type {jQuery}
      */
-    this.param.$boxHover = $boxHover;
+    this.props.$boxHover = $boxHover;
   }
 
   // 基底クラスを継承
@@ -178,7 +180,7 @@
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = &#x27;3.0.2&#x27;;
+  BoxHover.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -191,18 +193,18 @@
 
 
   /**
-   * &lt;h4&gt;デフォルト値、格納オブジェクト&lt;/h4&gt;
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
    * @static
-   * @property boxHoverOptions
+   * @property options
    * @type {Object}
    */
   /**
    * &lt;h4&gt;ホバー時に、box要素に付与するクラス名&lt;/h4&gt;
    *
    * @static
-   * @property boxHoverOptions.hoverClass
+   * @property options.hoverClass
    * @default hover
    * @type {String}
    */
@@ -210,11 +212,11 @@
    * &lt;h4&gt;Box内に複数リンクがある場合、優先対象に指定するリンククラス名&lt;/h4&gt;
    *
    * @static
-   * @property boxHoverOptions.linkClass
+   * @property options.linkClass
    * @default link
    * @type {String}
    */
-  BoxHover.boxHoverOptions = {
+  BoxHover.options = {
     hoverClass: &#x27;hover&#x27;,
     linkClass : &#x27;link&#x27;
   };
@@ -252,12 +254,12 @@
 
     this.off();
 
-    this.param.$boxHover.css({cursor: &#x27;pointer&#x27;})
+    this.props.$boxHover.css({cursor: &#x27;pointer&#x27;})
     .on(&#x27;mouseenter.BoxHover&#x27;, function(){
-      $(this).addClass(self.param.hoverClass);
+      $(this).addClass(self.props.hoverClass);
     })
     .on(&#x27;mouseleave.BoxHover&#x27;, function(){
-      $(this).removeClass(self.param.hoverClass);
+      $(this).removeClass(self.props.hoverClass);
     })
     .on(&#x27;click.BoxHover&#x27;, function(){
       self.transition($(this));
@@ -268,7 +270,7 @@
     });
 
     // フォーム要素はイベント伝播をキャンセル
-    this.param.$boxHover.find(&#x27;label input select textarea&#x27;)
+    this.props.$boxHover.find(&#x27;label input select textarea&#x27;)
     .on(&#x27;click.BoxHover&#x27;, function(clickEvent){
       clickEvent.stopPropagation();
     });
@@ -284,12 +286,12 @@
    * @return {BoxHover}
    */
   p.off = function(){
-    this.param.$boxHover
+    this.props.$boxHover
     .css({cursor: &#x27;auto&#x27;})
     .off(&#x27;mouseenter.BoxHover mouseleave.BoxHover click.BoxHover&#x27;)
     .find(&#x27;a&#x27;).off(&#x27;click.BoxHover&#x27;);
 
-    this.param.$boxHover.find(&#x27;label input select textarea&#x27;).off(&#x27;click.BoxHover&#x27;);
+    this.props.$boxHover.find(&#x27;label input select textarea&#x27;).off(&#x27;click.BoxHover&#x27;);
 
     return this;
   };
@@ -302,8 +304,7 @@
    * @return {Void}
    */
   p.transition = function($box){
-    var $link = $box.find(&#x27;.&#x27; + this.param.linkClass);
-
+    var $link = $box.find(&#x27;.&#x27; + this.props.linkClass);
     $link = $link[0] ? $link : $box.find(&#x27;a&#x27;).eq(0);
 
     // リンク展開

@@ -16,7 +16,8 @@
   /**
    * <h4>フォントリサイズイベント</h4>
    * <p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
-   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください</p>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.FontResize.html">DEMO</a></p>
    *
    * @class AMP.FontResize
    * @extends AMP.Events

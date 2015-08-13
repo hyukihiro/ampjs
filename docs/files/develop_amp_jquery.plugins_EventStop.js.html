@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -120,29 +121,31 @@
 
 	/**
 	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * &lt;p&gt;jQueryオブジェクトを拡張し、Pluginとして使用します&lt;/p&gt;
 	 *
 	 * @class jQuery
 	 */
 
 	/**
-	 * &lt;h4&gt;リサイズイベントを間引き、完了後発火します&lt;/h4&gt;
+	 * &lt;h4&gt;リサイズイベントを間引き、リサイズ完了後発火します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.stop.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @event resizestop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on(&#x27;resizestop&#x27;, callback);
-	 *	$(window).on(&#x27;resizestop&#x27;, {timer: 1000}, callback);
+	 * $(window).on(&#x27;resizestop&#x27;, callback);
+	 * $(window).on(&#x27;resizestop&#x27;, {timer: 1000}, callback);
 	 */
 	/**
-	 * &lt;h4&gt;スクロールイベントを間引き、完了後発火します&lt;/h4&gt;
+	 * &lt;h4&gt;スクロールイベントを間引き、スクロール完了後発火します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.stop.html#sec02&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @event scrollstop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on(&#x27;scrollstop&#x27;, {timer: 1000}, callback);
-	 *	$(window).on(&#x27;scrollstop&#x27;, callback);
-	 *	$(window).scrollstop(callback);
+	 * $(window).on(&#x27;scrollstop&#x27;, {timer: 1000}, callback);
+	 * $(window).on(&#x27;scrollstop&#x27;, callback);
+	 * $(window).scrollstop(callback);
 	 */
 	$.each({
 		resize: &#x27;resizestop&#x27;,
@@ -153,7 +156,7 @@
 			// data
 			data: {
 				eventType: fix,
-				timer    : 100,
+				timer    : 50,
 				timerId  : null
 			},
 

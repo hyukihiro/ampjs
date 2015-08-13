@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -124,13 +125,14 @@
 
   /**
    * &lt;h4&gt;要素の高さを揃える&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.FlatHeight.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.$.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $flatHeight 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Boolean} isResize リサイズ後に実行するか
+   * @param {jQuery} $flatHeight 対象のエリア要素
+   * @param {Number} split 区切る数 省略可
+   * @param {Boolean} isResize リサイズ後に実行するか
    */
   function FlatHeight($flatHeight, split, isResize){
 
@@ -142,40 +144,39 @@
     }
 
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = {};
+    this.props = {};
 
     /**
      * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
      *
      * @default $(&#x27;.flat_height&#x27;)
-     * @property param.$flatHeight
+     * @property props.$flatHeight
      * @type {jQuery}
      */
-    this.param.$flatHeight = $flatHeight;
+    this.props.$flatHeight = $flatHeight;
 
     /**
      * &lt;h4&gt;高さを揃える要素の分割単位&lt;/h4&gt;
      *
      * @default $flatHeight.length
-     * @property param.split
+     * @property props.split
      * @type {Number}
      */
-    this.param.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
      * &lt;h4&gt;リサイズ後、セットし直すか？&lt;/h4&gt;
      *
      * @default true
-     * @property param.isResize
+     * @property props.isResize
      * @type {Boolean}
      */
-    this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
-
+    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
 
     this._addEvent();
     this.setHeight();
@@ -200,7 +201,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = &#x27;3.0.1&#x27;;
+  FlatHeight.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -251,8 +252,8 @@
     }
 
     // window resize
-    $(root).on(&#x27;resizestop.FlatHeight&#x27;, {timer: 50}, function(){
-      if(self.param.isResize){
+    $(root).on(&#x27;resizestop.FlatHeight&#x27;, function(){
+      if(self.props.isResize){
         self.setHeight();
       }
     });
@@ -271,7 +272,7 @@
     if(!AMP.isNumber(num)){
       throw new TypeError(num + &#x27; is not a Number&#x27;);
     }
-    this.param.split = num;
+    this.props.split = num;
     this.setHeight();
     return this;
   };
@@ -285,34 +286,34 @@
    */
   p.setHeight = function(){
     var self = this,
-    total = self.param.$flatHeight.length,
-    rest = total % self.param.split,
+    total = self.props.$flatHeight.length,
+    rest = total % self.props.split,
     finalRow = total - rest,
     maxHeight = 0,
     targetHeight = 0,
     rowCount = 0,
     i = 0;
 
-    self.param.$flatHeight.height(&#x27;auto&#x27;);
+    self.props.$flatHeight.height(&#x27;auto&#x27;);
 
-    if(1 &lt; self.param.split){
+    if(1 &lt; self.props.split){
 
       for(; i &lt; total; i += 1){
         // 一番高い高さを求める
-        targetHeight = self.param.$flatHeight.eq(i).height();
+        targetHeight = self.props.$flatHeight.eq(i).height();
         maxHeight = maxHeight &lt; targetHeight ? targetHeight : maxHeight;
 
         // 行の高さを揃える
-        if((i + 1) % self.param.split === 0){
-          var _start = rowCount * self.param.split,
-          _end = (rowCount += 1) * self.param.split;
+        if((i + 1) % self.props.split === 0){
+          var _start = rowCount * self.props.split,
+          _end = (rowCount += 1) * self.props.split;
 
-          self.param.$flatHeight.slice(_start, _end).height(maxHeight);
+          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
           maxHeight = 0;
 
         // 最終行の高さを揃える
         } else if(1 &lt; rest &amp;&amp; finalRow &lt;= i &amp;&amp; i === total - 1){
-          self.param.$flatHeight.slice(rowCount * self.param.split, total).height(maxHeight);
+          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
         }
       }
     }

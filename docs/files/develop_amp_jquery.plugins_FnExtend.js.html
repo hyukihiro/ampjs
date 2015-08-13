@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -120,7 +121,7 @@
 
 	/**
 	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * &lt;p&gt;jQueryオブジェクトを拡張し、Pluginとして使用します&lt;/p&gt;
 	 *
 	 * @class jQuery
 	 */
@@ -128,18 +129,20 @@
 
 	/**
 	 * &lt;h4&gt;cssをアニメーションqueueで管理します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method qCss
 	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val プロパティ値
 	 * @return {jQuery}
 	 */
 	/**
 	 * &lt;h4&gt;attrをアニメーションqueueで管理します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method qAttr
 	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val プロパティ値
 	 * @return {jQuery}
 	 */
   $.each({
@@ -158,18 +161,18 @@
 
 	/**
 	 * &lt;h4&gt;addClassをアニメーションqueueで管理します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method qAddClass
-	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val 付与するクラス名
 	 * @return {jQuery}
 	 */
 	/**
 	 * &lt;h4&gt;removeClassをアニメーションqueueで管理します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method qRemoveClass
-	 * @param  {String} prop クラス名
-	 * @param  {Function} val コールバック関数
+	 * @param  {Function} val 削除するクラス名
 	 * @return {jQuery}
 	 */
   $.each({
@@ -188,6 +191,7 @@
 
 	/**
 	 * &lt;h4&gt;コールバック関数をアニメーションqueueで管理します&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method qCall
 	 * @param  {Function} fn コールバック関数
@@ -204,6 +208,7 @@
 
 	/**
 	 * &lt;h4&gt;属性値のreplace処理&lt;/h4&gt;
+	 * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec02&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @method replaceAttr
 	 * @param  {String} attr 属性名
@@ -225,9 +230,11 @@
 
   /**
    * &lt;h4&gt;ファイルの拡張子を取得&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/$.other.html#sec03&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @method getExt
-   * @param  {String} attr 取得属性名
+   * @param {String} attr 取得属性名
+   * @param {Boolean} isQuery 拡張子 + queryで値を返すか 初期値： false
    * @return {String} 拡張子を返す
    */
   $.fn.getExt = function(attr, isQuery){

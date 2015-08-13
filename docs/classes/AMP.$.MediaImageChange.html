@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -119,8 +120,9 @@
 
 
 <div class="box intro">
-    <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
-!!! AMP.Mediaqueryを継承しています
+    <p><h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4></p>
+<p>!!! AMP.Mediaqueryを継承しています<br>
+<a href="../../demo/AMP.$.MediaImages.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
@@ -232,6 +234,10 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item method inherited">
+                                <a href="#method_getStyle">getStyle</a>
+
+                            </li>
+                            <li class="index-item method inherited">
                                 <a href="#method_hasEvent">hasEvent</a>
 
                             </li>
@@ -287,52 +293,52 @@
 
                             </li>
                             <li class="index-item property inherited">
-                                <a href="#property_el">el</a>
+                                <a href="#property_elm">elm</a>
 
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_isObserver">isObserver</a>
 
                             </li>
-                            <li class="index-item property">
-                                <a href="#property_mediaImagesOptions">mediaImagesOptions</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_mediaImagesOptions.attrKey">mediaImagesOptions.attrKey</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_mediaImagesOptions.element">mediaImagesOptions.element</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_mediaImagesOptions.imagePrefix">mediaImagesOptions.imagePrefix</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_mediaImagesOptions.isObserver">mediaImagesOptions.isObserver</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
                             <li class="index-item property inherited">
                                 <a href="#property_mediaStyle">mediaStyle</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_param">param</a>
+                                <a href="#property_options">options</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.attrKey">options.attrKey</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.element">options.element</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.imagePrefix">options.imagePrefix</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.isObserver">options.isObserver</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_props">props</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_param.$images">param.$images</a>
+                                <a href="#property_props.$images">props.$images</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_param.current">param.current</a>
+                                <a href="#property_props.current">props.current</a>
 
                             </li>
                             <li class="index-item property">
@@ -380,7 +386,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__addEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l145"><code>develop\amp\core\class\Events.js:145</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l144"><code>develop\amp\core\class\Events.js:144</code></a>
         </p>
 
 
@@ -388,7 +394,8 @@
     </div>
 
     <div class="description">
-        <h4>イベント追加</h4>
+        <p><h4>イベント追加</h4></p>
+
     </div>
 
         <div class="params">
@@ -460,7 +467,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Mediaquery.html#method__controller">AMP.Mediaquery</a>:
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l112"><code>develop\amp\core\class\Mediaquery.js:112</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l111"><code>develop\amp\core\class\inherits\Mediaquery.js:111</code></a>
         </p>
 
 
@@ -468,7 +475,8 @@
     </div>
 
     <div class="description">
-        <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+        <p><h4>イベントコントローラー</h4></p>
+<p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
     </div>
 
 
@@ -507,7 +515,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__getEventNameMap">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l238"><code>develop\amp\core\class\Events.js:238</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l237"><code>develop\amp\core\class\Events.js:237</code></a>
         </p>
 
 
@@ -515,7 +523,8 @@
     </div>
 
     <div class="description">
-        <h4>イベント名、イベント属性を連想配列にして返す</h4>
+        <p><h4>イベント名、イベント属性を連想配列にして返す</h4></p>
+
     </div>
 
         <div class="params">
@@ -574,7 +583,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__removeEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l174"><code>develop\amp\core\class\Events.js:174</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l173"><code>develop\amp\core\class\Events.js:173</code></a>
         </p>
 
 
@@ -582,8 +591,9 @@
     </div>
 
     <div class="description">
-        <h4>イベント削除</h4>
-TODO: 内部処理最適化予定
+        <p><h4>イベント削除</h4>
+FIXME: 内部処理最適化予定</p>
+
     </div>
 
         <div class="params">
@@ -653,7 +663,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l148"><code>develop\amp\jquery\base\MediaImages.js:148</code></a>
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l147"><code>develop\amp\jquery\base\MediaImages.js:147</code></a>
         </p>
 
 
@@ -661,7 +671,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>MediaImageChangeインスタンスの生成</h4>
+        <p><h4>MediaImageChangeインスタンスの生成</h4></p>
+
     </div>
 
         <div class="params">
@@ -703,6 +714,47 @@ TODO: 内部処理最適化予定
 
 
 </div>
+<div id="method_getStyle" class="method item inherited">
+    <h3 class="name"><code>getStyle</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/AMP.Mediaquery.html#method_getStyle">AMP.Mediaquery</a>:
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l182"><code>develop\amp\core\class\inherits\Mediaquery.js:182</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>要素のスタイルを返します</h4></p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+            </div>
+        </div>
+
+
+</div>
 <div id="method_hasEvent" class="method item inherited">
     <h3 class="name"><code>hasEvent</code></h3>
 
@@ -727,7 +779,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_hasEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l255"><code>develop\amp\core\class\Events.js:255</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l254"><code>develop\amp\core\class\Events.js:254</code></a>
         </p>
 
 
@@ -735,7 +787,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベントが登録されているか判定します</h4>
+        <p><h4>登録イベントがあるか判定します</h4></p>
+
     </div>
 
         <div class="params">
@@ -793,7 +846,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_off">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l131"><code>develop\amp\core\class\Events.js:131</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l130"><code>develop\amp\core\class\Events.js:130</code></a>
         </p>
 
 
@@ -801,7 +854,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベント削除</h4>
+        <p><h4>イベント削除</h4></p>
+
     </div>
 
         <div class="params">
@@ -876,7 +930,7 @@ TODO: 内部処理最適化予定
                 AMP.Events
             </a>
             but overwritten in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l136"><code>develop\amp\core\class\Mediaquery.js:136</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l136"><code>develop\amp\core\class\inherits\Mediaquery.js:136</code></a>
         </p>
 
 
@@ -884,7 +938,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベント登録</h4>
+        <p><h4>イベント登録</h4></p>
+
     </div>
 
         <div class="params">
@@ -967,7 +1022,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_onece">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l110"><code>develop\amp\core\class\Events.js:110</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l109"><code>develop\amp\core\class\Events.js:109</code></a>
         </p>
 
 
@@ -975,7 +1030,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>1度だけ実行するイベント登録</h4>
+        <p><h4>1度だけ実行するイベント登録</h4></p>
+
     </div>
 
         <div class="params">
@@ -1052,7 +1108,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l194"><code>develop\amp\jquery\base\MediaImages.js:194</code></a>
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l193"><code>develop\amp\jquery\base\MediaImages.js:193</code></a>
         </p>
 
 
@@ -1060,7 +1116,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>監視の状態を切り替えます</h4>
+        <p><h4>監視の状態を切り替えます</h4></p>
+
     </div>
 
         <div class="params">
@@ -1109,7 +1166,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l162"><code>develop\amp\jquery\base\MediaImages.js:162</code></a>
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l161"><code>develop\amp\jquery\base\MediaImages.js:161</code></a>
         </p>
 
 
@@ -1117,7 +1174,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>ブレイクポイントの監視を開始します</h4>
+        <p><h4>ブレイクポイントの監視を開始します</h4></p>
+
     </div>
 
 
@@ -1149,7 +1207,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l182"><code>develop\amp\jquery\base\MediaImages.js:182</code></a>
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l181"><code>develop\amp\jquery\base\MediaImages.js:181</code></a>
         </p>
 
 
@@ -1157,7 +1215,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>ブレイクポイントの監視をストップします</h4>
+        <p><h4>ブレイクポイントの監視をストップします</h4></p>
+
     </div>
 
 
@@ -1189,7 +1248,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l207"><code>develop\amp\jquery\base\MediaImages.js:207</code></a>
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l206"><code>develop\amp\jquery\base\MediaImages.js:206</code></a>
         </p>
 
 
@@ -1197,7 +1256,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>画像を変更します</h4>
+        <p><h4>画像を変更します</h4></p>
+
     </div>
 
 
@@ -1237,7 +1297,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>クラス名を返す</h4>
+        <p><h4>クラス名を返す</h4></p>
+
     </div>
 
 
@@ -1280,7 +1341,7 @@ TODO: 内部処理最適化予定
                 AMP.Events
             </a>
             but overwritten in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l154"><code>develop\amp\core\class\Mediaquery.js:154</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l154"><code>develop\amp\core\class\inherits\Mediaquery.js:154</code></a>
         </p>
 
 
@@ -1288,8 +1349,8 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベント発行</h4>
-第二引数以降に値を渡すとcallbackに引数として渡します
+        <p><h4>イベント発行</h4></p>
+<p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
     </div>
 
         <div class="params">
@@ -1325,368 +1386,382 @@ TODO: 内部処理最適化予定
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property__listeners" class="property item private inherited">
-                        <h3 class="name"><code>_listeners</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                            <span class="flag private">private</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/AMP.Events.html#property__listeners">AMP.Events</a>:
-                            <a href="../files/develop_amp_core_class_Events.js.html#l41"><code>develop\amp\core\class\Events.js:41</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>イベントリスナーを連想配列で格納します</h4>
-                        </div>
-                    
-                    
-                            <div class="example">
-                                <h4>Example:</h4>
-                    
-                                <div class="example-content">
-                                    <p>_listeners = {
-                    attr    : eventObj.attr,
-                    func    : listener,
-                    context : context
-                    }</p>
-                    
-                                </div>
-                            </div>
-                    
-                    </div>
-                    <div id="property_className" class="property item">
-                        <h3 class="name"><code>className</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/AMP.BASE_CLASS.html#property_className">
-                                    AMP.BASE_CLASS
-                                </a>
-                                but overwritten in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l89"><code>develop\amp\jquery\base\MediaImages.js:89</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>クラス名</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_el" class="property item inherited">
-                        <h3 class="name"><code>el</code></h3>
-                        <span class="type">DOM</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/AMP.Mediaquery.html#property_el">AMP.Mediaquery</a>:
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l29"><code>develop\amp\core\class\Mediaquery.js:29</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スタイルを監視する要素</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> head</p>
-                    
-                    
-                    </div>
-                    <div id="property_isObserver" class="property item inherited">
-                        <h3 class="name"><code>isObserver</code></h3>
-                        <span class="type">Boolean</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/AMP.Mediaquery.html#property_isObserver">AMP.Mediaquery</a>:
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l42"><code>develop\amp\core\class\Mediaquery.js:42</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>要素を監視しているか</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> false</p>
-                    
-                    
-                    </div>
-                    <div id="property_mediaImagesOptions" class="property item">
-                        <h3 class="name"><code>mediaImagesOptions</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l98"><code>develop\amp\jquery\base\MediaImages.js:98</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>デフォルト値、格納オブジェクト</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_mediaImagesOptions.attrKey" class="property item">
-                        <h3 class="name"><code>mediaImagesOptions.attrKey</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l112"><code>develop\amp\jquery\base\MediaImages.js:112</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>画像ファイルパス格納属性名</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;data-media-img&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_mediaImagesOptions.element" class="property item">
-                        <h3 class="name"><code>mediaImagesOptions.element</code></h3>
-                        <span class="type">DOM</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l105"><code>develop\amp\jquery\base\MediaImages.js:105</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>監視対象要素</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_mediaImagesOptions.imagePrefix" class="property item">
-                        <h3 class="name"><code>mediaImagesOptions.imagePrefix</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l120"><code>develop\amp\jquery\base\MediaImages.js:120</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>画像ファイルに追加するprefix</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> &#x27;_&#x27;</p>
-                    
-                    
-                    </div>
-                    <div id="property_mediaImagesOptions.isObserver" class="property item">
-                        <h3 class="name"><code>mediaImagesOptions.isObserver</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l128"><code>develop\amp\jquery\base\MediaImages.js:128</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>対象要素監視しているか？</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_mediaStyle" class="property item inherited">
-                        <h3 class="name"><code>mediaStyle</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/AMP.Mediaquery.html#property_mediaStyle">AMP.Mediaquery</a>:
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l51"><code>develop\amp\core\class\Mediaquery.js:51</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>要素の現在のスタイルを保管します</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_param" class="property item">
-                        <h3 class="name"><code>param</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l31"><code>develop\amp\jquery\base\MediaImages.js:31</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>プロパティ格納オブジェクト</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_param.$images" class="property item">
-                        <h3 class="name"><code>param.$images</code></h3>
-                        <span class="type">JQuery</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l47"><code>develop\amp\jquery\base\MediaImages.js:47</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>画像を書き換える要素</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_param.current" class="property item">
-                        <h3 class="name"><code>param.current</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l55"><code>develop\amp\jquery\base\MediaImages.js:55</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>現在の状態</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_VERSION" class="property item">
-                        <h3 class="name"><code>VERSION</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l79"><code>develop\amp\jquery\base\MediaImages.js:79</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>バージョン情報</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
+<div id="property__listeners" class="property item private inherited">
+    <h3 class="name"><code>_listeners</code></h3>
+    <span class="type">Object</span>
+
+
+        <span class="flag private">private</span>
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/AMP.Events.html#property__listeners">AMP.Events</a>:
+        <a href="../files/develop_amp_core_class_Events.js.html#l41"><code>develop\amp\core\class\Events.js:41</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>イベントリスナーを連想配列で格納します</h4></p>
+
+    </div>
+
+
+        <div class="example">
+            <h4>Example:</h4>
+
+            <div class="example-content">
+                <p>_listeners = {
+attr    : eventObj.attr, <br>
+func    : listener, <br>
+context : context <br>
+}</p>
+
+            </div>
+        </div>
+
+</div>
+<div id="property_className" class="property item">
+    <h3 class="name"><code>className</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+            <p>Inherited from
+            <a href="../classes/AMP.BASE_CLASS.html#property_className">
+                AMP.BASE_CLASS
+            </a>
+            but overwritten in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l87"><code>develop\amp\jquery\base\MediaImages.js:87</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>クラス名</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_elm" class="property item inherited">
+    <h3 class="name"><code>elm</code></h3>
+    <span class="type">DOM</span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/AMP.Mediaquery.html#property_elm">AMP.Mediaquery</a>:
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l29"><code>develop\amp\core\class\inherits\Mediaquery.js:29</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>スタイルを監視する要素</h4></p>
+
+    </div>
+
+        <p><strong>Default:</strong> head</p>
+
+
+</div>
+<div id="property_isObserver" class="property item inherited">
+    <h3 class="name"><code>isObserver</code></h3>
+    <span class="type">Boolean</span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/AMP.Mediaquery.html#property_isObserver">AMP.Mediaquery</a>:
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l42"><code>develop\amp\core\class\inherits\Mediaquery.js:42</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>要素を監視しているか</h4></p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_mediaStyle" class="property item inherited">
+    <h3 class="name"><code>mediaStyle</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/AMP.Mediaquery.html#property_mediaStyle">AMP.Mediaquery</a>:
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l51"><code>develop\amp\core\class\inherits\Mediaquery.js:51</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>要素の現在のスタイルを保管します</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_options" class="property item">
+    <h3 class="name"><code>options</code></h3>
+    <span class="type">Object</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l96"><code>develop\amp\jquery\base\MediaImages.js:96</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>デフォルト値オブジェクト</h4></p>
+<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+    </div>
+
+
+
+</div>
+<div id="property_options.attrKey" class="property item">
+    <h3 class="name"><code>options.attrKey</code></h3>
+    <span class="type">String</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l111"><code>develop\amp\jquery\base\MediaImages.js:111</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>画像ファイルパス格納属性名</h4></p>
+
+    </div>
+
+        <p><strong>Default:</strong> &#x27;data-media-img&#x27;</p>
+
+
+</div>
+<div id="property_options.element" class="property item">
+    <h3 class="name"><code>options.element</code></h3>
+    <span class="type">DOM</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l104"><code>develop\amp\jquery\base\MediaImages.js:104</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>監視対象要素</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_options.imagePrefix" class="property item">
+    <h3 class="name"><code>options.imagePrefix</code></h3>
+    <span class="type">String</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l119"><code>develop\amp\jquery\base\MediaImages.js:119</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>画像ファイルに追加するprefix</h4></p>
+
+    </div>
+
+        <p><strong>Default:</strong> &#x27;_&#x27;</p>
+
+
+</div>
+<div id="property_options.isObserver" class="property item">
+    <h3 class="name"><code>options.isObserver</code></h3>
+    <span class="type">String</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l127"><code>develop\amp\jquery\base\MediaImages.js:127</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>対象要素監視しているか？</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_props" class="property item">
+    <h3 class="name"><code>props</code></h3>
+    <span class="type">Object</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l32"><code>develop\amp\jquery\base\MediaImages.js:32</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>プロパティオブジェクト</h4></p>
+<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+    </div>
+
+
+
+</div>
+<div id="property_props.$images" class="property item">
+    <h3 class="name"><code>props.$images</code></h3>
+    <span class="type">JQuery</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l45"><code>develop\amp\jquery\base\MediaImages.js:45</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>画像を書き換える要素</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_props.current" class="property item">
+    <h3 class="name"><code>props.current</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l53"><code>develop\amp\jquery\base\MediaImages.js:53</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>現在の状態</h4></p>
+
+    </div>
+
+
+
+</div>
+<div id="property_VERSION" class="property item">
+    <h3 class="name"><code>VERSION</code></h3>
+    <span class="type">String</span>
+
+
+
+
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_MediaImages.js.html#l77"><code>develop\amp\jquery\base\MediaImages.js:77</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p><h4>バージョン情報</h4></p>
+
+    </div>
+
+
+
+</div>
             </div>
 
 

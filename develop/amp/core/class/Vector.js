@@ -15,6 +15,7 @@
 
   /**
    * <h4>Vectorを管理します</h4>
+   * <p>DEMO作成予定</p>
    *
    * @class AMP.Vector
    * @extends AMP.BASE_CLASS

@@ -478,84 +478,93 @@
 
 	/**
 	 * <h4>フリックイベント</h4>
-	 * <p>X軸、Y軸4方向のフリックイベント</p>
+	 * <p>X軸、Y軸4方向のフリックイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flick
 	 * @example
-	 *	$(elm).on('flick', callback);
-	 *	$(elm).flick(callback);
+	 * $(elm).on('flick', callback);
+	 * $(elm).flick(callback);
 	 */
 	/**
 	 * <h4>フリックXイベント</h4>
-	 * <p>X軸2方向のフリックイベント</p>
+	 * <p>X軸2方向のフリックイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickX
 	 * @example
-	 *	$(elm).on('flickX', callback);
-	 *	$(elm).flickX(callback);
+	 * $(elm).on('flickX', callback);
+	 * $(elm).flickX(callback);
 	 */
 	/**
 	 * <h4>フリックYイベント</h4>
-	 * <p>Y軸2方向のフリックイベント</p>
+	 * <p>Y軸2方向のフリックイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickY
 	 * @example
-	 *	$(elm).on('flickY', callback);
-	 *	$(elm).flickY(callback);
+	 * $(elm).on('flickY', callback);
+	 * $(elm).flickY(callback);
 	 */
 	/**
 	 * <h4>フリックキャンセルイベント</h4>
-	 * <p>X軸、Y軸4方向のフリックキャンセルイベント</p>
+	 * <p>X軸、Y軸4方向のフリックキャンセルイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickcancel
 	 * @example
-	 *	$(elm).on('flickcancel', callback);
-	 *	$(elm).flickcancel(callback);
+	 * $(elm).on('flickcancel', callback);
+	 * $(elm).flickcancel(callback);
 	 */
 	/**
 	 * <h4>フリックXキャンセルイベント</h4>
-	 * <p>X軸2方向のフリックキャンセルイベント</p>
+	 * <p>X軸2方向のフリックキャンセルイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickcancelX
 	 * @example
-	 *	$(elm).on('flickcancelX', callback);
-	 *	$(elm).flickcancelX(callback);
+	 * $(elm).on('flickcancelX', callback);
+	 * $(elm).flickcancelX(callback);
 	 */
 	/**
 	 * <h4>フリックYキャンセルイベント</h4>
-	 * <p>Y軸2方向のフリックキャンセルイベント</p>
+	 * <p>Y軸2方向のフリックキャンセルイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickcancelY
 	 * @example
-	 *	$(elm).on('flickcancelY', callback);
-	 *	$(elm).flickcancelY(callback);
+	 * $(elm).on('flickcancelY', callback);
+	 * $(elm).flickcancelY(callback);
 	 */
 	/**
 	 * <h4>フリックムーブイベント</h4>
-	 * <p>X軸、Y軸4方向のフリックムーブイベント</p>
+	 * <p>X軸、Y軸4方向のフリックムーブイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickmove
 	 * @example
-	 *	$(elm).on('flickmove', callback);
-	 *	$(elm).flickmove(callback);
+	 * $(elm).on('flickmove', callback);
+	 * $(elm).flickmove(callback);
 	 */
 	/**
 	 * <h4>フリックXムーブイベント</h4>
-	 * <p>X軸2方向のフリックムーブイベント</p>
+	 * <p>X軸2方向のフリックムーブイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickmoveX
 	 * @example
-	 *	$(elm).on('flickmoveX', callback);
-	 *	$(elm).flickmoveX(callback);
+	 * $(elm).on('flickmoveX', callback);
+	 * $(elm).flickmoveX(callback);
 	 */
 	/**
 	 * <h4>フリックYムーブイベント</h4>
-	 * <p>Y軸2方向のフリックムーブイベント</p>
+	 * <p>Y軸2方向のフリックムーブイベント<br>
+	 * <a href="../../demo/$.flick.html">DEMO</a></p>
 	 *
 	 * @event flickmoveY
 	 * @example
-	 *	$(elm).on('flickmoveY', callback);
-	 *	$(elm).flickmoveY(callback);
+	 * $(elm).on('flickmoveY', callback);
+	 * $(elm).flickmoveY(callback);
 	 */
 	$.each(Flick.events, function(index, key){
 		// add Event
@@ -590,22 +599,24 @@
 	/**
 	 * <h4>マウスインした時の方向を取得するイベント</h4>
 	 * <p>イベントオブジェクトに取得したオブジェクトを返します<br>
-	 * <em>インライン要素は対象外です</em></p>
+	 * <em>インライン要素は対象外です</em><br>
+	 * <a href="../../demo/$.slip.html">DEMO</a></p>
 	 *
 	 * @event slipin
 	 * @example
-	 *	$(elm).on('slipin', callback);
-	 *	$(elm).slipin(callback);
+	 * $(elm).on('slipin', callback);
+	 * $(elm).slipin(callback);
 	 */
 	/**
 	 * <h4>マウスアウトした時の方向を取得するイベント</h4>
 	 * <p>イベントオブジェクトに取得したオブジェクトを返します<br>
-	 * <em>インライン要素は対象外です</em></p>
+	 * <em>インライン要素は対象外です</em><br>
+	 * <a href="../../demo/$.slip.html">DEMO</a></p>
 	 *
 	 * @event slipout
 	 * @example
-	 *	$(elm).on('slipout', callback);
-	 *	$(elm).slipout(callback);
+	 * $(elm).on('slipout', callback);
+	 * $(elm).slipout(callback);
 	 */
 	$.each({
 		mouseenter: 'slipin',
@@ -673,12 +684,14 @@
 
 	/**
 	 * <h4>slipin, slipout ショートハンド</h4>
+	 * <p><em>インライン要素は対象外です</em><br>
+	 * <a href="../../demo/$.slip.html">DEMO</a></p>
 	 *
 	 * @event slip
 	 * @param {Function} fnIn  slipinコールバック関数
 	 * @param {Function} fnOut slipoutコールバック関数
 	 * @example
-	 *	$(elm).slip(inCallback, outCallback);
+	 * $(elm).slip(inCallback, outCallback);
 	 */
 	$.fn.slip = function(fnIn, fnOut){
 		return this.slipin(fnIn).slipout(fnOut || fnIn);
@@ -701,23 +714,25 @@
 	 */
 
 	/**
-	 * <h4>リサイズイベントを間引き、完了後発火します</h4>
+	 * <h4>リサイズイベントを間引き、リサイズ完了後発火します</h4>
+	 * <p><a href="../../demo/$.stop.html#sec01">DEMO</a></p>
 	 *
 	 * @event resizestop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on('resizestop', callback);
-	 *	$(window).on('resizestop', {timer: 1000}, callback);
+	 * $(window).on('resizestop', callback);
+	 * $(window).on('resizestop', {timer: 1000}, callback);
 	 */
 	/**
-	 * <h4>スクロールイベントを間引き、完了後発火します</h4>
+	 * <h4>スクロールイベントを間引き、スクロール完了後発火します</h4>
+	 * <p><a href="../../demo/$.stop.html#sec02">DEMO</a></p>
 	 *
 	 * @event scrollstop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on('scrollstop', {timer: 1000}, callback);
-	 *	$(window).on('scrollstop', callback);
-	 *	$(window).scrollstop(callback);
+	 * $(window).on('scrollstop', {timer: 1000}, callback);
+	 * $(window).on('scrollstop', callback);
+	 * $(window).scrollstop(callback);
 	 */
 	$.each({
 		resize: 'resizestop',
@@ -728,7 +743,7 @@
 			// data
 			data: {
 				eventType: fix,
-				timer    : 100,
+				timer    : 50,
 				timerId  : null
 			},
 
@@ -782,11 +797,12 @@
 	--------------------------------------------------------------------------*/
 	/**
 	 * <h4>縦列・並列処理の管理</h4>
-	 * <p>Deferred resolve通知を受けたら次の関数へ移ります</p>
+	 * <p>Deferred resolve通知を受けたら次の関数へ移ります<br>
+	 * <a href="../../demo/$.extend.html#sec01">DEMO</a></p>
 	 *
 	 * @static
 	 * @method sequence
-	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
+	 * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
 	 * @return {jQuery.Deferred}
 	 */
 	$.sequence = function(){
@@ -823,31 +839,32 @@
 
   /**
    * <h4>縦列・並列処理の管理</h4>
-   * <p>実行した関数の戻り値は、次の関数の引数とproglessに渡します</p>
+   * <p>実行した関数の戻り値は、次の関数の引数とproglessに渡します<br>
+   * <a href="../../demo/$.extend.html#sec02">DEMO</a></p>
    *
    * @static
    * @method stream
-   * @param {Function} argments 関数、もしくは配列に格納した関数
+   * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
    * @return {jQuery.Deferred}
    */
   $.stream = function(){
-  	var slice = Array.prototype.slice;
+		var slice = Array.prototype.slice;
     var $defer = new $.Deferred(),
     count = 0,
     callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
 
     callbacks.push($defer.resolve);
-    stream();
+    _stream();
 
     // callbacksを再帰的に縦列処理する
-		function stream(){
+		function _stream(){
 			$.when.call(null, callbacks[count].apply(null, arguments))
 			.fail($defer.reject)
 			.done(function(){
 				$defer.notify.call(null, arguments);
 				count += 1;
 				if(count < callbacks.length){
-					stream.apply(null, arguments);
+					_stream.apply(null, arguments);
 				}
 			});
     }
@@ -874,18 +891,20 @@
 
 	/**
 	 * <h4>cssをアニメーションqueueで管理します</h4>
+	 * <p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
 	 *
 	 * @method qCss
 	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val プロパティ値
 	 * @return {jQuery}
 	 */
 	/**
 	 * <h4>attrをアニメーションqueueで管理します</h4>
+	 * <p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
 	 *
 	 * @method qAttr
 	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val プロパティ値
 	 * @return {jQuery}
 	 */
   $.each({
@@ -904,18 +923,18 @@
 
 	/**
 	 * <h4>addClassをアニメーションqueueで管理します</h4>
+	 * <p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
 	 *
 	 * @method qAddClass
-	 * @param  {String|Object} prop プロパティ名かオブジェクトで値を渡す
-	 * @param  {String|Function} val プロパティ値かコールバック関数
+	 * @param  {String} val 付与するクラス名
 	 * @return {jQuery}
 	 */
 	/**
 	 * <h4>removeClassをアニメーションqueueで管理します</h4>
+	 * <p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
 	 *
 	 * @method qRemoveClass
-	 * @param  {String} prop クラス名
-	 * @param  {Function} val コールバック関数
+	 * @param  {Function} val 削除するクラス名
 	 * @return {jQuery}
 	 */
   $.each({
@@ -934,6 +953,7 @@
 
 	/**
 	 * <h4>コールバック関数をアニメーションqueueで管理します</h4>
+	 * <p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
 	 *
 	 * @method qCall
 	 * @param  {Function} fn コールバック関数
@@ -950,6 +970,7 @@
 
 	/**
 	 * <h4>属性値のreplace処理</h4>
+	 * <p><a href="../../demo/$.other.html#sec02">DEMO</a></p>
 	 *
 	 * @method replaceAttr
 	 * @param  {String} attr 属性名
@@ -971,9 +992,11 @@
 
   /**
    * <h4>ファイルの拡張子を取得</h4>
+   * <p><a href="../../demo/$.other.html#sec03">DEMO</a></p>
    *
    * @method getExt
-   * @param  {String} attr 取得属性名
+   * @param {String} attr 取得属性名
+   * @param {Boolean} isQuery 拡張子 + queryで値を返すか 初期値： false
    * @return {String} 拡張子を返す
    */
   $.fn.getExt = function(attr, isQuery){

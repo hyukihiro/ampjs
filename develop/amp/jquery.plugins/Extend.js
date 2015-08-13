@@ -22,11 +22,12 @@
 	--------------------------------------------------------------------------*/
 	/**
 	 * <h4>縦列・並列処理の管理</h4>
-	 * <p>Deferred resolve通知を受けたら次の関数へ移ります</p>
+	 * <p>Deferred resolve通知を受けたら次の関数へ移ります<br>
+	 * <a href="../../demo/$.extend.html#sec01">DEMO</a></p>
 	 *
 	 * @static
 	 * @method sequence
-	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
+	 * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
 	 * @return {jQuery.Deferred}
 	 */
 	$.sequence = function(){
@@ -63,31 +64,32 @@
 
   /**
    * <h4>縦列・並列処理の管理</h4>
-   * <p>実行した関数の戻り値は、次の関数の引数とproglessに渡します</p>
+   * <p>実行した関数の戻り値は、次の関数の引数とproglessに渡します<br>
+   * <a href="../../demo/$.extend.html#sec02">DEMO</a></p>
    *
    * @static
    * @method stream
-   * @param {Function} argments 関数、もしくは配列に格納した関数
+   * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
    * @return {jQuery.Deferred}
    */
   $.stream = function(){
-  	var slice = Array.prototype.slice;
+		var slice = Array.prototype.slice;
     var $defer = new $.Deferred(),
     count = 0,
     callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
 
     callbacks.push($defer.resolve);
-    stream();
+    _stream();
 
     // callbacksを再帰的に縦列処理する
-		function stream(){
+		function _stream(){
 			$.when.call(null, callbacks[count].apply(null, arguments))
 			.fail($defer.reject)
 			.done(function(){
 				$defer.notify.call(null, arguments);
 				count += 1;
 				if(count < callbacks.length){
-					stream.apply(null, arguments);
+					_stream.apply(null, arguments);
 				}
 			});
     }

@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs jQuery Module File version 3.0.2
+ * AMPjs jQuery Module File version 3.1.0
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -40,7 +40,7 @@
 	 * @property AMP.$.VERSION
 	 * @type {String}
 	 */
-	AMP.$.VERSION = '3.0.2';
+	AMP.$.VERSION = '3.1.0';
 
 
 }(window, AMP));

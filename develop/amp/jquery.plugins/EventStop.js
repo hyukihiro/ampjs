@@ -17,23 +17,25 @@
 	 */
 
 	/**
-	 * <h4>リサイズイベントを間引き、完了後発火します</h4>
+	 * <h4>リサイズイベントを間引き、リサイズ完了後発火します</h4>
+	 * <p><a href="../../demo/$.stop.html#sec01">DEMO</a></p>
 	 *
 	 * @event resizestop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on('resizestop', callback);
-	 *	$(window).on('resizestop', {timer: 1000}, callback);
+	 * $(window).on('resizestop', callback);
+	 * $(window).on('resizestop', {timer: 1000}, callback);
 	 */
 	/**
-	 * <h4>スクロールイベントを間引き、完了後発火します</h4>
+	 * <h4>スクロールイベントを間引き、スクロール完了後発火します</h4>
+	 * <p><a href="../../demo/$.stop.html#sec02">DEMO</a></p>
 	 *
 	 * @event scrollstop
 	 * @param {Object} 間引く時間を指定 default {timer: 200}
 	 * @example
-	 *	$(window).on('scrollstop', {timer: 1000}, callback);
-	 *	$(window).on('scrollstop', callback);
-	 *	$(window).scrollstop(callback);
+	 * $(window).on('scrollstop', {timer: 1000}, callback);
+	 * $(window).on('scrollstop', callback);
+	 * $(window).scrollstop(callback);
 	 */
 	$.each({
 		resize: 'resizestop',
@@ -44,7 +46,7 @@
 			// data
 			data: {
 				eventType: fix,
-				timer    : 100,
+				timer    : 50,
 				timerId  : null
 			},
 

@@ -16,7 +16,8 @@
   /**
    * <h4>デバッグ機能を提供します</h4>
    * <p>!!!: シングルトン コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください</p>
+   * <em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.Debug.html">DEMO</a></p>
    *
    * @class AMP.Debug
    * @extends AMP.BASE_CLASS

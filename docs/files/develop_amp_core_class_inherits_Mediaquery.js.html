@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\class\FontResize.js - AMPjs</title>
+    <title>develop\amp\core\class\inherits\Mediaquery.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -103,7 +104,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\class\FontResize.js</h1>
+<h1 class="file-heading">File: develop\amp\core\class\inherits\Mediaquery.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -123,51 +124,57 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;フォントリサイズイベント&lt;/h4&gt;
-   * !!!: シングルトン&lt;br&gt;
-   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
-   * &lt;em&gt;AMP.fontResize&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
+   * &lt;h4&gt;Mediaqueryのブレイクポイントイベント&lt;/h4&gt;
+   * &lt;p&gt;!!!: 対象の要素(head)にcssでフォントファミリーを指定してください&lt;br&gt;
+   * シングルトン: コンストラクタを呼び出しで使用しません&lt;br&gt;
+   * &lt;em&gt;AMP.mediaquery&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.Mediaquery.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.FontResize
+   * @class AMP.Mediaquery
    * @extends AMP.Events
    * @constructor
+   * @param {DOM} elm 監視対象要素
    */
-  function FontResize(){
+  function Mediaquery(elm){
     /**
-     * &lt;h4&gt;要素を監視有効・無効の判定フラグ&lt;/h4&gt;
+     * &lt;h4&gt;スタイルを監視する要素&lt;/h4&gt;
      *
-     * @property isFontResize
-     * @default true
-     * @type {Boolean}
-     */
-    this.isFontResize = true;
-
-    /**
-     * &lt;h4&gt;監視する要素&lt;/h4&gt;
-     *
-     * @property el
+     * @property elm
+     * @default head
      * @type {DOM}
      */
-    this.el = null;
+    if(elm &amp;&amp; elm.nodeType === 1){
+      this.elm = elm;
+    } else {
+      this.elm = document.getElementsByTagName(&#x27;head&#x27;)[0];
+    }
 
     /**
-     * &lt;h4&gt;監視要素の高さ&lt;/h4&gt;
+     * &lt;h4&gt;要素を監視しているか&lt;/h4&gt;
      *
-     * @property height
-     * @type {Number}
+     * @property isObserver
+     * @default false
+     * @type {Boolean}
      */
-    this.height = null;
+    this.isObserver = false;
+
+    /**
+     * &lt;h4&gt;要素の現在のスタイルを保管します&lt;/h4&gt;
+     *
+     * @property mediaStyle
+     * @type {String}
+     */
+    this.mediaStyle = null;
 
     // superClass constructor call
-    // FontResize.Events_constructor.call(this);
-    AMP.Events.call(this);
+    Mediaquery.Events_constructor.call(this);
   }
 
   // AMP.Eventsクラスを継承
-  AMP.inherits(FontResize, AMP.Events);
+  AMP.inherits(Mediaquery, AMP.Events);
 
   // prototype
-  var p = FontResize.prototype;
+  var p = Mediaquery.prototype;
 
 
 
@@ -182,7 +189,7 @@
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = &#x27;3.0.1&#x27;;
+  Mediaquery.VERSION = &#x27;2.0.3&#x27;;
 
 
   /**
@@ -191,18 +198,19 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;FontResize&#x27;;
+  p.className = &#x27;Mediaquery&#x27;;
 
 
   /**
    * &lt;h4&gt;フォントサイズ変更時の発行するイベントタイプ&lt;/h4&gt;
+   * FIXME: イベント属性追加予定
    *
    * @static
    * @property eventType
    * @default change
    * @type {String}
    */
-  FontResize.eventType = &#x27;change&#x27;;
+  Mediaquery.eventType = &#x27;change&#x27;;
 
 
 
@@ -210,63 +218,28 @@
     @method
   --------------------------------------------------------------------------*/
 
-
   /**
-   * &lt;h4&gt;監視するフォント要素生成&lt;/h4&gt;
-   *
-   * @private
-   * @method _createElement
-   * @return {Void}
-   */
-  p._createElement = function(){
-
-    var key = &#x27;AMP_FONT_RESIZE&#x27;,
-    el = document.createElement(&#x27;ins&#x27;),
-    text = document.createTextNode(key);
-
-    el.id = key;
-    el.setAttribute(&#x27;style&#x27;, &#x27;display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;&#x27;);
-    el.appendChild(text);
-    document.body.appendChild(el);
-
-    // property
-    this.el = document.getElementById(key);
-    this.height = this.el.clientHeight;
-
-    // set controller
-    this._controller();
-  };
-
-
-  /**
-   * &lt;h4&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/h4&gt;
+   * &lt;h4&gt;イベントコントローラー&lt;/h4&gt;
+   * &lt;p&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/p&gt;
    *
    * @private
    * @method _controller
    * @return {Void}
    */
   p._controller = function(){
-    var self = this,
-    height = self.el.clientHeight;
+    var self = this;
 
-    if(self.isFontResize){
-      // フォントサイズに変更があれば
-      if(self.height !== height){
-        self.height = height;
-        this.trigger(FontResize.eventType);
-      }
+    // set property
+    this.isObserver = true;
+    this.mediaStyle = this.getStyle();
 
-      // 再起処理
-      if(AMP.hasRAF()){
-        AMP.requestAnimationFrame(function(){
-          self._controller();
-        });
-      } else {
-        setTimeout(function(){
-          self._controller();
-        }, 50);
+    // event
+    AMP.addEvent(root, &#x27;resize&#x27;, function(){
+      if(self.mediaStyle !== self.getStyle()){
+        self.mediaStyle = self.getStyle();
+        self.trigger(Mediaquery.eventType);
       }
-    }
+    });
   };
 
 
@@ -280,12 +253,56 @@
    * @return {Events}
    */
   p.on = function(type, listener, context){
-    // 監視要素がない場合、要素を追加する
-    if(!this.el){
-      this._createElement();
+    if(!this.isObserver){
+      this._controller();
     }
     this._addEvent(type, listener, context);
     return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;イベント発行&lt;/h4&gt;
+   * &lt;p&gt;第二引数以降に値を渡すとcallbackに引数として渡します&lt;/p&gt;
+   *
+   * @method trigger
+   * @param  {String} type イベントタイプ
+   * @return {Events}
+   */
+  p.trigger = function(type){
+    var self = this,
+    events = this._getEventNameMap(type),
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
+
+    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
+
+    if(listeners){
+      AMP.each(listeners, function(item){
+        if(!events.attr || item.attr === events.attr){
+          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
+          item.func.apply(item.context, args);
+        }
+      });
+    }
+    return self;
+  };
+
+
+  /**
+   * &lt;h4&gt;要素のスタイルを返します&lt;/h4&gt;
+   *
+   * @method getStyle
+   * @return {String}
+   */
+  p.getStyle = function(){
+    if(root.getComputedStyle){
+      return getComputedStyle(this.elm).getPropertyValue(&#x27;font-family&#x27;);
+    } else {
+      // !!!: jshintのチェックを緩和します
+      /* jshint -W069 */
+      return this.elm.currentStyle[&#x27;fontFamily&#x27;];
+    }
   };
 
 
@@ -294,8 +311,8 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.FontResize = FontResize;
-  AMP.fontResize = new FontResize();
+  AMP.Mediaquery = Mediaquery;
+  AMP.mediaquery = new Mediaquery();
 
 
 }(window, AMP));

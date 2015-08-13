@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -123,13 +124,15 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ストレージ管理&lt;/h4&gt;
-   * デフォルトでは、セッションストレージを使用します
+   * &lt;h4&gt;ストレージ操作&lt;/h4&gt;
+   * &lt;p&gt;セッションストレージもしくはローカルストレージを操作します&lt;br&gt;
+   * デフォルトでは、セッションストレージを使用します&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.Storage.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.Storage
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    */
   function Storage(isLocalStorage){
     /**
@@ -194,11 +197,10 @@
 
   /**
    * &lt;h4&gt;Storageインスタンスの生成&lt;/h4&gt;
-   * shorthand
    *
    * @static
    * @method get
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    * @return {Storage}
    */
   Storage.get = function(isLocalStorage){
@@ -232,7 +234,7 @@
 
 
   /**
-   * &lt;h4&gt;アイテム、ストレージデータの削除&lt;/h4&gt;
+   * &lt;h4&gt;ストレージデータの削除&lt;/h4&gt;
    *
    * @method removeItem
    * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
@@ -256,7 +258,7 @@
 
 
   /**
-   * &lt;h4&gt;レングスを返す&lt;/h4&gt;
+   * &lt;h4&gt;ストレージアイテム数を返す&lt;/h4&gt;
    *
    * @method getLength
    * @return {Number}

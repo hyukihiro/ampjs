@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\base\utility.js - AMPjs</title>
+    <title>AMP.$ - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -104,247 +104,84 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\base\utility.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-/// AMPjs Javascript Library
-/// The MIT License (MIT)
-/// author Yoshihito Fujiwara
-/// source https://bitbucket.org/yoshihitofujiwara/ampjs
-/// Copyright (c) 2014 Yoshihito Fujiwara
-
-(function(root, AMP){
-
-  // &#x27;use strict&#x27;;
+<h1>AMP.$ Class</h1>
+<div class="box meta">
 
 
-  /*======================================================================
-    ユーティリティ
-  ======================================================================*/
-
-  /**
-   * &lt;h4&gt;ユーティリティ&lt;/h4&gt;
-   *
-   * @class AMP.Utility
-   */
+        <div class="foundat">
+            Defined in: <a href="../files/develop_amp_jquery_AMP.$.js.html#l10"><code>develop\amp\jquery\AMP.$.js:10</code></a>
+        </div>
 
 
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;匿名関数名を返す&lt;/h4&gt;
-   * &lt;p&gt;無名関数はundefinedを返します&lt;/p&gt;
-   *
-   * @static
-   * @method getFunctionName
-   * @param  {Function} fn 名前を取得したい関数
-   * @return {String}
-   */
-  AMP.getFunctionName = function(fn){
-    if(AMP.isFunction(fn)){
-      if(fn.className){
-        return fn.className;
-      } else if (fn.prototype.className) {
-        return fn.prototype.className;
-      } else {
-        return (&#x27;&#x27; + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, &#x27;$1&#x27;);
-      }
-    } else {
-      throw new TypeError(fn + &#x27; is not a Function&#x27;);
-    }
-  };
+</div>
 
 
-  /**
-   * &lt;h4&gt;型名取得&lt;/h4&gt;
-   *
-   * @method type
-   * @param {Object} 判定するオブジェクト
-   * @return {String} 型名を返す
-   */
-  AMP.type = function(obj){
-    if(AMP.isArray(obj)){
-      return &#x27;array&#x27;;
-
-    } else if(AMP.isBoolean(obj)){
-      return &#x27;boolean&#x27;;
-
-    } else if(AMP.isFunction(obj)){
-      return &#x27;function&#x27;;
-
-    } else if(AMP.isNumber(obj)){
-      return &#x27;number&#x27;;
-
-    } else if(AMP.isObject(obj)){
-      return &#x27;object&#x27;;
-
-    } else if(AMP.isString(obj)){
-      return &#x27;string&#x27;;
-
-    } else if(AMP.isRegexp(obj)){
-      return &#x27;regexp&#x27;;
-
-    } else if(AMP.isNull(obj)){
-      return &#x27;null&#x27;;
-
-    } else {
-      return &#x27;undefined&#x27;;
-    }
-  };
+<div class="box intro">
+    
+</div>
 
 
-  /**
-   * &lt;h4&gt;画面のピクセル比を返す&lt;/h4&gt;
-   *
-   * @static
-   * @method pixelRatio
-   * @return {Number} 画面のピクセル比を返す
-   */
-  AMP.pixelRatio = function(){
-    return root.devicePixelRatio || 1;
-  };
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
 
 
-  /**
-   * &lt;h4&gt;画像のプリロード&lt;/h4&gt;
-   *
-   * @static
-   * @method preload
-   * @param {String} src 画像パス
-   * @return {ImageElement} 生成した、イメージ要素
-   */
-  AMP.preload = function(src){
-    var img = new Image();
-    img.src = src;
-    return img;
-  };
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_AMP.$.VERSION">AMP.$.VERSION</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                    </ul>
+                </div>
 
 
-  /**
-   * &lt;h4&gt;RAF(requestAnimationFrame)をエクスポートしています&lt;/h4&gt;
-   * &lt;p&gt;RAFに対応していないブラウザは、setTimeoutでフォールバックします&lt;/p&gt;
-   * FIXME: contextの処理追加予定
-   *
-   * @static
-   * @method requestAnimationFrame
-   * @param {Function} callback コールバック関数
-   * @return {Number}
-   */
-  AMP.requestAnimationFrame = (function(){
-    var requestAnimation = (
-      root.requestAnimationFrame ||
-      root.webkitRequestAnimationFrame ||
-      root.mozRequestAnimationFrame ||
-      root.oRequestAnimationFrame ||
-      function(callback){
-        return root.setTimeout(callback, 1000 / 60);
-      }
-    );
-
-    return function(callback){
-      return requestAnimation(callback);
-    };
-  }());
+        </div>
 
 
-  /**
-   * &lt;h4&gt;CAF(cancelAnimationFrame)をエクスポートしています&lt;/h4&gt;
-   * &lt;p&gt;CAFに対応していないブラウザは、clearTimeoutでフォールバックします&lt;/p&gt;
-   *
-   * @static
-   * @method cancelAnimationFrame
-   * @param {Number} id タイマーNumber
-   * @return {Number}
-   */
-  AMP.cancelAnimationFrame = (function(){
-    var cancelAnimation = (
-      root.cancelAnimationFrame ||
-      root.webkitCancelAnimationFrame ||
-      root.mozCancelAnimationFrame ||
-      root.oCancelAnimationFrame ||
-      function(id){
-        root.clearTimeout(id);
-      }
-    );
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    return function(id){
-      return cancelAnimation(id);
-    };
-  }());
+<div id="property_AMP.$.VERSION" class="property item">
+    <h3 class="name"><code>AMP.$.VERSION</code></h3>
+    <span class="type">String</span>
 
 
-  /**
-   * &lt;h4&gt;現在の時間を返します&lt;/h4&gt;
-   * &lt;p&gt;performance.nowメソッドをExportしています&lt;br&gt;
-   * performanceに対応していないブラウザはgetTime(Date関数)を返します&lt;/p&gt;
-   *
-   * @static
-   * @method now
-   * @return {Number}
-   */
-  AMP.now = (function(){
-    var p = root.performance,
-    pNow = p &amp;&amp; (p.now || p.mozNow || p.msNow || p.oNow || p.webkitNow);
-
-    return function(){
-      return (pNow &amp;&amp; pNow.call(p)) || (new Date().getTime());
-    };
-  }());
 
 
-  /**
-   * &lt;h4&gt;空の関数&lt;/h4&gt;
-   *
-   * @static
-   * @return {Void}
-   */
-  AMP.noop = function(){};
+        <span class="flag static">static</span>
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_AMP.$.js.html#l15"><code>develop\amp\jquery\AMP.$.js:15</code></a>
+        </p>
 
 
-  /**
-   * &lt;h4&gt;乱数の生成&lt;/h4&gt;
-   *
-   * @param  {Number}  min     最小値 ※省略可
-   * @param  {Number}  max     最大値 ※省略可
-   * @param  {Boolean} isRound 四捨五入するか ※省略可
-   * @return {Number} 乱数を返します
-   */
-  AMP.random = function(min, max, isRound){
-    var random = Math.random(),
-    value;
+    </div>
 
-    if(arguments.length === 0 || AMP.isBoolean(min)){
-      isRound = min;
-      value = random;
+    <div class="description">
+        <p><h4>バージョン情報</h4></p>
 
-    } else if(arguments.length === 1 || AMP.isBoolean(max)){
-      isRound = max;
-      value = random * min;
-
-    } else {
-      if (min &gt; max) {
-        var num = min;
-        min = max;
-        max = num;
-      }
-      value = random * (max - min) + min;
-    }
-
-    if(isRound){
-      return Math.round(value);
-    } else{
-      return value;
-    }
-  };
+    </div>
 
 
-}(window, AMP));
 
-    </pre>
+</div>
+            </div>
+
+
+    </div>
 </div>
                     </div>
                 </div>

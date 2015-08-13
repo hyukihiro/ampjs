@@ -17,7 +17,8 @@
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
    * <p>!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
    * シングルトン: コンストラクタを呼び出しで使用しません<br>
-   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください</p>
+   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.Mediaquery.html">DEMO</a></p>
    *
    * @class AMP.Mediaquery
    * @extends AMP.Events

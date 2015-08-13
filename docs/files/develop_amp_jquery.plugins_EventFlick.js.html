@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -117,13 +118,11 @@
 
 	// &#x27;use strict&#x27;;
 
-
 	/**
 	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * &lt;p&gt;jQueryオブジェクトを拡張し、Pluginとして使用します&lt;/p&gt;
 	 *
 	 * @class jQuery
-	 * @event flick
 	 */
 
 
@@ -560,13 +559,102 @@
 	};
 
 
-
 	/*--------------------------------------------------------------------------
 		export
 	--------------------------------------------------------------------------*/
 
 	$._Flick = Flick;
 
+	/**
+	 * &lt;h4&gt;フリックイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸、Y軸4方向のフリックイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flick
+	 * @example
+	 * $(elm).on(&#x27;flick&#x27;, callback);
+	 * $(elm).flick(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックXイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸2方向のフリックイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickX
+	 * @example
+	 * $(elm).on(&#x27;flickX&#x27;, callback);
+	 * $(elm).flickX(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックYイベント&lt;/h4&gt;
+	 * &lt;p&gt;Y軸2方向のフリックイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickY
+	 * @example
+	 * $(elm).on(&#x27;flickY&#x27;, callback);
+	 * $(elm).flickY(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックキャンセルイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸、Y軸4方向のフリックキャンセルイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickcancel
+	 * @example
+	 * $(elm).on(&#x27;flickcancel&#x27;, callback);
+	 * $(elm).flickcancel(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックXキャンセルイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸2方向のフリックキャンセルイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickcancelX
+	 * @example
+	 * $(elm).on(&#x27;flickcancelX&#x27;, callback);
+	 * $(elm).flickcancelX(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックYキャンセルイベント&lt;/h4&gt;
+	 * &lt;p&gt;Y軸2方向のフリックキャンセルイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickcancelY
+	 * @example
+	 * $(elm).on(&#x27;flickcancelY&#x27;, callback);
+	 * $(elm).flickcancelY(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックムーブイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸、Y軸4方向のフリックムーブイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickmove
+	 * @example
+	 * $(elm).on(&#x27;flickmove&#x27;, callback);
+	 * $(elm).flickmove(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックXムーブイベント&lt;/h4&gt;
+	 * &lt;p&gt;X軸2方向のフリックムーブイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickmoveX
+	 * @example
+	 * $(elm).on(&#x27;flickmoveX&#x27;, callback);
+	 * $(elm).flickmoveX(callback);
+	 */
+	/**
+	 * &lt;h4&gt;フリックYムーブイベント&lt;/h4&gt;
+	 * &lt;p&gt;Y軸2方向のフリックムーブイベント&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.flick.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+	 *
+	 * @event flickmoveY
+	 * @example
+	 * $(elm).on(&#x27;flickmoveY&#x27;, callback);
+	 * $(elm).flickmoveY(callback);
+	 */
 	$.each(Flick.events, function(index, key){
 		// add Event
 		$.event.special[key] = Flick[key];

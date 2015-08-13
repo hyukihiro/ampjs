@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -123,8 +124,9 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;スムーススクロール&lt;/h4&gt;
-   * WindowsPCのみ有効
+   * &lt;h4&gt;スムーススクロール（慣性スクロール）&lt;/h4&gt;
+   * &lt;p&gt;&lt;em&gt;※ WindowsPCのみ有効&lt;/em&gt;&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.SmothScroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.$.SmoothScroll
    * @extends AMP.BASE_CLASS
@@ -132,14 +134,15 @@
    */
   function SmoothScroll(options){
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true,
+    this.props = $.extend(true,
       {},
-      SmoothScroll.smoothScrollOptions,
+      SmoothScroll.options,
       {$page: $(&#x27;html, body&#x27;)},
       options
     );
@@ -164,7 +167,7 @@
    * @property VERSION
    * @type {String}
    */
-  SmoothScroll.VERSION = &#x27;3.0.1&#x27;;
+  SmoothScroll.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -177,42 +180,42 @@
 
 
   /**
-   * &lt;h4&gt;デフォルト値、格納オブジェクト&lt;/h4&gt;
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
    * @static
-   * @property smoothScrollOptions
+   * @property options
    * @type {Object}
    */
     /**
    * &lt;h4&gt;スムーススクロールエリア&lt;/h4&gt;
    *
-   * @property smoothScrollOptions.$page
+   * @property options.$page
    * @default $(&#x27;html, body&#x27;)
    * @type {jQuery}
    */
   /**
    * &lt;h4&gt;スクロール量&lt;/h4&gt;
    *
-   * @property smoothScrollOptions.amount
+   * @property options.amount
    * @default 500
    * @type {Number}
    */
   /**
    * &lt;h4&gt;duration&lt;/h4&gt;
    *
-   * @property smoothScrollOptions.duration
+   * @property options.duration
    * @default 500
    * @type {Number}
    */
   /**
    * &lt;h4&gt;easing&lt;/h4&gt;
    *
-   * @property smoothScrollOptions.easing
+   * @property options.easing
    * @default easeOutCubic
    * @type {String}
    */
-  SmoothScroll.smoothScrollOptions = {
+  SmoothScroll.options = {
     $page   : null,
     amount  : 400,
     duration: 600,
@@ -249,7 +252,7 @@
 
     // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.param.$page.off(&#x27;mousewheel.SmoothScroll&#x27;)
+      self.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;)
       .on(&#x27;mousewheel.SmoothScroll&#x27;, function(){
         self.tween(arguments[1]);
         return false;
@@ -266,7 +269,7 @@
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.param.$page.off(&#x27;mousewheel.SmoothScroll&#x27;);
+    this.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;);
     return this;
   };
 
@@ -279,12 +282,12 @@
    */
   p.tween = function(move){
     var self = this,
-    param = self.param,
-    y = AMP.isWebkit() ? self.param.$page.eq(1).scrollTop() : self.param.$page.eq(0).scrollTop(),
-    scrollY = move &gt; 0 ? y - param.amount : y + param.amount;
+    props = self.props,
+    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    scrollY = move &gt; 0 ? y - props.amount : y + props.amount;
 
-    self.param.$page.velocity(&#x27;stop&#x27;)
-    .velocity(&#x27;scroll&#x27;, {offset: scrollY, duration: param.duration, easing: param.easing});
+    self.props.$page.velocity(&#x27;stop&#x27;)
+    .velocity(&#x27;scroll&#x27;, {offset: scrollY, duration: props.duration, easing: props.easing});
   };
 
 

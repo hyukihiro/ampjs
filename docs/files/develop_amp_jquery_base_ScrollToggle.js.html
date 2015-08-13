@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -124,6 +125,7 @@
 
   /**
    * &lt;h4&gt;スクロール時、座標を判定してToggle処理をします&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.ScrollToggle.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
@@ -140,37 +142,38 @@
     }
 
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.props = $.extend(true, {}, ScrollToggle.options, options);
 
     /**
      * &lt;h4&gt;表示・非表示する要素&lt;/h4&gt;
      *
      * @default $(&#x27;.scroll_toggle&#x27;)
-     * @property param.$scrollToggle
+     * @property props.$scrollToggle
      * @type {jQuery}
      */
-    this.param.$scrollToggle = $scrollToggle;
+    this.props.$scrollToggle = $scrollToggle;
 
     /**
      * &lt;h4&gt;window要素&lt;/h4&gt;
      *
-     * @property param.$window
+     * @property props.$window
      * @type {jQuery}
      */
-    this.param.$window = $(window);
+    this.props.$window = $(window);
 
     /**
      * &lt;h4&gt;Displayスタイルの状態&lt;/h4&gt;
      *
-     * @property param.isDisplay
+     * @property props.isDisplay
      * @type {Boolean}
      */
-    this.param.isDisplay = $scrollToggle.css(&#x27;display&#x27;) !== &#x27;none&#x27;;
+    this.props.isDisplay = $scrollToggle.css(&#x27;display&#x27;) !== &#x27;none&#x27;;
   }
 
   // 基底クラスを継承
@@ -192,7 +195,7 @@
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = &#x27;3.1.1&#x27;;
+  ScrollToggle.VERSION = &#x27;3.2.0&#x27;;
 
 
   /**
@@ -205,11 +208,11 @@
 
 
   /**
-   * &lt;h4&gt;デフォルト値、格納オブジェクト&lt;/h4&gt;
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
    * @static
-   * @property scrollToggleOptions
+   * @property options
    * @type {Object}
    */
   /**
@@ -222,11 +225,11 @@
    */
   /**
    * &lt;h4&gt;表示・非表示の座標判定を反転します&lt;/h4&gt;
-   * 初期は、Y座標300pxを超えると表示しますが、300px超えると非表示にします
+   * &lt;p&gt;false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします&lt;/p&gt;
    *
    * @static
    * @property isReverse
-   * @default 300
+   * @default false
    * @type {Number}
    */
   /**
@@ -234,7 +237,7 @@
    *
    * @static
    * @property show
-   * @default { opacity : 1}
+   * @default { opacity: 1}
    * @type {Object}
    */
   /**
@@ -242,7 +245,7 @@
    *
    * @static
    * @property hide
-   * @default { opacity : 0}
+   * @default { opacity: 0}
    * @type {Object}
    */
   /**
@@ -277,11 +280,11 @@
    * @default $.noop
    * @type {String}
    */
-  ScrollToggle.scrollToggleOptions = {
+  ScrollToggle.options = {
     showY    : 300,
     isReverse: false,
-    show     : { opacity : 1},
-    hide     : { opacity : 0},
+    show     : { opacity: 1},
+    hide     : { opacity: 0},
     duration : 500,
     easing   : &#x27;easeInSine&#x27;,
     showCall : $.noop,
@@ -317,8 +320,8 @@
   p.on = function(){
     var self = this;
 
-    self.param.$window.off(&#x27;scroll.ScrollToggle&#x27;).on(&#x27;scroll.ScrollToggle&#x27;, function(){
-      self._scrollController(self.param.$window.scrollTop());
+    self.props.$window.off(&#x27;scroll.ScrollToggle&#x27;).on(&#x27;scroll.ScrollToggle&#x27;, function(){
+      self._scrollController(self.props.$window.scrollTop());
     }).trigger(&#x27;scroll.ScrollToggle&#x27;);
 
     return this;
@@ -335,21 +338,21 @@
    */
   p._scrollController = function(y){
     var self = this;
-    if(this.param.isReverse){
-      if(!this.param.isDislpay &amp;&amp; this.param.showY &gt; y){
+    if(this.props.isReverse){
+      if(!this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
         this.show();
-        this.param.isDislpay = true;
-      } else if(this.param.isDislpay &amp;&amp; this.param.showY &lt; y){
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
         this.hide();
-        this.param.isDislpay = false;
+        this.props.isDislpay = false;
       }
     } else {
-      if(!this.param.isDislpay &amp;&amp; this.param.showY &lt; y){
+      if(!this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
         this.show();
-        this.param.isDislpay = true;
-      } else if(this.param.isDislpay &amp;&amp; this.param.showY &gt; y){
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
         this.hide();
-        this.param.isDislpay = false;
+        this.props.isDislpay = false;
       }
     }
   };
@@ -362,7 +365,7 @@
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.param.$window.off(&#x27;scroll.ScrollToggle&#x27;);
+    this.props.$window.off(&#x27;scroll.ScrollToggle&#x27;);
     return this;
   };
 
@@ -374,11 +377,11 @@
    * @return {ScrollToggle}
    */
   p.show = function(){
-    this.param.$scrollToggle
+    this.props.$scrollToggle
     .css({display: &#x27;block&#x27;})
-    .css(this.param.hide)
+    .css(this.props.hide)
     .velocity(&#x27;stop&#x27;)
-    .velocity(this.param.show, this.param.duration, this.param.easing, this.param.showCall);
+    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
 
     return this;
   };
@@ -392,11 +395,11 @@
    */
   p.hide = function(){
     var self = this;
-    this.param.$scrollToggle
+    this.props.$scrollToggle
     .velocity(&#x27;stop&#x27;)
-    .velocity(this.param.hide, this.param.duration, this.param.easing, function(){
-      self.param.$scrollToggle.css({display: &#x27;none&#x27;});
-      self.param.hideCall();
+    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
+      self.props.$scrollToggle.css({display: &#x27;none&#x27;});
+      self.props.hideCall();
     });
 
     return this;

@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -123,7 +124,7 @@
   ======================================================================*/
 
   /**
-   * &lt;h4&gt;ブラウザサポートされていない場合、代替処理を行います&lt;/h4&gt;
+   * &lt;h4&gt;フォールバック&lt;/h4&gt;
    *
    * @class Fallback
    */
@@ -154,8 +155,8 @@
 
   /**
    * &lt;h4&gt;forEach&lt;/h4&gt;
-   * 配列の各要素に対して、指定された処理を実行します&lt;br&gt;
-   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
+   * &lt;p&gt;配列の各要素に対して、指定された処理を実行します&lt;br&gt;
+   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています&lt;/p&gt;
    *
    * @method Array.prototype.forEach
    * @type {Void}
@@ -176,7 +177,7 @@
 
   /**
    * &lt;h4&gt;束縛された関数生成&lt;/h4&gt;
-   * FIXME: βバージョンです。検証していません
+   * FIXME: βver.
    *
    * @beta
    * @method Function.prototype.bind
@@ -207,23 +208,22 @@
   -----------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;新しいprototypeオブジェクトの生成&lt;/h4&gt;
+   * &lt;h4&gt;新しいオブジェクトの生成&lt;/h4&gt;
    *
    * @static
    * @method Object.create
-   * @param  {Object} proto プロトタイプオブジェクト
+   * @param  {Object} obj オブジェクト
    * @return {Object}
    */
-  Object.create = Object.create || function(proto){
+  Object.create = Object.create || function(obj){
     function Obj(){}
-    Obj.prototype = proto;
+    Obj.prototype = obj;
     return new Obj();
   };
 
 
   /**
    * &lt;h4&gt;連想配列の要素数取得&lt;/h4&gt;
-   * Object.keysの処理を追加
    *
    * @static
    * @method Object.keys
@@ -251,7 +251,7 @@
   -----------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;両端の空白を取り除いた文字列を返す&lt;/h4&gt;
+   * &lt;h4&gt;文字列の両端の空白削除&lt;/h4&gt;
    *
    * @method String.prototype.trim
    * @return {String}
@@ -265,7 +265,7 @@
   -----------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;DOMイベント追加&lt;/h4&gt;
+   * &lt;h4&gt;ターゲットにイベントリスナーを登録&lt;/h4&gt;
    *
    * @static
    * @method addEvent
@@ -285,12 +285,12 @@
 
 
   /**
-   * &lt;h4&gt;DOMイベント削除&lt;/h4&gt;
+   * &lt;h4&gt;ターゲットからイベントリスナーを削除&lt;/h4&gt;
    *
    * @static
    * @method removeEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
+   * @param  {DOM} element ターゲット要素
+   * @param  {String} type イベント名
    * @param  {Function} listener 実行する関数
    * @return {DOM}
    */

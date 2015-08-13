@@ -15,6 +15,7 @@
 
   /**
    * <h4>スクロール時、座標を判定してToggle処理をします</h4>
+   * <p><a href="../../demo/AMP.$.ScrollToggle.html">DEMO</a></p>
    *
    * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
@@ -31,37 +32,38 @@
     }
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, ScrollToggle.scrollToggleOptions, options);
+    this.props = $.extend(true, {}, ScrollToggle.options, options);
 
     /**
      * <h4>表示・非表示する要素</h4>
      *
      * @default $('.scroll_toggle')
-     * @property param.$scrollToggle
+     * @property props.$scrollToggle
      * @type {jQuery}
      */
-    this.param.$scrollToggle = $scrollToggle;
+    this.props.$scrollToggle = $scrollToggle;
 
     /**
      * <h4>window要素</h4>
      *
-     * @property param.$window
+     * @property props.$window
      * @type {jQuery}
      */
-    this.param.$window = $(window);
+    this.props.$window = $(window);
 
     /**
      * <h4>Displayスタイルの状態</h4>
      *
-     * @property param.isDisplay
+     * @property props.isDisplay
      * @type {Boolean}
      */
-    this.param.isDisplay = $scrollToggle.css('display') !== 'none';
+    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
@@ -83,7 +85,7 @@
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = '3.1.1';
+  ScrollToggle.VERSION = '3.2.0';
 
 
   /**
@@ -96,11 +98,11 @@
 
 
   /**
-   * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
    * @static
-   * @property scrollToggleOptions
+   * @property options
    * @type {Object}
    */
   /**
@@ -113,11 +115,11 @@
    */
   /**
    * <h4>表示・非表示の座標判定を反転します</h4>
-   * 初期は、Y座標300pxを超えると表示しますが、300px超えると非表示にします
+   * <p>false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします</p>
    *
    * @static
    * @property isReverse
-   * @default 300
+   * @default false
    * @type {Number}
    */
   /**
@@ -125,7 +127,7 @@
    *
    * @static
    * @property show
-   * @default { opacity : 1}
+   * @default { opacity: 1}
    * @type {Object}
    */
   /**
@@ -133,7 +135,7 @@
    *
    * @static
    * @property hide
-   * @default { opacity : 0}
+   * @default { opacity: 0}
    * @type {Object}
    */
   /**
@@ -168,11 +170,11 @@
    * @default $.noop
    * @type {String}
    */
-  ScrollToggle.scrollToggleOptions = {
+  ScrollToggle.options = {
     showY    : 300,
     isReverse: false,
-    show     : { opacity : 1},
-    hide     : { opacity : 0},
+    show     : { opacity: 1},
+    hide     : { opacity: 0},
     duration : 500,
     easing   : 'easeInSine',
     showCall : $.noop,
@@ -208,8 +210,8 @@
   p.on = function(){
     var self = this;
 
-    self.param.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      self._scrollController(self.param.$window.scrollTop());
+    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      self._scrollController(self.props.$window.scrollTop());
     }).trigger('scroll.ScrollToggle');
 
     return this;
@@ -226,21 +228,21 @@
    */
   p._scrollController = function(y){
     var self = this;
-    if(this.param.isReverse){
-      if(!this.param.isDislpay && this.param.showY > y){
+    if(this.props.isReverse){
+      if(!this.props.isDislpay && this.props.showY > y){
         this.show();
-        this.param.isDislpay = true;
-      } else if(this.param.isDislpay && this.param.showY < y){
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay && this.props.showY < y){
         this.hide();
-        this.param.isDislpay = false;
+        this.props.isDislpay = false;
       }
     } else {
-      if(!this.param.isDislpay && this.param.showY < y){
+      if(!this.props.isDislpay && this.props.showY < y){
         this.show();
-        this.param.isDislpay = true;
-      } else if(this.param.isDislpay && this.param.showY > y){
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay && this.props.showY > y){
         this.hide();
-        this.param.isDislpay = false;
+        this.props.isDislpay = false;
       }
     }
   };
@@ -253,7 +255,7 @@
    * @return {ScrollToggle}
    */
   p.off = function(){
-    this.param.$window.off('scroll.ScrollToggle');
+    this.props.$window.off('scroll.ScrollToggle');
     return this;
   };
 
@@ -265,11 +267,11 @@
    * @return {ScrollToggle}
    */
   p.show = function(){
-    this.param.$scrollToggle
+    this.props.$scrollToggle
     .css({display: 'block'})
-    .css(this.param.hide)
+    .css(this.props.hide)
     .velocity('stop')
-    .velocity(this.param.show, this.param.duration, this.param.easing, this.param.showCall);
+    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
 
     return this;
   };
@@ -283,11 +285,11 @@
    */
   p.hide = function(){
     var self = this;
-    this.param.$scrollToggle
+    this.props.$scrollToggle
     .velocity('stop')
-    .velocity(this.param.hide, this.param.duration, this.param.easing, function(){
-      self.param.$scrollToggle.css({display: 'none'});
-      self.param.hideCall();
+    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
+      self.props.$scrollToggle.css({display: 'none'});
+      self.props.hideCall();
     });
 
     return this;

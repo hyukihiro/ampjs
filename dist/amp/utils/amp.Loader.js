@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.5
+ * AMPjs Core File version 3.0.6
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -41,7 +41,11 @@
 
   /**
    * <h4>ローダー</h4>
-   * <p><a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>に依存します</p>
+   * <p>
+   * 画像の読み込み通知を行います<br>
+   * <a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>
+   * に依存します<br>
+   * <a href="../../demo/AMP.Loader.html">DEMO</a></p>
    *
    * @class AMP.Loader
    * @constructor

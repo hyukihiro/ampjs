@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "AMP.$",
         "AMP.$.BoxHover",
         "AMP.$.FlatHeight",
         "AMP.$.Float3d",

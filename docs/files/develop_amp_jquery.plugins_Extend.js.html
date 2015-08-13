@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -120,7 +121,7 @@
 
 	/**
 	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * &lt;p&gt;jQueryオブジェクトを拡張し、Pluginとして使用します&lt;/p&gt;
 	 *
 	 * @class jQuery
 	 */
@@ -130,12 +131,13 @@
 		@sequence
 	--------------------------------------------------------------------------*/
 	/**
-	 * &lt;h4&gt;コールバック関数管理 &lt;/h4&gt;
-	 * Deferred resolve通知を受けたら次の関数へ移る
+	 * &lt;h4&gt;縦列・並列処理の管理&lt;/h4&gt;
+	 * &lt;p&gt;Deferred resolve通知を受けたら次の関数へ移ります&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.extend.html#sec01&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @static
 	 * @method sequence
-	 * @param  {Functions|Array} arguments 関数か関数を格納した配列を渡す
+	 * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
 	 * @return {jQuery.Deferred}
 	 */
 	$.sequence = function(){
@@ -171,34 +173,35 @@
 
 
   /**
-   * &lt;h4&gt;引数に渡した関数を縦列処理します&lt;/h4&gt;
-   * 実行した関数の戻り値は、次の関数の引数とproglessに渡します。
+   * &lt;h4&gt;縦列・並列処理の管理&lt;/h4&gt;
+   * &lt;p&gt;実行した関数の戻り値は、次の関数の引数とproglessに渡します&lt;br&gt;
+   * &lt;a href=&quot;../../demo/$.extend.html#sec02&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @static
    * @method stream
-   * @param {Function} argments 関数、もしくは配列に格納した関数
+   * @param  {Function|Array} arguments 可変長引数で関数を渡すか、関数を格納した配列を渡す
    * @return {jQuery.Deferred}
    */
   $.stream = function(){
-  	var slice = Array.prototype.slice;
+		var slice = Array.prototype.slice;
     var $defer = new $.Deferred(),
     count = 0,
     callbacks = $.isArray(arguments[0]) ? callbacks : slice.call(arguments);
 
     callbacks.push($defer.resolve);
-    stream();
+    _stream();
 
     // callbacksを再帰的に縦列処理する
-    function stream(){
-    	$.when.call(null, callbacks[count].apply(null, arguments))
-    	.fail($defer.reject)
-    	.done(function(){
-    		$defer.notify.call(null, arguments);
-    		count += 1;
-    		if(count &lt; callbacks.length){
-    			stream.apply(null, arguments);
-    		}
-    	});
+		function _stream(){
+			$.when.call(null, callbacks[count].apply(null, arguments))
+			.fail($defer.reject)
+			.done(function(){
+				$defer.notify.call(null, arguments);
+				count += 1;
+				if(count &lt; callbacks.length){
+					_stream.apply(null, arguments);
+				}
+			});
     }
 
     return $defer.promise();

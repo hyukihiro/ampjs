@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -124,13 +125,14 @@
 
   /**
    * &lt;h4&gt;イベント&lt;/h4&gt;
-   * イベントクラスの継承して使用出来ます&lt;br&gt;
-   * メディエーターとしても使用すことも可能です
+   * &lt;p&gt;イベントクラスの継承して使用出来ます&lt;br&gt;
+   * メディエーターとしても使用すことも可能です&lt;br&gt;
+   * DEMO作成予定&lt;/p&gt;
+   *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
-   *
    * @example
    *   // on&lt;br&gt;
    *   events.on(&#x27;change&#x27;, function(){...});&lt;br&gt;
@@ -144,22 +146,20 @@
    *   // tigger&lt;br&gt;
    *   events.tigger(&#x27;change&#x27;);&lt;br&gt;
    *   events.tigger(&#x27;change.type&#x27;);
-   *
    */
   function Events(){
     /**
      * &lt;h4&gt;イベントリスナーを連想配列で格納します&lt;/h4&gt;
      *
-     * @example
-     * _listeners = {
-     *    attr    : eventObj.attr,
-     *    func    : listener,
-     *    context : context
-     * }
-     *
      * @private
      * @property _listeners
      * @type {Object}
+     * @example
+     *   _listeners = {
+     *      attr    : eventObj.attr, &lt;br&gt;
+     *      func    : listener, &lt;br&gt;
+     *      context : context &lt;br&gt;
+     *   }
      */
     this._listeners = {};
   }
@@ -202,7 +202,7 @@
 
   /**
    * &lt;h4&gt;イベント登録&lt;/h4&gt;
-   * イベント名に属性値を付与することが出来ます
+   * &lt;p&gt;イベント名に属性名を付与するも可能&lt;/p&gt;
    *
    * @method on
    * @param  {String} type イベントタイプ
@@ -282,7 +282,7 @@
 
   /**
    * &lt;h4&gt;イベント削除&lt;/h4&gt;
-   * TODO: 内部処理最適化予定
+   * FIXME: 内部処理最適化予定
    *
    * @private
    * @method _removeEvent
@@ -362,7 +362,7 @@
 
 
   /**
-   * &lt;h4&gt;イベントが登録されているか判定します&lt;/h4&gt;
+   * &lt;h4&gt;登録イベントがあるか判定します&lt;/h4&gt;
    *
    * @method hasEvent
    * @param  {String} type イベントタイプ
