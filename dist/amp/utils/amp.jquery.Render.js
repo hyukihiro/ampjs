@@ -148,7 +148,7 @@
    * @property VERSION
    * @type {String}
    */
-  Render.VERSION = '3.0.0';
+  Render.VERSION = '3.0.1';
 
 
   /**
@@ -262,9 +262,8 @@
    * @return {Render}
    */
   p.ajaxFail = function(xhr, status, error){
-    if(AMP.isDevelop){
-      console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
-    }
+    // console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
+
     if(root.confirm('データの取得に失敗しました。\n再度、ページを読み込み直しますか？')){
       location.reload();
     }
