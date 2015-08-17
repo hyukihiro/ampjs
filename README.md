@@ -140,9 +140,6 @@ $.stream
 AMP.inherits
 
 ■ 追加
-AMP.shuffle
-AMP.reverse
-AMP.$.Slip
 AMP.$.LiquedSlider
 AMP.$.Crossfader
 ```

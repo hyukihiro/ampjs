@@ -6,9 +6,19 @@ jQuery(function($){
 	//
 	// console.log(AMP.Vector.radToDeg);
 
-	console.log(AMP.$);
+	// console.log(AMP.$);
+
+	var ary = AMP.shuffle([0,1,2,3,4,5])
+	console.log(ary);
 
 
+	var slip = new AMP.$.Slip({
+		// inDirection: 'left',
+		// outDirection: 'right'
+	});
+	slip.on();
+
+	// slip.active(0)
 
 // 	AMP.mediaquery.on('change.hoge', function(a){
 // 		console.log(a);

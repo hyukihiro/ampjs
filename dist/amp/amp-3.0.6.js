@@ -200,6 +200,20 @@ var AMP = {};
   }());
 
 
+  /**
+   * <h4>配列をシャッフルして新しい配列を返す</h4>
+   *
+   * @method shuffle
+   * @param  {Arrary} ary シャッフルする配列
+   * @return {Arrary}
+   */
+  AMP.shuffle = function(ary){
+    return ary.slice().sort(function(){
+      return Math.random() - 0.5;
+    });
+  };
+
+
 }(window, AMP));
 
 

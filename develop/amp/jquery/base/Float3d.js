@@ -149,7 +149,7 @@
    * @type {Number}
    */
   /**
-   * <h4>hover時のeasingく</h4>
+   * <h4>hover時のeasing</h4>
    *
    * @static
    * @property options.easing
