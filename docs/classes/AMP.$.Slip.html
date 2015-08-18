@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AMP.$.Rollover - AMPjs</title>
+    <title>AMP.$.Slip - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -105,15 +105,12 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>AMP.$.Rollover Class</h1>
+<h1>AMP.$.Slip Class</h1>
 <div class="box meta">
 
-        <div class="extends">
-            Extends <a href="../classes/AMP.BASE_CLASS.html" class="crosslink">AMP.BASE_CLASS</a>
-        </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_jquery_base_Rollover.js.html#l16"><code>develop\amp\jquery\base\Rollover.js:16</code></a>
+            Defined in: <a href="../files/develop_amp_jquery_base_Slip.js.html#l16"><code>develop\amp\jquery\base\Slip.js:16</code></a>
         </div>
 
 
@@ -121,19 +118,25 @@
 
 
 <div class="box intro">
-    <h4>ロールオーバー</h4>
-<p>!!!: シングルトン<br>
-コンストラクタを呼び出しで、使用しません<br>
-<em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
-<a href="../../demo/AMP.$.Rollover.html">DEMO</a></p>
+    <h4>ホバースライドアニメーション</h4>
+<a href="../../demo/AMP.$.Slip.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_AMP.$.Rollover" class="method item">
-    <h3 class="name"><code>AMP.$.Rollover</code></h3>
+<div id="method_AMP.$.Slip" class="method item">
+    <h3 class="name"><code>AMP.$.Slip</code></h3>
 
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>$target</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
 
 
 
@@ -145,7 +148,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l16"><code>develop\amp\jquery\base\Rollover.js:16</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l16"><code>develop\amp\jquery\base\Slip.js:16</code></a>
         </p>
 
 
@@ -156,6 +159,34 @@
         
     </div>
 
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">$target</code>
+                        <span class="type">JQuery</span>
+
+
+                    <div class="param-description">
+                        <p>対象の要素</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">options</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>オプション値</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
 
 
 
@@ -177,14 +208,23 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
+                    <ul class="index-list methods">
                             <li class="index-item method private">
-                                <a href="#method__createRolloverData">_createRolloverData</a>
+                                <a href="#method__createTweenStyle">_createTweenStyle</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method__tween">_tween</a>
 
                             </li>
                             <li class="index-item method">
                                 <a href="#method_active">active</a>
 
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_get">get</a>
+
+                                    <span class="flag static">static</span>
                             </li>
                             <li class="index-item method">
                                 <a href="#method_off">off</a>
@@ -198,25 +238,16 @@
                                 <a href="#method_passive">passive</a>
 
                             </li>
-                            <li class="index-item method inherited">
-                                <a href="#method_toString">toString</a>
-
-                            </li>
                     </ul>
                 </div>
 
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
-                            <li class="index-item property inherited">
+                    <ul class="index-list properties">
+                            <li class="index-item property">
                                 <a href="#property_className">className</a>
 
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_imageClass">imageClass</a>
-
-                                    <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
                                 <a href="#property_options">options</a>
@@ -229,19 +260,33 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
-                                <a href="#property_options.groupClass">options.groupClass</a>
+                                <a href="#property_options.inDirection">options.inDirection</a>
 
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
-                                <a href="#property_options.noOverClass">options.noOverClass</a>
+                                <a href="#property_options.noSlipClass">options.noSlipClass</a>
 
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
-                                <a href="#property_options.postfix">options.postfix</a>
+                                <a href="#property_options.outDirection">options.outDirection</a>
 
                                     <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.slipClass">options.slipClass</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_options.tween">options.tween</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_props">props</a>
+
                             </li>
                             <li class="index-item property">
                                 <a href="#property_VERSION">VERSION</a>
@@ -257,22 +302,19 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method__createRolloverData" class="method item private">
-    <h3 class="name"><code>_createRolloverData</code></h3>
+<div id="method__createTweenStyle" class="method item private">
+    <h3 class="name"><code>_createTweenStyle</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>$images</code>
-                </li>
-                <li class="arg">
-                        <code>options</code>
+                        <code>event</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Object</span>
         </span>
 
 
@@ -285,7 +327,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l256"><code>develop\amp\jquery\base\Rollover.js:256</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l267"><code>develop\amp\jquery\base\Slip.js:267</code></a>
         </p>
 
 
@@ -293,7 +335,7 @@
     </div>
 
     <div class="description">
-        <h4>ロールオーバーデータの生成</h4>
+        <h4>アニメーションスタイルの生成</h4>
     </div>
 
         <div class="params">
@@ -301,23 +343,12 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">$images</code>
-                        <span class="type">JQuery</span>
-
-
-                    <div class="param-description">
-                        <p>対象の画像要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">options</code>
+                        <code class="param-name">event</code>
                         <span class="type">Object</span>
 
 
                     <div class="param-description">
-                        <p>オプション値</p>
+                        <p>イベントオブジェクト</p>
 
                     </div>
 
@@ -329,7 +360,84 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Rollover</span>:
+                        <span class="type">Object</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method__tween" class="method item">
+    <h3 class="name"><code>_tween</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>num</code>
+                </li>
+                <li class="arg">
+                        <code>event</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Void</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l246"><code>develop\amp\jquery\base\Slip.js:246</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>アニメーション</h4>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">num</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>要素のインデックス</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">event</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>イベントオブジェクト</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Void</span>:
             </div>
         </div>
 
@@ -341,16 +449,13 @@
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>$images</code>
-                </li>
-                <li class="arg">
-                        <code>options</code>
+                        <code>num</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Slip</span>
         </span>
 
 
@@ -362,7 +467,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l194"><code>develop\amp\jquery\base\Rollover.js:194</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l210"><code>develop\amp\jquery\base\Slip.js:210</code></a>
         </p>
 
 
@@ -370,7 +475,7 @@
     </div>
 
     <div class="description">
-        <h4>画像のアクティブ化</h4>
+        <h4>アクティブ</h4>
     </div>
 
         <div class="params">
@@ -378,12 +483,79 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">$images</code>
+                        <code class="param-name">num</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>要素のインデックス</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Slip</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_get" class="method item">
+    <h3 class="name"><code>get</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>$target</code>
+                </li>
+                <li class="arg">
+                        <code>options</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Slip</span>
+        </span>
+
+
+
+
+        <span class="flag static">static</span>
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l160"><code>develop\amp\jquery\base\Slip.js:160</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>Slipインスタンスの生成</h4>
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">$target</code>
                         <span class="type">JQuery</span>
 
 
                     <div class="param-description">
-                        <p>対象の画像要素</p>
+                        <p>対象の要素</p>
 
                     </div>
 
@@ -406,7 +578,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Rollover</span>:
+                        <span class="type">Slip</span>:
             </div>
         </div>
 
@@ -415,19 +587,10 @@
 <div id="method_off" class="method item">
     <h3 class="name"><code>off</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>$images</code>
-                </li>
-                <li class="arg">
-                        <code>options</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Slip</span>
         </span>
 
 
@@ -439,7 +602,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l167"><code>develop\amp\jquery\base\Rollover.js:167</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l198"><code>develop\amp\jquery\base\Slip.js:198</code></a>
         </p>
 
 
@@ -447,43 +610,15 @@
     </div>
 
     <div class="description">
-        <h4>ロールオーバーイベント削除</h4>
+        <h4>イベント削除</h4>
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">$images</code>
-                        <span class="type">JQuery</span>
-
-
-                    <div class="param-description">
-                        <p>対象の画像要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>オプション値</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
         <div class="returns">
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Rollover</span>:
+                        <span class="type">Slip</span>:
             </div>
         </div>
 
@@ -492,19 +627,10 @@
 <div id="method_on" class="method item">
     <h3 class="name"><code>on</code></h3>
 
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>$images</code>
-                </li>
-                <li class="arg">
-                        <code>options</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
+        <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Slip</span>
         </span>
 
 
@@ -516,7 +642,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l122"><code>develop\amp\jquery\base\Rollover.js:122</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l174"><code>develop\amp\jquery\base\Slip.js:174</code></a>
         </p>
 
 
@@ -524,43 +650,15 @@
     </div>
 
     <div class="description">
-        <h4>ロールオーバーイベント追加</h4>
+        <h4>イベント登録</h4>
     </div>
 
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">$images</code>
-                        <span class="type">JQuery</span>
-
-
-                    <div class="param-description">
-                        <p>対象の画像要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>オプション値</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
 
         <div class="returns">
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Rollover</span>:
+                        <span class="type">Slip</span>:
             </div>
         </div>
 
@@ -572,16 +670,13 @@
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>$images</code>
-                </li>
-                <li class="arg">
-                        <code>options</code>
+                        <code>num</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Rollover</span>
+            <span class="type">Slip</span>
         </span>
 
 
@@ -593,7 +688,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_base_Rollover.js.html#l225"><code>develop\amp\jquery\base\Rollover.js:225</code></a>
+        <a href="../files/develop_amp_jquery_base_Slip.js.html#l228"><code>develop\amp\jquery\base\Slip.js:228</code></a>
         </p>
 
 
@@ -601,7 +696,7 @@
     </div>
 
     <div class="description">
-        <h4>画像を待機状態にする</h4>
+        <h4>待機状態のスタイル</h4>
     </div>
 
         <div class="params">
@@ -609,23 +704,12 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">$images</code>
-                        <span class="type">JQuery</span>
+                        <code class="param-name">num</code>
+                        <span class="type">Number</span>
 
 
                     <div class="param-description">
-                        <p>対象の画像要素</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">options</code>
-                        <span class="type">Object</span>
-
-
-                    <div class="param-description">
-                        <p>オプション値</p>
+                        <p>要素のインデックス</p>
 
                     </div>
 
@@ -637,49 +721,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Rollover</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_toString" class="method item inherited">
-    <h3 class="name"><code>toString</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">String</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="../classes/AMP.BASE_CLASS.html#method_toString">AMP.BASE_CLASS</a>:
-        <a href="../files/develop_amp_core_amp.js.html#l81"><code>develop\amp\core\amp.js:81</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>クラス名を返す</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">String</span>:
-                    <p>クラス名を返す</p>
-
+                        <span class="type">Slip</span>:
             </div>
         </div>
 
@@ -699,12 +741,9 @@
                     
                     
                         <div class="meta">
-                                <p>Inherited from
-                                <a href="../classes/AMP.BASE_CLASS.html#property_className">
-                                    AMP.BASE_CLASS
-                                </a>
-                                but overwritten in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l51"><code>develop\amp\jquery\base\Rollover.js:51</code></a>
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l72"><code>develop\amp\jquery\base\Slip.js:72</code></a>
                             </p>
                     
                     
@@ -712,31 +751,6 @@
                     
                         <div class="description">
                             <h4>クラス名</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_imageClass" class="property item">
-                        <h3 class="name"><code>imageClass</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l107"><code>develop\amp\jquery\base\Rollover.js:107</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>ロールオーバークラス名初期値</h4>
                         </div>
                     
                     
@@ -754,14 +768,15 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l60"><code>develop\amp\jquery\base\Rollover.js:60</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l81"><code>develop\amp\jquery\base\Slip.js:81</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>オプションのデフォルト値</h4>
+                            <h4>デフォルト値オブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
                         </div>
                     
                     
@@ -779,22 +794,22 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l75"><code>develop\amp\jquery\base\Rollover.js:75</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l117"><code>develop\amp\jquery\base\Slip.js:117</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>アクティブクラス名</h4>
+                            <h4>アクティブ時に付与するクラス名</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> active</p>
+                            <p><strong>Default:</strong> .activeClass</p>
                     
                     
                     </div>
-                    <div id="property_options.groupClass" class="property item">
-                        <h3 class="name"><code>options.groupClass</code></h3>
+                    <div id="property_options.inDirection" class="property item">
+                        <h3 class="name"><code>options.inDirection</code></h3>
                         <span class="type">String</span>
                     
                     
@@ -805,22 +820,24 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l67"><code>develop\amp\jquery\base\Rollover.js:67</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l89"><code>develop\amp\jquery\base\Slip.js:89</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>グループクラス名</h4>
+                            <h4>マウスイン時のアニメーション方向</h4>
+                    <p>以下7タイプ (allはデフォルト4方向)<br>
+                    all, side, updown, up, down, left, right</p>
                         </div>
                     
-                            <p><strong>Default:</strong> group_rover</p>
+                            <p><strong>Default:</strong> all</p>
                     
                     
                     </div>
-                    <div id="property_options.noOverClass" class="property item">
-                        <h3 class="name"><code>options.noOverClass</code></h3>
+                    <div id="property_options.noSlipClass" class="property item">
+                        <h3 class="name"><code>options.noSlipClass</code></h3>
                         <span class="type">String</span>
                     
                     
@@ -831,22 +848,22 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l83"><code>develop\amp\jquery\base\Rollover.js:83</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l125"><code>develop\amp\jquery\base\Slip.js:125</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>ノーロールオーバークラス名</h4>
+                            <h4>スライドしない要素に付与するクラス名</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> no_rover</p>
+                            <p><strong>Default:</strong> .no_slip</p>
                     
                     
                     </div>
-                    <div id="property_options.postfix" class="property item">
-                        <h3 class="name"><code>options.postfix</code></h3>
+                    <div id="property_options.outDirection" class="property item">
+                        <h3 class="name"><code>options.outDirection</code></h3>
                         <span class="type">String</span>
                     
                     
@@ -857,17 +874,97 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l91"><code>develop\amp\jquery\base\Rollover.js:91</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l99"><code>develop\amp\jquery\base\Slip.js:99</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>ロールオーバー時に付与するファイル名</h4>
+                            <h4>マウスアウト時のアニメーション方向</h4>
+                    <p>以下7タイプ (allはデフォルト4方向)<br>
+                    all, side, updown, up, down, left, right</p>
                         </div>
                     
-                            <p><strong>Default:</strong> _on</p>
+                            <p><strong>Default:</strong> all</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.slipClass" class="property item">
+                        <h3 class="name"><code>options.slipClass</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l109"><code>develop\amp\jquery\base\Slip.js:109</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>スライドする子要素のクラス名</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> slip_tween</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.tween" class="property item">
+                        <h3 class="name"><code>options.tween</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l133"><code>develop\amp\jquery\base\Slip.js:133</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>Tween option</h4>
+                    <p><a href="http://julian.com/research/velocity/" target="_blank">velocity.js オプション参照</a></p>
+                        </div>
+                    
+                            <p><strong>Default:</strong> .no_slip</p>
+                    
+                    
+                    </div>
+                    <div id="property_props" class="property item">
+                        <h3 class="name"><code>props</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l32"><code>develop\amp\jquery\base\Slip.js:32</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>プロパティオブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+                        </div>
+                    
                     
                     
                     </div>
@@ -883,7 +980,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_base_Rollover.js.html#l41"><code>develop\amp\jquery\base\Rollover.js:41</code></a>
+                            <a href="../files/develop_amp_jquery_base_Slip.js.html#l62"><code>develop\amp\jquery\base\Slip.js:62</code></a>
                             </p>
                     
                     

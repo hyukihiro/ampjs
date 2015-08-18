@@ -11,6 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AMP.$.Scroll",
         "AMP.$.ScrollToggle",
         "AMP.$.Slider",
+        "AMP.$.Slip",
         "AMP.$.SmoothScroll",
         "AMP.$.UIController",
         "AMP.Array",

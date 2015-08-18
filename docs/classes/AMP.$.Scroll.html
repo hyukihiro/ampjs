@@ -48,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -120,7 +121,7 @@
 
 
 <div class="box intro">
-    <p><h4>ページ内リンクのスクロール</h4></p>
+    <h4>ページ内リンクのスクロール</h4>
 <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
 </div>
 
@@ -326,8 +327,7 @@
     </div>
 
     <div class="description">
-        <p><h4>Scrollインスタンスの生成</h4></p>
-
+        <h4>Scrollインスタンスの生成</h4>
     </div>
 
         <div class="params">
@@ -395,8 +395,7 @@
     </div>
 
     <div class="description">
-        <p><h4>イベント削除</h4></p>
-
+        <h4>イベント削除</h4>
     </div>
 
 
@@ -436,8 +435,7 @@
     </div>
 
     <div class="description">
-        <p><h4>イベント登録</h4></p>
-
+        <h4>イベント登録</h4>
     </div>
 
 
@@ -477,8 +475,7 @@
     </div>
 
     <div class="description">
-        <p><h4>クラス名を返す</h4></p>
-
+        <h4>クラス名を返す</h4>
     </div>
 
 
@@ -526,7 +523,7 @@
     </div>
 
     <div class="description">
-        <p><h4>スクロールアニメーション</h4></p>
+        <h4>スクロールアニメーション</h4>
 <p>FIXME: Stringも対応予定</p>
     </div>
 
@@ -563,244 +560,238 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_className" class="property item">
-    <h3 class="name"><code>className</code></h3>
-    <span class="type">String</span>
-
-
-
-
-
-    <div class="meta">
-            <p>Inherited from
-            <a href="../classes/AMP.BASE_CLASS.html#property_className">
-                AMP.BASE_CLASS
-            </a>
-            but overwritten in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l73"><code>develop\amp\jquery\base\Scroll.js:73</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>クラス名</h4></p>
-
-    </div>
-
-
-
-</div>
-<div id="property_options" class="property item">
-    <h3 class="name"><code>options</code></h3>
-    <span class="type">Object</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l82"><code>develop\amp\jquery\base\Scroll.js:82</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>デフォルト値オブジェクト</h4></p>
-<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-    </div>
-
-
-
-</div>
-<div id="property_options.$html" class="property item">
-    <h3 class="name"><code>options.$html</code></h3>
-    <span class="type">JQuery</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l90"><code>develop\amp\jquery\base\Scroll.js:90</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>ページ要素</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> $(&#x27;html, body&#x27;)</p>
-
-
-</div>
-<div id="property_options.adjust" class="property item">
-    <h3 class="name"><code>options.adjust</code></h3>
-    <span class="type">Number | Function</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l98"><code>develop\amp\jquery\base\Scroll.js:98</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>停止位置調整値</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> 0</p>
-
-
-</div>
-<div id="property_options.noScrollClass" class="property item">
-    <h3 class="name"><code>options.noScrollClass</code></h3>
-    <span class="type">String</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l106"><code>develop\amp\jquery\base\Scroll.js:106</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>スクロールしないトリガークラス名</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> no_scroll</p>
-
-
-</div>
-<div id="property_options.tween" class="property item">
-    <h3 class="name"><code>options.tween</code></h3>
-    <span class="type">Object</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l114"><code>develop\amp\jquery\base\Scroll.js:114</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>スクロールアニメーションのオプション値</h4></p>
-<p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
-    </div>
-
-        <p><strong>Default:</strong> {duration: 800, easing: &#x27;easeOutQuint&#x27;}</p>
-
-
-</div>
-<div id="property_props" class="property item">
-    <h3 class="name"><code>props</code></h3>
-    <span class="type">Object</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l33"><code>develop\amp\jquery\base\Scroll.js:33</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>プロパティオブジェクト</h4></p>
-<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-    </div>
-
-
-
-</div>
-<div id="property_props.$scrollTrigger" class="property item">
-    <h3 class="name"><code>props.$scrollTrigger</code></h3>
-    <span class="type">JQuery</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l42"><code>develop\amp\jquery\base\Scroll.js:42</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>トリガーとなるa要素</h4></p>
-
-    </div>
-
-
-
-</div>
-<div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type">String</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_Scroll.js.html#l63"><code>develop\amp\jquery\base\Scroll.js:63</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>バージョン情報</h4></p>
-
-    </div>
-
-
-
-</div>
+                    <div id="property_className" class="property item">
+                        <h3 class="name"><code>className</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/AMP.BASE_CLASS.html#property_className">
+                                    AMP.BASE_CLASS
+                                </a>
+                                but overwritten in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l73"><code>develop\amp\jquery\base\Scroll.js:73</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>クラス名</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_options" class="property item">
+                        <h3 class="name"><code>options</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l82"><code>develop\amp\jquery\base\Scroll.js:82</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>デフォルト値オブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_options.$html" class="property item">
+                        <h3 class="name"><code>options.$html</code></h3>
+                        <span class="type">JQuery</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l90"><code>develop\amp\jquery\base\Scroll.js:90</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>ページ要素</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> $(&#x27;html, body&#x27;)</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.adjust" class="property item">
+                        <h3 class="name"><code>options.adjust</code></h3>
+                        <span class="type">Number | Function</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l98"><code>develop\amp\jquery\base\Scroll.js:98</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>停止位置調整値</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> 0</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.noScrollClass" class="property item">
+                        <h3 class="name"><code>options.noScrollClass</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l106"><code>develop\amp\jquery\base\Scroll.js:106</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>スクロールしないトリガークラス名</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> no_scroll</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.tween" class="property item">
+                        <h3 class="name"><code>options.tween</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l114"><code>develop\amp\jquery\base\Scroll.js:114</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>スクロールアニメーションのオプション値</h4>
+                    <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
+                        </div>
+                    
+                            <p><strong>Default:</strong> {duration: 800, easing: &#x27;easeOutQuint&#x27;}</p>
+                    
+                    
+                    </div>
+                    <div id="property_props" class="property item">
+                        <h3 class="name"><code>props</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l33"><code>develop\amp\jquery\base\Scroll.js:33</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>プロパティオブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_props.$scrollTrigger" class="property item">
+                        <h3 class="name"><code>props.$scrollTrigger</code></h3>
+                        <span class="type">JQuery</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l42"><code>develop\amp\jquery\base\Scroll.js:42</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>トリガーとなるa要素</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_VERSION" class="property item">
+                        <h3 class="name"><code>VERSION</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_Scroll.js.html#l63"><code>develop\amp\jquery\base\Scroll.js:63</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>バージョン情報</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
             </div>
 
 

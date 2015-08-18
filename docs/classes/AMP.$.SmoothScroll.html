@@ -48,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -120,7 +121,7 @@
 
 
 <div class="box intro">
-    <p><h4>スムーススクロール（慣性スクロール）</h4></p>
+    <h4>スムーススクロール（慣性スクロール）</h4>
 <p><em>※ WindowsPCのみ有効</em><br>
 <a href="../../demo/AMP.$.SmothScroll.html">DEMO</a></p>
 </div>
@@ -279,8 +280,7 @@
     </div>
 
     <div class="description">
-        <p><h4>SmoothScrollインスタンスの生成</h4></p>
-
+        <h4>SmoothScrollインスタンスの生成</h4>
     </div>
 
         <div class="params">
@@ -337,8 +337,7 @@
     </div>
 
     <div class="description">
-        <p><h4>イベント削除</h4></p>
-
+        <h4>イベント削除</h4>
     </div>
 
 
@@ -378,8 +377,7 @@
     </div>
 
     <div class="description">
-        <p><h4>初期化</h4></p>
-
+        <h4>初期化</h4>
     </div>
 
 
@@ -419,8 +417,7 @@
     </div>
 
     <div class="description">
-        <p><h4>クラス名を返す</h4></p>
-
+        <h4>クラス名を返す</h4>
     </div>
 
 
@@ -462,8 +459,7 @@
     </div>
 
     <div class="description">
-        <p><h4>スクロールアニメーション</h4></p>
-
+        <h4>スクロールアニメーション</h4>
     </div>
 
 
@@ -482,215 +478,209 @@
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-<div id="property_className" class="property item">
-    <h3 class="name"><code>className</code></h3>
-    <span class="type">String</span>
-
-
-
-
-
-    <div class="meta">
-            <p>Inherited from
-            <a href="../classes/AMP.BASE_CLASS.html#property_className">
-                AMP.BASE_CLASS
-            </a>
-            but overwritten in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l63"><code>develop\amp\jquery\base\SmothScroll.js:63</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>クラス名</h4></p>
-
-    </div>
-
-
-
-</div>
-<div id="property_options" class="property item">
-    <h3 class="name"><code>options</code></h3>
-    <span class="type">Object</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l72"><code>develop\amp\jquery\base\SmothScroll.js:72</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>デフォルト値オブジェクト</h4></p>
-<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-    </div>
-
-
-
-</div>
-<div id="property_options.$page" class="property item">
-    <h3 class="name"><code>options.$page</code></h3>
-    <span class="type">JQuery</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l80"><code>develop\amp\jquery\base\SmothScroll.js:80</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>スムーススクロールエリア</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> $(&#x27;html, body&#x27;)</p>
-
-
-</div>
-<div id="property_options.amount" class="property item">
-    <h3 class="name"><code>options.amount</code></h3>
-    <span class="type">Number</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l87"><code>develop\amp\jquery\base\SmothScroll.js:87</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>スクロール量</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> 500</p>
-
-
-</div>
-<div id="property_options.duration" class="property item">
-    <h3 class="name"><code>options.duration</code></h3>
-    <span class="type">Number</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l94"><code>develop\amp\jquery\base\SmothScroll.js:94</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>duration</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> 500</p>
-
-
-</div>
-<div id="property_options.easing" class="property item">
-    <h3 class="name"><code>options.easing</code></h3>
-    <span class="type">String</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l101"><code>develop\amp\jquery\base\SmothScroll.js:101</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>easing</h4></p>
-
-    </div>
-
-        <p><strong>Default:</strong> easeOutCubic</p>
-
-
-</div>
-<div id="property_props" class="property item">
-    <h3 class="name"><code>props</code></h3>
-    <span class="type">Object</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l26"><code>develop\amp\jquery\base\SmothScroll.js:26</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>プロパティオブジェクト</h4></p>
-<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-    </div>
-
-
-
-</div>
-<div id="property_VERSION" class="property item">
-    <h3 class="name"><code>VERSION</code></h3>
-    <span class="type">String</span>
-
-
-
-
-        <span class="flag static">static</span>
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l53"><code>develop\amp\jquery\base\SmothScroll.js:53</code></a>
-        </p>
-
-
-    </div>
-
-    <div class="description">
-        <p><h4>バージョン情報</h4></p>
-
-    </div>
-
-
-
-</div>
+                    <div id="property_className" class="property item">
+                        <h3 class="name"><code>className</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                <p>Inherited from
+                                <a href="../classes/AMP.BASE_CLASS.html#property_className">
+                                    AMP.BASE_CLASS
+                                </a>
+                                but overwritten in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l63"><code>develop\amp\jquery\base\SmothScroll.js:63</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>クラス名</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_options" class="property item">
+                        <h3 class="name"><code>options</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l72"><code>develop\amp\jquery\base\SmothScroll.js:72</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>デフォルト値オブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_options.$page" class="property item">
+                        <h3 class="name"><code>options.$page</code></h3>
+                        <span class="type">JQuery</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l80"><code>develop\amp\jquery\base\SmothScroll.js:80</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>スムーススクロールエリア</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> $(&#x27;html, body&#x27;)</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.amount" class="property item">
+                        <h3 class="name"><code>options.amount</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l87"><code>develop\amp\jquery\base\SmothScroll.js:87</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>スクロール量</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> 500</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.duration" class="property item">
+                        <h3 class="name"><code>options.duration</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l94"><code>develop\amp\jquery\base\SmothScroll.js:94</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>duration</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> 500</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.easing" class="property item">
+                        <h3 class="name"><code>options.easing</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l101"><code>develop\amp\jquery\base\SmothScroll.js:101</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>easing</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> easeOutCubic</p>
+                    
+                    
+                    </div>
+                    <div id="property_props" class="property item">
+                        <h3 class="name"><code>props</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l26"><code>develop\amp\jquery\base\SmothScroll.js:26</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>プロパティオブジェクト</h4>
+                    <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_VERSION" class="property item">
+                        <h3 class="name"><code>VERSION</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_base_SmothScroll.js.html#l53"><code>develop\amp\jquery\base\SmothScroll.js:53</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>バージョン情報</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
             </div>
 
 

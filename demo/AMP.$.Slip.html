@@ -52,50 +52,51 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.FontResize <a href="../docs/classes/AMP.FontResize.html">API Reference</a></h2>
+<h2>AMP.$.Slip <a href="../docs/classes/AMP.$.Slip.html">API Reference</a></h2>
 <div class="lead">
-<p>フォントサイズが変更されたらイベントが実行されます。</p>
+<p>ホバーにスライドアクションを加えます。<br>
+トリガーとなる要素は、block要素を推奨します。<br>
+スライドする要素は、トリガー要素の子要素(.slip_tween)をabsoluteで配置します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<p class="btn">
-<a class="blue small" href="#">Small</a>
-<a class="red large" href="#">Large</a>
-</p>
-<p class="dummy_text">Dummy Text..<br>Dummy Text..<br>Dummy Text..</p>
+<ul class="slip cf">
+<li><span class="slip_tween"></span></li>
+<li><span class="slip_tween"></span></li>
+<li><span class="slip_tween"></span></li>
+</ul>
 </textarea>
 
 <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
-p.dummy_text{
-	margin: 20px 0;
-	padding: 15px 25px;
-	border: 1px solid #e6e6e6;
+ul.slip li{
+	position: relative;
+	overflow: hidden;
+	float: left;
+	width: 28%;
+	height: 100px;
+	margin: 0 2%;
+	border: 1px solid #ccc;
+}
+ul.slip li .slip_tween{
+	display: block;
+	position: absolute;
+	top: -100%;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: #e8e8e8;
 }
 </textarea>
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// small
-$('.small').click(function(){
-	$('body').css({fontSize: '10px'});
-	return false;
-});
-
-// large
-$('.large').click(function(){
-	$('body').css({fontSize: '18px'});
-	return false;
-});
-
-// フォントサイズ変更時、イベント実行
-AMP.fontResize.on('change', function(){
-	alert('フォントサイズが変更されました');
-});
+AMP.$.Slip.get($('ul.slip li'));
 </textarea>
 </div>
 </section>
 <!-- #content // --></div>
+
 
 
 <footer>

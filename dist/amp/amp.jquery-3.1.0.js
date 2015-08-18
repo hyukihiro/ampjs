@@ -751,382 +751,6 @@
 
 (function(root, AMP, $){
 
-	// 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ホバー3Dアニメーション</h4>
-   * <p><em>IE10以上対象</em><br>
-   * <a href="../../demo/AMP.$.Float3d.html">DEMO</a></p>
-   *
-   * @example  要素構成: .float > .float_frame > .float_inner
-   *
-   * @class AMP.$.Float3d
-   * @constructor
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   */
-	function Float3d($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $('.float');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Float3d.options, options);
-
-    /**
-     * <h4>float要素</h4>
-     *
-     * @propaty $target
-     * @type {jQuery}
-     */
-    this.props.$target = $target;
-
-    /**
-     * <h4>html要素</h4>
-     *
-     * @propaty $html
-     * @type {jQuery}
-     */
-		this.props.$html = $('html');
-
-    /**
-     * <h4>float要素</h4>
-     *
-     * @private
-     * @propaty _isFloating
-     * @type {Boolean}
-     */
-    this.props._isFloating = false;
-	}
-
-  // 基底クラスを継承
-  AMP.inherits(Float3d, AMP.BASE_CLASS);
-
-	// prototype
-	var p = Float3d.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Float3d.VERSION = '1.1.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Float3d';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>3D変形の奥行きの深さを指定する値</h4>
-   *
-   * @static
-   * @property options.perspective
-   * @type {Number}
-   */
-  /**
-   * <h4>Z方向の距離で移動を指定する値</h4>
-   *
-   * @static
-   * @property options.translateZ
-   * @type {Number}
-   */
-  /**
-   * <h4>回転表示を指定する値</h4>
-   *
-   * @static
-   * @property options.rotate
-   * @type {Number}
-   */
-  /**
-   * <h4>floating時に回転する幅く</h4>
-   *
-   * @static
-   * @property options.range
-   * @type {Number}
-   */
-  /**
-   * <h4>floating時の回転するスピードく</h4>
-   *
-   * @static
-   * @property options.speed
-   * @type {Number}
-   */
-  /**
-   * <h4>hover時のdurationく</h4>
-   *
-   * @static
-   * @property options.duration
-   * @type {Number}
-   */
-  /**
-   * <h4>hover時のeasing</h4>
-   *
-   * @static
-   * @property options.easing
-   * @type {String}
-   */
-	Float3d.options = {
-    perspective: 400,
-    translateZ : -150,
-    rotate     : 7.5,
-    range      : 5,
-    speed      : 150,
-    duration   : 400,
-    easing     : 'easeOutExpo'
-	};
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Float3dインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   * @return {Float3d}
-   */
-  Float3d.get = function($target, options){
-    return new Float3d($target, options).on();
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @return {Float3d}
-   */
-  p.on = function(){
-    var self = this;
-
-    // イベント重複回避
-    self.off();
-
-    self.props.$target.css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective});
-
-    self.props.$target
-    .on('mouseenter.Float3d', function(onEvent){
-      self.onTween(this, onEvent);
-      self.props._isFloating = true;
-      self.floatTween($(this).children(), 0);
-
-      // moveEvent登録
-      $(this).on('mousemove.Float3d', function(moveEvent){
-        self.onTween(this, moveEvent);
-      });
-    })
-    .on('mouseleave.Float3d', function(outEvent){
-      self.props._isFloating = false;
-      self.outTween(this, outEvent);
-
-      // moveEvent削除
-      $(this).off('mousemove.Float3d');
-    });
-
-     // moveEvent削除
-    this.props.$html.on('mouseleave.Float3d', function(){
-      self.props.$target.parent().off('mousemove.Float3d');
-      self.props._isFloating = false;
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {Float3d}
-   */
-  p.off = function(){
-    this.props.$target.off('.Float3d').css({perspective: 0})
-    .children().css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective});
-
-    this.props.$html.off('.Float3d');
-
-    return this;
-  };
-
-
-  /**
-   * <h4>マウスオンTween</h4>
-   *
-   * @method onTween
-   * @param  {DOM} target 対象の要素
-   * @param  {Object} event イベントオブジェクト
-   * @return {Void}
-   */
-  p.onTween = function(target, event){
-    var $target = $(target).children(),
-    offset = this.offsetRatio(target, event);
-
-    $target.velocity('stop')
-    .velocity({
-      translateZ: this.props.translateZ,
-      rotateX   : this.props.rotate * offset.y,
-      rotateY   : this.props.rotate * offset.x,
-      rotateZ   : this.props.rotate * offset.x
-    }, {
-      duration: this.props.duration,
-      easing  : this.props.easing
-    });
-  };
-
-
-  /**
-   * <h4>選択中のTween</h4>
-   * 再起処理します
-   *
-   * @method floatTween
-   * @param  {DOM} target 対象の要素
-   * @return {Void}
-   */
-  p.floatTween = function($target, angle){
-    var self = this;
-
-    angle = typeof angle === 'number' ? angle : 0;
-    angle += Math.PI / self.props.speed;
-
-    $target.children()
-    .velocity('stop')
-    .velocity({
-      rotateX: (self.props.range * Math.cos(angle + Math.PI)),
-      rotateY: (self.props.range * Math.sin(angle + Math.PI)),
-      rotateZ: (self.props.range * Math.sin(angle + Math.PI))
-    }, {
-      duration: 1000 / 60,
-      easing  : 'linear',
-      complete: function(){
-        // 再起処理
-        if(self.props._isFloating){
-          self.floatTween($target, angle);
-        }
-      }
-    });
-  };
-
-
-  /**
-   * <h4>マウスアウトTween</h4>
-   *
-   * @method outTween
-   * @param  {DOM} target 対象の要素
-   * @return {Void}
-   */
-  p.outTween = function(target){
-    var self = this;
-
-    $(target).children()
-    .velocity('stop')
-    .velocity({
-      translateZ: 0,
-      rotateX   : 0,
-      rotateY   : 0,
-      rotateZ   : 0
-    }, {
-      duration: self.props.duration,
-      easing  : self.props.ease
-    })
-    .children()
-    .velocity('stop')
-    .velocity({
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0
-    }, {
-      duration: self.props.duration,
-      easing  : self.props.easing
-    });
-  };
-
-
-  /**
-   * <h4>エリアセンター中心に座標位置の比率を返す</h4>
-   * 比率は0を中心に-1から1までの小数点2桁の数値
-   *
-   * @method offsetRatio
-   * @param  {DOM} target 対象の要素
-   * @param  {Object} event  イベントオブジェクト
-   * @return {Object}  x,y座標比を格納したオブジェクト
-   */
-  p.offsetRatio = function(target, event){
-    var $target = $(target);
-
-    var center = {
-      x: $target.width() / 2,
-      y: $target.height() / 2
-    };
-
-    var offset = {
-      x: event.pageX - $target.offset().left,
-      y: event.pageY - $target.offset().top
-    };
-
-    // return offset
-    return {
-      x: ((offset.x - center.x) / center.x).toFixed(2),
-      y: ((center.y - offset.y) / center.y).toFixed(2)
-    };
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Float3d = Float3d;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
   // 'use strict';
 
 
@@ -2182,333 +1806,6 @@
 
 (function(root, AMP, $){
 
-	// 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ホバースライドアニメーション</h4>
-   * <a href="../../demo/AMP.$.Slip.html">DEMO</a></p>
-   *
-   * @class AMP.$.Slip
-   * @constructor
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   */
-	function Slip($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $('.slip');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Slip.options, options);
-
-    /**
-     * <h4>float要素</h4>
-     *
-     * @propaty $target
-     * @type {jQuery}
-     */
-    this.props.$target = $target;
-	}
-
-  // 基底クラスを継承
-  AMP.inherits(Slip, AMP.BASE_CLASS);
-
-	// prototype
-	var p = Slip.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Slip.VERSION = '1.0.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Slip';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>マウスイン時のアニメーション方向</h4>
-   * <p>以下7タイプ (allはデフォルト4方向)<br>
-   * all, side, updown, up, down, left, right</p>
-   *
-   * @static
-   * @property options.inDirection
-   * @default all
-   * @type {String}
-   */
-  /**
-   * <h4>マウスアウト時のアニメーション方向</h4>
-   * <p>以下7タイプ (allはデフォルト4方向)<br>
-   * all, side, updown, up, down, left, right</p>
-   *
-   * @static
-   * @property options.outDirection
-   * @default all
-   * @type {String}
-   */
-  /**
-   * <h4>スライドする子要素のクラス名</h4>
-   *
-   * @static
-   * @property options.slipClass
-   * @default slip_tween
-   * @type {String}
-   */
-  /**
-   * <h4>アクティブ時に付与するクラス名</h4>
-   *
-   * @static
-   * @property options.activeClass
-   * @default .activeClass
-   * @type {String}
-   */
-  /**
-   * <h4>スライドしない要素に付与するクラス名</h4>
-   *
-   * @static
-   * @property options.noSlipClass
-   * @default .no_slip
-   * @type {String}
-   */
-  /**
-   * <h4>Tween option</h4>
-   * <p><a href="http://julian.com/research/velocity/" target="_blank">velocity.js オプション参照</a></p>
-   *
-   * @static
-   * @property options.tween
-   * @default .no_slip
-   * @type {Object}
-   */
-	Slip.options = {
-    inDirection : 'all', // all, side, updown, up, down, left, right
-    outDirection: 'all', // all, side, updown, up, down, left, right
-    slipClass   : 'slip_tween',
-    activeClass : 'active',
-    noSlipClass : 'no_slip',
-    tween       : {
-      duration  : 400,
-      easing    : 'easeOutExpo'
-    }
-	};
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Slipインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   * @return {Slip}
-   */
-  Slip.get = function($target, options){
-    return new Slip($target, options).on();
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @return {Slip}
-   */
-  p.on = function(){
-    var self = this;
-
-    // 二重登録回避
-    this.off();
-
-    self.props.$target
-    .on('slipin.Slip', function(inEvent){
-      self._tween(self.props.$target.index(this), inEvent);
-    })
-    .on('slipout.Slip', function(outEvent){
-      self._tween(self.props.$target.index(this), outEvent);
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {Slip}
-   */
-  p.off = function(){
-    this.props.$target.off('slipin.Slip slipin.Slip');
-    return this;
-  };
-
-
-  /**
-   * <h4>アクティブ</h4>
-   *
-   * @method active
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.active = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target.addClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
-    .velocity('stop').css({top: 0, left: 0});
-
-    return this;
-  };
-
-
-  /**
-   * <h4>待機状態のスタイル</h4>
-   *
-   * @method passive
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.passive = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target.removeClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
-    .velocity('stop').css({top: '-100%'});
-
-    return this;
-  };
-
-
-  /**
-   * <h4>アニメーション</h4>
-   *
-   * @method _tween
-   * @param  {Number} num   要素のインデックス
-   * @param  {Object} event イベントオブジェクト
-   * @return {Void}
-   */
-  p._tween = function(num, event){
-    var style = this._createTweenStyle(event),
-    $target = this.props.$target.eq(num);
-
-    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noSlipClass)){
-      $target.find('.' + this.props.slipClass)
-      .velocity('stop')
-      .velocity(style.start, 0)
-      .velocity(style.end, this.props.tween);
-    }
-  };
-
-
-  /**
-   * <h4>アニメーションスタイルの生成</h4>
-   *
-   * @private
-   * @method _createTweenStyle
-   * @param  {Object} event イベントオブジェクト
-   * @return {Object}
-   */
-  p._createTweenStyle = function(event){
-    var isIn = event.type === 'slipin',
-    direction = isIn ? this.props.inDirection : this.props.outDirection,
-    style01 = {
-      left: 0,
-      top : 0
-    },
-    style02 = $.extend({}, style01),
-    style = isIn ? style01 : style02;
-
-    if(direction === 'side'){
-      style.left = event.x < 0 ? '-100%' : '100%';
-
-    } else if(direction === 'updown'){
-      style.top = event.y < 0 ? '-100%' : '100%';
-
-    } else if(direction === 'up'){
-      style.top = '-100%';
-
-    } else if(direction === 'down'){
-      style.top = '100%';
-
-    } else if(direction === 'left'){
-      style.left = '-100%';
-
-    } else if(direction === 'right'){
-      style.left = '100%';
-
-    } else {
-      // direction all
-      if(event.direction === 'top'){
-        style.top = '-100%';
-      } else if(event.direction === 'bottom'){
-        style.top = '100%';
-      } else if(event.direction === 'left'){
-        style.left = '-100%';
-      } else {
-        style.left = '100%';
-      }
-    }
-
-    return {
-      start: style01,
-      end  : style02
-    };
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Slip = Slip;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
   // 'use strict';
 
 
@@ -2956,6 +2253,709 @@
   --------------------------------------------------------------------------*/
 
   AMP.$.UIController = UIController;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+	// 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>ホバー3Dアニメーション</h4>
+   * <p><em>IE10以上対象</em><br>
+   * <a href="../../demo/AMP.$.Float3d.html">DEMO</a></p>
+   *
+   * @example  要素構成: .float > .float_frame > .float_inner
+   *
+   * @class AMP.$.Float3d
+   * @constructor
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   */
+	function Float3d($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.float');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, Float3d.options, options);
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @propaty $target
+     * @type {jQuery}
+     */
+    this.props.$target = $target;
+
+    /**
+     * <h4>html要素</h4>
+     *
+     * @propaty $html
+     * @type {jQuery}
+     */
+		this.props.$html = $('html');
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @private
+     * @propaty _isFloating
+     * @type {Boolean}
+     */
+    this.props._isFloating = false;
+	}
+
+  // 基底クラスを継承
+  AMP.inherits(Float3d, AMP.BASE_CLASS);
+
+	// prototype
+	var p = Float3d.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Float3d.VERSION = '1.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Float3d';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>3D変形の奥行きの深さを指定する値</h4>
+   *
+   * @static
+   * @property options.perspective
+   * @type {Number}
+   */
+  /**
+   * <h4>Z方向の距離で移動を指定する値</h4>
+   *
+   * @static
+   * @property options.translateZ
+   * @type {Number}
+   */
+  /**
+   * <h4>回転表示を指定する値</h4>
+   *
+   * @static
+   * @property options.rotate
+   * @type {Number}
+   */
+  /**
+   * <h4>floating時に回転する幅く</h4>
+   *
+   * @static
+   * @property options.range
+   * @type {Number}
+   */
+  /**
+   * <h4>floating時の回転するスピードく</h4>
+   *
+   * @static
+   * @property options.speed
+   * @type {Number}
+   */
+  /**
+   * <h4>hover時のdurationく</h4>
+   *
+   * @static
+   * @property options.duration
+   * @type {Number}
+   */
+  /**
+   * <h4>hover時のeasing</h4>
+   *
+   * @static
+   * @property options.easing
+   * @type {String}
+   */
+	Float3d.options = {
+    perspective: 400,
+    translateZ : -150,
+    rotate     : 7.5,
+    range      : 5,
+    speed      : 150,
+    duration   : 400,
+    easing     : 'easeOutExpo'
+	};
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Float3dインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   * @return {Float3d}
+   */
+  Float3d.get = function($target, options){
+    return new Float3d($target, options).on();
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @return {Float3d}
+   */
+  p.on = function(){
+    var self = this;
+
+    // イベント重複回避
+    self.off();
+
+    self.props.$target.css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective});
+
+    self.props.$target
+    .on('mouseenter.Float3d', function(onEvent){
+      self.onTween(this, onEvent);
+      self.props._isFloating = true;
+      self.floatTween($(this).children(), 0);
+
+      // moveEvent登録
+      $(this).on('mousemove.Float3d', function(moveEvent){
+        self.onTween(this, moveEvent);
+      });
+    })
+    .on('mouseleave.Float3d', function(outEvent){
+      self.props._isFloating = false;
+      self.outTween(this, outEvent);
+
+      // moveEvent削除
+      $(this).off('mousemove.Float3d');
+    });
+
+     // moveEvent削除
+    this.props.$html.on('mouseleave.Float3d', function(){
+      self.props.$target.parent().off('mousemove.Float3d');
+      self.props._isFloating = false;
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @return {Float3d}
+   */
+  p.off = function(){
+    this.props.$target.off('.Float3d').css({perspective: 0})
+    .children().css({perspective: this.props.perspective})
+    .children().css({perspective: this.props.perspective});
+
+    this.props.$html.off('.Float3d');
+
+    return this;
+  };
+
+
+  /**
+   * <h4>マウスオンTween</h4>
+   *
+   * @method onTween
+   * @param  {DOM} target 対象の要素
+   * @param  {Object} event イベントオブジェクト
+   * @return {Void}
+   */
+  p.onTween = function(target, event){
+    var $target = $(target).children(),
+    offset = this.offsetRatio(target, event);
+
+    $target.velocity('stop')
+    .velocity({
+      translateZ: this.props.translateZ,
+      rotateX   : this.props.rotate * offset.y,
+      rotateY   : this.props.rotate * offset.x,
+      rotateZ   : this.props.rotate * offset.x
+    }, {
+      duration: this.props.duration,
+      easing  : this.props.easing
+    });
+  };
+
+
+  /**
+   * <h4>選択中のTween</h4>
+   * 再起処理します
+   *
+   * @method floatTween
+   * @param  {DOM} target 対象の要素
+   * @return {Void}
+   */
+  p.floatTween = function($target, angle){
+    var self = this;
+
+    angle = typeof angle === 'number' ? angle : 0;
+    angle += Math.PI / self.props.speed;
+
+    $target.children()
+    .velocity('stop')
+    .velocity({
+      rotateX: (self.props.range * Math.cos(angle + Math.PI)),
+      rotateY: (self.props.range * Math.sin(angle + Math.PI)),
+      rotateZ: (self.props.range * Math.sin(angle + Math.PI))
+    }, {
+      duration: 1000 / 60,
+      easing  : 'linear',
+      complete: function(){
+        // 再起処理
+        if(self.props._isFloating){
+          self.floatTween($target, angle);
+        }
+      }
+    });
+  };
+
+
+  /**
+   * <h4>マウスアウトTween</h4>
+   *
+   * @method outTween
+   * @param  {DOM} target 対象の要素
+   * @return {Void}
+   */
+  p.outTween = function(target){
+    var self = this;
+
+    $(target).children()
+    .velocity('stop')
+    .velocity({
+      translateZ: 0,
+      rotateX   : 0,
+      rotateY   : 0,
+      rotateZ   : 0
+    }, {
+      duration: self.props.duration,
+      easing  : self.props.ease
+    })
+    .children()
+    .velocity('stop')
+    .velocity({
+      rotateX: 0,
+      rotateY: 0,
+      rotateZ: 0
+    }, {
+      duration: self.props.duration,
+      easing  : self.props.easing
+    });
+  };
+
+
+  /**
+   * <h4>エリアセンター中心に座標位置の比率を返す</h4>
+   * 比率は0を中心に-1から1までの小数点2桁の数値
+   *
+   * @method offsetRatio
+   * @param  {DOM} target 対象の要素
+   * @param  {Object} event  イベントオブジェクト
+   * @return {Object}  x,y座標比を格納したオブジェクト
+   */
+  p.offsetRatio = function(target, event){
+    var $target = $(target);
+
+    var center = {
+      x: $target.width() / 2,
+      y: $target.height() / 2
+    };
+
+    var offset = {
+      x: event.pageX - $target.offset().left,
+      y: event.pageY - $target.offset().top
+    };
+
+    // return offset
+    return {
+      x: ((offset.x - center.x) / center.x).toFixed(2),
+      y: ((center.y - offset.y) / center.y).toFixed(2)
+    };
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.Float3d = Float3d;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+	// 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>ホバースライドアニメーション</h4>
+   * <a href="../../demo/AMP.$.Slip.html">DEMO</a></p>
+   *
+   * @class AMP.$.Slip
+   * @constructor
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   */
+	function Slip($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.slip');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, Slip.options, options);
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @propaty $target
+     * @type {jQuery}
+     */
+    this.props.$target = $target;
+	}
+
+  // 基底クラスを継承
+  AMP.inherits(Slip, AMP.BASE_CLASS);
+
+	// prototype
+	var p = Slip.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Slip.VERSION = '1.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Slip';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>マウスイン時のアニメーション方向</h4>
+   * <p>以下7タイプ (allはデフォルト4方向)<br>
+   * all, side, updown, up, down, left, right</p>
+   *
+   * @static
+   * @property options.inDirection
+   * @default all
+   * @type {String}
+   */
+  /**
+   * <h4>マウスアウト時のアニメーション方向</h4>
+   * <p>以下7タイプ (allはデフォルト4方向)<br>
+   * all, side, updown, up, down, left, right</p>
+   *
+   * @static
+   * @property options.outDirection
+   * @default all
+   * @type {String}
+   */
+  /**
+   * <h4>スライドする子要素のクラス名</h4>
+   *
+   * @static
+   * @property options.slipClass
+   * @default slip_tween
+   * @type {String}
+   */
+  /**
+   * <h4>アクティブ時に付与するクラス名</h4>
+   *
+   * @static
+   * @property options.activeClass
+   * @default .activeClass
+   * @type {String}
+   */
+  /**
+   * <h4>スライドしない要素に付与するクラス名</h4>
+   *
+   * @static
+   * @property options.noSlipClass
+   * @default .no_slip
+   * @type {String}
+   */
+  /**
+   * <h4>Tween option</h4>
+   * <p><a href="http://julian.com/research/velocity/" target="_blank">velocity.js オプション参照</a></p>
+   *
+   * @static
+   * @property options.tween
+   * @default .no_slip
+   * @type {Object}
+   */
+	Slip.options = {
+    inDirection : 'all', // all, side, updown, up, down, left, right
+    outDirection: 'all', // all, side, updown, up, down, left, right
+    slipClass   : 'slip_tween',
+    activeClass : 'active',
+    noSlipClass : 'no_slip',
+    tween       : {
+      duration  : 400,
+      easing    : 'easeOutExpo'
+    }
+	};
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Slipインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   * @return {Slip}
+   */
+  Slip.get = function($target, options){
+    return new Slip($target, options).on();
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @return {Slip}
+   */
+  p.on = function(){
+    var self = this;
+
+    // 二重登録回避
+    this.off();
+
+    self.props.$target
+    .on('slipin.Slip', function(inEvent){
+      self._tween(self.props.$target.index(this), inEvent);
+    })
+    .on('slipout.Slip', function(outEvent){
+      self._tween(self.props.$target.index(this), outEvent);
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @return {Slip}
+   */
+  p.off = function(){
+    this.props.$target.off('slipin.Slip slipin.Slip');
+    return this;
+  };
+
+
+  /**
+   * <h4>アクティブ</h4>
+   *
+   * @method active
+   * @param  {Number} num 要素のインデックス
+   * @return {Slip}
+   */
+  p.active = function(num){
+    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
+
+    $target.addClass(this.props.activeClass)
+    .find('.' + this.props.slipClass)
+    .velocity('stop').css({top: 0, left: 0});
+
+    return this;
+  };
+
+
+  /**
+   * <h4>待機状態のスタイル</h4>
+   *
+   * @method passive
+   * @param  {Number} num 要素のインデックス
+   * @return {Slip}
+   */
+  p.passive = function(num){
+    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
+
+    $target.removeClass(this.props.activeClass)
+    .find('.' + this.props.slipClass)
+    .velocity('stop').css({top: '-100%'});
+
+    return this;
+  };
+
+
+  /**
+   * <h4>アニメーション</h4>
+   *
+   * @method _tween
+   * @param  {Number} num   要素のインデックス
+   * @param  {Object} event イベントオブジェクト
+   * @return {Void}
+   */
+  p._tween = function(num, event){
+    var style = this._createTweenStyle(event),
+    $target = this.props.$target.eq(num);
+
+    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noSlipClass)){
+      $target.find('.' + this.props.slipClass)
+      .velocity('stop')
+      .velocity(style.start, 0)
+      .velocity(style.end, this.props.tween);
+    }
+  };
+
+
+  /**
+   * <h4>アニメーションスタイルの生成</h4>
+   *
+   * @private
+   * @method _createTweenStyle
+   * @param  {Object} event イベントオブジェクト
+   * @return {Object}
+   */
+  p._createTweenStyle = function(event){
+    var isIn = event.type === 'slipin',
+    direction = isIn ? this.props.inDirection : this.props.outDirection,
+    style01 = {
+      left: 0,
+      top : 0
+    },
+    style02 = $.extend({}, style01),
+    style = isIn ? style01 : style02;
+
+    if(direction === 'side'){
+      style.left = event.x < 0 ? '-100%' : '100%';
+
+    } else if(direction === 'updown'){
+      style.top = event.y < 0 ? '-100%' : '100%';
+
+    } else if(direction === 'up'){
+      style.top = '-100%';
+
+    } else if(direction === 'down'){
+      style.top = '100%';
+
+    } else if(direction === 'left'){
+      style.left = '-100%';
+
+    } else if(direction === 'right'){
+      style.left = '100%';
+
+    } else {
+      // direction all
+      if(event.direction === 'top'){
+        style.top = '-100%';
+      } else if(event.direction === 'bottom'){
+        style.top = '100%';
+      } else if(event.direction === 'left'){
+        style.left = '-100%';
+      } else {
+        style.left = '100%';
+      }
+    }
+
+    return {
+      start: style01,
+      end  : style02
+    };
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.Slip = Slip;
 
 
 }(window, AMP, jQuery));

@@ -238,6 +238,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "develop\\amp\\jquery\\base\\Slip.js": {
+            "name": "develop\\amp\\jquery\\base\\Slip.js",
+            "modules": {},
+            "classes": {
+                "AMP.$.Slip": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "develop\\amp\\jquery\\base\\SmothScroll.js": {
             "name": "develop\\amp\\jquery\\base\\SmothScroll.js",
             "modules": {},
@@ -788,6 +797,31 @@
                 }
             ]
         },
+        "AMP.$.Slip": {
+            "name": "AMP.$.Slip",
+            "shortname": "AMP.$.Slip",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 16,
+            "description": "<h4>ホバースライドアニメーション</h4>\n<a href=\"../../demo/AMP.$.Slip.html\">DEMO</a></p>",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$target",
+                    "description": "対象の要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション値",
+                    "type": "Object"
+                }
+            ]
+        },
         "AMP.$.SmoothScroll": {
             "name": "AMP.$.SmoothScroll",
             "shortname": "AMP.$.SmoothScroll",
@@ -919,6 +953,25 @@
                 }
             ],
             "type": "{Array}",
+            "class": "AMP.Array"
+        },
+        {
+            "file": "develop\\amp\\core\\base\\array.js",
+            "line": 85,
+            "description": "<h4>配列をシャッフルして新しい配列を返す</h4>",
+            "itemtype": "method",
+            "name": "shuffle",
+            "params": [
+                {
+                    "name": "ary",
+                    "description": "シャッフルする配列",
+                    "type": "Arrary"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Arrary"
+            },
             "class": "AMP.Array"
         },
         {
@@ -5673,7 +5726,7 @@
         {
             "file": "develop\\amp\\jquery\\base\\Float3d.js",
             "line": 151,
-            "description": "<h4>hover時のeasingく</h4>",
+            "description": "<h4>hover時のeasing</h4>",
             "static": 1,
             "itemtype": "property",
             "name": "options.easing",
@@ -6604,6 +6657,250 @@
                 "type": "ScrollToggle"
             },
             "class": "AMP.$.ScrollToggle"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 32,
+            "description": "<h4>プロパティオブジェクト</h4>\n<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>",
+            "itemtype": "property",
+            "name": "props",
+            "type": "{Object}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 41,
+            "description": "<h4>float要素</h4>",
+            "propaty": "$target",
+            "type": "{jQuery}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 62,
+            "description": "<h4>バージョン情報</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "VERSION",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 72,
+            "description": "<h4>クラス名</h4>",
+            "itemtype": "property",
+            "name": "className",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 81,
+            "description": "<h4>デフォルト値オブジェクト</h4>\n<p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options",
+            "type": "{Object}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 89,
+            "description": "<h4>マウスイン時のアニメーション方向</h4>\n<p>以下7タイプ (allはデフォルト4方向)<br>\nall, side, updown, up, down, left, right</p>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.inDirection",
+            "default": "all",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 99,
+            "description": "<h4>マウスアウト時のアニメーション方向</h4>\n<p>以下7タイプ (allはデフォルト4方向)<br>\nall, side, updown, up, down, left, right</p>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.outDirection",
+            "default": "all",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 109,
+            "description": "<h4>スライドする子要素のクラス名</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.slipClass",
+            "default": "slip_tween",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 117,
+            "description": "<h4>アクティブ時に付与するクラス名</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.activeClass",
+            "default": ".activeClass",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 125,
+            "description": "<h4>スライドしない要素に付与するクラス名</h4>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.noSlipClass",
+            "default": ".no_slip",
+            "type": "{String}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 133,
+            "description": "<h4>Tween option</h4>\n<p><a href=\"http://julian.com/research/velocity/\" target=\"_blank\">velocity.js オプション参照</a></p>",
+            "static": 1,
+            "itemtype": "property",
+            "name": "options.tween",
+            "default": ".no_slip",
+            "type": "{Object}",
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 160,
+            "description": "<h4>Slipインスタンスの生成</h4>",
+            "static": 1,
+            "itemtype": "method",
+            "name": "get",
+            "params": [
+                {
+                    "name": "$target",
+                    "description": "対象の要素",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "options",
+                    "description": "オプション値",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Slip"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 174,
+            "description": "<h4>イベント登録</h4>",
+            "itemtype": "method",
+            "name": "on",
+            "return": {
+                "description": "",
+                "type": "Slip"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 198,
+            "description": "<h4>イベント削除</h4>",
+            "itemtype": "method",
+            "name": "off",
+            "return": {
+                "description": "",
+                "type": "Slip"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 210,
+            "description": "<h4>アクティブ</h4>",
+            "itemtype": "method",
+            "name": "active",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "要素のインデックス",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Slip"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 228,
+            "description": "<h4>待機状態のスタイル</h4>",
+            "itemtype": "method",
+            "name": "passive",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "要素のインデックス",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Slip"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 246,
+            "description": "<h4>アニメーション</h4>",
+            "itemtype": "method",
+            "name": "_tween",
+            "params": [
+                {
+                    "name": "num",
+                    "description": "要素のインデックス",
+                    "type": "Number"
+                },
+                {
+                    "name": "event",
+                    "description": "イベントオブジェクト",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Void"
+            },
+            "class": "AMP.$.Slip"
+        },
+        {
+            "file": "develop\\amp\\jquery\\base\\Slip.js",
+            "line": 267,
+            "description": "<h4>アニメーションスタイルの生成</h4>",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "method",
+            "name": "_createTweenStyle",
+            "params": [
+                {
+                    "name": "event",
+                    "description": "イベントオブジェクト",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "AMP.$.Slip"
         },
         {
             "file": "develop\\amp\\jquery\\base\\SmothScroll.js",
@@ -7681,6 +7978,10 @@
             "line": " develop\\amp\\jquery\\base\\Float3d.js:60"
         },
         {
+            "message": "unknown tag: propaty",
+            "line": " develop\\amp\\jquery\\base\\Slip.js:41"
+        },
+        {
             "message": "Missing item type\n<h4>空の関数</h4>",
             "line": " develop\\amp\\core\\base\\utility.js:189"
         },
@@ -7699,6 +8000,10 @@
         {
             "message": "Missing item type\n<h4>float要素</h4>",
             "line": " develop\\amp\\jquery\\base\\Float3d.js:60"
+        },
+        {
+            "message": "Missing item type\n<h4>float要素</h4>",
+            "line": " develop\\amp\\jquery\\base\\Slip.js:41"
         }
     ]
 }

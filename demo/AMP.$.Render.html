@@ -52,46 +52,31 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.FontResize <a href="../docs/classes/AMP.FontResize.html">API Reference</a></h2>
+<h2>AMP.$.Render <a href="../docs/classes/AMP.$.Render.html">API Reference</a></h2>
 <div class="lead">
-<p>フォントサイズが変更されたらイベントが実行されます。</p>
+<p>jsonデータを取得しHoganjsでHTMLを生成します</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<p class="btn">
-<a class="blue small" href="#">Small</a>
-<a class="red large" href="#">Large</a>
-</p>
-<p class="dummy_text">Dummy Text..<br>Dummy Text..<br>Dummy Text..</p>
+<p>ローカルでの動作確認はFireFoxでして下さい。</p>
+<script id="templ" type="text/template">
+<ul>
+{{#item}}<li>{{date}} | {{title}}</li>{{/item}}
+</ul>
+</script>
 </textarea>
-
-<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
-p.dummy_text{
-	margin: 20px 0;
-	padding: 15px 25px;
-	border: 1px solid #e6e6e6;
-}
-</textarea>
-
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// small
-$('.small').click(function(){
-	$('body').css({fontSize: '10px'});
-	return false;
-});
+//	以下同等
+//	var render = new AMP.$.Render($('#templ'), {url: 'assets/data/amp.render.json'});
+//	render.ajax().done(function(){
+//		render.setRenderData();
+//		render.render();
+//	});
 
-// large
-$('.large').click(function(){
-	$('body').css({fontSize: '18px'});
-	return false;
-});
-
-// フォントサイズ変更時、イベント実行
-AMP.fontResize.on('change', function(){
-	alert('フォントサイズが変更されました');
-});
+	AMP.$.Render.get($('#templ'), {url: 'assets/data/amp.render.json'});
 </textarea>
 </div>
 </section>

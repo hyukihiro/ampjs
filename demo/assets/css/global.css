@@ -245,6 +245,19 @@ p.btn a:hover{
 	font-size: 24px;
 	font-family: 'Abel', sans-serif;
 }
+.nav_index span.soon{
+	overflow: hidden;
+	position: relative;
+	display: block;
+	padding: 12px 24px;
+	border-bottom: 1px solid #e6e6e6;
+	font-weight: bold;
+	color: #999;
+}
+.nav_index span.soon span{
+	padding-left: .5em;
+	color: #428bca;
+}
 .nav_index a{
 	overflow: hidden;
 	position: relative;
