@@ -14,8 +14,9 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>スムーススクロール</h4>
-   * WindowsPCのみ有効
+   * <h4>スムーススクロール（慣性スクロール）</h4>
+   * <p><em>※ WindowsPCのみ有効</em><br>
+   * <a href="../../demo/AMP.$.SmothScroll.html">DEMO</a></p>
    *
    * @class AMP.$.SmoothScroll
    * @extends AMP.BASE_CLASS
@@ -23,14 +24,15 @@
    */
   function SmoothScroll(options){
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true,
+    this.props = $.extend(true,
       {},
-      SmoothScroll.smoothScrollOptions,
+      SmoothScroll.options,
       {$page: $('html, body')},
       options
     );
@@ -55,7 +57,7 @@
    * @property VERSION
    * @type {String}
    */
-  SmoothScroll.VERSION = '3.0.1';
+  SmoothScroll.VERSION = '3.1.0';
 
 
   /**
@@ -68,42 +70,42 @@
 
 
   /**
-   * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
    * @static
-   * @property smoothScrollOptions
+   * @property options
    * @type {Object}
    */
     /**
    * <h4>スムーススクロールエリア</h4>
    *
-   * @property smoothScrollOptions.$page
+   * @property options.$page
    * @default $('html, body')
    * @type {jQuery}
    */
   /**
    * <h4>スクロール量</h4>
    *
-   * @property smoothScrollOptions.amount
+   * @property options.amount
    * @default 500
    * @type {Number}
    */
   /**
    * <h4>duration</h4>
    *
-   * @property smoothScrollOptions.duration
+   * @property options.duration
    * @default 500
    * @type {Number}
    */
   /**
    * <h4>easing</h4>
    *
-   * @property smoothScrollOptions.easing
+   * @property options.easing
    * @default easeOutCubic
    * @type {String}
    */
-  SmoothScroll.smoothScrollOptions = {
+  SmoothScroll.options = {
     $page   : null,
     amount  : 400,
     duration: 600,
@@ -140,7 +142,7 @@
 
     // WindowsPCのみ有効
     if(AMP.isWindows()){
-      self.param.$page.off('mousewheel.SmoothScroll')
+      self.props.$page.off('mousewheel.SmoothScroll')
       .on('mousewheel.SmoothScroll', function(){
         self.tween(arguments[1]);
         return false;
@@ -157,7 +159,7 @@
    * @return {SmoothScroll}
    */
   p.off = function(){
-    this.param.$page.off('mousewheel.SmoothScroll');
+    this.props.$page.off('mousewheel.SmoothScroll');
     return this;
   };
 
@@ -170,12 +172,12 @@
    */
   p.tween = function(move){
     var self = this,
-    param = self.param,
-    y = AMP.isWebkit() ? self.param.$page.eq(1).scrollTop() : self.param.$page.eq(0).scrollTop(),
-    scrollY = move > 0 ? y - param.amount : y + param.amount;
+    props = self.props,
+    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    scrollY = move > 0 ? y - props.amount : y + props.amount;
 
-    self.param.$page.velocity('stop')
-    .velocity('scroll', {offset: scrollY, duration: param.duration, easing: param.easing});
+    self.props.$page.velocity('stop')
+    .velocity('scroll', {offset: scrollY, duration: props.duration, easing: props.easing});
   };
 
 

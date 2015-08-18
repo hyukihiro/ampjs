@@ -15,6 +15,7 @@
 
   /**
    * <h4>ページ内リンクのスクロール</h4>
+   * <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
    *
    * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
@@ -30,20 +31,21 @@
     }
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, Scroll.scrollOptions, {$html: $('html, body')}, options);
+    this.props = $.extend(true, {}, Scroll.options, {$html: $('html, body')}, options);
 
     /**
      * <h4>トリガーとなるa要素</h4>
      *
-     * @property param.$scrollTrigger
-     * @type {Object}
+     * @property props.$scrollTrigger
+     * @type {jQuery}
      */
-    this.param.$scrollTrigger = $scrollTrigger;
+    this.props.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -65,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.1.1';
+  Scroll.VERSION = '3.2.0';
 
 
   /**
@@ -78,18 +80,18 @@
 
 
   /**
-   * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
    * @static
-   * @property scrollOptions
+   * @property options
    * @type {Object}
    */
   /**
    * <h4>ページ要素</h4>
    *
    * @static
-   * @property scrollOptions.$html
+   * @property options.$html
    * @default $('html, body')
    * @type {jQuery}
    */
@@ -97,7 +99,7 @@
    * <h4>停止位置調整値</h4>
    *
    * @static
-   * @property scrollOptions.adjust
+   * @property options.adjust
    * @default 0
    * @type {Number|Function}
    */
@@ -105,20 +107,20 @@
    * <h4>スクロールしないトリガークラス名</h4>
    *
    * @static
-   * @property scrollOptions.noScrollClass
+   * @property options.noScrollClass
    * @default no_scroll
    * @type {String}
    */
   /**
    * <h4>スクロールアニメーションのオプション値</h4>
-   * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
+   * <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
-   * @property scrollOptions.tween
+   * @property options.tween
    * @default  {duration: 800, easing: 'easeOutQuint'}
    * @type {Object}
    */
-  Scroll.scrollOptions = {
+  Scroll.options = {
     $html        : null, // $('html, body'),
     adjust       : 0,
     noScrollClass: 'no_scroll',
@@ -160,8 +162,8 @@
     // スクロールイベントの重複回避
     this.off();
 
-    self.param.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.param.$scrollTrigger.index(this));
+    self.props.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
     });
 
     return this;
@@ -175,14 +177,14 @@
    * @return {Scroll}
    */
   p.off = function(){
-    this.param.$scrollTrigger.off('click.Scroll');
+    this.props.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
 
   /**
    * <h4>スクロールアニメーション</h4>
-   * FIXME: Stringも対応予定
+   * <p>FIXME: Stringも対応予定</p>
    *
    * @method tween
    * @param {Number} num トリガー要素のインデックス
@@ -190,17 +192,17 @@
    */
   p.tween = function(num){
     var self = this,
-    param = self.param,
-    $scrollTrigger = param.$scrollTrigger.eq(num),
+    props = self.props,
+    $scrollTrigger = props.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr('href'));
 
-    if($target[0] && !$scrollTrigger.hasClass(param.noScrollClass)){
-      var adjust = AMP.isFunction(param.adjust) ? param.adjust() || 0 : param.adjust,
+    if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
       moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
-        var tween = $.extend({offset: moveTo}, param.tween);
-        param.$html.velocity('stop').velocity('scroll', tween);
+        var tween = $.extend({offset: moveTo}, props.tween);
+        props.$html.velocity('stop').velocity('scroll', tween);
       }
       return false;
     }

@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -123,7 +125,7 @@
   ======================================================================*/
 
   /**
-   * &lt;h4&gt;クラス・オブジェクト等の継承、拡張&lt;/h4&gt;
+   * &lt;h4&gt;クラス・オブジェクトの継承、拡張&lt;/h4&gt;
    *
    * @class AMP.Extend
    */
@@ -143,7 +145,7 @@
    * @return {Object} 拡張したオブジェクトを返します
    */
   AMP.mixin = function(){
-    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
+    var isDeep, count, extendObject, length, obj, key, data, copy, clone;
 
     length = arguments.length;
     isDeep = AMP.isBoolean(arguments[0]) &amp;&amp; arguments[0];
@@ -168,10 +170,8 @@
           continue;
         }
 
-        isArray = AMP.isArray(copy);
-
-        if(isDeep &amp;&amp; copy &amp;&amp; AMP.isObject(copy) || isArray){
-          if(isArray){
+        if(isDeep &amp;&amp; copy &amp;&amp; AMP.isObject(copy) || AMP.isArray(copy)){
+          if(AMP.isArray(copy)){
             clone = data &amp;&amp; AMP.isArray(data) ? data : [];
           } else {
             clone = data &amp;&amp; AMP.isObject(data) ? data : {};
@@ -192,8 +192,8 @@
 
   /**
    * &lt;h4&gt;クラスの継承&lt;/h4&gt;
-   * 拡張した、サブクラスを返します&lt;br&gt;
-   * superClassは、可変長引数で、多重継承することが可能
+   * &lt;p&gt;拡張した、サブクラスを返します&lt;br&gt;
+   * superClassは、可変長引数で、多重継承することが可能&lt;/p&gt;
    *
    * @static
    * @method inherits
@@ -235,7 +235,7 @@
 
   /**
    * &lt;h4&gt;ClassをExtendします&lt;/h4&gt;
-   * ClassにextendメソッドをExportして使います
+   * &lt;p&gt;ClassにAMP._extendメソッドをExportして使います&lt;/p&gt;
    *
    * @protected
    * @static

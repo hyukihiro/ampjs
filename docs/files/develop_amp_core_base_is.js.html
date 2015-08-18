@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -141,23 +143,6 @@
 
 
   /*----------------------------------------------------------------------
-    @property
-  ----------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;developモード&lt;/h4&gt;
-   * 開発時に使用します&lt;br&gt;
-   * developモードは、エラー時コンソールログを出力します
-   *
-   * @static
-   * @property isDevelop
-   * @type {Boolean}
-   */
-  AMP.isDevelop = false;
-
-
-
-  /*----------------------------------------------------------------------
     @method
   ----------------------------------------------------------------------*/
 
@@ -169,7 +154,7 @@
    *
    * @static
    * @method isArray
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isArray = Array.isArray || function(obj){
@@ -182,7 +167,7 @@
    *
    * @static
    * @method isBoolean
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isBoolean = function(obj){
@@ -195,7 +180,7 @@
    *
    * @static
    * @method isFunction
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isFunction = function(obj){
@@ -208,7 +193,7 @@
    *
    * @static
    * @method isNumber
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNumber = function(obj){
@@ -221,7 +206,7 @@
    *
    * @static
    * @method isObject
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isObject = function(obj){
@@ -234,7 +219,7 @@
    *
    * @static
    * @method isPlainObject
-   * @param  {Object}  obj 判定したいオブジェクト
+   * @param  {Object}  obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isPlainObject = function(obj){
@@ -247,7 +232,7 @@
    *
    * @static
    * @method isString
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isString = function(obj){
@@ -260,7 +245,7 @@
    *
    * @static
    * @method isRegexp
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isRegexp = function(obj) {
@@ -273,7 +258,7 @@
    *
    * @static
    * @method isUndefined
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isUndefined = function(obj){
@@ -286,7 +271,7 @@
    *
    * @static
    * @method isNull
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNull = function(obj) {
@@ -299,7 +284,7 @@
 
   /**
    * &lt;h4&gt;ポジティブ値判定&lt;/h4&gt;
-   * !!!: 数値しか判定しません
+   * &lt;p&gt;数値しか判定しません&lt;/p&gt;
    *
    * @static
    * @method isPositive
@@ -313,7 +298,7 @@
 
   /**
    * &lt;h4&gt;ネガティブ値判定&lt;/h4&gt;
-   * !!!: 数値しか判定しません
+   * &lt;p&gt;数値しか判定しません&lt;/p&gt;
    *
    * @static
    * @method isNegative
@@ -386,7 +371,8 @@
 
 
   /**
-   * &lt;h4&gt;WindowsPhone判定 βver&lt;/h4&gt;
+   * &lt;h4&gt;WindowsPhone判定&lt;/h4&gt;
+   * FIXME: βver.
    *
    * @beta
    * @static
@@ -400,7 +386,7 @@
 
   /**
    * &lt;h4&gt;Mac判定&lt;/h4&gt;
-   * isoは、含みません
+   * &lt;p&gt;isoは、含みません&lt;/p&gt;
    *
    * @static
    * @method isMac
@@ -784,7 +770,7 @@
 
 
   /**
-   * &lt;h4&gt;Android Browser判定&lt;/h4&gt;
+   * &lt;h4&gt;AndroidBrowser判定&lt;/h4&gt;
    *
    * @static
    * @method isAndroidBrowser

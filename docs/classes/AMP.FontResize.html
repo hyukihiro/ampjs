@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -111,7 +113,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_class_FontResize.js.html#l16"><code>develop\amp\core\class\FontResize.js:16</code></a>
+            Defined in: <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l16"><code>develop\amp\core\class\inherits\FontResize.js:16</code></a>
         </div>
 
 
@@ -120,9 +122,9 @@
 
 <div class="box intro">
     <h4>フォントリサイズイベント</h4>
-!!!: シングルトン<br>
-コンストラクタを呼び出しで、使用しません<br>
-<em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+<p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
+<em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+<a href="../../demo/AMP.FontResize.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
@@ -142,7 +144,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_FontResize.js.html#l16"><code>develop\amp\core\class\FontResize.js:16</code></a>
+        <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l16"><code>develop\amp\core\class\inherits\FontResize.js:16</code></a>
         </p>
 
 
@@ -235,7 +237,7 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_el">el</a>
+                                <a href="#property_elm">elm</a>
 
                             </li>
                             <li class="index-item property">
@@ -296,7 +298,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__addEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l145"><code>develop\amp\core\class\Events.js:145</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l144"><code>develop\amp\core\class\Events.js:144</code></a>
         </p>
 
 
@@ -317,8 +319,7 @@
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -328,8 +329,7 @@
 
 
                     <div class="param-description">
-                        <p>コールバック関数</p>
-
+                        コールバック関数
                     </div>
 
                 </li>
@@ -339,8 +339,7 @@
 
 
                     <div class="param-description">
-                        <p>コンテキスト</p>
-
+                        コンテキスト
                     </div>
 
                 </li>
@@ -376,7 +375,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_FontResize.js.html#l132"><code>develop\amp\core\class\FontResize.js:132</code></a>
+        <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l131"><code>develop\amp\core\class\inherits\FontResize.js:131</code></a>
         </p>
 
 
@@ -384,7 +383,8 @@
     </div>
 
     <div class="description">
-        <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+        <h4>イベントコントローラー</h4>
+<p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
     </div>
 
 
@@ -417,7 +417,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_FontResize.js.html#l105"><code>develop\amp\core\class\FontResize.js:105</code></a>
+        <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l104"><code>develop\amp\core\class\inherits\FontResize.js:104</code></a>
         </p>
 
 
@@ -464,7 +464,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__getEventNameMap">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l238"><code>develop\amp\core\class\Events.js:238</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l237"><code>develop\amp\core\class\Events.js:237</code></a>
         </p>
 
 
@@ -485,8 +485,7 @@
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -531,7 +530,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__removeEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l174"><code>develop\amp\core\class\Events.js:174</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l173"><code>develop\amp\core\class\Events.js:173</code></a>
         </p>
 
 
@@ -540,7 +539,7 @@
 
     <div class="description">
         <h4>イベント削除</h4>
-TODO: 内部処理最適化予定
+FIXME: 内部処理最適化予定
     </div>
 
         <div class="params">
@@ -553,8 +552,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -564,8 +562,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>コールバック関数</p>
-
+                        コールバック関数
                     </div>
 
                 </li>
@@ -606,7 +603,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_hasEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l255"><code>develop\amp\core\class\Events.js:255</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l254"><code>develop\amp\core\class\Events.js:254</code></a>
         </p>
 
 
@@ -614,7 +611,7 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベントが登録されているか判定します</h4>
+        <h4>登録イベントがあるか判定します</h4>
     </div>
 
         <div class="params">
@@ -627,8 +624,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -672,7 +668,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_off">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l131"><code>develop\amp\core\class\Events.js:131</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l130"><code>develop\amp\core\class\Events.js:130</code></a>
         </p>
 
 
@@ -693,8 +689,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -704,8 +699,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントリスナー</p>
-
+                        イベントリスナー
                     </div>
 
                 </li>
@@ -755,7 +749,7 @@ TODO: 内部処理最適化予定
                 AMP.Events
             </a>
             but overwritten in
-        <a href="../files/develop_amp_core_class_FontResize.js.html#l164"><code>develop\amp\core\class\FontResize.js:164</code></a>
+        <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l164"><code>develop\amp\core\class\inherits\FontResize.js:164</code></a>
         </p>
 
 
@@ -846,7 +840,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_onece">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l110"><code>develop\amp\core\class\Events.js:110</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l109"><code>develop\amp\core\class\Events.js:109</code></a>
         </p>
 
 
@@ -867,8 +861,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -878,8 +871,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントリスナー</p>
-
+                        イベントリスナー
                     </div>
 
                 </li>
@@ -889,8 +881,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>コンテキスト</p>
-
+                        コンテキスト
                     </div>
 
                 </li>
@@ -972,7 +963,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_trigger">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l287"><code>develop\amp\core\class\Events.js:287</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l286"><code>develop\amp\core\class\Events.js:286</code></a>
         </p>
 
 
@@ -994,8 +985,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -1045,9 +1035,9 @@ TODO: 内部処理最適化予定
                     
                                 <div class="example-content">
                                     <p>_listeners = {
-                    attr    : eventObj.attr,
-                    func    : listener,
-                    context : context
+                    attr    : eventObj.attr, <br>
+                    func    : listener, <br>
+                    context : context <br>
                     }</p>
                     
                                 </div>
@@ -1068,7 +1058,7 @@ TODO: 内部処理最適化予定
                                     AMP.BASE_CLASS
                                 </a>
                                 but overwritten in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l79"><code>develop\amp\core\class\FontResize.js:79</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l79"><code>develop\amp\core\class\inherits\FontResize.js:79</code></a>
                             </p>
                     
                     
@@ -1081,8 +1071,8 @@ TODO: 内部処理最適化予定
                     
                     
                     </div>
-                    <div id="property_el" class="property item">
-                        <h3 class="name"><code>el</code></h3>
+                    <div id="property_elm" class="property item">
+                        <h3 class="name"><code>elm</code></h3>
                         <span class="type">DOM</span>
                     
                     
@@ -1092,7 +1082,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l36"><code>develop\amp\core\class\FontResize.js:36</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l36"><code>develop\amp\core\class\inherits\FontResize.js:36</code></a>
                             </p>
                     
                     
@@ -1117,7 +1107,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l88"><code>develop\amp\core\class\FontResize.js:88</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l88"><code>develop\amp\core\class\inherits\FontResize.js:88</code></a>
                             </p>
                     
                     
@@ -1142,7 +1132,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l44"><code>develop\amp\core\class\FontResize.js:44</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l44"><code>develop\amp\core\class\inherits\FontResize.js:44</code></a>
                             </p>
                     
                     
@@ -1166,7 +1156,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l27"><code>develop\amp\core\class\FontResize.js:27</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l27"><code>develop\amp\core\class\inherits\FontResize.js:27</code></a>
                             </p>
                     
                     
@@ -1192,7 +1182,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_FontResize.js.html#l69"><code>develop\amp\core\class\FontResize.js:69</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_FontResize.js.html#l69"><code>develop\amp\core\class\inherits\FontResize.js:69</code></a>
                             </p>
                     
                     

@@ -27,7 +27,7 @@
 
   /**
    * <h4>匿名関数名を返す</h4>
-   * 無名関数はundefinedを返します
+   * <p>無名関数はundefinedを返します</p>
    *
    * @static
    * @method getFunctionName
@@ -50,9 +50,10 @@
 
 
   /**
-   * <h4>型の取得</h4>
+   * <h4>型名取得</h4>
    *
    * @method type
+   * @param {Object} 判定するオブジェクト
    * @return {String} 型名を返す
    */
   AMP.type = function(obj){
@@ -104,7 +105,7 @@
    * @static
    * @method preload
    * @param {String} src 画像パス
-   * @return {Image} 生成した、イメージオブジェクト
+   * @return {ImageElement} 生成した、イメージ要素
    */
   AMP.preload = function(src){
     var img = new Image();
@@ -114,8 +115,8 @@
 
 
   /**
-   * <h4>requestAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、setTimeoutでフォールバックします
+   * <h4>RAF(requestAnimationFrame)をエクスポートしています</h4>
+   * <p>RAFに対応していないブラウザは、setTimeoutでフォールバックします</p>
    * FIXME: contextの処理追加予定
    *
    * @static
@@ -141,8 +142,8 @@
 
 
   /**
-   * <h4>cancelAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、clearTimeoutでフォールバックします
+   * <h4>CAF(cancelAnimationFrame)をエクスポートしています</h4>
+   * <p>CAFに対応していないブラウザは、clearTimeoutでフォールバックします</p>
    *
    * @static
    * @method cancelAnimationFrame
@@ -168,8 +169,8 @@
 
   /**
    * <h4>現在の時間を返します</h4>
-   * performance.nowメソッドをExportしています<br>
-   * performanceに対応していないブラウザはgetTimeを返します
+   * <p>performance.nowメソッドをExportしています<br>
+   * performanceに対応していないブラウザはgetTime(Date関数)を返します</p>
    *
    * @static
    * @method now
@@ -187,7 +188,6 @@
 
   /**
    * <h4>空の関数</h4>
-   * 何もしません
    *
    * @static
    * @return {Void}

@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs jQuery Module File version 3.0.2
+ * AMPjs jQuery Module File version 3.1.0
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -42,8 +42,9 @@
 
   /**
    * <h4>Ajax通信でJSONを受け取りDOM生成します</h4>
-   * 処理が完了したら、jQuery Deferred Objectを返します<br>
-   * <em>Hogan.jsに依存します</em>
+   * <p>処理が完了したら、jQuery Deferred Objectを返します<br>
+   * <em>Hogan.jsに依存します</em><br>
+   * <a href="../../demo/AMP.$.Render.html">DEMO</a></p>
    *
    * @class AMP.$.Render
    * @extends AMP.BASE_CLASS
@@ -54,15 +55,16 @@
   function Render($tmp, ajaxOptions){
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
     /**
      * <h4>js Template要素</h4>
      *
-     * @property param.$tmp
+     * @property props.$tmp
      * @type {jQuery}
      */
     /**
@@ -71,35 +73,35 @@
      * 初回renderが呼び出されると、自動的にレンダリングエリアを囲う要素を生成します<br>
      * これは、jQueryでDOMを再構築するより、innerHTMLで再構築した方がパフォーマンスがいい為です
      *
-     * @property param.$el
+     * @property props.$el
      * @type {Hogan}
      */
     /**
      * <h4>Hoganテンプレート</h4>
      *
-     * @property param.template
+     * @property props.template
      * @type {Hogan}
      */
     /**
      * <h4>レンダリングオリジナルデータ保管</h4>
      *
-     * @property param.originalData
+     * @property props.originalData
      * @type {Arrary|Object}
      */
     /**
      * <h4>レンダリングデータ</h4>
      *
-     * @property param.renderData
+     * @property props.renderData
      * @type {Arrary|Object}
      */
     /**
      * <h4>$.ajaxオプション値</h4>
      * Render.ajaxOptionsとajaxOptionsをmixinした値を格納します
      *
-     * @property param.ajaxOptions
+     * @property props.ajaxOptions
      * @type {Object}
      */
-    this.param = {
+    this.props = {
       $tmp        : $tmp,
       $el         : null,
       template    : Hogan.compile($tmp.html()),
@@ -148,7 +150,7 @@
    * @property VERSION
    * @type {String}
    */
-  Render.VERSION = '3.0.0';
+  Render.VERSION = '3.1.0';
 
 
   /**
@@ -161,9 +163,9 @@
 
 
   /**
-   * <h4>デフォルト値、格納オブジェクト</h4>
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します<br>
-   * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a>
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します<br>
+   * <a href="http://api.jquery.com/jquery.ajax/" target="_blank">jQuery Ajax API</a></p>
    *
    * @static
    * @property ajaxOptions
@@ -235,10 +237,10 @@
   p.ajax = function(){
     var self = this;
 
-    return $.ajax(self.param.ajaxOptions)
+    return $.ajax(self.props.ajaxOptions)
     .fail(self.ajaxFail)
     .done(function(data){
-      self.param.originalData = data;
+      self.props.originalData = data;
       self.ajaxDone(data);
     });
   };
@@ -262,9 +264,8 @@
    * @return {Render}
    */
   p.ajaxFail = function(xhr, status, error){
-    if(AMP.isDevelop){
-      console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
-    }
+    // console.log('xhr:' + xhr + '\nstatus: ' + status + '\nerror: ' + error);
+
     if(root.confirm('データの取得に失敗しました。\n再度、ページを読み込み直しますか？')){
       location.reload();
     }
@@ -281,13 +282,13 @@
    */
   p.setRenderData = function(renderData){
     if(renderData){
-      this.param.renderData = renderData;
+      this.props.renderData = renderData;
     } else {
-      if(AMP.isArray(this.param.originalData)){
-        this.param.renderData = this.param.originalData.concat();
+      if(AMP.isArray(this.props.originalData)){
+        this.props.renderData = this.props.originalData.concat();
 
       } else {
-        this.param.renderData = $.extend({}, this.param.originalData);
+        this.props.renderData = $.extend({}, this.props.originalData);
       }
     }
 
@@ -314,9 +315,9 @@
    * @return {Render}
    */
   p.removePrevHTML = function(){
-    if(!this.param.$el){
-      this.param.$tmp.wrapAll('<div class="js_render" />');
-      this.param.$el = this.param.$tmp.parent();
+    if(!this.props.$el){
+      this.props.$tmp.wrapAll('<div class="js_render" />');
+      this.props.$el = this.props.$tmp.parent();
     } else {
       this.$el.children().remove();
     }
@@ -345,7 +346,7 @@
    */
   p.createHTML = function(data){
     this.setRenderData(data);
-    return this.param.template.render(this.param.renderData) || this.notFound();
+    return this.props.template.render(this.props.renderData) || this.notFound();
   };
 
 
@@ -357,7 +358,7 @@
    */
   p.render = function(data){
     this.removePrevHTML();
-    this.param.$el[0].innerHTML = this.createHTML(data);
+    this.props.$el[0].innerHTML = this.createHTML(data);
     return this;
   };
 

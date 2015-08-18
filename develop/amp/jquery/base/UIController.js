@@ -15,7 +15,7 @@
 
   /**
    * <h4>UIコントローラ</h4>
-   * このクラスを継承する事でUIコントローラを提供します
+   * <p>UIコントローラクラスを継承する事でUIコントローラを提供します</p>
    *
    * @protected
    * @class AMP.$.UIController
@@ -43,7 +43,7 @@
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = '1.0.1';
+  UIController.VERSION = '1.1.0';
 
 
   /**
@@ -56,18 +56,18 @@
 
 
   /**
-   * <h4>パラメーター</h4>
+   * <h4>プロパティオブジェクト</h4>
    *
-   * @property param
+   * @property props
    * @type {Object}
    */
   /**
    * <h4>現在値</h4>
    *
-   * @property param.current
+   * @property props.current
    * @type {Number}
    */
-  p.param = {
+  p.props = {
     current: 0
   };
 
@@ -228,7 +228,7 @@
    * @return {Instance}
    */
   p.next = function(){
-    this._controller(this.param.current + 1);
+    this._controller(this.props.current + 1);
     return this;
   };
 
@@ -240,7 +240,7 @@
    * @return {Instance}
    */
   p.prev = function(){
-    this._controller(this.param.current -1);
+    this._controller(this.props.current -1);
     return this;
   };
 

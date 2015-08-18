@@ -14,7 +14,7 @@
   ======================================================================*/
 
   /**
-   * <h4>クラス・オブジェクト等の継承、拡張</h4>
+   * <h4>クラス・オブジェクトの継承、拡張</h4>
    *
    * @class AMP.Extend
    */
@@ -34,7 +34,7 @@
    * @return {Object} 拡張したオブジェクトを返します
    */
   AMP.mixin = function(){
-    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
+    var isDeep, count, extendObject, length, obj, key, data, copy, clone;
 
     length = arguments.length;
     isDeep = AMP.isBoolean(arguments[0]) && arguments[0];
@@ -59,10 +59,8 @@
           continue;
         }
 
-        isArray = AMP.isArray(copy);
-
-        if(isDeep && copy && AMP.isObject(copy) || isArray){
-          if(isArray){
+        if(isDeep && copy && AMP.isObject(copy) || AMP.isArray(copy)){
+          if(AMP.isArray(copy)){
             clone = data && AMP.isArray(data) ? data : [];
           } else {
             clone = data && AMP.isObject(data) ? data : {};
@@ -83,8 +81,8 @@
 
   /**
    * <h4>クラスの継承</h4>
-   * 拡張した、サブクラスを返します<br>
-   * superClassは、可変長引数で、多重継承することが可能
+   * <p>拡張した、サブクラスを返します<br>
+   * superClassは、可変長引数で、多重継承することが可能</p>
    *
    * @static
    * @method inherits
@@ -126,7 +124,7 @@
 
   /**
    * <h4>ClassをExtendします</h4>
-   * ClassにextendメソッドをExportして使います
+   * <p>ClassにAMP._extendメソッドをExportして使います</p>
    *
    * @protected
    * @static

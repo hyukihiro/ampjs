@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -120,7 +122,7 @@
 
 	/**
 	 * &lt;h4&gt;jQuery拡張&lt;/h4&gt;
-	 * jQueryオブジェクトを拡張し、Pluginとして使用します
+	 * &lt;p&gt;jQueryオブジェクトを拡張し、Pluginとして使用します&lt;/p&gt;
 	 *
 	 * @class jQuery
 	 */
@@ -131,23 +133,25 @@
 	--------------------------------------------------------------------------*/
 	/**
 	 * &lt;h4&gt;マウスインした時の方向を取得するイベント&lt;/h4&gt;
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * &lt;em&gt;インライン要素には効きません&lt;/em&gt;
+	 * &lt;p&gt;イベントオブジェクトに取得したオブジェクトを返します&lt;br&gt;
+	 * &lt;em&gt;インライン要素は対象外です&lt;/em&gt;&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.slip.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @event slipin
 	 * @example
-	 *	$(elm).on(&#x27;slipin&#x27;, callback);
-	 *	$(elm).slipin(callback);
+	 * $(elm).on(&#x27;slipin&#x27;, callback);
+	 * $(elm).slipin(callback);
 	 */
 	/**
 	 * &lt;h4&gt;マウスアウトした時の方向を取得するイベント&lt;/h4&gt;
-	 * イベントオブジェクトに取得したオブジェクトを返します
-	 * &lt;b&gt;インライン要素には効きません&lt;/b&gt;
+	 * &lt;p&gt;イベントオブジェクトに取得したオブジェクトを返します&lt;br&gt;
+	 * &lt;em&gt;インライン要素は対象外です&lt;/em&gt;&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.slip.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @event slipout
 	 * @example
-	 *	$(elm).on(&#x27;slipout&#x27;, callback);
-	 *	$(elm).slipout(callback);
+	 * $(elm).on(&#x27;slipout&#x27;, callback);
+	 * $(elm).slipout(callback);
 	 */
 	$.each({
 		mouseenter: &#x27;slipin&#x27;,
@@ -215,12 +219,14 @@
 
 	/**
 	 * &lt;h4&gt;slipin, slipout ショートハンド&lt;/h4&gt;
+	 * &lt;p&gt;&lt;em&gt;インライン要素は対象外です&lt;/em&gt;&lt;br&gt;
+	 * &lt;a href=&quot;../../demo/$.slip.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
 	 *
 	 * @event slip
-	 * @param  {Function} fnIn  slipinコールバック関数
-	 * @param  {Function} fnOut slipoutコールバック関数
+	 * @param {Function} fnIn  slipinコールバック関数
+	 * @param {Function} fnOut slipoutコールバック関数
 	 * @example
-	 *	$(elm).slip(inCallback, outCallback);
+	 * $(elm).slip(inCallback, outCallback);
 	 */
 	$.fn.slip = function(fnIn, fnOut){
 		return this.slipin(fnIn).slipout(fnOut || fnIn);

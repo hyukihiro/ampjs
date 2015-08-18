@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -117,7 +119,7 @@
 
 <div class="box intro">
     <h4>jQuery拡張</h4>
-jQueryオブジェクトを拡張し、Pluginとして使用します
+<p>jQueryオブジェクトを拡張し、Pluginとして使用します</p>
 </div>
 
 
@@ -126,7 +128,6 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
             <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
             <li class="api-class-tab events"><a href="#events">Events</a></li>
     </ul>
 
@@ -179,23 +180,48 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
                     </ul>
                 </div>
 
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                            <li class="index-item property">
-                                <a href="#property_AMP.$.VERSION">AMP.$.VERSION</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                    </ul>
-                </div>
 
 
                 <div class="index-section events">
                     <h3>Events</h3>
 
                     <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_flick">flick</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickcancel">flickcancel</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickcancelX">flickcancelX</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickcancelY">flickcancelY</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickmove">flickmove</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickmoveX">flickmoveX</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickmoveY">flickmoveY</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickX">flickX</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_flickY">flickY</a>
+
+                            </li>
                             <li class="index-item event">
                                 <a href="#event_resizestop">resizestop</a>
 
@@ -231,6 +257,9 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
                 <li class="arg">
                         <code>attr</code>
                 </li>
+                <li class="arg">
+                        <code>isQuery</code>
+                </li>
             </ul><span class="paren">)</span>
         </div>
 
@@ -247,7 +276,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l117"><code>develop\amp\jquery.plugins\FnExtend.js:117</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l121"><code>develop\amp\jquery.plugins\FnExtend.js:121</code></a>
         </p>
 
 
@@ -256,6 +285,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>ファイルの拡張子を取得</h4>
+<p><a href="../../demo/$.other.html#sec03">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -269,6 +299,17 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
                     <div class="param-description">
                         <p>取得属性名</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">isQuery</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>拡張子 + queryで値を返すか 初期値： false</p>
 
                     </div>
 
@@ -294,9 +335,6 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>prop</code>
-                </li>
-                <li class="arg">
                         <code>val</code>
                 </li>
             </ul><span class="paren">)</span>
@@ -315,7 +353,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l50"><code>develop\amp\jquery.plugins\FnExtend.js:50</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l52"><code>develop\amp\jquery.plugins\FnExtend.js:52</code></a>
         </p>
 
 
@@ -324,6 +362,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>addClassをアニメーションqueueで管理します</h4>
+<p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -331,23 +370,12 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">prop</code>
-                        <span class="type">String | Object</span>
-
-
-                    <div class="param-description">
-                        <p>プロパティ名かオブジェクトで値を渡す</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
                         <code class="param-name">val</code>
-                        <span class="type">String | Function</span>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>プロパティ値かコールバック関数</p>
+                        <p>付与するクラス名</p>
 
                     </div>
 
@@ -392,7 +420,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l28"><code>develop\amp\jquery.plugins\FnExtend.js:28</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l29"><code>develop\amp\jquery.plugins\FnExtend.js:29</code></a>
         </p>
 
 
@@ -401,6 +429,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>attrをアニメーションqueueで管理します</h4>
+<p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -420,11 +449,11 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
                 </li>
                 <li class="param">
                         <code class="param-name">val</code>
-                        <span class="type">String | Function</span>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>プロパティ値かコールバック関数</p>
+                        <p>プロパティ値</p>
 
                     </div>
 
@@ -466,7 +495,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l80"><code>develop\amp\jquery.plugins\FnExtend.js:80</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l82"><code>develop\amp\jquery.plugins\FnExtend.js:82</code></a>
         </p>
 
 
@@ -475,6 +504,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>コールバック関数をアニメーションqueueで管理します</h4>
+<p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -541,6 +571,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>cssをアニメーションqueueで管理します</h4>
+<p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -560,11 +591,11 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
                 </li>
                 <li class="param">
                         <code class="param-name">val</code>
-                        <span class="type">String | Function</span>
+                        <span class="type">String</span>
 
 
                     <div class="param-description">
-                        <p>プロパティ値かコールバック関数</p>
+                        <p>プロパティ値</p>
 
                     </div>
 
@@ -588,9 +619,6 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>prop</code>
-                </li>
-                <li class="arg">
                         <code>val</code>
                 </li>
             </ul><span class="paren">)</span>
@@ -609,7 +637,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l58"><code>develop\amp\jquery.plugins\FnExtend.js:58</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l60"><code>develop\amp\jquery.plugins\FnExtend.js:60</code></a>
         </p>
 
 
@@ -618,6 +646,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>removeClassをアニメーションqueueで管理します</h4>
+<p><a href="../../demo/$.other.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -625,23 +654,12 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">prop</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>クラス名</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
                         <code class="param-name">val</code>
                         <span class="type">Function</span>
 
 
                     <div class="param-description">
-                        <p>コールバック関数</p>
+                        <p>削除するクラス名</p>
 
                     </div>
 
@@ -689,7 +707,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l96"><code>develop\amp\jquery.plugins\FnExtend.js:96</code></a>
+        <a href="../files/develop_amp_jquery.plugins_FnExtend.js.html#l99"><code>develop\amp\jquery.plugins\FnExtend.js:99</code></a>
         </p>
 
 
@@ -698,6 +716,7 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
 
     <div class="description">
         <h4>属性値のreplace処理</h4>
+<p><a href="../../demo/$.other.html#sec02">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -783,8 +802,9 @@ jQueryオブジェクトを拡張し、Pluginとして使用します
     </div>
 
     <div class="description">
-        <h4>コールバック関数管理 </h4>
-Deferred resolve通知を受けたら次の関数へ移る
+        <h4>縦列・並列処理の管理</h4>
+<p>Deferred resolve通知を受けたら次の関数へ移ります<br>
+<a href="../../demo/$.extend.html#sec01">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -793,11 +813,11 @@ Deferred resolve通知を受けたら次の関数へ移る
             <ul class="params-list">
                 <li class="param">
                         <code class="param-name">arguments</code>
-                        <span class="type">Functions | Array</span>
+                        <span class="type">Function | Array</span>
 
 
                     <div class="param-description">
-                        <p>関数か関数を格納した配列を渡す</p>
+                        <p>可変長引数で関数を渡すか、関数を格納した配列を渡す</p>
 
                     </div>
 
@@ -821,7 +841,7 @@ Deferred resolve通知を受けたら次の関数へ移る
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>argments</code>
+                        <code>arguments</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -840,7 +860,7 @@ Deferred resolve通知を受けたら次の関数へ移る
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery.plugins_Extend.js.html#l64"><code>develop\amp\jquery.plugins\Extend.js:64</code></a>
+        <a href="../files/develop_amp_jquery.plugins_Extend.js.html#l65"><code>develop\amp\jquery.plugins\Extend.js:65</code></a>
         </p>
 
 
@@ -848,8 +868,9 @@ Deferred resolve通知を受けたら次の関数へ移る
     </div>
 
     <div class="description">
-        <h4>引数に渡した関数を縦列処理します</h4>
-実行した関数の戻り値は、次の関数の引数とproglessに渡します。
+        <h4>縦列・並列処理の管理</h4>
+<p>実行した関数の戻り値は、次の関数の引数とproglessに渡します<br>
+<a href="../../demo/$.extend.html#sec02">DEMO</a></p>
     </div>
 
         <div class="params">
@@ -857,12 +878,12 @@ Deferred resolve通知を受けたら次の関数へ移る
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">argments</code>
-                        <span class="type">Function</span>
+                        <code class="param-name">arguments</code>
+                        <span class="type">Function | Array</span>
 
 
                     <div class="param-description">
-                        <p>関数、もしくは配列に格納した関数</p>
+                        <p>可変長引数で関数を渡すか、関数を格納した配列を渡す</p>
 
                     </div>
 
@@ -882,40 +903,326 @@ Deferred resolve通知を受けたら次の関数へ移る
 </div>
             </div>
 
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
 
-                    <div id="property_AMP.$.VERSION" class="property item">
-                        <h3 class="name"><code>AMP.$.VERSION</code></h3>
-                        <span class="type">String</span>
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_flick" class="events item">
+                        <h3 class="name"><code>flick</code></h3>
+                        <span class="type"></span>
                     
                     
                     
                     
-                            <span class="flag static">static</span>
                     
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_AMP.$.js.html#l13"><code>develop\amp\jquery\AMP.$.js:13</code></a>
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l458"><code>develop\amp\jquery.plugins\EventFlick.js:458</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>バージョン情報</h4>
+                            <h4>フリックイベント</h4>
+                    <p>X軸、Y軸4方向のフリックイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
                         </div>
                     
                     
                     
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flick', callback);
+                    $(elm).flick(callback);</p>
+                    
+                                </div>
+                            </div>
                     </div>
-            </div>
-
-
-            <div id="events" class="api-class-tabpanel">
-                <h2 class="off-left">Events</h2>
-
+                    <div id="event_flickcancel" class="events item">
+                        <h3 class="name"><code>flickcancel</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l488"><code>develop\amp\jquery.plugins\EventFlick.js:488</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックキャンセルイベント</h4>
+                    <p>X軸、Y軸4方向のフリックキャンセルイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickcancel', callback);
+                    $(elm).flickcancel(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickcancelX" class="events item">
+                        <h3 class="name"><code>flickcancelX</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l498"><code>develop\amp\jquery.plugins\EventFlick.js:498</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックXキャンセルイベント</h4>
+                    <p>X軸2方向のフリックキャンセルイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickcancelX', callback);
+                    $(elm).flickcancelX(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickcancelY" class="events item">
+                        <h3 class="name"><code>flickcancelY</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l508"><code>develop\amp\jquery.plugins\EventFlick.js:508</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックYキャンセルイベント</h4>
+                    <p>Y軸2方向のフリックキャンセルイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickcancelY', callback);
+                    $(elm).flickcancelY(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickmove" class="events item">
+                        <h3 class="name"><code>flickmove</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l518"><code>develop\amp\jquery.plugins\EventFlick.js:518</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックムーブイベント</h4>
+                    <p>X軸、Y軸4方向のフリックムーブイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickmove', callback);
+                    $(elm).flickmove(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickmoveX" class="events item">
+                        <h3 class="name"><code>flickmoveX</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l528"><code>develop\amp\jquery.plugins\EventFlick.js:528</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックXムーブイベント</h4>
+                    <p>X軸2方向のフリックムーブイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickmoveX', callback);
+                    $(elm).flickmoveX(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickmoveY" class="events item">
+                        <h3 class="name"><code>flickmoveY</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l538"><code>develop\amp\jquery.plugins\EventFlick.js:538</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックYムーブイベント</h4>
+                    <p>Y軸2方向のフリックムーブイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickmoveY', callback);
+                    $(elm).flickmoveY(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickX" class="events item">
+                        <h3 class="name"><code>flickX</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l468"><code>develop\amp\jquery.plugins\EventFlick.js:468</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックXイベント</h4>
+                    <p>X軸2方向のフリックイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickX', callback);
+                    $(elm).flickX(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
+                    <div id="event_flickY" class="events item">
+                        <h3 class="name"><code>flickY</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery.plugins_EventFlick.js.html#l478"><code>develop\amp\jquery.plugins\EventFlick.js:478</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>フリックYイベント</h4>
+                    <p>Y軸2方向のフリックイベント<br>
+                    <a href="../../demo/$.flick.html">DEMO</a></p>
+                        </div>
+                    
+                    
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <p>$(elm).on('flickY', callback);
+                    $(elm).flickY(callback);</p>
+                    
+                                </div>
+                            </div>
+                    </div>
                     <div id="event_resizestop" class="events item">
                         <h3 class="name"><code>resizestop</code></h3>
                         <span class="type"></span>
@@ -934,7 +1241,8 @@ Deferred resolve通知を受けたら次の関数へ移る
                         </div>
                     
                         <div class="description">
-                            <h4>リサイズイベントを間引き、完了後発火します</h4>
+                            <h4>リサイズイベントを間引き、リサイズ完了後発火します</h4>
+                    <p><a href="../../demo/$.stop.html#sec01">DEMO</a></p>
                         </div>
                     
                             <div class="params">
@@ -960,8 +1268,8 @@ Deferred resolve通知を受けたら次の関数へ移る
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>$(window).on('resizestop', callback);
-                    $(window).on('resizestop', {timer: 1000}, callback);</code></pre>
+                                    <p>$(window).on('resizestop', callback);
+                    $(window).on('resizestop', {timer: 1000}, callback);</p>
                     
                                 </div>
                             </div>
@@ -977,14 +1285,15 @@ Deferred resolve通知を受けたら次の関数へ移る
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery.plugins_EventStop.js.html#l28"><code>develop\amp\jquery.plugins\EventStop.js:28</code></a>
+                            <a href="../files/develop_amp_jquery.plugins_EventStop.js.html#l29"><code>develop\amp\jquery.plugins\EventStop.js:29</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スクロールイベントを間引き、完了後発火します</h4>
+                            <h4>スクロールイベントを間引き、スクロール完了後発火します</h4>
+                    <p><a href="../../demo/$.stop.html#sec02">DEMO</a></p>
                         </div>
                     
                             <div class="params">
@@ -1010,9 +1319,9 @@ Deferred resolve通知を受けたら次の関数へ移る
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>$(window).on('scrollstop', {timer: 1000}, callback);
+                                    <p>$(window).on('scrollstop', {timer: 1000}, callback);
                     $(window).on('scrollstop', callback);
-                    $(window).scrollstop(callback);</code></pre>
+                    $(window).scrollstop(callback);</p>
                     
                                 </div>
                             </div>
@@ -1028,7 +1337,7 @@ Deferred resolve通知を受けたら次の関数へ移る
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery.plugins_EventSlip.js.html#l107"><code>develop\amp\jquery.plugins\EventSlip.js:107</code></a>
+                            <a href="../files/develop_amp_jquery.plugins_EventSlip.js.html#l109"><code>develop\amp\jquery.plugins\EventSlip.js:109</code></a>
                             </p>
                     
                     
@@ -1036,6 +1345,8 @@ Deferred resolve通知を受けたら次の関数へ移る
                     
                         <div class="description">
                             <h4>slipin, slipout ショートハンド</h4>
+                    <p><em>インライン要素は対象外です</em><br>
+                    <a href="../../demo/$.slip.html">DEMO</a></p>
                         </div>
                     
                             <div class="params">
@@ -1072,7 +1383,7 @@ Deferred resolve通知を受けたら次の関数へ移る
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>$(elm).slip(inCallback, outCallback);</code></pre>
+                                    <p>$(elm).slip(inCallback, outCallback);</p>
                     
                                 </div>
                             </div>
@@ -1096,8 +1407,9 @@ Deferred resolve通知を受けたら次の関数へ移る
                     
                         <div class="description">
                             <h4>マウスインした時の方向を取得するイベント</h4>
-                    イベントオブジェクトに取得したオブジェクトを返します
-                    <em>インライン要素には効きません</em>
+                    <p>イベントオブジェクトに取得したオブジェクトを返します<br>
+                    <em>インライン要素は対象外です</em><br>
+                    <a href="../../demo/$.slip.html">DEMO</a></p>
                         </div>
                     
                     
@@ -1106,8 +1418,8 @@ Deferred resolve通知を受けたら次の関数へ移る
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>$(elm).on('slipin', callback);
-                    $(elm).slipin(callback);</code></pre>
+                                    <p>$(elm).on('slipin', callback);
+                    $(elm).slipin(callback);</p>
                     
                                 </div>
                             </div>
@@ -1123,7 +1435,7 @@ Deferred resolve通知を受けたら次の関数へ移る
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery.plugins_EventSlip.js.html#l33"><code>develop\amp\jquery.plugins\EventSlip.js:33</code></a>
+                            <a href="../files/develop_amp_jquery.plugins_EventSlip.js.html#l34"><code>develop\amp\jquery.plugins\EventSlip.js:34</code></a>
                             </p>
                     
                     
@@ -1131,8 +1443,9 @@ Deferred resolve通知を受けたら次の関数へ移る
                     
                         <div class="description">
                             <h4>マウスアウトした時の方向を取得するイベント</h4>
-                    イベントオブジェクトに取得したオブジェクトを返します
-                    <b>インライン要素には効きません</b>
+                    <p>イベントオブジェクトに取得したオブジェクトを返します<br>
+                    <em>インライン要素は対象外です</em><br>
+                    <a href="../../demo/$.slip.html">DEMO</a></p>
                         </div>
                     
                     
@@ -1141,8 +1454,8 @@ Deferred resolve通知を受けたら次の関数へ移る
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>$(elm).on('slipout', callback);
-                    $(elm).slipout(callback);</code></pre>
+                                    <p>$(elm).on('slipout', callback);
+                    $(elm).slipout(callback);</p>
                     
                                 </div>
                             </div>

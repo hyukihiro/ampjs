@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.5
+ * AMPjs Core File version 3.0.6
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -35,14 +35,17 @@
   }
 
 
-
   /*--------------------------------------------------------------------------
     @constructor
   --------------------------------------------------------------------------*/
 
   /**
    * <h4>ローダー</h4>
-   * <em>imagesloaded.jsに依存します</em>
+   * <p>
+   * 画像の読み込み通知を行います<br>
+   * <a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>
+   * に依存します<br>
+   * <a href="../../demo/AMP.Loader.html">DEMO</a></p>
    *
    * @class AMP.Loader
    * @constructor
@@ -51,52 +54,52 @@
    */
   function Loader(elm){
     /**
-     * <h4>パラメーター格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = {};
+    this.props = {};
 
     /**
-     * <h4>対象のimgを囲う要素</h4>
+     * <h4>読み込み対象wrap要素</h4>
      *
-     * @property elm
+     * @property props.elm
      * @type {DOM}
      */
-    this.param.elm = elm || 'body';
+    this.props.elm = elm || 'body';
 
     /**
      * <h4>imagesloadedオブジェクト</h4>
      *
-     * @property imagesloaded
+     * @property props.imagesLoaded
      * @type {imagesloaded}
      */
-    this.param.imagesloaded = imagesLoaded(this.param.elm);
+    this.props.imagesLoaded = imagesLoaded(this.props.elm);
 
     /**
      * <h4>画像数</h4>
      *
-     * @property length
+     * @property props.length
      * @type {Number}
      */
-    this.param.length = this.param.imagesloaded.images.length;
+    this.props.length = this.props.imagesLoaded.images.length;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
      *
-     * @property count
+     * @property props.count
      * @type {Number}
      */
-    this.param.updateCount = 0;
+    this.props.updateCount = 0;
 
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
      *
-     * @property loadCount
+     * @property props.loadCount
      * @type {Number}
      */
-    this.param.loadCount = 0;
+    this.props.loadCount = 0;
 
     // start
     this._start();
@@ -121,7 +124,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = '3.2.0';
+  Loader.VERSION = '3.2.1';
 
 
   /**
@@ -161,26 +164,25 @@
     var self = this;
 
     // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.param.imagesloaded.on('progress', function(){
-      self.param.updateCount += 1;
+    self.props.imagesLoaded.on('progress', function(){
+      self.props.updateCount += 1;
       self._progress.apply(self, AMP.argsToArray(arguments));
     });
 
     // fail: 読込み失敗毎
-    self.param.imagesloaded.on('fail', function(){
+    self.props.imagesLoaded.on('fail', function(){
       self._failCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // done: 読込み成功毎
-    self.param.imagesloaded.on('done', function(){
+    self.props.imagesLoaded.on('done', function(){
       self._doneCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // always: 全ての読込み処理完了時
-    self.param.imagesloaded.on('always', function(){
+    self.props.imagesLoaded.on('always', function(){
       self._alwaysCall.apply(self, AMP.argsToArray(arguments));
     });
-
 
     // カウントを更新する
     self._update();
@@ -198,16 +200,16 @@
    */
   p._update = function(){
     var self = this,
-    current = self.param.updateCount / self.param.length * 100;
+    current = self.props.updateCount / self.props.length * 100;
 
     // カウンターのインクリメント
-    if(self.param.loadCount < current){
-      self.param.loadCount += 1;
+    if(self.props.loadCount < current){
+      self.props.loadCount += 1;
     }
 
-    self._updateCall(Math.ceil(self.param.loadCount));
+    self._updateCall(Math.ceil(self.props.loadCount));
 
-    if(100 <= self.param.loadCount){
+    if(100 <= self.props.loadCount){
       self._compleatCall();
     } else {
       AMP.requestAnimationFrame(function(){
@@ -223,7 +225,6 @@
    * @method progress
    * @type {Function}
    */
-
   p.progress = function(callback){
     this._progress = callback || AMP.noop;
     return this;
@@ -253,7 +254,7 @@
 
 
   /**
-   * <h4>画像読み込み失敗毎に呼び出されます</h4>
+   * <h4>画像読み込み失敗時に呼び出されます</h4>
    *
    * @private
    * @method _failCall
@@ -263,7 +264,7 @@
 
 
   /**
-   * <h4>画像読み込み毎に呼び出されます</h4>
+   * <h4>画像読み込み成功時に呼び出されます</h4>
    *
    * @method done
    * @type {Function}
@@ -275,7 +276,7 @@
 
 
   /**
-   * <h4>画像読み込み毎に呼び出されます</h4>
+   * <h4>画像読み込み成功時に呼び出されます</h4>
    *
    * @private
    * @method _doneCall

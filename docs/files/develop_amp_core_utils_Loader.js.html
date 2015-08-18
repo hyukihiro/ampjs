@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -123,14 +125,17 @@
   }
 
 
-
   /*--------------------------------------------------------------------------
     @constructor
   --------------------------------------------------------------------------*/
 
   /**
    * &lt;h4&gt;ローダー&lt;/h4&gt;
-   * &lt;em&gt;imagesloaded.jsに依存します&lt;/em&gt;
+   * &lt;p&gt;
+   * 画像の読み込み通知を行います&lt;br&gt;
+   * &lt;a href=&quot;http://imagesloaded.desandro.com/&quot; target=&quot;_blank&quot;&gt;imagesloaded.js&lt;/a&gt;
+   * に依存します&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.Loader.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.Loader
    * @constructor
@@ -139,52 +144,52 @@
    */
   function Loader(elm){
     /**
-     * &lt;h4&gt;パラメーター格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = {};
+    this.props = {};
 
     /**
-     * &lt;h4&gt;対象のimgを囲う要素&lt;/h4&gt;
+     * &lt;h4&gt;読み込み対象wrap要素&lt;/h4&gt;
      *
-     * @property elm
+     * @property props.elm
      * @type {DOM}
      */
-    this.param.elm = elm || &#x27;body&#x27;;
+    this.props.elm = elm || &#x27;body&#x27;;
 
     /**
      * &lt;h4&gt;imagesloadedオブジェクト&lt;/h4&gt;
      *
-     * @property imagesloaded
+     * @property props.imagesLoaded
      * @type {imagesloaded}
      */
-    this.param.imagesloaded = imagesLoaded(this.param.elm);
+    this.props.imagesLoaded = imagesLoaded(this.props.elm);
 
     /**
      * &lt;h4&gt;画像数&lt;/h4&gt;
      *
-     * @property length
+     * @property props.length
      * @type {Number}
      */
-    this.param.length = this.param.imagesloaded.images.length;
+    this.props.length = this.props.imagesLoaded.images.length;
 
     /**
      * &lt;h4&gt;画像が読み込まれた数をカウントします&lt;/h4&gt;
      *
-     * @property count
+     * @property props.count
      * @type {Number}
      */
-    this.param.updateCount = 0;
+    this.props.updateCount = 0;
 
     /**
      * &lt;h4&gt;画像が読み込まれた数をカウントします&lt;/h4&gt;
      *
-     * @property loadCount
+     * @property props.loadCount
      * @type {Number}
      */
-    this.param.loadCount = 0;
+    this.props.loadCount = 0;
 
     // start
     this._start();
@@ -209,7 +214,7 @@
    * @property VERSION
    * @type {String}
    */
-  Loader.VERSION = &#x27;3.2.0&#x27;;
+  Loader.VERSION = &#x27;3.2.1&#x27;;
 
 
   /**
@@ -249,26 +254,25 @@
     var self = this;
 
     // 画像処理完了毎（成功・失敗）にインクリメントする
-    self.param.imagesloaded.on(&#x27;progress&#x27;, function(){
-      self.param.updateCount += 1;
+    self.props.imagesLoaded.on(&#x27;progress&#x27;, function(){
+      self.props.updateCount += 1;
       self._progress.apply(self, AMP.argsToArray(arguments));
     });
 
     // fail: 読込み失敗毎
-    self.param.imagesloaded.on(&#x27;fail&#x27;, function(){
+    self.props.imagesLoaded.on(&#x27;fail&#x27;, function(){
       self._failCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // done: 読込み成功毎
-    self.param.imagesloaded.on(&#x27;done&#x27;, function(){
+    self.props.imagesLoaded.on(&#x27;done&#x27;, function(){
       self._doneCall.apply(self, AMP.argsToArray(arguments));
     });
 
     // always: 全ての読込み処理完了時
-    self.param.imagesloaded.on(&#x27;always&#x27;, function(){
+    self.props.imagesLoaded.on(&#x27;always&#x27;, function(){
       self._alwaysCall.apply(self, AMP.argsToArray(arguments));
     });
-
 
     // カウントを更新する
     self._update();
@@ -286,16 +290,16 @@
    */
   p._update = function(){
     var self = this,
-    current = self.param.updateCount / self.param.length * 100;
+    current = self.props.updateCount / self.props.length * 100;
 
     // カウンターのインクリメント
-    if(self.param.loadCount &lt; current){
-      self.param.loadCount += 1;
+    if(self.props.loadCount &lt; current){
+      self.props.loadCount += 1;
     }
 
-    self._updateCall(Math.ceil(self.param.loadCount));
+    self._updateCall(Math.ceil(self.props.loadCount));
 
-    if(100 &lt;= self.param.loadCount){
+    if(100 &lt;= self.props.loadCount){
       self._compleatCall();
     } else {
       AMP.requestAnimationFrame(function(){
@@ -311,7 +315,6 @@
    * @method progress
    * @type {Function}
    */
-
   p.progress = function(callback){
     this._progress = callback || AMP.noop;
     return this;
@@ -341,7 +344,7 @@
 
 
   /**
-   * &lt;h4&gt;画像読み込み失敗毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;画像読み込み失敗時に呼び出されます&lt;/h4&gt;
    *
    * @private
    * @method _failCall
@@ -351,7 +354,7 @@
 
 
   /**
-   * &lt;h4&gt;画像読み込み毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;画像読み込み成功時に呼び出されます&lt;/h4&gt;
    *
    * @method done
    * @type {Function}
@@ -363,7 +366,7 @@
 
 
   /**
-   * &lt;h4&gt;画像読み込み毎に呼び出されます&lt;/h4&gt;
+   * &lt;h4&gt;画像読み込み成功時に呼び出されます&lt;/h4&gt;
    *
    * @private
    * @method _doneCall

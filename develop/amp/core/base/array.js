@@ -25,7 +25,7 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>each処理を行います</h4>
+   * <h4>イテレート処理</h4>
    *
    * @static
    * @method each
@@ -61,8 +61,8 @@
 
 
   /**
-   * <h4>argumentsを配列に変換して返す</h4>
-   * スライス位置を指定して切り取り可能
+   * <h4>argumentsを配列に変換</h4>
+   * <p>スライス位置を指定して切り取り可能</p>
    *
    * @static
    * @method argsToArray
@@ -80,6 +80,20 @@
   		return slice.call(args, index, lastIndex);
   	};
   }());
+
+
+  /**
+   * <h4>配列をシャッフルして新しい配列を返す</h4>
+   *
+   * @method shuffle
+   * @param  {Arrary} ary シャッフルする配列
+   * @return {Arrary}
+   */
+  AMP.shuffle = function(ary){
+    return ary.slice().sort(function(){
+      return Math.random() - 0.5;
+    });
+  };
 
 
 }(window, AMP));

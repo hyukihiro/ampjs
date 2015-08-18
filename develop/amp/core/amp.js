@@ -27,8 +27,8 @@ var AMP = {};
 
   /**
    * <h4>BASE_CLASS (Amp)</h4>
-   * 基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
-   * AmpクラスをAMP.BASE_CLASSにエクスポートしてます
+   * <p>基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
+   * AmpクラスをAMP.BASE_CLASSにエクスポートしてます</p>
    *
    * @class AMP.BASE_CLASS
    * @constructor

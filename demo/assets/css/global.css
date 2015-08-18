@@ -149,6 +149,11 @@ header h1 a:hover{
 	font-size: 28px;
 	font-family: 'Abel', sans-serif;
 }
+#content h2 a{
+	display: inline-block;
+	margin-left: .5em;
+	font-size: 20px;
+}
 
 
 /* em */
@@ -222,6 +227,9 @@ p.btn a:hover{
 		margin: 25px 0 5px;
 		font-size: 18px;
 	}
+	#content h2 a{
+		font-size: 15px;
+	}
 }
 
 
@@ -236,6 +244,19 @@ p.btn a:hover{
 	border-top: 1px solid #e6e6e6;
 	font-size: 24px;
 	font-family: 'Abel', sans-serif;
+}
+.nav_index span.soon{
+	overflow: hidden;
+	position: relative;
+	display: block;
+	padding: 12px 24px;
+	border-bottom: 1px solid #e6e6e6;
+	font-weight: bold;
+	color: #999;
+}
+.nav_index span.soon span{
+	padding-left: .5em;
+	color: #428bca;
 }
 .nav_index a{
 	overflow: hidden;

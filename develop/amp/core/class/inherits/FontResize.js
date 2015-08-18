@@ -15,9 +15,9 @@
 
   /**
    * <h4>フォントリサイズイベント</h4>
-   * !!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   * <p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.FontResize.html">DEMO</a></p>
    *
    * @class AMP.FontResize
    * @extends AMP.Events
@@ -36,10 +36,10 @@
     /**
      * <h4>監視する要素</h4>
      *
-     * @property el
+     * @property elm
      * @type {DOM}
      */
-    this.el = null;
+    this.elm = null;
 
     /**
      * <h4>監視要素の高さ</h4>
@@ -50,8 +50,8 @@
     this.height = null;
 
     // superClass constructor call
-    // FontResize.Events_constructor.call(this);
-    AMP.Events.call(this);
+    FontResize.Events_constructor.call(this);
+    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -73,7 +73,7 @@
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = '3.0.1';
+  FontResize.VERSION = '3.0.2';
 
 
   /**
@@ -101,7 +101,6 @@
     @method
   --------------------------------------------------------------------------*/
 
-
   /**
    * <h4>監視するフォント要素生成</h4>
    *
@@ -121,8 +120,8 @@
     document.body.appendChild(el);
 
     // property
-    this.el = document.getElementById(key);
-    this.height = this.el.clientHeight;
+    this.elm = document.getElementById(key);
+    this.height = this.elm.clientHeight;
 
     // set controller
     this._controller();
@@ -130,7 +129,8 @@
 
 
   /**
-   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   * <h4>イベントコントローラー</h4>
+   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
    *
    * @private
    * @method _controller
@@ -172,7 +172,7 @@
    */
   p.on = function(type, listener, context){
     // 監視要素がない場合、要素を追加する
-    if(!this.el){
+    if(!this.elm){
       this._createElement();
     }
     this._addEvent(type, listener, context);

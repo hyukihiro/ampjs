@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.5
+ * AMPjs Core File version 3.0.6
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -38,7 +38,7 @@ var AMP = {};
 
   // クラス設定
   var CLASS_NAME = 'Amp',
-  VERSION = '3.0.5';
+  VERSION = '3.0.6';
 
 
 
@@ -48,8 +48,8 @@ var AMP = {};
 
   /**
    * <h4>BASE_CLASS (Amp)</h4>
-   * 基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
-   * AmpクラスをAMP.BASE_CLASSにエクスポートしてます
+   * <p>基底クラスを定義しています （このクラスをベースに子クラスを設計します)<br>
+   * AmpクラスをAMP.BASE_CLASSにエクスポートしてます</p>
    *
    * @class AMP.BASE_CLASS
    * @constructor
@@ -128,92 +128,11 @@ var AMP = {};
 
 
   /*======================================================================
-    配列
-  ======================================================================*/
-
-  /**
-   * <h4>配列</h4>
-   *
-   * @class AMP.Array
-   */
-
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>each処理を行います</h4>
-   *
-   * @static
-   * @method each
-   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
-   * @param  {Function} callback  イテレーション毎のコールバック関数
-   * @return {Object} 第一引数に渡されたオブジェクト
-   */
-	AMP.each = function(obj, callback){
-		var isContinue,
-		i;
-
-		if(AMP.isArray(obj)){
-			var l = obj.length;
-			i = 0;
-			for(; i < l; i += 1){
-				isContinue = callback.call(obj[i], obj[i], i);
-				if(isContinue === false){
-					break;
-				}
-			}
-
-		} else {
-			for(i in obj){
-				isContinue = callback.call(obj[i], obj[i], i);
-				if(isContinue === false){
-					break;
-				}
-			}
-		}
-
-		return obj;
-	};
-
-
-  /**
-   * <h4>argumentsを配列に変換して返す</h4>
-   * スライス位置を指定して切り取り可能
-   *
-   * @static
-   * @method argsToArray
-   * @param {arguments} args arguments
-   * @param {Number} index スライスする切り取り開始位置
-   * @param {Number} lastIndex スライスする切り取り終了位置
-   * @type {Array}
-   */
-  AMP.argsToArray = (function(){
-  	var slice = Array.prototype.slice;
-
-  	return function(args, index, lastIndex){
-  		index = index || 0;
-  		lastIndex = lastIndex || args.length;
-  		return slice.call(args, index, lastIndex);
-  	};
-  }());
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*======================================================================
     継承・拡張
   ======================================================================*/
 
   /**
-   * <h4>クラス・オブジェクト等の継承、拡張</h4>
+   * <h4>クラス・オブジェクトの継承、拡張</h4>
    *
    * @class AMP.Extend
    */
@@ -233,7 +152,7 @@ var AMP = {};
    * @return {Object} 拡張したオブジェクトを返します
    */
   AMP.mixin = function(){
-    var isDeep, count, extendObject, length, obj, key, data, copy, isArray, clone;
+    var isDeep, count, extendObject, length, obj, key, data, copy, clone;
 
     length = arguments.length;
     isDeep = AMP.isBoolean(arguments[0]) && arguments[0];
@@ -258,10 +177,8 @@ var AMP = {};
           continue;
         }
 
-        isArray = AMP.isArray(copy);
-
-        if(isDeep && copy && AMP.isObject(copy) || isArray){
-          if(isArray){
+        if(isDeep && copy && AMP.isObject(copy) || AMP.isArray(copy)){
+          if(AMP.isArray(copy)){
             clone = data && AMP.isArray(data) ? data : [];
           } else {
             clone = data && AMP.isObject(data) ? data : {};
@@ -282,8 +199,8 @@ var AMP = {};
 
   /**
    * <h4>クラスの継承</h4>
-   * 拡張した、サブクラスを返します<br>
-   * superClassは、可変長引数で、多重継承することが可能
+   * <p>拡張した、サブクラスを返します<br>
+   * superClassは、可変長引数で、多重継承することが可能</p>
    *
    * @static
    * @method inherits
@@ -325,7 +242,7 @@ var AMP = {};
 
   /**
    * <h4>ClassをExtendします</h4>
-   * ClassにextendメソッドをExportして使います
+   * <p>ClassにAMP._extendメソッドをExportして使います</p>
    *
    * @protected
    * @static
@@ -352,7 +269,7 @@ var AMP = {};
   ======================================================================*/
 
   /**
-   * <h4>ブラウザサポートされていない場合、代替処理を行います</h4>
+   * <h4>フォールバック</h4>
    *
    * @class Fallback
    */
@@ -383,8 +300,8 @@ var AMP = {};
 
   /**
    * <h4>forEach</h4>
-   * 配列の各要素に対して、指定された処理を実行します<br>
-   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
+   * <p>配列の各要素に対して、指定された処理を実行します<br>
+   * Array.forEach未実装のブラウザに、フォールバックして処理を追加しています</p>
    *
    * @method Array.prototype.forEach
    * @type {Void}
@@ -405,7 +322,7 @@ var AMP = {};
 
   /**
    * <h4>束縛された関数生成</h4>
-   * FIXME: βバージョンです。検証していません
+   * FIXME: βver.
    *
    * @beta
    * @method Function.prototype.bind
@@ -436,23 +353,22 @@ var AMP = {};
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>新しいprototypeオブジェクトの生成</h4>
+   * <h4>新しいオブジェクトの生成</h4>
    *
    * @static
    * @method Object.create
-   * @param  {Object} proto プロトタイプオブジェクト
+   * @param  {Object} obj オブジェクト
    * @return {Object}
    */
-  Object.create = Object.create || function(proto){
+  Object.create = Object.create || function(obj){
     function Obj(){}
-    Obj.prototype = proto;
+    Obj.prototype = obj;
     return new Obj();
   };
 
 
   /**
    * <h4>連想配列の要素数取得</h4>
-   * Object.keysの処理を追加
    *
    * @static
    * @method Object.keys
@@ -480,7 +396,7 @@ var AMP = {};
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>両端の空白を取り除いた文字列を返す</h4>
+   * <h4>文字列の両端の空白削除</h4>
    *
    * @method String.prototype.trim
    * @return {String}
@@ -494,7 +410,7 @@ var AMP = {};
   -----------------------------------------------------------------*/
 
   /**
-   * <h4>DOMイベント追加</h4>
+   * <h4>ターゲットにイベントリスナーを登録</h4>
    *
    * @static
    * @method addEvent
@@ -514,12 +430,12 @@ var AMP = {};
 
 
   /**
-   * <h4>DOMイベント削除</h4>
+   * <h4>ターゲットからイベントリスナーを削除</h4>
    *
    * @static
    * @method removeEvent
-   * @param  {DOM} element  ターゲット要素
-   * @param  {String} type     イベント名
+   * @param  {DOM} element ターゲット要素
+   * @param  {String} type イベント名
    * @param  {Function} listener 実行する関数
    * @return {DOM}
    */
@@ -542,231 +458,11 @@ var AMP = {};
 
 
   /*======================================================================
-    locationオブジェクト
-  ======================================================================*/
-
-  /**
-   * <h4>locationオブジェクト</h4>
-   *
-   * @class AMP.Location
-   */
-
-
-
-  /*----------------------------------------------------------------------
-    config
-  ----------------------------------------------------------------------*/
-
-  var url = root.location;
-
-
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>location.hashの取得し、配列にして返す</h4>
-   *
-   * @static
-   * @method getHash
-   * @return {Array}
-   */
-  AMP.getHash = function(){
-    var ary = url.hash.split('#').slice(1);
-    if(ary.length){
-      AMP.each(ary, function(item, i){
-        ary[i] = '#' + item;
-      });
-    }
-    return ary;
-  };
-
-
-  /**
-   * <h4>リクエストパラメータの値を連想配列として取得</h4>
-   * パラメータがない場合、空のオブジェクトを返す
-   *
-   * @static
-   * @method queryHashMap
-   * @return {Object}
-   */
-  AMP.queryHashMap = function(){
-    var map = {},
-    array = [],
-    param = url.search.slice(1).split('&');
-
-    if(param[0] !== ''){
-      var i = 0,
-      l = param.length;
-
-      for(; i < l; i += 1){
-        array = param[i].split('=');
-        map[array[0]] = array[1] ? decodeURI(array[1]) : decodeURI(array[0]);
-      }
-    }
-
-    return map;
-  };
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*======================================================================
-    文字列
-  ======================================================================*/
-
-  /**
-   * <h4>文字列</h4>
-   *
-   * @class AMP.String
-   */
-
-
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>id生成</h4>
-   * 文字列にナンバーを追加して返します
-   *
-   * @static
-   * @method createId
-   * @param {String} str id名 初期値: 'cid' 省略可
-   * @return {String}
-   */
-  AMP.createId = (function(){
-    var _count = 0;
-
-    return function(str){
-      str = str ? str : 'cid';
-      return str + (_count += 1);
-    };
-  }());
-
-
-  /**
-   * <h4>ランダムな4桁のコードを返す</h4>
-   *
-   * @static
-   * @method digit
-   * @return {String}
-   */
-  AMP.digit = function(){
-    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-  };
-
-
-  /**
-   * <h4>json形式オブジェクトを文字列にして返す</h4>
-   *
-   * @static
-   * @method jsonToString
-   * @param  {Object} obj オブジェクト
-   * @return {String}
-   */
-  AMP.jsonToString = function(obj){
-    var cache = [];
-    return JSON.stringify(obj, function(key, value){
-      if(typeof value === 'object' && value !== null){
-        if(cache.indexOf(value) !== -1){
-          return;
-        }
-        cache.push(value);
-      }
-      return value;
-    }, '\t');
-  };
-
-
-  /**
-   * <h4>空白文字を削除して返す</h4>
-   *
-   * @static
-   * @method removeSpace
-   * @param  {String} str 対象の文字列
-   * @return {String}
-   */
-  AMP.removeSpace = function(str){
-    return str.replace(/\s+/g, '');
-  };
-
-
-  /**
-   * <h4>文字列の全置換</h4>
-   * 対象の文字列と、削除文字列がマッチしたものを全置換します
-   *
-   * @static
-   * @method repraceAll
-   * @param  {String} str 置換対象の文字列
-   * @param  {String} del 削除する文字列
-   * @param  {String} add 追加する文字列
-   * @return {String}
-   */
-  AMP.repraceAll = function(str, del, add){
-    add = add ? add : '';
-    return str.split(del).join(add);
-  };
-
-
-  /**
-   * <h4>UUIDの生成して返す</h4>
-   *
-   * @static
-   * @method uuid
-   * @return {String}
-   */
-  AMP.uuid = function(){
-    var d = AMP.digit;
-    return (d() + d() + '-' + d() + '-' + d() + '-' + d() + '-' + d() + d() + d());
-  };
-
-
-  /**
-   * <h4>xmlを文字列に変換して返す</h4>
-   *
-   * @static
-   * @method xmlToString
-   * @param  {XML Node} xmlNodeデータ
-   * @return {String}
-   */
-  AMP.xmlToString = function(xml){
-    if(AMP.hasXMLSerializer()){
-      return (new XMLSerializer()).serializeToString(xml);
-    } else {
-      try {
-        return xmlNode.xml;
-      } catch(error){
-        if(AMP.isDeveplop){
-          console.log(error);
-        }
-      }
-    }
-  };
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*======================================================================
     機能判定
   ======================================================================*/
 
   /**
-   * <h4>機能判定</h4>
+   * <h4>所持判定</h4>
    *
    * @class AMP.Has
    */
@@ -824,7 +520,7 @@ var AMP = {};
 
 
   /**
-   * <h4>RequestAnimationFrame機能の有無</h4>
+   * <h4>RAF(requestAnimationFrame)機能の有無</h4>
    *
    * @static
    * @method hasRAF
@@ -1023,7 +719,7 @@ var AMP = {};
 
 
   /**
-   * <h4>css3 Transition機能の有無</h4>
+   * <h4>CSS3 Transition機能の有無</h4>
    *
    * @static
    * @method hasTransition
@@ -1077,23 +773,6 @@ var AMP = {};
 
 
   /*----------------------------------------------------------------------
-    @property
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>developモード</h4>
-   * 開発時に使用します<br>
-   * developモードは、エラー時コンソールログを出力します
-   *
-   * @static
-   * @property isDevelop
-   * @type {Boolean}
-   */
-  AMP.isDevelop = false;
-
-
-
-  /*----------------------------------------------------------------------
     @method
   ----------------------------------------------------------------------*/
 
@@ -1105,7 +784,7 @@ var AMP = {};
    *
    * @static
    * @method isArray
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isArray = Array.isArray || function(obj){
@@ -1118,7 +797,7 @@ var AMP = {};
    *
    * @static
    * @method isBoolean
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isBoolean = function(obj){
@@ -1131,7 +810,7 @@ var AMP = {};
    *
    * @static
    * @method isFunction
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isFunction = function(obj){
@@ -1144,7 +823,7 @@ var AMP = {};
    *
    * @static
    * @method isNumber
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNumber = function(obj){
@@ -1157,7 +836,7 @@ var AMP = {};
    *
    * @static
    * @method isObject
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isObject = function(obj){
@@ -1170,7 +849,7 @@ var AMP = {};
    *
    * @static
    * @method isPlainObject
-   * @param  {Object}  obj 判定したいオブジェクト
+   * @param  {Object}  obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isPlainObject = function(obj){
@@ -1183,7 +862,7 @@ var AMP = {};
    *
    * @static
    * @method isString
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isString = function(obj){
@@ -1196,7 +875,7 @@ var AMP = {};
    *
    * @static
    * @method isRegexp
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isRegexp = function(obj) {
@@ -1209,7 +888,7 @@ var AMP = {};
    *
    * @static
    * @method isUndefined
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isUndefined = function(obj){
@@ -1222,7 +901,7 @@ var AMP = {};
    *
    * @static
    * @method isNull
-   * @param  {Object} obj 判定したいオブジェクト
+   * @param  {Object} obj 判定するオブジェクト
    * @return {Boolean}
    */
   AMP.isNull = function(obj) {
@@ -1235,7 +914,7 @@ var AMP = {};
 
   /**
    * <h4>ポジティブ値判定</h4>
-   * !!!: 数値しか判定しません
+   * <p>数値しか判定しません</p>
    *
    * @static
    * @method isPositive
@@ -1249,7 +928,7 @@ var AMP = {};
 
   /**
    * <h4>ネガティブ値判定</h4>
-   * !!!: 数値しか判定しません
+   * <p>数値しか判定しません</p>
    *
    * @static
    * @method isNegative
@@ -1322,7 +1001,8 @@ var AMP = {};
 
 
   /**
-   * <h4>WindowsPhone判定 βver</h4>
+   * <h4>WindowsPhone判定</h4>
+   * FIXME: βver.
    *
    * @beta
    * @static
@@ -1336,7 +1016,7 @@ var AMP = {};
 
   /**
    * <h4>Mac判定</h4>
-   * isoは、含みません
+   * <p>isoは、含みません</p>
    *
    * @static
    * @method isMac
@@ -1720,7 +1400,7 @@ var AMP = {};
 
 
   /**
-   * <h4>Android Browser判定</h4>
+   * <h4>AndroidBrowser判定</h4>
    *
    * @static
    * @method isAndroidBrowser
@@ -1757,6 +1437,226 @@ var AMP = {};
 
 
   /*======================================================================
+    locationオブジェクト
+  ======================================================================*/
+
+  /**
+   * <h4>locationオブジェクト</h4>
+   *
+   * @class AMP.Location
+   */
+
+
+
+  /*----------------------------------------------------------------------
+    config
+  ----------------------------------------------------------------------*/
+
+  var url = root.location;
+
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>hashを取得し、配列にして返す</h4>
+   *
+   * @static
+   * @method getHash
+   * @return {Array}
+   */
+  AMP.getHash = function(){
+    var ary = url.hash.split('#').slice(1);
+    if(ary.length){
+      AMP.each(ary, function(item, i){
+        ary[i] = '#' + item;
+      });
+    }
+    return ary;
+  };
+
+
+  /**
+   * <h4>リクエストパラメータ値を連想配列として取得</h4>
+   *
+   * @static
+   * @method queryHashMap
+   * @return {Object}
+   */
+  AMP.queryHashMap = function(){
+    var map = {},
+    array = [],
+    param = url.search.slice(1).split('&');
+
+    if(param[0] !== ''){
+      var i = 0,
+      l = param.length;
+
+      for(; i < l; i += 1){
+        array = param[i].split('=');
+        map[array[0]] = array[1] ? decodeURI(array[1]) : decodeURI(array[0]);
+      }
+    }
+
+    return map;
+  };
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*======================================================================
+    文字列
+  ======================================================================*/
+
+  /**
+   * <h4>文字列</h4>
+   *
+   * @class AMP.String
+   */
+
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>id生成します</h4>
+   * <p>文字列にナンバーを追加して返します</p>
+   *
+   * @static
+   * @method createId
+   * @param {String} str id名 初期値: 'cid' 省略可
+   * @return {String}
+   */
+  AMP.createId = (function(){
+    var _count = 0;
+
+    return function(str){
+      str = str ? str : 'cid';
+      return str + (_count += 1);
+    };
+  }());
+
+
+  /**
+   * <h4>ランダムな4桁のコードを返す</h4>
+   *
+   * @static
+   * @method digit
+   * @return {String}
+   */
+  AMP.digit = function(){
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+  };
+
+
+  /**
+   * <h4>json形式オブジェクトを文字列にして返す</h4>
+   * FIXME: βver.
+   *
+   * @static
+   * @method jsonToString
+   * @param  {Object} obj オブジェクト
+   * @return {String}
+   */
+  AMP.jsonToString = function(obj){
+    var cache = [];
+    return JSON.stringify(obj, function(key, value){
+      if(typeof value === 'object' && value !== null){
+        if(cache.indexOf(value) !== -1){
+          return;
+        }
+        cache.push(value);
+      }
+      return value;
+    }, '\t');
+  };
+
+
+  /**
+   * <h4>空白文字の削除</h4>
+   *
+   * @static
+   * @method removeSpace
+   * @param  {String} str 対象の文字列
+   * @return {String}
+   */
+  AMP.removeSpace = function(str){
+    return str.replace(/\s+/g, '');
+  };
+
+
+  /**
+   * <h4>文字列の全置換</h4>
+   * <p>対象の文字列と、削除文字列がマッチしたものを全置換します</p>
+   *
+   * @static
+   * @method repraceAll
+   * @param  {String} str 置換対象の文字列
+   * @param  {String} del 削除する文字列
+   * @param  {String} add 追加する文字列
+   * @return {String}
+   */
+  AMP.repraceAll = function(str, del, add){
+    add = add ? add : '';
+    return str.split(del).join(add);
+  };
+
+
+  /**
+   * <h4>UUIDの生成して返す</h4>
+   *
+   * @static
+   * @method uuid
+   * @return {String}
+   */
+  AMP.uuid = function(){
+    var d = AMP.digit;
+    return (d() + d() + '-' + d() + '-' + d() + '-' + d() + '-' + d() + d() + d());
+  };
+
+
+  /**
+   * <h4>xmlを文字列に変換して返す</h4>
+   *
+   * @static
+   * @method xmlToString
+   * @param  {XML Node} xmlNodeデータ
+   * @return {String}
+   */
+  AMP.xmlToString = function(xml){
+    if(AMP.hasXMLSerializer()){
+      return (new XMLSerializer()).serializeToString(xml);
+    } else {
+      try {
+        return xmlNode.xml;
+      } catch(error){
+        if(AMP.isDeveplop){
+          console.log(error);
+        }
+      }
+    }
+  };
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*======================================================================
     ユーティリティ
   ======================================================================*/
 
@@ -1774,7 +1674,7 @@ var AMP = {};
 
   /**
    * <h4>匿名関数名を返す</h4>
-   * 無名関数はundefinedを返します
+   * <p>無名関数はundefinedを返します</p>
    *
    * @static
    * @method getFunctionName
@@ -1797,9 +1697,10 @@ var AMP = {};
 
 
   /**
-   * <h4>型の取得</h4>
+   * <h4>型名取得</h4>
    *
    * @method type
+   * @param {Object} 判定するオブジェクト
    * @return {String} 型名を返す
    */
   AMP.type = function(obj){
@@ -1851,7 +1752,7 @@ var AMP = {};
    * @static
    * @method preload
    * @param {String} src 画像パス
-   * @return {Image} 生成した、イメージオブジェクト
+   * @return {ImageElement} 生成した、イメージ要素
    */
   AMP.preload = function(src){
     var img = new Image();
@@ -1861,8 +1762,8 @@ var AMP = {};
 
 
   /**
-   * <h4>requestAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、setTimeoutでフォールバックします
+   * <h4>RAF(requestAnimationFrame)をエクスポートしています</h4>
+   * <p>RAFに対応していないブラウザは、setTimeoutでフォールバックします</p>
    * FIXME: contextの処理追加予定
    *
    * @static
@@ -1888,8 +1789,8 @@ var AMP = {};
 
 
   /**
-   * <h4>cancelAnimationFrameをエクスポートしています</h4>
-   * 対応していないブラウザは、clearTimeoutでフォールバックします
+   * <h4>CAF(cancelAnimationFrame)をエクスポートしています</h4>
+   * <p>CAFに対応していないブラウザは、clearTimeoutでフォールバックします</p>
    *
    * @static
    * @method cancelAnimationFrame
@@ -1915,8 +1816,8 @@ var AMP = {};
 
   /**
    * <h4>現在の時間を返します</h4>
-   * performance.nowメソッドをExportしています<br>
-   * performanceに対応していないブラウザはgetTimeを返します
+   * <p>performance.nowメソッドをExportしています<br>
+   * performanceに対応していないブラウザはgetTime(Date関数)を返します</p>
    *
    * @static
    * @method now
@@ -1934,7 +1835,6 @@ var AMP = {};
 
   /**
    * <h4>空の関数</h4>
-   * 何もしません
    *
    * @static
    * @return {Void}
@@ -1987,12 +1887,402 @@ var AMP = {};
   // 'use strict';
 
 
+  /*======================================================================
+    配列
+  ======================================================================*/
+
+  /**
+   * <h4>配列</h4>
+   *
+   * @class AMP.Array
+   */
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>イテレート処理</h4>
+   *
+   * @static
+   * @method each
+   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
+   * @param  {Function} callback  イテレーション毎のコールバック関数
+   * @return {Object} 第一引数に渡されたオブジェクト
+   */
+	AMP.each = function(obj, callback){
+		var isContinue,
+		i;
+
+		if(AMP.isArray(obj)){
+			var l = obj.length;
+			i = 0;
+			for(; i < l; i += 1){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+
+		} else {
+			for(i in obj){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+		}
+
+		return obj;
+	};
+
+
+  /**
+   * <h4>argumentsを配列に変換</h4>
+   * <p>スライス位置を指定して切り取り可能</p>
+   *
+   * @static
+   * @method argsToArray
+   * @param {arguments} args arguments
+   * @param {Number} index スライスする切り取り開始位置
+   * @param {Number} lastIndex スライスする切り取り終了位置
+   * @type {Array}
+   */
+  AMP.argsToArray = (function(){
+  	var slice = Array.prototype.slice;
+
+  	return function(args, index, lastIndex){
+  		index = index || 0;
+  		lastIndex = lastIndex || args.length;
+  		return slice.call(args, index, lastIndex);
+  	};
+  }());
+
+
+  /**
+   * <h4>配列をシャッフルして新しい配列を返す</h4>
+   *
+   * @method shuffle
+   * @param  {Arrary} ary シャッフルする配列
+   * @return {Arrary}
+   */
+  AMP.shuffle = function(ary){
+    return ary.slice().sort(function(){
+      return Math.random() - 0.5;
+    });
+  };
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>デバッグ機能を提供します</h4>
+   * <p>!!!: シングルトン コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.Debug.html">DEMO</a></p>
+   *
+   * @class AMP.Debug
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   */
+  function Debug(){}
+
+  // 基底クラスを継承
+  AMP.inherits(Debug, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Debug.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Debug.VERSION = '1.0.3';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Debug';
+
+
+  /**
+   * <h4>view要素を格納オブジェクト</h4>
+   *
+   * @static
+   * @property views
+   * @type {Object}
+   */
+  Debug.views = null;
+
+
+  /**
+   * <h4>viewの表示状態</h4>
+   *
+   * @static
+   * @property isShow
+   * @default true
+   * @type {Boolean}
+   */
+  Debug.isShow = true;
+
+
+  /**
+   * <h4>ログ出力の有効・無効</h4>
+   *
+   * @static
+   * @property isChangeLog
+   * @default true
+   * @type {Boolean}
+   */
+  Debug.isChangeLog = true;
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>view要素を生成</h4>
+   *
+   * @private
+   * @static
+   * @method _createView
+   * @return {Void}
+   */
+  Debug._createView = function(){
+    // view要素生成
+    var childNode = '<div style="min-width:250px;font-size:12px;background:#41454e;">\n<div style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>\n<textarea id="AMP_DEBUG_TEXT" style="box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>\n</div>';
+
+    // view要素の追加
+    var el = document.createElement('div');
+
+    el.id = 'AMP_DEBUG';
+    el.setAttribute('style', 'position:fixed;z-index:11111111;left:10px;bottom:10px;');
+    el.innerHTML = childNode;
+    document.body.appendChild(el);
+
+    // controll elements
+    Debug.views = {
+      wrap: document.getElementById('AMP_DEBUG'),
+      text: document.getElementById('AMP_DEBUG_TEXT')
+    };
+
+    // viewイベント追加
+    Debug._addEvent();
+  };
+
+
+  /**
+   * <h4>viewイベント設定</h4>
+   *
+   * @private
+   * @static
+   * @method _addEvent
+   * @return {Void}
+   */
+  Debug._addEvent = function(){
+    var isDrag = false,
+    x = null,
+    y = null;
+
+    // down
+    Debug.views.wrap.onmousedown  = function(){
+      isDrag = true;
+    };
+
+    // move
+    document.onmousemove = function(){
+      if(isDrag){
+        var _x = event.clientX;
+        _y = event.clientY;
+
+        if(AMP.isNumber(x)){
+          var diffX = _x - x;
+          var diffY = _y - y;
+          x = _x;
+          y = _y;
+
+          var position = 'position:fixed;';
+          position += 'top:' + (Debug.views.wrap.offsetTop + diffY) + 'px;';
+          position += 'left:' + (Debug.views.wrap.offsetLeft + diffX) + 'px;';
+          Debug.views.wrap.setAttribute('style', position);
+
+          return false;
+
+        } else {
+          x = _x;
+          y = _y;
+        }
+      }
+    };
+
+    // up
+    document.onmouseup = function(){
+      isDrag = false;
+      x = null;
+      y = null;
+    };
+
+    // cancel
+    Debug.views.text.onmousemove = function(){
+      isDrag = false;
+    };
+    Debug.views.wrap.onscroll = function(){
+      return false;
+    };
+  };
+
+
+  /**
+   * <h4>ログを出力します</h4>
+   *
+   * @method log
+   * @param {Any} args 出力するオブジェクト ※可変長引数可能
+   * @return {Debug}
+   */
+  p.log = function(){
+    if(!Debug.views){
+      Debug._createView();
+    }
+
+    if(Debug.isChangeLog){
+      AMP.each(AMP.argsToArray(arguments), function(data){
+        // データタイプに合わせてログを出力
+        if(AMP.isArray(data)){
+          Debug.views.text.value += JSON.stringify(data) + '\n';
+        } else if(AMP.isObject(data)){
+          Debug.views.text.value += JSON.stringify(data, null, '\t') + '\n';
+        } else {
+          Debug.views.text.value += data + '\n';
+        }
+      });
+
+      Debug.views.text.scrollTop = Debug.views.text.scrollHeight;
+    }
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ログのクリア</h4>
+   *
+   * @method clear
+   * @return {Debug}
+   */
+  p.clear = function(){
+    if(Debug.views){
+      Debug.views.text.value = '';
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>ログ出力を開始します</h4>
+   *
+   * @method start
+   * @return {Debug}
+   */
+  p.start = function(){
+    Debug.isChangeLog = true;
+    return this;
+  };
+
+
+  /**
+   * <h4>ログ出力を停止します</h4>
+   *
+   * @method stop
+   * @return {Debug}
+   */
+  p.stop = function(){
+    Debug.isChangeLog = false;
+    return this;
+  };
+
+
+  /**
+   * <h4>ログviewを非表示にします</h4>
+   *
+   * @method hide
+   * @return {Debug}
+   */
+  p.hide = function(){
+    if(Debug.views && Debug.isShow){
+      var style = Debug.views.wrap.getAttribute('style') + 'display:none;';
+      Debug.views.wrap.setAttribute('style', style);
+      Debug.isShow = false;
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>ログviewを表示します</h4>
+   *
+   * @method show
+   * @return {Debug}
+   */
+  p.show = function(){
+    if(Debug.views && !Debug.isShow){
+      var style = Debug.views.wrap.getAttribute('style') + 'display:block;';
+      Debug.views.wrap.setAttribute('style', style);
+      Debug.isShow = true;
+    }
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Debug = Debug;
+  AMP.debug = new Debug();
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
   /*----------------------------------------------------------------------
     @constructor
   ----------------------------------------------------------------------*/
 
   /**
    * <h4>Easingを管理します</h4>
+   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
    *
    * @class AMP.Ease
    * @extends AMP.BASE_CLASS
@@ -2033,7 +2323,7 @@ var AMP = {};
 
   /**
    * <h4>css3 Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   * <p><a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a></p>
    *
    * @property css
    * @type {Object}
@@ -2274,13 +2564,14 @@ var AMP = {};
 
   /**
    * <h4>イベント</h4>
-   * イベントクラスの継承して使用出来ます<br>
-   * メディエーターとしても使用すことも可能です
+   * <p>イベントクラスの継承して使用出来ます<br>
+   * メディエーターとしても使用すことも可能です<br>
+   * DEMO作成予定</p>
+   *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
-   *
    * @example
    *   // on<br>
    *   events.on('change', function(){...});<br>
@@ -2294,22 +2585,20 @@ var AMP = {};
    *   // tigger<br>
    *   events.tigger('change');<br>
    *   events.tigger('change.type');
-   *
    */
   function Events(){
     /**
      * <h4>イベントリスナーを連想配列で格納します</h4>
      *
-     * @example
-     * _listeners = {
-     *    attr    : eventObj.attr,
-     *    func    : listener,
-     *    context : context
-     * }
-     *
      * @private
      * @property _listeners
      * @type {Object}
+     * @example
+     *   _listeners = {
+     *      attr    : eventObj.attr, <br>
+     *      func    : listener, <br>
+     *      context : context <br>
+     *   }
      */
     this._listeners = {};
   }
@@ -2352,7 +2641,7 @@ var AMP = {};
 
   /**
    * <h4>イベント登録</h4>
-   * イベント名に属性値を付与することが出来ます
+   * <p>イベント名に属性名を付与するも可能</p>
    *
    * @method on
    * @param  {String} type イベントタイプ
@@ -2432,7 +2721,7 @@ var AMP = {};
 
   /**
    * <h4>イベント削除</h4>
-   * TODO: 内部処理最適化予定
+   * FIXME: 内部処理最適化予定
    *
    * @private
    * @method _removeEvent
@@ -2512,7 +2801,7 @@ var AMP = {};
 
 
   /**
-   * <h4>イベントが登録されているか判定します</h4>
+   * <h4>登録イベントがあるか判定します</h4>
    *
    * @method hasEvent
    * @param  {String} type イベントタイプ
@@ -2589,13 +2878,15 @@ var AMP = {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>ストレージ管理</h4>
-   * デフォルトでは、セッションストレージを使用します
+   * <h4>ストレージ操作</h4>
+   * <p>セッションストレージもしくはローカルストレージを操作します<br>
+   * デフォルトでは、セッションストレージを使用します<br>
+   * <a href="../../demo/AMP.Storage.html">DEMO</a></p>
    *
    * @class AMP.Storage
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    */
   function Storage(isLocalStorage){
     /**
@@ -2660,11 +2951,10 @@ var AMP = {};
 
   /**
    * <h4>Storageインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    * @return {Storage}
    */
   Storage.get = function(isLocalStorage){
@@ -2698,7 +2988,7 @@ var AMP = {};
 
 
   /**
-   * <h4>アイテム、ストレージデータの削除</h4>
+   * <h4>ストレージデータの削除</h4>
    *
    * @method removeItem
    * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
@@ -2722,7 +3012,7 @@ var AMP = {};
 
 
   /**
-   * <h4>レングスを返す</h4>
+   * <h4>ストレージアイテム数を返す</h4>
    *
    * @method getLength
    * @return {Number}
@@ -2788,6 +3078,7 @@ var AMP = {};
 
   /**
    * <h4>Vectorを管理します</h4>
+   * <p>DEMO作成予定</p>
    *
    * @class AMP.Vector
    * @extends AMP.BASE_CLASS
@@ -3035,7 +3326,7 @@ var AMP = {};
    * <h4>アングルモードの設定</h4>
    *
    * @method setAngleMode
-   * @param {String} type アングルモード名（radians　or degrees）
+   * @param {String} type アングルモード名（radians or degrees）
    * @return {Vector}
    */
   p.setAngleMode = function(type){
@@ -3052,7 +3343,7 @@ var AMP = {};
    * <h4>アングルモードの取得</h4>
    *
    * @method getAngleMode
-   * @return {String} アングルモードを返す（radians　or degrees）
+   * @return {String} アングルモードを返す（radians or degrees）
    */
   p.getAngleMode = function(){
     return this._angleMode;
@@ -3435,308 +3726,10 @@ var AMP = {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>デバッグ機能</h4>
-   * !!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.debug</em>にインスタンスをエクスポートしていますので、そちらを使用してください
-   *
-   * @class AMP.Debug
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   *
-   * @example
-   *   AMP.debug.log(any);<br>
-   *   AMP.debug.log(any, any...);
-   */
-  function Debug(){}
-
-  // 基底クラスを継承
-  AMP.inherits(Debug, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Debug.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Debug.VERSION = '1.0.2';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Debug';
-
-
-  /**
-   * <h4>デバッグview要素を格納用オブジェクト</h4>
-   *
-   * @static
-   * @property views
-   * @type {Object}
-   */
-  Debug.views = null;
-
-
-  /**
-   * <h4>デバッグviewの表示状態</h4>
-   *
-   * @static
-   * @property isShow
-   * @default true
-   * @type {Boolean}
-   */
-  Debug.isShow = true;
-
-
-  /**
-   * <h4>デバッグログの有効・無効</h4>
-   *
-   * @static
-   * @property isChangeLog
-   * @default true
-   * @type {Boolean}
-   */
-  Debug.isChangeLog = true;
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>view要素を生成</h4>
-   *
-   * @private
-   * @static
-   * @method _createView
-   * @return {Void}
-   */
-  Debug._createView = function(){
-    // view要素生成
-    var childNode = '<div style="min-width:250px;font-size:12px;background:#41454e;">\n<div class="ttl" style="padding:5px;line-height:12px;font-weight:bold;color:#f9f9f9;text-align:center;background:#272a32;">DEBUG</div>\n<textarea id="AMP_DEBUG_TEXT" style="box-sizing:border-box;width:100%;min-height:150px;padding:10px;font-family:consolas;color:#272a32;font-size:14px;line-height:1.5;border:5px solid #41454e;"></textarea>\n</div>';
-
-    // view要素の追加
-    var el = document.createElement('div');
-
-    el.id = 'AMP_DEBUG';
-    el.setAttribute('style', 'position:fixed;z-index:999999;left:10px;bottom:10px;');
-    el.innerHTML = childNode;
-    document.body.appendChild(el);
-
-    // controll elements
-    Debug.views = {
-      wrap: document.getElementById('AMP_DEBUG'),
-      text: document.getElementById('AMP_DEBUG_TEXT')
-    };
-
-    // viewイベント追加
-    Debug._addEvent();
-  };
-
-
-  /**
-   * <h4>viewイベント設定</h4>
-   *
-   * @private
-   * @static
-   * @method _addEvent
-   * @return {Void}
-   */
-  Debug._addEvent = function(){
-    var isDrag = false,
-    x = null,
-    y = null;
-
-    // down
-    Debug.views.wrap.onmousedown  = function(){
-      isDrag = true;
-    };
-
-    // move
-    document.onmousemove = function(){
-      if(isDrag){
-        var _x = event.clientX;
-        _y = event.clientY;
-
-        if(AMP.isNumber(x)){
-          var diffX = _x - x;
-          var diffY = _y - y;
-          x = _x;
-          y = _y;
-
-          var position = 'position:fixed;';
-          position += 'top:' + (Debug.views.wrap.offsetTop + diffY) + 'px;';
-          position += 'left:' + (Debug.views.wrap.offsetLeft + diffX) + 'px;';
-          Debug.views.wrap.setAttribute('style', position);
-
-          return false;
-
-        } else {
-          x = _x;
-          y = _y;
-        }
-      }
-    };
-
-    // up
-    document.onmouseup = function(){
-      isDrag = false;
-      x = null;
-      y = null;
-    };
-
-    // cancel
-    Debug.views.text.onmousemove = function(){
-      isDrag = false;
-    };
-    Debug.views.wrap.onscroll = function(){
-      return false;
-    };
-  };
-
-
-  /**
-   * <h4>ログを出力します</h4>
-   *
-   * @method log
-   * @param {Any} args 出力するオブジェクト ※可変長引数可能
-   * @return {Debug}
-   */
-  p.log = function(){
-    if(!Debug.views){
-      Debug._createView();
-    }
-
-    if(Debug.isChangeLog){
-      AMP.each(AMP.argsToArray(arguments), function(data){
-        // データタイプに合わせてログを出力
-        if(AMP.isArray(data)){
-          Debug.views.text.value += JSON.stringify(data) + '\n';
-        } else if(AMP.isObject(data)){
-          Debug.views.text.value += JSON.stringify(data, null, '\t') + '\n';
-        } else {
-          Debug.views.text.value += data + '\n';
-        }
-      });
-
-      Debug.views.text.scrollTop = Debug.views.text.scrollHeight;
-    }
-
-    return this;
-  };
-
-
-  /**
-   * <h4>ログのクリア</h4>
-   *
-   * @method clear
-   * @return {Debug}
-   */
-  p.clear = function(){
-    if(Debug.views){
-      Debug.views.text.value = '';
-    }
-    return this;
-  };
-
-
-  /**
-   * <h4>ログの出力モードを有効にします</h4>
-   *
-   * @method start
-   * @return {Debug}
-   */
-  p.start = function(){
-    Debug.isChangeLog = true;
-    return this;
-  };
-
-
-  /**
-   * <h4>ログの出力モードを無効にします</h4>
-   *
-   * @method stop
-   * @return {Debug}
-   */
-  p.stop = function(){
-    Debug.isChangeLog = false;
-    return this;
-  };
-
-
-  /**
-   * <h4>ログを非表示にします</h4>
-   *
-   * @method hide
-   * @return {Debug}
-   */
-  p.hide = function(){
-    if(Debug.views && Debug.isShow){
-      var style = Debug.views.wrap.getAttribute('style') + 'display:none;';
-      Debug.views.wrap.setAttribute('style', style);
-      Debug.isShow = false;
-    }
-    return this;
-  };
-
-
-  /**
-   * <h4>ログを表示します</h4>
-   *
-   * @method show
-   * @return {Debug}
-   */
-  p.show = function(){
-    if(Debug.views && !Debug.isShow){
-      var style = Debug.views.wrap.getAttribute('style') + 'display:block;';
-      Debug.views.wrap.setAttribute('style', style);
-      Debug.isShow = true;
-    }
-    return this;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Debug = Debug;
-  AMP.debug = new Debug();
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>フォントリサイズイベント</h4>
-   * !!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   * <p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.FontResize.html">DEMO</a></p>
    *
    * @class AMP.FontResize
    * @extends AMP.Events
@@ -3755,10 +3748,10 @@ var AMP = {};
     /**
      * <h4>監視する要素</h4>
      *
-     * @property el
+     * @property elm
      * @type {DOM}
      */
-    this.el = null;
+    this.elm = null;
 
     /**
      * <h4>監視要素の高さ</h4>
@@ -3769,8 +3762,8 @@ var AMP = {};
     this.height = null;
 
     // superClass constructor call
-    // FontResize.Events_constructor.call(this);
-    AMP.Events.call(this);
+    FontResize.Events_constructor.call(this);
+    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -3792,7 +3785,7 @@ var AMP = {};
    * @property VERSION
    * @type {String}
    */
-  FontResize.VERSION = '3.0.1';
+  FontResize.VERSION = '3.0.2';
 
 
   /**
@@ -3820,7 +3813,6 @@ var AMP = {};
     @method
   --------------------------------------------------------------------------*/
 
-
   /**
    * <h4>監視するフォント要素生成</h4>
    *
@@ -3840,8 +3832,8 @@ var AMP = {};
     document.body.appendChild(el);
 
     // property
-    this.el = document.getElementById(key);
-    this.height = this.el.clientHeight;
+    this.elm = document.getElementById(key);
+    this.height = this.elm.clientHeight;
 
     // set controller
     this._controller();
@@ -3849,7 +3841,8 @@ var AMP = {};
 
 
   /**
-   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   * <h4>イベントコントローラー</h4>
+   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
    *
    * @private
    * @method _controller
@@ -3891,7 +3884,7 @@ var AMP = {};
    */
   p.on = function(type, listener, context){
     // 監視要素がない場合、要素を追加する
-    if(!this.el){
+    if(!this.elm){
       this._createElement();
     }
     this._addEvent(type, listener, context);
@@ -3922,28 +3915,28 @@ var AMP = {};
 
   /**
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
-   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
-   * !!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+   * <p>!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
+   * シングルトン: コンストラクタを呼び出しで使用しません<br>
+   * <em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.Mediaquery.html">DEMO</a></p>
    *
    * @class AMP.Mediaquery
    * @extends AMP.Events
    * @constructor
-   * @param {DOM} element 監視対象要素
+   * @param {DOM} elm 監視対象要素
    */
-  function Mediaquery(element){
+  function Mediaquery(elm){
     /**
      * <h4>スタイルを監視する要素</h4>
      *
-     * @property el
+     * @property elm
      * @default head
      * @type {DOM}
      */
-    if(element && element.nodeType === 1){
-      this.el = element;
+    if(elm && elm.nodeType === 1){
+      this.elm = elm;
     } else {
-      this.el = document.getElementsByTagName('head')[0];
+      this.elm = document.getElementsByTagName('head')[0];
     }
 
     /**
@@ -3964,8 +3957,7 @@ var AMP = {};
     this.mediaStyle = null;
 
     // superClass constructor call
-    // Mediaquery.Events_constructor.call(this);
-    AMP.Events.call(this);
+    Mediaquery.Events_constructor.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -3987,7 +3979,7 @@ var AMP = {};
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.2';
+  Mediaquery.VERSION = '2.0.3';
 
 
   /**
@@ -4001,7 +3993,7 @@ var AMP = {};
 
   /**
    * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
-   * !!! FIXME : イベント属性追加予定
+   * FIXME: イベント属性追加予定
    *
    * @static
    * @property eventType
@@ -4017,7 +4009,8 @@ var AMP = {};
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+   * <h4>イベントコントローラー</h4>
+   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
    *
    * @private
    * @method _controller
@@ -4060,7 +4053,7 @@ var AMP = {};
 
   /**
    * <h4>イベント発行</h4>
-   * 第二引数以降に値を渡すとcallbackに引数として渡します
+   * <p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
    *
    * @method trigger
    * @param  {String} type イベントタイプ
@@ -4089,16 +4082,16 @@ var AMP = {};
   /**
    * <h4>要素のスタイルを返します</h4>
    *
-   * ＠method getStyle
+   * @method getStyle
    * @return {String}
    */
   p.getStyle = function(){
     if(root.getComputedStyle){
-      return getComputedStyle(this.el).getPropertyValue('font-family');
+      return getComputedStyle(this.elm).getPropertyValue('font-family');
     } else {
       // !!!: jshintのチェックを緩和します
-      /*jshint -W069 */
-      return this.el.currentStyle['fontFamily'];
+      /* jshint -W069 */
+      return this.elm.currentStyle['fontFamily'];
     }
   };
 

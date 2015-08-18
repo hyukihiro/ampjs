@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -124,6 +126,7 @@
 
   /**
    * &lt;h4&gt;ページ内リンクのスクロール&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.Scroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
@@ -139,20 +142,21 @@
     }
 
     /**
-     * &lt;h4&gt;プロパティ格納オブジェクト&lt;/h4&gt;
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = $.extend(true, {}, Scroll.scrollOptions, {$html: $(&#x27;html, body&#x27;)}, options);
+    this.props = $.extend(true, {}, Scroll.options, {$html: $(&#x27;html, body&#x27;)}, options);
 
     /**
      * &lt;h4&gt;トリガーとなるa要素&lt;/h4&gt;
      *
-     * @property param.$scrollTrigger
-     * @type {Object}
+     * @property props.$scrollTrigger
+     * @type {jQuery}
      */
-    this.param.$scrollTrigger = $scrollTrigger;
+    this.props.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
@@ -174,7 +178,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = &#x27;3.1.1&#x27;;
+  Scroll.VERSION = &#x27;3.2.0&#x27;;
 
 
   /**
@@ -187,18 +191,18 @@
 
 
   /**
-   * &lt;h4&gt;デフォルト値、格納オブジェクト&lt;/h4&gt;
-   * コンストラクタが呼び出し時に、optionsとmixinしてparamオブジェクトに格納します
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
    * @static
-   * @property scrollOptions
+   * @property options
    * @type {Object}
    */
   /**
    * &lt;h4&gt;ページ要素&lt;/h4&gt;
    *
    * @static
-   * @property scrollOptions.$html
+   * @property options.$html
    * @default $(&#x27;html, body&#x27;)
    * @type {jQuery}
    */
@@ -206,7 +210,7 @@
    * &lt;h4&gt;停止位置調整値&lt;/h4&gt;
    *
    * @static
-   * @property scrollOptions.adjust
+   * @property options.adjust
    * @default 0
    * @type {Number|Function}
    */
@@ -214,20 +218,20 @@
    * &lt;h4&gt;スクロールしないトリガークラス名&lt;/h4&gt;
    *
    * @static
-   * @property scrollOptions.noScrollClass
+   * @property options.noScrollClass
    * @default no_scroll
    * @type {String}
    */
   /**
    * &lt;h4&gt;スクロールアニメーションのオプション値&lt;/h4&gt;
-   * &lt;p&gt;参照： &lt;a href=&quot;http://julian.com/research/velocity/#arguments&quot; target=&quot;_blank&quot;&gt;オプション値&lt;/a&gt;&lt;/p&gt;
+   * &lt;p&gt;&lt;a href=&quot;http://julian.com/research/velocity/#arguments&quot; target=&quot;_blank&quot;&gt;オプション値&lt;/a&gt;&lt;/p&gt;
    *
    * @static
-   * @property scrollOptions.tween
+   * @property options.tween
    * @default  {duration: 800, easing: &#x27;easeOutQuint&#x27;}
    * @type {Object}
    */
-  Scroll.scrollOptions = {
+  Scroll.options = {
     $html        : null, // $(&#x27;html, body&#x27;),
     adjust       : 0,
     noScrollClass: &#x27;no_scroll&#x27;,
@@ -269,8 +273,8 @@
     // スクロールイベントの重複回避
     this.off();
 
-    self.param.$scrollTrigger.on(&#x27;click.Scroll&#x27;, function(){
-      return self.tween(self.param.$scrollTrigger.index(this));
+    self.props.$scrollTrigger.on(&#x27;click.Scroll&#x27;, function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
     });
 
     return this;
@@ -284,14 +288,14 @@
    * @return {Scroll}
    */
   p.off = function(){
-    this.param.$scrollTrigger.off(&#x27;click.Scroll&#x27;);
+    this.props.$scrollTrigger.off(&#x27;click.Scroll&#x27;);
     return this;
   };
 
 
   /**
    * &lt;h4&gt;スクロールアニメーション&lt;/h4&gt;
-   * FIXME: Stringも対応予定
+   * &lt;p&gt;FIXME: Stringも対応予定&lt;/p&gt;
    *
    * @method tween
    * @param {Number} num トリガー要素のインデックス
@@ -299,17 +303,17 @@
    */
   p.tween = function(num){
     var self = this,
-    param = self.param,
-    $scrollTrigger = param.$scrollTrigger.eq(num),
+    props = self.props,
+    $scrollTrigger = props.$scrollTrigger.eq(num),
     $target = $($scrollTrigger.attr(&#x27;href&#x27;));
 
-    if($target[0] &amp;&amp; !$scrollTrigger.hasClass(param.noScrollClass)){
-      var adjust = AMP.isFunction(param.adjust) ? param.adjust() || 0 : param.adjust,
+    if($target[0] &amp;&amp; !$scrollTrigger.hasClass(props.noScrollClass)){
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
       moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
-        var tween = $.extend({offset: moveTo}, param.tween);
-        param.$html.velocity(&#x27;stop&#x27;).velocity(&#x27;scroll&#x27;, tween);
+        var tween = $.extend({offset: moveTo}, props.tween);
+        props.$html.velocity(&#x27;stop&#x27;).velocity(&#x27;scroll&#x27;, tween);
       }
       return false;
     }

@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -108,7 +110,7 @@
 
 
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_utils_Loader.js.html#l22"><code>develop\amp\core\utils\Loader.js:22</code></a>
+            Defined in: <a href="../files/develop_amp_core_utils_Loader.js.html#l21"><code>develop\amp\core\utils\Loader.js:21</code></a>
         </div>
 
 
@@ -117,7 +119,11 @@
 
 <div class="box intro">
     <h4>ローダー</h4>
-<em>imagesloaded.jsに依存します</em>
+<p>
+画像の読み込み通知を行います<br>
+<a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>
+に依存します<br>
+<a href="../../demo/AMP.Loader.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
@@ -146,7 +152,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l22"><code>develop\amp\core\utils\Loader.js:22</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l21"><code>develop\amp\core\utils\Loader.js:21</code></a>
         </p>
 
 
@@ -280,27 +286,27 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_count">count</a>
+                                <a href="#property_props">props</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_elm">elm</a>
+                                <a href="#property_props.count">props.count</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_imagesloaded">imagesloaded</a>
+                                <a href="#property_props.elm">props.elm</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_length">length</a>
+                                <a href="#property_props.imagesLoaded">props.imagesLoaded</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_loadCount">loadCount</a>
+                                <a href="#property_props.length">props.length</a>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_param">param</a>
+                                <a href="#property_props.loadCount">props.loadCount</a>
 
                             </li>
                             <li class="index-item property">
@@ -333,7 +339,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l278"><code>develop\amp\core\utils\Loader.js:278</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l279"><code>develop\amp\core\utils\Loader.js:279</code></a>
         </p>
 
 
@@ -364,7 +370,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l322"><code>develop\amp\core\utils\Loader.js:322</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l323"><code>develop\amp\core\utils\Loader.js:323</code></a>
         </p>
 
 
@@ -395,7 +401,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l256"><code>develop\amp\core\utils\Loader.js:256</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l257"><code>develop\amp\core\utils\Loader.js:257</code></a>
         </p>
 
 
@@ -403,7 +409,7 @@
     </div>
 
     <div class="description">
-        <h4>画像読み込み毎に呼び出されます</h4>
+        <h4>画像読み込み成功時に呼び出されます</h4>
     </div>
 
 
@@ -426,7 +432,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l234"><code>develop\amp\core\utils\Loader.js:234</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l235"><code>develop\amp\core\utils\Loader.js:235</code></a>
         </p>
 
 
@@ -434,7 +440,7 @@
     </div>
 
     <div class="description">
-        <h4>画像読み込み失敗毎に呼び出されます</h4>
+        <h4>画像読み込み失敗時に呼び出されます</h4>
     </div>
 
 
@@ -457,7 +463,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l212"><code>develop\amp\core\utils\Loader.js:212</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l213"><code>develop\amp\core\utils\Loader.js:213</code></a>
         </p>
 
 
@@ -490,7 +496,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l133"><code>develop\amp\core\utils\Loader.js:133</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l136"><code>develop\amp\core\utils\Loader.js:136</code></a>
         </p>
 
 
@@ -533,7 +539,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l171"><code>develop\amp\core\utils\Loader.js:171</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l173"><code>develop\amp\core\utils\Loader.js:173</code></a>
         </p>
 
 
@@ -571,7 +577,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l300"><code>develop\amp\core\utils\Loader.js:300</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l301"><code>develop\amp\core\utils\Loader.js:301</code></a>
         </p>
 
 
@@ -601,7 +607,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l266"><code>develop\amp\core\utils\Loader.js:266</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l267"><code>develop\amp\core\utils\Loader.js:267</code></a>
         </p>
 
 
@@ -631,7 +637,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l310"><code>develop\amp\core\utils\Loader.js:310</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l311"><code>develop\amp\core\utils\Loader.js:311</code></a>
         </p>
 
 
@@ -661,7 +667,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l244"><code>develop\amp\core\utils\Loader.js:244</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l245"><code>develop\amp\core\utils\Loader.js:245</code></a>
         </p>
 
 
@@ -669,7 +675,7 @@
     </div>
 
     <div class="description">
-        <h4>画像読み込み毎に呼び出されます</h4>
+        <h4>画像読み込み成功時に呼び出されます</h4>
     </div>
 
 
@@ -691,7 +697,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l222"><code>develop\amp\core\utils\Loader.js:222</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l223"><code>develop\amp\core\utils\Loader.js:223</code></a>
         </p>
 
 
@@ -731,7 +737,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l120"><code>develop\amp\core\utils\Loader.js:120</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l123"><code>develop\amp\core\utils\Loader.js:123</code></a>
         </p>
 
 
@@ -785,7 +791,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l199"><code>develop\amp\core\utils\Loader.js:199</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l201"><code>develop\amp\core\utils\Loader.js:201</code></a>
         </p>
 
 
@@ -815,7 +821,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_utils_Loader.js.html#l288"><code>develop\amp\core\utils\Loader.js:288</code></a>
+        <a href="../files/develop_amp_core_utils_Loader.js.html#l289"><code>develop\amp\core\utils\Loader.js:289</code></a>
         </p>
 
 
@@ -846,7 +852,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l106"><code>develop\amp\core\utils\Loader.js:106</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l109"><code>develop\amp\core\utils\Loader.js:109</code></a>
                             </p>
                     
                     
@@ -859,8 +865,32 @@
                     
                     
                     </div>
-                    <div id="property_count" class="property item">
-                        <h3 class="name"><code>count</code></h3>
+                    <div id="property_props" class="property item">
+                        <h3 class="name"><code>props</code></h3>
+                        <span class="type">Object</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l35"><code>develop\amp\core\utils\Loader.js:35</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>プロパティオブジェクト</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_props.count" class="property item">
+                        <h3 class="name"><code>props.count</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -870,7 +900,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l64"><code>develop\amp\core\utils\Loader.js:64</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l67"><code>develop\amp\core\utils\Loader.js:67</code></a>
                             </p>
                     
                     
@@ -883,8 +913,8 @@
                     
                     
                     </div>
-                    <div id="property_elm" class="property item">
-                        <h3 class="name"><code>elm</code></h3>
+                    <div id="property_props.elm" class="property item">
+                        <h3 class="name"><code>props.elm</code></h3>
                         <span class="type">DOM</span>
                     
                     
@@ -894,21 +924,21 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l40"><code>develop\amp\core\utils\Loader.js:40</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l43"><code>develop\amp\core\utils\Loader.js:43</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>対象のimgを囲う要素</h4>
+                            <h4>読み込み対象wrap要素</h4>
                         </div>
                     
                     
                     
                     </div>
-                    <div id="property_imagesloaded" class="property item">
-                        <h3 class="name"><code>imagesloaded</code></h3>
+                    <div id="property_props.imagesLoaded" class="property item">
+                        <h3 class="name"><code>props.imagesLoaded</code></h3>
                         <span class="type">Imagesloaded</span>
                     
                     
@@ -918,7 +948,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l48"><code>develop\amp\core\utils\Loader.js:48</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l51"><code>develop\amp\core\utils\Loader.js:51</code></a>
                             </p>
                     
                     
@@ -931,8 +961,8 @@
                     
                     
                     </div>
-                    <div id="property_length" class="property item">
-                        <h3 class="name"><code>length</code></h3>
+                    <div id="property_props.length" class="property item">
+                        <h3 class="name"><code>props.length</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -942,7 +972,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l56"><code>develop\amp\core\utils\Loader.js:56</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l59"><code>develop\amp\core\utils\Loader.js:59</code></a>
                             </p>
                     
                     
@@ -955,8 +985,8 @@
                     
                     
                     </div>
-                    <div id="property_loadCount" class="property item">
-                        <h3 class="name"><code>loadCount</code></h3>
+                    <div id="property_props.loadCount" class="property item">
+                        <h3 class="name"><code>props.loadCount</code></h3>
                         <span class="type">Number</span>
                     
                     
@@ -966,7 +996,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l72"><code>develop\amp\core\utils\Loader.js:72</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l75"><code>develop\amp\core\utils\Loader.js:75</code></a>
                             </p>
                     
                     
@@ -974,30 +1004,6 @@
                     
                         <div class="description">
                             <h4>画像が読み込まれた数をカウントします</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_param" class="property item">
-                        <h3 class="name"><code>param</code></h3>
-                        <span class="type">Object</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l32"><code>develop\amp\core\utils\Loader.js:32</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>パラメーター格納オブジェクト</h4>
                         </div>
                     
                     
@@ -1015,7 +1021,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_utils_Loader.js.html#l96"><code>develop\amp\core\utils\Loader.js:96</code></a>
+                            <a href="../files/develop_amp_core_utils_Loader.js.html#l99"><code>develop\amp\core\utils\Loader.js:99</code></a>
                             </p>
                     
                     

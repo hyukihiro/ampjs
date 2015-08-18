@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -116,7 +118,7 @@
 
 
 <div class="box intro">
-    <h4>ブラウザサポートされていない場合、代替処理を行います</h4>
+    <h4>フォールバック</h4>
 </div>
 
 
@@ -212,7 +214,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_fallback.js.html#l158"><code>develop\amp\core\base\fallback.js:158</code></a>
+        <a href="../files/develop_amp_core_base_fallback.js.html#l157"><code>develop\amp\core\base\fallback.js:157</code></a>
         </p>
 
 
@@ -220,7 +222,7 @@
     </div>
 
     <div class="description">
-        <h4>DOMイベント追加</h4>
+        <h4>ターゲットにイベントリスナーを登録</h4>
     </div>
 
         <div class="params">
@@ -297,8 +299,8 @@
 
     <div class="description">
         <h4>forEach</h4>
-配列の各要素に対して、指定された処理を実行します<br>
-Array.forEach未実装のブラウザに、フォールバックして処理を追加しています
+<p>配列の各要素に対して、指定された処理を実行します<br>
+Array.forEach未実装のブラウザに、フォールバックして処理を追加しています</p>
     </div>
 
 
@@ -381,7 +383,7 @@ Array.forEach未実装のブラウザに、フォールバックして処理を�
 
     <div class="description">
         <h4>束縛された関数生成</h4>
-FIXME: βバージョンです。検証していません
+FIXME: βver.
     </div>
 
         <div class="params">
@@ -429,7 +431,7 @@ FIXME: βバージョンです。検証していません
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>proto</code>
+                        <code>obj</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -456,7 +458,7 @@ FIXME: βバージョンです。検証していません
     </div>
 
     <div class="description">
-        <h4>新しいprototypeオブジェクトの生成</h4>
+        <h4>新しいオブジェクトの生成</h4>
     </div>
 
         <div class="params">
@@ -464,12 +466,12 @@ FIXME: βバージョンです。検証していません
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">proto</code>
+                        <code class="param-name">obj</code>
                         <span class="type">Object</span>
 
 
                     <div class="param-description">
-                        <p>プロトタイプオブジェクト</p>
+                        <p>オブジェクト</p>
 
                     </div>
 
@@ -521,7 +523,6 @@ FIXME: βバージョンです。検証していません
 
     <div class="description">
         <h4>連想配列の要素数取得</h4>
-Object.keysの処理を追加
     </div>
 
         <div class="params">
@@ -582,7 +583,7 @@ Object.keysの処理を追加
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_fallback.js.html#l178"><code>develop\amp\core\base\fallback.js:178</code></a>
+        <a href="../files/develop_amp_core_base_fallback.js.html#l177"><code>develop\amp\core\base\fallback.js:177</code></a>
         </p>
 
 
@@ -590,7 +591,7 @@ Object.keysの処理を追加
     </div>
 
     <div class="description">
-        <h4>DOMイベント削除</h4>
+        <h4>ターゲットからイベントリスナーを削除</h4>
     </div>
 
         <div class="params">
@@ -661,7 +662,7 @@ Object.keysの処理を追加
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_base_fallback.js.html#l144"><code>develop\amp\core\base\fallback.js:144</code></a>
+        <a href="../files/develop_amp_core_base_fallback.js.html#l143"><code>develop\amp\core\base\fallback.js:143</code></a>
         </p>
 
 
@@ -669,7 +670,7 @@ Object.keysの処理を追加
     </div>
 
     <div class="description">
-        <h4>両端の空白を取り除いた文字列を返す</h4>
+        <h4>文字列の両端の空白削除</h4>
     </div>
 
 

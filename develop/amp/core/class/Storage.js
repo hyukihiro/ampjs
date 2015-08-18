@@ -14,13 +14,15 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>ストレージ管理</h4>
-   * デフォルトでは、セッションストレージを使用します
+   * <h4>ストレージ操作</h4>
+   * <p>セッションストレージもしくはローカルストレージを操作します<br>
+   * デフォルトでは、セッションストレージを使用します<br>
+   * <a href="../../demo/AMP.Storage.html">DEMO</a></p>
    *
    * @class AMP.Storage
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    */
   function Storage(isLocalStorage){
     /**
@@ -85,11 +87,10 @@
 
   /**
    * <h4>Storageインスタンスの生成</h4>
-   * shorthand
    *
    * @static
    * @method get
-   * @param {Boolean} isLocalStorage ローカルストレージを使用か？
+   * @param {Boolean} isLocalStorage ローカルストレージ使用フラグ
    * @return {Storage}
    */
   Storage.get = function(isLocalStorage){
@@ -123,7 +124,7 @@
 
 
   /**
-   * <h4>アイテム、ストレージデータの削除</h4>
+   * <h4>ストレージデータの削除</h4>
    *
    * @method removeItem
    * @param  {String} key 削除するキー ※可変長引数可 ※省略時、ストレージデータを削除します
@@ -147,7 +148,7 @@
 
 
   /**
-   * <h4>レングスを返す</h4>
+   * <h4>ストレージアイテム数を返す</h4>
    *
    * @method getLength
    * @return {Number}

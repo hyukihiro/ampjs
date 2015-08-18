@@ -13,12 +13,12 @@
     },
     "jqueryPlugin": {
       "name"       : "amp.jquery.plugins",
-      "version"    : "3.0.2",
+      "version"    : "3.0.3",
       "description": "AMPjs jQuery Plugin File"
     },
     "jquery": {
       "name"       : "amp.jquery",
-      "version"    : "3.0.2",
+      "version"    : "3.1.0",
       "description": "AMPjs jQuery Module File"
     },
     "createjs": {

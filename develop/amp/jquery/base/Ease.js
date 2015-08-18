@@ -36,7 +36,7 @@
 
   /**
    * <h4>jQuery Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
    *
    * @property $
    * @type {Object}

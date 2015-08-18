@@ -15,13 +15,14 @@
 
   /**
    * <h4>要素の高さを揃える</h4>
+   * <p><a href="../../demo/AMP.$.FlatHeight.html">DEMO</a></p>
    *
    * @class AMP.$.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $flatHeight 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Boolean} isResize リサイズ後に実行するか
+   * @param {jQuery} $flatHeight 対象のエリア要素
+   * @param {Number} split 区切る数 省略可
+   * @param {Boolean} isResize リサイズ後に実行するか
    */
   function FlatHeight($flatHeight, split, isResize){
 
@@ -33,40 +34,39 @@
     }
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-    this.param = {};
+    this.props = {};
 
     /**
      * <h4>ターゲット要素</h4>
      *
      * @default $('.flat_height')
-     * @property param.$flatHeight
+     * @property props.$flatHeight
      * @type {jQuery}
      */
-    this.param.$flatHeight = $flatHeight;
+    this.props.$flatHeight = $flatHeight;
 
     /**
      * <h4>高さを揃える要素の分割単位</h4>
      *
      * @default $flatHeight.length
-     * @property param.split
+     * @property props.split
      * @type {Number}
      */
-    this.param.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
 
     /**
      * <h4>リサイズ後、セットし直すか？</h4>
      *
      * @default true
-     * @property param.isResize
+     * @property props.isResize
      * @type {Boolean}
      */
-    this.param.isResize = AMP.isBoolean(isResize) ? isResize : true;
-
+    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
 
     this._addEvent();
     this.setHeight();
@@ -91,7 +91,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '3.0.1';
+  FlatHeight.VERSION = '3.1.0';
 
 
   /**
@@ -142,8 +142,8 @@
     }
 
     // window resize
-    $(root).on('resizestop.FlatHeight', {timer: 50}, function(){
-      if(self.param.isResize){
+    $(root).on('resizestop.FlatHeight', function(){
+      if(self.props.isResize){
         self.setHeight();
       }
     });
@@ -162,7 +162,7 @@
     if(!AMP.isNumber(num)){
       throw new TypeError(num + ' is not a Number');
     }
-    this.param.split = num;
+    this.props.split = num;
     this.setHeight();
     return this;
   };
@@ -176,34 +176,34 @@
    */
   p.setHeight = function(){
     var self = this,
-    total = self.param.$flatHeight.length,
-    rest = total % self.param.split,
+    total = self.props.$flatHeight.length,
+    rest = total % self.props.split,
     finalRow = total - rest,
     maxHeight = 0,
     targetHeight = 0,
     rowCount = 0,
     i = 0;
 
-    self.param.$flatHeight.height('auto');
+    self.props.$flatHeight.height('auto');
 
-    if(1 < self.param.split){
+    if(1 < self.props.split){
 
       for(; i < total; i += 1){
         // 一番高い高さを求める
-        targetHeight = self.param.$flatHeight.eq(i).height();
+        targetHeight = self.props.$flatHeight.eq(i).height();
         maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
 
         // 行の高さを揃える
-        if((i + 1) % self.param.split === 0){
-          var _start = rowCount * self.param.split,
-          _end = (rowCount += 1) * self.param.split;
+        if((i + 1) % self.props.split === 0){
+          var _start = rowCount * self.props.split,
+          _end = (rowCount += 1) * self.props.split;
 
-          self.param.$flatHeight.slice(_start, _end).height(maxHeight);
+          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
           maxHeight = 0;
 
         // 最終行の高さを揃える
         } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.param.$flatHeight.slice(rowCount * self.param.split, total).height(maxHeight);
+          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
         }
       }
     }

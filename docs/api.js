@@ -1,6 +1,7 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "AMP.$",
         "AMP.$.BoxHover",
         "AMP.$.FlatHeight",
         "AMP.$.Float3d",
@@ -10,6 +11,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "AMP.$.Scroll",
         "AMP.$.ScrollToggle",
         "AMP.$.Slider",
+        "AMP.$.Slip",
         "AMP.$.SmoothScroll",
         "AMP.$.UIController",
         "AMP.Array",

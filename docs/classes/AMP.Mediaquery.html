@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -111,7 +113,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_core_class_Mediaquery.js.html#l16"><code>develop\amp\core\class\Mediaquery.js:16</code></a>
+            Defined in: <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l16"><code>develop\amp\core\class\inherits\Mediaquery.js:16</code></a>
         </div>
 
 
@@ -120,10 +122,10 @@
 
 <div class="box intro">
     <h4>Mediaqueryのブレイクポイントイベント</h4>
-!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
-!!!: シングルトン<br>
-コンストラクタを呼び出しで、使用しません<br>
-<em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください
+<p>!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
+シングルトン: コンストラクタを呼び出しで使用しません<br>
+<em>AMP.mediaquery</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+<a href="../../demo/AMP.Mediaquery.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
@@ -134,7 +136,7 @@
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>element</code>
+                        <code>elm</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
@@ -149,7 +151,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l16"><code>develop\amp\core\class\Mediaquery.js:16</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l16"><code>develop\amp\core\class\inherits\Mediaquery.js:16</code></a>
         </p>
 
 
@@ -165,7 +167,7 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">element</code>
+                        <code class="param-name">elm</code>
                         <span class="type">DOM</span>
 
 
@@ -215,6 +217,10 @@
                                 <a href="#method__removeEvent">_removeEvent</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_getStyle">getStyle</a>
+
+                            </li>
                             <li class="index-item method inherited">
                                 <a href="#method_hasEvent">hasEvent</a>
 
@@ -255,7 +261,7 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_el">el</a>
+                                <a href="#property_elm">elm</a>
 
                             </li>
                             <li class="index-item property">
@@ -316,7 +322,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__addEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l145"><code>develop\amp\core\class\Events.js:145</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l144"><code>develop\amp\core\class\Events.js:144</code></a>
         </p>
 
 
@@ -337,8 +343,7 @@
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -348,8 +353,7 @@
 
 
                     <div class="param-description">
-                        <p>コールバック関数</p>
-
+                        コールバック関数
                     </div>
 
                 </li>
@@ -359,8 +363,7 @@
 
 
                     <div class="param-description">
-                        <p>コンテキスト</p>
-
+                        コンテキスト
                     </div>
 
                 </li>
@@ -396,7 +399,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l112"><code>develop\amp\core\class\Mediaquery.js:112</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l111"><code>develop\amp\core\class\inherits\Mediaquery.js:111</code></a>
         </p>
 
 
@@ -404,7 +407,8 @@
     </div>
 
     <div class="description">
-        <h4>状態を監視し、フォトサイズに変更があればイベントを発行します</h4>
+        <h4>イベントコントローラー</h4>
+<p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
     </div>
 
 
@@ -443,7 +447,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__getEventNameMap">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l238"><code>develop\amp\core\class\Events.js:238</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l237"><code>develop\amp\core\class\Events.js:237</code></a>
         </p>
 
 
@@ -464,8 +468,7 @@
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -510,7 +513,7 @@
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method__removeEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l174"><code>develop\amp\core\class\Events.js:174</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l173"><code>develop\amp\core\class\Events.js:173</code></a>
         </p>
 
 
@@ -519,7 +522,7 @@
 
     <div class="description">
         <h4>イベント削除</h4>
-TODO: 内部処理最適化予定
+FIXME: 内部処理最適化予定
     </div>
 
         <div class="params">
@@ -532,8 +535,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -543,8 +545,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>コールバック関数</p>
-
+                        コールバック関数
                     </div>
 
                 </li>
@@ -556,6 +557,46 @@ TODO: 内部処理最適化予定
 
             <div class="returns-description">
                         <span class="type">Void</span>:
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getStyle" class="method item">
+    <h3 class="name"><code>getStyle</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l182"><code>develop\amp\core\class\inherits\Mediaquery.js:182</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <h4>要素のスタイルを返します</h4>
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
             </div>
         </div>
 
@@ -585,7 +626,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_hasEvent">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l255"><code>develop\amp\core\class\Events.js:255</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l254"><code>develop\amp\core\class\Events.js:254</code></a>
         </p>
 
 
@@ -593,7 +634,7 @@ TODO: 内部処理最適化予定
     </div>
 
     <div class="description">
-        <h4>イベントが登録されているか判定します</h4>
+        <h4>登録イベントがあるか判定します</h4>
     </div>
 
         <div class="params">
@@ -606,8 +647,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -651,7 +691,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_off">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l131"><code>develop\amp\core\class\Events.js:131</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l130"><code>develop\amp\core\class\Events.js:130</code></a>
         </p>
 
 
@@ -672,8 +712,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -683,8 +722,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントリスナー</p>
-
+                        イベントリスナー
                     </div>
 
                 </li>
@@ -734,7 +772,7 @@ TODO: 内部処理最適化予定
                 AMP.Events
             </a>
             but overwritten in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l136"><code>develop\amp\core\class\Mediaquery.js:136</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l136"><code>develop\amp\core\class\inherits\Mediaquery.js:136</code></a>
         </p>
 
 
@@ -825,7 +863,7 @@ TODO: 内部処理最適化予定
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/AMP.Events.html#method_onece">AMP.Events</a>:
-        <a href="../files/develop_amp_core_class_Events.js.html#l110"><code>develop\amp\core\class\Events.js:110</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l109"><code>develop\amp\core\class\Events.js:109</code></a>
         </p>
 
 
@@ -846,8 +884,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントタイプ</p>
-
+                        イベントタイプ
                     </div>
 
                 </li>
@@ -857,8 +894,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>イベントリスナー</p>
-
+                        イベントリスナー
                     </div>
 
                 </li>
@@ -868,8 +904,7 @@ TODO: 内部処理最適化予定
 
 
                     <div class="param-description">
-                        <p>コンテキスト</p>
-
+                        コンテキスト
                     </div>
 
                 </li>
@@ -954,7 +989,7 @@ TODO: 内部処理最適化予定
                 AMP.Events
             </a>
             but overwritten in
-        <a href="../files/develop_amp_core_class_Mediaquery.js.html#l154"><code>develop\amp\core\class\Mediaquery.js:154</code></a>
+        <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l154"><code>develop\amp\core\class\inherits\Mediaquery.js:154</code></a>
         </p>
 
 
@@ -963,7 +998,7 @@ TODO: 内部処理最適化予定
 
     <div class="description">
         <h4>イベント発行</h4>
-第二引数以降に値を渡すとcallbackに引数として渡します
+<p>第二引数以降に値を渡すとcallbackに引数として渡します</p>
     </div>
 
         <div class="params">
@@ -1027,9 +1062,9 @@ TODO: 内部処理最適化予定
                     
                                 <div class="example-content">
                                     <p>_listeners = {
-                    attr    : eventObj.attr,
-                    func    : listener,
-                    context : context
+                    attr    : eventObj.attr, <br>
+                    func    : listener, <br>
+                    context : context <br>
                     }</p>
                     
                                 </div>
@@ -1050,7 +1085,7 @@ TODO: 内部処理最適化予定
                                     AMP.BASE_CLASS
                                 </a>
                                 but overwritten in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l86"><code>develop\amp\core\class\Mediaquery.js:86</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l85"><code>develop\amp\core\class\inherits\Mediaquery.js:85</code></a>
                             </p>
                     
                     
@@ -1063,8 +1098,8 @@ TODO: 内部処理最適化予定
                     
                     
                     </div>
-                    <div id="property_el" class="property item">
-                        <h3 class="name"><code>el</code></h3>
+                    <div id="property_elm" class="property item">
+                        <h3 class="name"><code>elm</code></h3>
                         <span class="type">DOM</span>
                     
                     
@@ -1074,7 +1109,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l29"><code>develop\amp\core\class\Mediaquery.js:29</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l29"><code>develop\amp\core\class\inherits\Mediaquery.js:29</code></a>
                             </p>
                     
                     
@@ -1100,7 +1135,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l95"><code>develop\amp\core\class\Mediaquery.js:95</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l94"><code>develop\amp\core\class\inherits\Mediaquery.js:94</code></a>
                             </p>
                     
                     
@@ -1108,7 +1143,7 @@ TODO: 内部処理最適化予定
                     
                         <div class="description">
                             <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
-                    !!! FIXME : イベント属性追加予定
+                    FIXME: イベント属性追加予定
                         </div>
                     
                             <p><strong>Default:</strong> change</p>
@@ -1126,7 +1161,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l42"><code>develop\amp\core\class\Mediaquery.js:42</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l42"><code>develop\amp\core\class\inherits\Mediaquery.js:42</code></a>
                             </p>
                     
                     
@@ -1151,7 +1186,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l51"><code>develop\amp\core\class\Mediaquery.js:51</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l51"><code>develop\amp\core\class\inherits\Mediaquery.js:51</code></a>
                             </p>
                     
                     
@@ -1176,7 +1211,7 @@ TODO: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Mediaquery.js.html#l76"><code>develop\amp\core\class\Mediaquery.js:76</code></a>
+                            <a href="../files/develop_amp_core_class_inherits_Mediaquery.js.html#l75"><code>develop\amp\core\class\inherits\Mediaquery.js:75</code></a>
                             </p>
                     
                     

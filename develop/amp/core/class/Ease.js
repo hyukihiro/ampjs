@@ -15,6 +15,7 @@
 
   /**
    * <h4>Easingを管理します</h4>
+   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
    *
    * @class AMP.Ease
    * @extends AMP.BASE_CLASS
@@ -55,7 +56,7 @@
 
   /**
    * <h4>css3 Easing用ネームスペース</h4>
-   * <a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a>
+   * <p><a href="http://easings.net/ja" target="_blank">Easingサンプルサイト</a></p>
    *
    * @property css
    * @type {Object}

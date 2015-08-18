@@ -15,13 +15,14 @@
 
   /**
    * <h4>イベント</h4>
-   * イベントクラスの継承して使用出来ます<br>
-   * メディエーターとしても使用すことも可能です
+   * <p>イベントクラスの継承して使用出来ます<br>
+   * メディエーターとしても使用すことも可能です<br>
+   * DEMO作成予定</p>
+   *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
-   *
    * @example
    *   // on<br>
    *   events.on('change', function(){...});<br>
@@ -35,22 +36,20 @@
    *   // tigger<br>
    *   events.tigger('change');<br>
    *   events.tigger('change.type');
-   *
    */
   function Events(){
     /**
      * <h4>イベントリスナーを連想配列で格納します</h4>
      *
-     * @example
-     * _listeners = {
-     *    attr    : eventObj.attr,
-     *    func    : listener,
-     *    context : context
-     * }
-     *
      * @private
      * @property _listeners
      * @type {Object}
+     * @example
+     *   _listeners = {
+     *      attr    : eventObj.attr, <br>
+     *      func    : listener, <br>
+     *      context : context <br>
+     *   }
      */
     this._listeners = {};
   }
@@ -93,7 +92,7 @@
 
   /**
    * <h4>イベント登録</h4>
-   * イベント名に属性値を付与することが出来ます
+   * <p>イベント名に属性名を付与するも可能</p>
    *
    * @method on
    * @param  {String} type イベントタイプ
@@ -173,7 +172,7 @@
 
   /**
    * <h4>イベント削除</h4>
-   * TODO: 内部処理最適化予定
+   * FIXME: 内部処理最適化予定
    *
    * @private
    * @method _removeEvent
@@ -253,7 +252,7 @@
 
 
   /**
-   * <h4>イベントが登録されているか判定します</h4>
+   * <h4>登録イベントがあるか判定します</h4>
    *
    * @method hasEvent
    * @param  {String} type イベントタイプ

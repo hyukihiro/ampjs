@@ -15,6 +15,7 @@
 
   /**
    * <h4>Vectorを管理します</h4>
+   * <p>DEMO作成予定</p>
    *
    * @class AMP.Vector
    * @extends AMP.BASE_CLASS
@@ -262,7 +263,7 @@
    * <h4>アングルモードの設定</h4>
    *
    * @method setAngleMode
-   * @param {String} type アングルモード名（radians　or degrees）
+   * @param {String} type アングルモード名（radians or degrees）
    * @return {Vector}
    */
   p.setAngleMode = function(type){
@@ -279,7 +280,7 @@
    * <h4>アングルモードの取得</h4>
    *
    * @method getAngleMode
-   * @return {String} アングルモードを返す（radians　or degrees）
+   * @return {String} アングルモードを返す（radians or degrees）
    */
   p.getAngleMode = function(){
     return this._angleMode;

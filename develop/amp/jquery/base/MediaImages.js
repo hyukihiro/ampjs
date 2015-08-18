@@ -15,7 +15,8 @@
 
   /**
    * <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
-   * !!! AMP.Mediaqueryを継承しています
+   * <p>!!! AMP.Mediaqueryを継承しています<br>
+   * <a href="../../demo/AMP.$.MediaImages.html">DEMO</a></p>
    *
    * @class AMP.$.MediaImageChange
    * @extends AMP.Mediaquery
@@ -29,39 +30,36 @@
     }
 
     /**
-     * <h4>プロパティ格納オブジェクト</h4>
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
-     * @property param
+     * @property props
      * @type {Object}
      */
-		this.param = $.extend(true,
-      {},
-      MediaImageChange.mediaImagesOptions,
-      options
-    );
+		this.props = $.extend(true, {}, MediaImageChange.options, options);
 
     if(!$images || !($images instanceof jQuery)){
-      $images = $('img[' + this.param.attrKey + ']');
+      $images = $('img[' + this.props.attrKey + ']');
     }
 
     /**
      * <h4>画像を書き換える要素</h4>
      *
-     * @property param.$images
+     * @property props.$images
      * @type {jQuery}
      */
-    this.param.$images = $images;
+    this.props.$images = $images;
 
     /**
      * <h4>現在の状態</h4>
      *
-     * @property param.current
+     * @property props.current
      * @type {String}
      */
-    this.param.current = null;
+    this.props.current = null;
 
 		// superClass constructor call
-		MediaImageChange.Mediaquery_constructor.call(this, this.param.element);
+		MediaImageChange.Mediaquery_constructor.call(this, this.props.element);
 	}
 
   // AMP.Mediaqueryクラスを継承
@@ -83,7 +81,7 @@
    * @property VERSION
    * @type {String}
    */
-  MediaImageChange.VERSION = '1.0.1';
+  MediaImageChange.VERSION = '1.1.0';
 
 
   /**
@@ -96,24 +94,25 @@
 
 
   /**
-   * <h4>デフォルト値、格納オブジェクト</h4>
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
    * @static
-   * @property mediaImagesOptions
+   * @property options
    * @type {Object}
    */
   /**
    * <h4>監視対象要素</h4>
    *
    * @static
-   * @property mediaImagesOptions.element
+   * @property options.element
    * @type {DOM}
    */
   /**
    * <h4>画像ファイルパス格納属性名</h4>
    *
    * @static
-   * @property mediaImagesOptions.attrKey
+   * @property options.attrKey
    * @default 'data-media-img'
    * @type {String}
    */
@@ -121,7 +120,7 @@
    * <h4>画像ファイルに追加するprefix</h4>
    *
    * @static
-   * @property mediaImagesOptions.imagePrefix
+   * @property options.imagePrefix
    * @default '_'
    * @type {String}
    */
@@ -129,10 +128,10 @@
    * <h4>対象要素監視しているか？</h4>
    *
    * @static
-   * @property mediaImagesOptions.isObserver
+   * @property options.isObserver
    * @type {String}
    */
-  MediaImageChange.mediaImagesOptions = {
+  MediaImageChange.options = {
     element    : null,
     attrKey    : 'data-media-img',
     imagePrefix: '_',
@@ -169,8 +168,8 @@
 		var self = this;
 
 		this.on('change.MediaImageChange', function(event){
-			if(self.param.isObserver){
-				self.param.current = event.mediaStyle;
+			if(self.props.isObserver){
+				self.props.current = event.mediaStyle;
 				self.change();
 			}
 		}).trigger('change.MediaImageChange');
@@ -199,7 +198,7 @@
    * @return {MediaImageChange}
    */
   p.setObserver = function(isState){
-    this.param.isObserver = AMP.isBoolean(isState) ? isState : this.param.isObserver;
+    this.props.isObserver = AMP.isBoolean(isState) ? isState : this.props.isObserver;
     return this;
   };
 
@@ -212,14 +211,14 @@
    */
   p.change = function(){
 		var self = this,
-		$images = this.param.$images,
+		$images = this.props.$images,
 		data,
 		ext;
 
 		$images.each(function(i){
-			data = $images.eq(i).attr(self.param.attrKey);
+			data = $images.eq(i).attr(self.props.attrKey);
 			ext = data.substring(data.lastIndexOf('.'), data.length);
-			$images[i].src = data.replace(ext, self.param.imagePrefix + self.param.current + ext);
+			$images[i].src = data.replace(ext, self.props.imagePrefix + self.props.current + ext);
     });
 
     return this;

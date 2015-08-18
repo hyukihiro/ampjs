@@ -175,7 +175,7 @@ MODULE.gulp.task('js', function(){
 	 MODULE.gulp.src([
 		PATH.develop + 'amp/core/*.js',
 		PATH.develop + 'amp/core/base/*.js',
-		PATH.develop + 'amp/core/class/*.js'
+		PATH.develop + 'amp/core/class/**/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())

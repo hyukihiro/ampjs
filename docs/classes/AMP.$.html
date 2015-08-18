@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\core\class\Mediaquery.js - AMPjs</title>
+    <title>AMP.$ - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.5</em>
+            <em>API Docs for: 3.0.6</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -38,6 +38,7 @@
                 
                         <div id="api-tabview-panel">
                             <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
@@ -47,6 +48,7 @@
                                 <li><a href="../classes/AMP.$.Scroll.html">AMP.$.Scroll</a></li>
                                 <li><a href="../classes/AMP.$.ScrollToggle.html">AMP.$.ScrollToggle</a></li>
                                 <li><a href="../classes/AMP.$.Slider.html">AMP.$.Slider</a></li>
+                                <li><a href="../classes/AMP.$.Slip.html">AMP.$.Slip</a></li>
                                 <li><a href="../classes/AMP.$.SmoothScroll.html">AMP.$.SmoothScroll</a></li>
                                 <li><a href="../classes/AMP.$.UIController.html">AMP.$.UIController</a></li>
                                 <li><a href="../classes/AMP.Array.html">AMP.Array</a></li>
@@ -103,220 +105,83 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\core\class\Mediaquery.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-/// AMPjs Javascript Library
-/// The MIT License (MIT)
-/// author Yoshihito Fujiwara
-/// source https://bitbucket.org/yoshihitofujiwara/ampjs
-/// Copyright (c) 2014 Yoshihito Fujiwara
-
-(function(root, AMP){
-
-  // &#x27;use strict&#x27;;
+<h1>AMP.$ Class</h1>
+<div class="box meta">
 
 
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;Mediaqueryのブレイクポイントイベント&lt;/h4&gt;
-   * !!!: 対象の要素(head)にcssでフォントファミリーを指定してください&lt;br&gt;
-   * !!!: シングルトン&lt;br&gt;
-   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
-   * &lt;em&gt;AMP.mediaquery&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください
-   *
-   * @class AMP.Mediaquery
-   * @extends AMP.Events
-   * @constructor
-   * @param {DOM} element 監視対象要素
-   */
-  function Mediaquery(element){
-    /**
-     * &lt;h4&gt;スタイルを監視する要素&lt;/h4&gt;
-     *
-     * @property el
-     * @default head
-     * @type {DOM}
-     */
-    if(element &amp;&amp; element.nodeType === 1){
-      this.el = element;
-    } else {
-      this.el = document.getElementsByTagName(&#x27;head&#x27;)[0];
-    }
-
-    /**
-     * &lt;h4&gt;要素を監視しているか&lt;/h4&gt;
-     *
-     * @property isObserver
-     * @default false
-     * @type {Boolean}
-     */
-    this.isObserver = false;
-
-    /**
-     * &lt;h4&gt;要素の現在のスタイルを保管します&lt;/h4&gt;
-     *
-     * @property mediaStyle
-     * @type {String}
-     */
-    this.mediaStyle = null;
-
-    // superClass constructor call
-    // Mediaquery.Events_constructor.call(this);
-    AMP.Events.call(this);
-  }
-
-  // AMP.Eventsクラスを継承
-  AMP.inherits(Mediaquery, AMP.Events);
-
-  // prototype
-  var p = Mediaquery.prototype;
+        <div class="foundat">
+            Defined in: <a href="../files/develop_amp_jquery_AMP.$.js.html#l10"><code>develop\amp\jquery\AMP.$.js:10</code></a>
+        </div>
 
 
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * &lt;h4&gt;バージョン情報&lt;/h4&gt;
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Mediaquery.VERSION = &#x27;2.0.2&#x27;;
+</div>
 
 
-  /**
-   * &lt;h4&gt;クラス名&lt;/h4&gt;
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = &#x27;Mediaquery&#x27;;
+<div class="box intro">
+    
+</div>
 
 
-  /**
-   * &lt;h4&gt;フォントサイズ変更時の発行するイベントタイプ&lt;/h4&gt;
-   * !!! FIXME : イベント属性追加予定
-   *
-   * @static
-   * @property eventType
-   * @default change
-   * @type {String}
-   */
-  Mediaquery.eventType = &#x27;change&#x27;;
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
 
 
+                <div class="index-section properties">
+                    <h3>Properties</h3>
 
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_AMP.$.VERSION">AMP.$.VERSION</a>
 
-  /**
-   * &lt;h4&gt;状態を監視し、フォトサイズに変更があればイベントを発行します&lt;/h4&gt;
-   *
-   * @private
-   * @method _controller
-   * @return {Void}
-   */
-  p._controller = function(){
-    var self = this;
-
-    // set property
-    this.isObserver = true;
-    this.mediaStyle = this.getStyle();
-
-    // event
-    AMP.addEvent(root, &#x27;resize&#x27;, function(){
-      if(self.mediaStyle !== self.getStyle()){
-        self.mediaStyle = self.getStyle();
-        self.trigger(Mediaquery.eventType);
-      }
-    });
-  };
+                                    <span class="flag static">static</span>
+                            </li>
+                    </ul>
+                </div>
 
 
-  /**
-   * &lt;h4&gt;イベント登録&lt;/h4&gt;
-   *
-   * @method on
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.on = function(type, listener, context){
-    if(!this.isObserver){
-      this._controller();
-    }
-    this._addEvent(type, listener, context);
-    return this;
-  };
+        </div>
 
 
-  /**
-   * &lt;h4&gt;イベント発行&lt;/h4&gt;
-   * 第二引数以降に値を渡すとcallbackに引数として渡します
-   *
-   * @method trigger
-   * @param  {String} type イベントタイプ
-   * @return {Events}
-   */
-  p.trigger = function(type){
-    var self = this,
-    events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type],
-    args = AMP.argsToArray(arguments, 1);
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
 
-    args.unshift({mediaStyle: self.mediaStyle, eventType: type});
-
-    if(listeners){
-      AMP.each(listeners, function(item){
-        if(!events.attr || item.attr === events.attr){
-          // item.func.call(item.context, {mediaStyle: self.mediaStyle});
-          item.func.apply(item.context, args);
-        }
-      });
-    }
-    return self;
-  };
-
-
-  /**
-   * &lt;h4&gt;要素のスタイルを返します&lt;/h4&gt;
-   *
-   * ＠method getStyle
-   * @return {String}
-   */
-  p.getStyle = function(){
-    if(root.getComputedStyle){
-      return getComputedStyle(this.el).getPropertyValue(&#x27;font-family&#x27;);
-    } else {
-      // !!!: jshintのチェックを緩和します
-      /*jshint -W069 */
-      return this.el.currentStyle[&#x27;fontFamily&#x27;];
-    }
-  };
+                    <div id="property_AMP.$.VERSION" class="property item">
+                        <h3 class="name"><code>AMP.$.VERSION</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_AMP.$.js.html#l15"><code>develop\amp\jquery\AMP.$.js:15</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>バージョン情報</h4>
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
 
 
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Mediaquery = Mediaquery;
-  AMP.mediaquery = new Mediaquery();
-
-
-}(window, AMP));
-
-    </pre>
+    </div>
 </div>
                     </div>
                 </div>
