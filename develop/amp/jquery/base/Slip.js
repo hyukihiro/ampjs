@@ -246,6 +246,7 @@
   /**
    * <h4>アニメーション</h4>
    *
+   * @private
    * @method _tween
    * @param  {Number} num   要素のインデックス
    * @param  {Object} event イベントオブジェクト

@@ -15,40 +15,6 @@
 <link rel="stylesheet" href="css/index.css" media="all">
 
 <style type="text/css">
-.float{
-	position: relative;
-	outline: 1px solid #f09;
-	width: 300px;
-	height: 300px;
-	background: #fff;
-}
-.float_frame{
-	width: 100%;
-	height: 100%;
-	background: #ccc;
-}
-.float_inner{
-	width: 100%;
-	height: 100%;
-	/*background: #000;*/
-}
-
-.slip{
-	margin: 50px auto;
-	overflow: hidden;
-	position: relative;
-	width: 200px;
-	height: 200px;
-	outline: 1px solid #f09;
-}
-.slip_tween{
-	position: absolute;
-	top: -100%;
-	left: -100%;
-	width: 100%;
-	height: 100%;
-	background: rgba(0,0,0,.5);
-}
 
 </style>
 
@@ -65,58 +31,35 @@
 <div id="content" class="cf">
 
 
-<p class="slip">AAA<span class="slip_tween"></span></p>
-<p class="slip">AAA<span class="slip_tween"></span></p>
-<p class="slip">AAA<span class="slip_tween"></span></p>
-
-
-
-
-<script id="tmpl" type="text/template">
-<dl>
-{{#article}}
-<dt><span class="date">{{date}}</span><span class="ttl">{{title}}</span></dt>
-<dd>{{text}}</dd>
-{{/article}}
-</dl>
-</script>
-
-
-<!--
-<div class="slider">
-<div class="frame">
-<ul class="slide cf">
-<li><a href="./"><img src="images/slider/mv01.jpg" alt=""></a></li>
-<li><a href="./"><img src="images/slider/mv02.jpg" alt=""></a></li>
-<li><a href="./"><img src="images/slider/mv03.jpg" alt=""></a></li>
-<li><a href="./"><img src="images/slider/mv04.jpg" alt=""></a></li>
-<li><a href="./"><img src="images/slider/mv05.jpg" alt=""></a></li>
+<div class="crossfader">
+<ul class="frame">
+<li><img src="images/slider/mv01.jpg" alt=""></li>
+<li><img src="images/slider/mv02.jpg" alt=""></li>
+<li><img src="images/slider/mv03.jpg" alt=""></li>
+<li><img src="images/slider/mv04.jpg" alt=""></li>
+<li><img src="images/slider/mv05.jpg" alt=""></li>
 </ul>
-</div>
-<ul class="pointer">
-<li><a href=""></a></li>
-</ul>
+
+<div class="nav cf">
 <p class="prev"><a href="#"><img class="rover" src="images/slider/ico_prev.png" width="40" height="48" alt=""></a></p>
 <p class="next"><a href="#"><img class="rover" src="images/slider/ico_next.png" width="40" height="48" alt=""></a></p>
-<ul class="thumbnail cf">
-<li><a href="#"><img src="images/slider/mv01_navi.jpg" width="120" height="50" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv02_navi.jpg" width="120" height="50" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv03_navi.jpg" width="120" height="50" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv04_navi.jpg" width="120" height="50" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv05_navi.jpg" width="120" height="50" alt=""></a></li>
+
+<ul class="pointer">
+<li><a href="#"></a></li>
 </ul>
-</div>-->
+
+<ul class="thumbnail">
+<li><a href="#"><img src="images/slider/mv01.jpg" width="100" height="auto" alt=""></a></li>
+<li><a href="#"><img src="images/slider/mv02.jpg" width="100" height="auto" alt=""></a></li>
+<li><a href="#"><img src="images/slider/mv03.jpg" width="100" height="auto" alt=""></a></li>
+<li><a href="#"><img src="images/slider/mv04.jpg" width="100" height="auto" alt=""></a></li>
+<li><a href="#"><img src="images/slider/mv05.jpg" width="100" height="auto" alt=""></a></li>
+</ul>
+</div>
+<!-- .crossfader // --></div>
 
 
-<!--
-<img src="http://www.musicstoreinc.com/products/images/6262212_01.jpg" alt="">
-<img src="http://c1.zzounds.com/media/quality,85/2315500020v1_hi-86951e68be51a05ab0c04a890dc3b6f6.jpg" alt="">
-<img src="https://bassmiddletreble.files.wordpress.com/2008/04/combo.jpg" alt="">
-<img src="http://www.musicstoreinc.com/products/images/6262212_01.jpg" alt="">
--->
 
-
-<!-- <div class="float"><div class="float_frame"><div class="float_inner"></div></div></div> -->
 
 <!-- #content // --></div>
 
@@ -173,6 +116,7 @@
 <script src="../develop/amp/jquery/base/Slip.js"></script>
 <script src="../develop/amp/jquery/base/SmothScroll.js"></script>
 <script src="../develop/amp/jquery/base/UIController.js"></script>
+<script src="../develop/amp/jquery/base/inherits/Crossfader.js"></script>
 <script src="../develop/amp/jquery/base/inherits/Slider.js"></script>
 <script src="../develop/amp/jquery/utils/Render.js"></script>
 

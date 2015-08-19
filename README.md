@@ -141,7 +141,6 @@ AMP.inherits
 
 ■ 追加
 AMP.$.LiquedSlider
-AMP.$.Crossfader
 ```
 
 ---

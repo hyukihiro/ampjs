@@ -2,6 +2,75 @@
 
 
 
+/*--------------------------------------------------------------------------
+	.crossfader
+--------------------------------------------------------------------------*/
+
+.crossfader{}
+
+
+.crossfader .frame{
+	position: relative;
+	max-width: 700px;
+	margin: 50px auto;
+	height: 250px;
+}
+.crossfader .frame li{
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+.crossfader .frame img{
+	max-width: 100%;
+	height: auto;
+}
+
+.crossfader .prev{
+	float: left;
+}
+.crossfader .next{
+	float: right;
+}
+
+.crossfader ul.pointer{
+
+	text-align: center;
+	letter-spacing: -.4em;
+}
+.crossfader ul.pointer li{
+	display: inline;
+	letter-spacing: 0;
+}
+.crossfader ul.pointer a{
+	border-radius: 100%;
+	display: inline-block;
+	margin: 5px;
+	width: 12px;
+	height: 12px;
+	background: #ccc;
+}
+.crossfader ul.pointer li.active a,
+.crossfader ul.pointer li a:hover{
+	background: #125982;
+}
+
+.crossfader ul.thumbnail{
+	clear: both;
+	text-align: center;
+	padding-top: 15px;
+	letter-spacing: -.4em;
+}
+.crossfader ul.thumbnail li{
+	display: inline;
+	letter-spacing: 0;
+}
+.crossfader ul.thumbnail a{
+	display: inline-block;
+	margin: 5px;
+}
+
+
+
 
 /*--------------------------------------------------------------------------
 	.slider

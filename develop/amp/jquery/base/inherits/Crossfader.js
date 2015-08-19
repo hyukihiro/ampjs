@@ -15,15 +15,15 @@
 
   /**
    * <h4>スライダー</h4>
-   * <p><a href="../../demo/AMP.$.Slider.html">DEMO</a></p>
+   * <p><a href="../../demo/AMP.$.Crossfader.html">DEMO</a></p>
    *
    * @constructor
-   * @class AMP.$.Slider
+   * @class AMP.$.Crossfader
    * @extends AMP.$.UIController
-   * @param {jQuery} $slider スライダー要素
+   * @param {jQuery} $crossfader crossfader要素
    * @param {Object} options オプション値
    */
-  function Slider($slider, options){
+  function Crossfader($crossfader, options){
     /**
      * <h4>プロパティオブジェクト</h4>
      * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
@@ -44,32 +44,6 @@
      * @type {Number}
      */
     /**
-     * <h4>スライドで進むアイテム数</h4>
-     *
-     * @private
-     * @default null
-     * @property props._stepLength
-     * @type {Number}
-     */
-    /**
-     * <h4>スライドカウントのMAX値</h4>
-     *
-     * @property props.slideMaxLength
-     * @type {Number}
-     */
-    /**
-     * <h4>スライドする距離</h4>
-     *
-     * @property props.distance
-     * @type {Number}
-     */
-    /**
-     * <h4>left値</h4>
-     *
-     * @property props.left
-     * @type {Number}
-     */
-    /**
      * <h4>タイマーID</h4>
      *
      * @private
@@ -86,22 +60,16 @@
 		this.props = $.extend(
 			true,
 			{},
-			Slider.options,
+			Crossfader.options,
 			{
-        $wrap         : $slider,
-        $frame        : $slider.find('.frame'),
-        $slide        : $slider.find('.slide'),
-        $slideItems   : $slider.find('.slide').children(),
-        $pointer      : $slider.find('.pointer'),
-        $thumbnail    : $slider.find('.thumbnail a'),
-        $prev         : $slider.find('.prev a'),
-        $next         : $slider.find('.next a'),
-        length        : $slider.find('.slide').children().length,
-        _stepLength   : null,
-        slideMaxLength: 0,
-        distance      : 0,
-        left          : 0,
-        _adjustLeft   : 0,
+        $wrap         : $crossfader,
+        $frame        : $crossfader.find('.frame'),
+        $item         : $crossfader.find('.frame').children(),
+        $pointer      : $crossfader.find('.pointer'),
+        $thumbnail    : $crossfader.find('.thumbnail a'),
+        $prev         : $crossfader.find('.prev a'),
+        $next         : $crossfader.find('.next a'),
+        length        : $crossfader.find('.frame').children().length,
         _timerId      : null,
         _isAnimate    : false
 			},
@@ -110,10 +78,10 @@
   }
 
   // AMP.$.UIControllerクラスを継承
-  AMP.inherits(Slider, AMP.$.UIController);
+  AMP.inherits(Crossfader, AMP.$.UIController);
 
   // prototype
-  var p = Slider.prototype;
+  var p = Crossfader.prototype;
 
 
 
@@ -128,7 +96,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.2.0';
+  Crossfader.VERSION = '1.0.0';
 
 
   /**
@@ -137,7 +105,7 @@
    * @property className
    * @type {String}
    */
-  p.className = 'Slider';
+  p.className = 'Crossfader';
 
 
   /**
@@ -156,17 +124,10 @@
    * @type {jQuery}
    */
   /**
-   * <h4>スライドする要素</h4>
-   *
-   * @static
-   * @property options.$slide
-   * @type {jQuery}
-   */
-  /**
    * <h4>スライドする子要素</h4>
    *
    * @static
-   * @property options.$slideItems
+   * @property options.$item
    * @type {jQuery}
    */
   /**
@@ -212,24 +173,10 @@
    * @type {Boolean}
    */
   /**
-   * <h4>スライドエリアの高さ調整機能を有効にするか</h4>
-   *
-   * @static
-   * @property options.isAutoHeight
-   * @type {Boolean}
-   */
-  /**
    * <h4>現在アクティブなスライドアイテムインデックス</h4>
    *
    * @static
    * @property options.current
-   * @type {Number}
-   */
-  /**
-   * <h4>スライドステップ数を固定したい場合、ステップ数の指定</h4>
-   *
-   * @static
-   * @property options.slideStep
    * @type {Number}
    */
   /**
@@ -268,10 +215,9 @@
    * @property options.tween
    * @type {Object}
    */
-  Slider.options = {
+  Crossfader.options = {
     $frame        : null,
-    $slide        : null,
-    $slideItems   : null,
+    $item         : null,
     $pointer      : null,
     $thumbnail    : null,
     $prev         : null,
@@ -279,15 +225,14 @@
     isFlick       : true,
     isResize      : true,
     isTimerCancel : true,
-    isAutoHeight  : false,
+    isAutoHeight  : true,
     current       : 0,
-    slideStep     : 0,
     timer         : 0,
     activeClass   : 'active',
     resizeCall    : $.noop,
     resizeStopCall: $.noop,
     tween         : {
-      easing      : 'easeOutQuart',
+      easing      : 'easeInSine',
       duration    : 500,
       begin       : $.noop,
       progress    : $.noop,
@@ -302,16 +247,16 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>Sliderインスタンスの生成</h4>
+   * <h4>Crossfaderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Slider
+   * @class AMP.$.Crossfader
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
-   * @return {Slider}
+   * @return {Crossfader}
    */
-  Slider.get = function($slider, options){
-    return new Slider($slider, options).init();
+  Crossfader.get = function($crossfader, options){
+    return new Crossfader($crossfader, options).init();
   };
 
 
@@ -320,7 +265,7 @@
    * Singleton
    *
    * @method  init
-   * @return {Slider}
+   * @return {Crossfader}
    */
   p.init = function(){
     // 初期化フラグ
@@ -329,75 +274,21 @@
     }
     this._isInit = true;
 
-    // props
-    this.setProps();
-
     // view
     this.createPointer();
-    this.setPosition();
-    this.active();
 
     // event
     this.addEventResize();
     this.addEventTimerCancel();
-    this.addEventThumbnail(this.props.$thumbnail);
-    this.addEventFlick(this.props.$slide);
+    this.addEventFlick(this.props.$frame);
     this.addEventNext(this.props.$next);
     this.addEventPrev(this.props.$prev);
+    this.addEventPager(this.props.$thumbnail);
     this.addEventPager(this.props.$pointer.find('a'));
 
-    // timer
-    this.timerStart();
-
-    return this;
-  };
-
-
-  /**
-   * <h4>プロパティ設定</h4>
-   *
-   * @method setProps
-   * @return {Slider}
-   */
-  p.setProps = function(){
-    // ステージの幅
-		var stageWidth = this.props.$frame.width();
-
-		// アイテム要素の幅
-		var itemWidth = this.props.$slideItems.outerWidth(true);
-
-		// 表示エリアにある要素数
-		var visibleLength = ~~(stageWidth / itemWidth);
-
-    // ステップ数
-    var step = this.props.slideStep && this.props.slideStep < visibleLength? this.props.slideStep : visibleLength;
-
-    // 初期値が無い場合はセット
-    if(!this.props._stepLength){
-      this.props._stepLength = step;
-    }
-
-    // 現在値をセット
-    this.props.current = ~~(this.props._stepLength * this.props.current / step);
-
-    // スライドアイテムのステップ数
-    this.props._stepLength = step;
-
-		// 移動距離
-		this.props.distance = step * itemWidth;
-
-    // スライド最大数
-    this.props.slideMaxLength = Math.ceil(this._getDisplayLength() / step);
-
-    // フレームのセンタリング
-    if(this.props.distance < stageWidth){
-      this.props._adjustLeft = ~~((this.props.distance - stageWidth) / -2);
-    } else {
-      this.props._adjustLeft = 0;
-    }
-
-    // 現在地
-    this.props.left = this.props.current * this.props.distance * -1;
+    // view
+    self.setIndex();
+    self.active();
 
     return this;
   };
@@ -409,25 +300,20 @@
 	 * <h4>リサイズイベント</h4>
 	 *
 	 * @method addEventResize
-	 * @return {Slider}
+	 * @return {Crossfader}
 	 */
 	p.addEventResize = function(){
 		var self = this;
 
-		$(window).off('resize.Slider resizestop.Slider')
-		.on('resize.Slider', function(){
+		$(window).off('resize.Crossfader resizestop.Crossfader')
+		.on('resize.Crossfader', function(){
       if(self.props.isResize){
         self.timerStop();
         self.props.resizeCall();
       }
     })
-    .on('resizestop.Slider', function(){
+    .on('resizestop.Crossfader', function(){
       if(self.props.isResize){
-        self.setProps();
-        self.setPosition();
-        self.createPointer();
-        self.addEventPager(self.props.$pointer.find('a'));
-        self.active();
         self.timerStart();
         self.props.resizeStopCall();
       }
@@ -438,42 +324,22 @@
 
 
   /**
-   * <h4>Thumbnailボタンイベント追加</h4>
-   *
-   * @method addEventThumbnail
-   * @param {jQuery} $thumbnail Thumbnailトリガー要素
-   * @return {Slider}
-   */
-  p.addEventThumbnail = function($thumbnail){
-    var self = this;
-
-    $thumbnail.on('click.Slider', function(){
-      var index = ~~($thumbnail.index(this) / self.props._stepLength);
-      self.moveTo(index);
-      return false;
-    });
-
-    return this;
-  };
-
-
-  /**
    * <h4>タイマーキャンセルイベント</h4>
    * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
    *
 	 * @method addEventTimerCancel
-	 * @return {Slider}
+	 * @return {Crossfader}
    */
   p.addEventTimerCancel = function(){
 		var self = this;
 
-		self.props.$wrap.off('mouseenter.Slider mouseleave.Slider')
-		.on('mouseenter.Slider', function(){
+		self.props.$wrap.off('mouseenter.Crossfader mouseleave.Crossfader')
+		.on('mouseenter.Crossfader', function(){
 			if(self.props.isTimerCancel){
 				self.timerStop();
 			}
 		})
-		.on('mouseleave.Slider', function(){
+		.on('mouseleave.Crossfader', function(){
 			if(self.props.isTimerCancel){
 				self.timerStart();
 			}
@@ -491,7 +357,7 @@
 	 *
 	 * @method timerStart
 	 * @param  {Number} num セットするタイマー値(省略可)
-	 * @return {Slider}
+	 * @return {Crossfader}
 	 */
 	p.timerStart = function(num){
 		var self = this;
@@ -516,7 +382,7 @@
 	/**
 	 * タイマー停止
 	 * @method timerStop
-	 * @return {Slider}
+	 * @return {Crossfader}
 	 */
 	p.timerStop = function(){
 		clearTimeout(this.props._timerId);
@@ -527,7 +393,6 @@
 	/**
 	 *<h4> コントローラー</h4>
 	 *
-   * @override
    * @private
 	 * @method _controller
    * @param  {Number} index スライドする位置
@@ -537,29 +402,25 @@
   p._controller = function(index, nonAnimate){
 		var self = this;
 
-		if(self.props._isAnimate || this.props.current === index){
+    // アニメーションキャンセル
+		if(self.props._isAnimate || self.props.current === index){
 			return void 0;
 		}
 
     // indexの調整
     if(index < 0){
-      index = self.props.slideMaxLength - 1;
-    } else if(index >= self.props.slideMaxLength){
+      index = self.props.length - 1;
+    } else if(index >= self.props.length){
       index = 0;
     }
 
     // パラメータ更新
+    prev = self.props.current;
     self.props.current = index;
-    self.props.left = self.props.current * self.props.distance * -1;
-
-    // 高さ調整
-    if(self.props.isAutoHeight){
-      self.autoHeight();
-    }
 
     // アニメート判定
     if(nonAnimate){
-      self.setPosition();
+      self.setIndex();
       self.active();
     } else {
       $.sequence(
@@ -571,7 +432,7 @@
         },
         function(){
           // スライド
-          return self._tween();
+          return self._tween(prev, self.props.current);
         },
         function(){
           // スライド後
@@ -585,29 +446,11 @@
 
 	/* Views
 	-----------------------------------------------------------------*/
-  /**
-   * <h4>表示可能な要素の数を取得</h4>
-   *
-   * @private
-   * @method _getDisplayLength
-   * @return {Number}
-   */
-  p._getDisplayLength = function(){
-    var count = 0;
-    this.props.$slideItems.each(function(){
-      if($(this).css('display') !== 'none'){
-        count += 1;
-      }
-    });
-    return count;
-  };
-
-
 	/**
 	 * <h4>ポインターの生成</h4>
 	 *
 	 * @method createPointer
-	 * @return {Slider}
+	 * @return {Crossfader}
 	 */
   p.createPointer = function(){
 		if(this.props.$pointer[0]){
@@ -615,7 +458,7 @@
 			print = '',
 			i = 0;
 
-      for(; i < this.props.slideMaxLength; i += 1){
+      for(; i < this.props.length; i += 1){
         print += pointerHTML;
 			}
 			this.props.$pointer[0].innerHTML = print;
@@ -629,20 +472,17 @@
    * <h4>要素のアクティブ化</h4>
    *
    * @method active
-   * @return {Slider}
+   * @return {Crossfader}
    */
   p.active = function(){
-    var index = this.props.current * this.props._stepLength;
-
-    // $slideItems
-    this.props.$slideItems.removeClass(this.props.activeClass)
-    .slice(index, index + this.props._stepLength)
-    .addClass(this.props.activeClass);
+    // $item
+    this.props.$item.removeClass(this.props.activeClass)
+    .eq(this.props.current).addClass(this.props.activeClass);
 
     // $thumbnail
     if(this.props.$thumbnail[0]){
       this.props.$thumbnail.removeClass(this.props.activeClass)
-      .slice(index, index + this.props._stepLength).addClass(this.props.activeClass);
+      .eq(this.props.current).addClass(this.props.activeClass);
     }
 
 		// $pointer
@@ -652,7 +492,7 @@
 		}
 
 		// $next
-		if(this.props.current === this.props.slideMaxLength - 1){
+		if(this.props.current === this.props.length - 1){
       this.props.$next.addClass(this.props.activeClass);
 		} else {
 			this.props.$next.removeClass(this.props.activeClass);
@@ -670,23 +510,14 @@
 
 
   /**
-   * <h4>スライダーをアイテムの高さに揃える</h4>
+   * <h4>クロスフェードアイテムの高さに揃える</h4>
    *
    * @method autoHeight
-   * @return {Slider}
+   * @return {Crossfader}
    */
   p.autoHeight = function(){
-    var height = 0,
-    index = this.props.current * this.props._stepLength,
-    $items = this.props.$slideItems.slice(index, index + this.props._stepLength);
-
-    // 一番高い要素の高さを取得
-    $items.each(function(i){
-      height = height < $items.eq(i).height() ? $items.eq(i).height() : height;
-    });
-
+    var height = this.props.$item.eq(this.props.current).height();
     this.props.$frame.height(height);
-
     return this;
   };
 
@@ -694,44 +525,20 @@
  /**
   * <h4>スライドスタイルのセット</h4>
   *
-  * @method setPosition
-  * @return {Slider}
+  * @method setIndex
+  * @return {Crossfader}
   */
-  p.setPosition = function(){
-    this.props.$slide.css({
-      width: this._getDisplayLength() * this.props.$slideItems.outerWidth(true),
-      left : this.props.left + this.props._adjustLeft
-    });
+  p.setIndex = function(){
+    this.props.$item.velocity('stop')
+    .css({display: 'none', zIndex: 1, opaciy: 0})
+    .eq(this.props.current)
+    .css({display: 'block', zIndex: this.props.length, opaciy: 1});
+
+    if(this.props.isAutoHeight){
+      this.autoHeight();
+    }
 
     return this;
-  };
-
-
-  /**
-   * <h4>指定x座標分移動</h4>
-   *
-   * @private
-   * @method _move
-   * @param  {Number} x 移動するx座標値
-   * @return {Void}
-   */
-  p._move = function(x){
-		this.props.$slide.velocity('stop').css({left: this.props.left + this.props._adjustLeft + x});
-  };
-
-
-  /**
-   * <h4>スライド位置を戻す</h4>
-   *
-   * @private
-   * @method _resetTween
-   * @return {jQuery.Deferred}
-   */
-  p._resetTween = function(){
-		return this.props.$slide.velocity('stop')
-    .velocity({
-      left: this.props.left + this.props._adjustLeft
-    }, this.props.tween.duration / 2, this.props.tween.easing);
   };
 
 
@@ -740,11 +547,27 @@
 	 *
 	 * @private
 	 * @method _tween
+   * @param {Number} prev 前の要素
+   * @param {Number} next 次の要素
 	 * @return {jQuery.Deferred}
 	 */
-	p._tween = function(){
-		return this.props.$slide.velocity('stop')
-    .velocity({left: this.props.left + this.props._adjustLeft}, this.props.tween);
+	p._tween = function(prev, next){
+    // prev hide
+    this.props.$item.velocity('stop')
+    .eq(prev).velocity({opacity: 0, zIndex: 1}, {
+      easing  : this.props.tween.easing,
+      duration: this.props.tween.duration,
+      display : 'none'
+    });
+
+    this.props.$item.eq(next).css({display: 'block',zIndex: this.props.length, opacity: 0});
+    if(this.props.isAutoHeight){
+      this.autoHeight();
+    }
+
+
+    // next show
+		return this.props.$item.eq(next).velocity({opacity: 1}, this.props.tween);
 	};
 
 
@@ -753,7 +576,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.Slider = Slider;
+  AMP.$.Crossfader = Crossfader;
 
 
 }(window, AMP, jQuery));
