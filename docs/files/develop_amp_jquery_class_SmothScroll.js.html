@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\UIController.js - AMPjs</title>
+    <title>develop\amp\jquery\class\SmothScroll.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\UIController.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\SmothScroll.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,21 +126,35 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;UIコントローラ&lt;/h4&gt;
-   * &lt;p&gt;UIコントローラクラスを継承する事でUIコントローラを提供します&lt;/p&gt;
+   * &lt;h4&gt;スムーススクロール（慣性スクロール）&lt;/h4&gt;
+   * &lt;p&gt;&lt;em&gt;※ WindowsPCのみ有効&lt;/em&gt;&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.SmothScroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @protected
-   * @class AMP.$.UIController
+   * @class AMP.$.SmoothScroll
    * @extends AMP.BASE_CLASS
    * @constructor
    */
-  function UIController(){}
+  function SmoothScroll(options){
+    /**
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true,
+      {},
+      SmoothScroll.options,
+      {$page: $(&#x27;html, body&#x27;)},
+      options
+    );
+  }
 
   // 基底クラスを継承
-  AMP.inherits(UIController, AMP.BASE_CLASS);
+  AMP.inherits(SmoothScroll, AMP.BASE_CLASS);
 
   // prototype
-  var p = UIController.prototype;
+  var p = SmoothScroll.prototype;
 
 
 
@@ -154,7 +169,7 @@
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = &#x27;1.1.0&#x27;;
+  SmoothScroll.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -163,23 +178,50 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;UIController&#x27;;
+  p.className = &#x27;SmoothScroll&#x27;;
 
 
   /**
-   * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
    *
-   * @property props
+   * @static
+   * @property options
    * @type {Object}
    */
-  /**
-   * &lt;h4&gt;現在値&lt;/h4&gt;
+    /**
+   * &lt;h4&gt;スムーススクロールエリア&lt;/h4&gt;
    *
-   * @property props.current
+   * @property options.$page
+   * @default $(&#x27;html, body&#x27;)
+   * @type {jQuery}
+   */
+  /**
+   * &lt;h4&gt;スクロール量&lt;/h4&gt;
+   *
+   * @property options.amount
+   * @default 500
    * @type {Number}
    */
-  p.props = {
-    current: 0
+  /**
+   * &lt;h4&gt;duration&lt;/h4&gt;
+   *
+   * @property options.duration
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;easing&lt;/h4&gt;
+   *
+   * @property options.easing
+   * @default easeOutCubic
+   * @type {String}
+   */
+  SmoothScroll.options = {
+    $page   : null,
+    amount  : 400,
+    duration: 600,
+    easing  : &#x27;easeOutCubic&#x27;
   };
 
 
@@ -189,185 +231,66 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Pagerボタンイベント登録&lt;/h4&gt;
+   * &lt;h4&gt;SmoothScrollインスタンスの生成&lt;/h4&gt;
    *
-   * @method addEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
+   * @static
+   * @method get
+   * @param  {Object} options? オプション値 省略可
+   * @return {SmoothScroll}
    */
-  p.addEventPager = function($pager){
-    var self = this;
-    $pager.on(&#x27;click.&#x27; + self.className, function(){
-      self.moveTo($pager.index(this));
-      return false;
-    });
-    return this;
+  SmoothScroll.get = function(options){
+    return new SmoothScroll(options).on();
   };
 
 
   /**
-   * &lt;h4&gt;Pagerボタンイベント削除&lt;/h4&gt;
+   * &lt;h4&gt;初期化&lt;/h4&gt;
    *
-   * @method removeEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
+   * @method on
+   * @return {SmoothScroll}
    */
-  p.removeEventPager = function($pager){
-    $pager.off(&#x27;click.&#x27; + this.className);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;Nextボタンイベント登録&lt;/h4&gt;
-   *
-   * @method addEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
-   */
-  p.addEventNext = function($next){
-    var self = this;
-    $next.on(&#x27;click.&#x27; + self.className, function(){
-      self.next();
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;Nextボタンイベント削除&lt;/h4&gt;
-   *
-   * @method removeEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
-   */
-  p.removeEventNext = function($next){
-    $next.off(&#x27;click.&#x27; + this.className);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;Prevボタンイベント登録&lt;/h4&gt;
-   *
-   * @method addEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.addEventPrev = function($prev){
-    var self = this;
-    $prev.on(&#x27;click.&#x27; + self.className, function(){
-      self.prev();
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;Prevボタンイベント削除&lt;/h4&gt;
-   *
-   * @method removeEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.removeEventPrev = function($prev){
-    $prev.off(&#x27;click.&#x27; + this.className);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;フリックイベント&lt;/h4&gt;
-   *
-   * @method addEventFlick
-   * @return {Slider}
-   */
-  p.addEventFlick = function($trigger){
+  p.on = function(){
     var self = this;
 
-    $trigger.off(&#x27;flickmoveX.Slider flickcancelX.Slider flickX.Slider&#x27;)
-    .on(&#x27;flickmoveX.&#x27; + this.className, function(moveEvent){
-      self._move(moveEvent.moveX);
-    })
-    .on(&#x27;flickcancelX.&#x27; + this.className, function(){
-      self._resetTween();
-    })
-    .on(&#x27;flickX.&#x27; + this.className, function(flickEvent){
-      if(0 &lt; flickEvent.moveX){
-        self.prev();
-      } else {
-        self.next();
-      }
-    });
+    // WindowsPCのみ有効
+    if(AMP.isWindows()){
+      self.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;)
+      .on(&#x27;mousewheel.SmoothScroll&#x27;, function(){
+        self.tween(arguments[1]);
+        return false;
+      });
+    }
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
-   * アニメート無
+   * &lt;h4&gt;イベント削除&lt;/h4&gt;
    *
-   * @method current
-   * @param {jQuery} index index番号
-   * @return {Instance}
+   * @method off
+   * @return {SmoothScroll}
    */
-  p.current = function(index){
-    this._controller(index, true);
+  p.off = function(){
+    this.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;);
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
+   * &lt;h4&gt;スクロールアニメーション&lt;/h4&gt;
    *
-   * @method moveTo
-   * @param {jQuery} index index番号
-   * @return {Instance}
+   * @method tween
+   * @return {Void}
    */
-  p.moveTo = function(index){
-    this._controller(index);
-    return this;
+  p.tween = function(move){
+    var self = this,
+    props = self.props,
+    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    scrollY = move &gt; 0 ? y - props.amount : y + props.amount;
+
+    self.props.$page.velocity(&#x27;stop&#x27;)
+    .velocity(&#x27;scroll&#x27;, {offset: scrollY, duration: props.duration, easing: props.easing});
   };
-
-
-  /**
-   * &lt;h4&gt;次へ&lt;/h4&gt;
-   *
-   * @method next
-   * @return {Instance}
-   */
-  p.next = function(){
-    this._controller(this.props.current + 1);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;前へ&lt;/h4&gt;
-   *
-   * @method prev
-   * @return {Instance}
-   */
-  p.prev = function(){
-    this._controller(this.props.current -1);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;コントローラー&lt;/h4&gt;
-   * 送られてきた値を制御します
-   *
-   * @protected
-   * @private
-   * @method _controller
-   * @param {Number} index スライドインデック
-   * @param {Boolean} noAnimate アニメート無
-   * @return {Instance}
-   */
-  p._controller = function(index, noAnimate){};
 
 
 
@@ -375,7 +298,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.UIController = UIController;
+  AMP.$.SmoothScroll = SmoothScroll;
 
 
 }(window, AMP, jQuery));

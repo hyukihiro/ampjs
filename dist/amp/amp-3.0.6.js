@@ -2573,13 +2573,15 @@ var AMP = {};
    * @extends AMP.BASE_CLASS
    * @constructor
    * @example
+   *   var events = new AMP.Events();
+   *
    *   // on<br>
    *   events.on('change', function(){...});<br>
    *   events.on('change.type', typeCall);<br>
    *
    *   // off<br>
    *   events.off('change');<br>
-   *   events.off('change', typeCall);<br>
+   *   events.off('change', funcName);<br>
    *   events.off();<br>
    *
    *   // tigger<br>
@@ -3967,7 +3969,6 @@ var AMP = {};
 
     // superClass constructor call
     FontResize.Events_constructor.call(this);
-    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -4027,13 +4028,13 @@ var AMP = {};
   p._createElement = function(){
 
     var key = 'AMP_FONT_RESIZE',
-    el = document.createElement('ins'),
+    elm = document.createElement('ins'),
     text = document.createTextNode(key);
 
-    el.id = key;
-    el.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
-    el.appendChild(text);
-    document.body.appendChild(el);
+    elm.id = key;
+    elm.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
+    elm.appendChild(text);
+    document.body.appendChild(elm);
 
     // property
     this.elm = document.getElementById(key);
@@ -4054,7 +4055,7 @@ var AMP = {};
    */
   p._controller = function(){
     var self = this,
-    height = self.el.clientHeight;
+    height = self.elm.clientHeight;
 
     if(self.isFontResize){
       // フォントサイズに変更があれば

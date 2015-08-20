@@ -24,13 +24,15 @@
    * @extends AMP.BASE_CLASS
    * @constructor
    * @example
+   *   var events = new AMP.Events();
+   *
    *   // on<br>
    *   events.on('change', function(){...});<br>
    *   events.on('change.type', typeCall);<br>
    *
    *   // off<br>
    *   events.off('change');<br>
-   *   events.off('change', typeCall);<br>
+   *   events.off('change', funcName);<br>
    *   events.off();<br>
    *
    *   // tigger<br>

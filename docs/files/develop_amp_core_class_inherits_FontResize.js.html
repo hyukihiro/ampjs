@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -162,7 +163,6 @@
 
     // superClass constructor call
     FontResize.Events_constructor.call(this);
-    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -222,13 +222,13 @@
   p._createElement = function(){
 
     var key = &#x27;AMP_FONT_RESIZE&#x27;,
-    el = document.createElement(&#x27;ins&#x27;),
+    elm = document.createElement(&#x27;ins&#x27;),
     text = document.createTextNode(key);
 
-    el.id = key;
-    el.setAttribute(&#x27;style&#x27;, &#x27;display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;&#x27;);
-    el.appendChild(text);
-    document.body.appendChild(el);
+    elm.id = key;
+    elm.setAttribute(&#x27;style&#x27;, &#x27;display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;&#x27;);
+    elm.appendChild(text);
+    document.body.appendChild(elm);
 
     // property
     this.elm = document.getElementById(key);
@@ -249,7 +249,7 @@
    */
   p._controller = function(){
     var self = this,
-    height = self.el.clientHeight;
+    height = self.elm.clientHeight;
 
     if(self.isFontResize){
       // フォントサイズに変更があれば

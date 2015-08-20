@@ -3022,7 +3022,7 @@
      * @type {Number}
      */
     /**
-     * <h4>left値</h4>
+     * <h4>スライドポジションleft値</h4>
      *
      * @property props.left
      * @type {Number}
@@ -3049,7 +3049,7 @@
         $wrap         : $slider,
         $frame        : $slider.find('.frame'),
         $slide        : $slider.find('.slide'),
-        $slideItems   : $slider.find('.slide').children(),
+        $slideItem    : $slider.find('.slide').children(),
         $pointer      : $slider.find('.pointer'),
         $thumbnail    : $slider.find('.thumbnail a'),
         $prev         : $slider.find('.prev a'),
@@ -3111,6 +3111,7 @@
    *
    * @static
    * @property options.$frame
+   * @default $slider.find('.frame')
    * @type {jQuery}
    */
   /**
@@ -3118,13 +3119,15 @@
    *
    * @static
    * @property options.$slide
+   * @default $slider.find('.slide')
    * @type {jQuery}
    */
   /**
-   * <h4>スライドする子要素</h4>
+   * <h4>スライドアイテム要素</h4>
    *
    * @static
-   * @property options.$slideItems
+   * @property options.$slideItem
+   * @default $slider.find('.slide').children()
    * @type {jQuery}
    */
   /**
@@ -3132,6 +3135,7 @@
    *
    * @static
    * @property options.$pointer
+   * @default $slider.find('.pointer')
    * @type {jQuery}
    */
   /**
@@ -3139,6 +3143,7 @@
    *
    * @static
    * @property options.$thumbnail
+   * @default $slider.find('.thumbnail a')
    * @type {jQuery}
    */
   /**
@@ -3146,6 +3151,7 @@
    *
    * @static
    * @property options.$prev
+   * @default $slider.find('.prev a')
    * @type {jQuery}
    */
   /**
@@ -3153,6 +3159,7 @@
    *
    * @static
    * @property options.$next
+   * @default $slider.find('.next a')
    * @type {jQuery}
    */
   /**
@@ -3160,6 +3167,7 @@
    *
    * @static
    * @property options.isFlick
+   * @default true
    * @type {Boolean}
    */
   /**
@@ -3167,6 +3175,7 @@
    *
    * @static
    * @property options.isTimerCancel
+   * @default true
    * @type {Boolean}
    */
   /**
@@ -3174,6 +3183,7 @@
    *
    * @static
    * @property options.isAutoHeight
+   * @default false
    * @type {Boolean}
    */
   /**
@@ -3181,6 +3191,7 @@
    *
    * @static
    * @property options.current
+   * @default 0
    * @type {Number}
    */
   /**
@@ -3188,13 +3199,16 @@
    *
    * @static
    * @property options.slideStep
+   * @default 0
    * @type {Number}
    */
   /**
    * <h4>スライドタイマーの間隔</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
    *
    * @static
    * @property options.timer
+   * @default 0
    * @type {Number}
    */
   /**
@@ -3202,6 +3216,7 @@
    *
    * @static
    * @property options.activeClass
+   * @default active
    * @type {String}
    */
   /**
@@ -3209,6 +3224,7 @@
    *
    * @static
    * @property options.resizeCall
+   * @default $.noop
    * @type {Function}
    */
   /**
@@ -3216,6 +3232,7 @@
    *
    * @static
    * @property options.resizeStopCall
+   * @default $.noop
    * @type {Function}
    */
   /**
@@ -3229,7 +3246,7 @@
   Slider.options = {
     $frame        : null,
     $slide        : null,
-    $slideItems   : null,
+    $slideItem    : null,
     $pointer      : null,
     $thumbnail    : null,
     $prev         : null,
@@ -3275,7 +3292,7 @@
 
   /**
    * <h4>初期化</h4>
-   * Singleton
+   * <p>Singleton</p>
    *
    * @method  init
    * @return {Slider}
@@ -3322,7 +3339,7 @@
 		var stageWidth = this.props.$frame.width();
 
 		// アイテム要素の幅
-		var itemWidth = this.props.$slideItems.outerWidth(true);
+		var itemWidth = this.props.$slideItem.outerWidth(true);
 
 		// 表示エリアにある要素数
 		var visibleLength = ~~(stageWidth / itemWidth);
@@ -3364,7 +3381,7 @@
 	/* Events
 	-----------------------------------------------------------------*/
 	/**
-	 * <h4>リサイズイベント</h4>
+	 * <h4>リサイズイベント登録</h4>
 	 *
 	 * @method addEventResize
 	 * @return {Slider}
@@ -3396,7 +3413,7 @@
 
 
   /**
-   * <h4>Thumbnailボタンイベント追加</h4>
+   * <h4>Thumbnailボタンイベント登録</h4>
    *
    * @method addEventThumbnail
    * @param {jQuery} $thumbnail Thumbnailトリガー要素
@@ -3416,8 +3433,8 @@
 
 
   /**
-   * <h4>タイマーキャンセルイベント</h4>
-   * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
+   * <h4>タイマーキャンセルイベント登録</h4>
+   * <p>スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
    *
 	 * @method addEventTimerCancel
 	 * @return {Slider}
@@ -3446,6 +3463,7 @@
   -----------------------------------------------------------------*/
 	/**
 	 * <h4>タイマースタート</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
 	 *
 	 * @method timerStart
 	 * @param  {Number} num セットするタイマー値(省略可)
@@ -3472,7 +3490,8 @@
 
 
 	/**
-	 * タイマー停止
+	 * <h4>タイマー停止</h4>
+   *
 	 * @method timerStop
 	 * @return {Slider}
 	 */
@@ -3483,7 +3502,8 @@
 
 
 	/**
-	 *<h4> コントローラー</h4>
+	 * <h4>コントローラー</h4>
+   * <p>スライダーイベントが実行されたとき、必ずここの処理を通します</p>
 	 *
    * @override
    * @private
@@ -3552,7 +3572,7 @@
    */
   p._getDisplayLength = function(){
     var count = 0;
-    this.props.$slideItems.each(function(){
+    this.props.$slideItem.each(function(){
       if($(this).css('display') !== 'none'){
         count += 1;
       }
@@ -3592,8 +3612,8 @@
   p.active = function(){
     var index = this.props.current * this.props._stepLength;
 
-    // $slideItems
-    this.props.$slideItems.removeClass(this.props.activeClass)
+    // $slideItem
+    this.props.$slideItem.removeClass(this.props.activeClass)
     .slice(index, index + this.props._stepLength)
     .addClass(this.props.activeClass);
 
@@ -3636,7 +3656,7 @@
   p.autoHeight = function(){
     var height = 0,
     index = this.props.current * this.props._stepLength,
-    $items = this.props.$slideItems.slice(index, index + this.props._stepLength);
+    $items = this.props.$slideItem.slice(index, index + this.props._stepLength);
 
     // 一番高い要素の高さを取得
     $items.each(function(i){
@@ -3657,7 +3677,7 @@
   */
   p.setPosition = function(){
     this.props.$slide.css({
-      width: this._getDisplayLength() * this.props.$slideItems.outerWidth(true),
+      width: this._getDisplayLength() * this.props.$slideItem.outerWidth(true),
       left : this.props.left + this.props._adjustLeft
     });
 
@@ -3727,13 +3747,13 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>スライダー</h4>
+   * <h4>クロスフェーダー</h4>
    * <p><a href="../../demo/AMP.$.Crossfader.html">DEMO</a></p>
    *
    * @constructor
    * @class AMP.$.Crossfader
    * @extends AMP.$.UIController
-   * @param {jQuery} $crossfader crossfader要素
+   * @param {jQuery} $crossfader クロスフェーダー要素
    * @param {Object} options オプション値
    */
   function Crossfader($crossfader, options){
@@ -3745,13 +3765,13 @@
      * @type {Object}
      */
     /**
-     * <h4>スライダー要素</h4>
+     * <h4>クロスフェーダー要素</h4>
      *
      * @property props.$wrap
      * @type {jQuery}
      */
     /**
-     * <h4>スライダーアイテム要素数</h4>
+     * <h4>アイテム要素数</h4>
      *
      * @property props.length
      * @type {Number}
@@ -3830,17 +3850,19 @@
    * @type {Object}
    */
   /**
-   * <h4>スライダーフレーム要素</h4>
+   * <h4>クロスフェーダーフレーム要素</h4>
    *
    * @static
    * @property options.$frame
+   * @default $crossfader.find('.frame')
    * @type {jQuery}
    */
   /**
-   * <h4>スライドする子要素</h4>
+   * <h4>クロスフェードするアイテム要素</h4>
    *
    * @static
    * @property options.$item
+   * @default $crossfader.find('.frame').children()
    * @type {jQuery}
    */
   /**
@@ -3848,6 +3870,7 @@
    *
    * @static
    * @property options.$pointer
+   * @default $crossfader.find('.pointer')
    * @type {jQuery}
    */
   /**
@@ -3855,6 +3878,7 @@
    *
    * @static
    * @property options.$thumbnail
+   * @default $crossfader.find('.thumbnail a')
    * @type {jQuery}
    */
   /**
@@ -3862,6 +3886,7 @@
    *
    * @static
    * @property options.$prev
+   * @default $crossfader.find('.prev a')
    * @type {jQuery}
    */
   /**
@@ -3869,6 +3894,7 @@
    *
    * @static
    * @property options.$next
+   * @default $crossfader.find('.next a')
    * @type {jQuery}
    */
   /**
@@ -3876,27 +3902,40 @@
    *
    * @static
    * @property options.isFlick
+   * @default true
    * @type {Boolean}
    */
   /**
-   * <h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>
+   * <h4>クロスフェーダー要素にマウスオンされたときタイマーを無効にするか</h4>
    *
    * @static
    * @property options.isTimerCancel
+   * @default true
    * @type {Boolean}
    */
   /**
-   * <h4>現在アクティブなスライドアイテムインデックス</h4>
+   * <h4>クロスフェードエリアの高さ調整機能を有効にするか</h4>
+   *
+   * @static
+   * @property options.isAutoHeight
+   * @default false
+   * @type {Boolean}
+   */
+  /**
+   * <h4>現在アクティブなアイテムインデックス</h4>
    *
    * @static
    * @property options.current
+   * @default 0
    * @type {Number}
    */
   /**
-   * <h4>スライドタイマーの間隔</h4>
+   * <h4>クロスフェードタイマーの間隔</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
    *
    * @static
    * @property options.timer
+   * @default 0
    * @type {Number}
    */
   /**
@@ -3904,6 +3943,7 @@
    *
    * @static
    * @property options.activeClass
+   * @default active
    * @type {String}
    */
   /**
@@ -3911,6 +3951,7 @@
    *
    * @static
    * @property options.resizeCall
+   * @default $.noop
    * @type {Function}
    */
   /**
@@ -3918,10 +3959,11 @@
    *
    * @static
    * @property options.resizeStopCall
+   * @default $.noop
    * @type {Function}
    */
   /**
-   * <h4>スライドアニメーションのオプション値</h4>
+   * <h4>クロスフェードアニメーションのオプション値</h4>
    * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
@@ -3964,7 +4006,7 @@
    *
    * @static
    * @class AMP.$.Crossfader
-   * @param {jQuery} $wrap   スライダー要素
+   * @param {jQuery} $wrap   クロスフェード要素
    * @param {Object} options オプション値
    * @return {Crossfader}
    */
@@ -3975,7 +4017,7 @@
 
   /**
    * <h4>初期化</h4>
-   * Singleton
+   * <p>Singleton</p>
    *
    * @method  init
    * @return {Crossfader}
@@ -4000,8 +4042,8 @@
     this.addEventPager(this.props.$pointer.find('a'));
 
     // view
-    self.setIndex();
-    self.active();
+    this.setIndex();
+    this.active();
 
     return this;
   };
@@ -4010,7 +4052,7 @@
 	/* Events
 	-----------------------------------------------------------------*/
 	/**
-	 * <h4>リサイズイベント</h4>
+	 * <h4>リサイズイベント登録</h4>
 	 *
 	 * @method addEventResize
 	 * @return {Crossfader}
@@ -4037,8 +4079,8 @@
 
 
   /**
-   * <h4>タイマーキャンセルイベント</h4>
-   * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
+   * <h4>タイマーキャンセルイベント登録</h4>
+   * <p>クロスフェーダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
    *
 	 * @method addEventTimerCancel
 	 * @return {Crossfader}
@@ -4067,6 +4109,7 @@
   -----------------------------------------------------------------*/
 	/**
 	 * <h4>タイマースタート</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
 	 *
 	 * @method timerStart
 	 * @param  {Number} num セットするタイマー値(省略可)
@@ -4093,7 +4136,8 @@
 
 
 	/**
-	 * タイマー停止
+	 * <h4>タイマー停止</h4>
+   *
 	 * @method timerStop
 	 * @return {Crossfader}
 	 */
@@ -4104,11 +4148,13 @@
 
 
 	/**
-	 *<h4> コントローラー</h4>
-	 *
+	 * <h4>コントローラー</h4>
+   * <p>クロスフェードイベントが実行されたとき、必ずここの処理を通します</p>
+   *
+   * @override
    * @private
 	 * @method _controller
-   * @param  {Number} index スライドする位置
+   * @param  {Number} index 表示するアイテムインデックス
 	 * @param  {Boolean} nonAnimate アニメーション無
 	 * @return {Void}
 	 */
@@ -4138,17 +4184,17 @@
     } else {
       $.sequence(
         function(){
-          // スライド前
+          // フェード前
           self.props._isAnimate = true;
           self.timerStop();
           self.active();
         },
         function(){
-          // スライド
+          // フェード
           return self._tween(prev, self.props.current);
         },
         function(){
-          // スライド後
+          // フェード後
           self.timerStart();
           self.props._isAnimate = false;
         }
@@ -4236,7 +4282,7 @@
 
 
  /**
-  * <h4>スライドスタイルのセット</h4>
+  * <h4>クロスフェードアイテムのスタイル設定</h4>
   *
   * @method setIndex
   * @return {Crossfader}
@@ -4256,7 +4302,7 @@
 
 
 	/**
-	 * <h4>スライドアニメーションを実行</h4>
+	 * <h4>クロスフェードアニメーションを実行</h4>
 	 *
 	 * @private
 	 * @method _tween
@@ -4274,10 +4320,10 @@
     });
 
     this.props.$item.eq(next).css({display: 'block',zIndex: this.props.length, opacity: 0});
+
     if(this.props.isAutoHeight){
       this.autoHeight();
     }
-
 
     // next show
 		return this.props.$item.eq(next).velocity({opacity: 1}, this.props.tween);

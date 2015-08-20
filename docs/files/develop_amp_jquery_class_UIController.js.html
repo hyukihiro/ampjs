@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\Slip.js - AMPjs</title>
+    <title>develop\amp\jquery\class\UIController.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\Slip.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\UIController.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -117,7 +118,7 @@
 
 (function(root, AMP, $){
 
-	// &#x27;use strict&#x27;;
+  // &#x27;use strict&#x27;;
 
 
   /*----------------------------------------------------------------------
@@ -125,44 +126,21 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ホバースライドアニメーション&lt;/h4&gt;
-   * &lt;a href=&quot;../../demo/AMP.$.Slip.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;UIコントローラ&lt;/h4&gt;
+   * &lt;p&gt;UIコントローラクラスを継承する事でUIコントローラを提供します&lt;/p&gt;
    *
-   * @class AMP.$.Slip
+   * @protected
+   * @class AMP.$.UIController
+   * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
    */
-	function Slip($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $(&#x27;.slip&#x27;);
-    }
-
-    /**
-     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
-     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Slip.options, options);
-
-    /**
-     * &lt;h4&gt;float要素&lt;/h4&gt;
-     *
-     * @propaty $target
-     * @type {jQuery}
-     */
-    this.props.$target = $target;
-	}
+  function UIController(){}
 
   // 基底クラスを継承
-  AMP.inherits(Slip, AMP.BASE_CLASS);
+  AMP.inherits(UIController, AMP.BASE_CLASS);
 
-	// prototype
-	var p = Slip.prototype;
+  // prototype
+  var p = UIController.prototype;
 
 
 
@@ -177,7 +155,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slip.VERSION = &#x27;1.0.0&#x27;;
+  UIController.VERSION = &#x27;1.1.0&#x27;;
 
 
   /**
@@ -186,81 +164,24 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Slip&#x27;;
+  p.className = &#x27;UIController&#x27;;
 
 
   /**
-   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
-   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+   * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
    *
-   * @static
-   * @property options
+   * @property props
    * @type {Object}
    */
   /**
-   * &lt;h4&gt;マウスイン時のアニメーション方向&lt;/h4&gt;
-   * &lt;p&gt;以下7タイプ (allはデフォルト4方向)&lt;br&gt;
-   * all, side, updown, up, down, left, right&lt;/p&gt;
+   * &lt;h4&gt;現在値&lt;/h4&gt;
    *
-   * @static
-   * @property options.inDirection
-   * @default all
-   * @type {String}
+   * @property props.current
+   * @type {Number}
    */
-  /**
-   * &lt;h4&gt;マウスアウト時のアニメーション方向&lt;/h4&gt;
-   * &lt;p&gt;以下7タイプ (allはデフォルト4方向)&lt;br&gt;
-   * all, side, updown, up, down, left, right&lt;/p&gt;
-   *
-   * @static
-   * @property options.outDirection
-   * @default all
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;スライドする子要素のクラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.slipClass
-   * @default slip_tween
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;アクティブ時に付与するクラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.activeClass
-   * @default .activeClass
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;スライドしない要素に付与するクラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.noSlipClass
-   * @default .no_slip
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;Tween option&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;http://julian.com/research/velocity/&quot; target=&quot;_blank&quot;&gt;velocity.js オプション参照&lt;/a&gt;&lt;/p&gt;
-   *
-   * @static
-   * @property options.tween
-   * @default .no_slip
-   * @type {Object}
-   */
-	Slip.options = {
-    inDirection : &#x27;all&#x27;, // all, side, updown, up, down, left, right
-    outDirection: &#x27;all&#x27;, // all, side, updown, up, down, left, right
-    slipClass   : &#x27;slip_tween&#x27;,
-    activeClass : &#x27;active&#x27;,
-    noSlipClass : &#x27;no_slip&#x27;,
-    tween       : {
-      duration  : 400,
-      easing    : &#x27;easeOutExpo&#x27;
-    }
-	};
+  p.props = {
+    current: 0
+  };
 
 
 
@@ -269,166 +190,185 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Slipインスタンスの生成&lt;/h4&gt;
+   * &lt;h4&gt;Pagerボタンイベント登録&lt;/h4&gt;
    *
-   * @static
-   * @method get
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   * @return {Slip}
+   * @method addEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
    */
-  Slip.get = function($target, options){
-    return new Slip($target, options).on();
+  p.addEventPager = function($pager){
+    var self = this;
+    $pager.on(&#x27;click.&#x27; + self.className, function(){
+      self.moveTo($pager.index(this));
+      return false;
+    });
+    return this;
   };
 
 
   /**
-   * &lt;h4&gt;イベント登録&lt;/h4&gt;
+   * &lt;h4&gt;Pagerボタンイベント削除&lt;/h4&gt;
    *
-   * @method on
-   * @return {Slip}
+   * @method removeEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
    */
-  p.on = function(){
+  p.removeEventPager = function($pager){
+    $pager.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Nextボタンイベント登録&lt;/h4&gt;
+   *
+   * @method addEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.addEventNext = function($next){
+    var self = this;
+    $next.on(&#x27;click.&#x27; + self.className, function(){
+      self.next();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Nextボタンイベント削除&lt;/h4&gt;
+   *
+   * @method removeEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.removeEventNext = function($next){
+    $next.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Prevボタンイベント登録&lt;/h4&gt;
+   *
+   * @method addEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPrev = function($prev){
+    var self = this;
+    $prev.on(&#x27;click.&#x27; + self.className, function(){
+      self.prev();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Prevボタンイベント削除&lt;/h4&gt;
+   *
+   * @method removeEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPrev = function($prev){
+    $prev.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;フリックイベント&lt;/h4&gt;
+   *
+   * @method addEventFlick
+   * @return {Slider}
+   */
+  p.addEventFlick = function($trigger){
     var self = this;
 
-    // 二重登録回避
-    this.off();
-
-    self.props.$target
-    .on(&#x27;slipin.Slip&#x27;, function(inEvent){
-      self._tween(self.props.$target.index(this), inEvent);
+    $trigger.off(&#x27;flickmoveX.Slider flickcancelX.Slider flickX.Slider&#x27;)
+    .on(&#x27;flickmoveX.&#x27; + this.className, function(moveEvent){
+      self._move(moveEvent.moveX);
     })
-    .on(&#x27;slipout.Slip&#x27;, function(outEvent){
-      self._tween(self.props.$target.index(this), outEvent);
-    });
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;イベント削除&lt;/h4&gt;
-   *
-   * @method off
-   * @return {Slip}
-   */
-  p.off = function(){
-    this.props.$target.off(&#x27;slipin.Slip slipin.Slip&#x27;);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;アクティブ&lt;/h4&gt;
-   *
-   * @method active
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.active = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target.addClass(this.props.activeClass)
-    .find(&#x27;.&#x27; + this.props.slipClass)
-    .velocity(&#x27;stop&#x27;).css({top: 0, left: 0});
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;待機状態のスタイル&lt;/h4&gt;
-   *
-   * @method passive
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.passive = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target.removeClass(this.props.activeClass)
-    .find(&#x27;.&#x27; + this.props.slipClass)
-    .velocity(&#x27;stop&#x27;).css({top: &#x27;-100%&#x27;});
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;アニメーション&lt;/h4&gt;
-   *
-   * @method _tween
-   * @param  {Number} num   要素のインデックス
-   * @param  {Object} event イベントオブジェクト
-   * @return {Void}
-   */
-  p._tween = function(num, event){
-    var style = this._createTweenStyle(event),
-    $target = this.props.$target.eq(num);
-
-    if(!$target.hasClass(this.props.activeClass) &amp;&amp; !$target.hasClass(this.props.noSlipClass)){
-      $target.find(&#x27;.&#x27; + this.props.slipClass)
-      .velocity(&#x27;stop&#x27;)
-      .velocity(style.start, 0)
-      .velocity(style.end, this.props.tween);
-    }
-  };
-
-
-  /**
-   * &lt;h4&gt;アニメーションスタイルの生成&lt;/h4&gt;
-   *
-   * @private
-   * @method _createTweenStyle
-   * @param  {Object} event イベントオブジェクト
-   * @return {Object}
-   */
-  p._createTweenStyle = function(event){
-    var isIn = event.type === &#x27;slipin&#x27;,
-    direction = isIn ? this.props.inDirection : this.props.outDirection,
-    style01 = {
-      left: 0,
-      top : 0
-    },
-    style02 = $.extend({}, style01),
-    style = isIn ? style01 : style02;
-
-    if(direction === &#x27;side&#x27;){
-      style.left = event.x &lt; 0 ? &#x27;-100%&#x27; : &#x27;100%&#x27;;
-
-    } else if(direction === &#x27;updown&#x27;){
-      style.top = event.y &lt; 0 ? &#x27;-100%&#x27; : &#x27;100%&#x27;;
-
-    } else if(direction === &#x27;up&#x27;){
-      style.top = &#x27;-100%&#x27;;
-
-    } else if(direction === &#x27;down&#x27;){
-      style.top = &#x27;100%&#x27;;
-
-    } else if(direction === &#x27;left&#x27;){
-      style.left = &#x27;-100%&#x27;;
-
-    } else if(direction === &#x27;right&#x27;){
-      style.left = &#x27;100%&#x27;;
-
-    } else {
-      // direction all
-      if(event.direction === &#x27;top&#x27;){
-        style.top = &#x27;-100%&#x27;;
-      } else if(event.direction === &#x27;bottom&#x27;){
-        style.top = &#x27;100%&#x27;;
-      } else if(event.direction === &#x27;left&#x27;){
-        style.left = &#x27;-100%&#x27;;
+    .on(&#x27;flickcancelX.&#x27; + this.className, function(){
+      self._resetTween();
+    })
+    .on(&#x27;flickX.&#x27; + this.className, function(flickEvent){
+      if(0 &lt; flickEvent.moveX){
+        self.prev();
       } else {
-        style.left = &#x27;100%&#x27;;
+        self.next();
       }
-    }
-
-    return {
-      start: style01,
-      end  : style02
-    };
+    });
+    return this;
   };
+
+
+  /**
+   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
+   * アニメート無
+   *
+   * @method current
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.current = function(index){
+    this._controller(index, true);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
+   *
+   * @method moveTo
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.moveTo = function(index){
+    this._controller(index);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;次へ&lt;/h4&gt;
+   *
+   * @method next
+   * @return {Instance}
+   */
+  p.next = function(){
+    this._controller(this.props.current + 1);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;前へ&lt;/h4&gt;
+   *
+   * @method prev
+   * @return {Instance}
+   */
+  p.prev = function(){
+    this._controller(this.props.current -1);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;コントローラー&lt;/h4&gt;
+   * 送られてきた値を制御します
+   *
+   * @protected
+   * @private
+   * @method _controller
+   * @param {Number} index スライドインデック
+   * @param {Boolean} nonAnimate アニメーション無
+   * @return {Instance}
+   */
+  p._controller = function(index, nonAnimate){};
 
 
 
@@ -436,7 +376,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.Slip = Slip;
+  AMP.$.UIController = UIController;
 
 
 }(window, AMP, jQuery));

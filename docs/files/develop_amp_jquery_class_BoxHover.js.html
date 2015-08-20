@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\Float3d.js - AMPjs</title>
+    <title>develop\amp\jquery\class\BoxHover.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\Float3d.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\BoxHover.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -117,7 +118,7 @@
 
 (function(root, AMP, $){
 
-	// &#x27;use strict&#x27;;
+  // &#x27;use strict&#x27;;
 
 
   /*----------------------------------------------------------------------
@@ -125,22 +126,22 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ホバー3Dアニメーション&lt;/h4&gt;
-   * &lt;p&gt;&lt;em&gt;IE10以上対象&lt;/em&gt;&lt;br&gt;
-   * &lt;a href=&quot;../../demo/AMP.$.Float3d.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;AMP.$.BoxHover&lt;/h4&gt;
+   * &lt;p&gt;リンクエリアを、BOXエリアまで拡大させます&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.BoxHover.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @example  要素構成: .float &gt; .float_frame &gt; .float_inner
-   *
-   * @class AMP.$.Float3d
+   * @class AMP.$.BoxHover
+   * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
+   * @param  {jQuery} $target 対象のbox要素
+   * @param  {Object} options オプション値 (BoxHover.options参照)
    */
-	function Float3d($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $(&#x27;.float&#x27;);
+  function BoxHover($boxHover, options){
+
+    // $boxHover指定がない場合、初期値を設定
+    if(!$boxHover || !($boxHover instanceof jQuery)){
+      options = $boxHover;
+      $boxHover = $(&#x27;.box_hover&#x27;);
     }
 
     /**
@@ -150,39 +151,23 @@
      * @property props
      * @type {Object}
      */
-    this.props = $.extend(true, {}, Float3d.options, options);
+    this.props = $.extend(true, {}, BoxHover.options, options);
 
     /**
-     * &lt;h4&gt;float要素&lt;/h4&gt;
+     * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
      *
-     * @propaty $target
+     * @default $(&#x27;.box_hover&#x27;)
+     * @property props.$boxHover
      * @type {jQuery}
      */
-    this.props.$target = $target;
-
-    /**
-     * &lt;h4&gt;html要素&lt;/h4&gt;
-     *
-     * @propaty $html
-     * @type {jQuery}
-     */
-		this.props.$html = $(&#x27;html&#x27;);
-
-    /**
-     * &lt;h4&gt;float要素&lt;/h4&gt;
-     *
-     * @private
-     * @propaty _isFloating
-     * @type {Boolean}
-     */
-    this.props._isFloating = false;
-	}
+    this.props.$boxHover = $boxHover;
+  }
 
   // 基底クラスを継承
-  AMP.inherits(Float3d, AMP.BASE_CLASS);
+  AMP.inherits(BoxHover, AMP.BASE_CLASS);
 
-	// prototype
-	var p = Float3d.prototype;
+  // prototype
+  var p = BoxHover.prototype;
 
 
 
@@ -197,7 +182,7 @@
    * @property VERSION
    * @type {String}
    */
-  Float3d.VERSION = &#x27;1.1.0&#x27;;
+  BoxHover.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -206,7 +191,7 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Float3d&#x27;;
+  p.className = &#x27;BoxHover&#x27;;
 
 
   /**
@@ -218,63 +203,25 @@
    * @type {Object}
    */
   /**
-   * &lt;h4&gt;3D変形の奥行きの深さを指定する値&lt;/h4&gt;
+   * &lt;h4&gt;ホバー時に、box要素に付与するクラス名&lt;/h4&gt;
    *
    * @static
-   * @property options.perspective
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;Z方向の距離で移動を指定する値&lt;/h4&gt;
-   *
-   * @static
-   * @property options.translateZ
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;回転表示を指定する値&lt;/h4&gt;
-   *
-   * @static
-   * @property options.rotate
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;floating時に回転する幅く&lt;/h4&gt;
-   *
-   * @static
-   * @property options.range
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;floating時の回転するスピードく&lt;/h4&gt;
-   *
-   * @static
-   * @property options.speed
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;hover時のdurationく&lt;/h4&gt;
-   *
-   * @static
-   * @property options.duration
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;hover時のeasing&lt;/h4&gt;
-   *
-   * @static
-   * @property options.easing
+   * @property options.hoverClass
+   * @default hover
    * @type {String}
    */
-	Float3d.options = {
-    perspective: 400,
-    translateZ : -150,
-    rotate     : 7.5,
-    range      : 5,
-    speed      : 150,
-    duration   : 400,
-    easing     : &#x27;easeOutExpo&#x27;
-	};
+  /**
+   * &lt;h4&gt;Box内に複数リンクがある場合、優先対象に指定するリンククラス名&lt;/h4&gt;
+   *
+   * @static
+   * @property options.linkClass
+   * @default link
+   * @type {String}
+   */
+  BoxHover.options = {
+    hoverClass: &#x27;hover&#x27;,
+    linkClass : &#x27;link&#x27;
+  };
 
 
 
@@ -283,16 +230,18 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Float3dインスタンスの生成&lt;/h4&gt;
+   * &lt;h4&gt;BoxHoverインスタンスの生成&lt;/h4&gt;
    *
    * @static
    * @method get
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   * @return {Float3d}
+   * @param  {jQuery} $boxHover 対象のbox要素 省略可 初期値 $(&#x27;.box-hover&#x27;)
+   * @param  {Object} options オプション値 省略可
+   * @return {BoxHover}
    */
-  Float3d.get = function($target, options){
-    return new Float3d($target, options).on();
+  BoxHover.get = function($boxHover, options){
+    var instance = new BoxHover($boxHover, options);
+    instance.on();
+    return instance;
   };
 
 
@@ -300,41 +249,32 @@
    * &lt;h4&gt;イベント登録&lt;/h4&gt;
    *
    * @method on
-   * @return {Float3d}
+   * @return {BoxHover}
    */
   p.on = function(){
     var self = this;
 
-    // イベント重複回避
-    self.off();
+    this.off();
 
-    self.props.$target.css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective});
-
-    self.props.$target
-    .on(&#x27;mouseenter.Float3d&#x27;, function(onEvent){
-      self.onTween(this, onEvent);
-      self.props._isFloating = true;
-      self.floatTween($(this).children(), 0);
-
-      // moveEvent登録
-      $(this).on(&#x27;mousemove.Float3d&#x27;, function(moveEvent){
-        self.onTween(this, moveEvent);
-      });
+    this.props.$boxHover.css({cursor: &#x27;pointer&#x27;})
+    .on(&#x27;mouseenter.BoxHover&#x27;, function(){
+      $(this).addClass(self.props.hoverClass);
     })
-    .on(&#x27;mouseleave.Float3d&#x27;, function(outEvent){
-      self.props._isFloating = false;
-      self.outTween(this, outEvent);
-
-      // moveEvent削除
-      $(this).off(&#x27;mousemove.Float3d&#x27;);
+    .on(&#x27;mouseleave.BoxHover&#x27;, function(){
+      $(this).removeClass(self.props.hoverClass);
+    })
+    .on(&#x27;click.BoxHover&#x27;, function(){
+      self.transition($(this));
+    })
+    .find(&#x27;a&#x27;)
+    .on(&#x27;click.BoxHover&#x27;, function(clickEvent){
+      clickEvent.stopPropagation();
     });
 
-     // moveEvent削除
-    this.props.$html.on(&#x27;mouseleave.Float3d&#x27;, function(){
-      self.props.$target.parent().off(&#x27;mousemove.Float3d&#x27;);
-      self.props._isFloating = false;
+    // フォーム要素はイベント伝播をキャンセル
+    this.props.$boxHover.find(&#x27;label input select textarea&#x27;)
+    .on(&#x27;click.BoxHover&#x27;, function(clickEvent){
+      clickEvent.stopPropagation();
     });
 
     return this;
@@ -345,138 +285,36 @@
    * &lt;h4&gt;イベント削除&lt;/h4&gt;
    *
    * @method off
-   * @return {Float3d}
+   * @return {BoxHover}
    */
   p.off = function(){
-    this.props.$target.off(&#x27;.Float3d&#x27;).css({perspective: 0})
-    .children().css({perspective: this.props.perspective})
-    .children().css({perspective: this.props.perspective});
+    this.props.$boxHover
+    .css({cursor: &#x27;auto&#x27;})
+    .off(&#x27;mouseenter.BoxHover mouseleave.BoxHover click.BoxHover&#x27;)
+    .find(&#x27;a&#x27;).off(&#x27;click.BoxHover&#x27;);
 
-    this.props.$html.off(&#x27;.Float3d&#x27;);
+    this.props.$boxHover.find(&#x27;label input select textarea&#x27;).off(&#x27;click.BoxHover&#x27;);
 
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;マウスオンTween&lt;/h4&gt;
+   * &lt;h4&gt;リンクページへ遷移&lt;/h4&gt;
    *
-   * @method onTween
-   * @param  {DOM} target 対象の要素
-   * @param  {Object} event イベントオブジェクト
+   * @method transition
    * @return {Void}
    */
-  p.onTween = function(target, event){
-    var $target = $(target).children(),
-    offset = this.offsetRatio(target, event);
+  p.transition = function($box){
+    var $link = $box.find(&#x27;.&#x27; + this.props.linkClass);
+    $link = $link[0] ? $link : $box.find(&#x27;a&#x27;).eq(0);
 
-    $target.velocity(&#x27;stop&#x27;)
-    .velocity({
-      translateZ: this.props.translateZ,
-      rotateX   : this.props.rotate * offset.y,
-      rotateY   : this.props.rotate * offset.x,
-      rotateZ   : this.props.rotate * offset.x
-    }, {
-      duration: this.props.duration,
-      easing  : this.props.easing
-    });
-  };
-
-
-  /**
-   * &lt;h4&gt;選択中のTween&lt;/h4&gt;
-   * 再起処理します
-   *
-   * @method floatTween
-   * @param  {DOM} target 対象の要素
-   * @return {Void}
-   */
-  p.floatTween = function($target, angle){
-    var self = this;
-
-    angle = typeof angle === &#x27;number&#x27; ? angle : 0;
-    angle += Math.PI / self.props.speed;
-
-    $target.children()
-    .velocity(&#x27;stop&#x27;)
-    .velocity({
-      rotateX: (self.props.range * Math.cos(angle + Math.PI)),
-      rotateY: (self.props.range * Math.sin(angle + Math.PI)),
-      rotateZ: (self.props.range * Math.sin(angle + Math.PI))
-    }, {
-      duration: 1000 / 60,
-      easing  : &#x27;linear&#x27;,
-      complete: function(){
-        // 再起処理
-        if(self.props._isFloating){
-          self.floatTween($target, angle);
-        }
-      }
-    });
-  };
-
-
-  /**
-   * &lt;h4&gt;マウスアウトTween&lt;/h4&gt;
-   *
-   * @method outTween
-   * @param  {DOM} target 対象の要素
-   * @return {Void}
-   */
-  p.outTween = function(target){
-    var self = this;
-
-    $(target).children()
-    .velocity(&#x27;stop&#x27;)
-    .velocity({
-      translateZ: 0,
-      rotateX   : 0,
-      rotateY   : 0,
-      rotateZ   : 0
-    }, {
-      duration: self.props.duration,
-      easing  : self.props.ease
-    })
-    .children()
-    .velocity(&#x27;stop&#x27;)
-    .velocity({
-      rotateX: 0,
-      rotateY: 0,
-      rotateZ: 0
-    }, {
-      duration: self.props.duration,
-      easing  : self.props.easing
-    });
-  };
-
-
-  /**
-   * &lt;h4&gt;エリアセンター中心に座標位置の比率を返す&lt;/h4&gt;
-   * 比率は0を中心に-1から1までの小数点2桁の数値
-   *
-   * @method offsetRatio
-   * @param  {DOM} target 対象の要素
-   * @param  {Object} event  イベントオブジェクト
-   * @return {Object}  x,y座標比を格納したオブジェクト
-   */
-  p.offsetRatio = function(target, event){
-    var $target = $(target);
-
-    var center = {
-      x: $target.width() / 2,
-      y: $target.height() / 2
-    };
-
-    var offset = {
-      x: event.pageX - $target.offset().left,
-      y: event.pageY - $target.offset().top
-    };
-
-    // return offset
-    return {
-      x: ((offset.x - center.x) / center.x).toFixed(2),
-      y: ((center.y - offset.y) / center.y).toFixed(2)
-    };
+    // リンク展開
+    if($link.attr(&#x27;target&#x27;) === &#x27;_blank&#x27;){
+      window.open($link.attr(&#x27;href&#x27;), &#x27;_blank&#x27;);
+    } else {
+      location.href = $link.attr(&#x27;href&#x27;);
+    }
   };
 
 
@@ -485,7 +323,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.Float3d = Float3d;
+  AMP.$.BoxHover = BoxHover;
 
 
 }(window, AMP, jQuery));

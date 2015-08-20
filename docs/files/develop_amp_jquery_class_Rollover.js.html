@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\ScrollToggle.js - AMPjs</title>
+    <title>develop\amp\jquery\class\Rollover.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\ScrollToggle.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\Rollover.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,63 +126,23 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;スクロール時、座標を判定してToggle処理をします&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.ScrollToggle.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;ロールオーバー&lt;/h4&gt;
+   * &lt;p&gt;!!!: シングルトン&lt;br&gt;
+   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
+   * &lt;em&gt;AMP.rollover&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.Rollover.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.$.ScrollToggle
+   * @class AMP.$.Rollover
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $scrollToggle 表示・非表示する要素
-   * @param  {Object} options オプション値
    */
-  function ScrollToggle($scrollToggle, options){
-
-    // $scrollToggle指定がない場合、初期値を設定
-    if(!$scrollToggle || !($scrollToggle instanceof jQuery)){
-      options = $scrollToggle;
-      $scrollToggle = $(&#x27;.scroll_toggle&#x27;);
-    }
-
-    /**
-     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
-     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, ScrollToggle.options, options);
-
-    /**
-     * &lt;h4&gt;表示・非表示する要素&lt;/h4&gt;
-     *
-     * @default $(&#x27;.scroll_toggle&#x27;)
-     * @property props.$scrollToggle
-     * @type {jQuery}
-     */
-    this.props.$scrollToggle = $scrollToggle;
-
-    /**
-     * &lt;h4&gt;window要素&lt;/h4&gt;
-     *
-     * @property props.$window
-     * @type {jQuery}
-     */
-    this.props.$window = $(window);
-
-    /**
-     * &lt;h4&gt;Displayスタイルの状態&lt;/h4&gt;
-     *
-     * @property props.isDisplay
-     * @type {Boolean}
-     */
-    this.props.isDisplay = $scrollToggle.css(&#x27;display&#x27;) !== &#x27;none&#x27;;
-  }
+  function Rollover(){}
 
   // 基底クラスを継承
-  AMP.inherits(ScrollToggle, AMP.BASE_CLASS);
+  AMP.inherits(Rollover, AMP.BASE_CLASS);
 
   // prototype
-  var p = ScrollToggle.prototype;
+  var p = Rollover.prototype;
 
 
 
@@ -196,7 +157,7 @@
    * @property VERSION
    * @type {String}
    */
-  ScrollToggle.VERSION = &#x27;3.2.0&#x27;;
+  Rollover.VERSION = &#x27;2.1.0&#x27;;
 
 
   /**
@@ -205,92 +166,64 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;ScrollToggle&#x27;;
+  p.className = &#x27;Rollover&#x27;;
 
 
   /**
-   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
-   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+   * &lt;h4&gt;オプションのデフォルト値&lt;/h4&gt;
    *
    * @static
    * @property options
    * @type {Object}
    */
   /**
-   * &lt;h4&gt;表示されるY値&lt;/h4&gt;
+   * &lt;h4&gt;グループクラス名&lt;/h4&gt;
    *
    * @static
-   * @property showY
-   * @default 300
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;表示・非表示の座標判定を反転します&lt;/h4&gt;
-   * &lt;p&gt;false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします&lt;/p&gt;
-   *
-   * @static
-   * @property isReverse
-   * @default false
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;表示のスタイル&lt;/h4&gt;
-   *
-   * @static
-   * @property show
-   * @default { opacity: 1}
-   * @type {Object}
-   */
-  /**
-   * &lt;h4&gt;非表示のスタイル&lt;/h4&gt;
-   *
-   * @static
-   * @property hide
-   * @default { opacity: 0}
-   * @type {Object}
-   */
-  /**
-   * &lt;h4&gt;duration&lt;/h4&gt;
-   *
-   * @static
-   * @property duration
-   * @default 500
-   * @type {Number}
-   */
-  /**
-   * &lt;h4&gt;easing&lt;/h4&gt;
-   *
-   * @static
-   * @property easing
-   * @default easeInSine
+   * @property options.groupClass
+   * @default group_rover
    * @type {String}
    */
   /**
-   * &lt;h4&gt;表示後のコールバック&lt;/h4&gt;
+   * &lt;h4&gt;アクティブクラス名&lt;/h4&gt;
    *
    * @static
-   * @property showCall
-   * @default $.noop
+   * @property options.activeClass
+   * @default active
    * @type {String}
    */
   /**
-   * &lt;h4&gt;非表示後のコールバック&lt;/h4&gt;
+   * &lt;h4&gt;ノーロールオーバークラス名&lt;/h4&gt;
    *
    * @static
-   * @property hideCall
-   * @default $.noop
+   * @property options.noOverClass
+   * @default no_rover
    * @type {String}
    */
-  ScrollToggle.options = {
-    showY    : 300,
-    isReverse: false,
-    show     : { opacity: 1},
-    hide     : { opacity: 0},
-    duration : 500,
-    easing   : &#x27;easeInSine&#x27;,
-    showCall : $.noop,
-    hideCall : $.noop
+  /**
+   * &lt;h4&gt;ロールオーバー時に付与するファイル名&lt;/h4&gt;
+   *
+   * @static
+   * @property options.postfix
+   * @default _on
+   * @type {String}
+   */
+  Rollover.options = {
+    groupClass : &#x27;group_rover&#x27;,
+    activeClass: &#x27;active&#x27;,
+    noOverClass: &#x27;no_rover&#x27;,
+    postfix    : &#x27;_on&#x27;
   };
+
+
+  /**
+   * &lt;h4&gt;ロールオーバークラス名初期値&lt;/h4&gt;
+   *
+   * @static
+   * @property imageClass
+   * @type {String}
+   */
+  Rollover.imageClass = &#x27;img.rover, input.rover, .all_rover img&#x27;;
 
 
 
@@ -299,120 +232,189 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ScrollToggleインスタンスの生成&lt;/h4&gt;
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $scrollToggle 表示・非表示する要素
-   * @param  {Object} options オプション値 省略可
-   * @return {Pagetop} Pagetopインスタンスを返す
-   */
-  ScrollToggle.get = function($scrollToggle, options){
-    return new ScrollToggle($scrollToggle, options).on();
-  };
-
-
-  /**
-   * &lt;h4&gt;イベントオン&lt;/h4&gt;
+   * &lt;h4&gt;ロールオーバーイベント追加&lt;/h4&gt;
    *
    * @method on
-   * @return {ScrollToggle}
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
    */
-  p.on = function(){
+  p.on = function($images, options){
     var self = this;
 
-    self.props.$window.off(&#x27;scroll.ScrollToggle&#x27;).on(&#x27;scroll.ScrollToggle&#x27;, function(){
-      self._scrollController(self.props.$window.scrollTop());
-    }).trigger(&#x27;scroll.ScrollToggle&#x27;);
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;スクロールイベントをコントロール&lt;/h4&gt;
-   *
-   * @private
-   * @method _scrollController
-   * @param {Number} y スクロールY値
-   * @return {Void}
-   */
-  p._scrollController = function(y){
-    var self = this;
-    if(this.props.isReverse){
-      if(!this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
-        this.show();
-        this.props.isDislpay = true;
-      } else if(this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
-        this.hide();
-        this.props.isDislpay = false;
-      }
-    } else {
-      if(!this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
-        this.show();
-        this.props.isDislpay = true;
-      } else if(this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
-        this.hide();
-        this.props.isDislpay = false;
-      }
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(Rollover.imageClass);
     }
-  };
 
+    var props = $.extend(true, {}, Rollover.options, options);
 
-  /**
-   * &lt;h4&gt;イベントオフ&lt;/h4&gt;
-   *
-   * @method off
-   * @return {ScrollToggle}
-   */
-  p.off = function(){
-    this.props.$window.off(&#x27;scroll.ScrollToggle&#x27;);
-    return this;
-  };
+    $images.each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
 
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
 
-  /**
-   * &lt;h4&gt;表示&lt;/h4&gt;
-   *
-   * @method show
-   * @return {ScrollToggle}
-   */
-  p.show = function(){
-    this.props.$scrollToggle
-    .css({display: &#x27;block&#x27;})
-    .css(this.props.hide)
-    .velocity(&#x27;stop&#x27;)
-    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;非表示&lt;/h4&gt;
-   *
-   * @method hide
-   * @return {ScrollToggle}
-   */
-  p.hide = function(){
-    var self = this;
-    this.props.$scrollToggle
-    .velocity(&#x27;stop&#x27;)
-    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
-      self.props.$scrollToggle.css({display: &#x27;none&#x27;});
-      self.props.hideCall();
+      // rollover
+      data.$trigger
+      .on(&#x27;mouseenter.Rollover&#x27;, function(){
+        if(!data.$image.hasClass(props.noOverClass)){
+          data.image.src = data.onSrc;
+        }
+      })
+      .on(&#x27;mouseleave.Rollover&#x27;, function(){
+        if(!data.$image.hasClass(props.noOverClass)){
+          data.image.src = data.offSrc;
+        }
+      });
     });
 
     return this;
   };
 
 
+  /**
+   * &lt;h4&gt;ロールオーバーイベント削除&lt;/h4&gt;
+   *
+   * @method off
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.off = function($images, options){
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(Rollover.imageClass);
+    }
+
+    var props = $.extend(true, {}, Rollover.options, options);
+
+    $images.each(function(i){
+      var $group = $images.eq(i).closest(&#x27;.&#x27; + props.groupClass),
+      $trigger = $group[0] ? $group : $images.eq(i);
+      $trigger.off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
+    });
+
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;画像のアクティブ化&lt;/h4&gt;
+   *
+   * @method active
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.active = function($images, options){
+    var self = this,
+    props = $.extend(true, {}, Rollover.options, options);
+
+    $images.addClass(props.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
+
+      // イベント削除
+      data.$trigger
+      .addClass(props.activeClass)
+      .off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
+
+      // off画像の場合
+      if(data.isOffImg){
+        data.image.src = data.onSrc;
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;画像を待機状態にする&lt;/h4&gt;
+   *
+   * @method passive
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.passive = function($images, options){
+    var self = this,
+    props = $.extend(true, {}, Rollover.options, options);
+
+    $images.removeClass(props.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
+
+      // イベント削除
+      data.$trigger
+      .removeClass(props.activeClass)
+      .off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
+
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;ロールオーバーデータの生成&lt;/h4&gt;
+   *
+   * @method _createRolloverData
+   * @private
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p._createRolloverData = function($image, options){
+    var
+    image = $image[0],
+    src = image.src,
+    ext = src.substring(src.lastIndexOf(&#x27;.&#x27;), src.length),
+    $group = $image.closest(&#x27;.&#x27; + options.groupClass).addClass(options.activeClass),
+    onSrc,
+    offSrc;
+
+    // 現在on画像の場合
+    if(src.lastIndexOf(options.postfix + ext) &gt; -1){
+      onSrc = src;
+      offSrc = src.replace(options.postfix + ext, ext);
+      AMP.preload(offSrc);
+
+    // 現在off画像の場合
+    } else {
+      offSrc = src;
+      onSrc = src.replace(ext, options.postfix + ext);
+      AMP.preload(onSrc);
+    }
+
+    // RolloverData
+    return {
+      $image  : $image,
+      image   : image,
+      $trigger: $group[0] ? $group : $image,
+      onSrc   : onSrc,
+      offSrc  : offSrc,
+      isOffImg: src === offSrc
+    };
+  };
+
+
 
   /*--------------------------------------------------------------------------
-    export
+    exports
   --------------------------------------------------------------------------*/
 
-  AMP.$.ScrollToggle = ScrollToggle;
+  AMP.$.Rollover = Rollover;
+  AMP.$.rollover = new Rollover();
 
 
 }(window, AMP, jQuery));

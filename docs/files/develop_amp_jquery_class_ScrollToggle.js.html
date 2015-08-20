@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\FlatHeight.js - AMPjs</title>
+    <title>develop\amp\jquery\class\ScrollToggle.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\FlatHeight.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\ScrollToggle.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,69 +126,63 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;要素の高さを揃える&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.FlatHeight.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;スクロール時、座標を判定してToggle処理をします&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.ScrollToggle.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.$.FlatHeight
+   * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {jQuery} $flatHeight 対象のエリア要素
-   * @param {Number} split 区切る数 省略可
-   * @param {Boolean} isResize リサイズ後に実行するか
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
+   * @param  {Object} options オプション値
    */
-  function FlatHeight($flatHeight, split, isResize){
+  function ScrollToggle($scrollToggle, options){
 
-    // $flatHeight指定がない場合、初期値を設定
-    if(!$flatHeight || !($flatHeight instanceof jQuery)){
-      isResize = split;
-      split = $flatHeight;
-      $flatHeight = $(&#x27;.flat_height&#x27;);
+    // $scrollToggle指定がない場合、初期値を設定
+    if(!$scrollToggle || !($scrollToggle instanceof jQuery)){
+      options = $scrollToggle;
+      $scrollToggle = $(&#x27;.scroll_toggle&#x27;);
     }
 
     /**
      * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
      * @property props
      * @type {Object}
      */
-    this.props = {};
+    this.props = $.extend(true, {}, ScrollToggle.options, options);
 
     /**
-     * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
+     * &lt;h4&gt;表示・非表示する要素&lt;/h4&gt;
      *
-     * @default $(&#x27;.flat_height&#x27;)
-     * @property props.$flatHeight
+     * @default $(&#x27;.scroll_toggle&#x27;)
+     * @property props.$scrollToggle
      * @type {jQuery}
      */
-    this.props.$flatHeight = $flatHeight;
+    this.props.$scrollToggle = $scrollToggle;
 
     /**
-     * &lt;h4&gt;高さを揃える要素の分割単位&lt;/h4&gt;
+     * &lt;h4&gt;window要素&lt;/h4&gt;
      *
-     * @default $flatHeight.length
-     * @property props.split
-     * @type {Number}
+     * @property props.$window
+     * @type {jQuery}
      */
-    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.props.$window = $(window);
 
     /**
-     * &lt;h4&gt;リサイズ後、セットし直すか？&lt;/h4&gt;
+     * &lt;h4&gt;Displayスタイルの状態&lt;/h4&gt;
      *
-     * @default true
-     * @property props.isResize
+     * @property props.isDisplay
      * @type {Boolean}
      */
-    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
-
-    this._addEvent();
-    this.setHeight();
+    this.props.isDisplay = $scrollToggle.css(&#x27;display&#x27;) !== &#x27;none&#x27;;
   }
 
   // 基底クラスを継承
-  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
+  AMP.inherits(ScrollToggle, AMP.BASE_CLASS);
 
   // prototype
-  var p = FlatHeight.prototype;
+  var p = ScrollToggle.prototype;
 
 
 
@@ -202,7 +197,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = &#x27;3.1.0&#x27;;
+  ScrollToggle.VERSION = &#x27;3.2.0&#x27;;
 
 
   /**
@@ -211,7 +206,92 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;FlatHeight&#x27;;
+  p.className = &#x27;ScrollToggle&#x27;;
+
+
+  /**
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * &lt;h4&gt;表示されるY値&lt;/h4&gt;
+   *
+   * @static
+   * @property showY
+   * @default 300
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;表示・非表示の座標判定を反転します&lt;/h4&gt;
+   * &lt;p&gt;false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします&lt;/p&gt;
+   *
+   * @static
+   * @property isReverse
+   * @default false
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;表示のスタイル&lt;/h4&gt;
+   *
+   * @static
+   * @property show
+   * @default { opacity: 1}
+   * @type {Object}
+   */
+  /**
+   * &lt;h4&gt;非表示のスタイル&lt;/h4&gt;
+   *
+   * @static
+   * @property hide
+   * @default { opacity: 0}
+   * @type {Object}
+   */
+  /**
+   * &lt;h4&gt;duration&lt;/h4&gt;
+   *
+   * @static
+   * @property duration
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;easing&lt;/h4&gt;
+   *
+   * @static
+   * @property easing
+   * @default easeInSine
+   * @type {String}
+   */
+  /**
+   * &lt;h4&gt;表示後のコールバック&lt;/h4&gt;
+   *
+   * @static
+   * @property showCall
+   * @default $.noop
+   * @type {String}
+   */
+  /**
+   * &lt;h4&gt;非表示後のコールバック&lt;/h4&gt;
+   *
+   * @static
+   * @property hideCall
+   * @default $.noop
+   * @type {String}
+   */
+  ScrollToggle.options = {
+    showY    : 300,
+    isReverse: false,
+    show     : { opacity: 1},
+    hide     : { opacity: 0},
+    duration : 500,
+    easing   : &#x27;easeInSine&#x27;,
+    showCall : $.noop,
+    hideCall : $.noop
+  };
 
 
 
@@ -220,104 +300,109 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;FlatHeightインスタンス生成&lt;/h4&gt;
+   * &lt;h4&gt;ScrollToggleインスタンスの生成&lt;/h4&gt;
    *
    * @static
    * @method get
-   * @param  {jQuery} $flatHeight 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Boolean} isResize リサイズ後に実行するか
-   * @return {FlatHeight}
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
+   * @param  {Object} options オプション値 省略可
+   * @return {Pagetop} Pagetopインスタンスを返す
    */
-  FlatHeight.get = function($flatHeight, split, isResize){
-    return new FlatHeight($flatHeight, split, isResize);
+  ScrollToggle.get = function($scrollToggle, options){
+    return new ScrollToggle($scrollToggle, options).on();
   };
 
 
   /**
-   * &lt;h4&gt;イベント設定&lt;/h4&gt;
-   * リサイズイベント、フォントリサイズイベント
+   * &lt;h4&gt;イベントオン&lt;/h4&gt;
    *
-   * @private
-   * @method addEvent
-   * @return {FlatHeight}
+   * @method on
+   * @return {ScrollToggle}
    */
-  p._addEvent = function(){
+  p.on = function(){
     var self = this;
 
-    // fontresize
-    if(AMP.isDevice(&#x27;pc&#x27;)){
-      AMP.fontResize.on(&#x27;change.FlatHeight&#x27;, function(){
-        self.setHeight();
-      });
-    }
+    self.props.$window.off(&#x27;scroll.ScrollToggle&#x27;).on(&#x27;scroll.ScrollToggle&#x27;, function(){
+      self._scrollController(self.props.$window.scrollTop());
+    }).trigger(&#x27;scroll.ScrollToggle&#x27;);
 
-    // window resize
-    $(root).on(&#x27;resizestop.FlatHeight&#x27;, function(){
-      if(self.props.isResize){
-        self.setHeight();
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;スクロールイベントをコントロール&lt;/h4&gt;
+   *
+   * @private
+   * @method _scrollController
+   * @param {Number} y スクロールY値
+   * @return {Void}
+   */
+  p._scrollController = function(y){
+    var self = this;
+    if(this.props.isReverse){
+      if(!this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
+        this.show();
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
+        this.hide();
+        this.props.isDislpay = false;
       }
+    } else {
+      if(!this.props.isDislpay &amp;&amp; this.props.showY &lt; y){
+        this.show();
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay &amp;&amp; this.props.showY &gt; y){
+        this.hide();
+        this.props.isDislpay = false;
+      }
+    }
+  };
+
+
+  /**
+   * &lt;h4&gt;イベントオフ&lt;/h4&gt;
+   *
+   * @method off
+   * @return {ScrollToggle}
+   */
+  p.off = function(){
+    this.props.$window.off(&#x27;scroll.ScrollToggle&#x27;);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;表示&lt;/h4&gt;
+   *
+   * @method show
+   * @return {ScrollToggle}
+   */
+  p.show = function(){
+    this.props.$scrollToggle
+    .css({display: &#x27;block&#x27;})
+    .css(this.props.hide)
+    .velocity(&#x27;stop&#x27;)
+    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
+
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;非表示&lt;/h4&gt;
+   *
+   * @method hide
+   * @return {ScrollToggle}
+   */
+  p.hide = function(){
+    var self = this;
+    this.props.$scrollToggle
+    .velocity(&#x27;stop&#x27;)
+    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
+      self.props.$scrollToggle.css({display: &#x27;none&#x27;});
+      self.props.hideCall();
     });
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;区切りをセットして高さを揃える&lt;/h4&gt;
-   *
-   * @method setSplit
-   * @return {FlatHeight}
-   */
-  p.setSplit = function(num){
-    if(!AMP.isNumber(num)){
-      throw new TypeError(num + &#x27; is not a Number&#x27;);
-    }
-    this.props.split = num;
-    this.setHeight();
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;高さを揃える&lt;/h4&gt;
-   *
-   * @method setHeight
-   * @return {FlatHeight}
-   */
-  p.setHeight = function(){
-    var self = this,
-    total = self.props.$flatHeight.length,
-    rest = total % self.props.split,
-    finalRow = total - rest,
-    maxHeight = 0,
-    targetHeight = 0,
-    rowCount = 0,
-    i = 0;
-
-    self.props.$flatHeight.height(&#x27;auto&#x27;);
-
-    if(1 &lt; self.props.split){
-
-      for(; i &lt; total; i += 1){
-        // 一番高い高さを求める
-        targetHeight = self.props.$flatHeight.eq(i).height();
-        maxHeight = maxHeight &lt; targetHeight ? targetHeight : maxHeight;
-
-        // 行の高さを揃える
-        if((i + 1) % self.props.split === 0){
-          var _start = rowCount * self.props.split,
-          _end = (rowCount += 1) * self.props.split;
-
-          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
-          maxHeight = 0;
-
-        // 最終行の高さを揃える
-        } else if(1 &lt; rest &amp;&amp; finalRow &lt;= i &amp;&amp; i === total - 1){
-          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
-        }
-      }
-    }
 
     return this;
   };
@@ -328,7 +413,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.FlatHeight = FlatHeight;
+  AMP.$.ScrollToggle = ScrollToggle;
 
 
 }(window, AMP, jQuery));

@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -162,12 +163,13 @@ DEMO作成予定</p>
             <h4>Example:</h4>
 
             <div class="example-content">
-                <p>// on<br>
+                <p>var events = new AMP.Events();</p>
+<p>// on<br>
 events.on('change', function(){...});<br>
 events.on('change.type', typeCall);<br></p>
 <p>// off<br>
 events.off('change');<br>
-events.off('change', typeCall);<br>
+events.off('change', funcName);<br>
 events.off();<br></p>
 <p>// tigger<br>
 events.tigger('change');<br>
@@ -290,7 +292,7 @@ events.tigger('change.type');</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l144"><code>develop\amp\core\class\Events.js:144</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l146"><code>develop\amp\core\class\Events.js:146</code></a>
         </p>
 
 
@@ -376,7 +378,7 @@ events.tigger('change.type');</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l237"><code>develop\amp\core\class\Events.js:237</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l239"><code>develop\amp\core\class\Events.js:239</code></a>
         </p>
 
 
@@ -443,7 +445,7 @@ events.tigger('change.type');</p>
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l173"><code>develop\amp\core\class\Events.js:173</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l175"><code>develop\amp\core\class\Events.js:175</code></a>
         </p>
 
 
@@ -518,7 +520,7 @@ FIXME: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l254"><code>develop\amp\core\class\Events.js:254</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l256"><code>develop\amp\core\class\Events.js:256</code></a>
         </p>
 
 
@@ -584,7 +586,7 @@ FIXME: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l130"><code>develop\amp\core\class\Events.js:130</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l132"><code>develop\amp\core\class\Events.js:132</code></a>
         </p>
 
 
@@ -664,7 +666,7 @@ FIXME: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l93"><code>develop\amp\core\class\Events.js:93</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l95"><code>develop\amp\core\class\Events.js:95</code></a>
         </p>
 
 
@@ -756,7 +758,7 @@ FIXME: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l109"><code>develop\amp\core\class\Events.js:109</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l111"><code>develop\amp\core\class\Events.js:111</code></a>
         </p>
 
 
@@ -882,7 +884,7 @@ FIXME: 内部処理最適化予定
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_core_class_Events.js.html#l286"><code>develop\amp\core\class\Events.js:286</code></a>
+        <a href="../files/develop_amp_core_class_Events.js.html#l288"><code>develop\amp\core\class\Events.js:288</code></a>
         </p>
 
 
@@ -939,7 +941,7 @@ FIXME: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Events.js.html#l41"><code>develop\amp\core\class\Events.js:41</code></a>
+                            <a href="../files/develop_amp_core_class_Events.js.html#l43"><code>develop\amp\core\class\Events.js:43</code></a>
                             </p>
                     
                     
@@ -978,7 +980,7 @@ FIXME: 内部処理最適化予定
                                     AMP.BASE_CLASS
                                 </a>
                                 but overwritten in
-                            <a href="../files/develop_amp_core_class_Events.js.html#l79"><code>develop\amp\core\class\Events.js:79</code></a>
+                            <a href="../files/develop_amp_core_class_Events.js.html#l81"><code>develop\amp\core\class\Events.js:81</code></a>
                             </p>
                     
                     
@@ -1003,7 +1005,7 @@ FIXME: 内部処理最適化予定
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_core_class_Events.js.html#l69"><code>develop\amp\core\class\Events.js:69</code></a>
+                            <a href="../files/develop_amp_core_class_Events.js.html#l71"><code>develop\amp\core\class\Events.js:71</code></a>
                             </p>
                     
                     

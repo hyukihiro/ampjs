@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\Rollover.js - AMPjs</title>
+    <title>develop\amp\jquery\class\FlatHeight.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\Rollover.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\FlatHeight.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,23 +126,69 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ロールオーバー&lt;/h4&gt;
-   * &lt;p&gt;!!!: シングルトン&lt;br&gt;
-   * コンストラクタを呼び出しで、使用しません&lt;br&gt;
-   * &lt;em&gt;AMP.rollover&lt;/em&gt;にインスタンスをエクスポートしていますので、そちらを使用してください&lt;br&gt;
-   * &lt;a href=&quot;../../demo/AMP.$.Rollover.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;要素の高さを揃える&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.FlatHeight.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.$.Rollover
+   * @class AMP.$.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
+   * @param {jQuery} $flatHeight 対象のエリア要素
+   * @param {Number} split 区切る数 省略可
+   * @param {Boolean} isResize リサイズ後に実行するか
    */
-  function Rollover(){}
+  function FlatHeight($flatHeight, split, isResize){
+
+    // $flatHeight指定がない場合、初期値を設定
+    if(!$flatHeight || !($flatHeight instanceof jQuery)){
+      isResize = split;
+      split = $flatHeight;
+      $flatHeight = $(&#x27;.flat_height&#x27;);
+    }
+
+    /**
+     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = {};
+
+    /**
+     * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
+     *
+     * @default $(&#x27;.flat_height&#x27;)
+     * @property props.$flatHeight
+     * @type {jQuery}
+     */
+    this.props.$flatHeight = $flatHeight;
+
+    /**
+     * &lt;h4&gt;高さを揃える要素の分割単位&lt;/h4&gt;
+     *
+     * @default $flatHeight.length
+     * @property props.split
+     * @type {Number}
+     */
+    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
+
+    /**
+     * &lt;h4&gt;リサイズ後、セットし直すか？&lt;/h4&gt;
+     *
+     * @default true
+     * @property props.isResize
+     * @type {Boolean}
+     */
+    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
+
+    this._addEvent();
+    this.setHeight();
+  }
 
   // 基底クラスを継承
-  AMP.inherits(Rollover, AMP.BASE_CLASS);
+  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
 
   // prototype
-  var p = Rollover.prototype;
+  var p = FlatHeight.prototype;
 
 
 
@@ -156,7 +203,7 @@
    * @property VERSION
    * @type {String}
    */
-  Rollover.VERSION = &#x27;2.1.0&#x27;;
+  FlatHeight.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -165,64 +212,7 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Rollover&#x27;;
-
-
-  /**
-   * &lt;h4&gt;オプションのデフォルト値&lt;/h4&gt;
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * &lt;h4&gt;グループクラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.groupClass
-   * @default group_rover
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;アクティブクラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.activeClass
-   * @default active
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;ノーロールオーバークラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.noOverClass
-   * @default no_rover
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;ロールオーバー時に付与するファイル名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.postfix
-   * @default _on
-   * @type {String}
-   */
-  Rollover.options = {
-    groupClass : &#x27;group_rover&#x27;,
-    activeClass: &#x27;active&#x27;,
-    noOverClass: &#x27;no_rover&#x27;,
-    postfix    : &#x27;_on&#x27;
-  };
-
-
-  /**
-   * &lt;h4&gt;ロールオーバークラス名初期値&lt;/h4&gt;
-   *
-   * @static
-   * @property imageClass
-   * @type {String}
-   */
-  Rollover.imageClass = &#x27;img.rover, input.rover, .all_rover img&#x27;;
+  p.className = &#x27;FlatHeight&#x27;;
 
 
 
@@ -231,101 +221,42 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ロールオーバーイベント追加&lt;/h4&gt;
+   * &lt;h4&gt;FlatHeightインスタンス生成&lt;/h4&gt;
    *
-   * @method on
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
+   * @static
+   * @method get
+   * @param  {jQuery} $flatHeight 対象のエリア要素
+   * @param  {Number} split 区切る数 省略可
+   * @param  {Boolean} isResize リサイズ後に実行するか
+   * @return {FlatHeight}
    */
-  p.on = function($images, options){
+  FlatHeight.get = function($flatHeight, split, isResize){
+    return new FlatHeight($flatHeight, split, isResize);
+  };
+
+
+  /**
+   * &lt;h4&gt;イベント設定&lt;/h4&gt;
+   * リサイズイベント、フォントリサイズイベント
+   *
+   * @private
+   * @method addEvent
+   * @return {FlatHeight}
+   */
+  p._addEvent = function(){
     var self = this;
 
-    // $image指定がない場合、初期値を設定
-    if(!$images || !($images instanceof jQuery)){
-      options = $images;
-      $images = $(Rollover.imageClass);
-    }
-
-    var props = $.extend(true, {}, Rollover.options, options);
-
-    $images.each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // on画像の場合
-      if(!data.isOffImg){
-        data.image.src = data.offSrc;
-      }
-
-      // rollover
-      data.$trigger
-      .on(&#x27;mouseenter.Rollover&#x27;, function(){
-        if(!data.$image.hasClass(props.noOverClass)){
-          data.image.src = data.onSrc;
-        }
-      })
-      .on(&#x27;mouseleave.Rollover&#x27;, function(){
-        if(!data.$image.hasClass(props.noOverClass)){
-          data.image.src = data.offSrc;
-        }
+    // fontresize
+    if(AMP.isDevice(&#x27;pc&#x27;)){
+      AMP.fontResize.on(&#x27;change.FlatHeight&#x27;, function(){
+        self.setHeight();
       });
-    });
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;ロールオーバーイベント削除&lt;/h4&gt;
-   *
-   * @method off
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.off = function($images, options){
-    // $image指定がない場合、初期値を設定
-    if(!$images || !($images instanceof jQuery)){
-      options = $images;
-      $images = $(Rollover.imageClass);
     }
 
-    var props = $.extend(true, {}, Rollover.options, options);
-
-    $images.each(function(i){
-      var $group = $images.eq(i).closest(&#x27;.&#x27; + props.groupClass),
-      $trigger = $group[0] ? $group : $images.eq(i);
-      $trigger.off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
-    });
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;画像のアクティブ化&lt;/h4&gt;
-   *
-   * @method active
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.active = function($images, options){
-    var self = this,
-    props = $.extend(true, {}, Rollover.options, options);
-
-    $images.addClass(props.activeClass)
-    .each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // イベント削除
-      data.$trigger
-      .addClass(props.activeClass)
-      .off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
-
-      // off画像の場合
-      if(data.isOffImg){
-        data.image.src = data.onSrc;
+    // window resize
+    $(root).on(&#x27;resizestop.FlatHeight&#x27;, function(){
+      if(self.props.isResize){
+        self.setHeight();
       }
     });
 
@@ -334,86 +265,71 @@
 
 
   /**
-   * &lt;h4&gt;画像を待機状態にする&lt;/h4&gt;
+   * &lt;h4&gt;区切りをセットして高さを揃える&lt;/h4&gt;
    *
-   * @method passive
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
+   * @method setSplit
+   * @return {FlatHeight}
    */
-  p.passive = function($images, options){
-    var self = this,
-    props = $.extend(true, {}, Rollover.options, options);
-
-    $images.removeClass(props.activeClass)
-    .each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // イベント削除
-      data.$trigger
-      .removeClass(props.activeClass)
-      .off(&#x27;mouseenter.Rollover mouseleave.Rollover&#x27;);
-
-      // on画像の場合
-      if(!data.isOffImg){
-        data.image.src = data.offSrc;
-      }
-    });
-
+  p.setSplit = function(num){
+    if(!AMP.isNumber(num)){
+      throw new TypeError(num + &#x27; is not a Number&#x27;);
+    }
+    this.props.split = num;
+    this.setHeight();
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;ロールオーバーデータの生成&lt;/h4&gt;
+   * &lt;h4&gt;高さを揃える&lt;/h4&gt;
    *
-   * @method _createRolloverData
-   * @private
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
+   * @method setHeight
+   * @return {FlatHeight}
    */
-  p._createRolloverData = function($image, options){
-    var
-    image = $image[0],
-    src = image.src,
-    ext = src.substring(src.lastIndexOf(&#x27;.&#x27;), src.length),
-    $group = $image.closest(&#x27;.&#x27; + options.groupClass).addClass(options.activeClass),
-    onSrc,
-    offSrc;
+  p.setHeight = function(){
+    var self = this,
+    total = self.props.$flatHeight.length,
+    rest = total % self.props.split,
+    finalRow = total - rest,
+    maxHeight = 0,
+    targetHeight = 0,
+    rowCount = 0,
+    i = 0;
 
-    // 現在on画像の場合
-    if(src.lastIndexOf(options.postfix + ext) &gt; -1){
-      onSrc = src;
-      offSrc = src.replace(options.postfix + ext, ext);
-      AMP.preload(offSrc);
+    self.props.$flatHeight.height(&#x27;auto&#x27;);
 
-    // 現在off画像の場合
-    } else {
-      offSrc = src;
-      onSrc = src.replace(ext, options.postfix + ext);
-      AMP.preload(onSrc);
+    if(1 &lt; self.props.split){
+
+      for(; i &lt; total; i += 1){
+        // 一番高い高さを求める
+        targetHeight = self.props.$flatHeight.eq(i).height();
+        maxHeight = maxHeight &lt; targetHeight ? targetHeight : maxHeight;
+
+        // 行の高さを揃える
+        if((i + 1) % self.props.split === 0){
+          var _start = rowCount * self.props.split,
+          _end = (rowCount += 1) * self.props.split;
+
+          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
+          maxHeight = 0;
+
+        // 最終行の高さを揃える
+        } else if(1 &lt; rest &amp;&amp; finalRow &lt;= i &amp;&amp; i === total - 1){
+          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
+        }
+      }
     }
 
-    // RolloverData
-    return {
-      $image  : $image,
-      image   : image,
-      $trigger: $group[0] ? $group : $image,
-      onSrc   : onSrc,
-      offSrc  : offSrc,
-      isOffImg: src === offSrc
-    };
+    return this;
   };
 
 
 
   /*--------------------------------------------------------------------------
-    exports
+    export
   --------------------------------------------------------------------------*/
 
-  AMP.$.Rollover = Rollover;
-  AMP.$.rollover = new Rollover();
+  AMP.$.FlatHeight = FlatHeight;
 
 
 }(window, AMP, jQuery));
