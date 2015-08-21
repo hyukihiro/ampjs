@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\FlatHeight.js - AMPjs</title>
+    <title>develop\amp\jquery\class\Scroll.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\FlatHeight.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\Scroll.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,69 +126,45 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;要素の高さを揃える&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.FlatHeight.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;ページ内リンクのスクロール&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.Scroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.$.FlatHeight
+   * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {jQuery} $flatHeight 対象のエリア要素
-   * @param {Number} split 区切る数 省略可
-   * @param {Boolean} isResize リサイズ後に実行するか
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
+   * @param  {Object} options オプション値
    */
-  function FlatHeight($flatHeight, split, isResize){
-
-    // $flatHeight指定がない場合、初期値を設定
-    if(!$flatHeight || !($flatHeight instanceof jQuery)){
-      isResize = split;
-      split = $flatHeight;
-      $flatHeight = $(&#x27;.flat_height&#x27;);
+  function Scroll($scrollTrigger, options){
+    // $scrollTrigger指定がない場合、初期値を設定
+    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
+      options = $scrollTrigger;
+      $scrollTrigger = $(&#x27;a[href^=#]&#x27;);
     }
 
     /**
      * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
+     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
      *
      * @property props
      * @type {Object}
      */
-    this.props = {};
+    this.props = $.extend(true, {}, Scroll.options, {$html: $(&#x27;html, body&#x27;)}, options);
 
     /**
-     * &lt;h4&gt;ターゲット要素&lt;/h4&gt;
+     * &lt;h4&gt;トリガーとなるa要素&lt;/h4&gt;
      *
-     * @default $(&#x27;.flat_height&#x27;)
-     * @property props.$flatHeight
+     * @property props.$scrollTrigger
      * @type {jQuery}
      */
-    this.props.$flatHeight = $flatHeight;
-
-    /**
-     * &lt;h4&gt;高さを揃える要素の分割単位&lt;/h4&gt;
-     *
-     * @default $flatHeight.length
-     * @property props.split
-     * @type {Number}
-     */
-    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
-
-    /**
-     * &lt;h4&gt;リサイズ後、セットし直すか？&lt;/h4&gt;
-     *
-     * @default true
-     * @property props.isResize
-     * @type {Boolean}
-     */
-    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
-
-    this._addEvent();
-    this.setHeight();
+    this.props.$scrollTrigger = $scrollTrigger;
   }
 
   // 基底クラスを継承
-  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
+  AMP.inherits(Scroll, AMP.BASE_CLASS);
 
   // prototype
-  var p = FlatHeight.prototype;
+  var p = Scroll.prototype;
 
 
 
@@ -202,7 +179,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = &#x27;3.1.0&#x27;;
+  Scroll.VERSION = &#x27;3.2.0&#x27;;
 
 
   /**
@@ -211,7 +188,59 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;FlatHeight&#x27;;
+  p.className = &#x27;Scroll&#x27;;
+
+
+  /**
+   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
+   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * &lt;h4&gt;ページ要素&lt;/h4&gt;
+   *
+   * @static
+   * @property options.$html
+   * @default $(&#x27;html, body&#x27;)
+   * @type {jQuery}
+   */
+  /**
+   * &lt;h4&gt;停止位置調整値&lt;/h4&gt;
+   *
+   * @static
+   * @property options.adjust
+   * @default 0
+   * @type {Number|Function}
+   */
+  /**
+   * &lt;h4&gt;スクロールしないトリガークラス名&lt;/h4&gt;
+   *
+   * @static
+   * @property options.noScrollClass
+   * @default no_scroll
+   * @type {String}
+   */
+  /**
+   * &lt;h4&gt;スクロールアニメーションのオプション値&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;http://julian.com/research/velocity/#arguments&quot; target=&quot;_blank&quot;&gt;オプション値&lt;/a&gt;&lt;/p&gt;
+   *
+   * @static
+   * @property options.tween
+   * @default  {duration: 800, easing: &#x27;easeOutQuint&#x27;}
+   * @type {Object}
+   */
+  Scroll.options = {
+    $html        : null, // $(&#x27;html, body&#x27;),
+    adjust       : 0,
+    noScrollClass: &#x27;no_scroll&#x27;,
+    tween        : {
+      duration   : 800,
+      easing     : &#x27;easeOutQuint&#x27;
+    }
+  };
 
 
 
@@ -220,43 +249,33 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;FlatHeightインスタンス生成&lt;/h4&gt;
+   * &lt;h4&gt;Scrollインスタンスの生成&lt;/h4&gt;
    *
    * @static
    * @method get
-   * @param  {jQuery} $flatHeight 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Boolean} isResize リサイズ後に実行するか
-   * @return {FlatHeight}
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
+   * @param  {Object} options オプション値 省略可
+   * @return {Scroll}
    */
-  FlatHeight.get = function($flatHeight, split, isResize){
-    return new FlatHeight($flatHeight, split, isResize);
+  Scroll.get = function($scrollTrigger, options){
+    return new Scroll($scrollTrigger, options).on();
   };
 
 
   /**
-   * &lt;h4&gt;イベント設定&lt;/h4&gt;
-   * リサイズイベント、フォントリサイズイベント
+   * &lt;h4&gt;イベント登録&lt;/h4&gt;
    *
-   * @private
-   * @method addEvent
-   * @return {FlatHeight}
+   * @method on
+   * @return {Scroll}
    */
-  p._addEvent = function(){
+  p.on = function(){
     var self = this;
 
-    // fontresize
-    if(AMP.isDevice(&#x27;pc&#x27;)){
-      AMP.fontResize.on(&#x27;change.FlatHeight&#x27;, function(){
-        self.setHeight();
-      });
-    }
+    // スクロールイベントの重複回避
+    this.off();
 
-    // window resize
-    $(root).on(&#x27;resizestop.FlatHeight&#x27;, function(){
-      if(self.props.isResize){
-        self.setHeight();
-      }
+    self.props.$scrollTrigger.on(&#x27;click.Scroll&#x27;, function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
     });
 
     return this;
@@ -264,62 +283,41 @@
 
 
   /**
-   * &lt;h4&gt;区切りをセットして高さを揃える&lt;/h4&gt;
+   * &lt;h4&gt;イベント削除&lt;/h4&gt;
    *
-   * @method setSplit
-   * @return {FlatHeight}
+   * @method off
+   * @return {Scroll}
    */
-  p.setSplit = function(num){
-    if(!AMP.isNumber(num)){
-      throw new TypeError(num + &#x27; is not a Number&#x27;);
-    }
-    this.props.split = num;
-    this.setHeight();
+  p.off = function(){
+    this.props.$scrollTrigger.off(&#x27;click.Scroll&#x27;);
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;高さを揃える&lt;/h4&gt;
+   * &lt;h4&gt;スクロールアニメーション&lt;/h4&gt;
+   * &lt;p&gt;FIXME: Stringも対応予定&lt;/p&gt;
    *
-   * @method setHeight
-   * @return {FlatHeight}
+   * @method tween
+   * @param {Number} num トリガー要素のインデックス
+   * @return {Void}
    */
-  p.setHeight = function(){
+  p.tween = function(num){
     var self = this,
-    total = self.props.$flatHeight.length,
-    rest = total % self.props.split,
-    finalRow = total - rest,
-    maxHeight = 0,
-    targetHeight = 0,
-    rowCount = 0,
-    i = 0;
+    props = self.props,
+    $scrollTrigger = props.$scrollTrigger.eq(num),
+    $target = $($scrollTrigger.attr(&#x27;href&#x27;));
 
-    self.props.$flatHeight.height(&#x27;auto&#x27;);
+    if($target[0] &amp;&amp; !$scrollTrigger.hasClass(props.noScrollClass)){
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
+      moveTo = $target.offset().top - adjust;
 
-    if(1 &lt; self.props.split){
-
-      for(; i &lt; total; i += 1){
-        // 一番高い高さを求める
-        targetHeight = self.props.$flatHeight.eq(i).height();
-        maxHeight = maxHeight &lt; targetHeight ? targetHeight : maxHeight;
-
-        // 行の高さを揃える
-        if((i + 1) % self.props.split === 0){
-          var _start = rowCount * self.props.split,
-          _end = (rowCount += 1) * self.props.split;
-
-          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
-          maxHeight = 0;
-
-        // 最終行の高さを揃える
-        } else if(1 &lt; rest &amp;&amp; finalRow &lt;= i &amp;&amp; i === total - 1){
-          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
-        }
+      if($(root).scrollTop() !== moveTo){
+        var tween = $.extend({offset: moveTo}, props.tween);
+        props.$html.velocity(&#x27;stop&#x27;).velocity(&#x27;scroll&#x27;, tween);
       }
+      return false;
     }
-
-    return this;
   };
 
 
@@ -328,7 +326,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.FlatHeight = FlatHeight;
+  AMP.$.Scroll = Scroll;
 
 
 }(window, AMP, jQuery));

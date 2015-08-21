@@ -51,34 +51,26 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.$.ScrollToggle <a href="../docs/classes/AMP.$.ScrollToggle.html">API Reference</a></h2>
+<h2>AMP.$.MediaImageChange <a href="../docs/classes/AMP.$.MediaImageChange.html">API Reference</a></h2>
 <div class="lead">
-<p>スクロールY座標を基準に要素の表示・非表示します。<br>オプション値はAPIリファレンスを参照</p>
+<p>ブレイクポイントで画像を切り替え表示します。<br>
+AMP.Mediaqueryを継承していますので、head要素に割り当てたfont-familyスタイルを見て状態を判定し、data属性にセットした画像パスをsrcに書き換えを行います。<br>
+サンプルではwindowサイズ変更時にブレイクポイントで画像が切り替わります。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<p class="scroll_toggle em">ScrollYが300px以下の場合、<br>この要素を非表示します。</p>
+<img src="assets/images/spacer.png" data-media-img="assets/images/img.png" alt="">
 </textarea>
 
-<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
-#content{
-	padding-top: 250px;
-	padding-bottom: 500px;
-}
-.scroll_toggle{
-	display: none;
-	padding: 50px 15px;
-	border: 1px solid #ddd;
-	text-align: center;
-}
-</textarea>
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// 第一引数、トリガー要素
-// 初期値： $('.scroll_toggle')
-AMP.$.ScrollToggle.get();
+// フォントファミリーにあわせて、以下の画像パスに切り替わる
+// PC時フォントファミリー pc: assets/images/img_pc.png
+// SP時フォントファミリー sp: assets/images/img_sp.png
+AMP.$.MediaImageChange.get();
 </textarea>
 </div>
 </section>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\Scroll.js - AMPjs</title>
+    <title>develop\amp\jquery\class\UIController.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\Scroll.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\UIController.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -125,45 +126,21 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;ページ内リンクのスクロール&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.$.Scroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;UIコントローラ&lt;/h4&gt;
+   * &lt;p&gt;UIコントローラクラスを継承する事でUIコントローラを提供します&lt;/p&gt;
    *
-   * @class AMP.$.Scroll
+   * @protected
+   * @class AMP.$.UIController
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
-   * @param  {Object} options オプション値
    */
-  function Scroll($scrollTrigger, options){
-    // $scrollTrigger指定がない場合、初期値を設定
-    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
-      options = $scrollTrigger;
-      $scrollTrigger = $(&#x27;a[href^=#]&#x27;);
-    }
-
-    /**
-     * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
-     * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Scroll.options, {$html: $(&#x27;html, body&#x27;)}, options);
-
-    /**
-     * &lt;h4&gt;トリガーとなるa要素&lt;/h4&gt;
-     *
-     * @property props.$scrollTrigger
-     * @type {jQuery}
-     */
-    this.props.$scrollTrigger = $scrollTrigger;
-  }
+  function UIController(){}
 
   // 基底クラスを継承
-  AMP.inherits(Scroll, AMP.BASE_CLASS);
+  AMP.inherits(UIController, AMP.BASE_CLASS);
 
   // prototype
-  var p = Scroll.prototype;
+  var p = UIController.prototype;
 
 
 
@@ -178,7 +155,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = &#x27;3.2.0&#x27;;
+  UIController.VERSION = &#x27;1.1.0&#x27;;
 
 
   /**
@@ -187,58 +164,23 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;Scroll&#x27;;
+  p.className = &#x27;UIController&#x27;;
 
 
   /**
-   * &lt;h4&gt;デフォルト値オブジェクト&lt;/h4&gt;
-   * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
+   * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
    *
-   * @static
-   * @property options
+   * @property props
    * @type {Object}
    */
   /**
-   * &lt;h4&gt;ページ要素&lt;/h4&gt;
+   * &lt;h4&gt;現在値&lt;/h4&gt;
    *
-   * @static
-   * @property options.$html
-   * @default $(&#x27;html, body&#x27;)
-   * @type {jQuery}
+   * @property props.current
+   * @type {Number}
    */
-  /**
-   * &lt;h4&gt;停止位置調整値&lt;/h4&gt;
-   *
-   * @static
-   * @property options.adjust
-   * @default 0
-   * @type {Number|Function}
-   */
-  /**
-   * &lt;h4&gt;スクロールしないトリガークラス名&lt;/h4&gt;
-   *
-   * @static
-   * @property options.noScrollClass
-   * @default no_scroll
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;スクロールアニメーションのオプション値&lt;/h4&gt;
-   * &lt;p&gt;&lt;a href=&quot;http://julian.com/research/velocity/#arguments&quot; target=&quot;_blank&quot;&gt;オプション値&lt;/a&gt;&lt;/p&gt;
-   *
-   * @static
-   * @property options.tween
-   * @default  {duration: 800, easing: &#x27;easeOutQuint&#x27;}
-   * @type {Object}
-   */
-  Scroll.options = {
-    $html        : null, // $(&#x27;html, body&#x27;),
-    adjust       : 0,
-    noScrollClass: &#x27;no_scroll&#x27;,
-    tween        : {
-      duration   : 800,
-      easing     : &#x27;easeOutQuint&#x27;
-    }
+  p.props = {
+    current: 0
   };
 
 
@@ -248,76 +190,185 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;Scrollインスタンスの生成&lt;/h4&gt;
+   * &lt;h4&gt;Pagerボタンイベント登録&lt;/h4&gt;
    *
-   * @static
-   * @method get
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {Scroll}
+   * @method addEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
    */
-  Scroll.get = function($scrollTrigger, options){
-    return new Scroll($scrollTrigger, options).on();
+  p.addEventPager = function($pager){
+    var self = this;
+    $pager.on(&#x27;click.&#x27; + self.className, function(){
+      self.moveTo($pager.index(this));
+      return false;
+    });
+    return this;
   };
 
 
   /**
-   * &lt;h4&gt;イベント登録&lt;/h4&gt;
+   * &lt;h4&gt;Pagerボタンイベント削除&lt;/h4&gt;
    *
-   * @method on
-   * @return {Scroll}
+   * @method removeEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
    */
-  p.on = function(){
+  p.removeEventPager = function($pager){
+    $pager.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Nextボタンイベント登録&lt;/h4&gt;
+   *
+   * @method addEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.addEventNext = function($next){
+    var self = this;
+    $next.on(&#x27;click.&#x27; + self.className, function(){
+      self.next();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Nextボタンイベント削除&lt;/h4&gt;
+   *
+   * @method removeEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.removeEventNext = function($next){
+    $next.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Prevボタンイベント登録&lt;/h4&gt;
+   *
+   * @method addEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPrev = function($prev){
+    var self = this;
+    $prev.on(&#x27;click.&#x27; + self.className, function(){
+      self.prev();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;Prevボタンイベント削除&lt;/h4&gt;
+   *
+   * @method removeEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPrev = function($prev){
+    $prev.off(&#x27;click.&#x27; + this.className);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;フリックイベント&lt;/h4&gt;
+   *
+   * @method addEventFlick
+   * @return {Slider}
+   */
+  p.addEventFlick = function($trigger){
     var self = this;
 
-    // スクロールイベントの重複回避
-    this.off();
-
-    self.props.$scrollTrigger.on(&#x27;click.Scroll&#x27;, function(){
-      return self.tween(self.props.$scrollTrigger.index(this));
-    });
-
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;イベント削除&lt;/h4&gt;
-   *
-   * @method off
-   * @return {Scroll}
-   */
-  p.off = function(){
-    this.props.$scrollTrigger.off(&#x27;click.Scroll&#x27;);
-    return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;スクロールアニメーション&lt;/h4&gt;
-   * &lt;p&gt;FIXME: Stringも対応予定&lt;/p&gt;
-   *
-   * @method tween
-   * @param {Number} num トリガー要素のインデックス
-   * @return {Void}
-   */
-  p.tween = function(num){
-    var self = this,
-    props = self.props,
-    $scrollTrigger = props.$scrollTrigger.eq(num),
-    $target = $($scrollTrigger.attr(&#x27;href&#x27;));
-
-    if($target[0] &amp;&amp; !$scrollTrigger.hasClass(props.noScrollClass)){
-      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
-      moveTo = $target.offset().top - adjust;
-
-      if($(root).scrollTop() !== moveTo){
-        var tween = $.extend({offset: moveTo}, props.tween);
-        props.$html.velocity(&#x27;stop&#x27;).velocity(&#x27;scroll&#x27;, tween);
+    $trigger.off(&#x27;flickmoveX.Slider flickcancelX.Slider flickX.Slider&#x27;)
+    .on(&#x27;flickmoveX.&#x27; + this.className, function(moveEvent){
+      self._move(moveEvent.moveX);
+    })
+    .on(&#x27;flickcancelX.&#x27; + this.className, function(){
+      self._resetTween();
+    })
+    .on(&#x27;flickX.&#x27; + this.className, function(flickEvent){
+      if(0 &lt; flickEvent.moveX){
+        self.prev();
+      } else {
+        self.next();
       }
-      return false;
-    }
+    });
+    return this;
   };
+
+
+  /**
+   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
+   * アニメート無
+   *
+   * @method current
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.current = function(index){
+    this._controller(index, true);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;指定インデックスへ&lt;/h4&gt;
+   *
+   * @method moveTo
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.moveTo = function(index){
+    this._controller(index);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;次へ&lt;/h4&gt;
+   *
+   * @method next
+   * @return {Instance}
+   */
+  p.next = function(){
+    this._controller(this.props.current + 1);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;前へ&lt;/h4&gt;
+   *
+   * @method prev
+   * @return {Instance}
+   */
+  p.prev = function(){
+    this._controller(this.props.current -1);
+    return this;
+  };
+
+
+  /**
+   * &lt;h4&gt;コントローラー&lt;/h4&gt;
+   * 送られてきた値を制御します
+   *
+   * @protected
+   * @private
+   * @method _controller
+   * @param {Number} index スライドインデック
+   * @param {Boolean} nonAnimate アニメーション無
+   * @return {Instance}
+   */
+  p._controller = function(index, nonAnimate){};
 
 
 
@@ -325,7 +376,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.Scroll = Scroll;
+  AMP.$.UIController = UIController;
 
 
 }(window, AMP, jQuery));

@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs jQuery Module File version 3.1.0
+ * AMPjs jQuery Module File version 3.1.1
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -132,9 +132,9 @@
    * @return {Render}
    */
   Render.get = function($tmp, ajaxOptions){
-    var inst = new Render($tmp, ajaxOptions);
-    inst.start();
-    return inst;
+    var instance = new Render($tmp, ajaxOptions);
+    instance.start();
+    return instance;
   };
 
 

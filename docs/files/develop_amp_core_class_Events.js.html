@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -128,20 +129,22 @@
    * &lt;h4&gt;イベント&lt;/h4&gt;
    * &lt;p&gt;イベントクラスの継承して使用出来ます&lt;br&gt;
    * メディエーターとしても使用すことも可能です&lt;br&gt;
-   * DEMO作成予定&lt;/p&gt;
+   * &lt;a href=&quot;../../demo/AMP.Events.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
    * @example
+   *   var events = new AMP.Events();
+   *
    *   // on&lt;br&gt;
    *   events.on(&#x27;change&#x27;, function(){...});&lt;br&gt;
    *   events.on(&#x27;change.type&#x27;, typeCall);&lt;br&gt;
    *
    *   // off&lt;br&gt;
    *   events.off(&#x27;change&#x27;);&lt;br&gt;
-   *   events.off(&#x27;change&#x27;, typeCall);&lt;br&gt;
+   *   events.off(&#x27;change&#x27;, funcName);&lt;br&gt;
    *   events.off();&lt;br&gt;
    *
    *   // tigger&lt;br&gt;
@@ -184,7 +187,7 @@
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = &#x27;2.0.1&#x27;;
+  Events.VERSION = &#x27;2.0.2&#x27;;
 
 
   /**
@@ -405,12 +408,13 @@
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+          item.func.apply(item.context, args);
         }
       });
     }

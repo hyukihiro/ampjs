@@ -17,20 +17,22 @@
    * <h4>イベント</h4>
    * <p>イベントクラスの継承して使用出来ます<br>
    * メディエーターとしても使用すことも可能です<br>
-   * DEMO作成予定</p>
+   * <a href="../../demo/AMP.Events.html">DEMO</a></p>
    *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
    * @example
+   *   var events = new AMP.Events();
+   *
    *   // on<br>
    *   events.on('change', function(){...});<br>
    *   events.on('change.type', typeCall);<br>
    *
    *   // off<br>
    *   events.off('change');<br>
-   *   events.off('change', typeCall);<br>
+   *   events.off('change', funcName);<br>
    *   events.off();<br>
    *
    *   // tigger<br>
@@ -73,7 +75,7 @@
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = '2.0.1';
+  Events.VERSION = '2.0.2';
 
 
   /**
@@ -294,12 +296,13 @@
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+          item.func.apply(item.context, args);
         }
       });
     }

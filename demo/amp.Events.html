@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -52,23 +51,54 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.$.MediaImages <a href="../docs/classes/AMP.$.MediaImages.html">API Reference</a></h2>
+<h2>AMP.Events <a href="../docs/classes/AMP.Events.html">API Reference</a></h2>
 <div class="lead">
-<p>ブレイクポイントで画像を切り替えます。<br>
-AMP.Mediaqueryを継承していますので、headで割り当てたfont-familyの文字列を見て処理を判定し、data属性にセットした画像パスをsrcに書き換えを行います。<br>
-サンプルではwindowサイズ変更時にブレイクポイントで画像が切り替わります。</p>
+<p>イベントを管理します。<br>イベントクラスの継承や、メディエーターとして使用することが可能です。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<img src="assets/images/spacer.png" data-media-img="assets/images/img.png" alt="">
+<p class="btn">
+<a class="blue add" href="#">現在時刻追加</a>
+<a class="green del" href="#">削除</a>
+</p>
 </textarea>
 
 <!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-AMP.$.MediaImageChange.get();
+// メディエーターとして使用
+var mediator = new AMP.Events();
+var val;
+var $btn = $('.btn');
+
+// イベント登録
+mediator.on('add', function(time){
+	val = time;
+	mediator.trigger('alert');
+});
+
+mediator.on('del', function(){
+	val = null;
+	mediator.trigger('alert');
+});
+
+mediator.on('alert', function(){
+	alert(val);
+});
+
+
+// クリックイベント登録
+$btn.find('.add').click(function(){
+	mediator.trigger('add', $.now());
+	return false;
+});
+
+$btn.find('.del').click(function(){
+	mediator.trigger('del');
+	return false;
+});
 </textarea>
 </div>
 </section>

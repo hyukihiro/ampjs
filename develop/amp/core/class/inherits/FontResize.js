@@ -51,7 +51,6 @@
 
     // superClass constructor call
     FontResize.Events_constructor.call(this);
-    // AMP.Events.call(this);
   }
 
   // AMP.Eventsクラスを継承
@@ -111,13 +110,13 @@
   p._createElement = function(){
 
     var key = 'AMP_FONT_RESIZE',
-    el = document.createElement('ins'),
+    elm = document.createElement('ins'),
     text = document.createTextNode(key);
 
-    el.id = key;
-    el.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
-    el.appendChild(text);
-    document.body.appendChild(el);
+    elm.id = key;
+    elm.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
+    elm.appendChild(text);
+    document.body.appendChild(elm);
 
     // property
     this.elm = document.getElementById(key);
@@ -138,7 +137,7 @@
    */
   p._controller = function(){
     var self = this,
-    height = self.el.clientHeight;
+    height = self.elm.clientHeight;
 
     if(self.isFontResize){
       // フォントサイズに変更があれば

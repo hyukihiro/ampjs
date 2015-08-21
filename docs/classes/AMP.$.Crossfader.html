@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>AMP.$.Slider - AMPjs</title>
+    <title>AMP.$.Crossfader - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -106,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1>AMP.$.Slider Class</h1>
+<h1>AMP.$.Crossfader Class</h1>
 <div class="box meta">
 
         <div class="extends">
@@ -114,7 +114,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l16"><code>develop\amp\jquery\class\inherits\Slider.js:16</code></a>
+            Defined in: <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l16"><code>develop\amp\jquery\class\inherits\Crossfader.js:16</code></a>
         </div>
 
 
@@ -122,19 +122,19 @@
 
 
 <div class="box intro">
-    <h4>スライダー</h4>
-<p><a href="../../demo/AMP.$.Slider.html">DEMO</a></p>
+    <h4>クロスフェーダー</h4>
+<p><a href="../../demo/AMP.$.Crossfader.html">DEMO</a></p>
 </div>
 
     <div class="constructor">
         <h2>Constructor</h2>
-<div id="method_AMP.$.Slider" class="method item">
-    <h3 class="name"><code>AMP.$.Slider</code></h3>
+<div id="method_AMP.$.Crossfader" class="method item">
+    <h3 class="name"><code>AMP.$.Crossfader</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>$slider</code>
+                        <code>$crossfader</code>
                 </li>
                 <li class="arg">
                         <code>options</code>
@@ -152,7 +152,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l16"><code>develop\amp\jquery\class\inherits\Slider.js:16</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l16"><code>develop\amp\jquery\class\inherits\Crossfader.js:16</code></a>
         </p>
 
 
@@ -168,12 +168,12 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">$slider</code>
+                        <code class="param-name">$crossfader</code>
                         <span class="type">JQuery</span>
 
 
                     <div class="param-description">
-                        <p>スライダー要素</p>
+                        <p>クロスフェーダー要素</p>
 
                     </div>
 
@@ -218,18 +218,6 @@
 
                             </li>
                             <li class="index-item method private">
-                                <a href="#method__getDisplayLength">_getDisplayLength</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method__move">_move</a>
-
-                            </li>
-                            <li class="index-item method private">
-                                <a href="#method__resetTween">_resetTween</a>
-
-                            </li>
-                            <li class="index-item method private">
                                 <a href="#method__tween">_tween</a>
 
                             </li>
@@ -255,10 +243,6 @@
                             </li>
                             <li class="index-item method">
                                 <a href="#method_addEventResize">addEventResize</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_addEventThumbnail">addEventThumbnail</a>
 
                             </li>
                             <li class="index-item method">
@@ -306,11 +290,7 @@
 
                             </li>
                             <li class="index-item method">
-                                <a href="#method_setPosition">setPosition</a>
-
-                            </li>
-                            <li class="index-item method">
-                                <a href="#method_setProps">setProps</a>
+                                <a href="#method_setIndex">setIndex</a>
 
                             </li>
                             <li class="index-item method">
@@ -347,6 +327,11 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
+                                <a href="#property_options.$item">options.$item</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_options.$next">options.$next</a>
 
                                     <span class="flag static">static</span>
@@ -358,16 +343,6 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_options.$prev">options.$prev</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_options.$slide">options.$slide</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_options.$slideItem">options.$slideItem</a>
 
                                     <span class="flag static">static</span>
                             </li>
@@ -412,11 +387,6 @@
                                     <span class="flag static">static</span>
                             </li>
                             <li class="index-item property">
-                                <a href="#property_options.slideStep">options.slideStep</a>
-
-                                    <span class="flag static">static</span>
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_options.timer">options.timer</a>
 
                                     <span class="flag static">static</span>
@@ -439,10 +409,6 @@
 
                             </li>
                             <li class="index-item property private">
-                                <a href="#property_props._stepLength">props._stepLength</a>
-
-                            </li>
-                            <li class="index-item property private">
                                 <a href="#property_props._timerId">props._timerId</a>
 
                             </li>
@@ -451,19 +417,7 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_props.distance">props.distance</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_props.left">props.left</a>
-
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_props.length">props.length</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_props.slideMaxLength">props.slideMaxLength</a>
 
                             </li>
                             <li class="index-item property">
@@ -511,7 +465,7 @@
                 AMP.$.UIController
             </a>
             but overwritten in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l545"><code>develop\amp\jquery\class\inherits\Slider.js:545</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l416"><code>develop\amp\jquery\class\inherits\Crossfader.js:416</code></a>
         </p>
 
 
@@ -520,7 +474,7 @@
 
     <div class="description">
         <h4>コントローラー</h4>
-<p>スライダーイベントが実行されたとき、必ずここの処理を通します</p>
+<p>クロスフェードイベントが実行されたとき、必ずここの処理を通します</p>
     </div>
 
         <div class="params">
@@ -533,7 +487,7 @@
 
 
                     <div class="param-description">
-                        <p>スライドする位置</p>
+                        <p>表示するアイテムインデックス</p>
 
                     </div>
 
@@ -562,60 +516,22 @@
 
 
 </div>
-<div id="method__getDisplayLength" class="method item private">
-    <h3 class="name"><code>_getDisplayLength</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Number</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l607"><code>develop\amp\jquery\class\inherits\Slider.js:607</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>表示可能な要素の数を取得</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Number</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method__move" class="method item private">
-    <h3 class="name"><code>_move</code></h3>
+<div id="method__tween" class="method item private">
+    <h3 class="name"><code>_tween</code></h3>
 
         <div class="args">
             <span class="paren">(</span><ul class="args-list inline commas">
                 <li class="arg">
-                        <code>x</code>
+                        <code>prev</code>
+                </li>
+                <li class="arg">
+                        <code>next</code>
                 </li>
             </ul><span class="paren">)</span>
         </div>
 
         <span class="returns-inline">
-            <span class="type">Void</span>
+            <span class="type">jQuery.Deferred</span>
         </span>
 
 
@@ -628,7 +544,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l729"><code>develop\amp\jquery\class\inherits\Slider.js:729</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l570"><code>develop\amp\jquery\class\inherits\Crossfader.js:570</code></a>
         </p>
 
 
@@ -636,7 +552,7 @@
     </div>
 
     <div class="description">
-        <h4>指定x座標分移動</h4>
+        <h4>クロスフェードアニメーションを実行</h4>
     </div>
 
         <div class="params">
@@ -644,100 +560,29 @@
 
             <ul class="params-list">
                 <li class="param">
-                        <code class="param-name">x</code>
+                        <code class="param-name">prev</code>
                         <span class="type">Number</span>
 
 
                     <div class="param-description">
-                        <p>移動するx座標値</p>
+                        <p>前の要素</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">next</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>次の要素</p>
 
                     </div>
 
                 </li>
             </ul>
         </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Void</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method__resetTween" class="method item private">
-    <h3 class="name"><code>_resetTween</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">jQuery.Deferred</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l742"><code>develop\amp\jquery\class\inherits\Slider.js:742</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>スライド位置を戻す</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">jQuery.Deferred</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method__tween" class="method item private">
-    <h3 class="name"><code>_tween</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">jQuery.Deferred</span>
-        </span>
-
-
-        <span class="flag private">private</span>
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l757"><code>develop\amp\jquery\class\inherits\Slider.js:757</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>スライドアニメーションを実行</h4>
-    </div>
-
 
         <div class="returns">
             <h4>Returns:</h4>
@@ -755,7 +600,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -767,7 +612,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l647"><code>develop\amp\jquery\class\inherits\Slider.js:647</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l496"><code>develop\amp\jquery\class\inherits\Crossfader.js:496</code></a>
         </p>
 
 
@@ -783,7 +628,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1021,7 +866,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1033,7 +878,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l424"><code>develop\amp\jquery\class\inherits\Slider.js:424</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l320"><code>develop\amp\jquery\class\inherits\Crossfader.js:320</code></a>
         </p>
 
 
@@ -1049,70 +894,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_addEventThumbnail" class="method item">
-    <h3 class="name"><code>addEventThumbnail</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>$thumbnail</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Slider</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l456"><code>develop\amp\jquery\class\inherits\Slider.js:456</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>Thumbnailボタンイベント登録</h4>
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">$thumbnail</code>
-                        <span class="type">JQuery</span>
-
-
-                    <div class="param-description">
-                        <p>Thumbnailトリガー要素</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1124,7 +906,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1136,7 +918,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l476"><code>develop\amp\jquery\class\inherits\Slider.js:476</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l347"><code>develop\amp\jquery\class\inherits\Crossfader.js:347</code></a>
         </p>
 
 
@@ -1145,7 +927,7 @@
 
     <div class="description">
         <h4>タイマーキャンセルイベント登録</h4>
-<p>スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
+<p>クロスフェーダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
     </div>
 
 
@@ -1153,7 +935,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1165,7 +947,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1177,7 +959,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l691"><code>develop\amp\jquery\class\inherits\Slider.js:691</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l537"><code>develop\amp\jquery\class\inherits\Crossfader.js:537</code></a>
         </p>
 
 
@@ -1185,7 +967,7 @@
     </div>
 
     <div class="description">
-        <h4>スライダーをアイテムの高さに揃える</h4>
+        <h4>クロスフェードアイテムの高さに揃える</h4>
     </div>
 
 
@@ -1193,7 +975,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1205,7 +987,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1217,7 +999,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l625"><code>develop\amp\jquery\class\inherits\Slider.js:625</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l474"><code>develop\amp\jquery\class\inherits\Crossfader.js:474</code></a>
         </p>
 
 
@@ -1233,7 +1015,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1308,7 +1090,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1320,7 +1102,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l334"><code>develop\amp\jquery\class\inherits\Slider.js:334</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l284"><code>develop\amp\jquery\class\inherits\Crossfader.js:284</code></a>
         </p>
 
 
@@ -1337,7 +1119,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1671,13 +1453,13 @@
 
 
 </div>
-<div id="method_setPosition" class="method item">
-    <h3 class="name"><code>setPosition</code></h3>
+<div id="method_setIndex" class="method item">
+    <h3 class="name"><code>setIndex</code></h3>
 
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1689,7 +1471,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l713"><code>develop\amp\jquery\class\inherits\Slider.js:713</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l550"><code>develop\amp\jquery\class\inherits\Crossfader.js:550</code></a>
         </p>
 
 
@@ -1697,7 +1479,7 @@
     </div>
 
     <div class="description">
-        <h4>スライドスタイルのセット</h4>
+        <h4>クロスフェードアイテムのスタイル設定</h4>
     </div>
 
 
@@ -1705,47 +1487,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
-            </div>
-        </div>
-
-
-</div>
-<div id="method_setProps" class="method item">
-    <h3 class="name"><code>setProps</code></h3>
-
-        <span class="paren">()</span>
-
-        <span class="returns-inline">
-            <span class="type">Slider</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l372"><code>develop\amp\jquery\class\inherits\Slider.js:372</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <h4>プロパティ設定</h4>
-    </div>
-
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1763,7 +1505,7 @@
         </div>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1775,7 +1517,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l505"><code>develop\amp\jquery\class\inherits\Slider.js:505</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l376"><code>develop\amp\jquery\class\inherits\Crossfader.js:376</code></a>
         </p>
 
 
@@ -1809,7 +1551,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1821,7 +1563,7 @@
         <span class="paren">()</span>
 
         <span class="returns-inline">
-            <span class="type">Slider</span>
+            <span class="type">Crossfader</span>
         </span>
 
 
@@ -1833,7 +1575,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l533"><code>develop\amp\jquery\class\inherits\Slider.js:533</code></a>
+        <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l404"><code>develop\amp\jquery\class\inherits\Crossfader.js:404</code></a>
         </p>
 
 
@@ -1849,7 +1591,7 @@
             <h4>Returns:</h4>
 
             <div class="returns-description">
-                        <span class="type">Slider</span>:
+                        <span class="type">Crossfader</span>:
             </div>
         </div>
 
@@ -1916,7 +1658,7 @@
                                     AMP.BASE_CLASS
                                 </a>
                                 but overwritten in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l134"><code>develop\amp\jquery\class\inherits\Slider.js:134</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l102"><code>develop\amp\jquery\class\inherits\Crossfader.js:102</code></a>
                             </p>
                     
                     
@@ -1941,7 +1683,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l143"><code>develop\amp\jquery\class\inherits\Slider.js:143</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l111"><code>develop\amp\jquery\class\inherits\Crossfader.js:111</code></a>
                             </p>
                     
                     
@@ -1967,17 +1709,43 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l151"><code>develop\amp\jquery\class\inherits\Slider.js:151</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l119"><code>develop\amp\jquery\class\inherits\Crossfader.js:119</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライダーフレーム要素</h4>
+                            <h4>クロスフェーダーフレーム要素</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> $slider.find(&#x27;.frame&#x27;)</p>
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.frame&#x27;)</p>
+                    
+                    
+                    </div>
+                    <div id="property_options.$item" class="property item">
+                        <h3 class="name"><code>options.$item</code></h3>
+                        <span class="type">JQuery</span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l127"><code>develop\amp\jquery\class\inherits\Crossfader.js:127</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <h4>クロスフェードするアイテム要素</h4>
+                        </div>
+                    
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.frame&#x27;).children()</p>
                     
                     
                     </div>
@@ -1993,7 +1761,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l199"><code>develop\amp\jquery\class\inherits\Slider.js:199</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l159"><code>develop\amp\jquery\class\inherits\Crossfader.js:159</code></a>
                             </p>
                     
                     
@@ -2003,7 +1771,7 @@
                             <h4>nextナビ要素</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> $slider.find(&#x27;.next a&#x27;)</p>
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.next a&#x27;)</p>
                     
                     
                     </div>
@@ -2019,7 +1787,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l175"><code>develop\amp\jquery\class\inherits\Slider.js:175</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l135"><code>develop\amp\jquery\class\inherits\Crossfader.js:135</code></a>
                             </p>
                     
                     
@@ -2029,7 +1797,7 @@
                             <h4>ポインター要素</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> $slider.find(&#x27;.pointer&#x27;)</p>
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.pointer&#x27;)</p>
                     
                     
                     </div>
@@ -2045,7 +1813,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l191"><code>develop\amp\jquery\class\inherits\Slider.js:191</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l151"><code>develop\amp\jquery\class\inherits\Crossfader.js:151</code></a>
                             </p>
                     
                     
@@ -2055,59 +1823,7 @@
                             <h4>prevナビ要素</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> $slider.find(&#x27;.prev a&#x27;)</p>
-                    
-                    
-                    </div>
-                    <div id="property_options.$slide" class="property item">
-                        <h3 class="name"><code>options.$slide</code></h3>
-                        <span class="type">JQuery</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l159"><code>develop\amp\jquery\class\inherits\Slider.js:159</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドする要素</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> $slider.find(&#x27;.slide&#x27;)</p>
-                    
-                    
-                    </div>
-                    <div id="property_options.$slideItem" class="property item">
-                        <h3 class="name"><code>options.$slideItem</code></h3>
-                        <span class="type">JQuery</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l167"><code>develop\amp\jquery\class\inherits\Slider.js:167</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドアイテム要素</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> $slider.find(&#x27;.slide&#x27;).children()</p>
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.prev a&#x27;)</p>
                     
                     
                     </div>
@@ -2123,7 +1839,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l183"><code>develop\amp\jquery\class\inherits\Slider.js:183</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l143"><code>develop\amp\jquery\class\inherits\Crossfader.js:143</code></a>
                             </p>
                     
                     
@@ -2133,7 +1849,7 @@
                             <h4>サムネイル要素</h4>
                         </div>
                     
-                            <p><strong>Default:</strong> $slider.find(&#x27;.thumbnail a&#x27;)</p>
+                            <p><strong>Default:</strong> $crossfader.find(&#x27;.thumbnail a&#x27;)</p>
                     
                     
                     </div>
@@ -2149,7 +1865,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l256"><code>develop\amp\jquery\class\inherits\Slider.js:256</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l208"><code>develop\amp\jquery\class\inherits\Crossfader.js:208</code></a>
                             </p>
                     
                     
@@ -2175,14 +1891,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l231"><code>develop\amp\jquery\class\inherits\Slider.js:231</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l191"><code>develop\amp\jquery\class\inherits\Crossfader.js:191</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>現在アクティブなスライドアイテムインデックス</h4>
+                            <h4>現在アクティブなアイテムインデックス</h4>
                         </div>
                     
                             <p><strong>Default:</strong> 0</p>
@@ -2201,14 +1917,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l223"><code>develop\amp\jquery\class\inherits\Slider.js:223</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l183"><code>develop\amp\jquery\class\inherits\Crossfader.js:183</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライドエリアの高さ調整機能を有効にするか</h4>
+                            <h4>クロスフェードエリアの高さ調整機能を有効にするか</h4>
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
@@ -2227,7 +1943,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l207"><code>develop\amp\jquery\class\inherits\Slider.js:207</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l167"><code>develop\amp\jquery\class\inherits\Crossfader.js:167</code></a>
                             </p>
                     
                     
@@ -2253,14 +1969,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l215"><code>develop\amp\jquery\class\inherits\Slider.js:215</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l175"><code>develop\amp\jquery\class\inherits\Crossfader.js:175</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライダー要素にマウスオンされたときタイマーを無効にするか</h4>
+                            <h4>クロスフェーダー要素にマウスオンされたときタイマーを無効にするか</h4>
                         </div>
                     
                             <p><strong>Default:</strong> true</p>
@@ -2279,7 +1995,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l264"><code>develop\amp\jquery\class\inherits\Slider.js:264</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l216"><code>develop\amp\jquery\class\inherits\Crossfader.js:216</code></a>
                             </p>
                     
                     
@@ -2305,7 +2021,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l272"><code>develop\amp\jquery\class\inherits\Slider.js:272</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l224"><code>develop\amp\jquery\class\inherits\Crossfader.js:224</code></a>
                             </p>
                     
                     
@@ -2316,32 +2032,6 @@
                         </div>
                     
                             <p><strong>Default:</strong> $.noop</p>
-                    
-                    
-                    </div>
-                    <div id="property_options.slideStep" class="property item">
-                        <h3 class="name"><code>options.slideStep</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                            <span class="flag static">static</span>
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l239"><code>develop\amp\jquery\class\inherits\Slider.js:239</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドステップ数を固定したい場合、ステップ数の指定</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> 0</p>
                     
                     
                     </div>
@@ -2357,14 +2047,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l247"><code>develop\amp\jquery\class\inherits\Slider.js:247</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l199"><code>develop\amp\jquery\class\inherits\Crossfader.js:199</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライドタイマーの間隔</h4>
+                            <h4>クロスフェードタイマーの間隔</h4>
                     <p>タイマー値が0の場合タイマーは実行しません</p>
                         </div>
                     
@@ -2384,14 +2074,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l280"><code>develop\amp\jquery\class\inherits\Slider.js:280</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l232"><code>develop\amp\jquery\class\inherits\Crossfader.js:232</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライドアニメーションのオプション値</h4>
+                            <h4>クロスフェードアニメーションのオプション値</h4>
                     <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
                         </div>
                     
@@ -2412,7 +2102,7 @@
                                     AMP.$.UIController
                                 </a>
                                 but overwritten in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l27"><code>develop\amp\jquery\class\inherits\Slider.js:27</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l27"><code>develop\amp\jquery\class\inherits\Crossfader.js:27</code></a>
                             </p>
                     
                     
@@ -2437,14 +2127,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l34"><code>develop\amp\jquery\class\inherits\Slider.js:34</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l34"><code>develop\amp\jquery\class\inherits\Crossfader.js:34</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライダー要素</h4>
+                            <h4>クロスフェーダー要素</h4>
                         </div>
                     
                     
@@ -2462,7 +2152,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l79"><code>develop\amp\jquery\class\inherits\Slider.js:79</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l53"><code>develop\amp\jquery\class\inherits\Crossfader.js:53</code></a>
                             </p>
                     
                     
@@ -2472,32 +2162,6 @@
                             <h4>アニメーション状態管理フラグ</h4>
                         </div>
                     
-                    
-                    
-                    </div>
-                    <div id="property_props._stepLength" class="property item private">
-                        <h3 class="name"><code>props._stepLength</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                            <span class="flag private">private</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l46"><code>develop\amp\jquery\class\inherits\Slider.js:46</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドで進むアイテム数</h4>
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -2513,7 +2177,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l72"><code>develop\amp\jquery\class\inherits\Slider.js:72</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l46"><code>develop\amp\jquery\class\inherits\Crossfader.js:46</code></a>
                             </p>
                     
                     
@@ -2550,54 +2214,6 @@
                     
                     
                     </div>
-                    <div id="property_props.distance" class="property item">
-                        <h3 class="name"><code>props.distance</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l60"><code>develop\amp\jquery\class\inherits\Slider.js:60</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドする距離</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_props.left" class="property item">
-                        <h3 class="name"><code>props.left</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l66"><code>develop\amp\jquery\class\inherits\Slider.js:66</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドポジションleft値</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_props.length" class="property item">
                         <h3 class="name"><code>props.length</code></h3>
                         <span class="type">Number</span>
@@ -2609,38 +2225,14 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l40"><code>develop\amp\jquery\class\inherits\Slider.js:40</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l40"><code>develop\amp\jquery\class\inherits\Crossfader.js:40</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <h4>スライダーアイテム要素数</h4>
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_props.slideMaxLength" class="property item">
-                        <h3 class="name"><code>props.slideMaxLength</code></h3>
-                        <span class="type">Number</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l54"><code>develop\amp\jquery\class\inherits\Slider.js:54</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <h4>スライドカウントのMAX値</h4>
+                            <h4>アイテム要素数</h4>
                         </div>
                     
                     
@@ -2658,7 +2250,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/develop_amp_jquery_class_inherits_Slider.js.html#l124"><code>develop\amp\jquery\class\inherits\Slider.js:124</code></a>
+                            <a href="../files/develop_amp_jquery_class_inherits_Crossfader.js.html#l92"><code>develop\amp\jquery\class\inherits\Crossfader.js:92</code></a>
                             </p>
                     
                     

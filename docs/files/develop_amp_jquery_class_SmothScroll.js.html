@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>develop\amp\jquery\base\MediaImages.js - AMPjs</title>
+    <title>develop\amp\jquery\class\SmothScroll.js - AMPjs</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -40,6 +40,7 @@
                             <ul id="api-classes" class="apis classes">
                                 <li><a href="../classes/AMP.$.html">AMP.$</a></li>
                                 <li><a href="../classes/AMP.$.BoxHover.html">AMP.$.BoxHover</a></li>
+                                <li><a href="../classes/AMP.$.Crossfader.html">AMP.$.Crossfader</a></li>
                                 <li><a href="../classes/AMP.$.FlatHeight.html">AMP.$.FlatHeight</a></li>
                                 <li><a href="../classes/AMP.$.Float3d.html">AMP.$.Float3d</a></li>
                                 <li><a href="../classes/AMP.$.MediaImageChange.html">AMP.$.MediaImageChange</a></li>
@@ -105,7 +106,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: develop\amp\jquery\base\MediaImages.js</h1>
+<h1 class="file-heading">File: develop\amp\jquery\class\SmothScroll.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -120,26 +121,20 @@
   // &#x27;use strict&#x27;;
 
 
-  /*--------------------------------------------------------------------------
+  /*----------------------------------------------------------------------
     @constructor
-  --------------------------------------------------------------------------*/
+  ----------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;メディアクエリのブレイクポイントに応じて、画像を書き換えます&lt;/h4&gt;
-   * &lt;p&gt;!!! AMP.Mediaqueryを継承しています&lt;br&gt;
-   * &lt;a href=&quot;../../demo/AMP.$.MediaImages.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
+   * &lt;h4&gt;スムーススクロール（慣性スクロール）&lt;/h4&gt;
+   * &lt;p&gt;&lt;em&gt;※ WindowsPCのみ有効&lt;/em&gt;&lt;br&gt;
+   * &lt;a href=&quot;../../demo/AMP.$.SmothScroll.html&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
-   * @class AMP.$.MediaImageChange
-   * @extends AMP.Mediaquery
-   * @param {jQuery} $images 画像を書き換える要素
-   * @param {Object} options オプション値
+   * @class AMP.$.SmoothScroll
+   * @extends AMP.BASE_CLASS
    * @constructor
    */
-	function MediaImageChange($images, options){
-		if(!$images || !($images instanceof jQuery)){
-      options = $images;
-    }
-
+  function SmoothScroll(options){
     /**
      * &lt;h4&gt;プロパティオブジェクト&lt;/h4&gt;
      * &lt;p&gt;コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します&lt;/p&gt;
@@ -147,43 +142,25 @@
      * @property props
      * @type {Object}
      */
-		this.props = $.extend(true, {}, MediaImageChange.options, options);
+    this.props = $.extend(true,
+      {},
+      SmoothScroll.options,
+      {$page: $(&#x27;html, body&#x27;)},
+      options
+    );
+  }
 
-    if(!$images || !($images instanceof jQuery)){
-      $images = $(&#x27;img[&#x27; + this.props.attrKey + &#x27;]&#x27;);
-    }
-
-    /**
-     * &lt;h4&gt;画像を書き換える要素&lt;/h4&gt;
-     *
-     * @property props.$images
-     * @type {jQuery}
-     */
-    this.props.$images = $images;
-
-    /**
-     * &lt;h4&gt;現在の状態&lt;/h4&gt;
-     *
-     * @property props.current
-     * @type {String}
-     */
-    this.props.current = null;
-
-		// superClass constructor call
-		MediaImageChange.Mediaquery_constructor.call(this, this.props.element);
-	}
-
-  // AMP.Mediaqueryクラスを継承
-  AMP.inherits(MediaImageChange, AMP.Mediaquery);
+  // 基底クラスを継承
+  AMP.inherits(SmoothScroll, AMP.BASE_CLASS);
 
   // prototype
-  var p = MediaImageChange.prototype;
+  var p = SmoothScroll.prototype;
 
 
 
-  /*----------------------------------------------------------------------
+  /*--------------------------------------------------------------------------
     @property
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
   /**
    * &lt;h4&gt;バージョン情報&lt;/h4&gt;
@@ -192,7 +169,7 @@
    * @property VERSION
    * @type {String}
    */
-  MediaImageChange.VERSION = &#x27;1.1.0&#x27;;
+  SmoothScroll.VERSION = &#x27;3.1.0&#x27;;
 
 
   /**
@@ -201,7 +178,7 @@
    * @property className
    * @type {String}
    */
-  p.className = &#x27;MediaImageChange&#x27;;
+  p.className = &#x27;SmoothScroll&#x27;;
 
 
   /**
@@ -212,136 +189,116 @@
    * @property options
    * @type {Object}
    */
-  /**
-   * &lt;h4&gt;監視対象要素&lt;/h4&gt;
+    /**
+   * &lt;h4&gt;スムーススクロールエリア&lt;/h4&gt;
    *
-   * @static
-   * @property options.element
-   * @type {DOM}
+   * @property options.$page
+   * @default $(&#x27;html, body&#x27;)
+   * @type {jQuery}
    */
   /**
-   * &lt;h4&gt;画像ファイルパス格納属性名&lt;/h4&gt;
+   * &lt;h4&gt;スクロール量&lt;/h4&gt;
    *
-   * @static
-   * @property options.attrKey
-   * @default &#x27;data-media-img&#x27;
+   * @property options.amount
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;duration&lt;/h4&gt;
+   *
+   * @property options.duration
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * &lt;h4&gt;easing&lt;/h4&gt;
+   *
+   * @property options.easing
+   * @default easeOutCubic
    * @type {String}
    */
-  /**
-   * &lt;h4&gt;画像ファイルに追加するprefix&lt;/h4&gt;
-   *
-   * @static
-   * @property options.imagePrefix
-   * @default &#x27;_&#x27;
-   * @type {String}
-   */
-  /**
-   * &lt;h4&gt;対象要素監視しているか？&lt;/h4&gt;
-   *
-   * @static
-   * @property options.isObserver
-   * @type {String}
-   */
-  MediaImageChange.options = {
-    element    : null,
-    attrKey    : &#x27;data-media-img&#x27;,
-    imagePrefix: &#x27;_&#x27;,
-    isObserver : true
+  SmoothScroll.options = {
+    $page   : null,
+    amount  : 400,
+    duration: 600,
+    easing  : &#x27;easeOutCubic&#x27;
   };
 
 
 
-  /*----------------------------------------------------------------------
+  /*--------------------------------------------------------------------------
     @method
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
   /**
-   * &lt;h4&gt;MediaImageChangeインスタンスの生成&lt;/h4&gt;
+   * &lt;h4&gt;SmoothScrollインスタンスの生成&lt;/h4&gt;
    *
    * @static
    * @method get
-   * @param {jQuery} $images 画像を書き換える要素
-   * @param {Object} options オプション値
-   * @return {MediaImageChange}
+   * @param  {Object} options? オプション値 省略可
+   * @return {SmoothScroll}
    */
-  MediaImageChange.get = function($images, options){
-    return new MediaImageChange($images, options).start();
+  SmoothScroll.get = function(options){
+    return new SmoothScroll(options).on();
   };
 
 
   /**
-   * &lt;h4&gt;ブレイクポイントの監視を開始します&lt;/h4&gt;
+   * &lt;h4&gt;初期化&lt;/h4&gt;
    *
-   * @method start
-   * @return {MediaImageChange}
+   * @method on
+   * @return {SmoothScroll}
    */
-  p.start = function(){
-		var self = this;
+  p.on = function(){
+    var self = this;
 
-		this.on(&#x27;change.MediaImageChange&#x27;, function(event){
-			if(self.props.isObserver){
-				self.props.current = event.mediaStyle;
-				self.change();
-			}
-		}).trigger(&#x27;change.MediaImageChange&#x27;);
-
+    // WindowsPCのみ有効
+    if(AMP.isWindows()){
+      self.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;)
+      .on(&#x27;mousewheel.SmoothScroll&#x27;, function(){
+        self.tween(arguments[1]);
+        return false;
+      });
+    }
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;ブレイクポイントの監視をストップします&lt;/h4&gt;
+   * &lt;h4&gt;イベント削除&lt;/h4&gt;
    *
-   * @method stop
-   * @return {MediaImageChange}
+   * @method off
+   * @return {SmoothScroll}
    */
-  p.stop = function(){
-    this.off(&#x27;change.MediaImageChange&#x27;);
-		return this;
-  };
-
-
-  /**
-   * &lt;h4&gt;監視の状態を切り替えます&lt;/h4&gt;
-   *
-   * @method setObserver
-   * @param {Boolean} isState メディアクエリの変更を監視するか
-   * @return {MediaImageChange}
-   */
-  p.setObserver = function(isState){
-    this.props.isObserver = AMP.isBoolean(isState) ? isState : this.props.isObserver;
+  p.off = function(){
+    this.props.$page.off(&#x27;mousewheel.SmoothScroll&#x27;);
     return this;
   };
 
 
   /**
-   * &lt;h4&gt;画像を変更します&lt;/h4&gt;
+   * &lt;h4&gt;スクロールアニメーション&lt;/h4&gt;
    *
-   * @method switch
-   * @return {MediaImageChange}
+   * @method tween
+   * @return {Void}
    */
-  p.change = function(){
-		var self = this,
-		$images = this.props.$images,
-		data,
-		ext;
+  p.tween = function(move){
+    var self = this,
+    props = self.props,
+    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    scrollY = move &gt; 0 ? y - props.amount : y + props.amount;
 
-		$images.each(function(i){
-			data = $images.eq(i).attr(self.props.attrKey);
-			ext = data.substring(data.lastIndexOf(&#x27;.&#x27;), data.length);
-			$images[i].src = data.replace(ext, self.props.imagePrefix + self.props.current + ext);
-    });
-
-    return this;
+    self.props.$page.velocity(&#x27;stop&#x27;)
+    .velocity(&#x27;scroll&#x27;, {offset: scrollY, duration: props.duration, easing: props.easing});
   };
 
 
 
-  /*----------------------------------------------------------------------
+  /*--------------------------------------------------------------------------
     export
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
-  AMP.$.MediaImageChange = MediaImageChange;
+  AMP.$.SmoothScroll = SmoothScroll;
 
 
 }(window, AMP, jQuery));

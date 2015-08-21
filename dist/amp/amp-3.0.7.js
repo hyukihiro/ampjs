@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.6
+ * AMPjs Core File version 3.0.7
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -38,7 +38,7 @@ var AMP = {};
 
   // クラス設定
   var CLASS_NAME = 'Amp',
-  VERSION = '3.0.6';
+  VERSION = '3.0.7';
 
 
 
@@ -128,11 +128,108 @@ var AMP = {};
 
 
   /*======================================================================
+    配列
+  ======================================================================*/
+
+  /**
+   * <h4>配列</h4>
+   * <p><a href="../../demo/AMP.Base.html#array">DEMO</a></p>
+   *
+   * @class AMP.Array
+   */
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>イテレート処理</h4>
+   *
+   * @static
+   * @method each
+   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
+   * @param  {Function} callback  イテレーション毎のコールバック関数
+   * @return {Object} 第一引数に渡されたオブジェクト
+   */
+	AMP.each = function(obj, callback){
+		var isContinue,
+		i;
+
+		if(AMP.isArray(obj)){
+			var l = obj.length;
+			i = 0;
+			for(; i < l; i += 1){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+
+		} else {
+			for(i in obj){
+				isContinue = callback.call(obj[i], obj[i], i);
+				if(isContinue === false){
+					break;
+				}
+			}
+		}
+
+		return obj;
+	};
+
+
+  /**
+   * <h4>argumentsを配列に変換</h4>
+   * <p>スライス位置を指定して切り取り可能</p>
+   *
+   * @static
+   * @method argsToArray
+   * @param {arguments} args arguments
+   * @param {Number} index スライスする切り取り開始位置
+   * @param {Number} lastIndex スライスする切り取り終了位置
+   * @type {Array}
+   */
+  AMP.argsToArray = (function(){
+  	var slice = Array.prototype.slice;
+
+  	return function(args, index, lastIndex){
+  		index = index || 0;
+  		lastIndex = lastIndex || args.length;
+  		return slice.call(args, index, lastIndex);
+  	};
+  }());
+
+
+  /**
+   * <h4>配列をシャッフルして新しい配列を返す</h4>
+   *
+   * @method shuffle
+   * @param  {Arrary} ary シャッフルする配列
+   * @return {Arrary}
+   */
+  AMP.shuffle = function(ary){
+    return ary.slice().sort(function(){
+      return Math.random() - 0.5;
+    });
+  };
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*======================================================================
     継承・拡張
   ======================================================================*/
 
   /**
    * <h4>クラス・オブジェクトの継承、拡張</h4>
+   * <p><a href="../../demo/AMP.Base.html#extend">DEMO</a></p>
    *
    * @class AMP.Extend
    */
@@ -458,14 +555,16 @@ var AMP = {};
 
 
   /*======================================================================
-    機能判定
+    ブラウザ機能判定
   ======================================================================*/
 
   /**
-   * <h4>所持判定</h4>
+   * <h4>ブラウザ機能判定</h4>
+   * <p><a href="../../demo/AMP.Base.html#has">DEMO</a></p>
    *
    * @class AMP.Has
    */
+
 
 
   /*----------------------------------------------------------------------
@@ -751,11 +850,12 @@ var AMP = {};
 
 
   /*======================================================================
-    オブジェクト,ブラウザの判定
+    型, OS, デバイス, ブラウザの判定
   ======================================================================*/
 
   /**
-   * <h4>オブジェクト、ブラウザの判定</h4>
+   * <h4>型, OS, デバイス, ブラウザの判定</h4>
+   * <p><a href="../../demo/AMP.Base.html#is">DEMO</a></p>
    *
    * @class AMP.Is
    */
@@ -963,7 +1063,13 @@ var AMP = {};
    * @static
    * @method isOS
    * @param  {String} key OS名<br>
-   * windows, windowsPhone, mac, ios, android
+   * OS名 | 引数文字列 <br>
+   * Windows | windows <br>
+   * Windows Phone | windowsPhone <br>
+   * Mac (for Desktop) | mac <br>
+   * Mac ios (for SmartDevice) | ios <br>
+   * Android | android
+   *
    * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
@@ -1071,7 +1177,17 @@ var AMP = {};
    * @static
    * @method isDevice
    * @param {String} key デバイス名<br>
-   * pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
+   * デバイス名 | 引数文字列 <br>
+   * PC (for Desktop) | pc <br>
+   * Smart Device | sd, smartdevice <br>
+   * Smart Phone | sp, smartphone <br>
+   * Tablet | tb, tablet <br>
+   * iPhone | iphone <br>
+   * iPad | ipad <br>
+   * iPod | ipod <br>
+   * Android Phone | androidPhone <br>
+   * Android Tablet | androidTablet
+   *
    * @return {Boolean}
    */
   AMP.isDevice = function(key){
@@ -1225,7 +1341,17 @@ var AMP = {};
    * @static
    * @method isBrowser
    * @param  {String} key ブラウザ名<br>
-   * ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
+   * ブラウザ名 | 引数文字列 <br>
+   * Microsoft Edge | edge <br>
+   * Internet Explorer | ie <br>
+   * Google Chrome | chrome <br>
+   * Firefox | firefox <br>
+   * Mac Safari (for Desktop) | safari <br>
+   * Opera (for Desktop) | opera <br>
+   * ios Safari | mobileSafari <br>
+   * Android | android <br>
+   * Webkit Browser | webkit
+   *
    * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
    * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}
@@ -1442,6 +1568,7 @@ var AMP = {};
 
   /**
    * <h4>locationオブジェクト</h4>
+   * <p><a href="../../demo/AMP.Base.html#location">DEMO</a></p>
    *
    * @class AMP.Location
    */
@@ -1518,6 +1645,7 @@ var AMP = {};
 
   /**
    * <h4>文字列</h4>
+   * <p><a href="../../demo/AMP.Base.html#string">DEMO</a></p>
    *
    * @class AMP.String
    */
@@ -1662,6 +1790,7 @@ var AMP = {};
 
   /**
    * <h4>ユーティリティ</h4>
+   * <p><a href="../../demo/AMP.Base.html#utility">DEMO</a></p>
    *
    * @class AMP.Utility
    */
@@ -1685,11 +1814,17 @@ var AMP = {};
     if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
+
       } else if (fn.prototype.className) {
         return fn.prototype.className;
+
+      } else if(fn.prototype.constructor && fn.prototype.constructor.name){
+        return fn.prototype.constructor.name;
+
       } else {
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
+
     } else {
       throw new TypeError(fn + ' is not a Function');
     }
@@ -1876,101 +2011,6 @@ var AMP = {};
     } else{
       return value;
     }
-  };
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*======================================================================
-    配列
-  ======================================================================*/
-
-  /**
-   * <h4>配列</h4>
-   *
-   * @class AMP.Array
-   */
-
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>イテレート処理</h4>
-   *
-   * @static
-   * @method each
-   * @param  {Array|Object}   obj イテレーションを行うオブジェクト
-   * @param  {Function} callback  イテレーション毎のコールバック関数
-   * @return {Object} 第一引数に渡されたオブジェクト
-   */
-	AMP.each = function(obj, callback){
-		var isContinue,
-		i;
-
-		if(AMP.isArray(obj)){
-			var l = obj.length;
-			i = 0;
-			for(; i < l; i += 1){
-				isContinue = callback.call(obj[i], obj[i], i);
-				if(isContinue === false){
-					break;
-				}
-			}
-
-		} else {
-			for(i in obj){
-				isContinue = callback.call(obj[i], obj[i], i);
-				if(isContinue === false){
-					break;
-				}
-			}
-		}
-
-		return obj;
-	};
-
-
-  /**
-   * <h4>argumentsを配列に変換</h4>
-   * <p>スライス位置を指定して切り取り可能</p>
-   *
-   * @static
-   * @method argsToArray
-   * @param {arguments} args arguments
-   * @param {Number} index スライスする切り取り開始位置
-   * @param {Number} lastIndex スライスする切り取り終了位置
-   * @type {Array}
-   */
-  AMP.argsToArray = (function(){
-  	var slice = Array.prototype.slice;
-
-  	return function(args, index, lastIndex){
-  		index = index || 0;
-  		lastIndex = lastIndex || args.length;
-  		return slice.call(args, index, lastIndex);
-  	};
-  }());
-
-
-  /**
-   * <h4>配列をシャッフルして新しい配列を返す</h4>
-   *
-   * @method shuffle
-   * @param  {Arrary} ary シャッフルする配列
-   * @return {Arrary}
-   */
-  AMP.shuffle = function(ary){
-    return ary.slice().sort(function(){
-      return Math.random() - 0.5;
-    });
   };
 
 
@@ -2566,20 +2606,22 @@ var AMP = {};
    * <h4>イベント</h4>
    * <p>イベントクラスの継承して使用出来ます<br>
    * メディエーターとしても使用すことも可能です<br>
-   * DEMO作成予定</p>
+   * <a href="../../demo/AMP.Events.html">DEMO</a></p>
    *
    *
    * @class AMP.Events
    * @extends AMP.BASE_CLASS
    * @constructor
    * @example
+   *   var events = new AMP.Events();
+   *
    *   // on<br>
    *   events.on('change', function(){...});<br>
    *   events.on('change.type', typeCall);<br>
    *
    *   // off<br>
    *   events.off('change');<br>
-   *   events.off('change', typeCall);<br>
+   *   events.off('change', funcName);<br>
    *   events.off();<br>
    *
    *   // tigger<br>
@@ -2622,7 +2664,7 @@ var AMP = {};
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = '2.0.1';
+  Events.VERSION = '2.0.2';
 
 
   /**
@@ -2843,12 +2885,13 @@ var AMP = {};
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+          item.func.apply(item.context, args);
         }
       });
     }
@@ -3726,194 +3769,6 @@ var AMP = {};
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>フォントリサイズイベント</h4>
-   * <p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
-   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
-   * <a href="../../demo/AMP.FontResize.html">DEMO</a></p>
-   *
-   * @class AMP.FontResize
-   * @extends AMP.Events
-   * @constructor
-   */
-  function FontResize(){
-    /**
-     * <h4>要素を監視有効・無効の判定フラグ</h4>
-     *
-     * @property isFontResize
-     * @default true
-     * @type {Boolean}
-     */
-    this.isFontResize = true;
-
-    /**
-     * <h4>監視する要素</h4>
-     *
-     * @property elm
-     * @type {DOM}
-     */
-    this.elm = null;
-
-    /**
-     * <h4>監視要素の高さ</h4>
-     *
-     * @property height
-     * @type {Number}
-     */
-    this.height = null;
-
-    // superClass constructor call
-    FontResize.Events_constructor.call(this);
-    // AMP.Events.call(this);
-  }
-
-  // AMP.Eventsクラスを継承
-  AMP.inherits(FontResize, AMP.Events);
-
-  // prototype
-  var p = FontResize.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  FontResize.VERSION = '3.0.2';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'FontResize';
-
-
-  /**
-   * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
-   *
-   * @static
-   * @property eventType
-   * @default change
-   * @type {String}
-   */
-  FontResize.eventType = 'change';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>監視するフォント要素生成</h4>
-   *
-   * @private
-   * @method _createElement
-   * @return {Void}
-   */
-  p._createElement = function(){
-
-    var key = 'AMP_FONT_RESIZE',
-    el = document.createElement('ins'),
-    text = document.createTextNode(key);
-
-    el.id = key;
-    el.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
-    el.appendChild(text);
-    document.body.appendChild(el);
-
-    // property
-    this.elm = document.getElementById(key);
-    this.height = this.elm.clientHeight;
-
-    // set controller
-    this._controller();
-  };
-
-
-  /**
-   * <h4>イベントコントローラー</h4>
-   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
-   *
-   * @private
-   * @method _controller
-   * @return {Void}
-   */
-  p._controller = function(){
-    var self = this,
-    height = self.el.clientHeight;
-
-    if(self.isFontResize){
-      // フォントサイズに変更があれば
-      if(self.height !== height){
-        self.height = height;
-        this.trigger(FontResize.eventType);
-      }
-
-      // 再起処理
-      if(AMP.hasRAF()){
-        AMP.requestAnimationFrame(function(){
-          self._controller();
-        });
-      } else {
-        setTimeout(function(){
-          self._controller();
-        }, 50);
-      }
-    }
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @param  {String} type イベントタイプ
-   * @param  {Function} listener イベントリスナー
-   * @param  {Object} context コンテキスト
-   * @return {Events}
-   */
-  p.on = function(type, listener, context){
-    // 監視要素がない場合、要素を追加する
-    if(!this.elm){
-      this._createElement();
-    }
-    this._addEvent(type, listener, context);
-    return this;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.FontResize = FontResize;
-  AMP.fontResize = new FontResize();
-
-
-}(window, AMP));
-
-
-(function(root, AMP){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>Mediaqueryのブレイクポイントイベント</h4>
    * <p>!!!: 対象の要素(head)にcssでフォントファミリーを指定してください<br>
    * シングルトン: コンストラクタを呼び出しで使用しません<br>
@@ -4103,6 +3958,193 @@ var AMP = {};
 
   AMP.Mediaquery = Mediaquery;
   AMP.mediaquery = new Mediaquery();
+
+
+}(window, AMP));
+
+
+(function(root, AMP){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>フォントリサイズイベント</h4>
+   * <p>!!!: シングルトン コンストラクタを呼び出しで使用しません<br>
+   * <em>AMP.fontResize</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.FontResize.html">DEMO</a></p>
+   *
+   * @class AMP.FontResize
+   * @extends AMP.Events
+   * @constructor
+   */
+  function FontResize(){
+    /**
+     * <h4>要素を監視有効・無効の判定フラグ</h4>
+     *
+     * @property isFontResize
+     * @default true
+     * @type {Boolean}
+     */
+    this.isFontResize = true;
+
+    /**
+     * <h4>監視する要素</h4>
+     *
+     * @property elm
+     * @type {DOM}
+     */
+    this.elm = null;
+
+    /**
+     * <h4>監視要素の高さ</h4>
+     *
+     * @property height
+     * @type {Number}
+     */
+    this.height = null;
+
+    // superClass constructor call
+    FontResize.Events_constructor.call(this);
+  }
+
+  // AMP.Eventsクラスを継承
+  AMP.inherits(FontResize, AMP.Events);
+
+  // prototype
+  var p = FontResize.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  FontResize.VERSION = '3.0.2';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'FontResize';
+
+
+  /**
+   * <h4>フォントサイズ変更時の発行するイベントタイプ</h4>
+   *
+   * @static
+   * @property eventType
+   * @default change
+   * @type {String}
+   */
+  FontResize.eventType = 'change';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>監視するフォント要素生成</h4>
+   *
+   * @private
+   * @method _createElement
+   * @return {Void}
+   */
+  p._createElement = function(){
+
+    var key = 'AMP_FONT_RESIZE',
+    elm = document.createElement('ins'),
+    text = document.createTextNode(key);
+
+    elm.id = key;
+    elm.setAttribute('style', 'display:block;visibility:hidden;position:absolute;top:0;left:0;zIndex:-1;');
+    elm.appendChild(text);
+    document.body.appendChild(elm);
+
+    // property
+    this.elm = document.getElementById(key);
+    this.height = this.elm.clientHeight;
+
+    // set controller
+    this._controller();
+  };
+
+
+  /**
+   * <h4>イベントコントローラー</h4>
+   * <p>状態を監視し、フォトサイズに変更があればイベントを発行します</p>
+   *
+   * @private
+   * @method _controller
+   * @return {Void}
+   */
+  p._controller = function(){
+    var self = this,
+    height = self.elm.clientHeight;
+
+    if(self.isFontResize){
+      // フォントサイズに変更があれば
+      if(self.height !== height){
+        self.height = height;
+        this.trigger(FontResize.eventType);
+      }
+
+      // 再起処理
+      if(AMP.hasRAF()){
+        AMP.requestAnimationFrame(function(){
+          self._controller();
+        });
+      } else {
+        setTimeout(function(){
+          self._controller();
+        }, 50);
+      }
+    }
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @param  {String} type イベントタイプ
+   * @param  {Function} listener イベントリスナー
+   * @param  {Object} context コンテキスト
+   * @return {Events}
+   */
+  p.on = function(type, listener, context){
+    // 監視要素がない場合、要素を追加する
+    if(!this.elm){
+      this._createElement();
+    }
+    this._addEvent(type, listener, context);
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.FontResize = FontResize;
+  AMP.fontResize = new FontResize();
 
 
 }(window, AMP));

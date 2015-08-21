@@ -64,7 +64,7 @@
      * @type {Number}
      */
     /**
-     * <h4>left値</h4>
+     * <h4>スライドポジションleft値</h4>
      *
      * @property props.left
      * @type {Number}
@@ -91,7 +91,7 @@
         $wrap         : $slider,
         $frame        : $slider.find('.frame'),
         $slide        : $slider.find('.slide'),
-        $slideItems   : $slider.find('.slide').children(),
+        $slideItem    : $slider.find('.slide').children(),
         $pointer      : $slider.find('.pointer'),
         $thumbnail    : $slider.find('.thumbnail a'),
         $prev         : $slider.find('.prev a'),
@@ -107,10 +107,6 @@
 			},
 			options
 		);
-
-		if(this.props.isInit){
-			this.init();
-		}
   }
 
   // AMP.$.UIControllerクラスを継承
@@ -132,7 +128,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.1.0';
+  Slider.VERSION = '1.2.0';
 
 
   /**
@@ -157,6 +153,7 @@
    *
    * @static
    * @property options.$frame
+   * @default $slider.find('.frame')
    * @type {jQuery}
    */
   /**
@@ -164,13 +161,15 @@
    *
    * @static
    * @property options.$slide
+   * @default $slider.find('.slide')
    * @type {jQuery}
    */
   /**
-   * <h4>スライドする子要素</h4>
+   * <h4>スライドアイテム要素</h4>
    *
    * @static
-   * @property options.$slideItems
+   * @property options.$slideItem
+   * @default $slider.find('.slide').children()
    * @type {jQuery}
    */
   /**
@@ -178,6 +177,7 @@
    *
    * @static
    * @property options.$pointer
+   * @default $slider.find('.pointer')
    * @type {jQuery}
    */
   /**
@@ -185,6 +185,7 @@
    *
    * @static
    * @property options.$thumbnail
+   * @default $slider.find('.thumbnail a')
    * @type {jQuery}
    */
   /**
@@ -192,6 +193,7 @@
    *
    * @static
    * @property options.$prev
+   * @default $slider.find('.prev a')
    * @type {jQuery}
    */
   /**
@@ -199,20 +201,15 @@
    *
    * @static
    * @property options.$next
+   * @default $slider.find('.next a')
    * @type {jQuery}
-   */
-  /**
-   * <h4>コンストラクタ呼び出されたときに、スライダーを初期化するか</h4>
-   *
-   * @static
-   * @property options.isInit
-   * @type {Boolean}
    */
   /**
    * <h4>フリックイベントを有効にするか</h4>
    *
    * @static
    * @property options.isFlick
+   * @default true
    * @type {Boolean}
    */
   /**
@@ -220,6 +217,15 @@
    *
    * @static
    * @property options.isTimerCancel
+   * @default true
+   * @type {Boolean}
+   */
+  /**
+   * <h4>スライドエリアの高さ調整機能を有効にするか</h4>
+   *
+   * @static
+   * @property options.isAutoHeight
+   * @default false
    * @type {Boolean}
    */
   /**
@@ -227,6 +233,7 @@
    *
    * @static
    * @property options.current
+   * @default 0
    * @type {Number}
    */
   /**
@@ -234,13 +241,16 @@
    *
    * @static
    * @property options.slideStep
+   * @default 0
    * @type {Number}
    */
   /**
    * <h4>スライドタイマーの間隔</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
    *
    * @static
    * @property options.timer
+   * @default 0
    * @type {Number}
    */
   /**
@@ -248,6 +258,7 @@
    *
    * @static
    * @property options.activeClass
+   * @default active
    * @type {String}
    */
   /**
@@ -255,6 +266,7 @@
    *
    * @static
    * @property options.resizeCall
+   * @default $.noop
    * @type {Function}
    */
   /**
@@ -262,6 +274,7 @@
    *
    * @static
    * @property options.resizeStopCall
+   * @default $.noop
    * @type {Function}
    */
   /**
@@ -275,15 +288,15 @@
   Slider.options = {
     $frame        : null,
     $slide        : null,
-    $slideItems   : null,
+    $slideItem    : null,
     $pointer      : null,
     $thumbnail    : null,
     $prev         : null,
     $next         : null,
-    isInit        : true,
     isFlick       : true,
     isResize      : true,
     isTimerCancel : true,
+    isAutoHeight  : false,
     current       : 0,
     slideStep     : 0,
     timer         : 0,
@@ -309,19 +322,18 @@
    * <h4>Sliderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Slider
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
    * @return {Slider}
    */
   Slider.get = function($slider, options){
-    return new Slider($slider, options);
+    return new Slider($slider, options).init();
   };
 
 
   /**
    * <h4>初期化</h4>
-   * Singleton
+   * <p>Singleton</p>
    *
    * @method  init
    * @return {Slider}
@@ -334,7 +346,7 @@
     this._isInit = true;
 
     // props
-    this.setParam();
+    this.setProps();
 
     // view
     this.createPointer();
@@ -358,17 +370,17 @@
 
 
   /**
-   * <h4>パラメーターの設定</h4>
+   * <h4>プロパティ設定</h4>
    *
-   * @method setParam
+   * @method setProps
    * @return {Slider}
    */
-  p.setParam = function(){
+  p.setProps = function(){
     // ステージの幅
 		var stageWidth = this.props.$frame.width();
 
 		// アイテム要素の幅
-		var itemWidth = this.props.$slideItems.outerWidth(true);
+		var itemWidth = this.props.$slideItem.outerWidth(true);
 
 		// 表示エリアにある要素数
 		var visibleLength = ~~(stageWidth / itemWidth);
@@ -410,7 +422,7 @@
 	/* Events
 	-----------------------------------------------------------------*/
 	/**
-	 * <h4>リサイズイベント</h4>
+	 * <h4>リサイズイベント登録</h4>
 	 *
 	 * @method addEventResize
 	 * @return {Slider}
@@ -427,7 +439,7 @@
     })
     .on('resizestop.Slider', function(){
       if(self.props.isResize){
-        self.setParam();
+        self.setProps();
         self.setPosition();
         self.createPointer();
         self.addEventPager(self.props.$pointer.find('a'));
@@ -442,7 +454,7 @@
 
 
   /**
-   * <h4>Thumbnailボタンイベント追加</h4>
+   * <h4>Thumbnailボタンイベント登録</h4>
    *
    * @method addEventThumbnail
    * @param {jQuery} $thumbnail Thumbnailトリガー要素
@@ -462,8 +474,8 @@
 
 
   /**
-   * <h4>タイマーキャンセルイベント</h4>
-   * スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします
+   * <h4>タイマーキャンセルイベント登録</h4>
+   * <p>スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
    *
 	 * @method addEventTimerCancel
 	 * @return {Slider}
@@ -492,6 +504,7 @@
   -----------------------------------------------------------------*/
 	/**
 	 * <h4>タイマースタート</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
 	 *
 	 * @method timerStart
 	 * @param  {Number} num セットするタイマー値(省略可)
@@ -518,7 +531,8 @@
 
 
 	/**
-	 * タイマー停止
+	 * <h4>タイマー停止</h4>
+   *
 	 * @method timerStop
 	 * @return {Slider}
 	 */
@@ -529,17 +543,20 @@
 
 
 	/**
-	 *<h4> コントローラー</h4>
+	 * <h4>コントローラー</h4>
+   * <p>スライダーイベントが実行されたとき、必ずここの処理を通します</p>
 	 *
+   * @override
    * @private
 	 * @method _controller
-	 * @param  {Number} index スライドする位置
+   * @param  {Number} index スライドする位置
+	 * @param  {Boolean} nonAnimate アニメーション無
 	 * @return {Void}
 	 */
-  p._controller = function(index, noAnimate){
+  p._controller = function(index, nonAnimate){
 		var self = this;
 
-		if(self.props._isAnimate){
+		if(self.props._isAnimate || this.props.current === index){
 			return void 0;
 		}
 
@@ -554,9 +571,15 @@
     self.props.current = index;
     self.props.left = self.props.current * self.props.distance * -1;
 
+    // 高さ調整
+    if(self.props.isAutoHeight){
+      self.autoHeight();
+    }
+
     // アニメート判定
-    if(noAnimate){
+    if(nonAnimate){
       self.setPosition();
+      self.active();
     } else {
       $.sequence(
         function(){
@@ -590,7 +613,7 @@
    */
   p._getDisplayLength = function(){
     var count = 0;
-    this.props.$slideItems.each(function(){
+    this.props.$slideItem.each(function(){
       if($(this).css('display') !== 'none'){
         count += 1;
       }
@@ -621,21 +644,6 @@
   };
 
 
- /**
-  * <h4>スライドスタイルのセット</h4>
-  *
-  * @method setPosition
-  * @return {Slider}
-  */
-  p.setPosition = function(){
-    this.props.$slide.css({
-      width: this._getDisplayLength() * this.props.$slideItems.outerWidth(true),
-      left : this.props.left + this.props._adjustLeft
-    });
-		return this;
-  };
-
-
   /**
    * <h4>要素のアクティブ化</h4>
    *
@@ -645,8 +653,8 @@
   p.active = function(){
     var index = this.props.current * this.props._stepLength;
 
-    // $slideItems
-    this.props.$slideItems.removeClass(this.props.activeClass)
+    // $slideItem
+    this.props.$slideItem.removeClass(this.props.activeClass)
     .slice(index, index + this.props._stepLength)
     .addClass(this.props.activeClass);
 
@@ -681,6 +689,44 @@
 
 
   /**
+   * <h4>スライダーをアイテムの高さに揃える</h4>
+   *
+   * @method autoHeight
+   * @return {Slider}
+   */
+  p.autoHeight = function(){
+    var height = 0,
+    index = this.props.current * this.props._stepLength,
+    $items = this.props.$slideItem.slice(index, index + this.props._stepLength);
+
+    // 一番高い要素の高さを取得
+    $items.each(function(i){
+      height = height < $items.eq(i).height() ? $items.eq(i).height() : height;
+    });
+
+    this.props.$frame.height(height);
+
+    return this;
+  };
+
+
+ /**
+  * <h4>スライドスタイルのセット</h4>
+  *
+  * @method setPosition
+  * @return {Slider}
+  */
+  p.setPosition = function(){
+    this.props.$slide.css({
+      width: this._getDisplayLength() * this.props.$slideItem.outerWidth(true),
+      left : this.props.left + this.props._adjustLeft
+    });
+
+    return this;
+  };
+
+
+  /**
    * <h4>指定x座標分移動</h4>
    *
    * @private
@@ -689,8 +735,7 @@
    * @return {Void}
    */
   p._move = function(x){
-		this.props.$slide.velocity('stop')
-    .css({left: this.props.left + this.props._adjustLeft + x});
+		this.props.$slide.velocity('stop').css({left: this.props.left + this.props._adjustLeft + x});
   };
 
 

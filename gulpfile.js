@@ -221,10 +221,10 @@ MODULE.gulp.task('js', function(){
 
 
 	// amp/amp.jquery.js
-	// base
+	// class
 	MODULE.gulp.src([
 		PATH.develop + 'amp/jquery/AMP.$.js',
-		PATH.develop + 'amp/jquery/base/**/*.js'
+		PATH.develop + 'amp/jquery/class/**/*.js'
 	])
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())

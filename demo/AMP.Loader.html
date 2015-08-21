@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -57,8 +56,8 @@ jQuery(function($){
 <p>ローディング処理の通知します。<br>
 <a href="http://imagesloaded.desandro.com/" target="_blank">imagesLoaded</a>に依存します。<br>
 updateメソッドでローディングの進捗%を取得することも可能ですが、カウントアップ処理はRAFで1づつインクリメントを行っています。<br>
-なので、実際の読み込み速度より遅れてカウントしています。（擬似的なカウントを取得したい場合はこちらを使用します。）<br>
-正確な進捗を取得したい場合はprogressメソッドを使用します。progressメソッドは1点ずつ処理が完了するごとに呼ばれます。</p>
+ですので、実際の読み込み速度より遅れてカウントしています。（擬似的なカウントを取得したい場合はこちらを使用します。）<br>
+正確な進捗を取得したい場合はprogressメソッドを使用します。progressメソッドは画像処理完了毎に呼ばれます。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
@@ -67,18 +66,16 @@ updateメソッドでローディングの進捗%を取得することも可能�
 <p class="loder_count">カウント <span class="em">0</span> %</p>
 <p class="loder_txt em">Standby</p>
 <div class="loader_img">
-<img src="assets/images/spacer.png" data-img="assets/images/slider/mv01.jpg" alt="">
-<img src="assets/images/spacer.png" data-img="assets/images/slider/mv02.jpg" alt="">
-<img src="assets/images/spacer.png" data-img="assets/images/slider/mv03.jpg" alt="">
-<img src="assets/images/spacer.png" data-img="assets/images/slider/mv04.jpg" alt="">
-<img src="assets/images/spacer.png" data-img="assets/images/slider/mv05.jpg" alt="">
+<img src="assets/images/spacer.png" data-img="assets/images/img01.png" alt="">
+<img src="assets/images/spacer.png" data-img="assets/images/img02.png" alt="">
+<img src="assets/images/spacer.png" data-img="assets/images/img03.png" alt="">
 </div>
 </textarea>
 
 <!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-// 画像を生成
+// Loader用画像を生成
 var $img = $('.loader_img').find('img');
 $img.each(function(i){
 	$img.eq(i).attr('src', $img.eq(i).attr('data-img') + '?' + $.now()).css({opacity: 0});
@@ -88,7 +85,7 @@ var $txt =  $('.loder_txt');
 var $count = $('.loder_count').find('span');
 
 // Loader
-var loader = new AMP.Loader($img);
+var loader = new AMP.Loader();
 
 loader
 .update(function(count){

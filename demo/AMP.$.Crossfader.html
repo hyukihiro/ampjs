@@ -51,9 +51,9 @@ jQuery(function($){
 
 <div id="content" class="cf">
 <section>
-<h2>AMP.$.Slider <a href="../docs/classes/AMP.$.Slider.html">API Reference</a></h2>
+<h2>AMP.$.Crossfader <a href="../docs/classes/AMP.$.Crossfader.html">API Reference</a></h2>
 <div class="lead">
-<p>Slider機能を提供します。<br>
+<p>Crossfader機能を提供します。<br>
 フリック機能はデフォルトで設定れています。<br>
 サムネイル、ポインター、PREV、NEXTボタン等、必要なUIを実装してください</p>
 </div>
@@ -62,16 +62,14 @@ jQuery(function($){
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
 
-<div class="slider">
-<div class="frame">
-<ul class="slide">
+<div class="crossfader">
+<ul class="frame">
 <li><a href="#"><img src="assets/images/img01.png" width="400" height="200" alt=""></a></li>
 <li><a href="#"><img src="assets/images/img02.png" width="400" height="200" alt=""></a></li>
 <li><a href="#"><img src="assets/images/img03.png" width="400" height="200" alt=""></a></li>
 </ul>
-</div>
 
-<div class="slider_nav cf">
+<div class="crossfader_nav cf">
 <p class="prev"><a href="#">PREV</a></p>
 <p class="next"><a href="#">NEXT</a></p>
 
@@ -85,35 +83,33 @@ jQuery(function($){
 <li class="num02"><a href="#">img02</a></li>
 <li class="num03"><a href="#">img03</a></li>
 </ul>
-<!-- .slider // --></div>
+<!-- .crossfader // --></div>
 </textarea>
 
 <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}">
-.slider .frame{
+.crossfader .frame{
 	position: relative;
-	overflow: hidden;
-	width: 100%;
+	width: 400px;
 	height: 200px;
-	background: #e9e9e9;
+	margin: 0 auto;
 }
-.slider ul.slide{
+.crossfader ul.frame li{
+	display: none;
 	position: absolute;
 	top: 0;
 	left: 0;
-	width: 10000px;
 }
-.slider ul.slide li{
-	float: left;
+.crossfader ul.frame li:first-child{
+	display: block;
 }
-
-.slider_nav{
+.crossfader_nav{
 	position: relative;
 	padding-top: 15px;
 }
 
 /* prev / next */
-.slider .prev a,
-.slider .next a{
+.crossfader .prev a,
+.crossfader .next a{
 	display: block;
 	padding: 12px 20px;
 	background: #f9f9f9;
@@ -122,27 +118,27 @@ jQuery(function($){
 	text-align: center;
 	text-decoration: none;
 }
-.slider .prev a{
+.crossfader .prev a{
 	float: left;
 }
-.slider .next a{
+.crossfader .next a{
 	float: right;
 }
-.slider .prev a:hover,
-.slider .next a:hover{
+.crossfader .prev a:hover,
+.crossfader .next a:hover{
 	background: #eee;
 }
 
 /* .pointer */
-.slider .pointer{
+.crossfader .pointer{
 	padding-top: 12px;
 	text-align: center;
 	letter-spacing: -.4em;
 }
-.slider .pointer li{
+.crossfader .pointer li{
 	display: inline;
 }
-.slider .pointer a{
+.crossfader .pointer a{
 	display: inline-block;
 	width: 12px;
 	height: 12px;
@@ -150,22 +146,22 @@ jQuery(function($){
 	border-radius: 100%;
 	background: #ccc;
 }
-.slider .pointer li.active a,
-.slider .pointer a:hover{
+.crossfader .pointer li.active a,
+.crossfader .pointer a:hover{
 	background: #357ebd;
 }
 
 /* .thumbnail */
-.slider ul.thumbnail{
+.crossfader ul.thumbnail{
 	margin: 15px 0;
 	clear: both;
 	text-align: center;
 }
 
-.slider ul.thumbnail li{
+.crossfader ul.thumbnail li{
 	display: inline;
 }
-.slider ul.thumbnail a{
+.crossfader ul.thumbnail a{
 	display: inline-block;
 	width: 20%;
 	margin: 0 5px;
@@ -175,26 +171,23 @@ jQuery(function($){
 	text-decoration: none;
 	color: #fff;
 }
-.slider ul.thumbnail li.num01 a{
+.crossfader ul.thumbnail li.num01 a{
 	background: #357ebd;
 }
-.slider ul.thumbnail li.num02 a{
+.crossfader ul.thumbnail li.num02 a{
 	background: #26c281;
 }
-.slider ul.thumbnail li.num03 a{
+.crossfader ul.thumbnail li.num03 a{
 	background: #d95043;
 }
-.slider ul.thumbnail a:hover{
+.crossfader ul.thumbnail a:hover{
 	opacity: .7;
 }
 
 /* @SP */
 @media all and (max-width: 500px){
-	.slider .frame{
-		height: 100px;
-	}
-
-	.slider ul.slide li img{
+	.crossfader .frame,
+	.crossfader ul.slide li img{
 		width: 200px;
 		height: 100px;
 	}
@@ -202,7 +195,7 @@ jQuery(function($){
 </textarea>
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-AMP.$.Slider.get($('.slider'));
+AMP.$.Crossfader.get($('.crossfader'));
 </textarea>
 </div>
 </section>

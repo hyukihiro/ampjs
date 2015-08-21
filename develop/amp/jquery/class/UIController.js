@@ -253,10 +253,10 @@
    * @private
    * @method _controller
    * @param {Number} index スライドインデック
-   * @param {Boolean} noAnimate アニメート無
+   * @param {Boolean} nonAnimate アニメーション無
    * @return {Instance}
    */
-  p._controller = function(index, noAnimate){};
+  p._controller = function(index, nonAnimate){};
 
 
 

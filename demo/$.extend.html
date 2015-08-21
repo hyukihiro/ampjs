@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -55,7 +54,8 @@ jQuery(function($){
 <h2>jQuery.sequence <a href="../docs/classes/jQuery.html#method_sequence">API Reference</a></h2>
 <div class="lead">
 <p>縦列、並列処理を行います。<br>
-jQuery.Deferredを使い縦列、並列処理を行いますのでjQuery.Deferredを使用している、ajax,animate等組み合わせて使用することが可能です。<br>
+jQuery.Deferredを使い縦列、並列処理を行います。<br>
+jQuery.Deferredを使用している、ajaxやanimate等を組み合わせて使用することが可能です。<br>
 また、jQuery.sequence自体、jQuery.Deferredオブジェクトを返しますので、入れ子構造も可能です。</p>
 </div>
 
@@ -143,8 +143,9 @@ function reset(){
 <div class="lead">
 <p>縦列、並列処理を行います。<br>
 jQuery.sequenceと同様にjQuery.Deferredを使い縦列、並列処理を行います。<br>
-streamの内部的な処理は、$.whenメソッドを再帰的に呼び出して実行している点がsequencと違います。<br>
-コールバック関数のreturn値は、次の関数の引数として渡します。</p>
+streamの内部的な処理は、$.whenメソッドを再帰的に呼び出して実行している点がsequenceと違い、<br>
+引数に渡したコールバック関数のreturn値は、次の関数の引数として渡して繋いでいきます。<br>
+また、jQuery.sequence自体、jQuery.Deferredオブジェクトを返しますので、入れ子構造も可能です。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">

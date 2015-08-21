@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -54,8 +53,8 @@ jQuery(function($){
 <section>
 <h2>jQuery.Flick <a href="../docs/classes/jQuery.html#event_flick">API Reference</a></h2>
 <div class="lead">
-<p>jQueryイベントクラスを拡張しFlickイベントを追加しています。<br>
-drag中は、flickmove。dragout時に、flickかflickcancelかhit判定してイベントを発行します。</p>
+<p>jQueryイベントクラスを拡張しFlickイベントを提供します。<br>
+flickmoveは、要素をdrag中にイベントを発行し、<br>flick, flickcancelはdragout時に、hit判定してイベントを発行します。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">

@@ -15,6 +15,7 @@
 
   /**
    * <h4>locationオブジェクト</h4>
+   * <p><a href="../../demo/AMP.Base.html#location">DEMO</a></p>
    *
    * @class AMP.Location
    */

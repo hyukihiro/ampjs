@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -55,9 +54,9 @@ jQuery(function($){
 <h2>jQuery.Slip <a href="../docs/classes/jQuery.html#event_slip">API Reference</a></h2>
 <div class="lead">
 <p>jQueryイベントクラスを拡張しSlipイベントを追加しています。<br>
-Slipイベントは、mouseenter, mouseleave実行時に要素のどのエリアからヒットしたのか所得することが可能です。<br>
-対象要素は、width,heightが所得できる要素（inline以外）が対象となります。<br>
-mouseenter, mouseleave, hoverイベントを拡張したイベントとして実装しています。</p>
+Slipイベントは、mouseenter, mouseleaveの拡張版として追加実装しています。<br>
+要素の上下左右どのエリアから、マウスイン、マウスアウトしたのか取得することが出来ます。<br>
+※ インライン要素では、ヒットエリア判定を取得することは出来ません。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
@@ -82,7 +81,6 @@ mouseenter, mouseleave, hoverイベントを拡張したイベントとして実
 	text-align: center;
 }
 .slip .over{
-	content: "";
 	position: absolute;
 	top: -100%;
 	left: 0;

@@ -127,9 +127,7 @@
    * @return {BoxHover}
    */
   BoxHover.get = function($boxHover, options){
-    var instance = new BoxHover($boxHover, options);
-    instance.on();
-    return instance;
+    return new BoxHover($boxHover, options).on();
   };
 
 

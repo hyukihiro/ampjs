@@ -10,11 +10,12 @@
 
 
   /*======================================================================
-    オブジェクト,ブラウザの判定
+    型, OS, デバイス, ブラウザの判定
   ======================================================================*/
 
   /**
-   * <h4>オブジェクト、ブラウザの判定</h4>
+   * <h4>型, OS, デバイス, ブラウザの判定</h4>
+   * <p><a href="../../demo/AMP.Base.html#is">DEMO</a></p>
    *
    * @class AMP.Is
    */
@@ -222,7 +223,13 @@
    * @static
    * @method isOS
    * @param  {String} key OS名<br>
-   * windows, windowsPhone, mac, ios, android
+   * OS名 | 引数文字列 <br>
+   * Windows | windows <br>
+   * Windows Phone | windowsPhone <br>
+   * Mac (for Desktop) | mac <br>
+   * Mac ios (for SmartDevice) | ios <br>
+   * Android | android
+   *
    * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
@@ -330,7 +337,17 @@
    * @static
    * @method isDevice
    * @param {String} key デバイス名<br>
-   * pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
+   * デバイス名 | 引数文字列 <br>
+   * PC (for Desktop) | pc <br>
+   * Smart Device | sd, smartdevice <br>
+   * Smart Phone | sp, smartphone <br>
+   * Tablet | tb, tablet <br>
+   * iPhone | iphone <br>
+   * iPad | ipad <br>
+   * iPod | ipod <br>
+   * Android Phone | androidPhone <br>
+   * Android Tablet | androidTablet
+   *
    * @return {Boolean}
    */
   AMP.isDevice = function(key){
@@ -484,7 +501,17 @@
    * @static
    * @method isBrowser
    * @param  {String} key ブラウザ名<br>
-   * ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
+   * ブラウザ名 | 引数文字列 <br>
+   * Microsoft Edge | edge <br>
+   * Internet Explorer | ie <br>
+   * Google Chrome | chrome <br>
+   * Firefox | firefox <br>
+   * Mac Safari (for Desktop) | safari <br>
+   * Opera (for Desktop) | opera <br>
+   * ios Safari | mobileSafari <br>
+   * Android | android <br>
+   * Webkit Browser | webkit
+   *
    * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
    * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}

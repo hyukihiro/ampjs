@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -54,18 +53,16 @@ jQuery(function($){
 <section id="sec01">
 <h2>jQuery.fn.queue <a href="../docs/classes/jQuery.html#method_qAddClass">API Reference</a></h2>
 <div class="lead">
-<p>jQuery.queueシリーズは、animation queueで扱えるメソッドとして追加しています。<br>
-animate同様stopやdelayメソッドが有効になり、aimate周りの関数と組みあわせて使用することが可能になります。<br>
-queueを組み合わせることで、ネスト構造が無くフラットにメソッドチェーンで実行することが可能になりますので、<br>
-animateのコールバックヘルを回避することが出来ます。<br>
-追加メソッドは以下のリストを参照。</p>
+<p>jQuery.fn.queueシリーズは、Animation Queueで扱えるメソッドとして、以下の機能を拡張追加しています。</p>
 <ul class="list_disc list_frame">
-<li>attr &rarr; qAttr (属性の取得・変更)</li>
-<li>css &rarr; qCss (cssの取得・変更)</li>
-<li>addClass &rarr; qAddClass (classの追加)</li>
-<li>removeClass &rarr; qRemoveClass (classの削除)</li>
-<li>qCall (コールバック関数)</li>
+<li>属性取得・変更 ： attr &rarr; qAttr</li>
+<li>css取得・変更 : css &rarr; qCss</li>
+<li>class追加 : addClass &rarr; qAddClass</li>
+<li>class削除 : removeClass &rarr; qRemoveClass</li>
+<li>コールバック : qCall</li>
 </ul>
+<p>Animate同様にstop, delayメソッドが有効になります。<br>
+Queueを組み合わせることで、ネスト構造が無くフラットにメソッドチェーンで実行することが可能になりますので、Animateのコールバックヘルを回避することが出来ます。</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
@@ -90,7 +87,6 @@ animateのコールバックヘルを回避することが出来ます。<br>
 </textarea>
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-
 var $box01 = $('.list_box01 li');
 var $q_txt = $('.q_txt');
 
@@ -135,7 +131,7 @@ function qPrint(){
 <div class="ex-code-prettify demo-right">
 <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
 <p class="run_txt">Runで実行してください。</p>
-<p>on, offボタンをクリックして、Button画像を切り替えます。</p>
+<p>on, offボタンをクリックして、Button画像のパスを書き換えています。</p>
 <p class="btn">
 <a class="blue on" href="#">on</a>
 <a class="green off" href="#">off</a>
@@ -169,7 +165,7 @@ $('.btn .off').click(function(){
 <h2>jQuery.fn.getExt <a href="../docs/classes/jQuery.html#method_getExt">API Reference</a></h2>
 <div class="lead">
 <p>getExtは、ファイルの拡張子を取得します。<br>
-第一引数は、取得したい拡張子属性名、第二引数は、query・hashを含むか(boolean)初期は、含みません。</p>
+第一引数は、取得したい拡張子属性名、第二引数は、queryやhashを含むかBooleanを渡します。(初期値はfalseで、query, hashは含みません。)</p>
 </div>
 
 <div class="ex-code-prettify demo-right">
@@ -196,10 +192,6 @@ $('.getExt_txt').html('ファイル拡張子は、 <span class="em">' + ext + '<
 </textarea>
 </div>
 </section>
-
-
-
-
 <!-- #content // --></div>
 
 

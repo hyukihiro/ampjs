@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -64,8 +63,8 @@ jQuery(function($){
 <p class="run_txt">Runで実行してください。</p>
 <ul class="slip cf">
 <li><span class="slip_tween"></span></li>
-<li><span class="slip_tween"></span></li>
-<li><span class="slip_tween"></span></li>
+<li class="active"><span class="slip_tween"></span>Active</li>
+<li class="no_slip"><span class="slip_tween"></span>NoSlip</li>
 </ul>
 </textarea>
 
@@ -76,22 +75,26 @@ ul.slip li{
 	float: left;
 	width: 28%;
 	height: 100px;
-	margin: 0 2%;
+	margin: 0 2% 15px;
 	border: 1px solid #ccc;
+	line-height: 100px;
+	text-align: center;
 }
 ul.slip li .slip_tween{
 	display: block;
 	position: absolute;
-	top: -100%;
+	/* top: 0; */
+	top: -100%; /* 初期は非表示 */
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: #e8e8e8;
+	background: #999;
+	opacity: .3;
 }
 </textarea>
 
 <textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
-AMP.$.Slip.get($('ul.slip li'));
+var slip = AMP.$.Slip.get($('ul.slip li'));
 </textarea>
 </div>
 </section>

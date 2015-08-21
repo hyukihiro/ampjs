@@ -16,7 +16,7 @@
   /**
    * <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
    * <p>!!! AMP.Mediaqueryを継承しています<br>
-   * <a href="../../demo/AMP.$.MediaImages.html">DEMO</a></p>
+   * <a href="../../demo/AMP.$.MediaImageChange.html">DEMO</a></p>
    *
    * @class AMP.$.MediaImageChange
    * @extends AMP.Mediaquery
