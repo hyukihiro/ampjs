@@ -67,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slip.VERSION = '1.0.1';
+  Slip.VERSION = '1.0.2';
 
 
   /**
@@ -108,10 +108,10 @@
    * @type {String}
    */
   /**
-   * <h4>スライドする子要素のクラス名</h4>
+   * <h4>アニメーション要素クラス名</h4>
    *
    * @static
-   * @property options.slipClass
+   * @property options.tweenClass
    * @default slip_tween
    * @type {String}
    */
@@ -124,10 +124,10 @@
    * @type {String}
    */
   /**
-   * <h4>スライドしない要素に付与するクラス名</h4>
+   * <h4>アニメーションしない要素に付与するクラス名</h4>
    *
    * @static
-   * @property options.noSlipClass
+   * @property options.noTweenClass
    * @default .no_slip
    * @type {String}
    */
@@ -143,9 +143,9 @@
 	Slip.options = {
     inDirection : 'all', // all, side, updown, up, down, left, right
     outDirection: 'all', // all, side, updown, up, down, left, right
-    slipClass   : 'slip_tween',
+    tweenClass  : 'slip_tween',
     activeClass : 'active',
-    noSlipClass : 'no_slip',
+    noTweenClass: 'no_slip',
     tween       : {
       duration  : 400,
       easing    : 'easeOutExpo'
@@ -192,7 +192,7 @@
       self._tween(self.props.$target.index(this), outEvent);
     })
     .each(function(i){
-      if($(this).hasClass(self.props.noSlipClass)){
+      if($(this).hasClass(self.props.noTweenClass)){
         self.passive(i);
 
       } else if($(this).hasClass(self.props.activeClass)){
@@ -228,7 +228,7 @@
 
     $target
     .addClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
+    .find('.' + this.props.tweenClass)
     .velocity('stop').css({top: 0, left: 0});
 
     return this;
@@ -247,7 +247,7 @@
 
     $target
     .removeClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
+    .find('.' + this.props.tweenClass)
     .velocity('stop').css({top: '-100%'});
 
     return this;
@@ -267,8 +267,8 @@
     var style = this._createTweenStyle(event),
     $target = this.props.$target.eq(num);
 
-    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noSlipClass)){
-      $target.find('.' + this.props.slipClass)
+    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noTweenClass)){
+      $target.find('.' + this.props.tweenClass)
       .velocity('stop')
       .velocity(style.start, 0)
       .velocity(style.end, this.props.tween);

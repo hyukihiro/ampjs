@@ -163,9 +163,6 @@ AMP.$.AjaxRender
 1. ~~AMP.$.Modal~~
 1. ~~AMP.$.Tab~~
 1. ~~AMP.$.Accordion~~
-1. ~~AMP.$.Matrix~~
-1. ~~AMP.$.Skew~~
-1. ~~AMP.$.Roll~~
 
 
 

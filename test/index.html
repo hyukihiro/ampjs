@@ -15,7 +15,18 @@
 <link rel="stylesheet" href="css/index.css" media="all">
 
 <style type="text/css">
-
+.matrix{
+	position: relative;
+	width: 200px;
+	height: 200px;
+	margin: 200px auto;
+	background: #666;
+	transform: matrix3d(
+		1, 0, 0, 0,
+		0, 1,	2, 2,
+		0, 0, 1, 0,
+		0, 0, 0, 1);
+}
 </style>
 
 </head>
@@ -30,35 +41,8 @@
 
 <div id="content" class="cf">
 
-<!-- <p id="TX">aaaaaaaaaaaaaaaaaaaaaaa</p> -->
-<!--
-<div class="crossfader">
-<ul class="frame">
-<li><img src="images/slider/mv01.jpg" alt=""></li>
-<li><img src="images/slider/mv02.jpg" alt=""></li>
-<li><img src="images/slider/mv03.jpg" alt=""></li>
-<li><img src="images/slider/mv04.jpg" alt=""></li>
-<li><img src="images/slider/mv05.jpg" alt=""></li>
-</ul>
+<div class="matrix"></div>
 
-<div class="nav cf">
-<p class="prev"><a href="#"><img class="rover" src="images/slider/ico_prev.png" width="40" height="48" alt=""></a></p>
-<p class="next"><a href="#"><img class="rover" src="images/slider/ico_next.png" width="40" height="48" alt=""></a></p>
-
-<ul class="pointer">
-<li><a href="#"></a></li>
-</ul>
-
-<ul class="thumbnail">
-<li><a href="#"><img src="images/slider/mv01.jpg" width="100" height="auto" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv02.jpg" width="100" height="auto" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv03.jpg" width="100" height="auto" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv04.jpg" width="100" height="auto" alt=""></a></li>
-<li><a href="#"><img src="images/slider/mv05.jpg" width="100" height="auto" alt=""></a></li>
-</ul>
-</div>
-</div>
- // -->
 
 
 
@@ -106,19 +90,20 @@
 <script src="../develop/amp/jquery.plugins/FnExtend.js"></script>
 
 <script src="../develop/amp/jquery/AMP.$.js"></script>
-<script src="../develop/amp/jquery/base/BoxHover.js"></script>
-<script src="../develop/amp/jquery/base/Ease.js"></script>
-<script src="../develop/amp/jquery/base/FlatHeight.js"></script>
-<script src="../develop/amp/jquery/base/Float3d.js"></script>
-<script src="../develop/amp/jquery/base/MediaImages.js"></script>
-<script src="../develop/amp/jquery/base/Rollover.js"></script>
-<script src="../develop/amp/jquery/base/Scroll.js"></script>
-<script src="../develop/amp/jquery/base/ScrollToggle.js"></script>
-<script src="../develop/amp/jquery/base/Slip.js"></script>
-<script src="../develop/amp/jquery/base/SmothScroll.js"></script>
-<script src="../develop/amp/jquery/base/UIController.js"></script>
-<script src="../develop/amp/jquery/base/inherits/Crossfader.js"></script>
-<script src="../develop/amp/jquery/base/inherits/Slider.js"></script>
+<script src="../develop/amp/jquery/class/BoxHover.js"></script>
+<script src="../develop/amp/jquery/class/Ease.js"></script>
+<script src="../develop/amp/jquery/class/FlatHeight.js"></script>
+<script src="../develop/amp/jquery/class/Float3d.js"></script>
+<script src="../develop/amp/jquery/class/Matrix.js"></script>
+<script src="../develop/amp/jquery/class/MediaImageChange.js"></script>
+<script src="../develop/amp/jquery/class/Rollover.js"></script>
+<script src="../develop/amp/jquery/class/Scroll.js"></script>
+<script src="../develop/amp/jquery/class/ScrollToggle.js"></script>
+<script src="../develop/amp/jquery/class/Slip.js"></script>
+<script src="../develop/amp/jquery/class/SmothScroll.js"></script>
+<script src="../develop/amp/jquery/class/UIController.js"></script>
+<script src="../develop/amp/jquery/class/inherits/Crossfader.js"></script>
+<script src="../develop/amp/jquery/class/inherits/Slider.js"></script>
 <script src="../develop/amp/jquery/utils/Render.js"></script>
 
 <!-- test -->

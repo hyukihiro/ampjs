@@ -56,48 +56,21 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>AMP.$.BoxHover</h4>
-   * <p>リンクエリアを、BOXエリアまで拡大させます<br>
-   * <a href="../../demo/AMP.$.BoxHover.html">DEMO</a></p>
+   * <h4>UIコントローラ</h4>
+   * <p>UIコントローラクラスを継承する事でUIコントローラを提供します</p>
    *
-   * @class AMP.$.BoxHover
+   * @protected
+   * @class AMP.$.UIController
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param  {jQuery} $target 対象のbox要素
-   * @param  {Object} options オプション値 (BoxHover.options参照)
    */
-  function BoxHover($boxHover, options){
-
-    // $boxHover指定がない場合、初期値を設定
-    if(!$boxHover || !($boxHover instanceof jQuery)){
-      options = $boxHover;
-      $boxHover = $('.box_hover');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, BoxHover.options, options);
-
-    /**
-     * <h4>ターゲット要素</h4>
-     *
-     * @default $('.box_hover')
-     * @property props.$boxHover
-     * @type {jQuery}
-     */
-    this.props.$boxHover = $boxHover;
-  }
+  function UIController(){}
 
   // 基底クラスを継承
-  AMP.inherits(BoxHover, AMP.BASE_CLASS);
+  AMP.inherits(UIController, AMP.BASE_CLASS);
 
   // prototype
-  var p = BoxHover.prototype;
+  var p = UIController.prototype;
 
 
 
@@ -112,7 +85,7 @@
    * @property VERSION
    * @type {String}
    */
-  BoxHover.VERSION = '3.1.0';
+  UIController.VERSION = '1.1.0';
 
 
   /**
@@ -121,7 +94,485 @@
    * @property className
    * @type {String}
    */
-  p.className = 'BoxHover';
+  p.className = 'UIController';
+
+
+  /**
+   * <h4>プロパティオブジェクト</h4>
+   *
+   * @property props
+   * @type {Object}
+   */
+  /**
+   * <h4>現在値</h4>
+   *
+   * @property props.current
+   * @type {Number}
+   */
+  p.props = {
+    current: 0
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Pagerボタンイベント登録</h4>
+   *
+   * @method addEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPager = function($pager){
+    var self = this;
+    $pager.on('click.' + self.className, function(){
+      self.moveTo($pager.index(this));
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Pagerボタンイベント削除</h4>
+   *
+   * @method removeEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPager = function($pager){
+    $pager.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>Nextボタンイベント登録</h4>
+   *
+   * @method addEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.addEventNext = function($next){
+    var self = this;
+    $next.on('click.' + self.className, function(){
+      self.next();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Nextボタンイベント削除</h4>
+   *
+   * @method removeEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.removeEventNext = function($next){
+    $next.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>Prevボタンイベント登録</h4>
+   *
+   * @method addEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPrev = function($prev){
+    var self = this;
+    $prev.on('click.' + self.className, function(){
+      self.prev();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Prevボタンイベント削除</h4>
+   *
+   * @method removeEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPrev = function($prev){
+    $prev.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>フリックイベント</h4>
+   *
+   * @method addEventFlick
+   * @return {Slider}
+   */
+  p.addEventFlick = function($trigger){
+    var self = this;
+
+    $trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
+    .on('flickmoveX.' + this.className, function(moveEvent){
+      self._move(moveEvent.moveX);
+    })
+    .on('flickcancelX.' + this.className, function(){
+      self._resetTween();
+    })
+    .on('flickX.' + this.className, function(flickEvent){
+      if(0 < flickEvent.moveX){
+        self.prev();
+      } else {
+        self.next();
+      }
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>指定インデックスへ</h4>
+   * アニメート無
+   *
+   * @method current
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.current = function(index){
+    this._controller(index, true);
+    return this;
+  };
+
+
+  /**
+   * <h4>指定インデックスへ</h4>
+   *
+   * @method moveTo
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.moveTo = function(index){
+    this._controller(index);
+    return this;
+  };
+
+
+  /**
+   * <h4>次へ</h4>
+   *
+   * @method next
+   * @return {Instance}
+   */
+  p.next = function(){
+    this._controller(this.props.current + 1);
+    return this;
+  };
+
+
+  /**
+   * <h4>前へ</h4>
+   *
+   * @method prev
+   * @return {Instance}
+   */
+  p.prev = function(){
+    this._controller(this.props.current -1);
+    return this;
+  };
+
+
+  /**
+   * <h4>コントローラー</h4>
+   * 送られてきた値を制御します
+   *
+   * @protected
+   * @private
+   * @method _controller
+   * @param {Number} index スライドインデック
+   * @param {Boolean} nonAnimate アニメーション無
+   * @return {Instance}
+   */
+  p._controller = function(index, nonAnimate){};
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.UIController = UIController;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>スムーススクロール（慣性スクロール）</h4>
+   * <p><em>※ WindowsPCのみ有効</em><br>
+   * <a href="../../demo/AMP.$.SmothScroll.html">DEMO</a></p>
+   *
+   * @class AMP.$.SmoothScroll
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   */
+  function SmoothScroll(options){
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true,
+      {},
+      SmoothScroll.options,
+      {$page: $('html, body')},
+      options
+    );
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(SmoothScroll, AMP.BASE_CLASS);
+
+  // prototype
+  var p = SmoothScroll.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  SmoothScroll.VERSION = '3.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'SmoothScroll';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+    /**
+   * <h4>スムーススクロールエリア</h4>
+   *
+   * @property options.$page
+   * @default $('html, body')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>スクロール量</h4>
+   *
+   * @property options.amount
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * <h4>duration</h4>
+   *
+   * @property options.duration
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * <h4>easing</h4>
+   *
+   * @property options.easing
+   * @default easeOutCubic
+   * @type {String}
+   */
+  SmoothScroll.options = {
+    $page   : null,
+    amount  : 400,
+    duration: 600,
+    easing  : 'easeOutCubic'
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>SmoothScrollインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {Object} options? オプション値 省略可
+   * @return {SmoothScroll}
+   */
+  SmoothScroll.get = function(options){
+    return new SmoothScroll(options).on();
+  };
+
+
+  /**
+   * <h4>初期化</h4>
+   *
+   * @method on
+   * @return {SmoothScroll}
+   */
+  p.on = function(){
+    var self = this;
+
+    // WindowsPCのみ有効
+    if(AMP.isWindows()){
+      self.props.$page.off('mousewheel.SmoothScroll')
+      .on('mousewheel.SmoothScroll', function(){
+        self.tween(arguments[1]);
+        return false;
+      });
+    }
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @return {SmoothScroll}
+   */
+  p.off = function(){
+    this.props.$page.off('mousewheel.SmoothScroll');
+    return this;
+  };
+
+
+  /**
+   * <h4>スクロールアニメーション</h4>
+   *
+   * @method tween
+   * @return {Void}
+   */
+  p.tween = function(move){
+    var self = this,
+    props = self.props,
+    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
+    scrollY = move > 0 ? y - props.amount : y + props.amount;
+
+    self.props.$page.velocity('stop')
+    .velocity('scroll', {offset: scrollY, duration: props.duration, easing: props.easing});
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.SmoothScroll = SmoothScroll;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+	// 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>ホバースライドアニメーション</h4>
+   * <a href="../../demo/AMP.$.Slip.html">DEMO</a></p>
+   *
+   * @class AMP.$.Slip
+   * @constructor
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   */
+	function Slip($target, options){
+    // $target指定がない場合、初期値を設定
+    if(!$target || !($target instanceof jQuery)){
+      options = $target;
+      $target = $('.slip');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, Slip.options, options);
+
+    /**
+     * <h4>float要素</h4>
+     *
+     * @propaty $target
+     * @type {jQuery}
+     */
+    this.props.$target = $target;
+	}
+
+  // 基底クラスを継承
+  AMP.inherits(Slip, AMP.BASE_CLASS);
+
+	// prototype
+	var p = Slip.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Slip.VERSION = '1.0.2';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Slip';
 
 
   /**
@@ -133,25 +584,69 @@
    * @type {Object}
    */
   /**
-   * <h4>ホバー時に、box要素に付与するクラス名</h4>
+   * <h4>マウスイン時のアニメーション方向</h4>
+   * <p>以下7タイプ (allはデフォルト4方向)<br>
+   * all, side, updown, up, down, left, right</p>
    *
    * @static
-   * @property options.hoverClass
-   * @default hover
+   * @property options.inDirection
+   * @default all
    * @type {String}
    */
   /**
-   * <h4>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</h4>
+   * <h4>マウスアウト時のアニメーション方向</h4>
+   * <p>以下7タイプ (allはデフォルト4方向)<br>
+   * all, side, updown, up, down, left, right</p>
    *
    * @static
-   * @property options.linkClass
-   * @default link
+   * @property options.outDirection
+   * @default all
    * @type {String}
    */
-  BoxHover.options = {
-    hoverClass: 'hover',
-    linkClass : 'link'
-  };
+  /**
+   * <h4>アニメーション要素クラス名</h4>
+   *
+   * @static
+   * @property options.tweenClass
+   * @default slip_tween
+   * @type {String}
+   */
+  /**
+   * <h4>アクティブ時に付与するクラス名</h4>
+   *
+   * @static
+   * @property options.activeClass
+   * @default .activeClass
+   * @type {String}
+   */
+  /**
+   * <h4>アニメーションしない要素に付与するクラス名</h4>
+   *
+   * @static
+   * @property options.noTweenClass
+   * @default .no_slip
+   * @type {String}
+   */
+  /**
+   * <h4>Tween option</h4>
+   * <p><a href="http://julian.com/research/velocity/" target="_blank">velocity.js オプション参照</a></p>
+   *
+   * @static
+   * @property options.tween
+   * @default .no_slip
+   * @type {Object}
+   */
+	Slip.options = {
+    inDirection : 'all', // all, side, updown, up, down, left, right
+    outDirection: 'all', // all, side, updown, up, down, left, right
+    tweenClass  : 'slip_tween',
+    activeClass : 'active',
+    noTweenClass: 'no_slip',
+    tween       : {
+      duration  : 400,
+      easing    : 'easeOutExpo'
+    }
+	};
 
 
 
@@ -160,16 +655,16 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>BoxHoverインスタンスの生成</h4>
+   * <h4>Slipインスタンスの生成</h4>
    *
    * @static
    * @method get
-   * @param  {jQuery} $boxHover 対象のbox要素 省略可 初期値 $('.box-hover')
-   * @param  {Object} options オプション値 省略可
-   * @return {BoxHover}
+   * @param  {jQuery} $target 対象の要素
+   * @param  {Object} options オプション値
+   * @return {Slip}
    */
-  BoxHover.get = function($boxHover, options){
-    return new BoxHover($boxHover, options).on();
+  Slip.get = function($target, options){
+    return new Slip($target, options).on();
   };
 
 
@@ -177,32 +672,28 @@
    * <h4>イベント登録</h4>
    *
    * @method on
-   * @return {BoxHover}
+   * @return {Slip}
    */
   p.on = function(){
     var self = this;
 
+    // 二重登録回避
     this.off();
 
-    this.props.$boxHover.css({cursor: 'pointer'})
-    .on('mouseenter.BoxHover', function(){
-      $(this).addClass(self.props.hoverClass);
+    self.props.$target
+    .on('slipin.Slip', function(inEvent){
+      self._tween(self.props.$target.index(this), inEvent);
     })
-    .on('mouseleave.BoxHover', function(){
-      $(this).removeClass(self.props.hoverClass);
+    .on('slipout.Slip', function(outEvent){
+      self._tween(self.props.$target.index(this), outEvent);
     })
-    .on('click.BoxHover', function(){
-      self.transition($(this));
-    })
-    .find('a')
-    .on('click.BoxHover', function(clickEvent){
-      clickEvent.stopPropagation();
-    });
+    .each(function(i){
+      if($(this).hasClass(self.props.noTweenClass)){
+        self.passive(i);
 
-    // フォーム要素はイベント伝播をキャンセル
-    this.props.$boxHover.find('label input select textarea')
-    .on('click.BoxHover', function(clickEvent){
-      clickEvent.stopPropagation();
+      } else if($(this).hasClass(self.props.activeClass)){
+        self.active(i);
+      }
     });
 
     return this;
@@ -213,36 +704,124 @@
    * <h4>イベント削除</h4>
    *
    * @method off
-   * @return {BoxHover}
+   * @return {Slip}
    */
   p.off = function(){
-    this.props.$boxHover
-    .css({cursor: 'auto'})
-    .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover')
-    .find('a').off('click.BoxHover');
+    this.props.$target.off('slipin.Slip slipin.Slip');
+    return this;
+  };
 
-    this.props.$boxHover.find('label input select textarea').off('click.BoxHover');
+
+  /**
+   * <h4>アクティブ</h4>
+   *
+   * @method active
+   * @param  {Number} num 要素のインデックス
+   * @return {Slip}
+   */
+  p.active = function(num){
+    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
+
+    $target
+    .addClass(this.props.activeClass)
+    .find('.' + this.props.tweenClass)
+    .velocity('stop').css({top: 0, left: 0});
 
     return this;
   };
 
 
   /**
-   * <h4>リンクページへ遷移</h4>
+   * <h4>待機状態のスタイル</h4>
    *
-   * @method transition
+   * @method passive
+   * @param  {Number} num 要素のインデックス
+   * @return {Slip}
+   */
+  p.passive = function(num){
+    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
+
+    $target
+    .removeClass(this.props.activeClass)
+    .find('.' + this.props.tweenClass)
+    .velocity('stop').css({top: '-100%'});
+
+    return this;
+  };
+
+
+  /**
+   * <h4>アニメーション</h4>
+   *
+   * @private
+   * @method _tween
+   * @param  {Number} num   要素のインデックス
+   * @param  {Object} event イベントオブジェクト
    * @return {Void}
    */
-  p.transition = function($box){
-    var $link = $box.find('.' + this.props.linkClass);
-    $link = $link[0] ? $link : $box.find('a').eq(0);
+  p._tween = function(num, event){
+    var style = this._createTweenStyle(event),
+    $target = this.props.$target.eq(num);
 
-    // リンク展開
-    if($link.attr('target') === '_blank'){
-      window.open($link.attr('href'), '_blank');
-    } else {
-      location.href = $link.attr('href');
+    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noTweenClass)){
+      $target.find('.' + this.props.tweenClass)
+      .velocity('stop')
+      .velocity(style.start, 0)
+      .velocity(style.end, this.props.tween);
     }
+  };
+
+
+  /**
+   * <h4>Tweenスタイルの生成</h4>
+   *
+   * @private
+   * @method _createTweenStyle
+   * @param  {Object} event イベントオブジェクト
+   * @return {Object}
+   */
+  p._createTweenStyle = function(event){
+    var isSlipin = event.type === 'slipin',
+    direction = isSlipin ? this.props.inDirection : this.props.outDirection,
+    style01 = {left: 0, top : 0},
+    style02 = $.extend({}, style01),
+    style = isSlipin ? style01 : style02;
+
+    if(direction === 'side'){
+      style.left = event.x < 0 ? '-100%' : '100%';
+
+    } else if(direction === 'updown'){
+      style.top = event.y < 0 ? '-100%' : '100%';
+
+    } else if(direction === 'up'){
+      style.top = '-100%';
+
+    } else if(direction === 'down'){
+      style.top = '100%';
+
+    } else if(direction === 'left'){
+      style.left = '-100%';
+
+    } else if(direction === 'right'){
+      style.left = '100%';
+
+    } else {
+      // direction All
+      if(event.direction === 'top'){
+        style.top = '-100%';
+      } else if(event.direction === 'bottom'){
+        style.top = '100%';
+      } else if(event.direction === 'left'){
+        style.left = '-100%';
+      } else {
+        style.left = '100%';
+      }
+    }
+
+    return {
+      start: style01,
+      end  : style02
+    };
   };
 
 
@@ -251,7 +830,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.BoxHover = BoxHover;
+  AMP.$.Slip = Slip;
 
 
 }(window, AMP, jQuery));
@@ -267,340 +846,63 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>Easingを管理します</h4>
+   * <h4>スクロール時、座標を判定してToggle処理をします</h4>
+   * <p><a href="../../demo/AMP.$.ScrollToggle.html">DEMO</a></p>
    *
-   * @class AMP.Ease
-   * @extends AMP.Ease
-   * @constructor
-   */
-  function Ease(){}
-
-  // AMP.Easeクラスを継承
-  AMP.inherits(Ease, AMP.Ease);
-
-  // prototype
-  var p = Ease.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>jQuery Easing用ネームスペース</h4>
-   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
-   *
-   * @property $
-   * @type {Object}
-   */
-  p.$ = {};
-
-
-  /* 1 Sine
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._1_SINE_IN
-   * @type {String}
-   */
-  p.$._1_SINE_IN = 'easeInSine';
-
-  /**
-   * @property $._1_SINE_OUT
-   * @type {String}
-   */
-  p.$._1_SINE_OUT = 'easeOutSine';
-
-  /**
-   * @property $._1_SINE_IN_OUT
-   * @type {String}
-   */
-  p.$._1_SINE_IN_OUT = 'easeInOutSine';
-
-
-  /* 2 Quad
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._2_QUAD_IN
-   * @type {String}
-   */
-  p.$._2_QUAD_IN = 'easeInQuad';
-
-  /**
-   * @property $._2_QUAD_OUT
-   * @type {String}
-   */
-  p.$._2_QUAD_OUT = 'easeOutQuad';
-
-  /**
-   * @property $._2_QUAD_IN_OUT
-   * @type {String}
-   */
-  p.$._2_QUAD_IN_OUT = 'easeInOutQuad';
-
-
-  /* 3 Cubic
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._3_CUBIC_IN
-   * @type {String}
-   */
-  p.$._3_CUBIC_IN = 'easeInCubic';
-
-  /**
-   * @property $._3_CUBIC_OUT
-   * @type {String}
-   */
-  p.$._3_CUBIC_OUT = 'easeOutCubic';
-
-  /**
-   * @property $._3_CUBIC_IN_OUT
-   * @type {String}
-   */
-  p.$._3_CUBIC_IN_OUT = 'easeInOutCubic';
-
-
-  /* 4 Quart
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._4_QUART_IN
-   * @type {String}
-   */
-  p.$._4_QUART_IN = 'easeInQuart';
-
-  /**
-   * @property $._4_QUART_OUT
-   * @type {String}
-   */
-  p.$._4_QUART_OUT = 'easeOutQuart';
-
-  /**
-   * @property $._4_QUART_IN_OUT
-   * @type {String}
-   */
-  p.$._4_QUART_IN_OUT = 'easeInOutQuart';
-
-
-  /* 5 Quint
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._5_QUINT_IN
-   * @type {String}
-   */
-  p.$._5_QUINT_IN = 'easeInQuint';
-
-  /**
-   * @property $._5_QUINT_OUT
-   * @type {String}
-   */
-  p.$._5_QUINT_OUT = 'easeOutQuint';
-
-  /**
-   * @property $._5_QUINT_IN_OUT
-   * @type {String}
-   */
-  p.$._5_QUINT_IN_OUT = 'easeInOutQuint';
-
-
-  /* 6 Expo
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._6_EXPO_IN
-   * @type {String}
-   */
-  p.$._6_EXPO_IN = 'easeInExpo';
-
-  /**
-   * @property $._6_EXPO_OUT
-   * @type {String}
-   */
-  p.$._6_EXPO_OUT = 'easeOutExpo';
-
-  /**
-   * @property $._6_EXPO_IN_OUT
-   * @type {String}
-   */
-  p.$._6_EXPO_IN_OUT = 'easeInOutExpo';
-
-
-  /* 7 Circ
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._7_CIRC_IN
-   * @type {String}
-   */
-  p.$._7_CIRC_IN = 'easeInCirc';
-
-  /**
-   * @property $._7_CIRC_OUT
-   * @type {String}
-   */
-  p.$._7_CIRC_OUT = 'easeOutCirc';
-
-  /**
-   * @property $._7_CIRC_IN_OUT
-   * @type {String}
-   */
-  p.$._7_CIRC_IN_OUT = 'easeInOutCirc';
-
-
-  /* Linear
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._LINEAR
-   * @type {String}
-   */
-  p.$._LINEAR = 'linear';
-
-
-  /* Back
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._BACK_IN
-   * @type {String}
-   */
-  p.$._BACK_IN = 'easeInBack';
-
-  /**
-   * @property $._BACK_OUT
-   * @type {String}
-   */
-  p.$._BACK_OUT = 'easeOutBack';
-
-  /**
-   * @property $._BACK_IN_OUT
-   * @type {String}
-   */
-  p.$._BACK_IN_OUT = 'easeInOutBack';
-
-
-  /* Elastic
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._ELASTIC_IN
-   * @type {String}
-   */
-  p.$._ELASTIC_IN = 'easeInElastic';
-
-  /**
-   * @property $._ELASTIC_OUT
-   * @type {String}
-   */
-  p.$._ELASTIC_OUT = 'easeOutElastic';
-
-  /**
-   * @property $._ELASTIC_IN_OUT
-   * @type {String}
-   */
-  p.$._ELASTIC_IN_OUT = 'easeInOutElastic';
-
-
-  /* Bounce
-  -----------------------------------------------------------------*/
-  /**
-   * @property $._BOUNCE_IN
-   * @type {String}
-   */
-  p.$._BOUNCE_IN = 'easeInBounce';
-
-  /**
-   * @property $._BOUNCE_OUT
-   * @type {String}
-   */
-  p.$._BOUNCE_OUT = 'easeOutBounce';
-
-  /**
-   * @property $._BOUNCE_IN_OUT
-   * @type {String}
-   */
-  p.$._BOUNCE_IN_OUT = 'easeInOutBounce';
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.Ease = Ease;
-  AMP.ease = new Ease();
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>要素の高さを揃える</h4>
-   * <p><a href="../../demo/AMP.$.FlatHeight.html">DEMO</a></p>
-   *
-   * @class AMP.$.FlatHeight
+   * @class AMP.$.ScrollToggle
    * @extends AMP.BASE_CLASS
    * @constructor
-   * @param {jQuery} $flatHeight 対象のエリア要素
-   * @param {Number} split 区切る数 省略可
-   * @param {Boolean} isResize リサイズ後に実行するか
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
+   * @param  {Object} options オプション値
    */
-  function FlatHeight($flatHeight, split, isResize){
+  function ScrollToggle($scrollToggle, options){
 
-    // $flatHeight指定がない場合、初期値を設定
-    if(!$flatHeight || !($flatHeight instanceof jQuery)){
-      isResize = split;
-      split = $flatHeight;
-      $flatHeight = $('.flat_height');
+    // $scrollToggle指定がない場合、初期値を設定
+    if(!$scrollToggle || !($scrollToggle instanceof jQuery)){
+      options = $scrollToggle;
+      $scrollToggle = $('.scroll_toggle');
     }
 
     /**
      * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
      *
      * @property props
      * @type {Object}
      */
-    this.props = {};
+    this.props = $.extend(true, {}, ScrollToggle.options, options);
 
     /**
-     * <h4>ターゲット要素</h4>
+     * <h4>表示・非表示する要素</h4>
      *
-     * @default $('.flat_height')
-     * @property props.$flatHeight
+     * @default $('.scroll_toggle')
+     * @property props.$scrollToggle
      * @type {jQuery}
      */
-    this.props.$flatHeight = $flatHeight;
+    this.props.$scrollToggle = $scrollToggle;
 
     /**
-     * <h4>高さを揃える要素の分割単位</h4>
+     * <h4>window要素</h4>
      *
-     * @default $flatHeight.length
-     * @property props.split
-     * @type {Number}
+     * @property props.$window
+     * @type {jQuery}
      */
-    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
+    this.props.$window = $(window);
 
     /**
-     * <h4>リサイズ後、セットし直すか？</h4>
+     * <h4>Displayスタイルの状態</h4>
      *
-     * @default true
-     * @property props.isResize
+     * @property props.isDisplay
      * @type {Boolean}
      */
-    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
-
-    this._addEvent();
-    this.setHeight();
+    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
   }
 
   // 基底クラスを継承
-  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
+  AMP.inherits(ScrollToggle, AMP.BASE_CLASS);
 
   // prototype
-  var p = FlatHeight.prototype;
+  var p = ScrollToggle.prototype;
 
 
 
@@ -615,7 +917,7 @@
    * @property VERSION
    * @type {String}
    */
-  FlatHeight.VERSION = '3.1.0';
+  ScrollToggle.VERSION = '3.2.0';
 
 
   /**
@@ -624,7 +926,92 @@
    * @property className
    * @type {String}
    */
-  p.className = 'FlatHeight';
+  p.className = 'ScrollToggle';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>表示されるY値</h4>
+   *
+   * @static
+   * @property showY
+   * @default 300
+   * @type {Number}
+   */
+  /**
+   * <h4>表示・非表示の座標判定を反転します</h4>
+   * <p>false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします</p>
+   *
+   * @static
+   * @property isReverse
+   * @default false
+   * @type {Number}
+   */
+  /**
+   * <h4>表示のスタイル</h4>
+   *
+   * @static
+   * @property show
+   * @default { opacity: 1}
+   * @type {Object}
+   */
+  /**
+   * <h4>非表示のスタイル</h4>
+   *
+   * @static
+   * @property hide
+   * @default { opacity: 0}
+   * @type {Object}
+   */
+  /**
+   * <h4>duration</h4>
+   *
+   * @static
+   * @property duration
+   * @default 500
+   * @type {Number}
+   */
+  /**
+   * <h4>easing</h4>
+   *
+   * @static
+   * @property easing
+   * @default easeInSine
+   * @type {String}
+   */
+  /**
+   * <h4>表示後のコールバック</h4>
+   *
+   * @static
+   * @property showCall
+   * @default $.noop
+   * @type {String}
+   */
+  /**
+   * <h4>非表示後のコールバック</h4>
+   *
+   * @static
+   * @property hideCall
+   * @default $.noop
+   * @type {String}
+   */
+  ScrollToggle.options = {
+    showY    : 300,
+    isReverse: false,
+    show     : { opacity: 1},
+    hide     : { opacity: 0},
+    duration : 500,
+    easing   : 'easeInSine',
+    showCall : $.noop,
+    hideCall : $.noop
+  };
 
 
 
@@ -633,104 +1020,109 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>FlatHeightインスタンス生成</h4>
+   * <h4>ScrollToggleインスタンスの生成</h4>
    *
    * @static
    * @method get
-   * @param  {jQuery} $flatHeight 対象のエリア要素
-   * @param  {Number} split 区切る数 省略可
-   * @param  {Boolean} isResize リサイズ後に実行するか
-   * @return {FlatHeight}
+   * @param  {jQuery} $scrollToggle 表示・非表示する要素
+   * @param  {Object} options オプション値 省略可
+   * @return {Pagetop} Pagetopインスタンスを返す
    */
-  FlatHeight.get = function($flatHeight, split, isResize){
-    return new FlatHeight($flatHeight, split, isResize);
+  ScrollToggle.get = function($scrollToggle, options){
+    return new ScrollToggle($scrollToggle, options).on();
   };
 
 
   /**
-   * <h4>イベント設定</h4>
-   * リサイズイベント、フォントリサイズイベント
+   * <h4>イベントオン</h4>
    *
-   * @private
-   * @method addEvent
-   * @return {FlatHeight}
+   * @method on
+   * @return {ScrollToggle}
    */
-  p._addEvent = function(){
+  p.on = function(){
     var self = this;
 
-    // fontresize
-    if(AMP.isDevice('pc')){
-      AMP.fontResize.on('change.FlatHeight', function(){
-        self.setHeight();
-      });
-    }
+    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
+      self._scrollController(self.props.$window.scrollTop());
+    }).trigger('scroll.ScrollToggle');
 
-    // window resize
-    $(root).on('resizestop.FlatHeight', function(){
-      if(self.props.isResize){
-        self.setHeight();
+    return this;
+  };
+
+
+  /**
+   * <h4>スクロールイベントをコントロール</h4>
+   *
+   * @private
+   * @method _scrollController
+   * @param {Number} y スクロールY値
+   * @return {Void}
+   */
+  p._scrollController = function(y){
+    var self = this;
+    if(this.props.isReverse){
+      if(!this.props.isDislpay && this.props.showY > y){
+        this.show();
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay && this.props.showY < y){
+        this.hide();
+        this.props.isDislpay = false;
       }
+    } else {
+      if(!this.props.isDislpay && this.props.showY < y){
+        this.show();
+        this.props.isDislpay = true;
+      } else if(this.props.isDislpay && this.props.showY > y){
+        this.hide();
+        this.props.isDislpay = false;
+      }
+    }
+  };
+
+
+  /**
+   * <h4>イベントオフ</h4>
+   *
+   * @method off
+   * @return {ScrollToggle}
+   */
+  p.off = function(){
+    this.props.$window.off('scroll.ScrollToggle');
+    return this;
+  };
+
+
+  /**
+   * <h4>表示</h4>
+   *
+   * @method show
+   * @return {ScrollToggle}
+   */
+  p.show = function(){
+    this.props.$scrollToggle
+    .css({display: 'block'})
+    .css(this.props.hide)
+    .velocity('stop')
+    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
+
+    return this;
+  };
+
+
+  /**
+   * <h4>非表示</h4>
+   *
+   * @method hide
+   * @return {ScrollToggle}
+   */
+  p.hide = function(){
+    var self = this;
+    this.props.$scrollToggle
+    .velocity('stop')
+    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
+      self.props.$scrollToggle.css({display: 'none'});
+      self.props.hideCall();
     });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>区切りをセットして高さを揃える</h4>
-   *
-   * @method setSplit
-   * @return {FlatHeight}
-   */
-  p.setSplit = function(num){
-    if(!AMP.isNumber(num)){
-      throw new TypeError(num + ' is not a Number');
-    }
-    this.props.split = num;
-    this.setHeight();
-    return this;
-  };
-
-
-  /**
-   * <h4>高さを揃える</h4>
-   *
-   * @method setHeight
-   * @return {FlatHeight}
-   */
-  p.setHeight = function(){
-    var self = this,
-    total = self.props.$flatHeight.length,
-    rest = total % self.props.split,
-    finalRow = total - rest,
-    maxHeight = 0,
-    targetHeight = 0,
-    rowCount = 0,
-    i = 0;
-
-    self.props.$flatHeight.height('auto');
-
-    if(1 < self.props.split){
-
-      for(; i < total; i += 1){
-        // 一番高い高さを求める
-        targetHeight = self.props.$flatHeight.eq(i).height();
-        maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
-
-        // 行の高さを揃える
-        if((i + 1) % self.props.split === 0){
-          var _start = rowCount * self.props.split,
-          _end = (rowCount += 1) * self.props.split;
-
-          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
-          maxHeight = 0;
-
-        // 最終行の高さを揃える
-        } else if(1 < rest && finalRow <= i && i === total - 1){
-          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
-        }
-      }
-    }
 
     return this;
   };
@@ -741,7 +1133,759 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.FlatHeight = FlatHeight;
+  AMP.$.ScrollToggle = ScrollToggle;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>ページ内リンクのスクロール</h4>
+   * <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
+   *
+   * @class AMP.$.Scroll
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
+   * @param  {Object} options オプション値
+   */
+  function Scroll($scrollTrigger, options){
+    // $scrollTrigger指定がない場合、初期値を設定
+    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
+      options = $scrollTrigger;
+      $scrollTrigger = $('a[href^=#]');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, Scroll.options, {$html: $('html, body')}, options);
+
+    /**
+     * <h4>トリガーとなるa要素</h4>
+     *
+     * @property props.$scrollTrigger
+     * @type {jQuery}
+     */
+    this.props.$scrollTrigger = $scrollTrigger;
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(Scroll, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Scroll.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Scroll.VERSION = '3.2.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Scroll';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>ページ要素</h4>
+   *
+   * @static
+   * @property options.$html
+   * @default $('html, body')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>停止位置調整値</h4>
+   *
+   * @static
+   * @property options.adjust
+   * @default 0
+   * @type {Number|Function}
+   */
+  /**
+   * <h4>スクロールしないトリガークラス名</h4>
+   *
+   * @static
+   * @property options.noScrollClass
+   * @default no_scroll
+   * @type {String}
+   */
+  /**
+   * <h4>スクロールアニメーションのオプション値</h4>
+   * <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
+   *
+   * @static
+   * @property options.tween
+   * @default  {duration: 800, easing: 'easeOutQuint'}
+   * @type {Object}
+   */
+  Scroll.options = {
+    $html        : null, // $('html, body'),
+    adjust       : 0,
+    noScrollClass: 'no_scroll',
+    tween        : {
+      duration   : 800,
+      easing     : 'easeOutQuint'
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Scrollインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
+   * @param  {Object} options オプション値 省略可
+   * @return {Scroll}
+   */
+  Scroll.get = function($scrollTrigger, options){
+    return new Scroll($scrollTrigger, options).on();
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @return {Scroll}
+   */
+  p.on = function(){
+    var self = this;
+
+    // スクロールイベントの重複回避
+    this.off();
+
+    self.props.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @return {Scroll}
+   */
+  p.off = function(){
+    this.props.$scrollTrigger.off('click.Scroll');
+    return this;
+  };
+
+
+  /**
+   * <h4>スクロールアニメーション</h4>
+   * <p>FIXME: Stringも対応予定</p>
+   *
+   * @method tween
+   * @param {Number} num トリガー要素のインデックス
+   * @return {Void}
+   */
+  p.tween = function(num){
+    var self = this,
+    props = self.props,
+    $scrollTrigger = props.$scrollTrigger.eq(num),
+    $target = $($scrollTrigger.attr('href'));
+
+    if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
+      moveTo = $target.offset().top - adjust;
+
+      if($(root).scrollTop() !== moveTo){
+        var tween = $.extend({offset: moveTo}, props.tween);
+        props.$html.velocity('stop').velocity('scroll', tween);
+      }
+      return false;
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.Scroll = Scroll;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>ロールオーバー</h4>
+   * <p>!!!: シングルトン<br>
+   * コンストラクタを呼び出しで、使用しません<br>
+   * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
+   * <a href="../../demo/AMP.$.Rollover.html">DEMO</a></p>
+   *
+   * @class AMP.$.Rollover
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   */
+  function Rollover(){}
+
+  // 基底クラスを継承
+  AMP.inherits(Rollover, AMP.BASE_CLASS);
+
+  // prototype
+  var p = Rollover.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Rollover.VERSION = '2.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Rollover';
+
+
+  /**
+   * <h4>オプションのデフォルト値</h4>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>グループクラス名</h4>
+   *
+   * @static
+   * @property options.groupClass
+   * @default group_rover
+   * @type {String}
+   */
+  /**
+   * <h4>アクティブクラス名</h4>
+   *
+   * @static
+   * @property options.activeClass
+   * @default active
+   * @type {String}
+   */
+  /**
+   * <h4>ノーロールオーバークラス名</h4>
+   *
+   * @static
+   * @property options.noOverClass
+   * @default no_rover
+   * @type {String}
+   */
+  /**
+   * <h4>ロールオーバー時に付与するファイル名</h4>
+   *
+   * @static
+   * @property options.postfix
+   * @default _on
+   * @type {String}
+   */
+  Rollover.options = {
+    groupClass : 'group_rover',
+    activeClass: 'active',
+    noOverClass: 'no_rover',
+    postfix    : '_on'
+  };
+
+
+  /**
+   * <h4>ロールオーバークラス名初期値</h4>
+   *
+   * @static
+   * @property imageClass
+   * @type {String}
+   */
+  Rollover.imageClass = 'img.rover, input.rover, .all_rover img';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>ロールオーバーイベント追加</h4>
+   *
+   * @method on
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.on = function($images, options){
+    var self = this;
+
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(Rollover.imageClass);
+    }
+
+    var props = $.extend(true, {}, Rollover.options, options);
+
+    $images.each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
+
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
+
+      // rollover
+      data.$trigger
+      .on('mouseenter.Rollover', function(){
+        if(!data.$image.hasClass(props.noOverClass)){
+          data.image.src = data.onSrc;
+        }
+      })
+      .on('mouseleave.Rollover', function(){
+        if(!data.$image.hasClass(props.noOverClass)){
+          data.image.src = data.offSrc;
+        }
+      });
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ロールオーバーイベント削除</h4>
+   *
+   * @method off
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.off = function($images, options){
+    // $image指定がない場合、初期値を設定
+    if(!$images || !($images instanceof jQuery)){
+      options = $images;
+      $images = $(Rollover.imageClass);
+    }
+
+    var props = $.extend(true, {}, Rollover.options, options);
+
+    $images.each(function(i){
+      var $group = $images.eq(i).closest('.' + props.groupClass),
+      $trigger = $group[0] ? $group : $images.eq(i);
+      $trigger.off('mouseenter.Rollover mouseleave.Rollover');
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>画像のアクティブ化</h4>
+   *
+   * @method active
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.active = function($images, options){
+    var self = this,
+    props = $.extend(true, {}, Rollover.options, options);
+
+    $images.addClass(props.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
+
+      // イベント削除
+      data.$trigger
+      .addClass(props.activeClass)
+      .off('mouseenter.Rollover mouseleave.Rollover');
+
+      // off画像の場合
+      if(data.isOffImg){
+        data.image.src = data.onSrc;
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>画像を待機状態にする</h4>
+   *
+   * @method passive
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p.passive = function($images, options){
+    var self = this,
+    props = $.extend(true, {}, Rollover.options, options);
+
+    $images.removeClass(props.activeClass)
+    .each(function(i){
+      var data = self._createRolloverData($images.eq(i), props);
+
+      // イベント削除
+      data.$trigger
+      .removeClass(props.activeClass)
+      .off('mouseenter.Rollover mouseleave.Rollover');
+
+      // on画像の場合
+      if(!data.isOffImg){
+        data.image.src = data.offSrc;
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ロールオーバーデータの生成</h4>
+   *
+   * @method _createRolloverData
+   * @private
+   * @param  {jQuery} $images 対象の画像要素
+   * @param  {Object} options オプション値
+   * @return {Rollover}
+   */
+  p._createRolloverData = function($image, options){
+    var
+    image = $image[0],
+    src = image.src,
+    ext = src.substring(src.lastIndexOf('.'), src.length),
+    $group = $image.closest('.' + options.groupClass).addClass(options.activeClass),
+    onSrc,
+    offSrc;
+
+    // 現在on画像の場合
+    if(src.lastIndexOf(options.postfix + ext) > -1){
+      onSrc = src;
+      offSrc = src.replace(options.postfix + ext, ext);
+      AMP.preload(offSrc);
+
+    // 現在off画像の場合
+    } else {
+      offSrc = src;
+      onSrc = src.replace(ext, options.postfix + ext);
+      AMP.preload(onSrc);
+    }
+
+    // RolloverData
+    return {
+      $image  : $image,
+      image   : image,
+      $trigger: $group[0] ? $group : $image,
+      onSrc   : onSrc,
+      offSrc  : offSrc,
+      isOffImg: src === offSrc
+    };
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    exports
+  --------------------------------------------------------------------------*/
+
+  AMP.$.Rollover = Rollover;
+  AMP.$.rollover = new Rollover();
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*--------------------------------------------------------------------------
+    @constructor
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
+   * <p>!!! AMP.Mediaqueryを継承しています<br>
+   * <a href="../../demo/AMP.$.MediaImageChange.html">DEMO</a></p>
+   *
+   * @class AMP.$.MediaImageChange
+   * @extends AMP.Mediaquery
+   * @param {jQuery} $images 画像を書き換える要素
+   * @param {Object} options オプション値
+   * @constructor
+   */
+	function MediaImageChange($images, options){
+		if(!$images || !($images instanceof jQuery)){
+      options = $images;
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+		this.props = $.extend(true, {}, MediaImageChange.options, options);
+
+    if(!$images || !($images instanceof jQuery)){
+      $images = $('img[' + this.props.attrKey + ']');
+    }
+
+    /**
+     * <h4>画像を書き換える要素</h4>
+     *
+     * @property props.$images
+     * @type {jQuery}
+     */
+    this.props.$images = $images;
+
+    /**
+     * <h4>現在の状態</h4>
+     *
+     * @property props.current
+     * @type {String}
+     */
+    this.props.current = null;
+
+		// superClass constructor call
+		MediaImageChange.Mediaquery_constructor.call(this, this.props.element);
+	}
+
+  // AMP.Mediaqueryクラスを継承
+  AMP.inherits(MediaImageChange, AMP.Mediaquery);
+
+  // prototype
+  var p = MediaImageChange.prototype;
+
+
+
+  /*----------------------------------------------------------------------
+    @property
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  MediaImageChange.VERSION = '1.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'MediaImageChange';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>監視対象要素</h4>
+   *
+   * @static
+   * @property options.element
+   * @type {DOM}
+   */
+  /**
+   * <h4>画像ファイルパス格納属性名</h4>
+   *
+   * @static
+   * @property options.attrKey
+   * @default 'data-media-img'
+   * @type {String}
+   */
+  /**
+   * <h4>画像ファイルに追加するprefix</h4>
+   *
+   * @static
+   * @property options.imagePrefix
+   * @default '_'
+   * @type {String}
+   */
+  /**
+   * <h4>対象要素監視しているか？</h4>
+   *
+   * @static
+   * @property options.isObserver
+   * @type {String}
+   */
+  MediaImageChange.options = {
+    element    : null,
+    attrKey    : 'data-media-img',
+    imagePrefix: '_',
+    isObserver : true
+  };
+
+
+
+  /*----------------------------------------------------------------------
+    @method
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>MediaImageChangeインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param {jQuery} $images 画像を書き換える要素
+   * @param {Object} options オプション値
+   * @return {MediaImageChange}
+   */
+  MediaImageChange.get = function($images, options){
+    return new MediaImageChange($images, options).start();
+  };
+
+
+  /**
+   * <h4>ブレイクポイントの監視を開始します</h4>
+   *
+   * @method start
+   * @return {MediaImageChange}
+   */
+  p.start = function(){
+		var self = this;
+
+		this.on('change.MediaImageChange', function(event){
+			if(self.props.isObserver){
+				self.props.current = event.mediaStyle;
+				self.change();
+			}
+		}).trigger('change.MediaImageChange');
+
+    return this;
+  };
+
+
+  /**
+   * <h4>ブレイクポイントの監視をストップします</h4>
+   *
+   * @method stop
+   * @return {MediaImageChange}
+   */
+  p.stop = function(){
+    this.off('change.MediaImageChange');
+		return this;
+  };
+
+
+  /**
+   * <h4>監視の状態を切り替えます</h4>
+   *
+   * @method setObserver
+   * @param {Boolean} isState メディアクエリの変更を監視するか
+   * @return {MediaImageChange}
+   */
+  p.setObserver = function(isState){
+    this.props.isObserver = AMP.isBoolean(isState) ? isState : this.props.isObserver;
+    return this;
+  };
+
+
+  /**
+   * <h4>画像を変更します</h4>
+   *
+   * @method switch
+   * @return {MediaImageChange}
+   */
+  p.change = function(){
+		var self = this,
+		$images = this.props.$images,
+		data,
+		ext;
+
+		$images.each(function(i){
+			data = $images.eq(i).attr(self.props.attrKey);
+			ext = data.substring(data.lastIndexOf('.'), data.length);
+			$images[i].src = data.replace(ext, self.props.imagePrefix + self.props.current + ext);
+    });
+
+    return this;
+  };
+
+
+
+  /*----------------------------------------------------------------------
+    export
+  ----------------------------------------------------------------------*/
+
+  AMP.$.MediaImageChange = MediaImageChange;
 
 
 }(window, AMP, jQuery));
@@ -1133,23 +2277,69 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>ロールオーバー</h4>
-   * <p>!!!: シングルトン<br>
-   * コンストラクタを呼び出しで、使用しません<br>
-   * <em>AMP.rollover</em>にインスタンスをエクスポートしていますので、そちらを使用してください<br>
-   * <a href="../../demo/AMP.$.Rollover.html">DEMO</a></p>
+   * <h4>要素の高さを揃える</h4>
+   * <p><a href="../../demo/AMP.$.FlatHeight.html">DEMO</a></p>
    *
-   * @class AMP.$.Rollover
+   * @class AMP.$.FlatHeight
    * @extends AMP.BASE_CLASS
    * @constructor
+   * @param {jQuery} $flatHeight 対象のエリア要素
+   * @param {Number} split 区切る数 省略可
+   * @param {Boolean} isResize リサイズ後に実行するか
    */
-  function Rollover(){}
+  function FlatHeight($flatHeight, split, isResize){
+
+    // $flatHeight指定がない場合、初期値を設定
+    if(!$flatHeight || !($flatHeight instanceof jQuery)){
+      isResize = split;
+      split = $flatHeight;
+      $flatHeight = $('.flat_height');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = {};
+
+    /**
+     * <h4>ターゲット要素</h4>
+     *
+     * @default $('.flat_height')
+     * @property props.$flatHeight
+     * @type {jQuery}
+     */
+    this.props.$flatHeight = $flatHeight;
+
+    /**
+     * <h4>高さを揃える要素の分割単位</h4>
+     *
+     * @default $flatHeight.length
+     * @property props.split
+     * @type {Number}
+     */
+    this.props.split = AMP.isNumber(split) ? split : $flatHeight.length;
+
+    /**
+     * <h4>リサイズ後、セットし直すか？</h4>
+     *
+     * @default true
+     * @property props.isResize
+     * @type {Boolean}
+     */
+    this.props.isResize = AMP.isBoolean(isResize) ? isResize : true;
+
+    this._addEvent();
+    this.setHeight();
+  }
 
   // 基底クラスを継承
-  AMP.inherits(Rollover, AMP.BASE_CLASS);
+  AMP.inherits(FlatHeight, AMP.BASE_CLASS);
 
   // prototype
-  var p = Rollover.prototype;
+  var p = FlatHeight.prototype;
 
 
 
@@ -1164,7 +2354,7 @@
    * @property VERSION
    * @type {String}
    */
-  Rollover.VERSION = '2.1.0';
+  FlatHeight.VERSION = '3.1.0';
 
 
   /**
@@ -1173,26 +2363,814 @@
    * @property className
    * @type {String}
    */
-  p.className = 'Rollover';
+  p.className = 'FlatHeight';
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>FlatHeightインスタンス生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {jQuery} $flatHeight 対象のエリア要素
+   * @param  {Number} split 区切る数 省略可
+   * @param  {Boolean} isResize リサイズ後に実行するか
+   * @return {FlatHeight}
+   */
+  FlatHeight.get = function($flatHeight, split, isResize){
+    return new FlatHeight($flatHeight, split, isResize);
+  };
 
 
   /**
-   * <h4>オプションのデフォルト値</h4>
+   * <h4>イベント設定</h4>
+   * リサイズイベント、フォントリサイズイベント
+   *
+   * @private
+   * @method addEvent
+   * @return {FlatHeight}
+   */
+  p._addEvent = function(){
+    var self = this;
+
+    // fontresize
+    if(AMP.isDevice('pc')){
+      AMP.fontResize.on('change.FlatHeight', function(){
+        self.setHeight();
+      });
+    }
+
+    // window resize
+    $(root).on('resizestop.FlatHeight', function(){
+      if(self.props.isResize){
+        self.setHeight();
+      }
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>区切りをセットして高さを揃える</h4>
+   *
+   * @method setSplit
+   * @return {FlatHeight}
+   */
+  p.setSplit = function(num){
+    if(!AMP.isNumber(num)){
+      throw new TypeError(num + ' is not a Number');
+    }
+    this.props.split = num;
+    this.setHeight();
+    return this;
+  };
+
+
+  /**
+   * <h4>高さを揃える</h4>
+   *
+   * @method setHeight
+   * @return {FlatHeight}
+   */
+  p.setHeight = function(){
+    var self = this,
+    total = self.props.$flatHeight.length,
+    rest = total % self.props.split,
+    finalRow = total - rest,
+    maxHeight = 0,
+    targetHeight = 0,
+    rowCount = 0,
+    i = 0;
+
+    self.props.$flatHeight.height('auto');
+
+    if(1 < self.props.split){
+
+      for(; i < total; i += 1){
+        // 一番高い高さを求める
+        targetHeight = self.props.$flatHeight.eq(i).height();
+        maxHeight = maxHeight < targetHeight ? targetHeight : maxHeight;
+
+        // 行の高さを揃える
+        if((i + 1) % self.props.split === 0){
+          var _start = rowCount * self.props.split,
+          _end = (rowCount += 1) * self.props.split;
+
+          self.props.$flatHeight.slice(_start, _end).height(maxHeight);
+          maxHeight = 0;
+
+        // 最終行の高さを揃える
+        } else if(1 < rest && finalRow <= i && i === total - 1){
+          self.props.$flatHeight.slice(rowCount * self.props.split, total).height(maxHeight);
+        }
+      }
+    }
+
+    return this;
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.FlatHeight = FlatHeight;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>Easingを管理します</h4>
+   *
+   * @class AMP.Ease
+   * @extends AMP.Ease
+   * @constructor
+   */
+  function Ease(){}
+
+  // AMP.Easeクラスを継承
+  AMP.inherits(Ease, AMP.Ease);
+
+  // prototype
+  var p = Ease.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>jQuery Easing用ネームスペース</h4>
+   * <p><a href="http://easings.net/ja" target="_blank">Easing一覧</a></p>
+   *
+   * @property $
+   * @type {Object}
+   */
+  p.$ = {};
+
+
+  /* 1 Sine
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._1_SINE_IN
+   * @type {String}
+   */
+  p.$._1_SINE_IN = 'easeInSine';
+
+  /**
+   * @property $._1_SINE_OUT
+   * @type {String}
+   */
+  p.$._1_SINE_OUT = 'easeOutSine';
+
+  /**
+   * @property $._1_SINE_IN_OUT
+   * @type {String}
+   */
+  p.$._1_SINE_IN_OUT = 'easeInOutSine';
+
+
+  /* 2 Quad
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._2_QUAD_IN
+   * @type {String}
+   */
+  p.$._2_QUAD_IN = 'easeInQuad';
+
+  /**
+   * @property $._2_QUAD_OUT
+   * @type {String}
+   */
+  p.$._2_QUAD_OUT = 'easeOutQuad';
+
+  /**
+   * @property $._2_QUAD_IN_OUT
+   * @type {String}
+   */
+  p.$._2_QUAD_IN_OUT = 'easeInOutQuad';
+
+
+  /* 3 Cubic
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._3_CUBIC_IN
+   * @type {String}
+   */
+  p.$._3_CUBIC_IN = 'easeInCubic';
+
+  /**
+   * @property $._3_CUBIC_OUT
+   * @type {String}
+   */
+  p.$._3_CUBIC_OUT = 'easeOutCubic';
+
+  /**
+   * @property $._3_CUBIC_IN_OUT
+   * @type {String}
+   */
+  p.$._3_CUBIC_IN_OUT = 'easeInOutCubic';
+
+
+  /* 4 Quart
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._4_QUART_IN
+   * @type {String}
+   */
+  p.$._4_QUART_IN = 'easeInQuart';
+
+  /**
+   * @property $._4_QUART_OUT
+   * @type {String}
+   */
+  p.$._4_QUART_OUT = 'easeOutQuart';
+
+  /**
+   * @property $._4_QUART_IN_OUT
+   * @type {String}
+   */
+  p.$._4_QUART_IN_OUT = 'easeInOutQuart';
+
+
+  /* 5 Quint
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._5_QUINT_IN
+   * @type {String}
+   */
+  p.$._5_QUINT_IN = 'easeInQuint';
+
+  /**
+   * @property $._5_QUINT_OUT
+   * @type {String}
+   */
+  p.$._5_QUINT_OUT = 'easeOutQuint';
+
+  /**
+   * @property $._5_QUINT_IN_OUT
+   * @type {String}
+   */
+  p.$._5_QUINT_IN_OUT = 'easeInOutQuint';
+
+
+  /* 6 Expo
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._6_EXPO_IN
+   * @type {String}
+   */
+  p.$._6_EXPO_IN = 'easeInExpo';
+
+  /**
+   * @property $._6_EXPO_OUT
+   * @type {String}
+   */
+  p.$._6_EXPO_OUT = 'easeOutExpo';
+
+  /**
+   * @property $._6_EXPO_IN_OUT
+   * @type {String}
+   */
+  p.$._6_EXPO_IN_OUT = 'easeInOutExpo';
+
+
+  /* 7 Circ
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._7_CIRC_IN
+   * @type {String}
+   */
+  p.$._7_CIRC_IN = 'easeInCirc';
+
+  /**
+   * @property $._7_CIRC_OUT
+   * @type {String}
+   */
+  p.$._7_CIRC_OUT = 'easeOutCirc';
+
+  /**
+   * @property $._7_CIRC_IN_OUT
+   * @type {String}
+   */
+  p.$._7_CIRC_IN_OUT = 'easeInOutCirc';
+
+
+  /* Linear
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._LINEAR
+   * @type {String}
+   */
+  p.$._LINEAR = 'linear';
+
+
+  /* Back
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._BACK_IN
+   * @type {String}
+   */
+  p.$._BACK_IN = 'easeInBack';
+
+  /**
+   * @property $._BACK_OUT
+   * @type {String}
+   */
+  p.$._BACK_OUT = 'easeOutBack';
+
+  /**
+   * @property $._BACK_IN_OUT
+   * @type {String}
+   */
+  p.$._BACK_IN_OUT = 'easeInOutBack';
+
+
+  /* Elastic
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._ELASTIC_IN
+   * @type {String}
+   */
+  p.$._ELASTIC_IN = 'easeInElastic';
+
+  /**
+   * @property $._ELASTIC_OUT
+   * @type {String}
+   */
+  p.$._ELASTIC_OUT = 'easeOutElastic';
+
+  /**
+   * @property $._ELASTIC_IN_OUT
+   * @type {String}
+   */
+  p.$._ELASTIC_IN_OUT = 'easeInOutElastic';
+
+
+  /* Bounce
+  -----------------------------------------------------------------*/
+  /**
+   * @property $._BOUNCE_IN
+   * @type {String}
+   */
+  p.$._BOUNCE_IN = 'easeInBounce';
+
+  /**
+   * @property $._BOUNCE_OUT
+   * @type {String}
+   */
+  p.$._BOUNCE_OUT = 'easeOutBounce';
+
+  /**
+   * @property $._BOUNCE_IN_OUT
+   * @type {String}
+   */
+  p.$._BOUNCE_IN_OUT = 'easeInOutBounce';
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.Ease = Ease;
+  AMP.ease = new Ease();
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>AMP.$.BoxHover</h4>
+   * <p>リンクエリアを、BOXエリアまで拡大させます<br>
+   * <a href="../../demo/AMP.$.BoxHover.html">DEMO</a></p>
+   *
+   * @class AMP.$.BoxHover
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   * @param  {jQuery} $target 対象のbox要素
+   * @param  {Object} options オプション値 (BoxHover.options参照)
+   */
+  function BoxHover($boxHover, options){
+
+    // $boxHover指定がない場合、初期値を設定
+    if(!$boxHover || !($boxHover instanceof jQuery)){
+      options = $boxHover;
+      $boxHover = $('.box_hover');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, BoxHover.options, options);
+
+    /**
+     * <h4>ターゲット要素</h4>
+     *
+     * @default $('.box_hover')
+     * @property props.$boxHover
+     * @type {jQuery}
+     */
+    this.props.$boxHover = $boxHover;
+  }
+
+  // 基底クラスを継承
+  AMP.inherits(BoxHover, AMP.BASE_CLASS);
+
+  // prototype
+  var p = BoxHover.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  BoxHover.VERSION = '3.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'BoxHover';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
    * @static
    * @property options
    * @type {Object}
    */
   /**
-   * <h4>グループクラス名</h4>
+   * <h4>ホバー時に、box要素に付与するクラス名</h4>
    *
    * @static
-   * @property options.groupClass
-   * @default group_rover
+   * @property options.hoverClass
+   * @default hover
    * @type {String}
    */
   /**
-   * <h4>アクティブクラス名</h4>
+   * <h4>Box内に複数リンクがある場合、優先対象に指定するリンククラス名</h4>
+   *
+   * @static
+   * @property options.linkClass
+   * @default link
+   * @type {String}
+   */
+  BoxHover.options = {
+    hoverClass: 'hover',
+    linkClass : 'link'
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>BoxHoverインスタンスの生成</h4>
+   *
+   * @static
+   * @method get
+   * @param  {jQuery} $boxHover 対象のbox要素 省略可 初期値 $('.box-hover')
+   * @param  {Object} options オプション値 省略可
+   * @return {BoxHover}
+   */
+  BoxHover.get = function($boxHover, options){
+    return new BoxHover($boxHover, options).on();
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @return {BoxHover}
+   */
+  p.on = function(){
+    var self = this;
+
+    this.off();
+
+    this.props.$boxHover.css({cursor: 'pointer'})
+    .on('mouseenter.BoxHover', function(){
+      $(this).addClass(self.props.hoverClass);
+    })
+    .on('mouseleave.BoxHover', function(){
+      $(this).removeClass(self.props.hoverClass);
+    })
+    .on('click.BoxHover', function(){
+      self.transition($(this));
+    })
+    .find('a')
+    .on('click.BoxHover', function(clickEvent){
+      clickEvent.stopPropagation();
+    });
+
+    // フォーム要素はイベント伝播をキャンセル
+    this.props.$boxHover.find('label input select textarea')
+    .on('click.BoxHover', function(clickEvent){
+      clickEvent.stopPropagation();
+    });
+
+    return this;
+  };
+
+
+  /**
+   * <h4>イベント削除</h4>
+   *
+   * @method off
+   * @return {BoxHover}
+   */
+  p.off = function(){
+    this.props.$boxHover
+    .css({cursor: 'auto'})
+    .off('mouseenter.BoxHover mouseleave.BoxHover click.BoxHover')
+    .find('a').off('click.BoxHover');
+
+    this.props.$boxHover.find('label input select textarea').off('click.BoxHover');
+
+    return this;
+  };
+
+
+  /**
+   * <h4>リンクページへ遷移</h4>
+   *
+   * @method transition
+   * @return {Void}
+   */
+  p.transition = function($box){
+    var $link = $box.find('.' + this.props.linkClass);
+    $link = $link[0] ? $link : $box.find('a').eq(0);
+
+    // リンク展開
+    if($link.attr('target') === '_blank'){
+      window.open($link.attr('href'), '_blank');
+    } else {
+      location.href = $link.attr('href');
+    }
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.BoxHover = BoxHover;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
+   * <h4>クロスフェーダー</h4>
+   * <p><a href="../../demo/AMP.$.Crossfader.html">DEMO</a></p>
+   *
+   * @constructor
+   * @class AMP.$.Crossfader
+   * @extends AMP.$.UIController
+   * @param {jQuery} $crossfader クロスフェーダー要素
+   * @param {Object} options オプション値
+   */
+  function Crossfader($crossfader, options){
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    /**
+     * <h4>クロスフェーダー要素</h4>
+     *
+     * @property props.$wrap
+     * @type {jQuery}
+     */
+    /**
+     * <h4>アイテム要素数</h4>
+     *
+     * @property props.length
+     * @type {Number}
+     */
+    /**
+     * <h4>タイマーID</h4>
+     *
+     * @private
+     * @property props._timerId
+     * @type {String}
+     */
+    /**
+     * <h4>アニメーション状態管理フラグ</h4>
+     *
+     * @private
+     * @property props._isAnimate
+     * @type {Boolean}
+     */
+		this.props = $.extend(
+			true,
+			{},
+			Crossfader.options,
+			{
+        $wrap         : $crossfader,
+        $frame        : $crossfader.find('.frame'),
+        $item         : $crossfader.find('.frame').children(),
+        $pointer      : $crossfader.find('.pointer'),
+        $thumbnail    : $crossfader.find('.thumbnail a'),
+        $prev         : $crossfader.find('.prev a'),
+        $next         : $crossfader.find('.next a'),
+        length        : $crossfader.find('.frame').children().length,
+        _timerId      : null,
+        _isAnimate    : false
+			},
+			options
+		);
+  }
+
+  // AMP.$.UIControllerクラスを継承
+  AMP.inherits(Crossfader, AMP.$.UIController);
+
+  // prototype
+  var p = Crossfader.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  Crossfader.VERSION = '1.0.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'Crossfader';
+
+
+  /**
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+   *
+   * @static
+   * @property options
+   * @type {Object}
+   */
+  /**
+   * <h4>クロスフェーダーフレーム要素</h4>
+   *
+   * @static
+   * @property options.$frame
+   * @default $crossfader.find('.frame')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>クロスフェードするアイテム要素</h4>
+   *
+   * @static
+   * @property options.$item
+   * @default $crossfader.find('.frame').children()
+   * @type {jQuery}
+   */
+  /**
+   * <h4>ポインター要素</h4>
+   *
+   * @static
+   * @property options.$pointer
+   * @default $crossfader.find('.pointer')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>サムネイル要素</h4>
+   *
+   * @static
+   * @property options.$thumbnail
+   * @default $crossfader.find('.thumbnail a')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>prevナビ要素</h4>
+   *
+   * @static
+   * @property options.$prev
+   * @default $crossfader.find('.prev a')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>nextナビ要素</h4>
+   *
+   * @static
+   * @property options.$next
+   * @default $crossfader.find('.next a')
+   * @type {jQuery}
+   */
+  /**
+   * <h4>フリックイベントを有効にするか</h4>
+   *
+   * @static
+   * @property options.isFlick
+   * @default true
+   * @type {Boolean}
+   */
+  /**
+   * <h4>クロスフェーダー要素にマウスオンされたときタイマーを無効にするか</h4>
+   *
+   * @static
+   * @property options.isTimerCancel
+   * @default true
+   * @type {Boolean}
+   */
+  /**
+   * <h4>クロスフェードエリアの高さ調整機能を有効にするか</h4>
+   *
+   * @static
+   * @property options.isAutoHeight
+   * @default false
+   * @type {Boolean}
+   */
+  /**
+   * <h4>現在アクティブなアイテムインデックス</h4>
+   *
+   * @static
+   * @property options.current
+   * @default 0
+   * @type {Number}
+   */
+  /**
+   * <h4>クロスフェードタイマーの間隔</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
+   *
+   * @static
+   * @property options.timer
+   * @default 0
+   * @type {Number}
+   */
+  /**
+   * <h4>アクティブ要素に付与するクラス名</h4>
    *
    * @static
    * @property options.activeClass
@@ -1200,356 +3178,51 @@
    * @type {String}
    */
   /**
-   * <h4>ノーロールオーバークラス名</h4>
+   * <h4>リサイズ時に実行する関数</h4>
    *
    * @static
-   * @property options.noOverClass
-   * @default no_rover
-   * @type {String}
+   * @property options.resizeCall
+   * @default $.noop
+   * @type {Function}
    */
   /**
-   * <h4>ロールオーバー時に付与するファイル名</h4>
+   * <h4>リサイズに完了時に実行する関数</h4>
    *
    * @static
-   * @property options.postfix
-   * @default _on
-   * @type {String}
-   */
-  Rollover.options = {
-    groupClass : 'group_rover',
-    activeClass: 'active',
-    noOverClass: 'no_rover',
-    postfix    : '_on'
-  };
-
-
-  /**
-   * <h4>ロールオーバークラス名初期値</h4>
-   *
-   * @static
-   * @property imageClass
-   * @type {String}
-   */
-  Rollover.imageClass = 'img.rover, input.rover, .all_rover img';
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ロールオーバーイベント追加</h4>
-   *
-   * @method on
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.on = function($images, options){
-    var self = this;
-
-    // $image指定がない場合、初期値を設定
-    if(!$images || !($images instanceof jQuery)){
-      options = $images;
-      $images = $(Rollover.imageClass);
-    }
-
-    var props = $.extend(true, {}, Rollover.options, options);
-
-    $images.each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // on画像の場合
-      if(!data.isOffImg){
-        data.image.src = data.offSrc;
-      }
-
-      // rollover
-      data.$trigger
-      .on('mouseenter.Rollover', function(){
-        if(!data.$image.hasClass(props.noOverClass)){
-          data.image.src = data.onSrc;
-        }
-      })
-      .on('mouseleave.Rollover', function(){
-        if(!data.$image.hasClass(props.noOverClass)){
-          data.image.src = data.offSrc;
-        }
-      });
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>ロールオーバーイベント削除</h4>
-   *
-   * @method off
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.off = function($images, options){
-    // $image指定がない場合、初期値を設定
-    if(!$images || !($images instanceof jQuery)){
-      options = $images;
-      $images = $(Rollover.imageClass);
-    }
-
-    var props = $.extend(true, {}, Rollover.options, options);
-
-    $images.each(function(i){
-      var $group = $images.eq(i).closest('.' + props.groupClass),
-      $trigger = $group[0] ? $group : $images.eq(i);
-      $trigger.off('mouseenter.Rollover mouseleave.Rollover');
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>画像のアクティブ化</h4>
-   *
-   * @method active
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.active = function($images, options){
-    var self = this,
-    props = $.extend(true, {}, Rollover.options, options);
-
-    $images.addClass(props.activeClass)
-    .each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // イベント削除
-      data.$trigger
-      .addClass(props.activeClass)
-      .off('mouseenter.Rollover mouseleave.Rollover');
-
-      // off画像の場合
-      if(data.isOffImg){
-        data.image.src = data.onSrc;
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>画像を待機状態にする</h4>
-   *
-   * @method passive
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p.passive = function($images, options){
-    var self = this,
-    props = $.extend(true, {}, Rollover.options, options);
-
-    $images.removeClass(props.activeClass)
-    .each(function(i){
-      var data = self._createRolloverData($images.eq(i), props);
-
-      // イベント削除
-      data.$trigger
-      .removeClass(props.activeClass)
-      .off('mouseenter.Rollover mouseleave.Rollover');
-
-      // on画像の場合
-      if(!data.isOffImg){
-        data.image.src = data.offSrc;
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>ロールオーバーデータの生成</h4>
-   *
-   * @method _createRolloverData
-   * @private
-   * @param  {jQuery} $images 対象の画像要素
-   * @param  {Object} options オプション値
-   * @return {Rollover}
-   */
-  p._createRolloverData = function($image, options){
-    var
-    image = $image[0],
-    src = image.src,
-    ext = src.substring(src.lastIndexOf('.'), src.length),
-    $group = $image.closest('.' + options.groupClass).addClass(options.activeClass),
-    onSrc,
-    offSrc;
-
-    // 現在on画像の場合
-    if(src.lastIndexOf(options.postfix + ext) > -1){
-      onSrc = src;
-      offSrc = src.replace(options.postfix + ext, ext);
-      AMP.preload(offSrc);
-
-    // 現在off画像の場合
-    } else {
-      offSrc = src;
-      onSrc = src.replace(ext, options.postfix + ext);
-      AMP.preload(onSrc);
-    }
-
-    // RolloverData
-    return {
-      $image  : $image,
-      image   : image,
-      $trigger: $group[0] ? $group : $image,
-      onSrc   : onSrc,
-      offSrc  : offSrc,
-      isOffImg: src === offSrc
-    };
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    exports
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Rollover = Rollover;
-  AMP.$.rollover = new Rollover();
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ページ内リンクのスクロール</h4>
-   * <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
-   *
-   * @class AMP.$.Scroll
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
-   * @param  {Object} options オプション値
-   */
-  function Scroll($scrollTrigger, options){
-    // $scrollTrigger指定がない場合、初期値を設定
-    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
-      options = $scrollTrigger;
-      $scrollTrigger = $('a[href^=#]');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Scroll.options, {$html: $('html, body')}, options);
-
-    /**
-     * <h4>トリガーとなるa要素</h4>
-     *
-     * @property props.$scrollTrigger
-     * @type {jQuery}
-     */
-    this.props.$scrollTrigger = $scrollTrigger;
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(Scroll, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Scroll.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Scroll.VERSION = '3.2.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Scroll';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
+   * @property options.resizeStopCall
+   * @default $.noop
+   * @type {Function}
    */
   /**
-   * <h4>ページ要素</h4>
-   *
-   * @static
-   * @property options.$html
-   * @default $('html, body')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>停止位置調整値</h4>
-   *
-   * @static
-   * @property options.adjust
-   * @default 0
-   * @type {Number|Function}
-   */
-  /**
-   * <h4>スクロールしないトリガークラス名</h4>
-   *
-   * @static
-   * @property options.noScrollClass
-   * @default no_scroll
-   * @type {String}
-   */
-  /**
-   * <h4>スクロールアニメーションのオプション値</h4>
-   * <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
+   * <h4>クロスフェードアニメーションのオプション値</h4>
+   * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
    *
    * @static
    * @property options.tween
-   * @default  {duration: 800, easing: 'easeOutQuint'}
    * @type {Object}
    */
-  Scroll.options = {
-    $html        : null, // $('html, body'),
-    adjust       : 0,
-    noScrollClass: 'no_scroll',
-    tween        : {
-      duration   : 800,
-      easing     : 'easeOutQuint'
+  Crossfader.options = {
+    $frame        : null,
+    $item         : null,
+    $pointer      : null,
+    $thumbnail    : null,
+    $prev         : null,
+    $next         : null,
+    isFlick       : true,
+    isResize      : true,
+    isTimerCancel : true,
+    isAutoHeight  : true,
+    current       : 0,
+    timer         : 0,
+    activeClass   : 'active',
+    resizeCall    : $.noop,
+    resizeStopCall: $.noop,
+    tween         : {
+      easing      : 'easeInSine',
+      duration    : 500,
+      begin       : $.noop,
+      progress    : $.noop,
+      complete    : $.noop
     }
   };
 
@@ -1560,1409 +3233,339 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>Scrollインスタンスの生成</h4>
+   * <h4>Crossfaderインスタンスの生成</h4>
    *
    * @static
-   * @method get
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {Scroll}
+   * @param {jQuery} $wrap   クロスフェード要素
+   * @param {Object} options オプション値
+   * @return {Crossfader}
    */
-  Scroll.get = function($scrollTrigger, options){
-    return new Scroll($scrollTrigger, options).on();
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @return {Scroll}
-   */
-  p.on = function(){
-    var self = this;
-
-    // スクロールイベントの重複回避
-    this.off();
-
-    self.props.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.props.$scrollTrigger.index(this));
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {Scroll}
-   */
-  p.off = function(){
-    this.props.$scrollTrigger.off('click.Scroll');
-    return this;
-  };
-
-
-  /**
-   * <h4>スクロールアニメーション</h4>
-   * <p>FIXME: Stringも対応予定</p>
-   *
-   * @method tween
-   * @param {Number} num トリガー要素のインデックス
-   * @return {Void}
-   */
-  p.tween = function(num){
-    var self = this,
-    props = self.props,
-    $scrollTrigger = props.$scrollTrigger.eq(num),
-    $target = $($scrollTrigger.attr('href'));
-
-    if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
-      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
-      moveTo = $target.offset().top - adjust;
-
-      if($(root).scrollTop() !== moveTo){
-        var tween = $.extend({offset: moveTo}, props.tween);
-        props.$html.velocity('stop').velocity('scroll', tween);
-      }
-      return false;
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Scroll = Scroll;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>スクロール時、座標を判定してToggle処理をします</h4>
-   * <p><a href="../../demo/AMP.$.ScrollToggle.html">DEMO</a></p>
-   *
-   * @class AMP.$.ScrollToggle
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   * @param  {jQuery} $scrollToggle 表示・非表示する要素
-   * @param  {Object} options オプション値
-   */
-  function ScrollToggle($scrollToggle, options){
-
-    // $scrollToggle指定がない場合、初期値を設定
-    if(!$scrollToggle || !($scrollToggle instanceof jQuery)){
-      options = $scrollToggle;
-      $scrollToggle = $('.scroll_toggle');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, ScrollToggle.options, options);
-
-    /**
-     * <h4>表示・非表示する要素</h4>
-     *
-     * @default $('.scroll_toggle')
-     * @property props.$scrollToggle
-     * @type {jQuery}
-     */
-    this.props.$scrollToggle = $scrollToggle;
-
-    /**
-     * <h4>window要素</h4>
-     *
-     * @property props.$window
-     * @type {jQuery}
-     */
-    this.props.$window = $(window);
-
-    /**
-     * <h4>Displayスタイルの状態</h4>
-     *
-     * @property props.isDisplay
-     * @type {Boolean}
-     */
-    this.props.isDisplay = $scrollToggle.css('display') !== 'none';
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(ScrollToggle, AMP.BASE_CLASS);
-
-  // prototype
-  var p = ScrollToggle.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  ScrollToggle.VERSION = '3.2.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'ScrollToggle';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>表示されるY値</h4>
-   *
-   * @static
-   * @property showY
-   * @default 300
-   * @type {Number}
-   */
-  /**
-   * <h4>表示・非表示の座標判定を反転します</h4>
-   * <p>false(初期値)は、Y座標300pxを超えると表示しますが、trueにすると300px超えると非表示にします</p>
-   *
-   * @static
-   * @property isReverse
-   * @default false
-   * @type {Number}
-   */
-  /**
-   * <h4>表示のスタイル</h4>
-   *
-   * @static
-   * @property show
-   * @default { opacity: 1}
-   * @type {Object}
-   */
-  /**
-   * <h4>非表示のスタイル</h4>
-   *
-   * @static
-   * @property hide
-   * @default { opacity: 0}
-   * @type {Object}
-   */
-  /**
-   * <h4>duration</h4>
-   *
-   * @static
-   * @property duration
-   * @default 500
-   * @type {Number}
-   */
-  /**
-   * <h4>easing</h4>
-   *
-   * @static
-   * @property easing
-   * @default easeInSine
-   * @type {String}
-   */
-  /**
-   * <h4>表示後のコールバック</h4>
-   *
-   * @static
-   * @property showCall
-   * @default $.noop
-   * @type {String}
-   */
-  /**
-   * <h4>非表示後のコールバック</h4>
-   *
-   * @static
-   * @property hideCall
-   * @default $.noop
-   * @type {String}
-   */
-  ScrollToggle.options = {
-    showY    : 300,
-    isReverse: false,
-    show     : { opacity: 1},
-    hide     : { opacity: 0},
-    duration : 500,
-    easing   : 'easeInSine',
-    showCall : $.noop,
-    hideCall : $.noop
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>ScrollToggleインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $scrollToggle 表示・非表示する要素
-   * @param  {Object} options オプション値 省略可
-   * @return {Pagetop} Pagetopインスタンスを返す
-   */
-  ScrollToggle.get = function($scrollToggle, options){
-    return new ScrollToggle($scrollToggle, options).on();
-  };
-
-
-  /**
-   * <h4>イベントオン</h4>
-   *
-   * @method on
-   * @return {ScrollToggle}
-   */
-  p.on = function(){
-    var self = this;
-
-    self.props.$window.off('scroll.ScrollToggle').on('scroll.ScrollToggle', function(){
-      self._scrollController(self.props.$window.scrollTop());
-    }).trigger('scroll.ScrollToggle');
-
-    return this;
-  };
-
-
-  /**
-   * <h4>スクロールイベントをコントロール</h4>
-   *
-   * @private
-   * @method _scrollController
-   * @param {Number} y スクロールY値
-   * @return {Void}
-   */
-  p._scrollController = function(y){
-    var self = this;
-    if(this.props.isReverse){
-      if(!this.props.isDislpay && this.props.showY > y){
-        this.show();
-        this.props.isDislpay = true;
-      } else if(this.props.isDislpay && this.props.showY < y){
-        this.hide();
-        this.props.isDislpay = false;
-      }
-    } else {
-      if(!this.props.isDislpay && this.props.showY < y){
-        this.show();
-        this.props.isDislpay = true;
-      } else if(this.props.isDislpay && this.props.showY > y){
-        this.hide();
-        this.props.isDislpay = false;
-      }
-    }
-  };
-
-
-  /**
-   * <h4>イベントオフ</h4>
-   *
-   * @method off
-   * @return {ScrollToggle}
-   */
-  p.off = function(){
-    this.props.$window.off('scroll.ScrollToggle');
-    return this;
-  };
-
-
-  /**
-   * <h4>表示</h4>
-   *
-   * @method show
-   * @return {ScrollToggle}
-   */
-  p.show = function(){
-    this.props.$scrollToggle
-    .css({display: 'block'})
-    .css(this.props.hide)
-    .velocity('stop')
-    .velocity(this.props.show, this.props.duration, this.props.easing, this.props.showCall);
-
-    return this;
-  };
-
-
-  /**
-   * <h4>非表示</h4>
-   *
-   * @method hide
-   * @return {ScrollToggle}
-   */
-  p.hide = function(){
-    var self = this;
-    this.props.$scrollToggle
-    .velocity('stop')
-    .velocity(this.props.hide, this.props.duration, this.props.easing, function(){
-      self.props.$scrollToggle.css({display: 'none'});
-      self.props.hideCall();
-    });
-
-    return this;
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.ScrollToggle = ScrollToggle;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-	// 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>ホバースライドアニメーション</h4>
-   * <a href="../../demo/AMP.$.Slip.html">DEMO</a></p>
-   *
-   * @class AMP.$.Slip
-   * @constructor
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   */
-	function Slip($target, options){
-    // $target指定がない場合、初期値を設定
-    if(!$target || !($target instanceof jQuery)){
-      options = $target;
-      $target = $('.slip');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Slip.options, options);
-
-    /**
-     * <h4>float要素</h4>
-     *
-     * @propaty $target
-     * @type {jQuery}
-     */
-    this.props.$target = $target;
-	}
-
-  // 基底クラスを継承
-  AMP.inherits(Slip, AMP.BASE_CLASS);
-
-	// prototype
-	var p = Slip.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Slip.VERSION = '1.0.1';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Slip';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>マウスイン時のアニメーション方向</h4>
-   * <p>以下7タイプ (allはデフォルト4方向)<br>
-   * all, side, updown, up, down, left, right</p>
-   *
-   * @static
-   * @property options.inDirection
-   * @default all
-   * @type {String}
-   */
-  /**
-   * <h4>マウスアウト時のアニメーション方向</h4>
-   * <p>以下7タイプ (allはデフォルト4方向)<br>
-   * all, side, updown, up, down, left, right</p>
-   *
-   * @static
-   * @property options.outDirection
-   * @default all
-   * @type {String}
-   */
-  /**
-   * <h4>スライドする子要素のクラス名</h4>
-   *
-   * @static
-   * @property options.slipClass
-   * @default slip_tween
-   * @type {String}
-   */
-  /**
-   * <h4>アクティブ時に付与するクラス名</h4>
-   *
-   * @static
-   * @property options.activeClass
-   * @default .activeClass
-   * @type {String}
-   */
-  /**
-   * <h4>スライドしない要素に付与するクラス名</h4>
-   *
-   * @static
-   * @property options.noSlipClass
-   * @default .no_slip
-   * @type {String}
-   */
-  /**
-   * <h4>Tween option</h4>
-   * <p><a href="http://julian.com/research/velocity/" target="_blank">velocity.js オプション参照</a></p>
-   *
-   * @static
-   * @property options.tween
-   * @default .no_slip
-   * @type {Object}
-   */
-	Slip.options = {
-    inDirection : 'all', // all, side, updown, up, down, left, right
-    outDirection: 'all', // all, side, updown, up, down, left, right
-    slipClass   : 'slip_tween',
-    activeClass : 'active',
-    noSlipClass : 'no_slip',
-    tween       : {
-      duration  : 400,
-      easing    : 'easeOutExpo'
-    }
-	};
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Slipインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $target 対象の要素
-   * @param  {Object} options オプション値
-   * @return {Slip}
-   */
-  Slip.get = function($target, options){
-    return new Slip($target, options).on();
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @return {Slip}
-   */
-  p.on = function(){
-    var self = this;
-
-    // 二重登録回避
-    this.off();
-
-    self.props.$target
-    .on('slipin.Slip', function(inEvent){
-      self._tween(self.props.$target.index(this), inEvent);
-    })
-    .on('slipout.Slip', function(outEvent){
-      self._tween(self.props.$target.index(this), outEvent);
-    })
-    .each(function(i){
-      if($(this).hasClass(self.props.noSlipClass)){
-        self.passive(i);
-
-      } else if($(this).hasClass(self.props.activeClass)){
-        self.active(i);
-      }
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {Slip}
-   */
-  p.off = function(){
-    this.props.$target.off('slipin.Slip slipin.Slip');
-    return this;
-  };
-
-
-  /**
-   * <h4>アクティブ</h4>
-   *
-   * @method active
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.active = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target
-    .addClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
-    .velocity('stop').css({top: 0, left: 0});
-
-    return this;
-  };
-
-
-  /**
-   * <h4>待機状態のスタイル</h4>
-   *
-   * @method passive
-   * @param  {Number} num 要素のインデックス
-   * @return {Slip}
-   */
-  p.passive = function(num){
-    var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
-
-    $target
-    .removeClass(this.props.activeClass)
-    .find('.' + this.props.slipClass)
-    .velocity('stop').css({top: '-100%'});
-
-    return this;
-  };
-
-
-  /**
-   * <h4>アニメーション</h4>
-   *
-   * @private
-   * @method _tween
-   * @param  {Number} num   要素のインデックス
-   * @param  {Object} event イベントオブジェクト
-   * @return {Void}
-   */
-  p._tween = function(num, event){
-    var style = this._createTweenStyle(event),
-    $target = this.props.$target.eq(num);
-
-    if(!$target.hasClass(this.props.activeClass) && !$target.hasClass(this.props.noSlipClass)){
-      $target.find('.' + this.props.slipClass)
-      .velocity('stop')
-      .velocity(style.start, 0)
-      .velocity(style.end, this.props.tween);
-    }
-  };
-
-
-  /**
-   * <h4>Tweenスタイルの生成</h4>
-   *
-   * @private
-   * @method _createTweenStyle
-   * @param  {Object} event イベントオブジェクト
-   * @return {Object}
-   */
-  p._createTweenStyle = function(event){
-    var isSlipin = event.type === 'slipin',
-    direction = isSlipin ? this.props.inDirection : this.props.outDirection,
-    style01 = {left: 0, top : 0},
-    style02 = $.extend({}, style01),
-    style = isSlipin ? style01 : style02;
-
-    if(direction === 'side'){
-      style.left = event.x < 0 ? '-100%' : '100%';
-
-    } else if(direction === 'updown'){
-      style.top = event.y < 0 ? '-100%' : '100%';
-
-    } else if(direction === 'up'){
-      style.top = '-100%';
-
-    } else if(direction === 'down'){
-      style.top = '100%';
-
-    } else if(direction === 'left'){
-      style.left = '-100%';
-
-    } else if(direction === 'right'){
-      style.left = '100%';
-
-    } else {
-      // direction All
-      if(event.direction === 'top'){
-        style.top = '-100%';
-      } else if(event.direction === 'bottom'){
-        style.top = '100%';
-      } else if(event.direction === 'left'){
-        style.left = '-100%';
-      } else {
-        style.left = '100%';
-      }
-    }
-
-    return {
-      start: style01,
-      end  : style02
-    };
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Slip = Slip;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>スムーススクロール（慣性スクロール）</h4>
-   * <p><em>※ WindowsPCのみ有効</em><br>
-   * <a href="../../demo/AMP.$.SmothScroll.html">DEMO</a></p>
-   *
-   * @class AMP.$.SmoothScroll
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   */
-  function SmoothScroll(options){
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true,
-      {},
-      SmoothScroll.options,
-      {$page: $('html, body')},
-      options
-    );
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(SmoothScroll, AMP.BASE_CLASS);
-
-  // prototype
-  var p = SmoothScroll.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  SmoothScroll.VERSION = '3.1.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'SmoothScroll';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-    /**
-   * <h4>スムーススクロールエリア</h4>
-   *
-   * @property options.$page
-   * @default $('html, body')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>スクロール量</h4>
-   *
-   * @property options.amount
-   * @default 500
-   * @type {Number}
-   */
-  /**
-   * <h4>duration</h4>
-   *
-   * @property options.duration
-   * @default 500
-   * @type {Number}
-   */
-  /**
-   * <h4>easing</h4>
-   *
-   * @property options.easing
-   * @default easeOutCubic
-   * @type {String}
-   */
-  SmoothScroll.options = {
-    $page   : null,
-    amount  : 400,
-    duration: 600,
-    easing  : 'easeOutCubic'
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>SmoothScrollインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {Object} options? オプション値 省略可
-   * @return {SmoothScroll}
-   */
-  SmoothScroll.get = function(options){
-    return new SmoothScroll(options).on();
+  Crossfader.get = function($crossfader, options){
+    return new Crossfader($crossfader, options).init();
   };
 
 
   /**
    * <h4>初期化</h4>
+   * <p>Singleton</p>
    *
-   * @method on
-   * @return {SmoothScroll}
+   * @method  init
+   * @return {Crossfader}
    */
-  p.on = function(){
-    var self = this;
-
-    // WindowsPCのみ有効
-    if(AMP.isWindows()){
-      self.props.$page.off('mousewheel.SmoothScroll')
-      .on('mousewheel.SmoothScroll', function(){
-        self.tween(arguments[1]);
-        return false;
-      });
+  p.init = function(){
+    // 初期化フラグ
+    if(this._isInit){
+      return this;
     }
+    this._isInit = true;
+
+    // view
+    this.createPointer();
+
+    // event
+    this.addEventResize();
+    this.addEventTimerCancel();
+    this.addEventFlick(this.props.$frame);
+    this.addEventNext(this.props.$next);
+    this.addEventPrev(this.props.$prev);
+    this.addEventPager(this.props.$thumbnail);
+    this.addEventPager(this.props.$pointer.find('a'));
+
+    // view
+    this.setIndex();
+    this.active();
+
     return this;
   };
 
 
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {SmoothScroll}
-   */
-  p.off = function(){
-    this.props.$page.off('mousewheel.SmoothScroll');
-    return this;
-  };
-
-
-  /**
-   * <h4>スクロールアニメーション</h4>
-   *
-   * @method tween
-   * @return {Void}
-   */
-  p.tween = function(move){
-    var self = this,
-    props = self.props,
-    y = AMP.isWebkit() ? self.props.$page.eq(1).scrollTop() : self.props.$page.eq(0).scrollTop(),
-    scrollY = move > 0 ? y - props.amount : y + props.amount;
-
-    self.props.$page.velocity('stop')
-    .velocity('scroll', {offset: scrollY, duration: props.duration, easing: props.easing});
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.SmoothScroll = SmoothScroll;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>UIコントローラ</h4>
-   * <p>UIコントローラクラスを継承する事でUIコントローラを提供します</p>
-   *
-   * @protected
-   * @class AMP.$.UIController
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   */
-  function UIController(){}
-
-  // 基底クラスを継承
-  AMP.inherits(UIController, AMP.BASE_CLASS);
-
-  // prototype
-  var p = UIController.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  UIController.VERSION = '1.1.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'UIController';
-
-
-  /**
-   * <h4>プロパティオブジェクト</h4>
-   *
-   * @property props
-   * @type {Object}
-   */
-  /**
-   * <h4>現在値</h4>
-   *
-   * @property props.current
-   * @type {Number}
-   */
-  p.props = {
-    current: 0
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Pagerボタンイベント登録</h4>
-   *
-   * @method addEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
-   */
-  p.addEventPager = function($pager){
-    var self = this;
-    $pager.on('click.' + self.className, function(){
-      self.moveTo($pager.index(this));
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>Pagerボタンイベント削除</h4>
-   *
-   * @method removeEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
-   */
-  p.removeEventPager = function($pager){
-    $pager.off('click.' + this.className);
-    return this;
-  };
-
-
-  /**
-   * <h4>Nextボタンイベント登録</h4>
-   *
-   * @method addEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
-   */
-  p.addEventNext = function($next){
-    var self = this;
-    $next.on('click.' + self.className, function(){
-      self.next();
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>Nextボタンイベント削除</h4>
-   *
-   * @method removeEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
-   */
-  p.removeEventNext = function($next){
-    $next.off('click.' + this.className);
-    return this;
-  };
-
-
-  /**
-   * <h4>Prevボタンイベント登録</h4>
-   *
-   * @method addEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.addEventPrev = function($prev){
-    var self = this;
-    $prev.on('click.' + self.className, function(){
-      self.prev();
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>Prevボタンイベント削除</h4>
-   *
-   * @method removeEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.removeEventPrev = function($prev){
-    $prev.off('click.' + this.className);
-    return this;
-  };
-
-
-  /**
-   * <h4>フリックイベント</h4>
-   *
-   * @method addEventFlick
-   * @return {Slider}
-   */
-  p.addEventFlick = function($trigger){
-    var self = this;
-
-    $trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
-    .on('flickmoveX.' + this.className, function(moveEvent){
-      self._move(moveEvent.moveX);
-    })
-    .on('flickcancelX.' + this.className, function(){
-      self._resetTween();
-    })
-    .on('flickX.' + this.className, function(flickEvent){
-      if(0 < flickEvent.moveX){
-        self.prev();
-      } else {
-        self.next();
-      }
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>指定インデックスへ</h4>
-   * アニメート無
-   *
-   * @method current
-   * @param {jQuery} index index番号
-   * @return {Instance}
-   */
-  p.current = function(index){
-    this._controller(index, true);
-    return this;
-  };
-
-
-  /**
-   * <h4>指定インデックスへ</h4>
-   *
-   * @method moveTo
-   * @param {jQuery} index index番号
-   * @return {Instance}
-   */
-  p.moveTo = function(index){
-    this._controller(index);
-    return this;
-  };
-
-
-  /**
-   * <h4>次へ</h4>
-   *
-   * @method next
-   * @return {Instance}
-   */
-  p.next = function(){
-    this._controller(this.props.current + 1);
-    return this;
-  };
-
-
-  /**
-   * <h4>前へ</h4>
-   *
-   * @method prev
-   * @return {Instance}
-   */
-  p.prev = function(){
-    this._controller(this.props.current -1);
-    return this;
-  };
-
-
-  /**
-   * <h4>コントローラー</h4>
-   * 送られてきた値を制御します
-   *
-   * @protected
-   * @private
-   * @method _controller
-   * @param {Number} index スライドインデック
-   * @param {Boolean} nonAnimate アニメーション無
-   * @return {Instance}
-   */
-  p._controller = function(index, nonAnimate){};
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.UIController = UIController;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*--------------------------------------------------------------------------
-    @constructor
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>メディアクエリのブレイクポイントに応じて、画像を書き換えます</h4>
-   * <p>!!! AMP.Mediaqueryを継承しています<br>
-   * <a href="../../demo/AMP.$.MediaImageChange.html">DEMO</a></p>
-   *
-   * @class AMP.$.MediaImageChange
-   * @extends AMP.Mediaquery
-   * @param {jQuery} $images 画像を書き換える要素
-   * @param {Object} options オプション値
-   * @constructor
-   */
-	function MediaImageChange($images, options){
-		if(!$images || !($images instanceof jQuery)){
-      options = $images;
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-		this.props = $.extend(true, {}, MediaImageChange.options, options);
-
-    if(!$images || !($images instanceof jQuery)){
-      $images = $('img[' + this.props.attrKey + ']');
-    }
-
-    /**
-     * <h4>画像を書き換える要素</h4>
-     *
-     * @property props.$images
-     * @type {jQuery}
-     */
-    this.props.$images = $images;
-
-    /**
-     * <h4>現在の状態</h4>
-     *
-     * @property props.current
-     * @type {String}
-     */
-    this.props.current = null;
-
-		// superClass constructor call
-		MediaImageChange.Mediaquery_constructor.call(this, this.props.element);
-	}
-
-  // AMP.Mediaqueryクラスを継承
-  AMP.inherits(MediaImageChange, AMP.Mediaquery);
-
-  // prototype
-  var p = MediaImageChange.prototype;
-
-
-
-  /*----------------------------------------------------------------------
-    @property
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  MediaImageChange.VERSION = '1.1.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'MediaImageChange';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>監視対象要素</h4>
-   *
-   * @static
-   * @property options.element
-   * @type {DOM}
-   */
-  /**
-   * <h4>画像ファイルパス格納属性名</h4>
-   *
-   * @static
-   * @property options.attrKey
-   * @default 'data-media-img'
-   * @type {String}
-   */
-  /**
-   * <h4>画像ファイルに追加するprefix</h4>
-   *
-   * @static
-   * @property options.imagePrefix
-   * @default '_'
-   * @type {String}
-   */
-  /**
-   * <h4>対象要素監視しているか？</h4>
-   *
-   * @static
-   * @property options.isObserver
-   * @type {String}
-   */
-  MediaImageChange.options = {
-    element    : null,
-    attrKey    : 'data-media-img',
-    imagePrefix: '_',
-    isObserver : true
-  };
-
-
-
-  /*----------------------------------------------------------------------
-    @method
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>MediaImageChangeインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param {jQuery} $images 画像を書き換える要素
-   * @param {Object} options オプション値
-   * @return {MediaImageChange}
-   */
-  MediaImageChange.get = function($images, options){
-    return new MediaImageChange($images, options).start();
-  };
-
-
-  /**
-   * <h4>ブレイクポイントの監視を開始します</h4>
-   *
-   * @method start
-   * @return {MediaImageChange}
-   */
-  p.start = function(){
+	/* Events
+	-----------------------------------------------------------------*/
+	/**
+	 * <h4>リサイズイベント登録</h4>
+	 *
+	 * @method addEventResize
+	 * @return {Crossfader}
+	 */
+	p.addEventResize = function(){
 		var self = this;
 
-		this.on('change.MediaImageChange', function(event){
-			if(self.props.isObserver){
-				self.props.current = event.mediaStyle;
-				self.change();
-			}
-		}).trigger('change.MediaImageChange');
+		$(window).off('resize.Crossfader resizestop.Crossfader')
+		.on('resize.Crossfader', function(){
+      if(self.props.isResize){
+        self.timerStop();
+        self.props.resizeCall();
+      }
+    })
+    .on('resizestop.Crossfader', function(){
+      if(self.props.isResize){
+        self.timerStart();
+        self.props.resizeStopCall();
+      }
+		});
 
-    return this;
-  };
-
-
-  /**
-   * <h4>ブレイクポイントの監視をストップします</h4>
-   *
-   * @method stop
-   * @return {MediaImageChange}
-   */
-  p.stop = function(){
-    this.off('change.MediaImageChange');
 		return this;
   };
 
 
   /**
-   * <h4>監視の状態を切り替えます</h4>
+   * <h4>タイマーキャンセルイベント登録</h4>
+   * <p>クロスフェーダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
    *
-   * @method setObserver
-   * @param {Boolean} isState メディアクエリの変更を監視するか
-   * @return {MediaImageChange}
+	 * @method addEventTimerCancel
+	 * @return {Crossfader}
    */
-  p.setObserver = function(isState){
-    this.props.isObserver = AMP.isBoolean(isState) ? isState : this.props.isObserver;
-    return this;
+  p.addEventTimerCancel = function(){
+		var self = this;
+
+		self.props.$wrap.off('mouseenter.Crossfader mouseleave.Crossfader')
+		.on('mouseenter.Crossfader', function(){
+			if(self.props.isTimerCancel){
+				self.timerStop();
+			}
+		})
+		.on('mouseleave.Crossfader', function(){
+			if(self.props.isTimerCancel){
+				self.timerStart();
+			}
+		});
+
+		return this;
+  };
+
+
+
+  /* Controllers
+  -----------------------------------------------------------------*/
+	/**
+	 * <h4>タイマースタート</h4>
+   * <p>タイマー値が0の場合タイマーは実行しません</p>
+	 *
+	 * @method timerStart
+	 * @param  {Number} num セットするタイマー値(省略可)
+	 * @return {Crossfader}
+	 */
+	p.timerStart = function(num){
+		var self = this;
+
+		if(AMP.isNumber(num)){
+			self.props.timer = num;
+		}
+
+		// タイマーをクリア
+		self.timerStop();
+
+		if(0 < self.props.timer){
+			self.props._timerId = setTimeout(function(){
+				self.next();
+			}, self.props.timer + self.props.tween.duration);
+		}
+
+		return this;
+	};
+
+
+	/**
+	 * <h4>タイマー停止</h4>
+   *
+	 * @method timerStop
+	 * @return {Crossfader}
+	 */
+	p.timerStop = function(){
+		clearTimeout(this.props._timerId);
+		return this;
+	};
+
+
+	/**
+	 * <h4>コントローラー</h4>
+   * <p>クロスフェードイベントが実行されたとき、必ずここの処理を通します</p>
+   *
+   * @override
+   * @private
+	 * @method _controller
+   * @param  {Number} index 表示するアイテムインデックス
+	 * @param  {Boolean} nonAnimate アニメーション無
+	 * @return {Void}
+	 */
+  p._controller = function(index, nonAnimate){
+		var self = this;
+
+    // アニメーションキャンセル
+		if(self.props._isAnimate || self.props.current === index){
+			return void 0;
+		}
+
+    // indexの調整
+    if(index < 0){
+      index = self.props.length - 1;
+    } else if(index >= self.props.length){
+      index = 0;
+    }
+
+    // パラメータ更新
+    prev = self.props.current;
+    self.props.current = index;
+
+    // アニメート判定
+    if(nonAnimate){
+      self.setIndex();
+      self.active();
+    } else {
+      $.sequence(
+        function(){
+          // フェード前
+          self.props._isAnimate = true;
+          self.timerStop();
+          self.active();
+        },
+        function(){
+          // フェード
+          return self._tween(prev, self.props.current);
+        },
+        function(){
+          // フェード後
+          self.timerStart();
+          self.props._isAnimate = false;
+        }
+      );
+    }
+  };
+
+
+	/* Views
+	-----------------------------------------------------------------*/
+	/**
+	 * <h4>ポインターの生成</h4>
+	 *
+	 * @method createPointer
+	 * @return {Crossfader}
+	 */
+  p.createPointer = function(){
+		if(this.props.$pointer[0]){
+			var pointerHTML = this.props.$pointer.find('>')[0].outerHTML,
+			print = '',
+			i = 0;
+
+      for(; i < this.props.length; i += 1){
+        print += pointerHTML;
+			}
+			this.props.$pointer[0].innerHTML = print;
+		}
+
+		return this;
   };
 
 
   /**
-   * <h4>画像を変更します</h4>
+   * <h4>要素のアクティブ化</h4>
    *
-   * @method switch
-   * @return {MediaImageChange}
+   * @method active
+   * @return {Crossfader}
    */
-  p.change = function(){
-		var self = this,
-		$images = this.props.$images,
-		data,
-		ext;
+  p.active = function(){
+    // $item
+    this.props.$item.removeClass(this.props.activeClass)
+    .eq(this.props.current).addClass(this.props.activeClass);
 
-		$images.each(function(i){
-			data = $images.eq(i).attr(self.props.attrKey);
-			ext = data.substring(data.lastIndexOf('.'), data.length);
-			$images[i].src = data.replace(ext, self.props.imagePrefix + self.props.current + ext);
-    });
+    // $thumbnail
+    if(this.props.$thumbnail[0]){
+      this.props.$thumbnail.removeClass(this.props.activeClass)
+      .eq(this.props.current).addClass(this.props.activeClass);
+    }
+
+		// $pointer
+		if(this.props.$pointer[0]){
+			this.props.$pointer.children().removeClass(this.props.activeClass)
+			.eq(this.props.current).addClass(this.props.activeClass);
+		}
+
+		// $next
+		if(this.props.current === this.props.length - 1){
+      this.props.$next.addClass(this.props.activeClass);
+		} else {
+			this.props.$next.removeClass(this.props.activeClass);
+		}
+
+		// $prev
+		if(this.props.current === 0){
+			this.props.$prev.addClass(this.props.activeClass);
+		} else {
+			this.props.$prev.removeClass(this.props.activeClass);
+		}
+
+		return this;
+  };
+
+
+  /**
+   * <h4>クロスフェードアイテムの高さに揃える</h4>
+   *
+   * @method autoHeight
+   * @return {Crossfader}
+   */
+  p.autoHeight = function(){
+    var height = this.props.$item.eq(this.props.current).height();
+    this.props.$frame.height(height);
+    return this;
+  };
+
+
+ /**
+  * <h4>クロスフェードアイテムのスタイル設定</h4>
+  *
+  * @method setIndex
+  * @return {Crossfader}
+  */
+  p.setIndex = function(){
+    this.props.$item.velocity('stop')
+    .css({display: 'none', zIndex: 1, opaciy: 0})
+    .eq(this.props.current)
+    .css({display: 'block', zIndex: this.props.length, opaciy: 1});
+
+    if(this.props.isAutoHeight){
+      this.autoHeight();
+    }
 
     return this;
   };
 
 
+	/**
+	 * <h4>クロスフェードアニメーションを実行</h4>
+	 *
+	 * @private
+	 * @method _tween
+   * @param {Number} prev 前の要素
+   * @param {Number} next 次の要素
+	 * @return {jQuery.Deferred}
+	 */
+	p._tween = function(prev, next){
+    // prev hide
+    this.props.$item.velocity('stop')
+    .eq(prev).velocity({opacity: 0, zIndex: 1}, {
+      easing  : this.props.tween.easing,
+      duration: this.props.tween.duration,
+      display : 'none'
+    });
 
-  /*----------------------------------------------------------------------
+    this.props.$item.eq(next).css({display: 'block',zIndex: this.props.length, opacity: 0});
+
+    if(this.props.isAutoHeight){
+      this.autoHeight();
+    }
+
+    // next show
+		return this.props.$item.eq(next).velocity({opacity: 1}, this.props.tween);
+	};
+
+
+
+  /*--------------------------------------------------------------------------
     export
-  ----------------------------------------------------------------------*/
+  --------------------------------------------------------------------------*/
 
-  AMP.$.MediaImageChange = MediaImageChange;
+  AMP.$.Crossfader = Crossfader;
 
 
 }(window, AMP, jQuery));
@@ -3737,609 +4340,6 @@
   --------------------------------------------------------------------------*/
 
   AMP.$.Slider = Slider;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
-   * <h4>クロスフェーダー</h4>
-   * <p><a href="../../demo/AMP.$.Crossfader.html">DEMO</a></p>
-   *
-   * @constructor
-   * @class AMP.$.Crossfader
-   * @extends AMP.$.UIController
-   * @param {jQuery} $crossfader クロスフェーダー要素
-   * @param {Object} options オプション値
-   */
-  function Crossfader($crossfader, options){
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    /**
-     * <h4>クロスフェーダー要素</h4>
-     *
-     * @property props.$wrap
-     * @type {jQuery}
-     */
-    /**
-     * <h4>アイテム要素数</h4>
-     *
-     * @property props.length
-     * @type {Number}
-     */
-    /**
-     * <h4>タイマーID</h4>
-     *
-     * @private
-     * @property props._timerId
-     * @type {String}
-     */
-    /**
-     * <h4>アニメーション状態管理フラグ</h4>
-     *
-     * @private
-     * @property props._isAnimate
-     * @type {Boolean}
-     */
-		this.props = $.extend(
-			true,
-			{},
-			Crossfader.options,
-			{
-        $wrap         : $crossfader,
-        $frame        : $crossfader.find('.frame'),
-        $item         : $crossfader.find('.frame').children(),
-        $pointer      : $crossfader.find('.pointer'),
-        $thumbnail    : $crossfader.find('.thumbnail a'),
-        $prev         : $crossfader.find('.prev a'),
-        $next         : $crossfader.find('.next a'),
-        length        : $crossfader.find('.frame').children().length,
-        _timerId      : null,
-        _isAnimate    : false
-			},
-			options
-		);
-  }
-
-  // AMP.$.UIControllerクラスを継承
-  AMP.inherits(Crossfader, AMP.$.UIController);
-
-  // prototype
-  var p = Crossfader.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Crossfader.VERSION = '1.0.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Crossfader';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>クロスフェーダーフレーム要素</h4>
-   *
-   * @static
-   * @property options.$frame
-   * @default $crossfader.find('.frame')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>クロスフェードするアイテム要素</h4>
-   *
-   * @static
-   * @property options.$item
-   * @default $crossfader.find('.frame').children()
-   * @type {jQuery}
-   */
-  /**
-   * <h4>ポインター要素</h4>
-   *
-   * @static
-   * @property options.$pointer
-   * @default $crossfader.find('.pointer')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>サムネイル要素</h4>
-   *
-   * @static
-   * @property options.$thumbnail
-   * @default $crossfader.find('.thumbnail a')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>prevナビ要素</h4>
-   *
-   * @static
-   * @property options.$prev
-   * @default $crossfader.find('.prev a')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>nextナビ要素</h4>
-   *
-   * @static
-   * @property options.$next
-   * @default $crossfader.find('.next a')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>フリックイベントを有効にするか</h4>
-   *
-   * @static
-   * @property options.isFlick
-   * @default true
-   * @type {Boolean}
-   */
-  /**
-   * <h4>クロスフェーダー要素にマウスオンされたときタイマーを無効にするか</h4>
-   *
-   * @static
-   * @property options.isTimerCancel
-   * @default true
-   * @type {Boolean}
-   */
-  /**
-   * <h4>クロスフェードエリアの高さ調整機能を有効にするか</h4>
-   *
-   * @static
-   * @property options.isAutoHeight
-   * @default false
-   * @type {Boolean}
-   */
-  /**
-   * <h4>現在アクティブなアイテムインデックス</h4>
-   *
-   * @static
-   * @property options.current
-   * @default 0
-   * @type {Number}
-   */
-  /**
-   * <h4>クロスフェードタイマーの間隔</h4>
-   * <p>タイマー値が0の場合タイマーは実行しません</p>
-   *
-   * @static
-   * @property options.timer
-   * @default 0
-   * @type {Number}
-   */
-  /**
-   * <h4>アクティブ要素に付与するクラス名</h4>
-   *
-   * @static
-   * @property options.activeClass
-   * @default active
-   * @type {String}
-   */
-  /**
-   * <h4>リサイズ時に実行する関数</h4>
-   *
-   * @static
-   * @property options.resizeCall
-   * @default $.noop
-   * @type {Function}
-   */
-  /**
-   * <h4>リサイズに完了時に実行する関数</h4>
-   *
-   * @static
-   * @property options.resizeStopCall
-   * @default $.noop
-   * @type {Function}
-   */
-  /**
-   * <h4>クロスフェードアニメーションのオプション値</h4>
-   * <p>参照： <a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
-   *
-   * @static
-   * @property options.tween
-   * @type {Object}
-   */
-  Crossfader.options = {
-    $frame        : null,
-    $item         : null,
-    $pointer      : null,
-    $thumbnail    : null,
-    $prev         : null,
-    $next         : null,
-    isFlick       : true,
-    isResize      : true,
-    isTimerCancel : true,
-    isAutoHeight  : true,
-    current       : 0,
-    timer         : 0,
-    activeClass   : 'active',
-    resizeCall    : $.noop,
-    resizeStopCall: $.noop,
-    tween         : {
-      easing      : 'easeInSine',
-      duration    : 500,
-      begin       : $.noop,
-      progress    : $.noop,
-      complete    : $.noop
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Crossfaderインスタンスの生成</h4>
-   *
-   * @static
-   * @param {jQuery} $wrap   クロスフェード要素
-   * @param {Object} options オプション値
-   * @return {Crossfader}
-   */
-  Crossfader.get = function($crossfader, options){
-    return new Crossfader($crossfader, options).init();
-  };
-
-
-  /**
-   * <h4>初期化</h4>
-   * <p>Singleton</p>
-   *
-   * @method  init
-   * @return {Crossfader}
-   */
-  p.init = function(){
-    // 初期化フラグ
-    if(this._isInit){
-      return this;
-    }
-    this._isInit = true;
-
-    // view
-    this.createPointer();
-
-    // event
-    this.addEventResize();
-    this.addEventTimerCancel();
-    this.addEventFlick(this.props.$frame);
-    this.addEventNext(this.props.$next);
-    this.addEventPrev(this.props.$prev);
-    this.addEventPager(this.props.$thumbnail);
-    this.addEventPager(this.props.$pointer.find('a'));
-
-    // view
-    this.setIndex();
-    this.active();
-
-    return this;
-  };
-
-
-	/* Events
-	-----------------------------------------------------------------*/
-	/**
-	 * <h4>リサイズイベント登録</h4>
-	 *
-	 * @method addEventResize
-	 * @return {Crossfader}
-	 */
-	p.addEventResize = function(){
-		var self = this;
-
-		$(window).off('resize.Crossfader resizestop.Crossfader')
-		.on('resize.Crossfader', function(){
-      if(self.props.isResize){
-        self.timerStop();
-        self.props.resizeCall();
-      }
-    })
-    .on('resizestop.Crossfader', function(){
-      if(self.props.isResize){
-        self.timerStart();
-        self.props.resizeStopCall();
-      }
-		});
-
-		return this;
-  };
-
-
-  /**
-   * <h4>タイマーキャンセルイベント登録</h4>
-   * <p>クロスフェーダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>
-   *
-	 * @method addEventTimerCancel
-	 * @return {Crossfader}
-   */
-  p.addEventTimerCancel = function(){
-		var self = this;
-
-		self.props.$wrap.off('mouseenter.Crossfader mouseleave.Crossfader')
-		.on('mouseenter.Crossfader', function(){
-			if(self.props.isTimerCancel){
-				self.timerStop();
-			}
-		})
-		.on('mouseleave.Crossfader', function(){
-			if(self.props.isTimerCancel){
-				self.timerStart();
-			}
-		});
-
-		return this;
-  };
-
-
-
-  /* Controllers
-  -----------------------------------------------------------------*/
-	/**
-	 * <h4>タイマースタート</h4>
-   * <p>タイマー値が0の場合タイマーは実行しません</p>
-	 *
-	 * @method timerStart
-	 * @param  {Number} num セットするタイマー値(省略可)
-	 * @return {Crossfader}
-	 */
-	p.timerStart = function(num){
-		var self = this;
-
-		if(AMP.isNumber(num)){
-			self.props.timer = num;
-		}
-
-		// タイマーをクリア
-		self.timerStop();
-
-		if(0 < self.props.timer){
-			self.props._timerId = setTimeout(function(){
-				self.next();
-			}, self.props.timer + self.props.tween.duration);
-		}
-
-		return this;
-	};
-
-
-	/**
-	 * <h4>タイマー停止</h4>
-   *
-	 * @method timerStop
-	 * @return {Crossfader}
-	 */
-	p.timerStop = function(){
-		clearTimeout(this.props._timerId);
-		return this;
-	};
-
-
-	/**
-	 * <h4>コントローラー</h4>
-   * <p>クロスフェードイベントが実行されたとき、必ずここの処理を通します</p>
-   *
-   * @override
-   * @private
-	 * @method _controller
-   * @param  {Number} index 表示するアイテムインデックス
-	 * @param  {Boolean} nonAnimate アニメーション無
-	 * @return {Void}
-	 */
-  p._controller = function(index, nonAnimate){
-		var self = this;
-
-    // アニメーションキャンセル
-		if(self.props._isAnimate || self.props.current === index){
-			return void 0;
-		}
-
-    // indexの調整
-    if(index < 0){
-      index = self.props.length - 1;
-    } else if(index >= self.props.length){
-      index = 0;
-    }
-
-    // パラメータ更新
-    prev = self.props.current;
-    self.props.current = index;
-
-    // アニメート判定
-    if(nonAnimate){
-      self.setIndex();
-      self.active();
-    } else {
-      $.sequence(
-        function(){
-          // フェード前
-          self.props._isAnimate = true;
-          self.timerStop();
-          self.active();
-        },
-        function(){
-          // フェード
-          return self._tween(prev, self.props.current);
-        },
-        function(){
-          // フェード後
-          self.timerStart();
-          self.props._isAnimate = false;
-        }
-      );
-    }
-  };
-
-
-	/* Views
-	-----------------------------------------------------------------*/
-	/**
-	 * <h4>ポインターの生成</h4>
-	 *
-	 * @method createPointer
-	 * @return {Crossfader}
-	 */
-  p.createPointer = function(){
-		if(this.props.$pointer[0]){
-			var pointerHTML = this.props.$pointer.find('>')[0].outerHTML,
-			print = '',
-			i = 0;
-
-      for(; i < this.props.length; i += 1){
-        print += pointerHTML;
-			}
-			this.props.$pointer[0].innerHTML = print;
-		}
-
-		return this;
-  };
-
-
-  /**
-   * <h4>要素のアクティブ化</h4>
-   *
-   * @method active
-   * @return {Crossfader}
-   */
-  p.active = function(){
-    // $item
-    this.props.$item.removeClass(this.props.activeClass)
-    .eq(this.props.current).addClass(this.props.activeClass);
-
-    // $thumbnail
-    if(this.props.$thumbnail[0]){
-      this.props.$thumbnail.removeClass(this.props.activeClass)
-      .eq(this.props.current).addClass(this.props.activeClass);
-    }
-
-		// $pointer
-		if(this.props.$pointer[0]){
-			this.props.$pointer.children().removeClass(this.props.activeClass)
-			.eq(this.props.current).addClass(this.props.activeClass);
-		}
-
-		// $next
-		if(this.props.current === this.props.length - 1){
-      this.props.$next.addClass(this.props.activeClass);
-		} else {
-			this.props.$next.removeClass(this.props.activeClass);
-		}
-
-		// $prev
-		if(this.props.current === 0){
-			this.props.$prev.addClass(this.props.activeClass);
-		} else {
-			this.props.$prev.removeClass(this.props.activeClass);
-		}
-
-		return this;
-  };
-
-
-  /**
-   * <h4>クロスフェードアイテムの高さに揃える</h4>
-   *
-   * @method autoHeight
-   * @return {Crossfader}
-   */
-  p.autoHeight = function(){
-    var height = this.props.$item.eq(this.props.current).height();
-    this.props.$frame.height(height);
-    return this;
-  };
-
-
- /**
-  * <h4>クロスフェードアイテムのスタイル設定</h4>
-  *
-  * @method setIndex
-  * @return {Crossfader}
-  */
-  p.setIndex = function(){
-    this.props.$item.velocity('stop')
-    .css({display: 'none', zIndex: 1, opaciy: 0})
-    .eq(this.props.current)
-    .css({display: 'block', zIndex: this.props.length, opaciy: 1});
-
-    if(this.props.isAutoHeight){
-      this.autoHeight();
-    }
-
-    return this;
-  };
-
-
-	/**
-	 * <h4>クロスフェードアニメーションを実行</h4>
-	 *
-	 * @private
-	 * @method _tween
-   * @param {Number} prev 前の要素
-   * @param {Number} next 次の要素
-	 * @return {jQuery.Deferred}
-	 */
-	p._tween = function(prev, next){
-    // prev hide
-    this.props.$item.velocity('stop')
-    .eq(prev).velocity({opacity: 0, zIndex: 1}, {
-      easing  : this.props.tween.easing,
-      duration: this.props.tween.duration,
-      display : 'none'
-    });
-
-    this.props.$item.eq(next).css({display: 'block',zIndex: this.props.length, opacity: 0});
-
-    if(this.props.isAutoHeight){
-      this.autoHeight();
-    }
-
-    // next show
-		return this.props.$item.eq(next).velocity({opacity: 1}, this.props.tween);
-	};
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Crossfader = Crossfader;
 
 
 }(window, AMP, jQuery));
