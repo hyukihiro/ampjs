@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -174,11 +174,12 @@
   /**
    * &lt;h4&gt;バージョン情報&lt;/h4&gt;
    *
+   *
    * @static
    * @property VERSION
    * @type {String}
    */
-  Slip.VERSION = &#x27;1.0.0&#x27;;
+  Slip.VERSION = &#x27;1.0.1&#x27;;
 
 
   /**
@@ -301,6 +302,14 @@
     })
     .on(&#x27;slipout.Slip&#x27;, function(outEvent){
       self._tween(self.props.$target.index(this), outEvent);
+    })
+    .each(function(i){
+      if($(this).hasClass(self.props.noSlipClass)){
+        self.passive(i);
+
+      } else if($(this).hasClass(self.props.activeClass)){
+        self.active(i);
+      }
     });
 
     return this;
@@ -329,7 +338,8 @@
   p.active = function(num){
     var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
 
-    $target.addClass(this.props.activeClass)
+    $target
+    .addClass(this.props.activeClass)
     .find(&#x27;.&#x27; + this.props.slipClass)
     .velocity(&#x27;stop&#x27;).css({top: 0, left: 0});
 
@@ -347,7 +357,8 @@
   p.passive = function(num){
     var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
 
-    $target.removeClass(this.props.activeClass)
+    $target
+    .removeClass(this.props.activeClass)
     .find(&#x27;.&#x27; + this.props.slipClass)
     .velocity(&#x27;stop&#x27;).css({top: &#x27;-100%&#x27;});
 
@@ -378,7 +389,7 @@
 
 
   /**
-   * &lt;h4&gt;アニメーションスタイルの生成&lt;/h4&gt;
+   * &lt;h4&gt;Tweenスタイルの生成&lt;/h4&gt;
    *
    * @private
    * @method _createTweenStyle
@@ -386,14 +397,11 @@
    * @return {Object}
    */
   p._createTweenStyle = function(event){
-    var isIn = event.type === &#x27;slipin&#x27;,
-    direction = isIn ? this.props.inDirection : this.props.outDirection,
-    style01 = {
-      left: 0,
-      top : 0
-    },
+    var isSlipin = event.type === &#x27;slipin&#x27;,
+    direction = isSlipin ? this.props.inDirection : this.props.outDirection,
+    style01 = {left: 0, top : 0},
     style02 = $.extend({}, style01),
-    style = isIn ? style01 : style02;
+    style = isSlipin ? style01 : style02;
 
     if(direction === &#x27;side&#x27;){
       style.left = event.x &lt; 0 ? &#x27;-100%&#x27; : &#x27;100%&#x27;;
@@ -414,7 +422,7 @@
       style.left = &#x27;100%&#x27;;
 
     } else {
-      // direction all
+      // direction All
       if(event.direction === &#x27;top&#x27;){
         style.top = &#x27;-100%&#x27;;
       } else if(event.direction === &#x27;bottom&#x27;){

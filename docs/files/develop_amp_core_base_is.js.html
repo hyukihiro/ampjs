@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -122,11 +122,12 @@
 
 
   /*======================================================================
-    オブジェクト,ブラウザの判定
+    型, OS, デバイス, ブラウザの判定
   ======================================================================*/
 
   /**
-   * &lt;h4&gt;オブジェクト、ブラウザの判定&lt;/h4&gt;
+   * &lt;h4&gt;型, OS, デバイス, ブラウザの判定&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.Base.html#is&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.Is
    */
@@ -334,7 +335,13 @@
    * @static
    * @method isOS
    * @param  {String} key OS名&lt;br&gt;
-   * windows, windowsPhone, mac, ios, android
+   * OS名 | 引数文字列 &lt;br&gt;
+   * Windows | windows &lt;br&gt;
+   * Windows Phone | windowsPhone &lt;br&gt;
+   * Mac (for Desktop) | mac &lt;br&gt;
+   * Mac ios (for SmartDevice) | ios &lt;br&gt;
+   * Android | android
+   *
    * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
@@ -442,7 +449,17 @@
    * @static
    * @method isDevice
    * @param {String} key デバイス名&lt;br&gt;
-   * pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
+   * デバイス名 | 引数文字列 &lt;br&gt;
+   * PC (for Desktop) | pc &lt;br&gt;
+   * Smart Device | sd, smartdevice &lt;br&gt;
+   * Smart Phone | sp, smartphone &lt;br&gt;
+   * Tablet | tb, tablet &lt;br&gt;
+   * iPhone | iphone &lt;br&gt;
+   * iPad | ipad &lt;br&gt;
+   * iPod | ipod &lt;br&gt;
+   * Android Phone | androidPhone &lt;br&gt;
+   * Android Tablet | androidTablet
+   *
    * @return {Boolean}
    */
   AMP.isDevice = function(key){
@@ -596,7 +613,17 @@
    * @static
    * @method isBrowser
    * @param  {String} key ブラウザ名&lt;br&gt;
-   * ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
+   * ブラウザ名 | 引数文字列 &lt;br&gt;
+   * Microsoft Edge | edge &lt;br&gt;
+   * Internet Explorer | ie &lt;br&gt;
+   * Google Chrome | chrome &lt;br&gt;
+   * Firefox | firefox &lt;br&gt;
+   * Mac Safari (for Desktop) | safari &lt;br&gt;
+   * Opera (for Desktop) | opera &lt;br&gt;
+   * ios Safari | mobileSafari &lt;br&gt;
+   * Android | android &lt;br&gt;
+   * Webkit Browser | webkit
+   *
    * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
    * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}

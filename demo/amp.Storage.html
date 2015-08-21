@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -83,20 +82,20 @@ var storage = AMP.Storage.get();
 $('.add').click(function(){
 	storage.setItem({addTime: new Date().getTime()});
 	alert('追加しました');
-	return flase;
+	return false;
 });
 
 // アイテムの取得
 $('.get').click(function(){
 	alert('取得: ' + storage.getItem('addTime'));
-	return flase;
+	return false;
 });
 
 // アイテムの削除
 $('.remove').click(function(){
 	storage.removeItem('addTime');
 	alert('削除しました');
-	return flase;
+	return false;
 });
 </textarea>
 </div>

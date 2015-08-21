@@ -15,6 +15,7 @@
 
   /**
    * <h4>文字列</h4>
+   * <p><a href="../../demo/AMP.Base.html#string">DEMO</a></p>
    *
    * @class AMP.String
    */

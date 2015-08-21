@@ -111,9 +111,9 @@
    * @return {Render}
    */
   Render.get = function($tmp, ajaxOptions){
-    var inst = new Render($tmp, ajaxOptions);
-    inst.start();
-    return inst;
+    var instance = new Render($tmp, ajaxOptions);
+    instance.start();
+    return instance;
   };
 
 

@@ -16,13 +16,12 @@
 <link rel="stylesheet" href="./assets/jquery.ex-code-prettify/jquery.ex-code-prettify.css" media="all">
 
 <!-- inject:js -->
-<script src="../dist/libs/createjs-2014.12.12.min.js"></script>
 <script src="../dist/libs/jquery-1.8.3.min.js"></script>
 <script src="../dist/libs/jquery.plugins.js"></script>
 <script src="../dist/libs/utils.js"></script>
+<script src="../dist/amp/amp-3.0.7.min.js"></script>
 <script src="../dist/amp/amp.jquery.plugins-3.0.3.min.js"></script>
-<script src="../dist/amp/amp-3.0.6.min.js"></script>
-<script src="../dist/amp/amp.jquery-3.1.0.min.js"></script>
+<script src="../dist/amp/amp.jquery-3.1.1.min.js"></script>
 <script src="../dist/amp/utils/amp.Loader.min.js"></script>
 <script src="../dist/amp/utils/amp.jquery.Render.min.js"></script>
 <!-- endinject -->
@@ -33,7 +32,7 @@
 <script type="text/javascript">
 jQuery(function($){
 	$('textarea.code').exCodePrettify({
-		showRunButton : true,
+		showRunButton : false,
 		showDemo : true,
 		editCode : true,
 		behaveJS : true
@@ -51,62 +50,252 @@ jQuery(function($){
 
 
 <div id="content" class="cf">
-<section>
+<section id="is">
 <h2>AMP.Is <a href="../docs/classes/AMP.Is.html">API Reference</a></h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>型, OS, デバイス, ブラウザの判定しBoolean値を返します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
 </div>
 
-<div class="ex-code-prettify demo-right">
-<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}">
-<p class="run_txt">Runで実行してください。</p>
-<ul>
-<li>OSは、<span class="os"></span></li>
-<li>デバイスは、<span class="device"></span></li>
-<li>ブラウザは、<span class="browser"></span></li>
-</ul>
-</textarea>
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
 <!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
-<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:false}">
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('-------------------- AMP.Is --------------------');
+
+// 型判定
+var obj = {a: 0};
+console.log('isObject : {a: 0} : ' + AMP.isObject(obj));
+console.log('isPlainObject : {a: 0} : ' + AMP.isPlainObject(obj));
+console.log('isArray : {a: 0} : ' + AMP.isArray(obj));
+
+// 下記のOS, デバイス, ブラウザ判定は、ショートハンドとして用意しています。
 // OS判定
 // 引数リスト： windows, windowsPhone, mac, ios, android
-if(AMP.isOS('windows')){
-	$('.os').text('windows です。');
-} else {
-	$('.os').text('windows ではありません。');
-}
+console.log('isOS : windows : ' + AMP.isOS('windows'));
 
-// OS判定
+// Device判定
 // 引数リスト： pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
-if(AMP.isDevice('smartdevice')){
-	$('.device').text('スマートデバイスです。');
-} else {
-	$('.device').text('スマートデバイスではありません。');
-}
+console.log('isDevice : smartdevice : ' + AMP.isDevice('smartdevice'));
 
 // Browser判定
 // 引数リスト： ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
-if(AMP.isBrowser('ie')){
-	$('.browser').text('IE です。');
-} else {
-	$('.browser').text('IE ではありません。');
-}
+console.log('isBrowser : ie : ' + AMP.isBrowser('ie'));
 </textarea>
 </div>
 </section>
 
 
-<p>後日追加</p>
-<!--
-<section>
-<h2>AMP.Is</h2>
+<section id="has">
+<h2>AMP.Has <a href="../docs/classes/AMP.Has.html">API Reference</a></h2>
 <div class="lead">
-<p>OS,Device,Browser,型など判定処理をします。<br>
-詳しくはAPIを参照してください。</p>
+<p>ブラウザ機能の判定しBoolean値を返します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.Has --------------------');
+
+console.log('Geolocation機能 : ' + AMP.hasGeolocation());
+console.log('PushState機能 : ' + AMP.hasPushState());
+console.log('requestAnimationFrame機能の有無 : ' + AMP.hasRAF());
+console.log('Location Hashの有無 : ' + AMP.hasHash());
+</textarea>
 </div>
 </section>
- -->
+
+
+<section id="has">
+<h2>AMP.Has <a href="../docs/classes/AMP.Has.html">API Reference</a></h2>
+<div class="lead">
+<p>ブラウザ機能の判定しBoolean値を返します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- HAS START --------------------');
+
+console.log('Geolocation機能 : ' + AMP.hasGeolocation());
+console.log('PushState機能 : ' + AMP.hasPushState());
+console.log('requestAnimationFrame機能の有無 : ' + AMP.hasRAF());
+console.log('Location Hashの有無 : ' + AMP.hasHash());
+</textarea>
+</div>
+</section>
+
+
+<section id="location">
+<h2>AMP.Location <a href="../docs/classes/AMP.Location.html">API Reference</a></h2>
+<div class="lead">
+<p>Locationオブジェクトを扱います。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.Location --------------------');
+
+// hashを取得し、配列にして返す
+console.log('getHash', AMP.getHash());
+
+// リクエストパラメータ値を連想配列として取得
+console.log('queryHashMap', AMP.queryHashMap());
+</textarea>
+</div>
+</section>
+
+
+<section id="array">
+<h2>AMP.Array <a href="../docs/classes/AMP.Array.html">API Reference</a></h2>
+<div class="lead">
+<p>配列を扱います。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.Array --------------------');
+
+// argumentsを配列に変換(引数指定でスライス可能)
+(function(){
+	console.log('argsToArray : ' + AMP.argsToArray(arguments, 1));
+}('arg01', 'arg02', 'arg03'));
+
+// 配列をシャッフルして新しい配列を返す
+console.log('shuffle : ' + AMP.shuffle([0,1,2,3,4,5]));
+</textarea>
+</div>
+</section>
+
+
+<section id="string">
+<h2>AMP.String <a href="../docs/classes/AMP.String.html">API Reference</a></h2>
+<div class="lead">
+<p>文字列を扱います。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.String --------------------');
+
+// 空白文字の削除
+console.log('AMP.removeSpace(\'Test01　Test02 Test03\') : ' + AMP.removeSpace('Test01　Test02 Test03'));
+
+// 文字列全置換
+console.log("AMP.repraceAll('Test01 Test02 Test03', '0', '_') : " + AMP.repraceAll('Test01 Test02 Test03', '0', '_'));
+</textarea>
+</div>
+</section>
+
+
+<section id="extend">
+<h2>AMP.Extend <a href="../docs/classes/AMP.Extend.html">API Reference</a></h2>
+<div class="lead">
+<p>オブジェクト拡張、クラス継承などの機能を提供します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.Extend --------------------');
+
+// ### クラスの継承 ###
+// 親クラス
+function Parent(){}
+Parent.prototype.firstName = 'Fujiwara';
+
+// 子クラスを定義
+function Child(){};
+
+// 継承（可変長引数で多重継承可能）
+AMP.inherits(Child, Parent);
+
+// 子クラスのプロパティ・メソッド定義
+Child.prototype.secondName = 'Yoshihito';
+Child.prototype.callName = function(){
+	console.log(this.firstName + this.secondName);
+};
+
+console.log('child class instance', new Child());
+
+
+// ### クラスの拡張 ###
+function Fujiwara(){}
+
+// 拡張メソッドをエクスポート
+Fujiwara.extend = AMP._extend;
+
+Fujiwara.prototype.firstName = 'Fujiwara';
+Fujiwara.prototype.secondName = 'Yoshihito';
+Fujiwara.prototype.callName = function(){
+	console.log(this.firstName + this.secondName);
+};
+
+// クラスを拡張
+var Fujiwara2 = Fujiwara.extend();
+Fujiwara2.prototype.walk = function(){};
+
+// or
+
+var Fujiwara2 = Fujiwara.extend({
+	walk: function(){}
+});
+</textarea>
+</div>
+</section>
+
+
+<section id="utility">
+<h2>AMP.Utility <a href="../docs/classes/AMP.Utility.html">API Reference</a></h2>
+<div class="lead">
+<p>Utility機能を提供します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+
+<div class="ex-code-prettify">
+<!-- <textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea> -->
+<!-- <textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea> -->
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}">
+console.log('\n-------------------- AMP.Utility --------------------');
+
+// 関数名の取得
+function HOGE(){}
+console.log('関数名の取得', AMP.getFunctionName(HOGE));
+
+// 乱数の生成
+console.log('乱数の生成', AMP.random(0, 100, true));
+</textarea>
+</div>
+</section>
+
+
+<section id="fallback">
+<h2>AMP.Fallback <a href="../docs/classes/Fallback.html">API Reference</a></h2>
+<div class="lead">
+<p>ブラウザの差異を吸収する為の機能を提供します。<br>
+メソッド一覧、引数に関して詳しくはAPIを参照してください。</p>
+</div>
+<!-- <div class="ex-code-prettify">
+<textarea class="code HTML" data-ex-code-prettify-param="{codeType:'html'}"></textarea>
+<textarea class="code" data-ex-code-prettify-param="{codeType:'css'}"></textarea>
+<textarea class="code script" data-ex-code-prettify-param="{codeType:'script', autoRun:true}"></textarea>
+</div> -->
+</section>
 <!-- #content // --></div>
 
 

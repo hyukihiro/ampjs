@@ -15,6 +15,7 @@
 
   /**
    * <h4>クラス・オブジェクトの継承、拡張</h4>
+   * <p><a href="../../demo/AMP.Base.html#extend">DEMO</a></p>
    *
    * @class AMP.Extend
    */

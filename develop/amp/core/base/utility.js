@@ -15,6 +15,7 @@
 
   /**
    * <h4>ユーティリティ</h4>
+   * <p><a href="../../demo/AMP.Base.html#utility">DEMO</a></p>
    *
    * @class AMP.Utility
    */
@@ -38,11 +39,17 @@
     if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
+
       } else if (fn.prototype.className) {
         return fn.prototype.className;
+
+      } else if(fn.prototype.constructor && fn.prototype.constructor.name){
+        return fn.prototype.constructor.name;
+
       } else {
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
+
     } else {
       throw new TypeError(fn + ' is not a Function');
     }

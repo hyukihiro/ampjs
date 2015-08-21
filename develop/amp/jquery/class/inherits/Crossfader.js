@@ -272,7 +272,6 @@
    * <h4>Crossfaderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Crossfader
    * @param {jQuery} $wrap   クロスフェード要素
    * @param {Object} options オプション値
    * @return {Crossfader}

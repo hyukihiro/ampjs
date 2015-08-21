@@ -15,6 +15,7 @@
 
   /**
    * <h4>配列</h4>
+   * <p><a href="../../demo/AMP.Base.html#array">DEMO</a></p>
    *
    * @class AMP.Array
    */

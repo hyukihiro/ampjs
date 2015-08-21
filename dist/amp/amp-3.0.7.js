@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.6
+ * AMPjs Core File version 3.0.7
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara
@@ -38,7 +38,7 @@ var AMP = {};
 
   // クラス設定
   var CLASS_NAME = 'Amp',
-  VERSION = '3.0.6';
+  VERSION = '3.0.7';
 
 
 
@@ -133,6 +133,7 @@ var AMP = {};
 
   /**
    * <h4>配列</h4>
+   * <p><a href="../../demo/AMP.Base.html#array">DEMO</a></p>
    *
    * @class AMP.Array
    */
@@ -228,6 +229,7 @@ var AMP = {};
 
   /**
    * <h4>クラス・オブジェクトの継承、拡張</h4>
+   * <p><a href="../../demo/AMP.Base.html#extend">DEMO</a></p>
    *
    * @class AMP.Extend
    */
@@ -553,14 +555,16 @@ var AMP = {};
 
 
   /*======================================================================
-    機能判定
+    ブラウザ機能判定
   ======================================================================*/
 
   /**
-   * <h4>所持判定</h4>
+   * <h4>ブラウザ機能判定</h4>
+   * <p><a href="../../demo/AMP.Base.html#has">DEMO</a></p>
    *
    * @class AMP.Has
    */
+
 
 
   /*----------------------------------------------------------------------
@@ -846,11 +850,12 @@ var AMP = {};
 
 
   /*======================================================================
-    オブジェクト,ブラウザの判定
+    型, OS, デバイス, ブラウザの判定
   ======================================================================*/
 
   /**
-   * <h4>オブジェクト、ブラウザの判定</h4>
+   * <h4>型, OS, デバイス, ブラウザの判定</h4>
+   * <p><a href="../../demo/AMP.Base.html#is">DEMO</a></p>
    *
    * @class AMP.Is
    */
@@ -1058,7 +1063,13 @@ var AMP = {};
    * @static
    * @method isOS
    * @param  {String} key OS名<br>
-   * windows, windowsPhone, mac, ios, android
+   * OS名 | 引数文字列 <br>
+   * Windows | windows <br>
+   * Windows Phone | windowsPhone <br>
+   * Mac (for Desktop) | mac <br>
+   * Mac ios (for SmartDevice) | ios <br>
+   * Android | android
+   *
    * @param  {String|Number} ver バージョンナンバー Android ios のみ有効
    * @return {Boolean}
    */
@@ -1166,7 +1177,17 @@ var AMP = {};
    * @static
    * @method isDevice
    * @param {String} key デバイス名<br>
-   * pc, sd, smartdevice, sp, smartphone, tb, tablet, iphone, ipad, ipod, androidphone, androidtablet
+   * デバイス名 | 引数文字列 <br>
+   * PC (for Desktop) | pc <br>
+   * Smart Device | sd, smartdevice <br>
+   * Smart Phone | sp, smartphone <br>
+   * Tablet | tb, tablet <br>
+   * iPhone | iphone <br>
+   * iPad | ipad <br>
+   * iPod | ipod <br>
+   * Android Phone | androidPhone <br>
+   * Android Tablet | androidTablet
+   *
    * @return {Boolean}
    */
   AMP.isDevice = function(key){
@@ -1320,7 +1341,17 @@ var AMP = {};
    * @static
    * @method isBrowser
    * @param  {String} key ブラウザ名<br>
-   * ie, edge, chrome, safari, firefox, opera, mobileSafari, android, webkit
+   * ブラウザ名 | 引数文字列 <br>
+   * Microsoft Edge | edge <br>
+   * Internet Explorer | ie <br>
+   * Google Chrome | chrome <br>
+   * Firefox | firefox <br>
+   * Mac Safari (for Desktop) | safari <br>
+   * Opera (for Desktop) | opera <br>
+   * ios Safari | mobileSafari <br>
+   * Android | android <br>
+   * Webkit Browser | webkit
+   *
    * @param  {String | Number} ver バージョン (ie, mobileSafari, android) 省略可
    * @param  {String} pun ie指定バージョン範囲 (prev, later) 省略可
    * @return {Boolean}
@@ -1537,6 +1568,7 @@ var AMP = {};
 
   /**
    * <h4>locationオブジェクト</h4>
+   * <p><a href="../../demo/AMP.Base.html#location">DEMO</a></p>
    *
    * @class AMP.Location
    */
@@ -1613,6 +1645,7 @@ var AMP = {};
 
   /**
    * <h4>文字列</h4>
+   * <p><a href="../../demo/AMP.Base.html#string">DEMO</a></p>
    *
    * @class AMP.String
    */
@@ -1757,6 +1790,7 @@ var AMP = {};
 
   /**
    * <h4>ユーティリティ</h4>
+   * <p><a href="../../demo/AMP.Base.html#utility">DEMO</a></p>
    *
    * @class AMP.Utility
    */
@@ -1780,11 +1814,17 @@ var AMP = {};
     if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
+
       } else if (fn.prototype.className) {
         return fn.prototype.className;
+
+      } else if(fn.prototype.constructor && fn.prototype.constructor.name){
+        return fn.prototype.constructor.name;
+
       } else {
         return ('' + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, '$1');
       }
+
     } else {
       throw new TypeError(fn + ' is not a Function');
     }
@@ -2566,7 +2606,7 @@ var AMP = {};
    * <h4>イベント</h4>
    * <p>イベントクラスの継承して使用出来ます<br>
    * メディエーターとしても使用すことも可能です<br>
-   * DEMO作成予定</p>
+   * <a href="../../demo/AMP.Events.html">DEMO</a></p>
    *
    *
    * @class AMP.Events
@@ -2624,7 +2664,7 @@ var AMP = {};
    * @property VERSION
    * @type {String}
    */
-  Events.VERSION = '2.0.1';
+  Events.VERSION = '2.0.2';
 
 
   /**
@@ -2845,12 +2885,13 @@ var AMP = {};
   p.trigger = function(type){
     var self = this,
     events = this._getEventNameMap(type),
-    listeners = this._listeners[events.type];
+    listeners = this._listeners[events.type],
+    args = AMP.argsToArray(arguments, 1);
 
     if(listeners){
       AMP.each(listeners, function(item){
         if(!events.attr || item.attr === events.attr){
-          item.func.apply(item.context, AMP.argsToArray(arguments, 1));
+          item.func.apply(item.context, args);
         }
       });
     }

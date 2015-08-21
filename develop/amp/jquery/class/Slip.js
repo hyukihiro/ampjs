@@ -62,11 +62,12 @@
   /**
    * <h4>バージョン情報</h4>
    *
+   *
    * @static
    * @property VERSION
    * @type {String}
    */
-  Slip.VERSION = '1.0.0';
+  Slip.VERSION = '1.0.1';
 
 
   /**
@@ -189,6 +190,14 @@
     })
     .on('slipout.Slip', function(outEvent){
       self._tween(self.props.$target.index(this), outEvent);
+    })
+    .each(function(i){
+      if($(this).hasClass(self.props.noSlipClass)){
+        self.passive(i);
+
+      } else if($(this).hasClass(self.props.activeClass)){
+        self.active(i);
+      }
     });
 
     return this;
@@ -217,7 +226,8 @@
   p.active = function(num){
     var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
 
-    $target.addClass(this.props.activeClass)
+    $target
+    .addClass(this.props.activeClass)
     .find('.' + this.props.slipClass)
     .velocity('stop').css({top: 0, left: 0});
 
@@ -235,7 +245,8 @@
   p.passive = function(num){
     var $target = AMP.isNumber(num) ? this.props.$target.eq(num) : this.props.$target;
 
-    $target.removeClass(this.props.activeClass)
+    $target
+    .removeClass(this.props.activeClass)
     .find('.' + this.props.slipClass)
     .velocity('stop').css({top: '-100%'});
 
@@ -266,7 +277,7 @@
 
 
   /**
-   * <h4>アニメーションスタイルの生成</h4>
+   * <h4>Tweenスタイルの生成</h4>
    *
    * @private
    * @method _createTweenStyle
@@ -274,14 +285,11 @@
    * @return {Object}
    */
   p._createTweenStyle = function(event){
-    var isIn = event.type === 'slipin',
-    direction = isIn ? this.props.inDirection : this.props.outDirection,
-    style01 = {
-      left: 0,
-      top : 0
-    },
+    var isSlipin = event.type === 'slipin',
+    direction = isSlipin ? this.props.inDirection : this.props.outDirection,
+    style01 = {left: 0, top : 0},
     style02 = $.extend({}, style01),
-    style = isIn ? style01 : style02;
+    style = isSlipin ? style01 : style02;
 
     if(direction === 'side'){
       style.left = event.x < 0 ? '-100%' : '100%';
@@ -302,7 +310,7 @@
       style.left = '100%';
 
     } else {
-      // direction all
+      // direction All
       if(event.direction === 'top'){
         style.top = '-100%';
       } else if(event.direction === 'bottom'){

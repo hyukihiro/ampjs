@@ -322,7 +322,6 @@
    * <h4>Sliderインスタンスの生成</h4>
    *
    * @static
-   * @class AMP.$.Slider
    * @param {jQuery} $wrap   スライダー要素
    * @param {Object} options オプション値
    * @return {Slider}

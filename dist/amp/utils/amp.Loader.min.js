@@ -1,6 +1,6 @@
 /**
  * AMPjs Javascript Library
- * AMPjs Core File version 3.0.6
+ * AMPjs Core File version 3.0.7
  *
  * The MIT License (MIT)
  * author Yoshihito Fujiwara

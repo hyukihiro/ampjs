@@ -17,7 +17,7 @@
                 <h1><img src="../assets/css/logo.png" title="AMPjs" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 3.0.6</em>
+            <em>API Docs for: 3.0.7</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -127,6 +127,7 @@
 
   /**
    * &lt;h4&gt;ユーティリティ&lt;/h4&gt;
+   * &lt;p&gt;&lt;a href=&quot;../../demo/AMP.Base.html#utility&quot;&gt;DEMO&lt;/a&gt;&lt;/p&gt;
    *
    * @class AMP.Utility
    */
@@ -150,11 +151,17 @@
     if(AMP.isFunction(fn)){
       if(fn.className){
         return fn.className;
+
       } else if (fn.prototype.className) {
         return fn.prototype.className;
+
+      } else if(fn.prototype.constructor &amp;&amp; fn.prototype.constructor.name){
+        return fn.prototype.constructor.name;
+
       } else {
         return (&#x27;&#x27; + fn).replace(/^\s*function\s*([^\(]*)[\S\s]+$/im, &#x27;$1&#x27;);
       }
+
     } else {
       throw new TypeError(fn + &#x27; is not a Function&#x27;);
     }
