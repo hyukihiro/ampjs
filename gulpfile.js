@@ -169,7 +169,7 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'libs'));
 
 
-	/* AMP
+	/* AMP CORE
 	-----------------------------------------------------------------*/
 	// amp/ amp.js
 	 MODULE.gulp.src([
@@ -190,7 +190,9 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// amp/utils/
+
+	/* AMP Utils
+	-----------------------------------------------------------------*/
 	 MODULE.gulp.src(PATH.develop + 'amp/core/utils/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -204,7 +206,9 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.core}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils/'));
 
-	// amp/amp.jquery.plugins.js
+
+	/* AMP jQuery Plugin
+	-----------------------------------------------------------------*/
 	MODULE.gulp.src(PATH.develop + 'amp/jquery.plugins/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -220,10 +224,10 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
 
-	// amp/amp.jquery.js
-	// class
+	/* AMP jQuery
+	-----------------------------------------------------------------*/
 	MODULE.gulp.src([
-		PATH.develop + 'amp/jquery/AMP.$.js',
+		PATH.develop + 'amp/jquery/$.js',
 		PATH.develop + 'amp/jquery/class/**/*.js'
 	])
 	.pipe(MODULE.plumber())
@@ -239,7 +243,9 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.header(LICENCE, {data: BANNER.jquery}))
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 
-	// amp/utils/
+
+	/* AMP jQuery Utils
+	-----------------------------------------------------------------*/
 	MODULE.gulp.src(PATH.develop + 'amp/jquery/utils/*.js')
 	.pipe(MODULE.plumber())
 	.pipe(MODULE.jshint())
@@ -254,7 +260,23 @@ MODULE.gulp.task('js', function(){
 	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/utils'));
 
 
-	// amp.createjs.js
-	// add code
-
+	/* AMP createjs
+	-----------------------------------------------------------------*/
+	MODULE.gulp.src([
+		PATH.develop + 'amp/createjs/cjs.js',
+		PATH.develop + 'amp/createjs/class/**/*.js'
+	])
+	.pipe(MODULE.plumber())
+	.pipe(MODULE.jshint())
+	.pipe(MODULE.jshint.reporter('jshint-stylish'))
+	.pipe(MODULE.concat(BANNER.createjs.name + '-' + BANNER.createjs.version + '.js'))
+	.pipe(MODULE.delete_lines({filters: [/^\/{3}\s/]}))
+	.pipe(MODULE.header(LICENCE, {data: BANNER.createjs}))
+	.pipe(MODULE.template(BANNER.createjs))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'))
+	.pipe(MODULE.rename({extname: '.min.js'}))
+	.pipe(MODULE.uglify())
+	.pipe(MODULE.header(LICENCE, {data: BANNER.createjs}))
+	.pipe(MODULE.gulp.dest(PATH.dist + 'amp/'));
 });
+

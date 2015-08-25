@@ -41,10 +41,8 @@
 
   /**
    * <h4>ローダー</h4>
-   * <p>
-   * 画像の読み込み通知を行います<br>
-   * <a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>
-   * に依存します<br>
+   * <p>画像の読み込み通知を行います<br>
+   * <a href="http://imagesloaded.desandro.com/" target="_blank">imagesloaded.js</a>に依存します<br>
    * <a href="../../demo/AMP.Loader.html">DEMO</a></p>
    *
    * @class AMP.Loader
@@ -88,7 +86,7 @@
     /**
      * <h4>画像が読み込まれた数をカウントします</h4>
      *
-     * @property props.count
+     * @property props.updateCount
      * @type {Number}
      */
     this.props.updateCount = 0;
