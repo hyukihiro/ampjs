@@ -585,7 +585,7 @@
       display : 'none'
     });
 
-    this.props.$item.eq(next).css({display: 'block',zIndex: this.props.length, opacity: 0});
+    this.props.$item.eq(next).css({display: 'block', zIndex: this.props.length, opacity: 0});
 
     if(this.props.isAutoHeight){
       this.autoHeight();

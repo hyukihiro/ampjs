@@ -25,7 +25,7 @@
 
 
 	// バージョン情報
-	Flick.VERSION = '1.3.3';
+	Flick.VERSION = '1.3.4';
 
 
 	// イベント設定値
@@ -209,6 +209,9 @@
 						$target.trigger(data.flickEvent);
 					}
 				}
+
+				// delete data
+				data = null;
 			});
 		};
 	};
@@ -292,6 +295,9 @@
 			$('html').off('mouseup' + attr + ' touchend' + attr)
 			.on('mouseup' + attr + ' touchend' + attr, function(){
 				$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
+
+				// delete data
+				data = null;
 			});
 		};
 	};
@@ -369,6 +375,9 @@
 						}
 					}
 				}
+
+				// delete data
+				data = null;
 			});
 		};
 	};

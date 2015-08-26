@@ -312,6 +312,27 @@ var AMP = {};
   };
 
 
+  /**
+   * <h4>要素のスタイル値</h4>
+   *
+   * @static
+   * @method getStyle
+   * @param  {DOM} elm  対象要素
+   * @param  {String} attr スタイル名
+   * @return {String}
+   */
+  AMP.getStyle = function(elm, attr){
+    if(root.getComputedStyle){
+      return getComputedStyle(elm).getPropertyValue(attr);
+    } else {
+      // !!!: jshintのチェックを緩和します
+      /* jshint -W069 */
+      return elm.currentStyle[attr];
+    }
+  };
+
+
+
 }(window, AMP));
 
 
