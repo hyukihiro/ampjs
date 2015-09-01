@@ -152,6 +152,43 @@
   --------------------------------------------------------------------------*/
 
   /**
+   * <h4>二点間の距離の累乗</h4>
+   *
+   * @method diffMag
+   * @param  {Vector} vector1
+   * @param  {Vector} vector2
+   * @return {Number}
+   */
+  Vector.diffMag = function(vector1, vector2){
+    return Math.pow((vector1.x - vector2.x), 2) + Math.pow((vector1.y - vector2.y), 2);
+  };
+
+  /*
+  Vector.getCenterOfGravity: function(triangle) {
+    // 2点の座標からベクトルに
+    pointsToVector: function(p, q) {
+        return {
+            x: q.x - p.x,
+            y: q.y - p.y
+        };
+    },
+
+        // 任意の2つのベクトルの和の1/3が重心になる
+        var p = this.pointsToVector(triangle[0], triangle[1]);
+        var q = this.pointsToVector(triangle[0], triangle[2]);
+
+        return {
+            x: (p.x + q.x) / 3 + triangle[0].x,
+            y: (p.y + q.y) / 3 + triangle[0].y
+        }
+  }
+  */
+
+
+
+  /* static
+  -----------------------------------------------------------------*/
+  /**
    * <h4>ラジアンを角度に変換して返す</h4>
    *
    * @static
@@ -248,6 +285,8 @@
   };
 
 
+  /* public
+  -----------------------------------------------------------------*/
   /**
    * <h4>Vectorのcopyを生成します</h4>
    *
@@ -640,7 +679,6 @@
       };
     }
   };
-
 
 
   /*--------------------------------------------------------------------------

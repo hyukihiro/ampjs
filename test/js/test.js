@@ -3,11 +3,45 @@ jQuery(function($){
 
 
 
-	// console.log(jQuery.easing);
+  var w = 500,
+  h = 500;
 
-	// $('canvas').velocity({width: 500}, 1000, '_BOUNCE_IN_OUT')
+  var stage = AMP.cjs.Stage.get('canvas', {width: w, height: h});
+  var polygon = new Polygon(stage);
 
-	console.log(window);
+  stage.on();
+
+  // stage click取れない？
+  //
+  AMP.addEvent(stage.canvas, 'click', function(mouseEvent){
+    var point = new AMP.Vector({
+      x: mouseEvent.clientX - mouseEvent.target.offsetLeft,
+      y: mouseEvent.clientY - mouseEvent.target.offsetTop
+    });
+
+    polygon.plot(point);
+
+
+    return false;
+  });
+
+
+
+  AMP.addEvent($('h1')[0], 'click', function(mouseEvent){
+    var delaunay = new Delaunay(w, h, polygon.points);
+    polygon.drawTriangle(delaunay.getDelaunay());
+
+        // var d = new MathDelaunay(w, h, points);
+        // var triangles = d.split();
+        // for(var i=0,n=triangles.length; i<n; i++){
+        //     pc.drawTriangle(triangles[i]);
+        // }
+  });
+
+
+
+
+
 
 
 
@@ -98,4 +132,6 @@ draw();
 
 
 });
+
+
 

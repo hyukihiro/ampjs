@@ -820,6 +820,16 @@
     @method
   --------------------------------------------------------------------------*/
 
+  /**
+   * [get description]
+   * @param  {[type]} canvas  [description]
+   * @param  {[type]} options [description]
+   * @return {[type]}         [description]
+   */
+  Stage.get = function(canvas, options){
+    return new Stage(canvas, options);
+  };
+
 
   /**
    * <h4>ステージのセットアップ開始</h4>
@@ -923,8 +933,6 @@
 
     this.canvas.width = AMP.isNumber(obj.width) ? obj.width : this.canvas.width;
     this.canvas.height = AMP.isNumber(obj.height) ? obj.height : this.canvas.height;
-    // this.canvas.style.width = this.canvas.width;
-    // this.canvas.style.height = this.canvas.height;
 
     return this;
   };
@@ -940,6 +948,20 @@
     return {
       width : this.canvas.width,
       height: this.canvas.height
+    };
+  };
+
+
+  /**
+   * <h4>ステージのセンターXY座標を返す</h4>
+   *
+   * @method getCenter
+   * @return {Object}
+   */
+  p.getCenter = function(){
+    return {
+      x: this.canvas.width / 2,
+      y: this.canvas.height / 2
     };
   };
 
