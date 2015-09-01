@@ -13,6 +13,7 @@
     @constructor
   ----------------------------------------------------------------------*/
 
+  /// FIXME: βバージョン
   /**
    * <h4>Stage</h4>
    * <p>createjs.Stageクラスを拡張しています</p>
@@ -60,10 +61,10 @@
 
 
   Stage.options = {
+    // isCSS : true,
     raf   : cjs.Ticker.RAF,
     width : 300,
-    height: 150,
-    isCssMode: true
+    height: 150
   };
 
 
@@ -165,11 +166,6 @@
   p.setSize = function(width, height){
     var obj = {};
 
-    if(this.props.isCssMode){
-
-    }
-
-
     if(AMP.isObject(width)){
       obj = width;
     } else {
@@ -179,6 +175,8 @@
 
     this.canvas.width = AMP.isNumber(obj.width) ? obj.width : this.canvas.width;
     this.canvas.height = AMP.isNumber(obj.height) ? obj.height : this.canvas.height;
+    // this.canvas.style.width = this.canvas.width;
+    // this.canvas.style.height = this.canvas.height;
 
     return this;
   };
@@ -192,9 +190,9 @@
    */
   p.getSize = function(){
     return {
-      width: this.canvas.width,
+      width : this.canvas.width,
       height: this.canvas.height
-    }
+    };
   };
 
 

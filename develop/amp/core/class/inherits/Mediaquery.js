@@ -79,7 +79,7 @@
    * @property VERSION
    * @type {String}
    */
-  Mediaquery.VERSION = '2.0.3';
+  Mediaquery.VERSION = '2.0.4';
 
 
   /**
@@ -121,12 +121,12 @@
 
     // set property
     this.isObserver = true;
-    this.mediaStyle = this.getStyle();
+    this.mediaStyle = AMP.getStyle(this.elm, 'font-family');
 
     // event
     AMP.addEvent(root, 'resize', function(){
-      if(self.mediaStyle !== self.getStyle()){
-        self.mediaStyle = self.getStyle();
+      if(self.mediaStyle !== AMP.getStyle(self.elm, 'font-family')){
+        self.mediaStyle = AMP.getStyle(self.elm, 'font-family');
         self.trigger(Mediaquery.eventType);
       }
     });
@@ -178,22 +178,6 @@
     return self;
   };
 
-
-  /**
-   * <h4>要素のスタイルを返します</h4>
-   *
-   * @method getStyle
-   * @return {String}
-   */
-  p.getStyle = function(){
-    if(root.getComputedStyle){
-      return getComputedStyle(this.elm).getPropertyValue('font-family');
-    } else {
-      // !!!: jshintのチェックを緩和します
-      /* jshint -W069 */
-      return this.elm.currentStyle['fontFamily'];
-    }
-  };
 
 
 

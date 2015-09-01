@@ -200,16 +200,25 @@
    * @static
    * @method getStyle
    * @param  {DOM} elm  対象要素
-   * @param  {String} attr スタイル名
+   * @param  {String} prop プロパティ名
    * @return {String}
    */
-  AMP.getStyle = function(elm, attr){
+  AMP.getStyle = function(elm, prop){
     if(root.getComputedStyle){
-      return getComputedStyle(elm).getPropertyValue(attr);
+      return root.getComputedStyle(elm).getPropertyValue(prop);
+
     } else {
+      var propAry = prop.split('-'),
+      propName = propAry[0];
+
+      AMP.each(propAry, function(item, i){
+        if(i !== 0){
+          propName += item.charAt(0).toUpperCase() + item.slice(1);
+        }
+      });
       // !!!: jshintのチェックを緩和します
       /* jshint -W069 */
-      return elm.currentStyle[attr];
+      return elm.currentStyle[propName];
     }
   };
 

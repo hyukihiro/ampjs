@@ -97,6 +97,31 @@
 
 
 	/**
+	 * <h4>アニメーションキュー処理の追加</h4>
+	 *
+	 * @method addQ
+	 * @param {String|Function} attr メソッド名
+	 * @param {String|Object} prop プロパティ名
+	 * @param {String} val  値
+	 */
+	$.fn.addQ = function(method, prop, val){
+		var self = this,
+		args =  [].slice.call(arguments, 1);
+
+		if($.isFunction(method)){
+			return this.queue(function(){
+				method.apply(self, args);
+				return self.dequeue();
+			});
+		} else {
+			return this.queue(function(){
+				return self[method].apply(self, args).dequeue();
+			});
+		}
+	};
+
+
+	/**
 	 * <h4>属性値のreplace処理</h4>
 	 * <p><a href="../../demo/$.other.html#sec02">DEMO</a></p>
 	 *

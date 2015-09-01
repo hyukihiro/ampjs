@@ -211,7 +211,9 @@
 				}
 
 				// delete data
-				data = null;
+				setTimeout(function(){
+					data = null;
+				}, 20);
 			});
 		};
 	};
@@ -297,7 +299,9 @@
 				$target.off('mousemove' + attr + ' touchmove' + attr + ' click' + attr);
 
 				// delete data
-				data = null;
+				setTimeout(function(){
+					data = null;
+				}, 20);
 			});
 		};
 	};
@@ -377,7 +381,10 @@
 				}
 
 				// delete data
-				data = null;
+				setTimeout(function(){
+					data = null;
+				}, 20);
+
 			});
 		};
 	};
