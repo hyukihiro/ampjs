@@ -3,13 +3,29 @@ jQuery(function($){
 
 
 
+
+var img = new Image();
+img.src =  'images/sample.jpg';
+img.onload = function(){
+
+	// console.log(new AMP.ImageMatrix(img));
+
   var w = 500,
   h = 500;
 
   var stage = AMP.cjs.Stage.get('canvas', {width: w, height: h});
-  var polygon = new Polygon(stage);
-
+  var polygon = new AMP.cjs.Polygon(stage);
   stage.on();
+
+  var bitmap = new createjs.Bitmap(img.src);
+  bitmap.x = 0;
+  bitmap.y = 0;
+
+	stage.addChild(bitmap);
+     // stage.update();
+
+
+
 
   // stage click取れない？
   //
@@ -19,8 +35,11 @@ jQuery(function($){
       y: mouseEvent.clientY - mouseEvent.target.offsetTop
     });
 
-    polygon.plot(point);
+		var	graphics = new createjs.Graphics();
+		graphics.beginFill('#000');
+		graphics.drawCircle(-1, -1, 2);
 
+    polygon.plot(point, graphics);
 
     return false;
   });
@@ -28,21 +47,17 @@ jQuery(function($){
 
 
   AMP.addEvent($('h1')[0], 'click', function(mouseEvent){
-    var delaunay = new Delaunay(w, h, polygon.points);
-    polygon.drawTriangle(delaunay.getDelaunay());
+    var delaunay = new AMP.Delaunay(w, h, polygon.points);
+    var edges = delaunay.getDelaunay();
+    console.log(edges);
+    polygon.draw(edges);
 
-        // var d = new MathDelaunay(w, h, points);
-        // var triangles = d.split();
-        // for(var i=0,n=triangles.length; i<n; i++){
-        //     pc.drawTriangle(triangles[i]);
-        // }
+var im = new AMP.CanvasBittmapData(stage.canvas);
+im.createImageData();
+im.getColor(100, 100);
+
+
   });
-
-
-
-
-
-
 
 
 	// 	var loader = AMP.cjs.Loader.get([
@@ -129,6 +144,7 @@ draw();
 
 
 
+};
 
 
 });

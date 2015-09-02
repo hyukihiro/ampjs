@@ -49,7 +49,7 @@
    * @property VERSION
    * @type {String}
    */
-  Vector.VERSION = '1.0.3';
+  Vector.VERSION = '1.0.4';
 
 
   /**
@@ -150,6 +150,36 @@
   /*--------------------------------------------------------------------------
     @method
   --------------------------------------------------------------------------*/
+  /**
+   * <h4>座標オブジェクトを生成</h4>
+   *
+   * @private
+   * @meVector.coordMap
+   * @param  {Number|Object} x x座標値もしくは、座標オブジェクト
+   * @param  {Number} y y座標値
+   * @param  {Number} z z座標値
+   * @return {Object}   x,y,z座標を格納したオブジェクト
+   */
+  Vector.coordMap = function(x, y, z){
+    if(AMP.isObject(x)){
+      return x;
+
+    } else if(AMP.isArray(x)){
+      return {
+        x: x[0] || 0,
+        y: x[1] || 0,
+        z: x[2] || 0
+      };
+
+    } else {
+      return {
+        x: x || 0,
+        y: y || 0,
+        z: z || 0
+      };
+    }
+  };
+
 
   /**
    * <h4>二点間の距離の累乗</h4>
@@ -162,6 +192,33 @@
   Vector.diffMag = function(vector1, vector2){
     return Math.pow((vector1.x - vector2.x), 2) + Math.pow((vector1.y - vector2.y), 2);
   };
+
+
+  /**
+   * [sub description]
+   * @param  {[type]} vector1 [description]
+   * @param  {[type]} vector2 [description]
+   * @return {[type]}         [description]
+   */
+  Vector.sub = function(vector1, vector2){
+    var copy = vector1.copy();
+    copy.sub(vector2);
+    return copy;
+  };
+
+
+  /**
+   * [add description]
+   * @param {[type]} vector1 [description]
+   * @param {[type]} vector2 [description]
+   */
+  Vector.add = function(vector1, vector2){
+    var copy = vector1.copy();
+    copy.add(vector2);
+    return copy;
+  };
+
+
 
   /*
   Vector.getCenterOfGravity: function(triangle) {
@@ -336,7 +393,7 @@
    * @return {Vector}
    */
   p.set = function(x, y, z){
-    var coord = this._createCoord(x, y, z);
+    var coord = Vector.coordMap(x, y, z);
     this.x = coord.x;
     this.y = coord.y;
     this.z = coord.z;
@@ -376,7 +433,7 @@
    * @return {Vector}
    */
   p.add = function(x, y, z){
-    var coord = this._createCoord(x, y, z);
+    var coord = Vector.coordMap(x, y, z);
     this.x += coord.x;
     this.y += coord.y;
     this.z += coord.z;
@@ -394,7 +451,7 @@
    * @return {Vector}
    */
   p.sub = function(x, y, z){
-    var coord = this._createCoord(x, y, z);
+    var coord = Vector.coordMap(x, y, z);
     this.x -= coord.x;
     this.y -= coord.y;
     this.z -= coord.z;
@@ -465,7 +522,7 @@
    * @return {Number}
    */
   p.dot = function(x, y, z){
-    var coord = this._createCoord(x, y, z);
+    var coord = Vector.coordMap(x, y, z);
     return this.x * coord.x + this.y * coord.y + this.z * coord.z;
   };
 
@@ -480,7 +537,7 @@
    * @return {Number}
    */
   p.cross = function(x, y, z){
-    var coord = this._createCoord(x, y, z),
+    var coord = Vector.coordMap(x, y, z),
     _x = this.y * coord.z - this.z * coord.y,
     _y = this.z * coord.x - this.x * coord.z,
     _z = this.x * coord.y - this.y * coord.x;
@@ -597,7 +654,7 @@
    */
   p.lerp = function(x, y, z, amount){
     if(!AMP.isNumber(x)){
-      var coord = this._createCoord(x);
+      var coord = Vector.coordMap(x);
       amount = y;
       x = coord.x;
       y = coord.y;
@@ -647,38 +704,10 @@
    * @return {Boolean}
    */
   p.isEquals = function(x, y, z){
-    var coord = this._createCoord(x, y, z);
+    var coord = Vector.coordMap(x, y, z);
     return this.x === coord.x && this.y === coord.y && this.z === coord.z;
   };
 
-
-  /**
-   * <h4>座標オブジェクトを生成</h4>
-   *
-   * @private
-   * @method _createCoord
-   * @param  {Number|Object} x x座標値もしくは、座標オブジェクト
-   * @param  {Number} y y座標値
-   * @param  {Number} z z座標値
-   * @return {Object}   x,y,z座標を格納したオブジェクト
-   */
-  p._createCoord = function(x, y, z){
-    if(AMP.isObject(x)){
-      return x;
-    } else if(AMP.isArray(x)){
-      return {
-        x: x[0] || 0,
-        y: x[1] || 0,
-        z: x[2] || 0
-      };
-    } else {
-      return {
-        x: x || 0,
-        y: y || 0,
-        z: z || 0
-      };
-    }
-  };
 
 
   /*--------------------------------------------------------------------------
