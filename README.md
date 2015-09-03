@@ -156,6 +156,7 @@ AMP.$.Render (Ajax機能削除 AMP.$.AjaxRenderに移行)
 
 
 ■ 追加
+AMP.imagesLoad
 AMP.$.LiquedSlider
 AMP.$.AjaxRender
 

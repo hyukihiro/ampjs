@@ -188,7 +188,7 @@
     if(element.addEventListener){
       element.removeEventListener(type, listener, false);
     } else {
-      element.detachEvent('on' + type, listener);
+      element.detachEvent('on' + type);
     }
     return element;
   };

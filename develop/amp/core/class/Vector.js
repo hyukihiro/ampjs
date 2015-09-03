@@ -221,6 +221,18 @@
 
 
   /*
+  Vector.radToCoord = function(){
+
+  };
+  Vector.degToDoord = function(){
+    return {
+      x: 0,
+      y: 0
+    };
+  };
+  */
+
+  /*
   Vector.getCenterOfGravity: function(triangle) {
     // 2点の座標からベクトルに
     pointsToVector: function(p, q) {

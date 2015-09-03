@@ -1,7 +1,35 @@
 
+var cjs = createjs;
+
 jQuery(function($){
 
 
+
+
+
+
+
+
+
+
+/*
+
+	var canvas = $('canvas')[0];
+	var context = canvas.getContext('2d');
+	var imageLoad = AMP.ImageLoad.get('images/js.png');
+
+	imageLoad
+	.load()
+	.done(function(){
+		var canvasImage = new AMP.CanvasImage(canvas);
+
+		context.drawImage(imageLoad.image, 0, 0);
+
+		var data = canvasImage.getDotData(50, 50);
+		console.log(data);
+	});
+return;
+*/
 
 
 var img = new Image();
@@ -10,137 +38,90 @@ img.onload = function(){
 
 	// console.log(new AMP.ImageMatrix(img));
 
-  var w = 500,
-  h = 500;
+  var
+  w = 500,
+  h = 500,
+  stage = AMP.cjs.Stage.get('canvas', {width: w, height: h}),
+  polygon = new AMP.cjs.Polygon(stage),
+  graphics = new createjs.Graphics();
 
-  var stage = AMP.cjs.Stage.get('canvas', {width: w, height: h});
-  var polygon = new AMP.cjs.Polygon(stage);
+	graphics.beginFill('#000');
+	graphics.drawCircle(0, 0, 2);
+
   stage.on();
 
-  var bitmap = new createjs.Bitmap(img.src);
-  bitmap.x = 0;
-  bitmap.y = 0;
-
-	stage.addChild(bitmap);
-     // stage.update();
-
-
-
-
   // stage click取れない？
-  //
   AMP.addEvent(stage.canvas, 'click', function(mouseEvent){
     var point = new AMP.Vector({
       x: mouseEvent.clientX - mouseEvent.target.offsetLeft,
       y: mouseEvent.clientY - mouseEvent.target.offsetTop
     });
 
-		var	graphics = new createjs.Graphics();
-		graphics.beginFill('#000');
-		graphics.drawCircle(-1, -1, 2);
-
-    polygon.plot(point, graphics);
+    polygon.addPoint(point).drawPlot(polygon.points.length - 1, graphics);
 
     return false;
   });
 
-
-
   AMP.addEvent($('h1')[0], 'click', function(mouseEvent){
+    polygon.removePlot();
+
     var delaunay = new AMP.Delaunay(w, h, polygon.points);
     var edges = delaunay.getDelaunay();
-    console.log(edges);
     polygon.draw(edges);
-
-var im = new AMP.CanvasBittmapData(stage.canvas);
-im.createImageData();
-im.getColor(100, 100);
-
-
   });
 
 
-	// 	var loader = AMP.cjs.Loader.get([
-	// 		{src: '/test/images/slider/mv010.jpg'},
-	// 		{src: '/test/images/slider/mv02.jpg'},
-	// 		{src: '/test/images/slider/mv03.jpg'},
-	// 		{src: '/test/images/slider/mv04.jpg'},
-	// 		{src: '/test/images/slider/mv05.jpg'}
-	// 	]);
 
-	// loader.update(function(e){
-	// 	console.log(e);
-	// })
-
-/*
-var stage = new AMP.cjs.Stage('canvas');
-// var stage = new createjs.Stage("canvas");
-var c = 0;
-
-stage.on();
-
-stage
-.resize(function(){
-	// console.log($(window).width(), $(window).height());
-	stage.setSize(500 + c++, 500 + c++)
-	draw();
-})
-.updateStage(function(){
-	console.log(0);
-});
+  var lineGraphics = new createjs.Graphics(),
+  x = 0,
+  y = 0,
+  radius = 100,
+  point = 8,
+  deg = 0,
+  DEG = 360 / point;
 
 
-function draw(){
-	stage.removeChild()
-	// Graphicsのインスタンスを作成します。
-	var graphics = new createjs.Graphics();
+  lineGraphics.beginStroke('#000');
+  lineGraphics.setStrokeStyle(3);
+  lineGraphics.drawRoundRectComplex(x,y, radius, radius, radius,radius,radius,radius);
 
-	// 色の指定（線と塗りつぶしとそれぞれ色を指定する）
-	graphics.beginStroke("#cccccc");
-	graphics.beginFill("#7aeac8");
+  /*
 
-	graphics
-	.moveTo(80,80)
-	.lineTo(240,80)
-	.lineTo(240,240)
-	.lineTo(80,240)
-	.closePath();
+  var pX,pY;
 
-	// Shapeとして、Stageに追加します。
-	var shape = new createjs.Shape(graphics);
-	shape.x = 0;
-	shape.y = 0;
-	stage.addChild(shape);
-}
+  // lineGraphics
+  // Vector.PI_TWO
+  var i = 0;
+  for(; i < point+1; i += 1){
+    var radian = Math.PI/180*deg;
+    var _x = x + radius * Math.sin(radian);
+    var _y = y + radius * Math.cos(radian);
+    // Math.cos(deg*Math.PI/180)*radius+x
+    // Math.sin(deg*Math.PI/180)*radius+y
+    deg += DEG;
+    if(i == 0){
+      lineGraphics.moveTo(_x, _y);
+    } else {
+      lineGraphics.lineTo(_x, _y);
+      // lineGraphics.bezierCurveTo(_x, _y, pX, pY);
+    }
 
-draw();
-
-
-*/
-
-
-// createjs.Ticker.timingMode = createjs.Ticker.RAF;
-// createjs.Ticker.on('tick', function(){
-//   stage.update();
-// });
+    pX = _x;
+    pY = _y;
 
 
+  }
+
+  graphics.closePath();
+  console.log(graphics);
+  */
+
+  var shape = new cjs.Shape(lineGraphics);
+  stage.addChild(shape);
 
 
-
-
-
-
-
-
-
-
-	// var shape = new AMP.cjs.Shape();
-	// console.log(shape);
-
-
-
-// console.log(new createjs.Shape());
+// theCanvas.style.left = (offsetX-n+Math.sin(radian)*radius)+’px’;
+// theCanvas.style.top = (offsetY-n+Math.cos(radian)*radius)+’px’;
 
 
 

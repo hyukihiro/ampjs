@@ -58,17 +58,84 @@
     @method
   --------------------------------------------------------------------------*/
 
-	// plot
-	p.plot = function(point, graphics){
-		this.points.push(point);
+	// addPoint
+	p.addPoint = function(point){
+		this.points = this.points.concat(AMP.argsToArray(arguments));
+    return this;
+	};
 
-		if(graphics){
-      var shape = new cjs.Shape(graphics);
+
+  p.drawPlot = function(index, graphics){
+    var self = this;
+
+    if(AMP.isNumber(index)){
+      var point = this.points[index],
+      shape = new cjs.Shape(graphics);
+
+      shape.name = 'plot';
       shape.x = point.x;
       shape.y = point.y;
       this.container.addChild(shape);
+
+    } else {
+      graphics = index.toString && index.toString() === '[Graphics]' ? index : graphics;
+
+      AMP.each(this.points, function(point, index){
+        self.drawPlot(index, graphics);
+      });
     }
-	};
+
+    return this;
+  };
+
+
+
+  p.removePlot = function(index){
+    var self = this;
+
+    //   console.log(this.container.children);
+    // var i = this.container.children.length-1;
+    // while(i -= 1){
+    //   var child = this.container.children[i];
+    //   if(child && child.name === 'plot'){
+    //     this.container.removeChildAt(i);
+    //     self.removePlot(index);
+    //     break;
+    //   }
+    // }
+
+
+    /*
+    if(AMP.isNumber(index)){
+      var plot = this.container.getChildAt(index);
+      // console.log(this.container.children[index] === plot);
+      if(plot && plot.name === 'plot'){
+        this.container.removeAllChildren();
+      }
+
+    } else {
+      var i = this.container.children.length-1;
+      while(i -= 1){
+        self.removePlot(i);
+      }
+    }
+
+    */
+
+    return this;
+  };
+
+
+
+
+
+
+  p.createPlots = function(radiusX, radiusY){
+    var size = this.container.getSize();
+    // console.log(this.container.getSize());
+  };
+
+
 
 
   /**
@@ -104,7 +171,11 @@
       var shape = new cjs.Shape(graphics);
       self.container.addChild(shape);
     });
+
+    return this;
   };
+
+
 
 
 
