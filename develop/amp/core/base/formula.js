@@ -26,7 +26,7 @@
   /**
    * <h4>π (半円)</h4>
    *
-   *
+   * @static
    * @property PI
    * @type {Number}
    */
@@ -36,6 +36,7 @@
   /**
    * <h4>π * 2 (円)</h4>
    *
+   * @static
    * @property PI_TWO
    * @type {Number}
    */
@@ -45,10 +46,32 @@
   /**
    * <h4>π * 2 (1/4円)</h4>
    *
+   * @static
    * @property PI_HARF
    * @type {Number}
    */
   AMP.PI_HARF = AMP.PI / 2;
+
+
+  /**
+   * <h4>ラジアンからに角度変換する積数</h4>
+   *
+   * @static
+   * @property RAD_TO_DEG
+   * @type {Number}
+   */
+  AMP.RAD_TO_DEG = 180 / AMP.PI;
+
+
+  /**
+   * <h4>角度からラジアンに変換する積数</h4>
+   *
+   * @static
+   * @property DEG_TO_RAD
+   * @type {Number}
+   */
+  AMP.DEG_TO_RAD = AMP.PI / 180;
+
 
 
 
@@ -160,6 +183,16 @@
 
   AMP.arcToDeg = function(distance){
   };
+
+
+  /*
+  -----------------------------------------------------------------*/
+  AMP.coordToRad = fn(x, y){
+    return Math.atan(y, x);
+  }
+  AMP.coordToDeg = fn(x, y){
+    return Math.atan2(y, x) * AMP.RAD_TO_DEG;
+  }
 
 
 
