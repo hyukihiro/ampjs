@@ -5395,7 +5395,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 424,
+            "line": 425,
             "description": "<h4>リサイズイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventResize",
@@ -5407,7 +5407,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 456,
+            "line": 457,
             "description": "<h4>Thumbnailボタンイベント登録</h4>",
             "itemtype": "method",
             "name": "addEventThumbnail",
@@ -5426,7 +5426,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 476,
+            "line": 477,
             "description": "<h4>タイマーキャンセルイベント登録</h4>\n<p>スライダーにマウスオンされた状態の時、タイマー処理をキャンセルします</p>",
             "itemtype": "method",
             "name": "addEventTimerCancel",
@@ -5438,7 +5438,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 505,
+            "line": 506,
             "description": "<h4>タイマースタート</h4>\n<p>タイマー値が0の場合タイマーは実行しません</p>",
             "itemtype": "method",
             "name": "timerStart",
@@ -5457,7 +5457,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 533,
+            "line": 534,
             "description": "<h4>タイマー停止</h4>",
             "itemtype": "method",
             "name": "timerStop",
@@ -5469,7 +5469,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 545,
+            "line": 546,
             "description": "<h4>コントローラー</h4>\n<p>スライダーイベントが実行されたとき、必ずここの処理を通します</p>",
             "override": "",
             "access": "private",
@@ -5496,7 +5496,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 607,
+            "line": 608,
             "description": "<h4>表示可能な要素の数を取得</h4>",
             "access": "private",
             "tagname": "",
@@ -5510,7 +5510,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 625,
+            "line": 626,
             "description": "<h4>ポインターの生成</h4>",
             "itemtype": "method",
             "name": "createPointer",
@@ -5522,7 +5522,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 647,
+            "line": 648,
             "description": "<h4>要素のアクティブ化</h4>",
             "itemtype": "method",
             "name": "active",
@@ -5534,7 +5534,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 691,
+            "line": 692,
             "description": "<h4>スライダーをアイテムの高さに揃える</h4>",
             "itemtype": "method",
             "name": "autoHeight",
@@ -5546,7 +5546,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 713,
+            "line": 714,
             "description": "<h4>スライドスタイルのセット</h4>",
             "itemtype": "method",
             "name": "setPosition",
@@ -5558,7 +5558,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 729,
+            "line": 730,
             "description": "<h4>指定x座標分移動</h4>",
             "access": "private",
             "tagname": "",
@@ -5579,7 +5579,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 742,
+            "line": 743,
             "description": "<h4>スライド位置を戻す</h4>",
             "access": "private",
             "tagname": "",
@@ -5593,7 +5593,7 @@
         },
         {
             "file": "develop\\amp\\jquery\\class\\inherits\\Slider.js",
-            "line": 757,
+            "line": 758,
             "description": "<h4>スライドアニメーションを実行</h4>",
             "access": "private",
             "tagname": "",
@@ -8109,7 +8109,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 458,
+            "line": 474,
             "description": "<h4>フリックイベント</h4>\n<p>X軸、Y軸4方向のフリックイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flick",
@@ -8120,7 +8120,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 468,
+            "line": 484,
             "description": "<h4>フリックXイベント</h4>\n<p>X軸2方向のフリックイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickX",
@@ -8131,7 +8131,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 478,
+            "line": 494,
             "description": "<h4>フリックYイベント</h4>\n<p>Y軸2方向のフリックイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickY",
@@ -8142,7 +8142,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 488,
+            "line": 504,
             "description": "<h4>フリックキャンセルイベント</h4>\n<p>X軸、Y軸4方向のフリックキャンセルイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickcancel",
@@ -8153,7 +8153,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 498,
+            "line": 514,
             "description": "<h4>フリックXキャンセルイベント</h4>\n<p>X軸2方向のフリックキャンセルイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickcancelX",
@@ -8164,7 +8164,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 508,
+            "line": 524,
             "description": "<h4>フリックYキャンセルイベント</h4>\n<p>Y軸2方向のフリックキャンセルイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickcancelY",
@@ -8175,7 +8175,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 518,
+            "line": 534,
             "description": "<h4>フリックムーブイベント</h4>\n<p>X軸、Y軸4方向のフリックムーブイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickmove",
@@ -8186,7 +8186,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 528,
+            "line": 544,
             "description": "<h4>フリックXムーブイベント</h4>\n<p>X軸2方向のフリックムーブイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickmoveX",
@@ -8197,7 +8197,7 @@
         },
         {
             "file": "develop\\amp\\jquery.plugins\\EventFlick.js",
-            "line": 538,
+            "line": 554,
             "description": "<h4>フリックYムーブイベント</h4>\n<p>Y軸2方向のフリックムーブイベント<br>\n<a href=\"../../demo/$.flick.html\">DEMO</a></p>",
             "itemtype": "event",
             "name": "flickmoveY",
@@ -8493,7 +8493,7 @@
         },
         {
             "message": "unknown tag: override",
-            "line": " develop\\amp\\jquery\\class\\inherits\\Slider.js:545"
+            "line": " develop\\amp\\jquery\\class\\inherits\\Slider.js:546"
         },
         {
             "message": "unknown tag: propaty",
