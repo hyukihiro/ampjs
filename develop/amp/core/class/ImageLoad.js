@@ -139,7 +139,7 @@
    * @default satanbay
    * @type {String}
    */
-  ImageLoad.STATE_STANDBY = 'satanbay';
+  ImageLoad.STATE_STANDBY = 'standby';
 
 
   /**

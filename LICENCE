@@ -1,5 +1,8 @@
 /**
- * AMPjs Javascript Library
+ * ╔═╗╔╦╗╔═╗ ┬┌─┐
+ * ╠═╣║║║╠═╝ │└─┐
+ * ╩ ╩╩ ╩╩  └┘└─┘
+ * Javascript Library
  * <%= data.description %> version <%= data.version %>
  *
  * author Yoshihito Fujiwara

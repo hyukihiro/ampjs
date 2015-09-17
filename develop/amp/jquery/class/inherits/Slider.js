@@ -128,7 +128,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.2.0';
+  Slider.VERSION = '1.2.1';
 
 
   /**
@@ -403,6 +403,7 @@
 		this.props.distance = step * itemWidth;
 
     // スライド最大数
+    step = step || 1;
     this.props.slideMaxLength = Math.ceil(this._getDisplayLength() / step);
 
     // フレームのセンタリング

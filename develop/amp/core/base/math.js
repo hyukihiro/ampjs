@@ -16,8 +16,9 @@
   /**
    * <h4>数式</h4>
    *
-   * @class Formula
+   * @class Math
    */
+
 
   /*--------------------------------------------------------------------------
     @property
@@ -74,14 +75,17 @@
 
 
 
-
   /*----------------------------------------------------------------------
     @method
   ----------------------------------------------------------------------*/
+  /// Degree
+  /// Radian
+  /// Coord
+  /// Arc
+  /// Other
 
-  /* Degree To
+  /* Degree
   -----------------------------------------------------------------*/
-
   /**
    * <h4>角度と半径からx,y座標を求める</h4>
    *
@@ -108,7 +112,7 @@
    * @return {Number} ラジアン
    */
   AMP.degToRad = function(deg){
-    return deg * AMP.PI / 180;
+    return deg * AMP.DEG_TO_RAD;
   };
 
 
@@ -126,10 +130,8 @@
   };
 
 
-
   /* Radian
   -----------------------------------------------------------------*/
-
   /**
    * <h4>ラジアンと半径からx,y座標を求める</h4>
    *
@@ -156,7 +158,7 @@
    * @return {Number} 角度
    */
   AMP.radToDeg = function(rad){
-    return rad / AMP.PI * 180;
+    return rad / AMP.RAD_TO_DEG;
   };
 
 
@@ -173,26 +175,57 @@
     return rad * radius;
   };
 
-  /* Arc To
-  -----------------------------------------------------------------*/
 
+  /* Coord
+  -----------------------------------------------------------------*/
+  /**
+   * <h4>座標からラジアンを求める</h4>
+   *
+   * @static
+   * @method coordToRad
+   * @param  {Number} x x座標
+   * @param  {Number} y y座標
+   * @return {Number}   ラジアン
+   */
+  AMP.coordToRad = function(x, y){
+    return Math.atan(y, x);
+  };
+
+
+  /**
+   * <h4>座標から角度を求める</h4>
+   *
+   * @static
+   * @method coordToDeg
+   * @param  {Number} x x座標
+   * @param  {Number} y y座標
+   * @return {Number}   角度
+   */
+  AMP.coordToDeg = function(x, y){
+    return Math.atan2(y, x) * AMP.RAD_TO_DEG;
+  };
+
+
+  AMP.coordToArc = function(x, y){
+  };
+
+
+  /* Arc
+  -----------------------------------------------------------------*/
 // 円弧からラジアンを求める
 
-  AMP.arcToRad = function(distance){
+  AMP.arcToRad = function(arc, radius){
+    return arc / radius;
   };
 
-  AMP.arcToDeg = function(distance){
+
+  AMP.arcToDeg = function(arc, radius){
+    return arc / radius * radius;
   };
 
 
-  /*
-  -----------------------------------------------------------------*/
-  AMP.coordToRad = fn(x, y){
-    return Math.atan(y, x);
-  }
-  AMP.coordToDeg = fn(x, y){
-    return Math.atan2(y, x) * AMP.RAD_TO_DEG;
-  }
+  AMP.arcTo2d = function(arc, radius){
+  };
 
 
 

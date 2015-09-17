@@ -4,8 +4,21 @@ var cjs = createjs;
 jQuery(function($){
 
 
+// console.log(AMP.degToArc(90, 100));
+// console.log(AMP.coordToDeg(10, 10));
+
+// console.log(AMP.degTo2d(90, 100));
+// console.log(AMP.radTo2d(Math.PI, 100));
 
 
+// AMP.degToArc(deg, radius)
+// AMP.arcToDeg(arc, radius);
+console.log(AMP.degToArc(180, 100));
+console.log(AMP.arcToDeg(AMP.degToArc(180, 100), 100));
+
+
+
+return false;
 
 
 

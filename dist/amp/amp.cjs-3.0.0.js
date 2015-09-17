@@ -1,5 +1,8 @@
 /**
- * AMPjs Javascript Library
+ * ╔═╗╔╦╗╔═╗ ┬┌─┐
+ * ╠═╣║║║╠═╝ │└─┐
+ * ╩ ╩╩ ╩╩  └┘└─┘
+ * Javascript Library
  * AMPjs createjs Module File version 3.0.0
  *
  * author Yoshihito Fujiwara

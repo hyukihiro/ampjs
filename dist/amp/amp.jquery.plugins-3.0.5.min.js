@@ -1,5 +1,8 @@
 /**
- * AMPjs Javascript Library
+ * ╔═╗╔╦╗╔═╗ ┬┌─┐
+ * ╠═╣║║║╠═╝ │└─┐
+ * ╩ ╩╩ ╩╩  └┘└─┘
+ * Javascript Library
  * AMPjs jQuery Plugin File version 3.0.5
  *
  * author Yoshihito Fujiwara

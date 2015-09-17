@@ -1,5 +1,6 @@
-# AMPjs JavaScript Library
-
+ ╔═╗╔╦╗╔═╗ ┬┌─┐  
+ ╠═╣║║║╠═╝ │└─┐  
+ ╩ ╩╩ ╩╩  └┘└─┘  
 
 [TOC]
 

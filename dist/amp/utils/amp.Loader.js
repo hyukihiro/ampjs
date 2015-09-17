@@ -1,5 +1,8 @@
 /**
- * AMPjs Javascript Library
+ * ╔═╗╔╦╗╔═╗ ┬┌─┐
+ * ╠═╣║║║╠═╝ │└─┐
+ * ╩ ╩╩ ╩╩  └┘└─┘
+ * Javascript Library
  * AMPjs Core File version 3.0.8
  *
  * author Yoshihito Fujiwara
