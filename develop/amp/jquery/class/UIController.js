@@ -43,7 +43,7 @@
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = '1.1.0';
+  UIController.VERSION = '1.2.0';
 
 
   /**
