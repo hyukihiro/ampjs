@@ -171,12 +171,12 @@
    * <h4>フリックイベント</h4>
    *
    * @method addEventFlick
-   * @return {Slider}
+   * @return {Instance}
    */
   p.addEventFlick = function($trigger){
     var self = this;
 
-    $trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
+    $trigger.off('flickmoveX.' + this.className + ' flickcancelX.' + this.className + ' flickX.' + this.className)
     .on('flickmoveX.' + this.className, function(moveEvent){
       self._move(moveEvent.moveX);
     })
@@ -249,14 +249,40 @@
    * <h4>コントローラー</h4>
    * 送られてきた値を制御します
    *
+   * @interface
    * @protected
    * @private
    * @method _controller
    * @param {Number} index スライドインデック
    * @param {Boolean} nonAnimate アニメーション無
-   * @return {Instance}
+   * @return {Void}
    */
   p._controller = function(index, nonAnimate){};
+
+
+  /**
+   * <h4>フリックキャンセル時呼び出されます</h4>
+   *
+   * @interface
+   * @protected
+   * @private
+   * @method _resetTween
+   * @return {Void}
+   */
+  p._resetTween = function(){};
+
+
+   /**
+   * <h4>フリック中呼び出します</h4>
+   *
+   * @interface
+   * @protected
+   * @private
+   * @method _move
+   * @param {Number} x フリック中の移動距離
+   * @return {Void}
+   */
+  p._move = function(x){};
 
 
 
