@@ -67,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.2.0';
+  Scroll.VERSION = '3.2.1';
 
 
   /**
@@ -197,7 +197,7 @@
     $target = $($scrollTrigger.attr('href'));
 
     if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
-      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust(num) || 0 : props.adjust,
       moveTo = $target.offset().top - adjust;
 
       if($(root).scrollTop() !== moveTo){
