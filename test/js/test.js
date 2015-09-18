@@ -13,12 +13,13 @@ jQuery(function($){
 
 // AMP.degToArc(deg, radius)
 // AMP.arcToDeg(arc, radius);
-console.log(AMP.degToArc(180, 100));
-console.log(AMP.arcToDeg(AMP.degToArc(180, 100), 100));
+// console.log(AMP.degToArc(180, 100));
+// console.log(AMP.arcToDeg(AMP.degToArc(180, 100), 100));
 
 
 
-return false;
+// return false;
+
 
 
 
@@ -26,21 +27,20 @@ return false;
 
 
 /*
+  var canvas = $('canvas')[0];
+  var context = canvas.getContext('2d');
+  var imageLoad = AMP.ImageLoad.get('images/js.png');
 
-	var canvas = $('canvas')[0];
-	var context = canvas.getContext('2d');
-	var imageLoad = AMP.ImageLoad.get('images/js.png');
+  imageLoad
+  .load()
+  .done(function(){
+    var canvasImage = new AMP.CanvasImage(canvas);
 
-	imageLoad
-	.load()
-	.done(function(){
-		var canvasImage = new AMP.CanvasImage(canvas);
+    context.drawImage(imageLoad.image, 0, 0);
 
-		context.drawImage(imageLoad.image, 0, 0);
-
-		var data = canvasImage.getDotData(50, 50);
-		console.log(data);
-	});
+    var data = canvasImage.getDotData(50, 50);
+    console.log(data);
+  });
 return;
 */
 
@@ -70,7 +70,9 @@ img.onload = function(){
       y: mouseEvent.clientY - mouseEvent.target.offsetTop
     });
 
-    polygon.addPoint(point).drawPlot(polygon.points.length - 1, graphics);
+    polygon.createRandomPoints(100);
+
+    // polygon.addPoint(point).drawPoint(polygon.points.length - 1, graphics);
 
     return false;
   });
@@ -129,8 +131,8 @@ img.onload = function(){
   console.log(graphics);
   */
 
-  var shape = new cjs.Shape(lineGraphics);
-  stage.addChild(shape);
+  // var shape = new cjs.Shape(lineGraphics);
+  // stage.addChild(shape);
 
 
 // theCanvas.style.left = (offsetX-n+Math.sin(radian)*radius)+’px’;

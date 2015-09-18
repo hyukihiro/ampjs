@@ -1386,222 +1386,6 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>ページ内リンクのスクロール</h4>
-   * <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
-   *
-   * @class AMP.$.Scroll
-   * @extends AMP.BASE_CLASS
-   * @constructor
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
-   * @param  {Object} options オプション値
-   */
-  function Scroll($scrollTrigger, options){
-    // $scrollTrigger指定がない場合、初期値を設定
-    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
-      options = $scrollTrigger;
-      $scrollTrigger = $('a[href^=#]');
-    }
-
-    /**
-     * <h4>プロパティオブジェクト</h4>
-     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-     *
-     * @property props
-     * @type {Object}
-     */
-    this.props = $.extend(true, {}, Scroll.options, {$html: $('html, body')}, options);
-
-    /**
-     * <h4>トリガーとなるa要素</h4>
-     *
-     * @property props.$scrollTrigger
-     * @type {jQuery}
-     */
-    this.props.$scrollTrigger = $scrollTrigger;
-  }
-
-  // 基底クラスを継承
-  AMP.inherits(Scroll, AMP.BASE_CLASS);
-
-  // prototype
-  var p = Scroll.prototype;
-
-
-
-  /*--------------------------------------------------------------------------
-    @property
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>バージョン情報</h4>
-   *
-   * @static
-   * @property VERSION
-   * @type {String}
-   */
-  Scroll.VERSION = '3.2.0';
-
-
-  /**
-   * <h4>クラス名</h4>
-   *
-   * @property className
-   * @type {String}
-   */
-  p.className = 'Scroll';
-
-
-  /**
-   * <h4>デフォルト値オブジェクト</h4>
-   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
-   *
-   * @static
-   * @property options
-   * @type {Object}
-   */
-  /**
-   * <h4>ページ要素</h4>
-   *
-   * @static
-   * @property options.$html
-   * @default $('html, body')
-   * @type {jQuery}
-   */
-  /**
-   * <h4>停止位置調整値</h4>
-   *
-   * @static
-   * @property options.adjust
-   * @default 0
-   * @type {Number|Function}
-   */
-  /**
-   * <h4>スクロールしないトリガークラス名</h4>
-   *
-   * @static
-   * @property options.noScrollClass
-   * @default no_scroll
-   * @type {String}
-   */
-  /**
-   * <h4>スクロールアニメーションのオプション値</h4>
-   * <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
-   *
-   * @static
-   * @property options.tween
-   * @default  {duration: 800, easing: 'easeOutQuint'}
-   * @type {Object}
-   */
-  Scroll.options = {
-    $html        : null, // $('html, body'),
-    adjust       : 0,
-    noScrollClass: 'no_scroll',
-    tween        : {
-      duration   : 800,
-      easing     : 'easeOutQuint'
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    @method
-  --------------------------------------------------------------------------*/
-
-  /**
-   * <h4>Scrollインスタンスの生成</h4>
-   *
-   * @static
-   * @method get
-   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
-   * @param  {Object} options オプション値 省略可
-   * @return {Scroll}
-   */
-  Scroll.get = function($scrollTrigger, options){
-    return new Scroll($scrollTrigger, options).on();
-  };
-
-
-  /**
-   * <h4>イベント登録</h4>
-   *
-   * @method on
-   * @return {Scroll}
-   */
-  p.on = function(){
-    var self = this;
-
-    // スクロールイベントの重複回避
-    this.off();
-
-    self.props.$scrollTrigger.on('click.Scroll', function(){
-      return self.tween(self.props.$scrollTrigger.index(this));
-    });
-
-    return this;
-  };
-
-
-  /**
-   * <h4>イベント削除</h4>
-   *
-   * @method off
-   * @return {Scroll}
-   */
-  p.off = function(){
-    this.props.$scrollTrigger.off('click.Scroll');
-    return this;
-  };
-
-
-  /**
-   * <h4>スクロールアニメーション</h4>
-   * <p>FIXME: Stringも対応予定</p>
-   *
-   * @method tween
-   * @param {Number} num トリガー要素のインデックス
-   * @return {Void}
-   */
-  p.tween = function(num){
-    var self = this,
-    props = self.props,
-    $scrollTrigger = props.$scrollTrigger.eq(num),
-    $target = $($scrollTrigger.attr('href'));
-
-    if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
-      var adjust = AMP.isFunction(props.adjust) ? props.adjust() || 0 : props.adjust,
-      moveTo = $target.offset().top - adjust;
-
-      if($(root).scrollTop() !== moveTo){
-        var tween = $.extend({offset: moveTo}, props.tween);
-        props.$html.velocity('stop').velocity('scroll', tween);
-      }
-      return false;
-    }
-  };
-
-
-
-  /*--------------------------------------------------------------------------
-    export
-  --------------------------------------------------------------------------*/
-
-  AMP.$.Scroll = Scroll;
-
-
-}(window, AMP, jQuery));
-
-
-(function(root, AMP, $){
-
-  // 'use strict';
-
-
-  /*----------------------------------------------------------------------
-    @constructor
-  ----------------------------------------------------------------------*/
-
-  /**
    * <h4>スクロール時、座標を判定してToggle処理をします</h4>
    * <p><a href="../../demo/AMP.$.ScrollToggle.html">DEMO</a></p>
    *
@@ -2093,21 +1877,45 @@
   ----------------------------------------------------------------------*/
 
   /**
-   * <h4>UIコントローラ</h4>
-   * <p>UIコントローラクラスを継承する事でUIコントローラを提供します</p>
+   * <h4>ページ内リンクのスクロール</h4>
+   * <p><a href="../../demo/AMP.$.Scroll.html">DEMO</a></p>
    *
-   * @protected
-   * @class AMP.$.UIController
+   * @class AMP.$.Scroll
    * @extends AMP.BASE_CLASS
    * @constructor
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素
+   * @param  {Object} options オプション値
    */
-  function UIController(){}
+  function Scroll($scrollTrigger, options){
+    // $scrollTrigger指定がない場合、初期値を設定
+    if(!$scrollTrigger || !($scrollTrigger instanceof jQuery)){
+      options = $scrollTrigger;
+      $scrollTrigger = $('a[href^=#]');
+    }
+
+    /**
+     * <h4>プロパティオブジェクト</h4>
+     * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
+     *
+     * @property props
+     * @type {Object}
+     */
+    this.props = $.extend(true, {}, Scroll.options, {$html: $('html, body')}, options);
+
+    /**
+     * <h4>トリガーとなるa要素</h4>
+     *
+     * @property props.$scrollTrigger
+     * @type {jQuery}
+     */
+    this.props.$scrollTrigger = $scrollTrigger;
+  }
 
   // 基底クラスを継承
-  AMP.inherits(UIController, AMP.BASE_CLASS);
+  AMP.inherits(Scroll, AMP.BASE_CLASS);
 
   // prototype
-  var p = UIController.prototype;
+  var p = Scroll.prototype;
 
 
 
@@ -2122,7 +1930,7 @@
    * @property VERSION
    * @type {String}
    */
-  UIController.VERSION = '1.1.0';
+  Scroll.VERSION = '3.2.1';
 
 
   /**
@@ -2131,23 +1939,58 @@
    * @property className
    * @type {String}
    */
-  p.className = 'UIController';
+  p.className = 'Scroll';
 
 
   /**
-   * <h4>プロパティオブジェクト</h4>
+   * <h4>デフォルト値オブジェクト</h4>
+   * <p>コンストラクタが呼び出し時に、引数とoptionsをmixinしてpropsオブジェクトに格納します</p>
    *
-   * @property props
+   * @static
+   * @property options
    * @type {Object}
    */
   /**
-   * <h4>現在値</h4>
+   * <h4>ページ要素</h4>
    *
-   * @property props.current
-   * @type {Number}
+   * @static
+   * @property options.$html
+   * @default $('html, body')
+   * @type {jQuery}
    */
-  p.props = {
-    current: 0
+  /**
+   * <h4>停止位置調整値</h4>
+   *
+   * @static
+   * @property options.adjust
+   * @default 0
+   * @type {Number|Function}
+   */
+  /**
+   * <h4>スクロールしないトリガークラス名</h4>
+   *
+   * @static
+   * @property options.noScrollClass
+   * @default no_scroll
+   * @type {String}
+   */
+  /**
+   * <h4>スクロールアニメーションのオプション値</h4>
+   * <p><a href="http://julian.com/research/velocity/#arguments" target="_blank">オプション値</a></p>
+   *
+   * @static
+   * @property options.tween
+   * @default  {duration: 800, easing: 'easeOutQuint'}
+   * @type {Object}
+   */
+  Scroll.options = {
+    $html        : null, // $('html, body'),
+    adjust       : 0,
+    noScrollClass: 'no_scroll',
+    tween        : {
+      duration   : 800,
+      easing     : 'easeOutQuint'
+    }
   };
 
 
@@ -2157,185 +2000,76 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>Pagerボタンイベント登録</h4>
+   * <h4>Scrollインスタンスの生成</h4>
    *
-   * @method addEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
+   * @static
+   * @method get
+   * @param  {jQuery} $scrollTrigger トリガーとなるa要素 省略可
+   * @param  {Object} options オプション値 省略可
+   * @return {Scroll}
    */
-  p.addEventPager = function($pager){
+  Scroll.get = function($scrollTrigger, options){
+    return new Scroll($scrollTrigger, options).on();
+  };
+
+
+  /**
+   * <h4>イベント登録</h4>
+   *
+   * @method on
+   * @return {Scroll}
+   */
+  p.on = function(){
     var self = this;
-    $pager.on('click.' + self.className, function(){
-      self.moveTo($pager.index(this));
-      return false;
+
+    // スクロールイベントの重複回避
+    this.off();
+
+    self.props.$scrollTrigger.on('click.Scroll', function(){
+      return self.tween(self.props.$scrollTrigger.index(this));
     });
+
     return this;
   };
 
 
   /**
-   * <h4>Pagerボタンイベント削除</h4>
+   * <h4>イベント削除</h4>
    *
-   * @method removeEventPager
-   * @param {jQuery} $pager Pagerトリガー要素
-   * @return {Instance}
+   * @method off
+   * @return {Scroll}
    */
-  p.removeEventPager = function($pager){
-    $pager.off('click.' + this.className);
+  p.off = function(){
+    this.props.$scrollTrigger.off('click.Scroll');
     return this;
   };
 
 
   /**
-   * <h4>Nextボタンイベント登録</h4>
+   * <h4>スクロールアニメーション</h4>
+   * <p>FIXME: Stringも対応予定</p>
    *
-   * @method addEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
+   * @method tween
+   * @param {Number} num トリガー要素のインデックス
+   * @return {Void}
    */
-  p.addEventNext = function($next){
-    var self = this;
-    $next.on('click.' + self.className, function(){
-      self.next();
-      return false;
-    });
-    return this;
-  };
+  p.tween = function(num){
+    var self = this,
+    props = self.props,
+    $scrollTrigger = props.$scrollTrigger.eq(num),
+    $target = $($scrollTrigger.attr('href'));
 
+    if($target[0] && !$scrollTrigger.hasClass(props.noScrollClass)){
+      var adjust = AMP.isFunction(props.adjust) ? props.adjust(num) || 0 : props.adjust,
+      moveTo = $target.offset().top - adjust;
 
-  /**
-   * <h4>Nextボタンイベント削除</h4>
-   *
-   * @method removeEventNext
-   * @param {jQuery} $next Nextリガー要素
-   * @return {Instance}
-   */
-  p.removeEventNext = function($next){
-    $next.off('click.' + this.className);
-    return this;
-  };
-
-
-  /**
-   * <h4>Prevボタンイベント登録</h4>
-   *
-   * @method addEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.addEventPrev = function($prev){
-    var self = this;
-    $prev.on('click.' + self.className, function(){
-      self.prev();
-      return false;
-    });
-    return this;
-  };
-
-
-  /**
-   * <h4>Prevボタンイベント削除</h4>
-   *
-   * @method removeEventPrev
-   * @param {jQuery} $prev Prevトリガー要素
-   * @return {Instance}
-   */
-  p.removeEventPrev = function($prev){
-    $prev.off('click.' + this.className);
-    return this;
-  };
-
-
-  /**
-   * <h4>フリックイベント</h4>
-   *
-   * @method addEventFlick
-   * @return {Slider}
-   */
-  p.addEventFlick = function($trigger){
-    var self = this;
-
-    $trigger.off('flickmoveX.Slider flickcancelX.Slider flickX.Slider')
-    .on('flickmoveX.' + this.className, function(moveEvent){
-      self._move(moveEvent.moveX);
-    })
-    .on('flickcancelX.' + this.className, function(){
-      self._resetTween();
-    })
-    .on('flickX.' + this.className, function(flickEvent){
-      if(0 < flickEvent.moveX){
-        self.prev();
-      } else {
-        self.next();
+      if($(root).scrollTop() !== moveTo){
+        var tween = $.extend({offset: moveTo}, props.tween);
+        props.$html.velocity('stop').velocity('scroll', tween);
       }
-    });
-    return this;
+      return false;
+    }
   };
-
-
-  /**
-   * <h4>指定インデックスへ</h4>
-   * アニメート無
-   *
-   * @method current
-   * @param {jQuery} index index番号
-   * @return {Instance}
-   */
-  p.current = function(index){
-    this._controller(index, true);
-    return this;
-  };
-
-
-  /**
-   * <h4>指定インデックスへ</h4>
-   *
-   * @method moveTo
-   * @param {jQuery} index index番号
-   * @return {Instance}
-   */
-  p.moveTo = function(index){
-    this._controller(index);
-    return this;
-  };
-
-
-  /**
-   * <h4>次へ</h4>
-   *
-   * @method next
-   * @return {Instance}
-   */
-  p.next = function(){
-    this._controller(this.props.current + 1);
-    return this;
-  };
-
-
-  /**
-   * <h4>前へ</h4>
-   *
-   * @method prev
-   * @return {Instance}
-   */
-  p.prev = function(){
-    this._controller(this.props.current -1);
-    return this;
-  };
-
-
-  /**
-   * <h4>コントローラー</h4>
-   * 送られてきた値を制御します
-   *
-   * @protected
-   * @private
-   * @method _controller
-   * @param {Number} index スライドインデック
-   * @param {Boolean} nonAnimate アニメーション無
-   * @return {Instance}
-   */
-  p._controller = function(index, nonAnimate){};
 
 
 
@@ -2343,7 +2077,7 @@
     export
   --------------------------------------------------------------------------*/
 
-  AMP.$.UIController = UIController;
+  AMP.$.Scroll = Scroll;
 
 
 }(window, AMP, jQuery));
@@ -2764,6 +2498,298 @@
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>UIコントローラ</h4>
+   * <p>UIコントローラクラスを継承する事でUIコントローラを提供します</p>
+   *
+   * @protected
+   * @class AMP.$.UIController
+   * @extends AMP.BASE_CLASS
+   * @constructor
+   */
+  function UIController(){}
+
+  // 基底クラスを継承
+  AMP.inherits(UIController, AMP.BASE_CLASS);
+
+  // prototype
+  var p = UIController.prototype;
+
+
+
+  /*--------------------------------------------------------------------------
+    @property
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>バージョン情報</h4>
+   *
+   * @static
+   * @property VERSION
+   * @type {String}
+   */
+  UIController.VERSION = '1.1.0';
+
+
+  /**
+   * <h4>クラス名</h4>
+   *
+   * @property className
+   * @type {String}
+   */
+  p.className = 'UIController';
+
+
+  /**
+   * <h4>プロパティオブジェクト</h4>
+   *
+   * @property props
+   * @type {Object}
+   */
+  /**
+   * <h4>現在値</h4>
+   *
+   * @property props.current
+   * @type {Number}
+   */
+  p.props = {
+    current: 0
+  };
+
+
+
+  /*--------------------------------------------------------------------------
+    @method
+  --------------------------------------------------------------------------*/
+
+  /**
+   * <h4>Pagerボタンイベント登録</h4>
+   *
+   * @method addEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPager = function($pager){
+    var self = this;
+    $pager.on('click.' + self.className, function(){
+      self.moveTo($pager.index(this));
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Pagerボタンイベント削除</h4>
+   *
+   * @method removeEventPager
+   * @param {jQuery} $pager Pagerトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPager = function($pager){
+    $pager.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>Nextボタンイベント登録</h4>
+   *
+   * @method addEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.addEventNext = function($next){
+    var self = this;
+    $next.on('click.' + self.className, function(){
+      self.next();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Nextボタンイベント削除</h4>
+   *
+   * @method removeEventNext
+   * @param {jQuery} $next Nextリガー要素
+   * @return {Instance}
+   */
+  p.removeEventNext = function($next){
+    $next.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>Prevボタンイベント登録</h4>
+   *
+   * @method addEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.addEventPrev = function($prev){
+    var self = this;
+    $prev.on('click.' + self.className, function(){
+      self.prev();
+      return false;
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>Prevボタンイベント削除</h4>
+   *
+   * @method removeEventPrev
+   * @param {jQuery} $prev Prevトリガー要素
+   * @return {Instance}
+   */
+  p.removeEventPrev = function($prev){
+    $prev.off('click.' + this.className);
+    return this;
+  };
+
+
+  /**
+   * <h4>フリックイベント</h4>
+   *
+   * @method addEventFlick
+   * @return {Instance}
+   */
+  p.addEventFlick = function($trigger){
+    var self = this;
+
+    $trigger.off('flickmoveX.' + this.className + ' flickcancelX.' + this.className + ' flickX.' + this.className)
+    .on('flickmoveX.' + this.className, function(moveEvent){
+      self._move(moveEvent.moveX);
+    })
+    .on('flickcancelX.' + this.className, function(){
+      self._resetTween();
+    })
+    .on('flickX.' + this.className, function(flickEvent){
+      if(0 < flickEvent.moveX){
+        self.prev();
+      } else {
+        self.next();
+      }
+    });
+    return this;
+  };
+
+
+  /**
+   * <h4>指定インデックスへ</h4>
+   * アニメート無
+   *
+   * @method current
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.current = function(index){
+    this._controller(index, true);
+    return this;
+  };
+
+
+  /**
+   * <h4>指定インデックスへ</h4>
+   *
+   * @method moveTo
+   * @param {jQuery} index index番号
+   * @return {Instance}
+   */
+  p.moveTo = function(index){
+    this._controller(index);
+    return this;
+  };
+
+
+  /**
+   * <h4>次へ</h4>
+   *
+   * @method next
+   * @return {Instance}
+   */
+  p.next = function(){
+    this._controller(this.props.current + 1);
+    return this;
+  };
+
+
+  /**
+   * <h4>前へ</h4>
+   *
+   * @method prev
+   * @return {Instance}
+   */
+  p.prev = function(){
+    this._controller(this.props.current -1);
+    return this;
+  };
+
+
+  /**
+   * <h4>コントローラー</h4>
+   * 送られてきた値を制御します
+   *
+   * @interface
+   * @protected
+   * @private
+   * @method _controller
+   * @param {Number} index スライドインデック
+   * @param {Boolean} nonAnimate アニメーション無
+   * @return {Void}
+   */
+  p._controller = function(index, nonAnimate){};
+
+
+  /**
+   * <h4>フリックキャンセル時呼び出されます</h4>
+   *
+   * @interface
+   * @protected
+   * @private
+   * @method _resetTween
+   * @return {Void}
+   */
+  p._resetTween = function(){};
+
+
+   /**
+   * <h4>フリック中呼び出します</h4>
+   *
+   * @interface
+   * @protected
+   * @private
+   * @method _move
+   * @param {Number} x フリック中の移動距離
+   * @return {Void}
+   */
+  p._move = function(x){};
+
+
+
+  /*--------------------------------------------------------------------------
+    export
+  --------------------------------------------------------------------------*/
+
+  AMP.$.UIController = UIController;
+
+
+}(window, AMP, jQuery));
+
+
+(function(root, AMP, $){
+
+  // 'use strict';
+
+
+  /*----------------------------------------------------------------------
+    @constructor
+  ----------------------------------------------------------------------*/
+
+  /**
    * <h4>スライダー</h4>
    * <p><a href="../../demo/AMP.$.Slider.html">DEMO</a></p>
    *
@@ -2878,7 +2904,7 @@
    * @property VERSION
    * @type {String}
    */
-  Slider.VERSION = '1.2.0';
+  Slider.VERSION = '1.2.1';
 
 
   /**
@@ -3153,6 +3179,7 @@
 		this.props.distance = step * itemWidth;
 
     // スライド最大数
+    step = step || 1;
     this.props.slideMaxLength = Math.ceil(this._getDisplayLength() / step);
 
     // フレームのセンタリング

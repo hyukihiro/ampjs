@@ -96,6 +96,7 @@
     this.off();
 
     this.setSize(this.props.width, this.props.height);
+    this.setBounds(0, 0, this.props.width, this.props.height);
 
     cjs.Ticker.timingMode = this.props.raf;
 

@@ -58,6 +58,7 @@
     @method
   --------------------------------------------------------------------------*/
 
+  // http://codepen.io/yuichiroharai/pen/XbVpdx
 	// addPoint
 	p.addPoint = function(point){
 		this.points = this.points.concat(AMP.argsToArray(arguments));
@@ -65,7 +66,75 @@
 	};
 
 
-  p.drawPlot = function(index, graphics){
+  p.createRandomPoints = function(distance, limit){
+    limit = limit || 1000;
+
+    var points = this._createOuterPoints(distance),
+    plot,
+    l,
+    i = 0,
+    j = 0;
+
+    for(; i <= limit; i += 1){
+      plot = 0;// new plot;
+      l = points.length;
+      for(j = 0; j < l; j += 1){
+        if (distance < AMP.Vector.Distance(points[j], plot)) {
+          points.push(plot);
+          // i = 0;
+          break;
+        };
+      }
+    }
+
+    console.log(points);
+    return points;
+  };
+
+
+  p._createOuterPoints = function(distance){
+    var range,
+    size   = this.container.getBounds(),
+    width  = size.width,
+    height = size.height;
+    points = [],
+    i = 0,
+    plot = 0,
+    max = distance < 20 ? distance : 20;
+
+    for(;i < 2; i += 1){
+      range = i ? width * 2 : height * 2;
+
+      while(plot < range){
+        plot += distance + AMP.random(0, max, true);
+
+        if(range < plot){
+          break;
+        }
+
+        if(i){ // y
+          points.push({
+            x: plot < height ? 0 : width,
+            y: plot < height ? plot : plot - height
+          });
+
+        } else { // x
+          points.push({
+            x: plot < width ? plot : plot - width,
+            y: plot < width ? 0 : height
+          });
+        }
+      }
+
+      plot = 0;
+    }
+
+    return points;
+  };
+
+
+
+  p.drawPoint = function(index, graphics){
     var self = this;
 
     if(AMP.isNumber(index)){
@@ -81,7 +150,7 @@
       graphics = index.toString && index.toString() === '[Graphics]' ? index : graphics;
 
       AMP.each(this.points, function(point, index){
-        self.drawPlot(index, graphics);
+        self.drawPoint(index, graphics);
       });
     }
 
@@ -92,7 +161,6 @@
 
   p.removePlot = function(index){
     var self = this;
-
     //   console.log(this.container.children);
     // var i = this.container.children.length-1;
     // while(i -= 1){
@@ -103,8 +171,6 @@
     //     break;
     //   }
     // }
-
-
     /*
     if(AMP.isNumber(index)){
       var plot = this.container.getChildAt(index);
@@ -112,18 +178,17 @@
       if(plot && plot.name === 'plot'){
         this.container.removeAllChildren();
       }
-
     } else {
       var i = this.container.children.length-1;
       while(i -= 1){
         self.removePlot(i);
       }
     }
-
     */
-
     return this;
   };
+
+
 
 
 
