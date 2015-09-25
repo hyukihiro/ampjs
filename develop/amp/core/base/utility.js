@@ -27,6 +27,24 @@
   ----------------------------------------------------------------------*/
 
   /**
+   * <h4>キャンバスから画像生成</h4>
+   * <p>see: <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toDataURL" target="_blank">toDataURL</a></p>
+   *
+   * @static
+   * @method canvasToImage
+   * @param  {DOM} canvas  キャンバス要素
+   * @param  {String} type    画像タイプ (toDataURL)
+   * @param  {Number} quality 画像クオリティ jpegのみ (toDataURL)
+   * @return {Image}
+   */
+  AMP.canvasToImage = function(canvas, type, quality){
+    var image = new Image();
+    image.src = canvas.toDataURL(type, quality);
+    return image;
+  };
+
+
+  /**
    * <h4>匿名関数名を返す</h4>
    * <p>無名関数はundefinedを返します</p>
    *
@@ -59,6 +77,7 @@
   /**
    * <h4>型名取得</h4>
    *
+   * @static
    * @method type
    * @param {Object} 判定するオブジェクト
    * @return {String} 型名を返す
@@ -205,6 +224,7 @@
   /**
    * <h4>乱数の生成</h4>
    *
+   * @static
    * @param  {Number}  min     最小値 ※省略可
    * @param  {Number}  max     最大値 ※省略可
    * @param  {Boolean} isRound 四捨五入するか ※省略可
