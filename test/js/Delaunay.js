@@ -51,7 +51,7 @@
     this.setSize(width, height);
   }
 
-  // åŸºåº•ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿
+  // »ùµ×¥¯¥é¥¹¤ò¾@³Ğ
   AMP.inherits(Delaunay, AMP.BASE_CLASS);
 
   // prototype
@@ -64,7 +64,7 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±</h4>
+   * <h4>¥Ğ©`¥¸¥ç¥óÇéˆó</h4>
    *
    * @static
    * @property VERSION
@@ -74,7 +74,7 @@
 
 
   /**
-   * <h4>ã‚¯ãƒ©ã‚¹å</h4>
+   * <h4>¥¯¥é¥¹Ãû</h4>
    *
    * @property className
    * @type {String}
@@ -110,7 +110,7 @@
       y: height
     }];
 
-    // ä¸€ç•ªæœ€åˆã®ä¸‰è§’å½¢2å€‹
+    // Ò»·¬×î³õ¤ÎÈı½ÇĞÎ2‚€
     this._defaultTriangles = [
       [this.rect[0], this.rect[1], this.rect[2]],
       [this.rect[1], this.rect[2], this.rect[3]]
@@ -118,7 +118,7 @@
   };
 
 
-  // åˆ†å‰²ã‚’ä½œæˆ
+  // ·Ö¸î¤ò×÷³É
   /**
    * [getDelaunay description]
    * @return {[type]} [description]
@@ -131,10 +131,10 @@
       // FIXME
       var triangles = self._chooseTriangles(delaunayEdges, point);
 
-      // FIXME: ä¸‰è§’å½¢ã‚’ãƒãƒ¼ã‚¸ã—ã¦å¤šè§’å½¢ã«ã™ã‚‹
-      var poly = self._mergeTriangles(triangles.ok);
-
-      delaunayEdges = triangles.ng.concat(self._splitPolygon(poly, point));
+      // FIXME: Èı½ÇĞÎ¤ò¥Ş©`¥¸¤·¤Æ¶à½ÇĞÎ¤Ë¤¹¤ë
+      if(triangles.ok.length){
+        delaunayEdges = triangles.ng.concat(self._splitPolygon(self._mergeTriangles(triangles.ok), point));
+      }
     });
 
     this.delaunayEdges = delaunayEdges;
@@ -143,8 +143,8 @@
   };
 
 
-  // ç‚¹pãŒå¤–æ¥å††ã«å«ã¾ã‚Œã‚‹ã‚ˆã†ãªä¸‰è§’å½¢ã‚’é¸ã¶
-  // FIXME: ok, ngã¯ã‚ã¨ã§ã‹ãˆã‚‹
+  // µãp¤¬Íâ½ÓƒÒ¤Ëº¬¤Ş¤ì¤ë¤è¤¦¤ÊÈı½ÇĞÎ¤òßx¤Ö
+  // FIXME: ok, ng¤Ï¤¢¤È¤Ç¤«¤¨¤ë
   /**
    * [_chooseTriangles description]
    * @param  {[type]} triangles [description]
@@ -171,7 +171,7 @@
   };
 
 
-  // ç‚¹pãŒä¸‰è§’å½¢tã®å¤–æ¥å††ã«å«ã¾ã‚Œã‚‹ã‹
+  // µãp¤¬Èı½ÇĞÎt¤ÎÍâ½ÓƒÒ¤Ëº¬¤Ş¤ì¤ë¤«
   /**
    * [_test description]
    * @param  {[type]} triangle [description]
@@ -179,20 +179,20 @@
    * @return {[type]}          [description]
    */
   p._test = function(edges, point){
-    // å††ã®ä¸­å¿ƒã‹ã‚‰pã¾ã§ã®è·é›¢ã¨å††ã®åŠå¾„ã‚’æ¯”è¼ƒ
+    // ƒÒ¤ÎÖĞĞÄ¤«¤époint¤Ş¤Ç¤Î¾àëx¤ÈƒÒ¤Î°ë¾¶¤ò±Èİ^
     var circle = Delaunay.getCircumscribedCircle(edges);
-    return circle.diffMag >= AMP.Vector.diffMag(point, circle.point);
+    return !!circle && circle.diffMag >= AMP.Vector.diffMag(point, circle.point);
   };
 
 
-  // è¤‡æ•°ã®ä¸‰è§’å½¢ã‚’ãƒãƒ¼ã‚¸ã—ã¦ã²ã¨ã¤ã®å¤šè§’å½¢ã«ã™ã‚‹
+  // Ñ}Êı¤ÎÈı½ÇĞÎ¤ò¥Ş©`¥¸¤·¤Æ¤Ò¤È¤Ä¤Î¶à½ÇĞÎ¤Ë¤¹¤ë
   /**
    * [_mergeTriangles description]
    * @param  {[type]} triangles [description]
    * @return {[type]}           [description]
    */
   p._mergeTriangles = function(triangles) {
-    // å„ä¸‰è§’å½¢ã‚’è¾ºã«åˆ†å‰²ã—ã¦ã€é‡ãªã‚‹è¾ºã‚’å–ã‚Šé™¤ã
+    // ¸÷Èı½ÇĞÎ¤òŞx¤Ë·Ö¸î¤·¤Æ¡¢ÖØ¤Ê¤ëŞx¤òÈ¡¤ê³ı¤¯
     var polygon = [],
     edges = this.trianglesToEdges(triangles),
     total = edges.length;
@@ -209,7 +209,7 @@
           // FIXME:
           if((edge1[0].x == edge2[0].x && edge1[0].y == edge2[0].y && edge1[1].x == edge2[1].x && edge1[1].y == edge2[1].y) ||
              (edge1[0].x == edge2[1].x && edge1[0].y == edge2[1].y && edge1[1].x == edge2[0].x && edge1[1].y == edge2[0].y)){
-            // æ¬¡ä»¥é™ã®ãƒ«ãƒ¼ãƒ—ã§ã‚¹ã‚­ãƒƒãƒ—ã™ã‚‹
+            // ´ÎÒÔ½µ¤Î¥ë©`¥×¤Ç¥¹¥­¥Ã¥×¤¹¤ë
             edges[j].skip = true;
             found = true;
             break;
@@ -220,7 +220,7 @@
       }
     });
 
-    // total-1ãƒ«ãƒ¼ãƒ—ã§nç•ªç›®ãŒè©•ä¾¡ã•ã‚Œã¦ã„ãªã„ã®ã§
+    // total-1¥ë©`¥×¤Çn·¬Ä¿¤¬Ôuı¤µ¤ì¤Æ¤¤¤Ê¤¤¤Î¤Ç
     if (!edges[total - 1].skip){
       polygon.push([edges[total - 1][0], edges[total - 1][1]]);
     }
@@ -229,7 +229,7 @@
   };
 
 
-  // ä¸‰è§’å½¢ã®é›†åˆã‹ã‚‰è¾ºã®é›†åˆã¸
+  // Èı½ÇĞÎ¤Î¼¯ºÏ¤«¤éŞx¤Î¼¯ºÏ¤Ø
   /**
    * [trianglesToEdges description]
    * @param  {[type]} triangles [description]
@@ -246,7 +246,7 @@
   };
 
 
-  // å¤šè§’å½¢ã®å„é ‚ç‚¹ã¨ç‚¹pã‚’çµã‚“ã§ä¸‰è§’å½¢ã«åˆ†å‰²ã™ã‚‹
+  // ¶à½ÇĞÎ¤Î¸÷í”µã¤Èµãp¤ò½Y¤ó¤ÇÈı½ÇĞÎ¤Ë·Ö¸î¤¹¤ë
   /**
    * [_splitPolygon description]
    * @param  {[type]} polygon [description]
@@ -264,11 +264,11 @@
 
 
   /**
-   * è¿½åŠ 
-   * ä¸‰è§’å½¢ã®é‡å¿ƒ
+   * ×·¼Ó
+   * Èı½ÇĞÎ¤ÎÖØĞÄ
    */
   Delaunay.getCenterOfGravity = function(triangle){
-    // ä»»æ„ã®2ã¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã®å’Œã®1/3ãŒé‡å¿ƒã«ãªã‚‹
+    // ÈÎÒâ¤Î2¤Ä¤Î¥Ù¥¯¥È¥ë¤ÎºÍ¤Î1/3¤¬ÖØĞÄ¤Ë¤Ê¤ë
     var p = AMP.Vector.sub(triangle[0], triangle[1]);
     var q = AMP.Vector.sub(triangle[0], triangle[2]);
     p.add(q);
@@ -286,43 +286,47 @@
    * @return {[type]}          [description]
    */
   Delaunay.getCircumscribedCircle = function(edges){
-    var px, py, qx, qy, rx, ry,
-    ax, ay, bx, by,
-    d, a, b, pl2, ql2, rl2;
+    var point, radius,
+    p1x, p1y, p2x, p2y, p3x, p3y,
+    o1x, o1y, o2x, o2y,
+    a, b, pl2, ql2, rl2;
 
-    px = edges[0].x;
-    py = edges[0].y;
-    qx = edges[1].x;
-    qy = edges[1].y;
-    rx = edges[2].x;
-    ry = edges[2].y;
+    // Èıµã¤Î×ù˜Ë
+    p1x = edges[0].x;
+    p1y = edges[0].y;
+    p2x = edges[1].x;
+    p2y = edges[1].y;
+    p3x = edges[2].x;
+    p3y = edges[2].y;
 
-    ax = px - rx;
-    ay = py - ry;
-    bx = qx - rx;
-    by = qy - ry;
-    d = ax * by - ay * bx;
+    // Èı½Ç¤ÎÍâ¾¶
+    o1x = p1x - p3x;
+    o1y = p1y - p3y;
+    o2x = p2x - p3x;
+    o2y = p2y - p3y;
 
-    if (d === 0) {
+    // Œ½Ç¾€¾àëx°ë¾¶¸î¤ê³ö¤¹
+    radius = (o1x * o2y - o1y * o2x) / 2;
+
+    if(radius === 0){
       return null;
     }
 
-    pl2 = px * px + py * py;
-    ql2 = qx * qx + qy * qy;
-    rl2 = rx * rx + ry * ry;
+    // ¤³¤³¤«¤é
+    pl2 = p1x * p1x + p1y * p1y;
+    ql2 = p2x * p2x + p2y * p2y;
+    rl2 = p3x * p3x + p3y * p3y;
     a = pl2 - rl2;
     b = ql2 - rl2;
 
-    var point = {
-        x: (by * a - ay * b) / d / 2,
-        y: (-bx * a + ax * b) / d / 2
+    point = {
+      x: (o2y * a - o1y * b) / radius,
+      y: (o2x * a * -1 + o1x * b) / radius
     };
-
-    var diffMag = AMP.Vector.diffMag(point, edges[2]);
 
     return {
       point  : point,
-      diffMag: diffMag
+      diffMag: AMP.Vector.diffMag(point, edges[2])
     };
   };
 

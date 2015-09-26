@@ -22,7 +22,7 @@
 		this.points = [];
 	}
 
-  // åŸºåº•ã‚¯ãƒ©ã‚¹ã‚’ç¶™æ‰¿
+  // »ùµ×¥¯¥é¥¹¤ò¾@³Ğ
   AMP.inherits(Polygon, AMP.BASE_CLASS);
 
   // prototype
@@ -35,7 +35,7 @@
   --------------------------------------------------------------------------*/
 
   /**
-   * <h4>ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±</h4>
+   * <h4>¥Ğ©`¥¸¥ç¥óÇéˆó</h4>
    *
    * @static
    * @property VERSION
@@ -45,7 +45,7 @@
 
 
   /**
-   * <h4>ã‚¯ãƒ©ã‚¹å</h4>
+   * <h4>¥¯¥é¥¹Ãû</h4>
    *
    * @property className
    * @type {String}
@@ -69,25 +69,34 @@
   p.createRandomPoints = function(distance, limit){
     limit = limit || 1000;
 
-    var points = this._createOuterPoints(distance),
+    var size = this.container.getBounds(),
+    points = this._createOuterPoints(distance),
     plot,
     l,
     i = 0,
     j = 0;
 
     for(; i <= limit; i += 1){
-      plot = 0;// new plot;
+      plot = {
+        x: AMP.random(1, size.width - 1, true),
+        y: AMP.random(1, size.height - 1, true)
+      };
       l = points.length;
+
       for(j = 0; j < l; j += 1){
-        if (distance < AMP.Vector.Distance(points[j], plot)) {
-          points.push(plot);
-          // i = 0;
+        if(AMP.Vector.distance(points[j], plot) < distance){
           break;
-        };
+        }
+        if(j === l - 1){
+          // i = 0;
+          i = ~~(i / 2);
+          points.push(plot);
+        }
       }
     }
 
-    console.log(points);
+    this.points = points;
+
     return points;
   };
 
@@ -96,11 +105,16 @@
     var range,
     size   = this.container.getBounds(),
     width  = size.width,
-    height = size.height;
-    points = [],
+    height = size.height,
+    max = distance < 5 ? 1 : 5,
     i = 0,
     plot = 0,
-    max = distance < 20 ? distance : 20;
+    points = [
+      {x: 0, y: 0},
+      {x: width, y: 0},
+      {x: width, y: height},
+      {x: 0, y: height}
+    ];
 
     for(;i < 2; i += 1){
       range = i ? width * 2 : height * 2;
@@ -211,7 +225,7 @@
   p.draw = function(polygons) {
     var self = this;
 
-    // ãƒ‘ã‚¹ã®å‰Šé™¤ã¨PointClasså§”è­²
+    // ¥Ñ¥¹¤ÎÏ÷³ı¤ÈPointClassÎ¯×j
     // graphics.clearPath();
     AMP.each(polygons, function(points){
       var graphics = new cjs.Graphics();

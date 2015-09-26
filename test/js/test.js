@@ -3,7 +3,6 @@ var cjs = createjs;
 
 jQuery(function($){
 
-
 // console.log(AMP.degToArc(90, 100));
 // console.log(AMP.coordToDeg(10, 10));
 
@@ -70,7 +69,14 @@ img.onload = function(){
       y: mouseEvent.clientY - mouseEvent.target.offsetTop
     });
 
-    polygon.createRandomPoints(100);
+    // polygon.createRandomPoints(100);
+
+    //
+    var delaunay = new AMP.Delaunay(w, h, polygon.createRandomPoints(50));
+    polygon.drawPoint(polygon.points, graphics);
+
+    var edges = delaunay.getDelaunay();
+    polygon.draw(edges);
 
     // polygon.addPoint(point).drawPoint(polygon.points.length - 1, graphics);
 

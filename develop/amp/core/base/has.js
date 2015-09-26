@@ -125,6 +125,20 @@
 
 
   /**
+   * <h4>WebWorker機能の有無</h4>
+   *
+   * @static
+   * @method hasWebWorker
+   * @return {Boolean}
+   */
+  AMP.hasWebGL = (function(){
+    var canvas = doc.createElement('canvas');
+    return function(){
+      return !!root.WebGLRenderingContext && !!canvas.getContext('experimental-webgl');
+    }
+  }());
+
+  /**
    * <h4>Audio機能の有無</h4>
    *
    * @static

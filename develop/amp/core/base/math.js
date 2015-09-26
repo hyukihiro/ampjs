@@ -238,12 +238,12 @@
    * <h4>対角線の長さを求める</h4>
    *
    * @static
-   * @method diagonal
+   * @method distance
    * @param  {Number} x x座標
    * @param  {Number} y y座標
    * @return {Number} 対角線の長さ
    */
-  AMP.diagonal = function(x, y){
+  AMP.distance = function(x, y){
     return Math.sqrt(Math.pow(x, 2) + Math.pow(y, 2));
   };
 
