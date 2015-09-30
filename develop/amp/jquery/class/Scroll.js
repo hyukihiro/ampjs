@@ -67,7 +67,7 @@
    * @property VERSION
    * @type {String}
    */
-  Scroll.VERSION = '3.2.1';
+  Scroll.VERSION = '3.3.1';
 
 
   /**
@@ -206,6 +206,30 @@
       }
       return false;
     }
+  };
+
+
+  /**
+   * <h4>スクロールアニメーション</h4>
+   *
+   * @static
+   * @method tween
+   * @param {jQuery} $target 対象要素
+   * @param {Number|Function} adjust 停止位置調整値
+   * @param {Object} option tweenオプション
+   * @return {jQuery}
+   */
+  Scroll.tween = function($target, adjust, option){
+    if(AMP.isObject(adjust)){
+      option = adjust;
+      adjust = 0;
+    }
+
+    var adjust = AMP.isFunction(adjust) ? adjust() || 0 : adjust,
+    moveTo = $target.offset().top - adjust,
+    tween = $.extend({offset: moveTo}, Scroll.options.tween, option);
+
+    return $('html, body').velocity('stop').velocity('scroll', tween);
   };
 
 
